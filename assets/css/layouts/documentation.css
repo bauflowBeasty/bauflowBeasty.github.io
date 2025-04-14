@@ -1,0 +1,124 @@
+/* assets/css/layouts/documentation.css */
+.doc-container {
+    display: grid;
+    grid-template-columns: 250px 1fr;
+    gap: 2rem;
+    max-width: 1400px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+  }
+  
+  .doc-sidebar {
+    position: sticky;
+    top: 100px;
+    align-self: start;
+    border-right: 1px solid var(--color-primary);
+    padding-right: 1rem;
+  }
+  
+  .doc-nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .doc-nav a {
+    display: block;
+    padding: 0.75rem 1rem;
+    color: var(--color-text);
+    text-decoration: none;
+    border-radius: 4px;
+    transition: all 0.2s;
+    position: relative;
+  padding-left: 1.5rem;
+  }
+  
+  .doc-nav a:hover,
+  .doc-nav a.active {
+    background: rgba(255, 255, 0, 0.1);
+    color: var(--color-primary);
+  }
+  
+  .doc-nav a.active {
+    font-weight: bold;
+  }
+
+
+  .doc-nav a.active::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 4px;
+    height: 60%;
+    background: var(--color-primary);
+    border-radius: 2px;
+  }
+
+
+
+
+  .doc-content {
+    padding-bottom: 4rem;
+  }
+  
+  .doc-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  
+  .doc-title {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  
+  .download-button {
+    padding: 0.75rem 1.5rem;
+    background: var(--color-primary);
+    color: var(--color-secondary);
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: opacity 0.3s;
+  }
+  
+  .download-button:hover {
+    opacity: 0.9;
+  }
+  
+  .doc-section {
+    margin-bottom: 3rem;
+    scroll-margin-top: 1rem;
+  }
+  
+  @media (max-width: 768px) {
+    .doc-container {
+      grid-template-columns: 1fr;
+    }
+    
+    .doc-sidebar {
+      position: static;
+      border-right: none;
+      border-bottom: 1px solid var(--color-primary);
+      padding-bottom: 1rem;
+      margin-bottom: 1rem;
+    }
+  }
+
+  /* Transición suave entre secciones */
+html {
+    scroll-behavior: smooth;
+  }
+  
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }

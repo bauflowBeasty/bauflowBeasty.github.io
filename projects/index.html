@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Projects | Dev Portfolio</title>
+  <!-- Mismos estilos que el homepage -->
+  <link rel="stylesheet" href="../assets/css/base/reset.css">
+  <link rel="stylesheet" href="../assets/css/base/variables.css">
+  <link rel="stylesheet" href="../assets/css/base/typography.css">
+  <link rel="stylesheet" href="../assets/css/components/header.css">
+  <link rel="stylesheet" href="../assets/css/components/card.css">
+  <link rel="stylesheet" href="../assets/css/components/theme-toggle.css">
+  <link rel="stylesheet" href="../assets/css/layouts/grid-system.css">
+  <link rel="stylesheet" href="../assets/css/main.css">
+  <!-- Estilo adicional para filtros -->
+  <link rel="stylesheet" href="../assets/css/components/filters.css">
+</head>
+<body>
+  <!-- Header (igual al homepage) -->
+  <header class="header">
+    <div class="container">
+      <a href="/" class="logo">MyPortfolio</a>
+      <input type="checkbox" id="mobile-menu-toggle" class="visually-hidden">
+      <label for="mobile-menu-toggle" class="hamburger-button" aria-label="Toggle menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </label>
+      <nav class="navbar">
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/projects" class="active">Projects</a></li>
+          <li>
+            <button id="theme-toggle" aria-label="Toggle theme">
+              <span class="light-icon">☀️</span>
+              <span class="dark-icon">🌙</span>
+            </button>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <h1>My Projects</h1>
+    
+    <!-- Filtros (opcional) -->
+    <div class="filters">
+      <div class="filter-group">
+        <label for="tech-filter">Filter by:</label>
+        <select id="tech-filter" class="filter-select">
+          <option value="all">All Technologies</option>
+          <option value="unity">Unity</option>
+          <option value="csharp">C#</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <label for="sort">Sort by:</label>
+        <select id="sort" class="filter-select">
+          <option value="newest">Newest First</option>
+          <option value="oldest">Oldest First</option>
+          <option value="name">Name (A-Z)</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Grid de proyectos -->
+    <div class="projects-grid">
+      <!-- Proyecto 1 -->
+      <article class="project-card" data-tech="unity" data-date="2023-11-01">
+        <div class="card-header">
+          <span class="version-badge">v2.1.4</span>
+          <img src="../assets/icons/unity.svg" alt="Unity" class="language-icon">
+        </div>
+        <div class="card-content">
+          <h3>Save System</h3>
+          <p>Complete save/load solution for Unity games with encryption and cloud save support.</p>
+          <div class="price-tag">$15.99 <span class="free-badge">FREE Demo</span></div>
+        </div>
+        <a href="save-system/" class="card-link">View Documentation</a>
+      </article>
+
+      <!-- Proyecto 2 -->
+      <article class="project-card" data-tech="csharp" data-date="2023-08-15">
+        <div class="card-header">
+          <span class="version-badge">v1.0.0</span>
+          <img src="../assets/icons/csharp.svg" alt="C#" class="language-icon">
+        </div>
+        <div class="card-content">
+          <h3>Inventory Pro</h3>
+          <p>Modular inventory system for RPG and adventure games.</p>
+          <div class="price-tag">$12.99</div>
+        </div>
+        <a href="#" class="card-link">Coming Soon</a>
+      </article>
+    </div>
+  </main>
+
+  <!-- Footer (igual al homepage) -->
+  <footer class="footer">
+    <div class="container">
+      <p>© 2023 My Dev Portfolio. All assets are Unity compatible.</p>
+      <nav>
+        <a href="/privacy">Privacy Policy</a> | 
+        <a href="/contact">Contact</a>
+      </nav>
+    </div>
+  </footer>
+
+  <!-- JavaScript -->
+  <script src="../assets/js/project-filters.js" defer></script>
+  <script src="../assets/js/theme-toggle.js" defer></script>
+  <script src="../assets/js/hamburger-menu.js" defer></script>
+</body>
+</html>

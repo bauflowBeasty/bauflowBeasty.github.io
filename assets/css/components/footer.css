@@ -1,0 +1,50 @@
+/* assets/css/components/footer.css */
+.footer {
+    background-color: var(--color-secondary);
+    color: var(--color-text);
+    padding: 2.5rem 0;
+    margin-top: 4rem;
+    border-top: 2px solid var(--color-primary);
+  }
+  
+  .footer .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    text-align: center;
+  }
+  
+  .footer p {
+    margin: 0;
+    opacity: 0.9;
+    font-size: 0.9rem;
+  }
+  
+  .footer nav {
+    display: flex;
+    gap: 1.5rem;
+  }
+  
+  .footer a {
+    color: var(--color-primary);
+    text-decoration: none;
+    font-weight: 500;
+    transition: opacity 0.3s;
+  }
+  
+  .footer a:hover {
+    opacity: 0.8;
+    text-decoration: underline;
+  }
+  
+  @media (max-width: 768px) {
+    .footer {
+      padding: 2rem 1rem;
+    }
+    
+    .footer nav {
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+  }

@@ -1,112 +1,117 @@
 <!DOCTYPE html>
-<html lang="es">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Contacto - Mi Empresa</title>
-        <!-- Ruta corregida para GitHub Pages -->
-        <link rel="stylesheet" href="/styles.css">
-        <!-- O si está en un repositorio: -->
-        <!-- <link rel="stylesheet" href="/nombre-repositorio/styles.css"> -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    </head>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Dev Portfolio</title>
+  <link rel="stylesheet" href="/assets/css/base/reset.css">
+  <link rel="stylesheet" href="/assets/css/base/variables.css">
+  <link rel="stylesheet" href="/assets/css/base/typography.css">
+  <link rel="stylesheet" href="/assets/css/components/header.css">
+  <link rel="stylesheet" href="/assets/css/components/card.css">
+  <link rel="stylesheet" href="/assets/css/components/theme-toggle.css">
+  <link rel="stylesheet" href="/assets/css/layouts/grid-system.css">
+  <link rel="stylesheet" href="/assets/css/main.css">
+</head>
 <body>
-    <header>
-        <div class="container">
-            <h1>Nuestros Canales de Contacto</h1>
-            <p>Conéctate con nosotros a través de estos medios</p>
+  <!-- Header/Nav -->
+  <header class="header">
+    <div class="container">
+      <a href="/" class="logo">MyPortfolio</a>
+      
+      <input type="checkbox" id="mobile-menu-toggle" class="visually-hidden">
+      <label for="mobile-menu-toggle" class="hamburger-button" aria-label="Toggle menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </label>
+      
+      <nav class="navbar">
+        <ul>
+          <li><a href="/" class="active">Home</a></li>
+          <li><a href="/projects">Projects</a></li>
+          <li><button id="theme-toggle" aria-label="Toggle theme">
+            <span class="light-icon">☀️</span>
+            <span class="dark-icon">🌙</span>
+          </button></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="container">
+    <section class="about-section">
+      <h1>About Me</h1>
+      <div class="profile-grid">
+        <!-- Foto circular agregada aquí -->
+        <div class="profile-pic-container">
+          <img src="assets/images/profile.jpg" alt="My Profile Photo" class="profile-pic">
         </div>
-    </header>
-
-    <main class="container">
-        <section class="contact-gallery">
-            <div class="contact-card">
-                <div class="contact-image">
-                    <img src="https://via.placeholder.com/400x300?text=Oficina+Principal" alt="Oficina Principal">
-                </div>
-                <div class="contact-content">
-                    <h2>Visítanos</h2>
-                    <p>Nuestras puertas están abiertas de lunes a viernes de 9:00 am a 6:00 pm.</p>
-                    <div class="contact-detail">
-                        <i class="fas fa-map-marker-alt"></i>
-                        <p>Avenida Principal 456, Piso 8<br>Ciudad de México, 03810</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="contact-card reverse">
-                <div class="contact-image">
-                    <img src="https://via.placeholder.com/400x300?text=Equipo+de+Soporte" alt="Equipo de Soporte">
-                </div>
-                <div class="contact-content">
-                    <h2>Soporte Técnico</h2>
-                    <p>Nuestro equipo está disponible para ayudarte con cualquier inquietud técnica.</p>
-                    <div class="contact-detail">
-                        <i class="fas fa-phone"></i>
-                        <p>+52 55 1234 5678<br>Lunes a Viernes 8:00 am - 7:00 pm</p>
-                    </div>
-                    <div class="contact-detail">
-                        <i class="fas fa-envelope"></i>
-                        <p>soporte@miempresa.com<br>Respuesta en menos de 24 horas</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="contact-card">
-                <div class="contact-image">
-                    <img src="https://via.placeholder.com/400x300?text=Redes+Sociales" alt="Redes Sociales">
-                </div>
-                <div class="contact-content">
-                    <h2>Síguenos</h2>
-                    <p>Mantente actualizado con nuestras últimas noticias y promociones.</p>
-                    <div class="social-links">
-                        <a href="#" class="social-button facebook">
-                            <i class="fab fa-facebook-f"></i> Facebook
-                        </a>
-                        <a href="#" class="social-button twitter">
-                            <i class="fab fa-twitter"></i> Twitter
-                        </a>
-                        <a href="#" class="social-button instagram">
-                            <i class="fab fa-instagram"></i> Instagram
-                        </a>
-                        <a href="#" class="social-button linkedin">
-                            <i class="fab fa-linkedin-in"></i> LinkedIn
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="map-section">
-            <h2>Ubicación en el Mapa</h2>
-            <div class="map-container">
-                <!-- Imagen de mapa estático (reemplazar por mapa real si es necesario) -->
-                <img src="https://maps.googleapis.com/maps/api/staticmap?center=19.432608,-99.133209&zoom=15&size=800x400&markers=color:red%7C19.432608,-99.133209&key=YOUR_API_KEY" alt="Mapa de ubicación">
-                <div class="map-overlay">
-                    <h3>Cómo llegar</h3>
-                    <p>Estamos a 2 cuadras de la estación Insurgentes del Metro. Hay estacionamiento público disponible frente al edificio.</p>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-logo">
-                    <img src="https://via.placeholder.com/150x50?text=Logo+Empresa" alt="Logo de la empresa">
-                    <p>Soluciones innovadoras desde 2010</p>
-                </div>
-                <div class="footer-contact">
-                    <h3>Contacto Rápido</h3>
-                    <p><i class="fas fa-phone"></i> +52 55 9876 5432</p>
-                    <p><i class="fas fa-envelope"></i> info@miempresa.com</p>
-                </div>
-            </div>
-            <div class="copyright">
-                <p>&copy; 2023 Mi Empresa. Todos los derechos reservados.</p>
-            </div>
+        
+        <div class="bio">
+          <p>Unity developer specializing in system architecture tools with 5+ years of experience creating robust game systems.</p>
+          <ul class="skills">
+            <li>Unity Engine</li>
+            <li>C# Programming</li>
+            <li>System Design</li>
+          </ul>
         </div>
-    </footer>
+        
+        <div class="social-links">
+          <a href="#" class="social-icon">GitHub</a>
+          <a href="#" class="social-icon">LinkedIn</a>
+          <a href="#" class="social-icon">Unity Store</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="featured-projects">
+      <h2>Featured Projects</h2>
+      <div class="projects-grid">
+        <!-- Project Card 1 - Estilo minimalista -->
+        <article class="project-card">
+          <div class="card-header">
+            <span class="version-badge">v2.1.4</span>
+            <img src="assets/icons/unity.svg" alt="Unity" class="language-icon">
+          </div>
+          <div class="card-content">
+            <h3>Save System</h3>
+            <p>Complete save/load solution for Unity games with encryption support.</p>
+            <div class="price-tag">$15.99 <span class="free-badge">FREE Demo</span></div>
+          </div>
+          <a href="/projects/save-system" class="card-link">View Details</a>
+        </article>
+
+        <!-- Project Card 2 -->
+        <article class="project-card">
+          <div class="card-header">
+            <span class="version-badge">v1.0.0</span>
+            <img src="assets/icons/csharp.svg" alt="C#" class="language-icon">
+          </div>
+          <div class="card-content">
+            <h3>Inventory System</h3>
+            <p>Modular inventory framework for RPG games.</p>
+            <div class="price-tag">$12.99</div>
+          </div>
+          <a href="#" class="card-link">Coming Soon</a>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <p>© 2023 My Dev Portfolio</p>
+      <nav>
+        <a href="/privacy">Privacy Policy</a> | 
+        <a href="/contact">Contact</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script src="assets/js/theme-toggle.js" defer></script>
+  <script src="assets/js/hamburger-menu.js" defer></script>
 </body>
 </html>

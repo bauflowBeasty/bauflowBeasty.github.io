@@ -1,0 +1,25 @@
+/* assets/css/layouts/grid-system.css */
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 1.5rem;
+  }
+  
+  .profile-grid {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 3rem;
+    align-items: center;
+  }
+  
+  @media (max-width: 768px) {
+    .profile-grid {
+      grid-template-columns: 1fr;
+      text-align: center;
+    }
+    
+    .profile-pic {
+      margin: 0 auto;
+    }
+  }

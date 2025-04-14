@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Save System | Documentation</title>
+  <!-- Mismos estilos base -->
+  <link rel="stylesheet" href="../../../assets/css/base/reset.css">
+  <link rel="stylesheet" href="../../../assets/css/base/variables.css">
+  <link rel="stylesheet" href="../../../assets/css/base/typography.css">
+  <link rel="stylesheet" href="../../../assets/css/components/header.css">
+  <link rel="stylesheet" href="../../../assets/css/components/theme-toggle.css">
+  <link rel="stylesheet" href="/assets/css/main.css">
+  <!-- Estilos específicos de documentación -->
+  <link rel="stylesheet" href="../../../assets/css/layouts/documentation.css">
+</head>
+<body>
+  <!-- Header/Nav -->
+  <header class="header">
+    <div class="container">
+      <a href="/" class="logo">MyPortfolio</a>
+      
+      <input type="checkbox" id="mobile-menu-toggle" class="visually-hidden">
+      <label for="mobile-menu-toggle" class="hamburger-button" aria-label="Toggle menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </label>
+      
+      <nav class="navbar">
+        <ul>
+          <li><a href="/" class="active">Home</a></li>
+          <li><a href="/projects">Projects</a></li>
+          <li><button id="theme-toggle" aria-label="Toggle theme">
+            <span class="light-icon">☀️</span>
+            <span class="dark-icon">🌙</span>
+          </button></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="doc-container">
+    <aside class="doc-sidebar">
+      <nav class="doc-nav">
+        <ul>
+          <li><a href="#overview" class="active">Overview</a></li>
+          <li><a href="#installation">Installation</a></li>
+          <li><a href="#how-to-use">How to Use</a></li>
+          <li><a href="#technical-details">Technical Details</a></li>
+          <li><a href="#changelog">Changelog</a></li>
+          <li><a href="#gallery">Gallery</a></li>
+        </ul>
+      </nav>
+    </aside>
+
+    
+    <article class="doc-content">
+      <header class="doc-header">
+        <div class="doc-title">
+          <h1>Save System <span class="version-badge">v2.1.4</span></h1>
+          <div class="price-tag">$15.99 <span class="free-badge">FREE Demo</span></div>
+        </div>
+        <a href="#" class="download-button">Get on Unity Store</a>
+      </header>
+
+      
+
+      <section id="overview" class="doc-section">
+        <h2>Overview</h2>
+        <p>Complete save/load solution for Unity games with:</p>
+        <ul>
+          <li>Data encryption</li>
+          <li>Cloud save support</li>
+          <li>Multi-slot system</li>
+        </ul>
+      </section>
+
+      <section id="installation" class="doc-section">
+        <h2>Installation</h2>
+        <ol>
+          <li>Import the .unitypackage</li>
+          <li>Add the SaveManager prefab to your scene</li>
+        </ol>
+      </section>
+
+      <!-- Más secciones... -->
+
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <p>© 2023 My Dev Portfolio</p>
+      <nav>
+        <a href="/privacy">Privacy Policy</a> | 
+        <a href="/contact">Contact</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script src="../../../assets/js/doc-navigation.js" defer></script>
+  <script src="../../../assets/js/carousel.js" defer></script>
+</body>
+</html>

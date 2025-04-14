@@ -1,0 +1,30 @@
+/* assets/css/base/variables.css */
+:root {
+  /* Colores base */
+  --color-black: #000000;
+  --color-yellow: #FFFF00;
+  --color-yellow-light: #FFF9C4;
+  --color-green: #4CAF50;
+  
+  /* Tema oscuro (default) */
+  --color-primary: var(--color-yellow);
+  --color-secondary: var(--color-black);
+  --color-bg: #121212;
+  --color-text: #E0E0E0;
+  --color-text-secondary: #B0B0B0;
+  
+  /* Espaciados */
+  --spacing-xs: 0.5rem;
+  --spacing-sm: 1rem;
+  --spacing-md: 1.5rem;
+  --spacing-lg: 2rem;
+  --spacing-xl: 3rem;
+}
+
+[data-theme="light"] {
+  --color-primary: var(--color-black);
+  --color-secondary: var(--color-yellow-light);
+  --color-bg: #FFFFFF;
+  --color-text: #333333;
+  --color-text-secondary: #666666;
+}

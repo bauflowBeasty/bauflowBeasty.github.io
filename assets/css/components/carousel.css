@@ -1,0 +1,137 @@
+/* Estilos base del carrusel */
+.carousel {
+  position: relative;
+  width: 100%;
+  max-width: 900px;
+  margin: 2rem auto;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.slides-container {
+  display: flex;
+  transition: transform 0.5s cubic-bezier(0.65, 0, 0.35, 1);
+  height: 450px;
+  background: var(--color-bg);
+}
+
+.slide {
+  min-width: 100%;
+  position: relative;
+}
+
+.slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  background: linear-gradient(135deg, #222 25%, #111 100%);
+}
+
+.slide-caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.75);
+  color: var(--color-primary);
+  padding: 1rem;
+  text-align: center;
+  font-size: 1.1rem;
+}
+
+/* Controles */
+.carousel-controls {
+  position: absolute;
+  bottom: 20px;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+  z-index: 10;
+}
+
+.control-btn {
+  background: rgba(255, 255, 0, 0.8);
+  border: none;
+  color: var(--color-secondary);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  font-size: 1.2rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.control-btn:hover {
+  background: var(--color-primary);
+  transform: scale(1.1);
+}
+
+.dots-container {
+  display: flex;
+  gap: 0.8rem;
+}
+
+.dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.4);
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.dot.active {
+  background: var(--color-primary);
+  transform: scale(1.2);
+}
+
+.dot:hover {
+  background: var(--color-primary);
+}
+
+/* Fallback para cuando no hay JS */
+.no-js .slides-container {
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+}
+
+.no-js .slide {
+  scroll-snap-align: start;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .carousel {
+    border-radius: 0;
+    border-left: none;
+    border-right: none;
+  }
+  
+  .slides-container {
+    height: 300px;
+  }
+  
+  .control-btn {
+    width: 35px;
+    height: 35px;
+  }
+}
+
+/* Animaciones */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.slide {
+  animation: fadeIn 0.5s ease-out;
+}
