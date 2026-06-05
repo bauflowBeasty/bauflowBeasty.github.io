@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BeastySaveSystem — Documentación | bauflow</title>
+  <title>BeastySaveSystem — Documentation | bauflow</title>
   <script>document.documentElement.setAttribute('data-theme', localStorage.getItem('theme') || 'dark');</script>
   <link rel="stylesheet" href="/assets/css/base/variables.css">
   <link rel="stylesheet" href="/assets/css/base/reset.css">
@@ -22,7 +22,7 @@
     <div class="container">
       <a href="/" class="logo">bau<span>flow</span></a>
 
-      <button class="hamburger" id="hamburger" aria-label="Abrir menú" aria-expanded="false">
+      <button class="hamburger" id="hamburger" data-i18n-aria="nav.openMenu" aria-label="Open menu" aria-expanded="false">
         <span></span>
         <span></span>
         <span></span>
@@ -30,13 +30,18 @@
 
       <nav class="navbar" id="navbar">
         <ul>
-          <li><a href="/">Proyectos</a></li>
-          <li><a href="/#contact">Contacto</a></li>
+          <li><a href="/" data-i18n="nav.projects">Projects</a></li>
+          <li><a href="/#contact" data-i18n="nav.contact">Contact</a></li>
           <li>
-            <button id="theme-toggle" aria-label="Cambiar tema">
+            <button id="theme-toggle" aria-label="Toggle theme">
               <span class="light-icon">&#9728;</span>
               <span class="dark-icon">&#9790;</span>
             </button>
+          </li>
+          <li class="lang-switcher">
+            <button data-lang-btn="en">EN</button>
+            <span>|</span>
+            <button data-lang-btn="es">ES</button>
           </li>
         </ul>
       </nav>
@@ -47,24 +52,24 @@
   <div class="doc-cover">
     <div class="doc-cover-inner">
       <div class="doc-cover-title">BeastySaveSystem</div>
-      <div class="doc-cover-sub">Documentación Técnica</div>
+      <div class="doc-cover-sub" data-i18n="doc.cover.sub1">Technical Documentation</div>
       <div class="doc-cover-divider"></div>
-      <div class="doc-cover-sub" style="font-size:0.88rem;">Unity Save System Plugin &mdash; Referencia Completa para Desarrolladores</div>
-      <div class="doc-cover-sub" style="font-size:0.82rem;margin-top:0.2rem;">Versión 1.0 &nbsp;&middot;&nbsp; Junio 2026 &nbsp;&middot;&nbsp; Namespaces: <code>Beasty_SaveSystem</code> / <code>Beasty_SaveSystemCore</code></div>
+      <div class="doc-cover-sub" style="font-size:0.88rem;" data-i18n-html="doc.cover.sub2">Unity Save System Plugin &mdash; Complete Developer Reference</div>
+      <div class="doc-cover-sub" style="font-size:0.82rem;margin-top:0.2rem;" data-i18n-html="doc.cover.sub3">Version 1.0 &nbsp;&middot;&nbsp; June 2026 &nbsp;&middot;&nbsp; Namespaces: <code>Beasty_SaveSystem</code> / <code>Beasty_SaveSystemCore</code></div>
 
       <div class="doc-cover-meta">
-        <div class="k">Plataforma</div>
+        <div class="k" data-i18n="doc.cover.kPlatform">Platform</div>
         <div class="v">Unity &mdash; Windows / macOS / Linux / Android / iOS</div>
-        <div class="k">Serialización</div>
+        <div class="k" data-i18n="doc.cover.kSerial">Serialization</div>
         <div class="v">JSON via Newtonsoft.Json (Json.NET)</div>
-        <div class="k">Encriptación</div>
+        <div class="k" data-i18n="doc.cover.kEncrypt">Encryption</div>
         <div class="v">AES-256-CBC</div>
-        <div class="k">Patrones</div>
+        <div class="k" data-i18n="doc.cover.kPatterns">Patterns</div>
         <div class="v">Facade &middot; Singleton &middot; MVP &middot; Registry &middot; Strategy</div>
-        <div class="k">Async</div>
+        <div class="k" data-i18n="doc.cover.kAsync">Async</div>
         <div class="v">Task-based (C# async / await)</div>
-        <div class="k">Tipos Unity</div>
-        <div class="v">21 conversores integrados (Transform, Colliders, Camera, Light, Texture2D&hellip;)</div>
+        <div class="k" data-i18n="doc.cover.kTypes">Unity Types</div>
+        <div class="v" data-i18n-html="doc.cover.vTypes">21 built-in converters (Transform, Colliders, Camera, Light, Texture2D&hellip;)</div>
       </div>
     </div>
   </div>
@@ -77,59 +82,54 @@
 
     <!-- SIDEBAR -->
     <nav class="doc-sidebar" id="doc-sidebar">
-      <div class="sidebar-heading">Contenido</div>
-      <a href="#overview">1. Project Overview</a>
-      <a href="#architecture" class="sub">2. Architecture</a>
-      <a href="#core-classes" class="sub">3. Core Classes</a>
-      <a href="#api" class="sub">4. Public API</a>
-      <a href="#encryption" class="sub">5. Encryption</a>
-      <a href="#converters" class="sub">6. Converter System</a>
-      <a href="#slots" class="sub">7. Save Slot System</a>
-      <a href="#setup" class="sub">8. File Setup</a>
-      <a href="#mvp" class="sub">9. Demo MVP Layer</a>
-      <a href="#dataprocessor" class="sub">10. DataProcessor</a>
-      <a href="#platforms" class="sub">11. Platforms &amp; Paths</a>
-      <a href="#integration" class="sub">12. Integration Guide</a>
-      <a href="#structure" class="sub">13. File Structure</a>
-      <a href="#limitations" class="sub">14. Limitations</a>
-      <a href="#quickref" class="sub">15. Quick Reference</a>
+      <div class="sidebar-heading" data-i18n="doc.sidebar.heading">Contents</div>
+      <a href="#overview"      data-i18n="doc.sidebar.s1">1. Project Overview</a>
+      <a href="#architecture"  class="sub" data-i18n="doc.sidebar.s2">2. Architecture</a>
+      <a href="#core-classes"  class="sub" data-i18n="doc.sidebar.s3">3. Core Classes</a>
+      <a href="#api"           class="sub" data-i18n="doc.sidebar.s4">4. Public API</a>
+      <a href="#encryption"    class="sub" data-i18n="doc.sidebar.s5">5. Encryption</a>
+      <a href="#converters"    class="sub" data-i18n="doc.sidebar.s6">6. Converter System</a>
+      <a href="#slots"         class="sub" data-i18n="doc.sidebar.s7">7. Save Slot System</a>
+      <a href="#setup"         class="sub" data-i18n="doc.sidebar.s8">8. File Setup</a>
+      <a href="#mvp"           class="sub" data-i18n="doc.sidebar.s9">9. Demo MVP Layer</a>
+      <a href="#dataprocessor" class="sub" data-i18n="doc.sidebar.s10">10. DataProcessor</a>
+      <a href="#platforms"     class="sub" data-i18n-html="doc.sidebar.s11">11. Platforms &amp; Paths</a>
+      <a href="#integration"   class="sub" data-i18n="doc.sidebar.s12">12. Integration Guide</a>
+      <a href="#structure"     class="sub" data-i18n="doc.sidebar.s13">13. File Structure</a>
+      <a href="#limitations"   class="sub" data-i18n="doc.sidebar.s14">14. Limitations</a>
+      <a href="#quickref"      class="sub" data-i18n="doc.sidebar.s15">15. Quick Reference</a>
     </nav>
 
     <!-- CONTENT -->
     <div class="doc-content">
 
       <!-- Toggle button visible solo en mobile -->
-      <button class="sidebar-toggle" id="sidebar-toggle">&#9776; Contenido</button>
+      <button class="sidebar-toggle" id="sidebar-toggle">&#9776; <span data-i18n="doc.sidebar.toggle">Contents</span></button>
 
       <!-- ══ 1. PROJECT OVERVIEW ══════════════════════════════ -->
       <section id="overview">
-        <h1>1. Project Overview</h1>
-        <p>
-          <strong>BeastySaveSystem</strong> es un plugin de Unity listo para producción que provee una solución
-          completa de guardado orientada a plataformas móviles (Android / iOS) y escritorio (Windows / macOS / Linux).
-          El sistema gestiona serialización de objetos, E/S de archivos cifrados con AES-256, gestión de slots de
-          guardado con metadata, y una UI de demo completa construida con el patrón MVP.
-        </p>
+        <h1 data-i18n="doc.s1.title">1. Project Overview</h1>
+        <p data-i18n-html="doc.s1.p1"><strong>BeastySaveSystem</strong> is a production-ready Unity plugin that provides a complete save solution targeting mobile platforms (Android / iOS) and desktop (Windows / macOS / Linux). The system handles object serialization, AES-256 encrypted file I/O, save-slot management with metadata, and a full demo UI built with the MVP pattern.</p>
 
-        <h2>1.1 Objetivos de Diseño</h2>
+        <h2 data-i18n="doc.s1.h2_1">1.1 Design Goals</h2>
         <ul>
-          <li><strong>Zero boilerplate</strong> &mdash; Llama un método estático para guardar o cargar cualquier objeto. No se requieren atributos en las clases de datos.</li>
-          <li><strong>Agnóstico de plataforma</strong> &mdash; Selección automática de ruta: <code>persistentDataPath</code> en mobile, <code>dataPath</code> en desktop.</li>
-          <li><strong>Guardados cifrados</strong> &mdash; Cifrado AES-256 transparente al llamador; activado por un flag booleano.</li>
-          <li><strong>Carga por referencia</strong> &mdash; Patrón <code>PopulateObject</code> que llena instancias existentes en lugar de crear nuevas &mdash; esencial para componentes de Unity.</li>
-          <li><strong>Async-first</strong> &mdash; Cada API pública tiene un equivalente <code>Task&lt;T&gt;</code> async para E/S no bloqueante.</li>
-          <li><strong>Soporte de tipos Unity</strong> &mdash; 21 conversores integrados para Transform, Colliders, Camera, Light, SpriteRenderer, Texture2D y todos los tipos de valor comunes.</li>
+          <li data-i18n-html="doc.s1.li1"><strong>Zero boilerplate</strong> &mdash; Call a static method to save or load any object. No attributes required on data classes.</li>
+          <li data-i18n-html="doc.s1.li2"><strong>Platform-agnostic</strong> &mdash; Automatic path selection: <code>persistentDataPath</code> on mobile, <code>dataPath</code> on desktop.</li>
+          <li data-i18n-html="doc.s1.li3"><strong>Encrypted saves</strong> &mdash; AES-256 encryption transparent to the caller; enabled by a boolean flag.</li>
+          <li data-i18n-html="doc.s1.li4"><strong>Load by reference</strong> &mdash; <code>PopulateObject</code> pattern fills existing instances instead of creating new ones &mdash; essential for Unity components.</li>
+          <li data-i18n-html="doc.s1.li5"><strong>Async-first</strong> &mdash; Every public API has a <code>Task&lt;T&gt;</code> async equivalent for non-blocking I/O.</li>
+          <li data-i18n-html="doc.s1.li6"><strong>Unity type support</strong> &mdash; 21 built-in converters for Transform, Colliders, Camera, Light, SpriteRenderer, Texture2D and all common value types.</li>
         </ul>
 
-        <h2>1.2 Mapa de Namespaces</h2>
+        <h2 data-i18n="doc.s1.h2_2">1.2 Namespace Map</h2>
         <div class="table-wrap">
           <table>
-            <thead><tr><th>Namespace</th><th>Propósito</th><th>Tipos Clave</th></tr></thead>
+            <thead><tr><th data-i18n="doc.th.namespace">Namespace</th><th data-i18n="doc.th.purpose">Purpose</th><th data-i18n="doc.th.keyTypes">Key Types</th></tr></thead>
             <tbody>
-              <tr><td><code>Beasty_SaveSystem</code></td><td>Capa de API pública</td><td><code>BeastySaveSystemAPI</code>, <code>BeastySaveSystemFileSetup</code>, <code>SaveSlotController</code></td></tr>
-              <tr><td><code>Beasty_SaveSystemCore</code></td><td>Motor interno</td><td><code>SaveSystem</code>, <code>SaveByReference</code>, <code>SaveSystem_List</code>, <code>Encrypted</code>, <code>DataProcessor</code></td></tr>
-              <tr><td><code>Beasty_SaveSystemCore</code> (converters)</td><td>Conversores de tipos Unity</td><td><code>UnityObjectConverter</code>, <code>IUnityTypeConverter</code>, todas las clases <code>*Converter</code></td></tr>
-              <tr><td><code>Beasty_SaveSystem</code> (example)</td><td>Demo / app de referencia</td><td><code>BeastySavePresenter</code>, <code>BeastySaveView</code>, <code>BeastySaveModel</code>, <code>Metadata</code>, <code>ConfigFile</code></td></tr>
+              <tr><td><code>Beasty_SaveSystem</code></td><td data-i18n="doc.s1.td1">Public API layer</td><td><code>BeastySaveSystemAPI</code>, <code>BeastySaveSystemFileSetup</code>, <code>SaveSlotController</code></td></tr>
+              <tr><td><code>Beasty_SaveSystemCore</code></td><td data-i18n="doc.s1.td2">Internal engine</td><td><code>SaveSystem</code>, <code>SaveByReference</code>, <code>SaveSystem_List</code>, <code>Encrypted</code>, <code>DataProcessor</code></td></tr>
+              <tr><td><code>Beasty_SaveSystemCore</code> (converters)</td><td data-i18n="doc.s1.td3">Unity type converters</td><td><code>UnityObjectConverter</code>, <code>IUnityTypeConverter</code>, all <code>*Converter</code> classes</td></tr>
+              <tr><td><code>Beasty_SaveSystem</code> (example)</td><td data-i18n="doc.s1.td4">Reference implementation / Demo app</td><td><code>BeastySavePresenter</code>, <code>BeastySaveView</code>, <code>BeastySaveModel</code>, <code>Metadata</code>, <code>ConfigFile</code></td></tr>
             </tbody>
           </table>
         </div>
@@ -137,38 +137,38 @@
 
       <!-- ══ 2. ARCHITECTURE ══════════════════════════════════ -->
       <section id="architecture">
-        <h1>2. Architecture</h1>
+        <h1 data-i18n="doc.s2.title">2. Architecture</h1>
 
-        <h2>2.1 Arquitectura en Capas</h2>
+        <h2 data-i18n="doc.s2.h2_1">2.1 Layered Architecture</h2>
         <div class="table-wrap">
           <table>
-            <thead><tr><th>Capa</th><th>Clases</th><th>Responsabilidad</th></tr></thead>
+            <thead><tr><th data-i18n="doc.th.layer">Layer</th><th data-i18n="doc.th.classes">Classes</th><th data-i18n="doc.th.resp">Responsibility</th></tr></thead>
             <tbody>
               <tr>
                 <td><strong>API / Facade</strong></td>
                 <td><code>BeastySaveSystemAPI</code><br><code>BeastySaveSystemFileSetup</code><br><code>SaveSlotController</code></td>
-                <td>Punto de entrada único para los consumers. Sin acoplamiento a los internos de serialización.</td>
+                <td data-i18n="doc.s2.td1_r">Single entry point for consumers. No coupling to serialization internals.</td>
               </tr>
               <tr>
                 <td><strong>Core Engine</strong></td>
                 <td><code>SaveSystem</code><br><code>SaveByReference</code><br><code>SaveSystem_List</code><br><code>FileOperationsHandler</code><br><code>Encrypted</code><br><code>DataProcessor</code></td>
-                <td>Serialización JSON, E/S de archivos, cifrado, resolución de tipos.</td>
+                <td data-i18n="doc.s2.td2_r">JSON serialization, file I/O, encryption, type resolution.</td>
               </tr>
               <tr>
                 <td><strong>Converter Pipeline</strong></td>
-                <td><code>UnityObjectConverter</code><br><code>UnityTypeConverterRegistry</code><br><code>IUnityTypeConverter</code><br>+ 21 conversores concretos</td>
-                <td>Traduce tipos Unity que Newtonsoft.Json no puede manejar nativamente.</td>
+                <td><code>UnityObjectConverter</code><br><code>UnityTypeConverterRegistry</code><br><code>IUnityTypeConverter</code><br>+ 21 concrete converters</td>
+                <td data-i18n="doc.s2.td3_r">Translates Unity types that Newtonsoft.Json cannot natively handle.</td>
               </tr>
               <tr>
                 <td><strong>Demo / Example</strong></td>
                 <td><code>BeastySavePresenter</code><br><code>BeastySaveView</code><br><code>BeastySaveModel</code><br><code>SaveEntryUI</code></td>
-                <td>Implementación de referencia MVP. No requerida en runtime.</td>
+                <td data-i18n="doc.s2.td4_r">Reference MVP implementation. Not required at runtime.</td>
               </tr>
             </tbody>
           </table>
         </div>
 
-        <h2>2.2 Flujo de Datos &mdash; Operación Save</h2>
+        <h2 data-i18n="doc.s2.h2_2">2.2 Data Flow &mdash; Save Operation</h2>
         <pre>Caller
   → BeastySaveSystemAPI (static facade)
   → SaveSystem / SaveByReference / SaveSystem_List
@@ -180,7 +180,7 @@
   → [optional] Encrypted.Encrypt()
   → FileOperationsHandler.WriteToFile / WriteToFileAsync</pre>
 
-        <h2>2.3 Flujo de Datos &mdash; Operación Load (Reference)</h2>
+        <h2 data-i18n="doc.s2.h2_3">2.3 Data Flow &mdash; Load (Reference) Operation</h2>
         <pre>Caller
   → BeastySaveSystemAPI.LoadRef / LoadRef_Encrypted
   → SaveByReference.Load()
@@ -193,8 +193,8 @@
   → Concrete Converter (ReadJson, existingValue)
   → existing object instance populated in-place ✓</pre>
 
-        <h2>2.4 Formato JSON &mdash; SaveByReference (typed envelope)</h2>
-        <p>Al guardar con <code>SaveRef</code> o <code>SaveRef_Encrypted</code>, <code>JsonSerializer</code> envuelve el objeto para que <code>DataProcessor</code> pueda resolver la instancia destino correcta al cargar sin crear nuevos objetos:</p>
+        <h2 data-i18n="doc.s2.h2_4">2.4 JSON Format &mdash; SaveByReference (typed envelope)</h2>
+        <p data-i18n-html="doc.s2.p4">When saving with <code>SaveRef</code> or <code>SaveRef_Encrypted</code>, the <code>JsonSerializer</code> wraps the object so <code>DataProcessor</code> can resolve the correct target instance when loading without creating new objects:</p>
         <pre>{
   "objects": {
     "type": "Beasty_SaveSystem.SaveObjectModel",
@@ -209,8 +209,8 @@
   }
 }</pre>
 
-        <h2>2.5 Formato JSON &mdash; SaveSystem (plain)</h2>
-        <p>Usando <code>Save</code> / <code>Load&lt;T&gt;</code>, Newtonsoft.Json serializa el grafo de objetos directamente &mdash; sin envelope wrapper:</p>
+        <h2 data-i18n="doc.s2.h2_5">2.5 JSON Format &mdash; SaveSystem (plain)</h2>
+        <p data-i18n-html="doc.s2.p5">Using <code>Save</code> / <code>Load&lt;T&gt;</code>, Newtonsoft.Json serializes the object graph directly &mdash; no envelope wrapper:</p>
         <pre>{
   "PersistentID": "abc-123",
   "data": {
@@ -223,63 +223,63 @@
 
       <!-- ══ 3. CORE CLASSES ══════════════════════════════════ -->
       <section id="core-classes">
-        <h1>3. Core Classes Reference</h1>
+        <h1 data-i18n="doc.s3.title">3. Core Classes Reference</h1>
 
-        <h2>3.1 SaveFileInfo</h2>
-        <p><code>SaveFileInfo</code> es un contenedor de configuración serializable que se pasa a cada operación de guardado/carga.</p>
+        <h2 data-i18n="doc.s3.h2_1">3.1 SaveFileInfo</h2>
+        <p data-i18n-html="doc.s3.p1"><code>SaveFileInfo</code> is a serializable configuration container passed to every save/load operation.</p>
         <div class="table-wrap">
           <table>
-            <thead><tr><th>Propiedad</th><th>Tipo</th><th>Default</th><th>Descripción</th></tr></thead>
+            <thead><tr><th data-i18n="doc.th.property">Property</th><th data-i18n="doc.th.type">Type</th><th data-i18n="doc.th.def">Default</th><th data-i18n="doc.th.description">Description</th></tr></thead>
             <tbody>
-              <tr><td><code>FileExtension</code></td><td>string</td><td><code>BeastySaveSystem</code></td><td>Extensión de archivo (sin punto inicial). Configurable en Inspector.</td></tr>
-              <tr><td><code>SaveFolder</code></td><td>string</td><td><code>Saves</code></td><td>Subcarpeta dentro de <code>DataPath</code>.</td></tr>
-              <tr><td><code>DataPath</code></td><td>string</td><td>dependiente de plataforma</td><td><code>persistentDataPath</code> en mobile; <code>dataPath</code> en desktop. El setter rechaza valores vacíos.</td></tr>
-              <tr><td><code>EncryptionKey</code></td><td>string</td><td>32-char default</td><td>Clave AES-256. El setter aplica <code>length == 32</code> y advierte de lo contrario.</td></tr>
+              <tr><td><code>FileExtension</code></td><td>string</td><td><code>BeastySaveSystem</code></td><td data-i18n-html="doc.s3.td1_d">File extension (without leading dot). Configurable in Inspector.</td></tr>
+              <tr><td><code>SaveFolder</code></td><td>string</td><td><code>Saves</code></td><td data-i18n-html="doc.s3.td2_d">Subfolder inside <code>DataPath</code>.</td></tr>
+              <tr><td><code>DataPath</code></td><td>string</td><td>platform-dependent</td><td data-i18n-html="doc.s3.td3_d"><code>persistentDataPath</code> on mobile; <code>dataPath</code> on desktop. The setter rejects empty values.</td></tr>
+              <tr><td><code>EncryptionKey</code></td><td>string</td><td>32-char default</td><td data-i18n-html="doc.s3.td4_d">AES-256 key. The setter enforces <code>length == 32</code> and warns otherwise.</td></tr>
             </tbody>
           </table>
         </div>
-        <p>Métodos helper: <code>GetFullPath(fileName)</code> construye y crea el directorio automáticamente. <code>GetFullPath()</code> (sin args) retorna solo la carpeta. <code>DefaultDataPath()</code> resetea al default de plataforma.</p>
+        <p data-i18n-html="doc.s3.p_help">Helper methods: <code>GetFullPath(fileName)</code> builds and auto-creates the directory. <code>GetFullPath()</code> (no args) returns the folder only. <code>DefaultDataPath()</code> resets to the platform default.</p>
 
-        <h2>3.2 BaseSaveFileInfo (abstract)</h2>
-        <p>Base abstracta heredada por <code>SaveSystem</code>, <code>SaveByReference</code>, y <code>SaveSystem_List</code>. Copia todos los settings de <code>SaveFileInfo</code> en campos readonly protegidos y expone <code>GetFullPath(fileName)</code>. Auto-crea el directorio de guardado en el primer acceso.</p>
+        <h2 data-i18n="doc.s3.h2_2">3.2 BaseSaveFileInfo (abstract)</h2>
+        <p data-i18n-html="doc.s3.p2">Abstract base inherited by <code>SaveSystem</code>, <code>SaveByReference</code>, and <code>SaveSystem_List</code>. Copies all settings from <code>SaveFileInfo</code> into protected readonly fields and exposes <code>GetFullPath(fileName)</code>. Auto-creates the save directory on first access.</p>
 
-        <h2>3.3 SaveSystem</h2>
-        <p>Maneja serialización directa de objetos usando <code>JsonConvert.SerializeObject</code> / <code>JsonConvert.DeserializeObject&lt;T&gt;</code>. Retorna una <strong>nueva instancia</strong> de T al cargar.</p>
+        <h2 data-i18n="doc.s3.h2_3">3.3 SaveSystem</h2>
+        <p data-i18n-html="doc.s3.p3">Handles direct object serialization using <code>JsonConvert.SerializeObject</code> / <code>JsonConvert.DeserializeObject&lt;T&gt;</code>. Returns a <strong>new instance</strong> of T when loading.</p>
         <div class="table-wrap">
           <table>
-            <thead><tr><th>Método</th><th>Firma</th><th>Notas</th></tr></thead>
+            <thead><tr><th data-i18n="doc.th.method">Method</th><th data-i18n="doc.th.signature">Signature</th><th data-i18n="doc.th.notes">Notes</th></tr></thead>
             <tbody>
-              <tr><td><code>Save</code> <span class="badge badge-sync">sync</span></td><td><code>bool Save(object, string, bool encrypt=false)</code></td><td>Escribe JSON (o Base64 cifrado) a disco via <code>File.WriteAllText</code>.</td></tr>
-              <tr><td><code>SaveAsync</code> <span class="badge badge-async">async</span></td><td><code>Task&lt;bool&gt; SaveAsync(object, string, bool)</code></td><td>Escritura async via <code>StreamWriter.WriteAsync</code>.</td></tr>
-              <tr><td><code>Load&lt;T&gt;</code> <span class="badge badge-sync">sync</span></td><td><code>T Load&lt;T&gt;(string, bool decrypt=false)</code></td><td>Deserializa en una nueva instancia de T. Retorna <code>default</code> al fallar.</td></tr>
-              <tr><td><code>LoadAsync&lt;T&gt;</code> <span class="badge badge-async">async</span></td><td><code>Task&lt;T&gt; LoadAsync&lt;T&gt;(string, bool)</code></td><td>Lectura + deserialización async.</td></tr>
-            </tbody>
-          </table>
-        </div>
-
-        <h2>3.4 SaveByReference</h2>
-        <p>Usa el formato JSON de typed-envelope y <code>DataProcessor.ProcessLoadedData</code> para llenar instancias de objetos existentes in-place. Requerido para componentes Unity porque Unity controla el ciclo de vida de los componentes &mdash; no puedes hacer <em>new</em> a un MonoBehaviour.</p>
-        <div class="table-wrap">
-          <table>
-            <thead><tr><th>Método</th><th>Firma</th><th>Notas</th></tr></thead>
-            <tbody>
-              <tr><td><code>Save</code> <span class="badge badge-sync">sync</span></td><td><code>bool Save(object, string, bool encrypt=false)</code></td><td>Envuelve el objeto en typed envelope <code>{objects:{type,data}}</code>.</td></tr>
-              <tr><td><code>Load</code> <span class="badge badge-sync">sync</span></td><td><code>void Load(string, object target, bool decrypt=false)</code></td><td>Llena <code>target</code> via DataProcessor. Sin retorno &mdash; muta la instancia existente.</td></tr>
-              <tr><td><code>LoadAsync&lt;T&gt;</code> <span class="badge badge-async">async</span></td><td><code>Task&lt;T&gt; LoadAsync&lt;T&gt;(string, bool)</code></td><td>Variante async. Para tipos no-componente (deserializa a nueva T).</td></tr>
+              <tr><td><code>Save</code> <span class="badge badge-sync">sync</span></td><td><code>bool Save(object, string, bool encrypt=false)</code></td><td data-i18n-html="doc.s3.s_n1">Writes JSON (or encrypted Base64) to disk via <code>File.WriteAllText</code>.</td></tr>
+              <tr><td><code>SaveAsync</code> <span class="badge badge-async">async</span></td><td><code>Task&lt;bool&gt; SaveAsync(object, string, bool)</code></td><td data-i18n-html="doc.s3.s_n2">Async write via <code>StreamWriter.WriteAsync</code>.</td></tr>
+              <tr><td><code>Load&lt;T&gt;</code> <span class="badge badge-sync">sync</span></td><td><code>T Load&lt;T&gt;(string, bool decrypt=false)</code></td><td data-i18n-html="doc.s3.s_n3">Deserializes into a new T instance. Returns <code>default</code> on failure.</td></tr>
+              <tr><td><code>LoadAsync&lt;T&gt;</code> <span class="badge badge-async">async</span></td><td><code>Task&lt;T&gt; LoadAsync&lt;T&gt;(string, bool)</code></td><td data-i18n="doc.s3.s_n4">Async read + deserialization.</td></tr>
             </tbody>
           </table>
         </div>
 
-        <h2>3.5 SaveSystem_List</h2>
-        <p>Maneja <code>List&lt;object&gt;</code> heterogéneas. Cada elemento se almacena con su nombre CLR completo para que DataProcessor pueda enrutar datos a la instancia correcta al cargar.</p>
+        <h2 data-i18n="doc.s3.h2_4">3.4 SaveByReference</h2>
+        <p data-i18n-html="doc.s3.p4">Uses the typed-envelope JSON format and <code>DataProcessor.ProcessLoadedData</code> to fill existing object instances in-place. Required for Unity components because Unity controls the component lifecycle &mdash; you cannot <em>new</em> a MonoBehaviour.</p>
         <div class="table-wrap">
           <table>
-            <thead><tr><th>Método</th><th>Firma</th><th>Notas</th></tr></thead>
+            <thead><tr><th data-i18n="doc.th.method">Method</th><th data-i18n="doc.th.signature">Signature</th><th data-i18n="doc.th.notes">Notes</th></tr></thead>
             <tbody>
-              <tr><td><code>Save</code> <span class="badge badge-sync">sync</span></td><td><code>bool Save(List&lt;object&gt;, string, bool)</code></td><td>Serializa cada elemento con metadata de tipo.</td></tr>
-              <tr><td><code>SaveAsync</code> <span class="badge badge-async">async</span></td><td><code>Task&lt;bool&gt; SaveAsync(List&lt;object&gt;, string, bool)</code></td><td>Serialización async paralela via <code>Task.WhenAll</code>.</td></tr>
-              <tr><td><code>LoadAndAssign</code> <span class="badge badge-sync">sync</span></td><td><code>bool LoadAndAssign(List&lt;object&gt;, string, bool)</code></td><td>Hace match de tipos y llama <code>PopulateObject</code> en cada match.</td></tr>
-              <tr><td><code>LoadAndMergeAsync</code> <span class="badge badge-async">async</span></td><td><code>Task&lt;bool&gt; LoadAndMergeAsync(List&lt;object&gt;, string, bool)</code></td><td>Versión async de <code>LoadAndAssign</code>.</td></tr>
+              <tr><td><code>Save</code> <span class="badge badge-sync">sync</span></td><td><code>bool Save(object, string, bool encrypt=false)</code></td><td data-i18n-html="doc.s3.r_n1">Wraps object in typed envelope <code>{objects:{type,data}}</code>.</td></tr>
+              <tr><td><code>Load</code> <span class="badge badge-sync">sync</span></td><td><code>void Load(string, object target, bool decrypt=false)</code></td><td data-i18n-html="doc.s3.r_n2">Fills <code>target</code> via DataProcessor. No return &mdash; mutates existing instance.</td></tr>
+              <tr><td><code>LoadAsync&lt;T&gt;</code> <span class="badge badge-async">async</span></td><td><code>Task&lt;T&gt; LoadAsync&lt;T&gt;(string, bool)</code></td><td data-i18n-html="doc.s3.r_n3">Async variant. For non-component types (deserializes to new T).</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 data-i18n="doc.s3.h2_5">3.5 SaveSystem_List</h2>
+        <p data-i18n-html="doc.s3.p5">Handles heterogeneous <code>List&lt;object&gt;</code>. Each element is stored with its full CLR name so DataProcessor can route data to the correct instance when loading.</p>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th data-i18n="doc.th.method">Method</th><th data-i18n="doc.th.signature">Signature</th><th data-i18n="doc.th.notes">Notes</th></tr></thead>
+            <tbody>
+              <tr><td><code>Save</code> <span class="badge badge-sync">sync</span></td><td><code>bool Save(List&lt;object&gt;, string, bool)</code></td><td data-i18n="doc.s3.l_n1">Serializes each element with type metadata.</td></tr>
+              <tr><td><code>SaveAsync</code> <span class="badge badge-async">async</span></td><td><code>Task&lt;bool&gt; SaveAsync(List&lt;object&gt;, string, bool)</code></td><td data-i18n-html="doc.s3.l_n2">Parallel async serialization via <code>Task.WhenAll</code>.</td></tr>
+              <tr><td><code>LoadAndAssign</code> <span class="badge badge-sync">sync</span></td><td><code>bool LoadAndAssign(List&lt;object&gt;, string, bool)</code></td><td data-i18n-html="doc.s3.l_n3">Matches types and calls <code>PopulateObject</code> on each match.</td></tr>
+              <tr><td><code>LoadAndMergeAsync</code> <span class="badge badge-async">async</span></td><td><code>Task&lt;bool&gt; LoadAndMergeAsync(List&lt;object&gt;, string, bool)</code></td><td data-i18n-html="doc.s3.l_n4">Async version of <code>LoadAndAssign</code>.</td></tr>
             </tbody>
           </table>
         </div>
@@ -287,61 +287,57 @@
 
       <!-- ══ 4. PUBLIC API ════════════════════════════════════ -->
       <section id="api">
-        <h1>4. BeastySaveSystemAPI &mdash; Public Facade</h1>
-        <p>
-          <code>BeastySaveSystemAPI</code> es una <strong>clase estática</strong> que actúa como el único punto de
-          entrada público para todas las operaciones de guardado/carga. Los callers nunca instancian clases del
-          motor interno directamente. Todos los métodos requieren una instancia de <code>SaveFileInfo</code>.
-        </p>
+        <h1 data-i18n="doc.s4.title">4. BeastySaveSystemAPI &mdash; Public Facade</h1>
+        <p data-i18n-html="doc.s4.p1"><code>BeastySaveSystemAPI</code> is a <strong>static class</strong> that acts as the sole public entry point for all save/load operations. Callers never instantiate internal engine classes directly. All methods require a <code>SaveFileInfo</code> instance.</p>
 
-        <h2>4.1 Reference-based Save / Load (recomendado para componentes Unity)</h2>
+        <h2 data-i18n="doc.s4.h2_1">4.1 Reference-based Save / Load (recommended for Unity components)</h2>
         <div class="table-wrap">
           <table>
-            <thead><tr><th>Método</th><th>Retorno</th><th>Parámetros</th><th>Descripción</th></tr></thead>
+            <thead><tr><th data-i18n="doc.th.method">Method</th><th data-i18n="doc.th.ret">Return</th><th data-i18n="doc.th.params">Parameters</th><th data-i18n="doc.th.description">Description</th></tr></thead>
             <tbody>
-              <tr><td><code>SaveRef</code></td><td><code>bool</code></td><td><code>object data, string fileName, SaveFileInfo info</code></td><td>Guardado sync usando typed envelope.</td></tr>
-              <tr><td><code>SaveRef_Encrypted</code> <span class="badge badge-enc">enc</span></td><td><code>bool</code></td><td><code>object data, string fileName, SaveFileInfo info</code></td><td>Guardado sync AES-256 con typed envelope.</td></tr>
-              <tr><td><code>LoadRef</code></td><td><code>void</code></td><td><code>string fileName, object target, SaveFileInfo info</code></td><td>Carga sync in-place en objeto existente. Muta target.</td></tr>
-              <tr><td><code>LoadRef_Encrypted</code> <span class="badge badge-enc">enc</span></td><td><code>void</code></td><td><code>string fileName, object target, SaveFileInfo info</code></td><td>Carga cifrada sync in-place.</td></tr>
+              <tr><td><code>SaveRef</code></td><td><code>bool</code></td><td><code>object data, string fileName, SaveFileInfo info</code></td><td data-i18n="doc.s4.r1_d">Sync save using typed envelope.</td></tr>
+              <tr><td><code>SaveRef_Encrypted</code> <span class="badge badge-enc">enc</span></td><td><code>bool</code></td><td><code>object data, string fileName, SaveFileInfo info</code></td><td data-i18n="doc.s4.r2_d">Sync AES-256 save with typed envelope.</td></tr>
+              <tr><td><code>LoadRef</code></td><td><code>void</code></td><td><code>string fileName, object target, SaveFileInfo info</code></td><td data-i18n="doc.s4.r3_d">Sync in-place load into existing object. Mutates target.</td></tr>
+              <tr><td><code>LoadRef_Encrypted</code> <span class="badge badge-enc">enc</span></td><td><code>void</code></td><td><code>string fileName, object target, SaveFileInfo info</code></td><td data-i18n="doc.s4.r4_d">Sync encrypted in-place load.</td></tr>
             </tbody>
           </table>
         </div>
 
-        <h2>4.2 Individual Object Save / Load</h2>
+        <h2 data-i18n="doc.s4.h2_2">4.2 Individual Object Save / Load</h2>
         <div class="table-wrap">
           <table>
-            <thead><tr><th>Método</th><th>Retorno</th><th>Descripción</th></tr></thead>
+            <thead><tr><th data-i18n="doc.th.method">Method</th><th data-i18n="doc.th.ret">Return</th><th data-i18n="doc.th.description">Description</th></tr></thead>
             <tbody>
-              <tr><td><code>Save</code></td><td><code>bool</code></td><td>Guardado plain sync.</td></tr>
-              <tr><td><code>SaveAsync</code> <span class="badge badge-async">async</span></td><td><code>Task&lt;bool&gt;</code></td><td>Guardado plain async.</td></tr>
-              <tr><td><code>Save_Encrypted</code> <span class="badge badge-enc">enc</span></td><td><code>bool</code></td><td>Guardado AES-256 sync.</td></tr>
-              <tr><td><code>SaveAsync_Encrypted</code> <span class="badge badge-async">async</span> <span class="badge badge-enc">enc</span></td><td><code>Task&lt;bool&gt;</code></td><td>Guardado AES-256 async.</td></tr>
-              <tr><td><code>Load&lt;T&gt;</code></td><td><code>T</code></td><td>Carga plain sync &mdash; deserializa en nueva instancia de T.</td></tr>
-              <tr><td><code>LoadAsync&lt;T&gt;</code> <span class="badge badge-async">async</span></td><td><code>Task&lt;T&gt;</code></td><td>Carga plain async.</td></tr>
-              <tr><td><code>Load_Encrypted&lt;T&gt;</code> <span class="badge badge-enc">enc</span></td><td><code>T</code></td><td>Carga cifrada sync.</td></tr>
-              <tr><td><code>LoadAsync_Encrypted&lt;T&gt;</code> <span class="badge badge-async">async</span> <span class="badge badge-enc">enc</span></td><td><code>Task&lt;T&gt;</code></td><td>Carga cifrada async.</td></tr>
+              <tr><td><code>Save</code></td><td><code>bool</code></td><td data-i18n="doc.s4.s1_d">Plain sync save.</td></tr>
+              <tr><td><code>SaveAsync</code> <span class="badge badge-async">async</span></td><td><code>Task&lt;bool&gt;</code></td><td data-i18n="doc.s4.s2_d">Plain async save.</td></tr>
+              <tr><td><code>Save_Encrypted</code> <span class="badge badge-enc">enc</span></td><td><code>bool</code></td><td data-i18n="doc.s4.s3_d">AES-256 sync save.</td></tr>
+              <tr><td><code>SaveAsync_Encrypted</code> <span class="badge badge-async">async</span> <span class="badge badge-enc">enc</span></td><td><code>Task&lt;bool&gt;</code></td><td data-i18n="doc.s4.s4_d">AES-256 async save.</td></tr>
+              <tr><td><code>Load&lt;T&gt;</code></td><td><code>T</code></td><td data-i18n="doc.s4.l1_d">Plain sync load &mdash; deserializes to new T instance.</td></tr>
+              <tr><td><code>LoadAsync&lt;T&gt;</code> <span class="badge badge-async">async</span></td><td><code>Task&lt;T&gt;</code></td><td data-i18n="doc.s4.l2_d">Plain async load.</td></tr>
+              <tr><td><code>Load_Encrypted&lt;T&gt;</code> <span class="badge badge-enc">enc</span></td><td><code>T</code></td><td data-i18n="doc.s4.l3_d">Encrypted sync load.</td></tr>
+              <tr><td><code>LoadAsync_Encrypted&lt;T&gt;</code> <span class="badge badge-async">async</span> <span class="badge badge-enc">enc</span></td><td><code>Task&lt;T&gt;</code></td><td data-i18n="doc.s4.l4_d">Encrypted async load.</td></tr>
             </tbody>
           </table>
         </div>
 
-        <h2>4.3 Object List Save / Load</h2>
+        <h2 data-i18n="doc.s4.h2_3">4.3 Object List Save / Load</h2>
         <div class="table-wrap">
           <table>
-            <thead><tr><th>Método</th><th>Retorno</th><th>Descripción</th></tr></thead>
+            <thead><tr><th data-i18n="doc.th.method">Method</th><th data-i18n="doc.th.ret">Return</th><th data-i18n="doc.th.description">Description</th></tr></thead>
             <tbody>
-              <tr><td><code>Save_ObjectList</code></td><td><code>bool</code></td><td>Guardado sync de <code>List&lt;object&gt;</code>.</td></tr>
-              <tr><td><code>SaveAsync_ObjectList</code> <span class="badge badge-async">async</span></td><td><code>Task&lt;bool&gt;</code></td><td>Guardado async de <code>List&lt;object&gt;</code>.</td></tr>
-              <tr><td><code>Save_ObjectList_Encrypted</code> <span class="badge badge-enc">enc</span></td><td><code>bool</code></td><td>Guardado cifrado sync de lista.</td></tr>
-              <tr><td><code>SaveAsync_ObjectList_Encrypted</code> <span class="badge badge-async">async</span> <span class="badge badge-enc">enc</span></td><td><code>Task&lt;bool&gt;</code></td><td>Guardado cifrado async de lista.</td></tr>
-              <tr><td><code>LoadAndMergeList</code></td><td><code>bool</code></td><td>Sync &mdash; merge de datos cargados en instancias existentes de la lista.</td></tr>
-              <tr><td><code>LoadAndMergeListAsync</code> <span class="badge badge-async">async</span></td><td><code>Task&lt;bool&gt;</code></td><td>Merge async en lista existente.</td></tr>
-              <tr><td><code>LoadAndMergeList_Encrypted</code> <span class="badge badge-enc">enc</span></td><td><code>bool</code></td><td>Merge cifrado sync.</td></tr>
-              <tr><td><code>LoadAndMergeListAsync_Encrypted</code> <span class="badge badge-async">async</span> <span class="badge badge-enc">enc</span></td><td><code>Task&lt;bool&gt;</code></td><td>Merge cifrado async.</td></tr>
+              <tr><td><code>Save_ObjectList</code></td><td><code>bool</code></td><td data-i18n-html="doc.s4.sl1_d">Sync save of <code>List&lt;object&gt;</code>.</td></tr>
+              <tr><td><code>SaveAsync_ObjectList</code> <span class="badge badge-async">async</span></td><td><code>Task&lt;bool&gt;</code></td><td data-i18n-html="doc.s4.sl2_d">Async save of <code>List&lt;object&gt;</code>.</td></tr>
+              <tr><td><code>Save_ObjectList_Encrypted</code> <span class="badge badge-enc">enc</span></td><td><code>bool</code></td><td data-i18n="doc.s4.sl3_d">Encrypted sync list save.</td></tr>
+              <tr><td><code>SaveAsync_ObjectList_Encrypted</code> <span class="badge badge-async">async</span> <span class="badge badge-enc">enc</span></td><td><code>Task&lt;bool&gt;</code></td><td data-i18n="doc.s4.sl4_d">Encrypted async list save.</td></tr>
+              <tr><td><code>LoadAndMergeList</code></td><td><code>bool</code></td><td data-i18n="doc.s4.ll1_d">Sync &mdash; merge loaded data into existing list instances.</td></tr>
+              <tr><td><code>LoadAndMergeListAsync</code> <span class="badge badge-async">async</span></td><td><code>Task&lt;bool&gt;</code></td><td data-i18n="doc.s4.ll2_d">Async merge into existing list.</td></tr>
+              <tr><td><code>LoadAndMergeList_Encrypted</code> <span class="badge badge-enc">enc</span></td><td><code>bool</code></td><td data-i18n="doc.s4.ll3_d">Encrypted sync merge.</td></tr>
+              <tr><td><code>LoadAndMergeListAsync_Encrypted</code> <span class="badge badge-async">async</span> <span class="badge badge-enc">enc</span></td><td><code>Task&lt;bool&gt;</code></td><td data-i18n="doc.s4.ll4_d">Encrypted async merge.</td></tr>
             </tbody>
           </table>
         </div>
 
-        <h2>4.4 Ejemplos de Uso</h2>
+        <h2 data-i18n="doc.s4.h2_4">4.4 Usage Examples</h2>
         <pre>// ── Setup ────────────────────────────────────────────────────────────────
 SaveFileInfo info = BeastySaveSystemFileSetup.Instance.fileInfo;
 
@@ -350,7 +346,7 @@ PlayerData pd = new PlayerData { integerValue1 = 42, stringValue1 = "Hero" };
 BeastySaveSystemAPI.Save(pd, "player_data", info);
 PlayerData loaded = BeastySaveSystemAPI.Load&lt;PlayerData&gt;("player_data", info);
 
-// ── Reference-based (para MonoBehaviours) ────────────────────────────────
+// ── Reference-based (for MonoBehaviours) ─────────────────────────────────
 BeastySaveSystemAPI.SaveRef(saveObjectModel, "Slot1", info);
 BeastySaveSystemAPI.LoadRef("Slot1", saveObjectModel, info);  // in-place
 
@@ -367,58 +363,52 @@ BeastySaveSystemAPI.LoadAndMergeList(objs, "multi_save", info);</pre>
 
       <!-- ══ 5. ENCRYPTION ════════════════════════════════════ -->
       <section id="encryption">
-        <h1>5. Encryption System</h1>
+        <h1 data-i18n="doc.s5.title">5. Encryption System</h1>
 
-        <h2>5.1 Algoritmo</h2>
-        <p>El cifrado es provisto por la clase interna sealed <code>Encrypted</code> (namespace <code>Beasty_SaveSystemCore</code>). Usa <code>System.Security.Cryptography.Aes</code> de .NET:</p>
+        <h2 data-i18n="doc.s5.h2_1">5.1 Algorithm</h2>
+        <p data-i18n-html="doc.s5.p1">Encryption is provided by the internal sealed class <code>Encrypted</code> (namespace <code>Beasty_SaveSystemCore</code>). Uses <code>System.Security.Cryptography.Aes</code> from .NET:</p>
         <div class="table-wrap">
           <table>
-            <thead><tr><th>Parámetro</th><th>Valor</th></tr></thead>
+            <thead><tr><th data-i18n="doc.s5.th_param">Parameter</th><th data-i18n="doc.th.value">Value</th></tr></thead>
             <tbody>
-              <tr><td>Algoritmo</td><td>AES (Advanced Encryption Standard)</td></tr>
-              <tr><td>Longitud de clave</td><td>256 bits &mdash; 32 bytes, codificados UTF-8 desde el string de la clave</td></tr>
-              <tr><td>Modo</td><td>CBC (Cipher Block Chaining) &mdash; default de .NET AES</td></tr>
-              <tr><td>IV (Initialization Vector)</td><td>16 bytes en cero &mdash; fijo por sesión</td></tr>
-              <tr><td>Codificación de salida</td><td>String Base64 escrito a disco</td></tr>
-              <tr><td>Soporte Async</td><td>Sí &mdash; <code>EncryptAsync</code> y <code>DecryptAsync</code></td></tr>
+              <tr><td>Algorithm</td><td data-i18n="doc.s5.v1">AES (Advanced Encryption Standard)</td></tr>
+              <tr><td>Key length</td><td data-i18n-html="doc.s5.v2">256 bits &mdash; 32 bytes, UTF-8 encoded from the key string</td></tr>
+              <tr><td>Mode</td><td data-i18n-html="doc.s5.v3">CBC (Cipher Block Chaining) &mdash; .NET AES default</td></tr>
+              <tr><td>IV (Initialization Vector)</td><td data-i18n-html="doc.s5.v4">16 zero bytes &mdash; fixed per session</td></tr>
+              <tr><td>Output encoding</td><td data-i18n="doc.s5.v5">Base64 string written to disk</td></tr>
+              <tr><td>Async support</td><td data-i18n-html="doc.s5.v6">Yes &mdash; <code>EncryptAsync</code> and <code>DecryptAsync</code></td></tr>
             </tbody>
           </table>
         </div>
 
         <div class="callout warn">
           <span class="callout-icon">&#9888;</span>
-          <div>
-            <strong>Nota de seguridad &mdash; IV Fijo:</strong> El Initialization Vector siempre son 16 bytes en cero.
-            Dos cifrados de texto idéntico con la misma clave producen ciphertext idéntico.
-            Esto es aceptable para protección contra tampering en archivos de guardado, pero no es adecuado
-            para seguridad semántica (e.g., transmisión en red). Para mayor protección, genera un IV aleatorio
-            por guardado y prepéndelo al ciphertext antes de codificar en Base64.
-          </div>
+          <div data-i18n-html="doc.s5.callout"><strong>Security Note &mdash; Fixed IV:</strong> The Initialization Vector is always 16 zero bytes. Two encryptions of identical plaintext with the same key produce identical ciphertext. This is acceptable for tamper protection on save files, but is not suitable for semantic security (e.g., network transmission). For stronger protection, generate a random IV per save and prepend it to the ciphertext before Base64 encoding.</div>
         </div>
 
-        <h2>5.2 PasswordGenerator</h2>
-        <p><code>PasswordGenerator.GenerateSecurePassword(int length = 32)</code> usa <code>RNGCryptoServiceProvider</code> para generar una clave aleatoria criptográficamente segura con caracteres alfanuméricos + símbolos.</p>
-        <pre>// Genera una clave AES de 32 caracteres criptográficamente segura
+        <h2 data-i18n="doc.s5.h2_2">5.2 PasswordGenerator</h2>
+        <p data-i18n-html="doc.s5.p2"><code>PasswordGenerator.GenerateSecurePassword(int length = 32)</code> uses <code>RNGCryptoServiceProvider</code> to generate a cryptographically secure random key with alphanumeric + symbol characters.</p>
+        <pre>// Generate a cryptographically secure 32-character AES key
 string key = PasswordGenerator.GenerateSecurePassword(32);
 
-// Asígnala a fileInfo (el setter aplica length == 32)
+// Assign to fileInfo (setter enforces length == 32)
 BeastySaveSystemFileSetup.Instance.fileInfo.EncryptionKey = key;
 
-// IMPORTANTE: persiste la clave de forma segura (PlayerPrefs + derivación, keychain, servidor)
-// Sin la clave original, los guardados cifrados no pueden descifrarse.</pre>
+// IMPORTANT: persist the key securely (PlayerPrefs + derivation, keychain, server)
+// Without the original key, encrypted saves cannot be decrypted.</pre>
 
-        <h2>5.3 Decryption Guard</h2>
-        <p>Antes de descifrar, <code>Encrypted.Decrypt</code> valida que el ciphertext sea Base64 válido via regex. Un string inválido lanza <code>FormatException</code> en lugar de retornar datos silenciosamente incorrectos &mdash; la excepción es capturada y logueada por el caller.</p>
+        <h2 data-i18n="doc.s5.h2_3">5.3 Decryption Guard</h2>
+        <p data-i18n-html="doc.s5.p3">Before decrypting, <code>Encrypted.Decrypt</code> validates that the ciphertext is valid Base64 via regex. An invalid string throws <code>FormatException</code> instead of silently returning incorrect data &mdash; the exception is caught and logged by the caller.</p>
 
-        <h2>5.4 Method Reference</h2>
+        <h2 data-i18n="doc.s5.h2_4">5.4 Method Reference</h2>
         <div class="table-wrap">
           <table>
-            <thead><tr><th>Método</th><th>Firma</th><th>Notas</th></tr></thead>
+            <thead><tr><th data-i18n="doc.th.method">Method</th><th data-i18n="doc.th.signature">Signature</th><th data-i18n="doc.th.notes">Notes</th></tr></thead>
             <tbody>
-              <tr><td><code>Encrypt</code></td><td><code>static string Encrypt(string plainText, string key)</code></td><td>Retorna ciphertext en Base64.</td></tr>
-              <tr><td><code>EncryptAsync</code></td><td><code>static Task&lt;string&gt; EncryptAsync(string plainText, string key)</code></td><td>Variante async usando <code>WriteAsync</code>.</td></tr>
-              <tr><td><code>Decrypt</code></td><td><code>static string Decrypt(string cipherText, string key)</code></td><td>Valida Base64 antes de descifrar. Lanza en input inválido.</td></tr>
-              <tr><td><code>DecryptAsync</code></td><td><code>static Task&lt;string&gt; DecryptAsync(string cipherText, string key)</code></td><td>Variante async usando <code>ReadToEndAsync</code>.</td></tr>
+              <tr><td><code>Encrypt</code></td><td><code>static string Encrypt(string plainText, string key)</code></td><td data-i18n="doc.s5.e1_n">Returns ciphertext in Base64.</td></tr>
+              <tr><td><code>EncryptAsync</code></td><td><code>static Task&lt;string&gt; EncryptAsync(string plainText, string key)</code></td><td data-i18n-html="doc.s5.e2_n">Async variant using <code>WriteAsync</code>.</td></tr>
+              <tr><td><code>Decrypt</code></td><td><code>static string Decrypt(string cipherText, string key)</code></td><td data-i18n="doc.s5.d1_n">Validates Base64 before decrypting. Throws on invalid input.</td></tr>
+              <tr><td><code>DecryptAsync</code></td><td><code>static Task&lt;string&gt; DecryptAsync(string cipherText, string key)</code></td><td data-i18n-html="doc.s5.d2_n">Async variant using <code>ReadToEndAsync</code>.</td></tr>
             </tbody>
           </table>
         </div>
@@ -426,76 +416,59 @@ BeastySaveSystemFileSetup.Instance.fileInfo.EncryptionKey = key;
 
       <!-- ══ 6. CONVERTER SYSTEM ══════════════════════════════ -->
       <section id="converters">
-        <h1>6. Converter System</h1>
-        <p>
-          Newtonsoft.Json no puede serializar nativamente la mayoría de los tipos Unity (Vector3, Transform, Colliders, etc.)
-          porque tienen referencias circulares, estado interno oculto, o requieren instancias existentes para aplicar valores.
-          El converter pipeline resuelve esto con un patrón strategy basado en registry.
-        </p>
+        <h1 data-i18n="doc.s6.title">6. Converter System</h1>
+        <p data-i18n="doc.s6.p1">Newtonsoft.Json cannot natively serialize most Unity types (Vector3, Transform, Colliders, etc.) because they have circular references, hidden internal state, or require existing instances to apply values. The converter pipeline resolves this with a registry-based strategy pattern.</p>
 
-        <h2>6.1 IUnityTypeConverter Interface</h2>
+        <h2 data-i18n="doc.s6.h2_1">6.1 IUnityTypeConverter Interface</h2>
         <pre>public interface IUnityTypeConverter
 {
-    // Retorna true si este converter maneja objectType
+    // <span data-i18n="doc.s6.c1">Returns true if this converter handles objectType</span>
     bool CanConvert(Type objectType);
 
-    // Serializa value a JSON
+    // <span data-i18n="doc.s6.c2">Serialize value to JSON</span>
     void WriteJson(JsonWriter writer, object value, JsonSerializer serializer);
 
-    // Deserializa JSON y aplica a existingValue (no debe ser null para tipos componente)
+    // <span data-i18n="doc.s6.c3">Deserialize JSON and apply to existingValue (must not be null for component types)</span>
     object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer);
 }</pre>
         <div class="callout info">
           <span class="callout-icon">&#8505;</span>
-          <div>
-            El parámetro <code>existingValue</code> en <code>ReadJson</code> es crítico.
-            Los conversores de componentes (Transform, Colliders, Camera, Light, SpriteRenderer, MonoBehaviour, Texture2D)
-            <strong>aplican valores a esta instancia existente</strong> en lugar de crear nuevos GameObjects.
-            Si <code>existingValue == null</code>, loguean un <code>Debug.LogError</code> y retornan
-            <code>null</code> &mdash; sin crash. Los conversores de tipos de valor (Vector2/3, Quaternion, Color, etc.) lo ignoran.
-          </div>
+          <div data-i18n-html="doc.s6.callout">The <code>existingValue</code> parameter in <code>ReadJson</code> is critical. Component converters (Transform, Colliders, Camera, Light, SpriteRenderer, MonoBehaviour, Texture2D) <strong>apply values to this existing instance</strong> instead of creating new GameObjects. If <code>existingValue == null</code>, they log a <code>Debug.LogError</code> and return <code>null</code> &mdash; no crash. Value type converters (Vector2/3, Quaternion, Color, etc.) ignore it.</div>
         </div>
 
-        <h2>6.2 UnityObjectConverter &amp; Registry</h2>
-        <p>
-          <code>UnityObjectConverter</code> (extiende <code>JsonConverter</code>) está registrado en
-          <code>JsonSettings</code> y actúa como dispatcher. En <code>WriteJson</code> / <code>ReadJson</code>,
-          itera <code>UnityTypeConverterRegistry.Converters</code> y delega al primer converter cuyo
-          <code>CanConvert</code> retorne true. Si ningún converter hace match, cae al
-          <code>serializer.Serialize/Deserialize</code>. Para <code>GameObject</code> específicamente,
-          refleja propiedades públicas omitiendo las obsoletas y circulares.
-        </p>
+        <h2 data-i18n-html="doc.s6.h2_2">6.2 UnityObjectConverter &amp; Registry</h2>
+        <p data-i18n-html="doc.s6.p2"><code>UnityObjectConverter</code> (extends <code>JsonConverter</code>) is registered in <code>JsonSettings</code> and acts as a dispatcher. In <code>WriteJson</code> / <code>ReadJson</code>, it iterates <code>UnityTypeConverterRegistry.Converters</code> and delegates to the first converter whose <code>CanConvert</code> returns true. If no converter matches, it falls back to <code>serializer.Serialize/Deserialize</code>. For <code>GameObject</code> specifically, it reflects public properties omitting obsolete and circular ones.</p>
 
-        <h2>6.3 Catálogo de Conversores</h2>
+        <h2 data-i18n="doc.s6.h2_3">6.3 Converter Catalog</h2>
         <div class="table-wrap">
           <table>
-            <thead><tr><th>Conversor</th><th>Tipo Unity</th><th>Campos Serializados</th><th>Notas</th></tr></thead>
+            <thead><tr><th data-i18n="doc.th.converter">Converter</th><th data-i18n="doc.th.unityType">Unity Type</th><th data-i18n="doc.th.fields">Serialized Fields</th><th data-i18n="doc.th.notes">Notes</th></tr></thead>
             <tbody>
-              <tr class="table-group-header"><td colspan="4">2D Colliders</td></tr>
-              <tr><td><code>BoxCollider2DConverter</code></td><td><code>BoxCollider2D</code></td><td>offset, size, isTrigger</td><td>Aplica a componente existente.</td></tr>
+              <tr class="table-group-header"><td colspan="4" data-i18n="doc.s6.grp2d">2D Colliders</td></tr>
+              <tr><td><code>BoxCollider2DConverter</code></td><td><code>BoxCollider2D</code></td><td>offset, size, isTrigger</td><td data-i18n="doc.s6.n_box2d">Applies to existing component.</td></tr>
               <tr><td><code>CapsuleCollider2DConverter</code></td><td><code>CapsuleCollider2D</code></td><td>offset, size, direction, isTrigger</td><td></td></tr>
               <tr><td><code>CircleCollider2DConverter</code></td><td><code>CircleCollider2D</code></td><td>offset, radius, isTrigger</td><td></td></tr>
-              <tr><td><code>SpriteRendererConverter</code></td><td><code>SpriteRenderer</code></td><td>color, flipX, flipY, sortingLayerID, sortingOrder</td><td>Referencia del asset Sprite no guardada.</td></tr>
-              <tr class="table-group-header"><td colspan="4">3D Colliders &amp; Components</td></tr>
+              <tr><td><code>SpriteRendererConverter</code></td><td><code>SpriteRenderer</code></td><td>color, flipX, flipY, sortingLayerID, sortingOrder</td><td data-i18n="doc.s6.n_spr">Sprite asset reference not saved.</td></tr>
+              <tr class="table-group-header"><td colspan="4" data-i18n-html="doc.s6.grp3d">3D Colliders &amp; Components</td></tr>
               <tr><td><code>BoxColliderConverter</code></td><td><code>BoxCollider</code></td><td>center, size, isTrigger</td><td></td></tr>
               <tr><td><code>CapsuleColliderConverter</code></td><td><code>CapsuleCollider</code></td><td>center, radius, height, direction, isTrigger</td><td></td></tr>
               <tr><td><code>SphereColliderConverter</code></td><td><code>SphereCollider</code></td><td>center, radius, isTrigger</td><td></td></tr>
-              <tr><td><code>MeshColliderConverter</code></td><td><code>MeshCollider</code></td><td>convex, isTrigger, cookingOptions</td><td>Asset de Mesh no guardado.</td></tr>
+              <tr><td><code>MeshColliderConverter</code></td><td><code>MeshCollider</code></td><td>convex, isTrigger, cookingOptions</td><td data-i18n="doc.s6.n_mesh">Mesh asset not saved.</td></tr>
               <tr><td><code>LightConverter</code></td><td><code>Light</code></td><td>type, color, intensity, range, spotAngle, shadows, enabled</td><td></td></tr>
-              <tr class="table-group-header"><td colspan="4">General / Value Types</td></tr>
+              <tr class="table-group-header"><td colspan="4" data-i18n="doc.s6.grpGen">General / Value Types</td></tr>
               <tr><td><code>CameraConverter</code></td><td><code>Camera</code></td><td>fieldOfView, nearClip, farClip, backgroundColor, orthographic, orthoSize</td><td></td></tr>
-              <tr><td><code>TransformConverter</code></td><td><code>Transform</code></td><td>position, rotation, localPosition, localRotation, localScale</td><td>Aplica in-place. Requiere Transform existente.</td></tr>
-              <tr><td><code>MonoBehaviourConverter</code></td><td><code>MonoBehaviour</code> (todas las subclases)</td><td>Todos los campos public + <code>[SerializeField]</code></td><td>Recursivo via serializer. Aplica a componente existente.</td></tr>
-              <tr><td><code>SpriteConverter</code></td><td><code>Texture2D</code></td><td>format, width, height, data (PNG → Base64)</td><td>Guarda datos raw de píxeles. Requiere Texture2D existente.</td></tr>
-              <tr><td><code>Vector2Converter</code></td><td><code>Vector2</code></td><td>x, y</td><td>Value type &mdash; existingValue ignorado.</td></tr>
-              <tr><td><code>Vector3Converter</code></td><td><code>Vector3</code></td><td>x, y, z</td><td>Value type.</td></tr>
-              <tr><td><code>QuaternionConverter</code></td><td><code>Quaternion</code></td><td>x, y, z, w</td><td>Value type.</td></tr>
-              <tr><td><code>ColorConverter</code></td><td><code>Color</code></td><td>r, g, b, a</td><td>Value type.</td></tr>
-              <tr><td><code>RectConverter</code></td><td><code>Rect</code></td><td>x, y, width, height</td><td>Value type.</td></tr>
-              <tr><td><code>BoundsConverter</code></td><td><code>Bounds</code></td><td>center (Vector3), size (Vector3)</td><td>Value type.</td></tr>
-              <tr><td><code>EnumConverter</code></td><td>Cualquier <code>Enum</code></td><td>string name</td><td>Parsed via <code>Enum.Parse</code>.</td></tr>
+              <tr><td><code>TransformConverter</code></td><td><code>Transform</code></td><td>position, rotation, localPosition, localRotation, localScale</td><td data-i18n="doc.s6.n_box2d">Applies to existing component.</td></tr>
+              <tr><td><code>MonoBehaviourConverter</code></td><td><code>MonoBehaviour</code> (all subclasses)</td><td>All public + <code>[SerializeField]</code> fields</td><td data-i18n="doc.s6.n_mono">Recursive via serializer. Applies to existing component.</td></tr>
+              <tr><td><code>SpriteConverter</code></td><td><code>Texture2D</code></td><td>format, width, height, data (PNG → Base64)</td><td data-i18n="doc.s6.n_tex">Saves raw pixel data. Requires existing Texture2D.</td></tr>
+              <tr><td><code>Vector2Converter</code></td><td><code>Vector2</code></td><td>x, y</td><td data-i18n="doc.s6.n_vt">Value type &mdash; existingValue ignored.</td></tr>
+              <tr><td><code>Vector3Converter</code></td><td><code>Vector3</code></td><td>x, y, z</td><td data-i18n="doc.s6.n_vt">Value type &mdash; existingValue ignored.</td></tr>
+              <tr><td><code>QuaternionConverter</code></td><td><code>Quaternion</code></td><td>x, y, z, w</td><td data-i18n="doc.s6.n_vt">Value type &mdash; existingValue ignored.</td></tr>
+              <tr><td><code>ColorConverter</code></td><td><code>Color</code></td><td>r, g, b, a</td><td data-i18n="doc.s6.n_vt">Value type &mdash; existingValue ignored.</td></tr>
+              <tr><td><code>RectConverter</code></td><td><code>Rect</code></td><td>x, y, width, height</td><td data-i18n="doc.s6.n_vt">Value type &mdash; existingValue ignored.</td></tr>
+              <tr><td><code>BoundsConverter</code></td><td><code>Bounds</code></td><td>center (Vector3), size (Vector3)</td><td data-i18n="doc.s6.n_vt">Value type &mdash; existingValue ignored.</td></tr>
+              <tr><td><code>EnumConverter</code></td><td>Any <code>Enum</code></td><td>string name</td><td data-i18n-html="doc.s6.n_enum">Parsed via <code>Enum.Parse</code>.</td></tr>
               <tr><td><code>LayerMaskConverter</code></td><td><code>LayerMask</code></td><td>value (int)</td><td></td></tr>
-              <tr><td><code>GenericObjectConverter</code></td><td><code>object</code> / Dictionary</td><td>Delega al serializer</td><td>Fallback para tipos C# planos.</td></tr>
+              <tr><td><code>GenericObjectConverter</code></td><td><code>object</code> / Dictionary</td><td>Delegates to serializer</td><td data-i18n="doc.s6.n_gen">Fallback for plain C# types.</td></tr>
             </tbody>
           </table>
         </div>
@@ -503,110 +476,110 @@ BeastySaveSystemFileSetup.Instance.fileInfo.EncryptionKey = key;
 
       <!-- ══ 7. SAVE SLOT SYSTEM ══════════════════════════════ -->
       <section id="slots">
-        <h1>7. Save Slot System</h1>
-        <p>El sistema de slots provee archivos de guardado con nombre y metadata rica, soportando sobreescrituras y numeración incremental de slots. Está construido sobre la API core y usa el formato reference-based para todos los datos de slot.</p>
+        <h1 data-i18n="doc.s7.title">7. Save Slot System</h1>
+        <p data-i18n="doc.s7.p1">The slot system provides named save files with rich metadata, supporting overwrites and incremental slot numbering. It is built on the core API and uses the reference-based format for all slot data.</p>
 
-        <h2>7.1 SaveSlotController</h2>
-        <p>Singleton MonoBehaviour. Coordina creación de slots, persistencia del índice de slots, e instanciación de UI cards. Lee el toggle global de cifrado desde <code>BeastySaveSystemFileSetup.Instance.EnableEncryt</code>.</p>
+        <h2 data-i18n="doc.s7.h2_1">7.1 SaveSlotController</h2>
+        <p data-i18n-html="doc.s7.p_ctrl">Singleton MonoBehaviour. Coordinates slot creation, slot index persistence, and UI card instantiation. Reads the global encryption toggle from <code>BeastySaveSystemFileSetup.Instance.EnableEncryt</code>.</p>
         <div class="table-wrap">
           <table>
-            <thead><tr><th>Método</th><th>Descripción</th></tr></thead>
+            <thead><tr><th data-i18n="doc.th.method">Method</th><th data-i18n="doc.th.description">Description</th></tr></thead>
             <tbody>
-              <tr><td><code>Save(SaveObjectModel, displayName?, metadata?, OnSuccess?, OnError?)</code></td><td>Despacha a <code>SaveSlot</code> o <code>SaveSlotEncrypted</code> según el flag global de cifrado.</td></tr>
-              <tr><td><code>SaveSlot(...)</code></td><td>Crea o reutiliza metadata, la agrega a ConfigFile, guarda datos del slot via <code>SaveRef</code>, luego guarda ConfigFile.</td></tr>
-              <tr><td><code>SaveSlotEncrypted(...)</code></td><td>Mismo flujo pero usa <code>SaveRef_Encrypted</code> para datos del slot y <code>Save_Encrypted</code> para ConfigFile.</td></tr>
-              <tr><td><code>LoadConfigFile()</code></td><td>Carga el ConfigFile (índice de slots) desde disco en el campo <code>configFile</code>.</td></tr>
-              <tr><td><code>CreateSlotsCards(GameObject card, Transform parent)</code></td><td>Llama <code>LoadConfigFile</code>, destruye cards antiguas, luego instancia un card prefab UI por entrada de slot.</td></tr>
-              <tr><td><code>LoadSlotFile(Metadata)</code></td><td>Retorna un <code>SaveObjectModel</code> deserializado desde el archivo de slot (nueva instancia).</td></tr>
-              <tr><td><code>LoadSlotFile&lt;T&gt;(Metadata, T target)</code></td><td>Llena una instancia T existente via <code>LoadRef</code> / <code>LoadRef_Encrypted</code>.</td></tr>
-              <tr><td><code>CreateMetadataForSaveSlot(displayName)</code></td><td>Auto-numera slots contando archivos <code>Slot*.ext</code> en la carpeta de guardado via <code>FileFinder</code>.</td></tr>
-              <tr><td><code>DestroyAllChildren(Transform parent)</code></td><td>Destruye GameObjects hijo en orden inverso para evitar problemas de índice.</td></tr>
+              <tr><td><code>Save(SaveObjectModel, displayName?, metadata?, OnSuccess?, OnError?)</code></td><td data-i18n-html="doc.s7.td_sv">Dispatches to <code>SaveSlot</code> or <code>SaveSlotEncrypted</code> based on the global encryption flag.</td></tr>
+              <tr><td><code>SaveSlot(...)</code></td><td data-i18n-html="doc.s7.td_ss">Creates or reuses metadata, adds it to ConfigFile, saves slot data via <code>SaveRef</code>, then saves ConfigFile.</td></tr>
+              <tr><td><code>SaveSlotEncrypted(...)</code></td><td data-i18n-html="doc.s7.td_se">Same flow but uses <code>SaveRef_Encrypted</code> for slot data and <code>Save_Encrypted</code> for ConfigFile.</td></tr>
+              <tr><td><code>LoadConfigFile()</code></td><td data-i18n-html="doc.s7.td_lc">Loads the ConfigFile (slot index) from disk into the <code>configFile</code> field.</td></tr>
+              <tr><td><code>CreateSlotsCards(GameObject card, Transform parent)</code></td><td data-i18n-html="doc.s7.td_cc">Calls <code>LoadConfigFile</code>, destroys old cards, then instantiates one UI card prefab per slot entry.</td></tr>
+              <tr><td><code>LoadSlotFile(Metadata)</code></td><td data-i18n-html="doc.s7.td_ls1">Returns a <code>SaveObjectModel</code> deserialized from the slot file (new instance).</td></tr>
+              <tr><td><code>LoadSlotFile&lt;T&gt;(Metadata, T target)</code></td><td data-i18n-html="doc.s7.td_ls2">Fills an existing T instance via <code>LoadRef</code> / <code>LoadRef_Encrypted</code>.</td></tr>
+              <tr><td><code>CreateMetadataForSaveSlot(displayName)</code></td><td data-i18n-html="doc.s7.td_cm">Auto-numbers slots by counting <code>Slot*.ext</code> files in the save folder via <code>FileFinder</code>.</td></tr>
+              <tr><td><code>DestroyAllChildren(Transform parent)</code></td><td data-i18n="doc.s7.td_dc">Destroys child GameObjects in reverse order to avoid index issues.</td></tr>
             </tbody>
           </table>
         </div>
 
-        <h2>7.2 ConfigFile</h2>
-        <p>El índice de slots &mdash; una clase serializable que contiene un <code>List&lt;Metadata&gt;</code>. Guardado como archivo estándar llamado <code>ConfigFile</code> en la misma carpeta que los archivos de slot.</p>
+        <h2 data-i18n="doc.s7.h2_2">7.2 ConfigFile</h2>
+        <p data-i18n-html="doc.s7.p_cfg">The slot index &mdash; a serializable class containing a <code>List&lt;Metadata&gt;</code>. Saved as a standard file named <code>ConfigFile</code> in the same folder as slot files.</p>
         <div class="table-wrap">
           <table>
-            <thead><tr><th>Método</th><th>Descripción</th></tr></thead>
+            <thead><tr><th data-i18n="doc.th.method">Method</th><th data-i18n="doc.th.description">Description</th></tr></thead>
             <tbody>
-              <tr><td><code>AddOrUpdate(Metadata)</code></td><td>Inserta nueva metadata o actualiza entrada existente matched por <code>FileName</code>. Actualiza <code>DisplayName</code>, <code>LastModified</code>, <code>ThumbnailPath</code>, <code>AdditionalInfo</code>.</td></tr>
-              <tr><td><code>Remove(string fileName)</code></td><td>Elimina la entrada con el <code>FileName</code> dado. Retorna <code>true</code> si fue eliminada.</td></tr>
-              <tr><td><code>HaveSlots()</code></td><td>Retorna <code>true</code> si la lista <code>Saves</code> es no-null y no-vacía.</td></tr>
+              <tr><td><code>AddOrUpdate(Metadata)</code></td><td data-i18n-html="doc.s7.td_au">Inserts new metadata or updates an existing entry matched by <code>FileName</code>. Updates <code>DisplayName</code>, <code>LastModified</code>, <code>ThumbnailPath</code>, <code>AdditionalInfo</code>.</td></tr>
+              <tr><td><code>Remove(string fileName)</code></td><td data-i18n-html="doc.s7.td_rm">Removes the entry with the given <code>FileName</code>. Returns <code>true</code> if removed.</td></tr>
+              <tr><td><code>HaveSlots()</code></td><td data-i18n-html="doc.s7.td_hs">Returns <code>true</code> if the <code>Saves</code> list is non-null and non-empty.</td></tr>
             </tbody>
           </table>
         </div>
 
-        <h2>7.3 Metadata</h2>
+        <h2 data-i18n="doc.s7.h2_3">7.3 Metadata</h2>
         <div class="table-wrap">
           <table>
-            <thead><tr><th>Campo</th><th>Tipo</th><th>Descripción</th></tr></thead>
+            <thead><tr><th data-i18n="doc.th.property">Field</th><th data-i18n="doc.th.type">Type</th><th data-i18n="doc.th.description">Description</th></tr></thead>
             <tbody>
-              <tr><td><code>FileName</code></td><td><code>string</code></td><td>Nombre de archivo físico (e.g., <code>Slot1</code>). Auto-generado por <code>CreateMetadataForSaveSlot</code>.</td></tr>
-              <tr><td><code>DisplayName</code></td><td><code>string</code></td><td>Nombre legible mostrado en UI.</td></tr>
-              <tr><td><code>CreationDate</code></td><td><code>DateTime</code></td><td>Seteado en el primer guardado.</td></tr>
-              <tr><td><code>LastModified</code></td><td><code>DateTime</code></td><td>Actualizado en cada sobreescritura.</td></tr>
-              <tr><td><code>ThumbnailPath</code></td><td><code>string</code></td><td>Ruta opcional a screenshot o imagen thumbnail.</td></tr>
-              <tr><td><code>AdditionalInfo</code></td><td><code>string</code></td><td>Datos extra libres (nombre de nivel, tiempo de juego, etc.).</td></tr>
+              <tr><td><code>FileName</code></td><td><code>string</code></td><td data-i18n-html="doc.s7.td_fn">Physical file name (e.g., <code>Slot1</code>). Auto-generated by <code>CreateMetadataForSaveSlot</code>.</td></tr>
+              <tr><td><code>DisplayName</code></td><td><code>string</code></td><td data-i18n="doc.s7.td_dn">Human-readable name shown in UI.</td></tr>
+              <tr><td><code>CreationDate</code></td><td><code>DateTime</code></td><td data-i18n="doc.s7.td_cd">Set on first save.</td></tr>
+              <tr><td><code>LastModified</code></td><td><code>DateTime</code></td><td data-i18n="doc.s7.td_lm">Updated on every overwrite.</td></tr>
+              <tr><td><code>ThumbnailPath</code></td><td><code>string</code></td><td data-i18n="doc.s7.td_tp">Optional path to screenshot or thumbnail image.</td></tr>
+              <tr><td><code>AdditionalInfo</code></td><td><code>string</code></td><td data-i18n="doc.s7.td_ai">Free-form extra data (level name, play time, etc.).</td></tr>
             </tbody>
           </table>
         </div>
 
-        <h2>7.4 Ejemplo del Ciclo de Vida de un Slot</h2>
-        <pre>// Crear un nuevo slot
-SaveSlotController.Instance.Save(saveObjectModel, displayName: "Capítulo 1",
-    OnSuccess: () => Debug.Log("Guardado!"),
-    OnError:   () => Debug.LogError("Error al guardar!"));
+        <h2 data-i18n="doc.s7.h2_4">7.4 Slot Lifecycle Example</h2>
+        <pre>// Create a new slot
+SaveSlotController.Instance.Save(saveObjectModel, displayName: "Chapter 1",
+    OnSuccess: () => Debug.Log("Saved!"),
+    OnError:   () => Debug.LogError("Save failed!"));
 
-// Poblar cards de UI (carga config internamente)
+// Populate UI cards (loads config internally)
 SaveSlotController.Instance.CreateSlotsCards(cardPrefab, scrollContainer);
 
-// Cargar datos del slot en un MonoBehaviour existente
+// Load slot data into an existing MonoBehaviour
 SaveSlotController.Instance.LoadSlotFile(metadata, saveObjectModel);
 
-// Sobreescribir un slot existente (pasar la Metadata existente)
+// Overwrite an existing slot (pass existing Metadata)
 metadata.LastModified = DateTime.Now;
 SaveSlotController.Instance.Save(saveObjectModel, metadata: metadata);</pre>
       </section>
 
       <!-- ══ 8. FILE SETUP ════════════════════════════════════ -->
       <section id="setup">
-        <h1>8. File Setup &amp; Configuration</h1>
+        <h1 data-i18n-html="doc.s8.title">8. File Setup &amp; Configuration</h1>
 
-        <h2>8.1 BeastySaveSystemFileSetup</h2>
-        <p>Singleton MonoBehaviour. Debe existir en la escena en un GameObject persistente. Configura todos los campos en el Inspector via el editor custom <code>SaveManagerInspector</code>.</p>
+        <h2 data-i18n="doc.s8.h2_1">8.1 BeastySaveSystemFileSetup</h2>
+        <p data-i18n-html="doc.s8.p1">Singleton MonoBehaviour. Must exist in the scene on a persistent GameObject. Configure all fields in the Inspector via the custom editor <code>SaveManagerInspector</code>.</p>
         <div class="table-wrap">
           <table>
-            <thead><tr><th>Campo / Propiedad</th><th>Default</th><th>Descripción</th></tr></thead>
+            <thead><tr><th data-i18n="doc.th.property">Field / Property</th><th data-i18n="doc.th.def">Default</th><th data-i18n="doc.th.description">Description</th></tr></thead>
             <tbody>
-              <tr><td><code>fileInfo</code> (<code>SaveFileInfo</code>)</td><td>instancia default</td><td>Expuesto en Inspector. Configura ruta, extensión, clave de cifrado.</td></tr>
-              <tr><td><code>enableLogs</code></td><td><code>false</code></td><td>Enruta a <code>DebugLogger.EnableLogs</code>. Toggle en Inspector.</td></tr>
-              <tr><td><code>enableEncryt</code></td><td><code>true</code></td><td>Toggle global de cifrado verificado por <code>SaveSlotController</code>.</td></tr>
-              <tr><td><code>Instance</code> (static)</td><td>&mdash;</td><td>Referencia singleton. Seteada en <code>Awake</code>, sobrevive cambios de escena (<code>DontDestroyOnLoad</code>).</td></tr>
-              <tr><td><code>EnableDisable_Logs()</code></td><td>&mdash;</td><td>Toggle de log output en runtime.</td></tr>
-              <tr><td><code>EnableDisable_Encrypt()</code></td><td>&mdash;</td><td>Toggle de cifrado en runtime.</td></tr>
-              <tr><td><code>DefaultInfoInstance()</code></td><td>&mdash;</td><td>Context menu &mdash; resetea <code>fileInfo</code> a defaults.</td></tr>
+              <tr><td><code>fileInfo</code> (<code>SaveFileInfo</code>)</td><td>default instance</td><td data-i18n="doc.s8.td1_d">Exposed in Inspector. Configures path, extension, encryption key.</td></tr>
+              <tr><td><code>enableLogs</code></td><td><code>false</code></td><td data-i18n-html="doc.s8.td2_d">Routes to <code>DebugLogger.EnableLogs</code>. Inspector toggle.</td></tr>
+              <tr><td><code>enableEncryt</code></td><td><code>true</code></td><td data-i18n-html="doc.s8.td3_d">Global encryption toggle checked by <code>SaveSlotController</code>.</td></tr>
+              <tr><td><code>Instance</code> (static)</td><td>&mdash;</td><td data-i18n-html="doc.s8.td4_d">Singleton reference. Set in <code>Awake</code>, survives scene changes (<code>DontDestroyOnLoad</code>).</td></tr>
+              <tr><td><code>EnableDisable_Logs()</code></td><td>&mdash;</td><td data-i18n="doc.s8.td5_d">Runtime log output toggle.</td></tr>
+              <tr><td><code>EnableDisable_Encrypt()</code></td><td>&mdash;</td><td data-i18n="doc.s8.td6_d">Runtime encryption toggle.</td></tr>
+              <tr><td><code>DefaultInfoInstance()</code></td><td>&mdash;</td><td data-i18n-html="doc.s8.td7_d">Context menu &mdash; resets <code>fileInfo</code> to defaults.</td></tr>
             </tbody>
           </table>
         </div>
 
-        <h2>8.2 SaveableObject</h2>
-        <p><code>SaveableObject</code> es un MonoBehaviour marcador. Los Game Objects heredan de él para señalar participación en el sistema de guardado. No contiene lógica &mdash; sirve como mecanismo de tagging para escaneo de escena.</p>
+        <h2 data-i18n="doc.s8.h2_2">8.2 SaveableObject</h2>
+        <p data-i18n-html="doc.s8.p2"><code>SaveableObject</code> is a marker MonoBehaviour. Game Objects inherit from it to signal participation in the save system. Contains no logic &mdash; serves as a tagging mechanism for scene scanning.</p>
 
-        <h2>8.3 DebugLogger</h2>
-        <p>Utilidad estática interna que envuelve <code>Debug.Log</code>, <code>Debug.LogWarning</code>, y <code>Debug.LogException</code>. Todo el logging está controlado por <code>DebugLogger.EnableLogs</code> seteado por <code>BeastySaveSystemFileSetup.Awake</code>. Las excepciones se loguean <strong>siempre</strong> independientemente del flag.</p>
+        <h2 data-i18n="doc.s8.h2_3">8.3 DebugLogger</h2>
+        <p data-i18n-html="doc.s8.p3">Internal static utility that wraps <code>Debug.Log</code>, <code>Debug.LogWarning</code>, and <code>Debug.LogException</code>. All logging is controlled by <code>DebugLogger.EnableLogs</code> set by <code>BeastySaveSystemFileSetup.Awake</code>. Exceptions are logged <strong>always</strong> regardless of the flag.</p>
 
-        <h2>8.4 FileOperationsHandler</h2>
-        <p>Clase estática interna que envuelve E/S de archivos:</p>
+        <h2 data-i18n="doc.s8.h2_4">8.4 FileOperationsHandler</h2>
+        <p data-i18n="doc.s8.p4">Internal static class wrapping file I/O:</p>
         <div class="table-wrap">
           <table>
-            <thead><tr><th>Método</th><th>Descripción</th></tr></thead>
+            <thead><tr><th data-i18n="doc.th.method">Method</th><th data-i18n="doc.th.description">Description</th></tr></thead>
             <tbody>
-              <tr><td><code>WriteToFile(path, content)</code></td><td>Sync &mdash; <code>File.WriteAllText</code>.</td></tr>
-              <tr><td><code>WriteToFileAsync(path, content)</code></td><td>Async &mdash; <code>StreamWriter.WriteAsync</code>, codificación UTF-8, modo overwrite.</td></tr>
-              <tr><td><code>ReadFromFile(path)</code></td><td>Sync &mdash; <code>File.ReadAllText</code>. Lanza <code>FileNotFoundException</code> si falta.</td></tr>
-              <tr><td><code>ReadFromFileAsync(path)</code></td><td>Async &mdash; <code>StreamReader.ReadToEndAsync</code>, codificación UTF-8. Lanza si falta.</td></tr>
+              <tr><td><code>WriteToFile(path, content)</code></td><td data-i18n-html="doc.s8.w1_d">Sync &mdash; <code>File.WriteAllText</code>.</td></tr>
+              <tr><td><code>WriteToFileAsync(path, content)</code></td><td data-i18n-html="doc.s8.w2_d">Async &mdash; <code>StreamWriter.WriteAsync</code>, UTF-8 encoding, overwrite mode.</td></tr>
+              <tr><td><code>ReadFromFile(path)</code></td><td data-i18n-html="doc.s8.r1_d">Sync &mdash; <code>File.ReadAllText</code>. Throws <code>FileNotFoundException</code> if missing.</td></tr>
+              <tr><td><code>ReadFromFileAsync(path)</code></td><td data-i18n-html="doc.s8.r2_d">Async &mdash; <code>StreamReader.ReadToEndAsync</code>, UTF-8 encoding. Throws if missing.</td></tr>
             </tbody>
           </table>
         </div>
@@ -614,144 +587,140 @@ SaveSlotController.Instance.Save(saveObjectModel, metadata: metadata);</pre>
 
       <!-- ══ 9. MVP DEMO LAYER ════════════════════════════════ -->
       <section id="mvp">
-        <h1>9. Demo Layer &mdash; MVP Pattern</h1>
-        <p>La carpeta <code>Example/</code> provee una UI demo completa de save/load usando el patrón Model-View-Presenter. Esta es una implementación de referencia &mdash; no una dependencia de runtime requerida.</p>
+        <h1 data-i18n="doc.s9.title">9. Demo Layer &mdash; MVP Pattern</h1>
+        <p data-i18n-html="doc.s9.p1">The <code>Example/</code> folder provides a complete save/load demo UI using the Model-View-Presenter pattern. This is a reference implementation &mdash; not a required runtime dependency.</p>
 
-        <h2>9.1 Responsabilidades de Componentes</h2>
+        <h2 data-i18n="doc.s9.h2_1">9.1 Component Responsibilities</h2>
         <div class="table-wrap">
           <table>
-            <thead><tr><th>Componente</th><th>Rol</th><th>Responsabilidades Clave</th></tr></thead>
+            <thead><tr><th data-i18n="doc.th.component">Component</th><th data-i18n="doc.th.role">Role</th><th data-i18n="doc.th.keyResp">Key Responsibilities</th></tr></thead>
             <tbody>
-              <tr><td><code>BeastySaveModel</code></td><td>Model</td><td>Thin wrapper sobre <code>SaveSlotController</code>. Expone <code>SaveSlot()</code> y <code>LoadObject()</code> al presenter.</td></tr>
-              <tr><td><code>BeastySaveView</code></td><td>View</td><td>MonoBehaviour Unity. Owns referencias de UI (slot container, prefab, input fields). Dispara eventos C#: <code>saveEvent</code>, <code>saveOverwriteEvent</code>, <code>onLoadEvent</code>.</td></tr>
-              <tr><td><code>BeastySavePresenter</code></td><td>Presenter</td><td>Se suscribe a eventos de la view. Llama métodos del model. Refresca slot cards después de cada guardado. Gestiona ciclo de vida <code>Show</code>/<code>Hide</code>.</td></tr>
-              <tr><td><code>IBeastyPresenter</code></td><td>Interface</td><td>Contrato de <code>Show()</code> y <code>Hide()</code> para testeabilidad.</td></tr>
-              <tr><td><code>IBeastyView</code></td><td>Interface</td><td>Contrato de view para desacoplamiento del presenter.</td></tr>
-              <tr><td><code>SaveEntryUI</code></td><td>UI Card</td><td>MonoBehaviour de card por slot. Inicializado con <code>DisplayName</code>, <code>LastModified</code>, y <code>Metadata</code>. Expone botones Load y Overwrite via eventos.</td></tr>
-              <tr><td><code>ChooseViewManager</code></td><td>Navegación</td><td>Gestiona qué panel está activo (menú principal vs. pantalla save/load).</td></tr>
-              <tr><td><code>NavigationManager</code></td><td>Navegación</td><td>Helpers de navegación de escena/panel.</td></tr>
-              <tr><td><code>FileFinder</code></td><td>Utilidad</td><td><code>FindFilesByPattern(path, pattern)</code> &mdash; cuenta archivos de slot existentes para auto-numerar los nuevos.</td></tr>
+              <tr><td><code>BeastySaveModel</code></td><td data-i18n="doc.s9.r1_role">Model</td><td data-i18n-html="doc.s9.r1_resp">Thin wrapper over <code>SaveSlotController</code>. Exposes <code>SaveSlot()</code> and <code>LoadObject()</code> to the presenter.</td></tr>
+              <tr><td><code>BeastySaveView</code></td><td data-i18n="doc.s9.r2_role">View</td><td data-i18n-html="doc.s9.r2_resp">Unity MonoBehaviour. Owns UI references (slot container, prefab, input fields). Fires C# events: <code>saveEvent</code>, <code>saveOverwriteEvent</code>, <code>onLoadEvent</code>.</td></tr>
+              <tr><td><code>BeastySavePresenter</code></td><td data-i18n="doc.s9.r3_role">Presenter</td><td data-i18n-html="doc.s9.r3_resp">Subscribes to view events. Calls model methods. Refreshes slot cards after each save. Manages <code>Show</code>/<code>Hide</code> lifecycle.</td></tr>
+              <tr><td><code>IBeastyPresenter</code></td><td data-i18n="doc.s9.r4_role">Interface</td><td data-i18n-html="doc.s9.r4_resp"><code>Show()</code> and <code>Hide()</code> contract for testability.</td></tr>
+              <tr><td><code>IBeastyView</code></td><td data-i18n="doc.s9.r5_role">Interface</td><td data-i18n="doc.s9.r5_resp">View contract for presenter decoupling.</td></tr>
+              <tr><td><code>SaveEntryUI</code></td><td data-i18n="doc.s9.r6_role">UI Card</td><td data-i18n-html="doc.s9.r6_resp">Per-slot card MonoBehaviour. Initialized with <code>DisplayName</code>, <code>LastModified</code>, and <code>Metadata</code>. Exposes Load and Overwrite buttons via events.</td></tr>
+              <tr><td><code>ChooseViewManager</code></td><td data-i18n="doc.s9.r7_role">Navigation</td><td data-i18n="doc.s9.r7_resp">Manages which panel is active (main menu vs. save/load screen).</td></tr>
+              <tr><td><code>NavigationManager</code></td><td data-i18n="doc.s9.r8_role">Navigation</td><td data-i18n="doc.s9.r8_resp">Scene/panel navigation helpers.</td></tr>
+              <tr><td><code>FileFinder</code></td><td data-i18n="doc.s9.r9_role">Utility</td><td data-i18n-html="doc.s9.r9_resp"><code>FindFilesByPattern(path, pattern)</code> &mdash; counts existing slot files to auto-number new ones.</td></tr>
             </tbody>
           </table>
         </div>
 
-        <h2>9.2 Flujo de Eventos</h2>
-        <pre>// BeastySaveView dispara:
+        <h2 data-i18n="doc.s9.h2_2">9.2 Event Flow</h2>
+        <pre>// BeastySaveView fires:
 public event Action&lt;SaveObjectModel, string&gt;   saveEvent;
 public event Action&lt;SaveObjectModel, Metadata&gt; saveOverwriteEvent;
 public event Action&lt;Metadata, SaveObjectModel&gt; onLoadEvent;
 
-// BeastySavePresenter conecta en constructor:
+// BeastySavePresenter connects in constructor:
 view.saveEvent          += OnSaveEvent;
 view.saveOverwriteEvent += OnSaveOverwriteEvent;
 view.onLoadEvent        += OnLoad;
 
-// Presenter llama en save:
+// Presenter calls on save:
 model.SaveSlot(saveData, displayName, OnSuccess: LoadSlotsCards);
 
-// Presenter llama en load:
+// Presenter calls on load:
 model.LoadObject(metadata, saveObjectModel);</pre>
       </section>
 
       <!-- ══ 10. DATA PROCESSOR ═══════════════════════════════ -->
       <section id="dataprocessor">
-        <h1>10. DataProcessor &mdash; Type-Safe In-Place Loading</h1>
-        <p><code>DataProcessor</code> es el motor estático interno que conecta el formato JSON de typed-envelope con instancias de objetos existentes. Llamado exclusivamente por <code>SaveByReference.Load</code> y <code>SaveSystem_List.LoadAndAssign</code>.</p>
+        <h1 data-i18n="doc.s10.title">10. DataProcessor &mdash; Type-Safe In-Place Loading</h1>
+        <p data-i18n-html="doc.s10.p1"><code>DataProcessor</code> is the internal static engine that connects the typed-envelope JSON format with existing object instances. Called exclusively by <code>SaveByReference.Load</code> and <code>SaveSystem_List.LoadAndAssign</code>.</p>
 
-        <h2>10.1 ProcessLoadedData(string json, object target) &mdash; Single Object</h2>
+        <h2 data-i18n="doc.s10.h2_1">10.1 ProcessLoadedData(string json, object target) &mdash; Single Object</h2>
         <ol>
-          <li>Parse del string JSON en un <code>JObject</code>.</li>
-          <li>Extracción del token <code>"objects"</code> &mdash; soporta tanto <code>JObject</code> como <code>JArray</code>.</li>
-          <li>Lectura del campo <code>"type"</code> y resolución del tipo CLR completo via <code>ResolveType</code> (escanea todos los assemblies del AppDomain).</li>
-          <li>Comparación del tipo resuelto contra <code>target.GetType()</code>.</li>
-          <li>En match: llama <code>JsonConvert.PopulateObject(data.ToString(), target, JsonSettings)</code> &mdash; aplica valores in-place a la instancia existente.</li>
-          <li>Loguea un warning si no se encuentra tipo coincidente.</li>
+          <li data-i18n-html="doc.s10.a_li1">Parse the JSON string into a <code>JObject</code>.</li>
+          <li data-i18n-html="doc.s10.a_li2">Extract the <code>"objects"</code> token &mdash; supports both <code>JObject</code> and <code>JArray</code>.</li>
+          <li data-i18n-html="doc.s10.a_li3">Read the <code>"type"</code> field and resolve the full CLR type via <code>ResolveType</code> (scans all AppDomain assemblies).</li>
+          <li data-i18n-html="doc.s10.a_li4">Compare the resolved type against <code>target.GetType()</code>.</li>
+          <li data-i18n-html="doc.s10.a_li5">On match: call <code>JsonConvert.PopulateObject(data.ToString(), target, JsonSettings)</code> &mdash; applies values in-place to the existing instance.</li>
+          <li data-i18n="doc.s10.a_li6">Logs a warning if no matching type is found.</li>
         </ol>
 
-        <h2>10.2 ProcessLoadedData(string json, List&lt;object&gt; list) &mdash; List</h2>
+        <h2 data-i18n-html="doc.s10.h2_2">10.2 ProcessLoadedData(string json, List&lt;object&gt; list) &mdash; List</h2>
         <ol>
-          <li>Deserializa el JSON en <code>Dictionary&lt;string, object&gt;</code>.</li>
-          <li>Cast de <code>"objects"</code> a <code>JArray</code>.</li>
-          <li>Para cada elemento: resuelve tipo, encuentra la primera instancia coincidente en <code>objectList</code> por tipo.</li>
-          <li>Llama <code>PopulateObject</code> en cada instancia matched.</li>
-          <li>Omite elementos con tipos no resolvibles o sin entrada coincidente &mdash; loguea un warning, no lanza excepción.</li>
+          <li data-i18n-html="doc.s10.b_li1">Deserialize JSON into <code>Dictionary&lt;string, object&gt;</code>.</li>
+          <li data-i18n-html="doc.s10.b_li2">Cast <code>"objects"</code> to <code>JArray</code>.</li>
+          <li data-i18n-html="doc.s10.b_li3">For each element: resolve type, find first matching instance in <code>objectList</code> by type.</li>
+          <li data-i18n-html="doc.s10.b_li4">Call <code>PopulateObject</code> on each matched instance.</li>
+          <li data-i18n="doc.s10.b_li5">Skips elements with unresolvable types or no matching entry &mdash; logs a warning, does not throw.</li>
         </ol>
 
-        <h2>10.3 ResolveType(string typeName)</h2>
-        <p>Busca en todos los assemblies en <code>AppDomain.CurrentDomain.GetAssemblies()</code> el nombre de tipo fully-qualified. Retorna <code>null</code> si no se encuentra. Maneja tipos a través de Unity runtime, game scripts, y plugins sin registro explícito.</p>
-        <pre>// Tipo almacenado en JSON: "Beasty_SaveSystem.SaveObjectModel"
+        <h2 data-i18n="doc.s10.h2_3">10.3 ResolveType(string typeName)</h2>
+        <p data-i18n-html="doc.s10.p3">Searches all assemblies in <code>AppDomain.CurrentDomain.GetAssemblies()</code> for the fully-qualified type name. Returns <code>null</code> if not found. Handles types across Unity runtime, game scripts, and plugins without explicit registration.</p>
+        <pre>// Type stored in JSON: "Beasty_SaveSystem.SaveObjectModel"
 Type t = DataProcessor.ResolveType("Beasty_SaveSystem.SaveObjectModel");
-// Retorna el Tipo CLR si se encuentra en algún assembly cargado, null de lo contrario</pre>
+// Returns the CLR Type if found in any loaded assembly, null otherwise</pre>
       </section>
 
       <!-- ══ 11. PLATFORMS & PATHS ════════════════════════════ -->
       <section id="platforms">
-        <h1>11. Platform Support &amp; File Paths</h1>
+        <h1 data-i18n-html="doc.s11.title">11. Platform Support &amp; File Paths</h1>
 
         <div class="table-wrap">
           <table>
-            <thead><tr><th>Plataforma</th><th>Ruta Base Default</th><th>Notas</th></tr></thead>
+            <thead><tr><th data-i18n="doc.th.platform">Platform</th><th data-i18n="doc.th.basePath">Default Base Path</th><th data-i18n="doc.th.notes">Notes</th></tr></thead>
             <tbody>
-              <tr><td>Windows / macOS / Linux</td><td><code>Application.dataPath</code></td><td>En editor: apunta a la carpeta Assets. En build: dentro del directorio de build. Puede ser read-only en algunos sistemas.</td></tr>
-              <tr><td>Android</td><td><code>Application.persistentDataPath</code></td><td>Sandbox de la app. Sobrevive reinstalación en la mayoría de dispositivos. Ruta seteada por directiva de preprocesador.</td></tr>
-              <tr><td>iOS</td><td><code>Application.persistentDataPath</code></td><td>Sandbox de la app. Elegible para backup de iCloud. Ruta seteada por directiva de preprocesador.</td></tr>
+              <tr><td>Windows / macOS / Linux</td><td><code>Application.dataPath</code></td><td data-i18n="doc.s11.td1_n">In editor: points to Assets folder. In build: inside build directory. May be read-only on some systems.</td></tr>
+              <tr><td>Android</td><td><code>Application.persistentDataPath</code></td><td data-i18n="doc.s11.td2_n">App sandbox. Survives reinstall on most devices. Path set by preprocessor directive.</td></tr>
+              <tr><td>iOS</td><td><code>Application.persistentDataPath</code></td><td data-i18n="doc.s11.td3_n">App sandbox. Eligible for iCloud backup. Path set by preprocessor directive.</td></tr>
             </tbody>
           </table>
         </div>
 
-        <p>La ruta final de guardado se construye como:</p>
+        <p data-i18n="doc.s11.p_path">The final save path is built as:</p>
         <pre>{DataPath} / {SaveFolder} / {FileName}.{FileExtension}</pre>
-        <p><code>GetFullPath</code> auto-crea el directorio via <code>Directory.CreateDirectory</code> si no existe. Tanto <code>SaveFileInfo</code> como <code>BaseSaveFileInfo</code> usan directivas de preprocesador idénticas para determinar el default de plataforma.</p>
+        <p data-i18n-html="doc.s11.p_create"><code>GetFullPath</code> auto-creates the directory via <code>Directory.CreateDirectory</code> if it doesn't exist. Both <code>SaveFileInfo</code> and <code>BaseSaveFileInfo</code> use identical preprocessor directives to determine the platform default.</p>
 
         <div class="callout warn">
           <span class="callout-icon">&#9888;</span>
-          <div>
-            Para builds de escritorio, considera override de <code>DataPath</code> a
-            <code>Application.persistentDataPath</code> si el directorio de instalación puede ser read-only
-            (común en carpetas protegidas del sistema en Windows/macOS).
-          </div>
+          <div data-i18n-html="doc.s11.callout">For desktop builds, consider overriding <code>DataPath</code> to <code>Application.persistentDataPath</code> if the installation directory may be read-only (common in protected system folders on Windows/macOS).</div>
         </div>
       </section>
 
       <!-- ══ 12. INTEGRATION GUIDE ════════════════════════════ -->
       <section id="integration">
-        <h1>12. Integration Guide</h1>
+        <h1 data-i18n="doc.s12.title">12. Integration Guide</h1>
 
-        <h2>12.1 Scene Setup</h2>
+        <h2 data-i18n="doc.s12.h2_1">12.1 Scene Setup</h2>
         <ol>
-          <li>Crea un GameObject vacío en tu escena persistente (e.g., <strong>SaveSystem</strong>).</li>
-          <li>Adjunta <code>BeastySaveSystemFileSetup</code>. Configura campos de <code>fileInfo</code> en el Inspector (extensión, carpeta, clave de cifrado).</li>
-          <li>Adjunta <code>SaveSlotController</code> al mismo GameObject o a uno hermano.</li>
-          <li>Activa <strong>Enable Encrypt</strong> para habilitar archivos de guardado AES-256.</li>
-          <li>Activa <strong>Enable Logs</strong> para output de debug en consola durante desarrollo (desactivar en release).</li>
+          <li data-i18n-html="doc.s12.li1">Create an empty GameObject in your persistent scene (e.g., <strong>SaveSystem</strong>).</li>
+          <li data-i18n-html="doc.s12.li2">Attach <code>BeastySaveSystemFileSetup</code>. Configure <code>fileInfo</code> fields in the Inspector (extension, folder, encryption key).</li>
+          <li data-i18n-html="doc.s12.li3">Attach <code>SaveSlotController</code> to the same or a sibling GameObject.</li>
+          <li data-i18n-html="doc.s12.li4">Enable <strong>Enable Encrypt</strong> to activate AES-256 save files.</li>
+          <li data-i18n-html="doc.s12.li5">Enable <strong>Enable Logs</strong> for debug console output during development (disable in release).</li>
         </ol>
 
-        <h2>12.2 Guardando tus Datos</h2>
+        <h2 data-i18n="doc.s12.h2_2">12.2 Saving Your Data</h2>
         <pre>SaveFileInfo info = BeastySaveSystemFileSetup.Instance.fileInfo;
 
-// Opción A: Clase C# plana — usa Save / Load&lt;T&gt;
+// Option A: Plain C# class — use Save / Load&lt;T&gt;
 var pd = new PlayerData { integerValue1 = 42 };
 BeastySaveSystemAPI.Save(pd, "player", info);
 PlayerData result = BeastySaveSystemAPI.Load&lt;PlayerData&gt;("player", info);
 
-// Opción B: MonoBehaviour — usa SaveRef / LoadRef
+// Option B: MonoBehaviour — use SaveRef / LoadRef
 BeastySaveSystemAPI.SaveRef(myMono, "player_component", info);
 BeastySaveSystemAPI.LoadRef("player_component", myMono, info);  // in-place
 
-// Opción C: Save slot con metadata
+// Option C: Save slot with metadata
 SaveSlotController.Instance.Save(saveObjectModel, displayName: "Slot 1",
-    OnSuccess: () => Debug.Log("Guardado!"),
+    OnSuccess: () => Debug.Log("Saved!"),
     OnError:   () => Debug.LogError("Error!"));</pre>
 
-        <h2>12.3 Clave de Cifrado Personalizada</h2>
+        <h2 data-i18n="doc.s12.h2_3">12.3 Custom Encryption Key</h2>
         <pre>string key = PasswordGenerator.GenerateSecurePassword(32);
 BeastySaveSystemFileSetup.Instance.fileInfo.EncryptionKey = key;
 
-// Persiste la clave de forma segura — sin ella, los guardados cifrados no pueden descifrarse
-PlayerPrefs.SetString("save_key", key);  // solo ejemplo — usa un almacén seguro</pre>
+// <span data-i18n="doc.s12.p3">Persist the key securely &mdash; without it, encrypted saves cannot be decrypted</span>
+PlayerPrefs.SetString("save_key", key);  // example only — use a secure store</pre>
 
-        <h2>12.4 Agregar un Conversor Personalizado</h2>
-        <pre>// Paso 1: Implementa IUnityTypeConverter
+        <h2 data-i18n="doc.s12.h2_4">12.4 Adding a Custom Converter</h2>
+        <pre>// <span data-i18n-html="doc.s12.step1">Step 1: Implement <code>IUnityTypeConverter</code></span>
 internal sealed class MyTypeConverter : IUnityTypeConverter
 {
     public bool CanConvert(Type t) =&gt; t == typeof(MyUnityType);
@@ -773,23 +742,22 @@ internal sealed class MyTypeConverter : IUnityTypeConverter
             return null;
         }
         var target = (MyUnityType)existing;
-        // ... leer propiedades del reader y aplicar a target ...
+        // ... read properties from reader and apply to target ...
         return target;
     }
 }
 
-// Paso 2: Registrar en UnityTypeConverterRegistry.Converters
-// Agregar ANTES de GenericObjectConverter (que actúa como fallback)</pre>
+// <span data-i18n-html="doc.s12.step2">Step 2: Register in <code>UnityTypeConverterRegistry.Converters</code> &mdash; add BEFORE <code>GenericObjectConverter</code> (which acts as fallback)</span></pre>
       </section>
 
       <!-- ══ 13. FILE STRUCTURE ═══════════════════════════════ -->
       <section id="structure">
-        <h1>13. Project File Structure</h1>
+        <h1 data-i18n="doc.s13.title">13. Project File Structure</h1>
         <pre>Assets/
 └── BeastyComponents/
     └── SaveSystem/
         ├── Editor/
-        │   └── SaveManagerInspector.cs         Custom Inspector para BeastySaveSystemFileSetup
+        │   └── SaveManagerInspector.cs         <span data-i18n="doc.s13.c1">Custom Inspector for BeastySaveSystemFileSetup</span>
         │
         ├── Example/
         │   └── Scripts/
@@ -811,14 +779,14 @@ internal sealed class MyTypeConverter : IUnityTypeConverter
         │       │   └── FileFinder.cs
         │       ├── view/
         │       │   └── BeastySaveView.cs
-        │       └── SaveObjectModel.cs           Demo MonoBehaviour (PlayerData, ExampleClass)
+        │       └── SaveObjectModel.cs           <span data-i18n="doc.s13.c2">Demo MonoBehaviour (PlayerData, ExampleClass)</span>
         │
         └── Scripts/
-            ├── BeastySaveSystemAPI.cs           ← FACADE PÚBLICA — empieza aquí
-            ├── BeastySaveSystemFileSetup.cs     Singleton MonoBehaviour de escena
-            ├── SaveableObject.cs                Componente marcador
+            ├── BeastySaveSystemAPI.cs           <span data-i18n="doc.s13.c3">← PUBLIC FACADE — start here</span>
+            ├── BeastySaveSystemFileSetup.cs     <span data-i18n="doc.s13.c4">Scene Singleton MonoBehaviour</span>
+            ├── SaveableObject.cs                <span data-i18n="doc.s13.c5">Marker component</span>
             ├── SavesSlots/
-            │   └── SaveSlotController.cs        Singleton de gestión de slots
+            │   └── SaveSlotController.cs        <span data-i18n="doc.s13.c6">Slot management singleton</span>
             └── BeastySaveSystemCore/
                 ├── Converter/
                 │   ├── IUnityTypeConverter.cs
@@ -827,7 +795,7 @@ internal sealed class MyTypeConverter : IUnityTypeConverter
                 │   ├── UnityObjectConverter.cs
                 │   ├── UnityTypeConverterRegistry.cs
                 │   └── Instances/
-                │       ├── SpriteConverter.cs   (Texture2D)
+                │       ├── SpriteConverter.cs   <span data-i18n="doc.s13.c7">(Texture2D)</span>
                 │       ├── 2D/
                 │       │   ├── BoxCollider2DConverter.cs
                 │       │   ├── CapsuleCollider2DConverter.cs
@@ -870,82 +838,82 @@ internal sealed class MyTypeConverter : IUnityTypeConverter
 
       <!-- ══ 14. LIMITATIONS ══════════════════════════════════ -->
       <section id="limitations">
-        <h1>14. Known Limitations &amp; Recommendations</h1>
+        <h1 data-i18n-html="doc.s14.title">14. Known Limitations &amp; Recommendations</h1>
 
-        <h3>IV Fijo en Cifrado AES</h3>
-        <p>El IV siempre son 16 bytes en cero. Dos guardados con el mismo plaintext y clave producen ciphertext idéntico. Para mayor protección, genera un IV aleatorio por guardado y prepéndelo al ciphertext antes de Base64, luego léelo de vuelta durante el descifrado.</p>
+        <h3 data-i18n="doc.s14.h3_1">Fixed IV in AES Encryption</h3>
+        <p data-i18n="doc.s14.p1">The IV is always 16 zero bytes. Two saves with the same plaintext and key produce identical ciphertext. For stronger protection, generate a random IV per save and prepend it to the ciphertext before Base64, then read it back during decryption.</p>
 
-        <h3>Escaneo de AppDomain Assembly en cada Carga</h3>
-        <p><code>DataProcessor.ResolveType</code> itera todos los assemblies cargados en cada llamada. Para proyectos grandes, considera cachear tipos resueltos en un <code>Dictionary&lt;string, Type&gt;</code> para evitar escaneos repetidos.</p>
+        <h3 data-i18n="doc.s14.h3_2">AppDomain Assembly Scan on Every Load</h3>
+        <p data-i18n-html="doc.s14.p2"><code>DataProcessor.ResolveType</code> iterates all loaded assemblies on every call. For large projects, consider caching resolved types in a <code>Dictionary&lt;string, Type&gt;</code> to avoid repeated scans.</p>
 
-        <h3>Referencia de Asset Sprite No Guardada</h3>
-        <p><code>SpriteRendererConverter</code> guarda propiedades de renderizado (color, flip, sorting) pero no la referencia del asset Sprite. Guarda la clave Addressables del sprite o la ruta de Resources por separado y re-asigna al cargar.</p>
+        <h3 data-i18n="doc.s14.h3_3">Sprite Asset Reference Not Saved</h3>
+        <p data-i18n-html="doc.s14.p3"><code>SpriteRendererConverter</code> saves rendering properties (color, flip, sorting) but not the Sprite asset reference. Save the sprite's Addressables key or Resources path separately and re-assign on load.</p>
 
-        <h3>Asset de Mesh No Guardado</h3>
-        <p><code>MeshColliderConverter</code> guarda flags convex/trigger pero no el asset de mesh. Usa un registro de mesh por nombre si se necesita re-asignación de mesh al cargar.</p>
+        <h3 data-i18n="doc.s14.h3_4">Mesh Asset Not Saved</h3>
+        <p data-i18n-html="doc.s14.p4"><code>MeshColliderConverter</code> saves convex/trigger flags but not the mesh asset. Use a mesh registry keyed by name if mesh re-assignment is needed on load.</p>
 
-        <h3>Match de Tipo Único por Lista</h3>
-        <p><code>SaveSystem_List</code> encuentra el <em>primer</em> objeto en la lista que coincide con un tipo dado. Múltiples objetos del mismo tipo en una lista recibirán todos los datos de la primera entrada coincidente. Usa un diccionario keyed por tipo o clases wrapper únicas como workaround.</p>
+        <h3 data-i18n="doc.s14.h3_5">Single Type Match per List</h3>
+        <p data-i18n-html="doc.s14.p5"><code>SaveSystem_List</code> finds the <em>first</em> object in the list that matches a given type. Multiple objects of the same type in a list will all receive data from the first matching entry. Use a type-keyed dictionary or unique wrapper classes as a workaround.</p>
 
-        <h3>Sin API de Delete Slot</h3>
-        <p><code>ConfigFile.Remove</code> elimina la entrada de metadata, pero el archivo de guardado físico debe eliminarse por separado via <code>File.Delete(info.GetFullPath(metadata.FileName))</code>.</p>
+        <h3 data-i18n="doc.s14.h3_6">No Delete Slot API</h3>
+        <p data-i18n-html="doc.s14.p6"><code>ConfigFile.Remove</code> removes the metadata entry, but the physical save file must be deleted separately via <code>File.Delete(info.GetFullPath(metadata.FileName))</code>.</p>
 
-        <h3>DataPath en Editor vs. Build</h3>
-        <p>En el Unity Editor, <code>Application.dataPath</code> apunta a la carpeta <code>Assets</code>. En un build de escritorio apunta dentro del directorio de build, que puede ser read-only en algunos sistemas. Considera override de <code>DataPath</code> a <code>Application.persistentDataPath</code> para builds de escritorio en release.</p>
+        <h3 data-i18n="doc.s14.h3_7">DataPath in Editor vs. Build</h3>
+        <p data-i18n-html="doc.s14.p7">In the Unity Editor, <code>Application.dataPath</code> points to the <code>Assets</code> folder. In a desktop build it points inside the build directory, which may be read-only on some systems. Consider overriding <code>DataPath</code> to <code>Application.persistentDataPath</code> for release desktop builds.</p>
       </section>
 
       <!-- ══ 15. QUICK REFERENCE ══════════════════════════════ -->
       <section id="quickref">
-        <h1>15. Quick Reference Card</h1>
+        <h1 data-i18n="doc.s15.title">15. Quick Reference Card</h1>
 
-        <h2>Árbol de Decisión &mdash; ¿Qué API usar?</h2>
-        <pre>P: ¿El objeto hereda de MonoBehaviour o Component?
-   SÍ  ──→ Usa SaveRef / LoadRef  (reference-based, in-place)
+        <h2 data-i18n="doc.s15.h2_1">Decision Tree &mdash; Which API to Use?</h2>
+        <pre data-i18n="doc.s15.tree">Q: Does the object inherit from MonoBehaviour or Component?
+   YES ──→ Use SaveRef / LoadRef  (reference-based, in-place)
    NO  ──→
-       P: ¿Un solo objeto?
-          SÍ  ──→ Usa Save / Load&lt;T&gt;
-          NO  ──→ Usa Save_ObjectList / LoadAndMergeList
+       Q: Single object?
+          YES ──→ Use Save / Load&lt;T&gt;
+          NO  ──→ Use Save_ObjectList / LoadAndMergeList
 
-P: ¿Necesitas cifrado?
-   SÍ  ──→ Agrega _Encrypted al nombre del método
-   NO  ──→ Usa la versión plain
+Q: Do you need encryption?
+   YES ──→ Add _Encrypted to the method name
+   NO  ──→ Use the plain version
 
-P: ¿Puede el caller bloquear el main thread?
-   SÍ  ──→ Usa versiones síncronas (sin sufijo Async)
-   NO  ──→ Usa versiones async (sufijo Async) con await</pre>
+Q: Can the caller block the main thread?
+   YES ──→ Use sync versions (no Async suffix)
+   NO  ──→ Use async versions (Async suffix) with await</pre>
 
-        <h2>Convención de Nombres de Métodos</h2>
+        <h2 data-i18n="doc.s15.h2_2">Method Naming Convention</h2>
         <div class="table-wrap">
           <table>
-            <thead><tr><th>Sufijo / Prefijo</th><th>Significado</th></tr></thead>
+            <thead><tr><th data-i18n="doc.th.suffix">Suffix / Prefix</th><th data-i18n="doc.th.meaning">Meaning</th></tr></thead>
             <tbody>
-              <tr><td><code>Async</code></td><td>Retorna <code>Task&lt;T&gt;</code> &mdash; usar con <code>await</code>. E/S no bloqueante.</td></tr>
-              <tr><td><code>_Encrypted</code></td><td>AES-256 cifrado al guardar / descifrado al cargar. Clave desde <code>SaveFileInfo.EncryptionKey</code>.</td></tr>
-              <tr><td><code>Ref</code> / <code>LoadRef</code></td><td>Reference-based &mdash; llena una instancia existente. Requerido para MonoBehaviours.</td></tr>
-              <tr><td><code>_ObjectList</code></td><td>Opera en <code>List&lt;object&gt;</code> con tipos mixtos.</td></tr>
-              <tr><td><code>LoadAndMerge</code></td><td>Merge de datos cargados en elementos existentes de la lista (in-place por elemento).</td></tr>
+              <tr><td><code>Async</code></td><td data-i18n-html="doc.s15.m1">Returns <code>Task&lt;T&gt;</code> &mdash; use with <code>await</code>. Non-blocking I/O.</td></tr>
+              <tr><td><code>_Encrypted</code></td><td data-i18n-html="doc.s15.m2">AES-256 encrypted on save / decrypted on load. Key from <code>SaveFileInfo.EncryptionKey</code>.</td></tr>
+              <tr><td><code>Ref</code> / <code>LoadRef</code></td><td data-i18n="doc.s15.m3">Reference-based &mdash; fills an existing instance. Required for MonoBehaviours.</td></tr>
+              <tr><td><code>_ObjectList</code></td><td data-i18n-html="doc.s15.m4">Operates on <code>List&lt;object&gt;</code> with mixed types.</td></tr>
+              <tr><td><code>LoadAndMerge</code></td><td data-i18n="doc.s15.m5">Merges loaded data into existing list elements (in-place per element).</td></tr>
             </tbody>
           </table>
         </div>
 
-        <h2>Patrón de Acceso a Singletons</h2>
-        <pre>// Singleton de configuración (setup en escena)
+        <h2 data-i18n="doc.s15.h2_3">Singleton Access Pattern</h2>
+        <pre>// Configuration singleton (setup in scene)
 BeastySaveSystemFileSetup.Instance.fileInfo         // SaveFileInfo
 BeastySaveSystemFileSetup.Instance.EnableEncryt     // bool
 
-// Singleton de gestión de slots
+// Slot management singleton
 SaveSlotController.Instance.Save(...)
 SaveSlotController.Instance.LoadConfigFile()
 SaveSlotController.Instance.CreateSlotsCards(...)
 
-// API Estática — sin instancia necesaria
+// Static API — no instance needed
 BeastySaveSystemAPI.Save(...)
 BeastySaveSystemAPI.LoadRef(...)</pre>
 
-        <h2>API Completa de un Vistazo</h2>
+        <h2 data-i18n="doc.s15.h2_4">Full API at a Glance</h2>
         <div class="table-wrap">
           <table>
-            <thead><tr><th>Método</th><th>Enc</th><th>Async</th><th>Retorno</th></tr></thead>
+            <thead><tr><th data-i18n="doc.th.method">Method</th><th data-i18n="doc.th.notes">Enc</th><th>Async</th><th data-i18n="doc.th.ret">Return</th></tr></thead>
             <tbody>
               <tr><td><code>SaveRef</code></td><td></td><td></td><td><code>bool</code></td></tr>
               <tr><td><code>SaveRef_Encrypted</code></td><td>&#10003;</td><td></td><td><code>bool</code></td></tr>
@@ -972,8 +940,8 @@ BeastySaveSystemAPI.LoadRef(...)</pre>
         </div>
 
         <hr class="divider">
-        <p style="text-align:center;font-size:0.8rem;color:var(--text-dim);">
-          BeastySaveSystem Technical Documentation &nbsp;&middot;&nbsp; Junio 2026 &nbsp;&middot;&nbsp;
+        <p style="text-align:center;font-size:0.8rem;color:var(--text-dim);" data-i18n-html="doc.s15.footer">
+          BeastySaveSystem Technical Documentation &nbsp;&middot;&nbsp; June 2026 &nbsp;&middot;&nbsp;
           Namespaces: <code>Beasty_SaveSystem</code> / <code>Beasty_SaveSystemCore</code>
         </p>
       </section>
@@ -985,12 +953,14 @@ BeastySaveSystemAPI.LoadRef(...)</pre>
     <div class="container">
       <span class="footer-copy">&#169; 2026 Álvaro Bautista &mdash; bauflow</span>
       <nav class="footer-links">
-        <a href="/">&#8592; Proyectos</a>
-        <a href="/#contact">Contacto</a>
+        <a href="/">&#8592; <span data-i18n="footer.projects">Projects</span></a>
+        <a href="/#contact" data-i18n="footer.contact">Contact</a>
       </nav>
     </div>
   </footer>
 
+  <script src="/data/translations.js"></script>
+  <script src="/assets/js/i18n.js"></script>
   <script src="/assets/js/theme-toggle.js"></script>
   <script src="/assets/js/doc-sidebar.js" defer></script>
   <script>

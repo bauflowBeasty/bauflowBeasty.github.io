@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>bauflow — Unity Developer</title>
-  <!-- Aplicar tema antes de renderizar para evitar parpadeo -->
   <script>document.documentElement.setAttribute('data-theme', localStorage.getItem('theme') || 'dark');</script>
   <link rel="stylesheet" href="/assets/css/base/variables.css">
   <link rel="stylesheet" href="/assets/css/base/reset.css">
@@ -21,7 +20,7 @@
     <div class="container">
       <a href="/" class="logo">bau<span>flow</span></a>
 
-      <button class="hamburger" id="hamburger" aria-label="Abrir menú" aria-expanded="false">
+      <button class="hamburger" id="hamburger" data-i18n-aria="nav.openMenu" aria-label="Open menu" aria-expanded="false">
         <span></span>
         <span></span>
         <span></span>
@@ -29,13 +28,18 @@
 
       <nav class="navbar" id="navbar">
         <ul>
-          <li><a href="/" class="active">Proyectos</a></li>
-          <li><a href="#contact">Contacto</a></li>
+          <li><a href="/" class="active" data-i18n="nav.projects">Projects</a></li>
+          <li><a href="#contact" data-i18n="nav.contact">Contact</a></li>
           <li>
-            <button id="theme-toggle" aria-label="Cambiar tema">
+            <button id="theme-toggle" aria-label="Toggle theme">
               <span class="light-icon">&#9728;</span>
               <span class="dark-icon">&#9790;</span>
             </button>
+          </li>
+          <li class="lang-switcher">
+            <button data-lang-btn="en">EN</button>
+            <span>|</span>
+            <button data-lang-btn="es">ES</button>
           </li>
         </ul>
       </nav>
@@ -45,19 +49,19 @@
   <main>
     <div class="container">
 
-      <!-- ── Proyectos ─────────────────────────────────────────── -->
+      <!-- ── Projects ─────────────────────────────────────────── -->
       <section class="section">
-        <p class="section-label">Portfolio</p>
-        <h2 class="section-heading">Proyectos</h2>
+        <p class="section-label" data-i18n="home.portfolio">Portfolio</p>
+        <h2 class="section-heading" data-i18n="home.projects">Projects</h2>
         <div class="projects-grid" id="projects-grid">
-          <!-- Generado automáticamente desde /data/projects.js -->
+          <!-- Auto-generated from /data/projects.js -->
         </div>
       </section>
 
-      <!-- ── Contacto ──────────────────────────────────────────── -->
+      <!-- ── Contact ──────────────────────────────────────────── -->
       <section class="section contact-section" id="contact">
-        <p class="section-label">Contacto</p>
-        <h2 class="section-heading">Contáctame</h2>
+        <p class="section-label" data-i18n="home.contactLabel">Contact</p>
+        <h2 class="section-heading" data-i18n="home.contactHeading">Contact Me</h2>
         <div class="contact-links">
           <a href="#" class="contact-link">
             <span class="contact-icon">&#9993;</span>
@@ -85,12 +89,14 @@
     <div class="container">
       <span class="footer-copy">&#169; 2026 Álvaro Bautista &mdash; bauflow</span>
       <nav class="footer-links">
-        <a href="#contact">Contacto</a>
-        <a href="/">Proyectos</a>
+        <a href="#contact" data-i18n="footer.contact">Contact</a>
+        <a href="/" data-i18n="footer.projects">Projects</a>
       </nav>
     </div>
   </footer>
 
+  <script src="/data/translations.js"></script>
+  <script src="/assets/js/i18n.js"></script>
   <script src="/data/projects.js"></script>
   <script src="/assets/js/projects-loader.js"></script>
   <script src="/assets/js/theme-toggle.js"></script>

@@ -8,7 +8,10 @@ var PROJECTS = [
     id:          "save-system",
     name:        "BeastySaveSystem",
     version:     "1.0.0",
-    description: "Sistema de guardado para Unity con cifrado AES-256, gestión de slots múltiples y 21 conversores de tipos de Unity integrados. Soporta async/await y carga por referencia para MonoBehaviours.",
+    description: {
+      en: "Unity save system with AES-256 encryption, multiple save slots, and 21 built-in Unity type converters. Supports async/await and load-by-reference for MonoBehaviours.",
+      es: "Sistema de guardado para Unity con cifrado AES-256, gestión de slots múltiples y 21 conversores de tipos de Unity integrados. Soporta async/await y carga por referencia para MonoBehaviours."
+    },
     tags:        ["Unity", "C#", "Plugin"],
     price:       "$15.99",
     freeDemo:    true,
@@ -24,7 +27,10 @@ var PROJECTS = [
     id:          "inventory-system",
     name:        "BeastyInventory",
     version:     "1.0.0",
-    description: "Descripción del proyecto.",
+    description: {
+      en: "Project description in English.",
+      es: "Descripción del proyecto en español."
+    },
     tags:        ["Unity", "C#"],
     price:       "$12.99",
     freeDemo:    false,
