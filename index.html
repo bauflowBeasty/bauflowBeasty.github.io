@@ -3,115 +3,117 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My Dev Portfolio</title>
-  <link rel="stylesheet" href="/assets/css/base/reset.css">
+  <title>bauflow — Unity Developer</title>
+  <!-- Aplicar tema antes de renderizar para evitar parpadeo -->
+  <script>document.documentElement.setAttribute('data-theme', localStorage.getItem('theme') || 'dark');</script>
   <link rel="stylesheet" href="/assets/css/base/variables.css">
+  <link rel="stylesheet" href="/assets/css/base/reset.css">
   <link rel="stylesheet" href="/assets/css/base/typography.css">
   <link rel="stylesheet" href="/assets/css/components/header.css">
   <link rel="stylesheet" href="/assets/css/components/card.css">
+  <link rel="stylesheet" href="/assets/css/components/footer.css">
   <link rel="stylesheet" href="/assets/css/components/theme-toggle.css">
-  <link rel="stylesheet" href="/assets/css/layouts/grid-system.css">
   <link rel="stylesheet" href="/assets/css/main.css">
 </head>
 <body>
-  <!-- Header/Nav -->
+
   <header class="header">
     <div class="container">
-      <a href="/" class="logo">MyPortfolio</a>
-      
-      <input type="checkbox" id="mobile-menu-toggle" class="visually-hidden">
-      <label for="mobile-menu-toggle" class="hamburger-button" aria-label="Toggle menu">
+      <a href="/" class="logo">bau<span>flow</span></a>
+
+      <button class="hamburger" id="hamburger" aria-label="Abrir menú" aria-expanded="false">
         <span></span>
         <span></span>
         <span></span>
-      </label>
-      
-      <nav class="navbar">
+      </button>
+
+      <nav class="navbar" id="navbar">
         <ul>
-          <li><a href="/" class="active">Home</a></li>
-          <li><a href="/projects">Projects</a></li>
-          <li><button id="theme-toggle" aria-label="Toggle theme">
-            <span class="light-icon">☀️</span>
-            <span class="dark-icon">🌙</span>
-          </button></li>
+          <li><a href="/" class="active">Proyectos</a></li>
+          <li><a href="#contact">Contacto</a></li>
+          <li>
+            <button id="theme-toggle" aria-label="Cambiar tema">
+              <span class="light-icon">&#9728;</span>
+              <span class="dark-icon">&#9790;</span>
+            </button>
+          </li>
         </ul>
       </nav>
     </div>
   </header>
 
-  <!-- Main Content -->
-  <main class="container">
-    <section class="about-section">
-      <h1>About Me</h1>
-      <div class="profile-grid">
-        <!-- Foto circular agregada aquí -->
-        <div class="profile-pic-container">
-          <img src="assets/images/profile.jpg" alt="My Profile Photo" class="profile-pic">
-        </div>
-        
-        <div class="bio">
-          <p>Unity developer specializing in system architecture tools with 5+ years of experience creating robust game systems.</p>
-          <ul class="skills">
-            <li>Unity Engine</li>
-            <li>C# Programming</li>
-            <li>System Design</li>
-          </ul>
-        </div>
-        
-        <div class="social-links">
-          <a href="#" class="social-icon">GitHub</a>
-          <a href="#" class="social-icon">LinkedIn</a>
-          <a href="#" class="social-icon">Unity Store</a>
-        </div>
-      </div>
-    </section>
+  <main>
+    <div class="container">
 
-    <section class="featured-projects">
-      <h2>Featured Projects</h2>
-      <div class="projects-grid">
-        <!-- Project Card 1 - Estilo minimalista -->
-        <article class="project-card">
-          <div class="card-header">
-            <span class="version-badge">v2.1.4</span>
-            <img src="assets/icons/unity.svg" alt="Unity" class="language-icon">
-          </div>
-          <div class="card-content">
-            <h3>Save System</h3>
-            <p>Complete save/load solution for Unity games with encryption support.</p>
-            <div class="price-tag">$15.99 <span class="free-badge">FREE Demo</span></div>
-          </div>
-          <a href="/projects/save-system" class="card-link">View Details</a>
-        </article>
+      <!-- ── Proyectos ─────────────────────────────────────────── -->
+      <section class="section">
+        <p class="section-label">Portfolio</p>
+        <h2 class="section-heading">Proyectos</h2>
+        <div class="projects-grid" id="projects-grid">
+          <!-- Generado automáticamente desde /data/projects.js -->
+        </div>
+      </section>
 
-        <!-- Project Card 2 -->
-        <article class="project-card">
-          <div class="card-header">
-            <span class="version-badge">v1.0.0</span>
-            <img src="assets/icons/csharp.svg" alt="C#" class="language-icon">
-          </div>
-          <div class="card-content">
-            <h3>Inventory System</h3>
-            <p>Modular inventory framework for RPG games.</p>
-            <div class="price-tag">$12.99</div>
-          </div>
-          <a href="#" class="card-link">Coming Soon</a>
-        </article>
-      </div>
-    </section>
+      <!-- ── Contacto ──────────────────────────────────────────── -->
+      <section class="section contact-section" id="contact">
+        <p class="section-label">Contacto</p>
+        <h2 class="section-heading">Contáctame</h2>
+        <div class="contact-links">
+          <a href="#" class="contact-link">
+            <span class="contact-icon">&#9993;</span>
+            <span>Email</span>
+          </a>
+          <a href="#" class="contact-link">
+            <span class="contact-icon">in</span>
+            <span>LinkedIn</span>
+          </a>
+          <a href="#" class="contact-link">
+            <span class="contact-icon">&#9679;</span>
+            <span>GitHub</span>
+          </a>
+          <a href="#" class="contact-link">
+            <span class="contact-icon">&#9654;</span>
+            <span>Unity Asset Store</span>
+          </a>
+        </div>
+      </section>
+
+    </div>
   </main>
 
-  <!-- Footer -->
   <footer class="footer">
     <div class="container">
-      <p>© 2023 My Dev Portfolio</p>
-      <nav>
-        <a href="/privacy">Privacy Policy</a> | 
-        <a href="/contact">Contact</a>
+      <span class="footer-copy">&#169; 2026 Álvaro Bautista &mdash; bauflow</span>
+      <nav class="footer-links">
+        <a href="#contact">Contacto</a>
+        <a href="/">Proyectos</a>
       </nav>
     </div>
   </footer>
 
-  <script src="assets/js/theme-toggle.js" defer></script>
-  <script src="assets/js/hamburger-menu.js" defer></script>
+  <script src="/data/projects.js"></script>
+  <script src="/assets/js/projects-loader.js"></script>
+  <script src="/assets/js/theme-toggle.js"></script>
+  <script>
+    (function () {
+      var btn    = document.getElementById('hamburger');
+      var navbar = document.getElementById('navbar');
+      if (!btn || !navbar) return;
+
+      btn.addEventListener('click', function () {
+        var open = navbar.classList.toggle('open');
+        btn.classList.toggle('open', open);
+        btn.setAttribute('aria-expanded', open);
+      });
+
+      document.addEventListener('click', function (e) {
+        if (!btn.contains(e.target) && !navbar.contains(e.target)) {
+          navbar.classList.remove('open');
+          btn.classList.remove('open');
+          btn.setAttribute('aria-expanded', 'false');
+        }
+      });
+    })();
+  </script>
 </body>
 </html>
