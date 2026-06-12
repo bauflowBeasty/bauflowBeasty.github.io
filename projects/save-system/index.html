@@ -20,7 +20,7 @@
   <!-- ══ HEADER ════════════════════════════════════════════════ -->
   <header class="header">
     <div class="container">
-      <a href="/" class="logo">bau<span>flow</span></a>
+      <a href="/" class="logo">Beas<span>ty</span></a>
 
       <button class="hamburger" id="hamburger" data-i18n-aria="nav.openMenu" aria-label="Open menu" aria-expanded="false">
         <span></span>
@@ -264,6 +264,7 @@
             <thead><tr><th data-i18n="doc.th.method">Method</th><th data-i18n="doc.th.signature">Signature</th><th data-i18n="doc.th.notes">Notes</th></tr></thead>
             <tbody>
               <tr><td><code>Save</code> <span class="badge badge-sync">sync</span></td><td><code>bool Save(object, string, bool encrypt=false)</code></td><td data-i18n-html="doc.s3.r_n1">Wraps object in typed envelope <code>{objects:{type,data}}</code>.</td></tr>
+              <tr><td><code>SaveAsync</code> <span class="badge badge-async">async</span></td><td><code>Task&lt;bool&gt; SaveAsync(object, string, bool)</code></td><td data-i18n-html="doc.s3.r_n4">Async write via <code>StreamWriter.WriteAsync</code>. Same envelope format as <code>Save</code>.</td></tr>
               <tr><td><code>Load</code> <span class="badge badge-sync">sync</span></td><td><code>void Load(string, object target, bool decrypt=false)</code></td><td data-i18n-html="doc.s3.r_n2">Fills <code>target</code> via DataProcessor. No return &mdash; mutates existing instance.</td></tr>
               <tr><td><code>LoadAsync&lt;T&gt;</code> <span class="badge badge-async">async</span></td><td><code>Task&lt;T&gt; LoadAsync&lt;T&gt;(string, bool)</code></td><td data-i18n-html="doc.s3.r_n3">Async variant. For non-component types (deserializes to new T).</td></tr>
             </tbody>
@@ -290,6 +291,38 @@
         <h1 data-i18n="doc.s4.title">4. BeastySaveSystemAPI &mdash; Public Facade</h1>
         <p data-i18n-html="doc.s4.p1"><code>BeastySaveSystemAPI</code> is a <strong>static class</strong> that acts as the sole public entry point for all save/load operations. Callers never instantiate internal engine classes directly. All methods require a <code>SaveFileInfo</code> instance.</p>
 
+        <h2 data-i18n="doc.s4.h2_choosing">Choosing the Right Save Type</h2>
+        <p data-i18n-html="doc.s4.choosing_intro">The three save strategies differ in how they behave on <strong>load</strong>. Choosing the wrong one can lead to stale references in your code.</p>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th data-i18n="doc.s4.th_saveType">Save Type</th><th data-i18n="doc.s4.th_instanceOnLoad">Instance on Load</th><th data-i18n="doc.s4.th_objectsPerFile">Objects per file</th><th data-i18n="doc.s4.th_bestFor">Best for</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><code>Save</code> / <code>Load&lt;T&gt;</code></td>
+                <td data-i18n-html="doc.s4.c1_instance"><strong>New instance</strong></td>
+                <td>1</td>
+                <td data-i18n="doc.s4.c1_bestfor">Plain C# data classes. No other code holds a reference to the loaded object.</td>
+              </tr>
+              <tr>
+                <td><code>SaveRef</code> / <code>LoadRef</code></td>
+                <td data-i18n-html="doc.s4.c2_instance"><strong>Existing instance</strong> (in-place)</td>
+                <td>1</td>
+                <td data-i18n="doc.s4.c2_bestfor">MonoBehaviours, singletons, or any object whose reference is shared across multiple systems.</td>
+              </tr>
+              <tr>
+                <td><code>Save_ObjectList</code> / <code>LoadAndMergeList</code></td>
+                <td data-i18n-html="doc.s4.c3_instance"><strong>Existing instances</strong> (in-place, per element)</td>
+                <td data-i18n="doc.s4.c3_count">N (mixed types)</td>
+                <td data-i18n="doc.s4.c3_bestfor">Full game save: multiple systems (player, inventory, settings) bundled in a single file.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="callout warn">
+          <span class="callout-icon">&#9888;</span>
+          <div data-i18n-html="doc.s4.choosing_warn"><strong>Critical difference &mdash; <code>Load&lt;T&gt;</code> vs <code>LoadRef</code>:</strong> <code>Load&lt;T&gt;</code> deserializes into a <em>new object</em>. Any other code still holding a reference to the old object will see stale data &mdash; you must reassign everywhere. <code>LoadRef</code> uses <code>JsonConvert.PopulateObject</code> to update the properties of your <em>existing</em> instance. All references throughout your code automatically see the updated values. This is the only correct choice for Unity components, since Unity controls their lifecycle and you cannot <em>new</em> a MonoBehaviour.</div>
+        </div>
+
         <h2 data-i18n="doc.s4.h2_1">4.1 Reference-based Save / Load (recommended for Unity components)</h2>
         <div class="table-wrap">
           <table>
@@ -299,6 +332,10 @@
               <tr><td><code>SaveRef_Encrypted</code> <span class="badge badge-enc">enc</span></td><td><code>bool</code></td><td><code>object data, string fileName, SaveFileInfo info</code></td><td data-i18n="doc.s4.r2_d">Sync AES-256 save with typed envelope.</td></tr>
               <tr><td><code>LoadRef</code></td><td><code>void</code></td><td><code>string fileName, object target, SaveFileInfo info</code></td><td data-i18n="doc.s4.r3_d">Sync in-place load into existing object. Mutates target.</td></tr>
               <tr><td><code>LoadRef_Encrypted</code> <span class="badge badge-enc">enc</span></td><td><code>void</code></td><td><code>string fileName, object target, SaveFileInfo info</code></td><td data-i18n="doc.s4.r4_d">Sync encrypted in-place load.</td></tr>
+              <tr><td><code>SaveRefAsync</code> <span class="badge badge-async">async</span></td><td><code>Task&lt;bool&gt;</code></td><td><code>object data, string fileName, SaveFileInfo info</code></td><td data-i18n="doc.s4.r5_d">Async save using typed envelope.</td></tr>
+              <tr><td><code>SaveRefAsync_Encrypted</code> <span class="badge badge-async">async</span> <span class="badge badge-enc">enc</span></td><td><code>Task&lt;bool&gt;</code></td><td><code>object data, string fileName, SaveFileInfo info</code></td><td data-i18n="doc.s4.r6_d">Async AES-256 save with typed envelope.</td></tr>
+              <tr><td><code>LoadRefAsync&lt;T&gt;</code> <span class="badge badge-async">async</span></td><td><code>Task&lt;T&gt;</code></td><td><code>string fileName, SaveFileInfo info</code></td><td data-i18n="doc.s4.r7_d">Async load. Deserializes to a new T instance.</td></tr>
+              <tr><td><code>LoadRefAsync_Encrypted&lt;T&gt;</code> <span class="badge badge-async">async</span> <span class="badge badge-enc">enc</span></td><td><code>Task&lt;T&gt;</code></td><td><code>string fileName, SaveFileInfo info</code></td><td data-i18n="doc.s4.r8_d">Async encrypted load. Returns new T.</td></tr>
             </tbody>
           </table>
         </div>
@@ -349,6 +386,13 @@ PlayerData loaded = BeastySaveSystemAPI.Load&lt;PlayerData&gt;("player_data", in
 // ── Reference-based (for MonoBehaviours) ─────────────────────────────────
 BeastySaveSystemAPI.SaveRef(saveObjectModel, "Slot1", info);
 BeastySaveSystemAPI.LoadRef("Slot1", saveObjectModel, info);  // in-place
+
+// ── Reference-based async ────────────────────────────────────────────────
+await BeastySaveSystemAPI.SaveRefAsync(saveObjectModel, "Slot1", info);
+await BeastySaveSystemAPI.SaveRefAsync_Encrypted(saveObjectModel, "Slot1_enc", info);
+// Returns new T — use when you don't need to keep the original reference alive
+SaveObjectModel loaded = await BeastySaveSystemAPI.LoadRefAsync&lt;SaveObjectModel&gt;("Slot1", info);
+SaveObjectModel loadedEnc = await BeastySaveSystemAPI.LoadRefAsync_Encrypted&lt;SaveObjectModel&gt;("Slot1_enc", info);
 
 // ── Encrypted async ───────────────────────────────────────────────────────
 await BeastySaveSystemAPI.SaveAsync_Encrypted(pd, "player_enc", info);
@@ -916,9 +960,13 @@ BeastySaveSystemAPI.LoadRef(...)</pre>
             <thead><tr><th data-i18n="doc.th.method">Method</th><th data-i18n="doc.th.notes">Enc</th><th>Async</th><th data-i18n="doc.th.ret">Return</th></tr></thead>
             <tbody>
               <tr><td><code>SaveRef</code></td><td></td><td></td><td><code>bool</code></td></tr>
+              <tr><td><code>SaveRefAsync</code></td><td></td><td>&#10003;</td><td><code>Task&lt;bool&gt;</code></td></tr>
               <tr><td><code>SaveRef_Encrypted</code></td><td>&#10003;</td><td></td><td><code>bool</code></td></tr>
+              <tr><td><code>SaveRefAsync_Encrypted</code></td><td>&#10003;</td><td>&#10003;</td><td><code>Task&lt;bool&gt;</code></td></tr>
               <tr><td><code>LoadRef</code></td><td></td><td></td><td><code>void</code></td></tr>
+              <tr><td><code>LoadRefAsync&lt;T&gt;</code></td><td></td><td>&#10003;</td><td><code>Task&lt;T&gt;</code></td></tr>
               <tr><td><code>LoadRef_Encrypted</code></td><td>&#10003;</td><td></td><td><code>void</code></td></tr>
+              <tr><td><code>LoadRefAsync_Encrypted&lt;T&gt;</code></td><td>&#10003;</td><td>&#10003;</td><td><code>Task&lt;T&gt;</code></td></tr>
               <tr><td><code>Save</code></td><td></td><td></td><td><code>bool</code></td></tr>
               <tr><td><code>SaveAsync</code></td><td></td><td>&#10003;</td><td><code>Task&lt;bool&gt;</code></td></tr>
               <tr><td><code>Save_Encrypted</code></td><td>&#10003;</td><td></td><td><code>bool</code></td></tr>
@@ -959,6 +1007,10 @@ BeastySaveSystemAPI.LoadRef(...)</pre>
     </div>
   </footer>
 
+  <script src="/data/translations/en/shared.js"></script>
+  <script src="/data/translations/en/save-system.js"></script>
+  <script src="/data/translations/es/shared.js"></script>
+  <script src="/data/translations/es/save-system.js"></script>
   <script src="/data/translations.js"></script>
   <script src="/assets/js/i18n.js"></script>
   <script src="/assets/js/theme-toggle.js"></script>

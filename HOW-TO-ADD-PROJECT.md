@@ -68,6 +68,84 @@ projects/
 
 ---
 
+## Paso 3: Agregar las traducciones del nuevo proyecto
+
+Las traducciones están modularizadas en `data/translations/`. Cada proyecto tiene un archivo por idioma.
+
+### 3.1 Crear los archivos de traducción
+
+Crea dos archivos nuevos (uno por idioma):
+
+```
+data/translations/en/inventory-system.js
+data/translations/es/inventory-system.js
+```
+
+**Estructura de cada archivo** — en inglés (`en/inventory-system.js`):
+
+```js
+var _T_EN_INVENTORY = {
+  // Usa la clave que quieras; aquí "inv" como ejemplo
+  inv: {
+    cover: {
+      sub1: "Technical Documentation",
+      // ... resto de claves de portada
+    },
+    sidebar: {
+      heading: "Contents",
+      s1: "1. Overview",
+      // ...
+    },
+    s1: {
+      title: "1. Overview",
+      // ...
+    }
+    // ...
+  }
+};
+```
+
+En español (`es/inventory-system.js`), la misma estructura con variable `_T_ES_INVENTORY` y textos traducidos.
+
+### 3.2 Registrar en el ensamblador
+
+Abre `data/translations.js` y agrega las nuevas variables al `Object.assign` de cada idioma:
+
+```js
+var TRANSLATIONS = {
+  en: Object.assign({},
+    typeof _T_EN_SHARED    !== 'undefined' ? _T_EN_SHARED    : {},
+    typeof _T_EN_SAVE      !== 'undefined' ? _T_EN_SAVE      : {},
+    typeof _T_EN_DL        !== 'undefined' ? _T_EN_DL        : {},
+    typeof _T_EN_INVENTORY !== 'undefined' ? _T_EN_INVENTORY : {}  // ← nuevo
+  ),
+  es: Object.assign({},
+    typeof _T_ES_SHARED    !== 'undefined' ? _T_ES_SHARED    : {},
+    typeof _T_ES_SAVE      !== 'undefined' ? _T_ES_SAVE      : {},
+    typeof _T_ES_DL        !== 'undefined' ? _T_ES_DL        : {},
+    typeof _T_ES_INVENTORY !== 'undefined' ? _T_ES_INVENTORY : {}  // ← nuevo
+  )
+};
+```
+
+### 3.3 Cargar los scripts en la página del proyecto
+
+En `projects/inventory-system/index.html`, reemplaza el bloque de scripts de traducciones para incluir los módulos nuevos antes del ensamblador:
+
+```html
+<script src="/data/translations/en/shared.js"></script>
+<script src="/data/translations/en/inventory-system.js"></script>
+<script src="/data/translations/es/shared.js"></script>
+<script src="/data/translations/es/inventory-system.js"></script>
+<script src="/data/translations.js"></script>
+<script src="/assets/js/i18n.js"></script>
+```
+
+> **Nota:** `shared.js` contiene nav, footer y home — siempre se carga en todas las páginas.
+> Los módulos del proyecto solo se cargan en la página de ese proyecto.
+
+---
+
 ## Para cambiar los colores del sitio
 
 Abre `assets/css/base/variables.css`.
