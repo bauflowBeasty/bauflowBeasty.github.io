@@ -40,12 +40,7 @@ main {
   gap: 1.5rem;
 }
 
-/* ─── Contact ────────────────────────────────────────────────── */
-.contact-section {
-  padding-bottom: 4rem;
-  border-top: 1px solid var(--border);
-}
-
+/* ─── Contact links ──────────────────────────────────────────── */
 .contact-links {
   display: flex;
   flex-wrap: wrap;
@@ -157,6 +152,28 @@ main {
 .doc-cover-meta .k:last-child,
 .doc-cover-meta .v:last-child {
   border-bottom: none;
+}
+
+.doc-cover-cta {
+  margin-top: 1.5rem;
+}
+
+.doc-cover-btn {
+  display: inline-block;
+  padding: 0.6rem 2rem;
+  background: var(--accent);
+  color: var(--text-inv);
+  font-weight: 700;
+  font-size: 0.9rem;
+  border-radius: var(--radius);
+  transition: opacity var(--transition), transform var(--transition);
+}
+
+.doc-cover-btn:hover {
+  opacity: 0.85;
+  transform: translateY(-2px);
+  text-decoration: none;
+  color: var(--text-inv);
 }
 
 /* ─── Divider ────────────────────────────────────────────────── */

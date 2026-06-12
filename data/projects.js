@@ -14,9 +14,9 @@ var PROJECTS = [
     },
     tags:        ["Unity", "C#", "Plugin"],
     price:       "$9.99",
-    freeDemo:    true,
+    freeDemo:    false,
     docUrl:      "/projects/save-system/",
-    storeUrl:    "#"
+    storeUrl:    "https://docusaurus.io/"
   }
 
  ,{

@@ -81,6 +81,12 @@
   border-radius: 4px;
 }
 
+.card-actions {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
 .card-link {
   font-size: 0.82rem;
   font-weight: 600;
@@ -95,4 +101,15 @@
   background: var(--accent);
   color: var(--text-inv);
   text-decoration: none;
+}
+
+.card-link--store {
+  background: var(--accent);
+  color: var(--text-inv);
+  border-color: var(--accent);
+}
+
+.card-link--store:hover {
+  background: transparent;
+  color: var(--accent);
 }

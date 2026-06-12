@@ -6,7 +6,28 @@
   transition: background-color var(--transition), border-color var(--transition);
 }
 
-.footer .container {
+/* ─── Fila de contacto ───────────────────────────────────────── */
+.footer-contact {
+  padding-bottom: 1.25rem;
+  margin-bottom: 1.25rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.footer-contact-label {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent2);
+  margin-bottom: 0.6rem;
+}
+
+.footer-contact .contact-links {
+  flex-wrap: wrap;
+}
+
+/* ─── Fila inferior (copyright + nav) ───────────────────────── */
+.footer-bottom {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -36,7 +57,7 @@
 }
 
 @media (max-width: 600px) {
-  .footer .container {
+  .footer-bottom {
     flex-direction: column;
     align-items: flex-start;
   }

@@ -31,7 +31,7 @@
       <nav class="navbar" id="navbar">
         <ul>
           <li><a href="/" data-i18n="nav.projects">Projects</a></li>
-          <li><a href="/#contact" data-i18n="nav.contact">Contact</a></li>
+          <li><a href="#contact" data-i18n="nav.contact">Contact</a></li>
           <li>
             <button id="theme-toggle" aria-label="Toggle theme">
               <span class="light-icon">&#9728;</span>
@@ -70,6 +70,10 @@
         <div class="v">Task-based (C# async / await)</div>
         <div class="k" data-i18n="doc.cover.kTypes">Unity Types</div>
         <div class="v" data-i18n-html="doc.cover.vTypes">21 built-in converters (Transform, Colliders, Camera, Light, Texture2D&hellip;)</div>
+      </div>
+
+      <div class="doc-cover-cta">
+        <a href="#" class="doc-cover-btn" data-i18n="home.buyNow">Get on Store</a>
       </div>
     </div>
   </div>
@@ -997,13 +1001,35 @@ BeastySaveSystemAPI.LoadRef(...)</pre>
     </div><!-- .doc-content -->
   </div><!-- .doc-layout -->
 
-  <footer class="footer">
+  <footer class="footer" id="contact">
     <div class="container">
-      <span class="footer-copy">&#169; 2026 Álvaro Bautista &mdash; bauflow</span>
-      <nav class="footer-links">
-        <a href="/">&#8592; <span data-i18n="footer.projects">Projects</span></a>
-        <a href="/#contact" data-i18n="footer.contact">Contact</a>
-      </nav>
+      <div class="footer-contact">
+        <p class="footer-contact-label" data-i18n="home.contactLabel">Contact</p>
+        <div class="contact-links">
+          <a href="mailto:bauflowbeasty+web@gmail.com" class="contact-link">
+            <span class="contact-icon">&#9993;</span>
+            <span>Email</span>
+          </a>
+          <!--<a href="#" class="contact-link">
+            <span class="contact-icon">in</span>
+            <span>LinkedIn</span>
+          </a>
+          <a href="#" class="contact-link">
+            <span class="contact-icon">&#9679;</span>
+            <span>GitHub</span>
+          </a>
+          <a href="#" class="contact-link">
+            <span class="contact-icon">&#9654;</span>
+            <span>Unity Asset Store</span>
+          </a>-->
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span class="footer-copy">&#169; 2026 Álvaro Bautista &mdash; bauflow</span>
+        <nav class="footer-links">
+          <a href="/">&#8592; <span data-i18n="footer.projects">Projects</span></a>
+        </nav>
+      </div>
     </div>
   </footer>
 

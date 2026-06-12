@@ -11,6 +11,10 @@
       ? TRANSLATIONS[lang].home.viewDocs
       : (lang === 'es' ? 'Ver Docs' : 'View Docs');
 
+    var buyNow = (typeof TRANSLATIONS !== 'undefined' && TRANSLATIONS[lang])
+      ? TRANSLATIONS[lang].home.buyNow
+      : (lang === 'es' ? 'En la Tienda' : 'Get on Store');
+
     var freeLabel = 'FREE Demo';
 
     grid.innerHTML = PROJECTS.map(function (p) {
@@ -36,7 +40,12 @@
         '  <p class="card-desc">' + desc + '</p>',
         '  <div class="card-footer">',
         '    <div class="price-tag">' + p.price + freeDemo + '</div>',
-        '    <a href="' + p.docUrl + '" class="card-link">' + viewDocs + '</a>',
+        '    <div class="card-actions">',
+        (p.storeUrl && p.storeUrl !== '#'
+          ? '      <a href="' + p.storeUrl + '" class="card-link card-link--store" target="_blank" rel="noopener">' + buyNow + '</a>'
+          : ''),
+        '      <a href="' + p.docUrl + '" class="card-link">' + viewDocs + '</a>',
+        '    </div>',
         '  </div>',
         '</article>'
       ].join('\n');

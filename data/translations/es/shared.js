@@ -13,6 +13,7 @@ var _T_ES_SHARED = {
     projects:       "Proyectos",
     contactLabel:   "Contacto",
     contactHeading: "Contáctame",
-    viewDocs:       "Ver Docs"
+    viewDocs:       "Ver Docs",
+    buyNow:         "En la Tienda"
   }
 };
