@@ -61,7 +61,8 @@ var _T_ES_DL = {
       h2b:   "2b. Switch Maestro &mdash; <code>IsEnabled</code>",
       p3:    "Un único booleano estático controla toda la salida a la vez. Setearlo a <code>false</code> silencia cada llamada de log en todo el proyecto sin eliminar ni comentar ningún código:",
       tip:   "<strong>✅ Patrón recomendado</strong> Setea <code>IsEnabled = !Application.isEditor</code> o vincúlalo a un flag de debug build para que los logs se supriman automáticamente en producción.",
-      note:  "<strong>Gate por llamada</strong> Cada método acepta también un parámetro <code>canPrint</code> (ver abajo) que actúa como switch local para esa llamada específica, independientemente de <code>IsEnabled</code>. Ambas condiciones deben ser <code>true</code> para que aparezca un mensaje."
+      note:  "<strong>Gate por llamada</strong> Cada método acepta también un parámetro <code>canPrint</code> (ver abajo) que actúa como switch local para esa llamada específica, independientemente de <code>IsEnabled</code>. Ambas condiciones deben ser <code>true</code> para que aparezca un mensaje.",
+      fepm:  "<strong>ℹ️ Fast Enter Play Mode (Unity 6.6+)</strong> <code>IsEnabled</code> se reinicia automáticamente a <code>true</code> al inicio de cada sesión de Play &mdash; incluso con el domain reload desactivado (Fast Enter Play Mode, el ajuste por defecto desde Unity 6.6). Esto significa que no puedes &ldquo;setearlo una vez&rdquo; en una sesión anterior y esperar que el valor persista: si quieres los logs desactivados, setea <code>IsEnabled = false</code> en tu propio código de inicialización (p.&nbsp;ej. en <code>Awake()</code>), que se ejecuta después del reinicio."
     },
     s3: {
       title:          "3. Referencia de API Pública",
@@ -152,7 +153,7 @@ var _T_ES_DL = {
       unity_e:    "También recibe todos los logs (via <code>Debug</code> internamente)",
       unity_b:    "Archivo de log estándar de Unity / salida de <code>Debug.Log</code>",
       enabled_f:  "<code>IsEnabled</code>",
-      enabled_e:  "Respetado &mdash; setear a <code>false</code> para silenciar en el editor también",
+      enabled_e:  "Respetado &mdash; se reinicia a <code>true</code> en cada sesión de Play (compatible con Fast Enter Play Mode)",
       enabled_b:  "Respetado &mdash; recomendado setear <code>false</code> en producción",
       canprint_f: "<code>canPrint</code> parameter",
       canprint_e: "Respetado por llamada",

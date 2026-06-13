@@ -16,7 +16,7 @@ var PROJECTS = [
     price:       "$9.99",
     freeDemo:    false,
     docUrl:      "/projects/save-system/",
-    storeUrl:    "https://docusaurus.io/"
+    storeUrl:    ""
   }
 
  ,{
@@ -31,7 +31,7 @@ var PROJECTS = [
     price:       "$4.99",
     freeDemo:    false,
     docUrl:      "/projects/debug-logger/",
-    storeUrl:    "https://olympusxyz.com/"
+    storeUrl:    ""
   }
 
   /* Para agregar un nuevo proyecto, copia el bloque de arriba

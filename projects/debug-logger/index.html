@@ -175,6 +175,15 @@ BeastyDebugLogger.<span class="tp">IsEnabled</span> = <span class="kw">false</sp
           for that specific call, independently of <code>IsEnabled</code>. Both conditions must be
           <code>true</code> for a message to appear.</span>
         </div>
+
+        <div class="callout callout-info">
+          <span data-i18n-html="dl.s2.fepm"><strong>ℹ️ Fast Enter Play Mode (Unity 6.6+)</strong>
+          <code>IsEnabled</code> automatically resets to <code>true</code> at the start of every
+          Play session — even when domain reload is disabled (Fast Enter Play Mode, the default
+          since Unity 6.6). This means you cannot "set it once" in a previous session and expect
+          the value to persist: if you want logs disabled, set <code>IsEnabled = false</code> in
+          your own initialization code (e.g. in <code>Awake()</code>), which runs after the reset.</span>
+        </div>
       </section>
 
       <hr class="divider">
@@ -635,7 +644,7 @@ BeastyDebugLogger.<span class="fn">PrintLongMessage</span>(jsonBlob, label: <spa
               </tr>
               <tr>
                 <td data-i18n-html="dl.s5.enabled_f"><code>IsEnabled</code></td>
-                <td data-i18n-html="dl.s5.enabled_e">Respected — set to <code>false</code> to silence in editor too</td>
+                <td data-i18n-html="dl.s5.enabled_e">Respected — resets to <code>true</code> on every Play session (Fast Enter Play Mode safe)</td>
                 <td data-i18n-html="dl.s5.enabled_b">Respected — recommended to set <code>false</code> in production</td>
               </tr>
               <tr>

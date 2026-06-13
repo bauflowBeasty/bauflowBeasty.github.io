@@ -61,7 +61,8 @@ var _T_EN_DL = {
       h2b:   "2b. Master Switch &mdash; <code>IsEnabled</code>",
       p3:    "A single static boolean controls all output at once. Set it to <code>false</code> to silence every log call across your entire project without removing or commenting out any code:",
       tip:   "<strong>✅ Recommended pattern</strong> Set <code>IsEnabled = !Application.isEditor</code> or tie it to a debug build flag so logs are automatically suppressed in production.",
-      note:  "<strong>Per-call gate</strong> Every method also accepts a <code>canPrint</code> parameter (see below) which acts as a local switch for that specific call, independently of <code>IsEnabled</code>. Both conditions must be <code>true</code> for a message to appear."
+      note:  "<strong>Per-call gate</strong> Every method also accepts a <code>canPrint</code> parameter (see below) which acts as a local switch for that specific call, independently of <code>IsEnabled</code>. Both conditions must be <code>true</code> for a message to appear.",
+      fepm:  "<strong>ℹ️ Fast Enter Play Mode (Unity 6.6+)</strong> <code>IsEnabled</code> automatically resets to <code>true</code> at the start of every Play session &mdash; even when domain reload is disabled (Fast Enter Play Mode, the default since Unity 6.6). This means you cannot &ldquo;set it once&rdquo; in a previous session and expect the value to persist: if you want logs disabled, set <code>IsEnabled = false</code> in your own initialization code (e.g. in <code>Awake()</code>), which runs after the reset."
     },
     s3: {
       title:          "3. Public API Reference",
@@ -152,7 +153,7 @@ var _T_EN_DL = {
       unity_e:    "Also receives all logs (via <code>Debug</code> internally)",
       unity_b:    "Standard Unity log file / <code>Debug.Log</code> output",
       enabled_f:  "<code>IsEnabled</code>",
-      enabled_e:  "Respected &mdash; set to <code>false</code> to silence in editor too",
+      enabled_e:  "Respected &mdash; resets to <code>true</code> on every Play session (Fast Enter Play Mode safe)",
       enabled_b:  "Respected &mdash; recommended to set <code>false</code> in production",
       canprint_f: "<code>canPrint</code> parameter",
       canprint_e: "Respected per-call",
