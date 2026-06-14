@@ -17,36 +17,7 @@
 </head>
 <body>
 
-  <!-- ══ HEADER ════════════════════════════════════════════════ -->
-  <header class="header">
-    <div class="container">
-      <a href="/" class="logo">Beas<span>ty</span></a>
-
-      <button class="hamburger" id="hamburger" data-i18n-aria="nav.openMenu" aria-label="Open menu" aria-expanded="false">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
-
-      <nav class="navbar" id="navbar">
-        <ul>
-          <li><a href="/" data-i18n="nav.projects">Projects</a></li>
-          <li><a href="#contact" data-i18n="nav.contact">Contact</a></li>
-          <li>
-            <button id="theme-toggle" aria-label="Toggle theme">
-              <span class="light-icon">&#9728;</span>
-              <span class="dark-icon">&#9790;</span>
-            </button>
-          </li>
-          <li class="lang-switcher">
-            <button data-lang-btn="en">EN</button>
-            <span>|</span>
-            <button data-lang-btn="es">ES</button>
-          </li>
-        </ul>
-      </nav>
-    </div>
-  </header>
+  <div id="site-header"></div>
 
   <!-- ══ COVER ═════════════════════════════════════════════════ -->
   <div class="doc-cover">
@@ -1033,6 +1004,7 @@ BeastySaveSystemAPI.LoadRef(...)</pre>
     </div>
   </footer>
 
+  <script src="/assets/js/components/header.js"></script>
   <script src="/data/translations/en/shared.js"></script>
   <script src="/data/translations/en/save-system.js"></script>
   <script src="/data/translations/es/shared.js"></script>
@@ -1041,26 +1013,5 @@ BeastySaveSystemAPI.LoadRef(...)</pre>
   <script src="/assets/js/i18n.js"></script>
   <script src="/assets/js/theme-toggle.js"></script>
   <script src="/assets/js/doc-sidebar.js" defer></script>
-  <script>
-    (function () {
-      var btn    = document.getElementById('hamburger');
-      var navbar = document.getElementById('navbar');
-      if (!btn || !navbar) return;
-
-      btn.addEventListener('click', function () {
-        var open = navbar.classList.toggle('open');
-        btn.classList.toggle('open', open);
-        btn.setAttribute('aria-expanded', open);
-      });
-
-      document.addEventListener('click', function (e) {
-        if (!btn.contains(e.target) && !navbar.contains(e.target)) {
-          navbar.classList.remove('open');
-          btn.classList.remove('open');
-          btn.setAttribute('aria-expanded', 'false');
-        }
-      });
-    })();
-  </script>
 </body>
 </html>

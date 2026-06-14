@@ -23,11 +23,17 @@
   text-decoration: none !important;
 }
 
-.logo-svg {
+.logo-img {
   width: 36px;
   height: 36px;
   flex-shrink: 0;
 }
+
+/* Show the correct logo version per theme */
+.logo-img--light             { display: none; }
+.logo-img--dark              { display: block; }
+[data-theme="light"] .logo-img--dark  { display: none; }
+[data-theme="light"] .logo-img--light { display: block; }
 
 .logo-text {
   font-size: 1.1rem;
@@ -38,15 +44,6 @@
 
 .logo-text span {
   color: var(--text);
-}
-
-/* SVG dark-group color adapts to theme */
-.logo-dark path {
-  fill: #1a1a1a;
-}
-
-[data-theme="dark"] .logo-dark path {
-  fill: #f0f0f0;
 }
 
 /* ─── Desktop nav ─────────────────────────────────────────────── */
