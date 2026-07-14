@@ -1,0 +1,1 @@
+﻿Screenshots for this product go here. See ../../SCREENSHOTS.md for the exact filenames and what each one should show.

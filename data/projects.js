@@ -21,7 +21,7 @@ var PROJECTS = [
 
  ,{
     id:          "debug-logger",
-    name:        "BeastyDebugLogger",
+    name:        "BeastyConsole",
     version:     "1.0.0",
     description: {
       en: "Color-coded, emoji-enhanced logging system for Unity with an integrated custom console window. 12 semantic log levels, master switch, per-call conditional printing, and one-click IDE navigation.",
