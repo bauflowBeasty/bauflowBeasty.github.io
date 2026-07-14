@@ -1,0 +1,105 @@
+---
+import { render, type CollectionEntry } from 'astro:content';
+import BaseLayout from './BaseLayout.astro';
+import DocSidebar from '../components/DocSidebar.astro';
+import TableOfContents from '../components/TableOfContents.astro';
+import BuyCta from '../components/BuyCta.astro';
+import { getProduct } from '../data/products';
+import { SIDEBARS } from '../data/sidebars';
+import { t, type Lang } from '../data/ui-strings';
+import '../styles/doc.css';
+
+interface Props {
+  entry: CollectionEntry<'docs'>;
+  lang: Lang;
+}
+
+const { entry, lang } = Astro.props;
+const { Content, headings } = await render(entry);
+
+const rel = entry.id.replace(`${lang}/`, ''); // beasty-x/guides/page | beasty-x/index
+const productId = rel.split('/')[0] as keyof typeof SIDEBARS;
+const product = getProduct(productId)!;
+const pageSlug = rel.replace(`${productId}/`, ''); // guides/page | index
+
+const currentPath = Astro.url.pathname;
+const altHref = lang === 'en' ? `/es${currentPath}` : currentPath.replace(/^\/es/, '') || '/';
+
+// Prev/next from the sidebar reading order (overview first).
+const flat = ['index', ...SIDEBARS[productId].flatMap((g) => g.items)];
+const prefix = lang === 'es' ? '/es' : '';
+const hrefFor = (s: string) =>
+  s === 'index' ? `${prefix}/docs/${productId}/` : `${prefix}/docs/${productId}/${s}/`;
+const idx = flat.indexOf(pageSlug === 'index' ? 'index' : pageSlug);
+const prev = idx > 0 ? flat[idx - 1] : null;
+const next = idx >= 0 && idx < flat.length - 1 ? flat[idx + 1] : null;
+
+// Machine-style breadcrumb: the brand's signature texture in the docs.
+const crumb = `${productId} / ${pageSlug === 'index' ? 'README' : pageSlug.replace(/\//g, ' / ')}.md`;
+---
+
+<BaseLayout
+  title={`${entry.data.title} — ${product.name}`}
+  description={entry.data.description ?? product.tagline[lang]}
+  lang={lang}
+  altHref={altHref}
+>
+  <div class="doc-shell container">
+    <button class="drawer-toggle" data-drawer-toggle aria-expanded="false" aria-controls="doc-sidebar">
+      <span aria-hidden="true">☰</span>
+      {t(lang, 'docs.menu')}
+    </button>
+
+    <aside class="doc-sidebar-col" id="doc-sidebar">
+      <div id="search" class="doc-search"></div>
+      <DocSidebar productId={productId} lang={lang} currentPath={currentPath} />
+    </aside>
+
+    <article class="doc-content" lang={lang} data-pagefind-body data-pagefind-meta={`product:${product.name}`}>
+      <p class="machine doc-crumb">{crumb}</p>
+      <h1>{entry.data.title}</h1>
+      <BuyCta product={product} lang={lang} />
+      <div class="prose">
+        <Content />
+      </div>
+      <nav class="doc-pager" aria-label="Pagination">
+        {
+          prev !== null ? (
+            <a href={hrefFor(prev)} rel="prev">
+              ← {t(lang, 'docs.previous')}
+            </a>
+          ) : (
+            <span />
+          )
+        }
+        {
+          next !== null && (
+            <a href={hrefFor(next)} rel="next">
+              {t(lang, 'docs.next')} →
+            </a>
+          )
+        }
+      </nav>
+    </article>
+
+    <aside class="doc-toc-col">
+      <TableOfContents headings={headings} lang={lang} />
+    </aside>
+  </div>
+</BaseLayout>
+
+<script>
+  // Mobile drawer
+  const toggle = document.querySelector('[data-drawer-toggle]');
+  toggle?.addEventListener('click', () => {
+    const open = document.body.classList.toggle('drawer-open');
+    toggle.setAttribute('aria-expanded', String(open));
+  });
+
+  // Screenshots that are not shot yet: hide the broken-image placeholder.
+  document.querySelectorAll('.prose img').forEach((img) => {
+    img.addEventListener('error', () => {
+      (img.closest('p, figure') ?? img).remove();
+    });
+  });
+</script>

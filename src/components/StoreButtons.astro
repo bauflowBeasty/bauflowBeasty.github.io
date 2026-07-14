@@ -1,0 +1,77 @@
+---
+import type { Product } from '../data/products';
+import { t, type Lang } from '../data/ui-strings';
+
+interface Props {
+  product: Product;
+  lang: Lang;
+  compact?: boolean;
+}
+
+const { product, lang, compact = false } = Astro.props;
+---
+
+<div class:list={['store-buttons', { compact }]}>
+  {
+    product.storeLinks.map((link) =>
+      link.url ? (
+        <a class="store-btn" href={link.url} rel="noopener">
+          {link.label}
+        </a>
+      ) : (
+        <span class="store-btn disabled" aria-disabled="true" title={t(lang, 'product.comingSoon')}>
+          {link.label}
+          <small>{t(lang, 'product.comingSoon')}</small>
+        </span>
+      )
+    )
+  }
+</div>
+
+<style>
+  .store-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+  }
+
+  .store-btn {
+    display: inline-flex;
+    align-items: baseline;
+    gap: var(--space-2);
+    padding: var(--space-2) var(--space-4);
+    border-radius: var(--radius-md);
+    background: var(--accent-strong);
+    color: var(--accent-on);
+    font-weight: 600;
+    font-size: var(--text-sm);
+    line-height: 1.4;
+    transition: filter var(--dur-fast) var(--ease-out);
+  }
+
+  .store-btn:hover {
+    text-decoration: none;
+    filter: brightness(1.12);
+  }
+
+  .store-btn.disabled {
+    background: var(--surface-raised);
+    color: var(--text-muted);
+    border: 1px solid var(--border);
+    cursor: default;
+  }
+
+  .store-btn.disabled small {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--accent-text);
+  }
+
+  .compact .store-btn {
+    padding: var(--space-1) var(--space-3);
+    font-size: var(--text-xs);
+  }
+</style>

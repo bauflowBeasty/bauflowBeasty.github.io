@@ -1,0 +1,144 @@
+---
+import { getCollection } from 'astro:content';
+import { SIDEBARS } from '../data/sidebars';
+import { PRODUCTS } from '../data/products';
+import { t, type Lang } from '../data/ui-strings';
+
+interface Props {
+  productId: keyof typeof SIDEBARS;
+  lang: Lang;
+  /** Site path of the page being rendered, used to mark the active item. */
+  currentPath: string;
+}
+
+const { productId, lang, currentPath } = Astro.props;
+const prefix = lang === 'es' ? '/es' : '';
+const groups = SIDEBARS[productId];
+
+// slug -> title lookup for this product+lang, from page frontmatter
+const entries = await getCollection('docs', (e) => e.id.startsWith(`${lang}/${productId}/`));
+const titles = new Map(
+  entries.map((e) => [e.id.replace(`${lang}/${productId}/`, ''), e.data.title])
+);
+
+const hrefFor = (item: string) => `${prefix}/docs/${productId}/${item}/`;
+const isActive = (href: string) => currentPath.replace(/\/$/, '') === href.replace(/\/$/, '');
+const overviewHref = `${prefix}/docs/${productId}/`;
+---
+
+<nav class="doc-sidebar" aria-label={t(lang, 'nav.docs')}>
+  <div class="product-switch">
+    {
+      PRODUCTS.map((p) => (
+        <a
+          href={`${prefix}${p.docsEntry}`}
+          class:list={{ current: p.id === productId }}
+          aria-current={p.id === productId ? 'true' : undefined}
+        >
+          {p.name.replace('Beasty ', '')}
+        </a>
+      ))
+    }
+  </div>
+
+  <a class="sidebar-item overview" href={overviewHref} aria-current={isActive(overviewHref) ? 'page' : undefined}>
+    {t(lang, 'docs.overview')}
+  </a>
+
+  {
+    groups.map((group) => (
+      <section class="sidebar-group">
+        <h3 class="machine">{group.label[lang]}</h3>
+        <ul>
+          {group.items.map((item) => {
+            const href = hrefFor(item);
+            return (
+              <li>
+                <a class="sidebar-item" href={href} aria-current={isActive(href) ? 'page' : undefined}>
+                  {titles.get(item) ?? item}
+                </a>
+              </li>
+            );
+          })}
+        </ul>
+      </section>
+    ))
+  }
+</nav>
+
+<style>
+  .doc-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    font-size: var(--text-sm);
+  }
+
+  .product-switch {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    background: var(--surface);
+  }
+
+  .product-switch a {
+    padding: var(--space-2) var(--space-3);
+    color: var(--text-muted);
+    font-weight: 500;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .product-switch a:last-child {
+    border-bottom: none;
+  }
+
+  .product-switch a:hover {
+    text-decoration: none;
+    color: var(--text);
+    background: var(--accent-soft);
+  }
+
+  .product-switch a.current {
+    color: var(--text);
+    background: var(--surface-raised);
+    border-left: 3px solid var(--accent);
+  }
+
+  .sidebar-group h3 {
+    margin-bottom: var(--space-2);
+    color: var(--text-faint);
+  }
+
+  .sidebar-group ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .sidebar-item {
+    display: block;
+    padding: 0.3rem var(--space-3);
+    color: var(--text-muted);
+    border-left: 2px solid var(--border);
+    line-height: 1.45;
+  }
+
+  .sidebar-item:hover {
+    text-decoration: none;
+    color: var(--text);
+    border-left-color: var(--border-strong);
+  }
+
+  .sidebar-item[aria-current='page'] {
+    color: var(--accent-text);
+    border-left-color: var(--accent);
+    font-weight: 600;
+  }
+
+  .sidebar-item.overview {
+    font-weight: 600;
+  }
+</style>

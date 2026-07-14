@@ -1,0 +1,200 @@
+/* Documentation layout: sidebar / content / TOC, plus prose styling. */
+
+.doc-shell {
+  display: grid;
+  grid-template-columns: 250px minmax(0, 1fr) 210px;
+  gap: var(--space-7);
+  padding-block: var(--space-6);
+  align-items: start;
+}
+
+.doc-sidebar-col,
+.doc-toc-col {
+  position: sticky;
+  top: calc(var(--header-h) + var(--space-4));
+  max-height: calc(100dvh - var(--header-h) - var(--space-6));
+  overflow-y: auto;
+  scrollbar-width: thin;
+  padding-bottom: var(--space-4);
+}
+
+.drawer-toggle {
+  display: none;
+}
+
+.doc-crumb {
+  margin-bottom: var(--space-2);
+  overflow-wrap: anywhere;
+}
+
+.doc-content > h1 {
+  font-size: var(--text-xl);
+  margin-bottom: var(--space-4);
+}
+
+/* ---------- prose ---------- */
+
+.prose {
+  max-width: var(--prose-max);
+}
+
+.prose > * + * {
+  margin-top: var(--space-4);
+}
+
+.prose h2 {
+  margin-top: var(--space-7);
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--border);
+}
+
+.prose h3 {
+  margin-top: var(--space-6);
+}
+
+.prose ul,
+.prose ol {
+  padding-left: 1.4rem;
+}
+
+.prose li + li {
+  margin-top: var(--space-1);
+}
+
+.prose code:not(pre code) {
+  background: var(--accent-soft);
+  color: var(--text);
+  padding: 0.1em 0.35em;
+  border-radius: var(--radius-sm);
+  overflow-wrap: anywhere;
+}
+
+.prose pre {
+  padding: var(--space-4);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+  overflow-x: auto;
+  font-size: var(--text-sm);
+  line-height: 1.55;
+}
+
+/* Shiki dual themes: pick by site theme */
+html[data-theme='dark'] .prose pre.astro-code,
+html[data-theme='dark'] .prose pre.astro-code span {
+  color: var(--shiki-dark) !important;
+  background-color: var(--shiki-dark-bg) !important;
+}
+
+.prose blockquote {
+  border-left: 3px solid var(--note);
+  background: var(--note-soft);
+  padding: var(--space-3) var(--space-4);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  font-size: var(--text-sm);
+}
+
+.prose blockquote > * + * {
+  margin-top: var(--space-2);
+}
+
+.prose table {
+  display: block;
+  width: fit-content;
+  max-width: 100%;
+  overflow-x: auto;
+  border-collapse: collapse;
+  font-size: var(--text-sm);
+}
+
+.prose th,
+.prose td {
+  border: 1px solid var(--border);
+  padding: var(--space-2) var(--space-3);
+  text-align: left;
+  vertical-align: top;
+}
+
+.prose th {
+  background: var(--surface);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: 0.04em;
+}
+
+.prose img {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
+}
+
+.prose hr {
+  border: none;
+  border-top: 1px solid var(--border);
+}
+
+/* Heading anchors get room under the sticky header via scroll-padding (base.css) */
+
+/* ---------- pager ---------- */
+
+.doc-pager {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-4);
+  margin-top: var(--space-7);
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--border);
+  font-size: var(--text-sm);
+  font-weight: 500;
+}
+
+/* ---------- search box (Pagefind mounts here) ---------- */
+
+.doc-search {
+  margin-bottom: var(--space-4);
+}
+
+/* ---------- responsive ---------- */
+
+@media (max-width: 1080px) {
+  .doc-shell {
+    grid-template-columns: 240px minmax(0, 1fr);
+  }
+
+  .doc-toc-col {
+    display: none;
+  }
+}
+
+@media (max-width: 760px) {
+  .doc-shell {
+    display: block;
+  }
+
+  .drawer-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    margin-bottom: var(--space-4);
+    padding: var(--space-2) var(--space-4);
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius-md);
+    background: var(--surface);
+    font-size: var(--text-sm);
+    font-weight: 500;
+  }
+
+  .doc-sidebar-col {
+    display: none;
+    position: static;
+    max-height: none;
+    margin-bottom: var(--space-5);
+    padding: var(--space-4);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    background: var(--surface);
+  }
+
+  body.drawer-open .doc-sidebar-col {
+    display: block;
+  }
+}

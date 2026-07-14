@@ -1,0 +1,45 @@
+---
+import type { Product } from '../data/products';
+import { t, type Lang } from '../data/ui-strings';
+import StoreButtons from './StoreButtons.astro';
+
+interface Props {
+  product: Product;
+  lang: Lang;
+}
+
+const { product, lang } = Astro.props;
+---
+
+<aside class="buy-cta">
+  <p>
+    {t(lang, 'docs.buyStrip')}
+    <strong>{product.name}</strong>
+  </p>
+  <StoreButtons product={product} lang={lang} compact />
+</aside>
+
+<style>
+  .buy-cta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-3);
+    margin-block: var(--space-5);
+    padding: var(--space-3) var(--space-4);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent);
+    border-radius: var(--radius-md);
+    background: var(--surface);
+    font-size: var(--text-sm);
+  }
+
+  .buy-cta p {
+    color: var(--text-muted);
+  }
+
+  .buy-cta strong {
+    color: var(--text);
+  }
+</style>
