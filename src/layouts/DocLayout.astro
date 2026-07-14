@@ -51,7 +51,12 @@ const crumb = `${productId} / ${pageSlug === 'index' ? 'README' : pageSlug.repla
     </button>
 
     <aside class="doc-sidebar-col" id="doc-sidebar">
-      <div id="search" class="doc-search"></div>
+      <div
+        id="search"
+        class="doc-search"
+        data-placeholder={t(lang, 'docs.searchPlaceholder')}
+      >
+      </div>
       <DocSidebar productId={productId} lang={lang} currentPath={currentPath} />
     </aside>
 
@@ -87,6 +92,22 @@ const crumb = `${productId} / ${pageSlug === 'index' ? 'README' : pageSlug.repla
     </aside>
   </div>
 </BaseLayout>
+
+<link rel="stylesheet" href="/pagefind/pagefind-ui.css" />
+<script is:inline src="/pagefind/pagefind-ui.js"></script>
+<script is:inline>
+  // Pagefind exists only in production builds; in `npm run dev` the box stays empty.
+  window.addEventListener('DOMContentLoaded', () => {
+    if (!window.PagefindUI) return;
+    const el = document.querySelector('#search');
+    new window.PagefindUI({
+      element: '#search',
+      showImages: false,
+      showSubResults: true,
+      translations: { placeholder: el?.dataset.placeholder },
+    });
+  });
+</script>
 
 <script>
   // Mobile drawer
