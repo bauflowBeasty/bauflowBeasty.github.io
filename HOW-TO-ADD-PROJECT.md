@@ -11,6 +11,10 @@ editas archivos  →  git add -A  →  git commit -m "..."  →  git push
 
 GitHub Actions publica en 1-2 minutos. No necesitas ejecutar nada más.
 
+> **Configuración única (pendiente):** en GitHub → Settings → Pages → "Build and
+> deployment" → Source, selecciona **GitHub Actions** (antes estaba "Deploy from a
+> branch"). Sin este cambio el deploy nuevo no se activa.
+
 Para previsualizar en local (opcional, requiere Node):
 
 ```
