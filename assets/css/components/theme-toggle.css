@@ -1,4 +1,0 @@
-[data-theme="dark"] .light-icon { display: none; }
-[data-theme="dark"] .dark-icon  { display: inline; }
-[data-theme="light"] .light-icon { display: inline; }
-[data-theme="light"] .dark-icon  { display: none; }

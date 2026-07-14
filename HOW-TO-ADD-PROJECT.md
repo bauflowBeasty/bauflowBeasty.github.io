@@ -1,171 +1,78 @@
-# Cómo agregar un nuevo proyecto
+# Cómo mantener este sitio
 
-## Estructura general
+El sitio se construye con [Astro](https://astro.build). Tú editas Markdown y archivos de
+datos; GitHub Actions compila y publica solo al hacer `git push` a `main`.
 
-Cada proyecto tiene dos partes:
-1. Una entrada en `data/projects.js` — aparece en la home como tarjeta
-2. Una carpeta en `projects/<nombre-del-proyecto>/` — contiene la documentación
+## Flujo diario
 
----
-
-## Paso 1: Agregar la tarjeta en la home
-
-Abre `data/projects.js` y agrega un nuevo objeto al array `PROJECTS`.
-
-```js
-var PROJECTS = [
-  // proyecto existente...
-  {
-    id:          "save-system",
-    name:        "BeastySaveSystem",
-    ...
-  },
-
-  // ← agrega el nuevo proyecto aquí, separado por coma:
-  {
-    id:          "inventory-system",        // identificador único (sin espacios)
-    name:        "BeastyInventory",         // nombre mostrado en la tarjeta
-    version:     "1.0.0",                   // versión
-    description: "Descripción breve.",      // texto debajo del nombre
-    tags:        ["Unity", "C#"],           // etiquetas (máximo 3-4)
-    price:       "$12.99",                  // precio o "Gratis"
-    freeDemo:    false,                     // true muestra badge "FREE Demo"
-    docUrl:      "/projects/inventory-system/",  // ruta a la doc
-    storeUrl:    "#"                        // enlace a Unity Asset Store
-  }
-];
+```
+editas archivos  →  git add -A  →  git commit -m "..."  →  git push
 ```
 
-Guarda el archivo. La nueva tarjeta aparecerá automáticamente en la home.
+GitHub Actions publica en 1-2 minutos. No necesitas ejecutar nada más.
 
----
+Para previsualizar en local (opcional, requiere Node):
 
-## Paso 2: Crear la carpeta de documentación
+```
+npm install        (solo la primera vez)
+npm run dev        → abre http://localhost:4321
+```
 
-1. Crea la carpeta: `projects/inventory-system/`
-2. Copia el archivo de documentación existente como base:
+## Dónde vive cada cosa
+
+| Quiero cambiar… | Archivo |
+|---|---|
+| Texto de una página de docs (inglés) | `src/content/docs/en/<producto>/<página>.md` |
+| Texto de una página de docs (español) | `src/content/docs/es/<producto>/<página>.md` |
+| Enlaces de tienda (Asset Store, itch.io…) | `src/data/products.ts` → `storeLinks` |
+| Nombre, tagline o descripción de un producto | `src/data/products.ts` |
+| Textos de la interfaz (botones, menús) | `src/data/ui-strings.ts` |
+| Orden y grupos del menú lateral de docs | `src/data/sidebars.ts` |
+| Colores del sitio (ambos temas) | `src/styles/tokens.css` |
+| Capturas de pantalla de las docs | `public/docs-images/<producto>/` (ver `docs/SCREENSHOTS.md`) |
+
+## Rellenar un enlace de tienda
+
+En `src/data/products.ts`, busca el producto y cambia `url: null` por la URL real:
+
+```ts
+storeLinks: [
+  { store: 'unity', label: 'Unity Asset Store', url: 'https://assetstore.unity.com/packages/...' },
+  { store: 'itch', label: 'itch.io', url: 'https://bauflow.itch.io/...' },
+],
+```
+
+Mientras `url` sea `null`, el botón aparece como "Coming soon" deshabilitado.
+Para añadir otra tienda, añade una línea más al array con su `label` y `url`.
+
+## Añadir una página de documentación
+
+1. Crea `src/content/docs/en/<producto>/<grupo>/<mi-pagina>.md` con este encabezado:
+
+   ```markdown
+   ---
+   title: "My page title"
+   description: "One line for search engines."
+   ---
+
+   Content in Markdown…
    ```
-   projects/save-system/index.html  →  projects/inventory-system/index.html
-   ```
-3. Edita el nuevo `index.html`:
-   - Cambia el `<title>` en el `<head>`
-   - Cambia el título en `.doc-cover-title`
-   - Actualiza la tabla `.doc-cover-meta` con los datos de tu proyecto
-   - Reemplaza o actualiza los enlaces del sidebar `<nav class="doc-sidebar">`
-   - Reemplaza el contenido de las `<section id="...">` con la documentación de tu proyecto
 
----
+2. Crea su traducción en `src/content/docs/es/<producto>/<grupo>/<mi-pagina>.md`.
+3. Añade el slug (`<grupo>/<mi-pagina>`) en `src/data/sidebars.ts`, en el grupo que toque.
+4. Los enlaces internos se escriben absolutos: `[texto](/docs/<producto>/<grupo>/<página>/)`
+   (en la versión española: `/es/docs/...`).
 
-## Estructura de archivos resultante
+## Añadir un producto nuevo
 
-```
-projects/
-├── save-system/
-│   └── index.html        ← documentación del Save System
-└── inventory-system/
-    └── index.html        ← documentación del nuevo proyecto
-```
+1. Añádelo a `src/data/products.ts` (id, nombre, taglines, storeLinks, docsEntry).
+2. Crea su árbol de docs en `src/content/docs/en/<nuevo-id>/` (con un `index.md`) y su espejo `es/`.
+3. Define su menú en `src/data/sidebars.ts` bajo el mismo id.
+4. Añade el nombre corto en `shortNames` de `src/components/Header.astro`.
 
----
+## Capturas de pantalla
 
-## Paso 3: Agregar las traducciones del nuevo proyecto
-
-Las traducciones están modularizadas en `data/translations/`. Cada proyecto tiene un archivo por idioma.
-
-### 3.1 Crear los archivos de traducción
-
-Crea dos archivos nuevos (uno por idioma):
-
-```
-data/translations/en/inventory-system.js
-data/translations/es/inventory-system.js
-```
-
-**Estructura de cada archivo** — en inglés (`en/inventory-system.js`):
-
-```js
-var _T_EN_INVENTORY = {
-  // Usa la clave que quieras; aquí "inv" como ejemplo
-  inv: {
-    cover: {
-      sub1: "Technical Documentation",
-      // ... resto de claves de portada
-    },
-    sidebar: {
-      heading: "Contents",
-      s1: "1. Overview",
-      // ...
-    },
-    s1: {
-      title: "1. Overview",
-      // ...
-    }
-    // ...
-  }
-};
-```
-
-En español (`es/inventory-system.js`), la misma estructura con variable `_T_ES_INVENTORY` y textos traducidos.
-
-### 3.2 Registrar en el ensamblador
-
-Abre `data/translations.js` y agrega las nuevas variables al `Object.assign` de cada idioma:
-
-```js
-var TRANSLATIONS = {
-  en: Object.assign({},
-    typeof _T_EN_SHARED    !== 'undefined' ? _T_EN_SHARED    : {},
-    typeof _T_EN_SAVE      !== 'undefined' ? _T_EN_SAVE      : {},
-    typeof _T_EN_DL        !== 'undefined' ? _T_EN_DL        : {},
-    typeof _T_EN_INVENTORY !== 'undefined' ? _T_EN_INVENTORY : {}  // ← nuevo
-  ),
-  es: Object.assign({},
-    typeof _T_ES_SHARED    !== 'undefined' ? _T_ES_SHARED    : {},
-    typeof _T_ES_SAVE      !== 'undefined' ? _T_ES_SAVE      : {},
-    typeof _T_ES_DL        !== 'undefined' ? _T_ES_DL        : {},
-    typeof _T_ES_INVENTORY !== 'undefined' ? _T_ES_INVENTORY : {}  // ← nuevo
-  )
-};
-```
-
-### 3.3 Cargar los scripts en la página del proyecto
-
-En `projects/inventory-system/index.html`, reemplaza el bloque de scripts de traducciones para incluir los módulos nuevos antes del ensamblador:
-
-```html
-<script src="/data/translations/en/shared.js"></script>
-<script src="/data/translations/en/inventory-system.js"></script>
-<script src="/data/translations/es/shared.js"></script>
-<script src="/data/translations/es/inventory-system.js"></script>
-<script src="/data/translations.js"></script>
-<script src="/assets/js/i18n.js"></script>
-```
-
-> **Nota:** `shared.js` contiene nav, footer y home — siempre se carga en todas las páginas.
-> Los módulos del proyecto solo se cargan en la página de ese proyecto.
-
----
-
-## Para cambiar los colores del sitio
-
-Abre `assets/css/base/variables.css`.
-
-El archivo tiene dos bloques claramente etiquetados:
-- `[data-theme="dark"]` — colores del modo oscuro
-- `[data-theme="light"]` — colores del modo claro
-
-Cada variable tiene un comentario que explica qué parte del sitio afecta.
-Cambia el valor hexadecimal y todos los elementos que usan esa variable se actualizan solos.
-
----
-
-## Para cambiar el nombre/logo
-
-Busca `bau<span>flow</span>` en `index.html` y `projects/*/index.html`.
-
----
-
-## Para agregar/editar links de contacto
-
-En `index.html`, busca la sección `<section class="section contact-section" id="contact">`.
-Cada `<a href="#">` es un enlace de contacto. Reemplaza el `#` con la URL real.
+Las páginas ya referencian las imágenes. Guarda cada PNG en
+`public/docs-images/<producto>/` con el nombre exacto que aparece en el Markdown
+(lista completa en `docs/SCREENSHOTS.md`). Mientras no exista el archivo, la página
+oculta el hueco automáticamente.
