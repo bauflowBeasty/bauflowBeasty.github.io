@@ -1,0 +1,42 @@
+/* Landing (storefront) layout. */
+
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+  gap: var(--space-7);
+  align-items: center;
+  padding-block: var(--space-8) var(--space-8);
+}
+
+.hero-copy h1 {
+  font-size: var(--text-hero);
+  margin-block: var(--space-3) var(--space-4);
+}
+
+.hero-sub {
+  color: var(--text-muted);
+  font-size: var(--text-md);
+  max-width: 46ch;
+  text-wrap: pretty;
+}
+
+.products {
+  padding-block: var(--space-5);
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(19rem, 1fr));
+  gap: var(--space-5);
+}
+
+.ecosystem {
+  margin-block: var(--space-8) var(--space-6);
+}
+
+@media (max-width: 900px) {
+  .hero {
+    grid-template-columns: 1fr;
+    padding-block: var(--space-7);
+  }
+}

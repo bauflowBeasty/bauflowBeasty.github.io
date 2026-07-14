@@ -1,0 +1,81 @@
+---
+import type { Product } from '../data/products';
+import { t, type Lang } from '../data/ui-strings';
+import StoreButtons from './StoreButtons.astro';
+
+interface Props {
+  product: Product;
+  lang: Lang;
+  index: number;
+}
+
+const { product, lang, index } = Astro.props;
+const prefix = lang === 'es' ? '/es' : '';
+---
+
+<article class="product-card">
+  <header>
+    <p class="machine">{product.id} · v{product.version}</p>
+    <h3>{product.name}</h3>
+    <p class="tagline">{product.tagline[lang]}</p>
+  </header>
+  <p class="blurb">{product.blurb[lang]}</p>
+  <div class="card-actions">
+    <a class="docs-link" href={`${prefix}${product.docsEntry}`}>
+      {t(lang, 'product.readDocs')} →
+    </a>
+    <StoreButtons product={product} lang={lang} />
+  </div>
+</article>
+
+<style>
+  .product-card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    padding: var(--space-6);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    background: var(--surface);
+    box-shadow: var(--shadow-card);
+    transition: border-color var(--dur-base) var(--ease-out);
+  }
+
+  .product-card:hover {
+    border-color: var(--border-strong);
+  }
+
+  .product-card h3 {
+    font-size: var(--text-lg);
+    margin-top: var(--space-2);
+  }
+
+  .tagline {
+    font-family: var(--font-display);
+    font-size: var(--text-md);
+    color: var(--accent-text);
+    margin-top: var(--space-1);
+  }
+
+  .blurb {
+    color: var(--text-muted);
+    font-size: var(--text-sm);
+    max-width: 60ch;
+    flex: 1;
+  }
+
+  .card-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-3);
+    padding-top: var(--space-4);
+    border-top: 1px solid var(--border);
+  }
+
+  .docs-link {
+    font-weight: 600;
+    font-size: var(--text-sm);
+  }
+</style>

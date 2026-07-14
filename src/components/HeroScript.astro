@@ -1,0 +1,100 @@
+---
+/**
+ * The signature element of the landing: the brand introduces itself in the
+ * VNBeasty scripting language of the visual novel engine. The choice menu
+ * is the real CTA row.
+ */
+import { t, type Lang } from '../data/ui-strings';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+---
+
+<div class="hero-script" role="img" aria-label={t(lang, 'hero.sub')}>
+  <div class="script-chrome machine">
+    <span class="dot" aria-hidden="true"></span>
+    welcome.vnbeasty
+  </div>
+  <pre class="script-body" aria-hidden="true"><code><span class="kw">label</span> <span class="id">welcome</span><span class="pu">:</span>
+    <span class="ch">beasty</span> <span class="str">"{t(lang, 'hero.title')}"</span>
+    <span class="kw">menu</span><span class="pu">:</span>
+        <a href="#products" class="str">"{t(lang, 'hero.ctaDocs')}"</a> <span class="pu">-&gt;</span> <span class="kw">jump</span> <span class="id">docs</span>
+        <a href="#products" class="str">"{t(lang, 'hero.ctaStore')}"</a> <span class="pu">-&gt;</span> <span class="kw">jump</span> <span class="id">store</span></code></pre>
+</div>
+
+<style>
+  .hero-script {
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius-lg);
+    background: var(--surface-code);
+    box-shadow: var(--shadow-pop);
+    overflow: hidden;
+  }
+
+  .script-chrome {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-2) var(--space-4);
+    border-bottom: 1px solid var(--border);
+    background: var(--surface-raised);
+    color: var(--text-muted);
+  }
+
+  html[data-theme='light'] .script-chrome {
+    background: var(--surface);
+  }
+
+  .dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: var(--accent-strong);
+  }
+
+  .script-body {
+    margin: 0;
+    padding: var(--space-5);
+    overflow-x: auto;
+    font-size: var(--text-sm);
+    line-height: 1.9;
+    color: #efe9e2;
+  }
+
+  .kw {
+    color: var(--accent);
+    font-weight: 600;
+  }
+
+  .id {
+    color: #8ab4d8;
+  }
+
+  .pu {
+    color: #7d746b;
+  }
+
+  .ch {
+    color: #d8a24a;
+    font-weight: 600;
+  }
+
+  .str,
+  a.str {
+    color: #efe9e2;
+  }
+
+  a.str {
+    text-decoration: underline;
+    text-decoration-color: var(--accent);
+    text-underline-offset: 4px;
+    text-decoration-thickness: 2px;
+  }
+
+  a.str:hover {
+    color: var(--accent);
+  }
+</style>

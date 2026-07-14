@@ -1,0 +1,95 @@
+---
+title: "Compilación y plataformas"
+description: "Qué necesita el paquete, dónde se ejecuta, y qué revisar antes de presionar Build."
+---
+
+Qué necesita el paquete, dónde se ejecuta, y qué revisar antes de presionar Build.
+
+## Requisitos
+
+- **Unity 6000.2 o más reciente.**
+- Sin paquetes externos. El sistema de guardado viene incluido dentro del paquete, con su propio motor JSON —
+  no hay dependencia de Newtonsoft, y nada que instalar desde el Package Manager para tener un juego funcional.
+- El paquete Addressables solo se necesita si optas por el [streaming](/es/docs/beasty-visual-novel/production/streaming/).
+
+## Render pipelines
+
+**Built-in, URP (incluido el 2D Renderer) y HDRP funcionan todos, sin cambios.**
+
+La razón es simple: el paquete **no incluye shaders ni materiales**. Los fondos, personajes y props son
+sprites; la interfaz es uGUI. No hay nada que actualizar cuando cambias de pipeline, y ningún material que se
+ponga magenta. Puedes mover un proyecto de Built-in a URP a mitad de la producción y la novela visual no se
+entera.
+
+## Backends de scripting
+
+**Mono e IL2CPP.** Ambos son compatibles, y el pipeline de guardado está verificado contra una build real de
+IL2CPP.
+
+## Plataformas
+
+Cualquiera con E/S de archivos normal — que es lo que el sistema de guardado necesita:
+
+- Windows, macOS, Linux
+- Android, iOS
+- Consolas
+
+> **Advertencia**
+> **WebGL no es compatible en 1.0.0.** El pipeline de guardado es la razón: la escritura atómica necesita
+> `File.Replace`, y las variantes asíncronas de guardado/carga son basadas en `Task`. Una build de navegador no
+> provee ninguna de las dos. No hay un modo parcial — no planifiques un lanzamiento en WebGL con esta versión.
+> La explicación completa está en [plataformas y límites](/es/docs/beasty-save-system/advanced/platforms-and-limits/) del sistema de guardado.
+
+## Antes de compilar
+
+Una checklist corta:
+
+1. **Ejecuta el validador** en cada `DialogueScene`
+   (`Tools > Beasty VN > Maintenance > Validate Selected Project`). Encuentra el id de personaje colgante, el
+   resultado de subgrafo sin enrutar y la clave de localización sin texto de origen — los fallos que no
+   arrojan excepción y por eso no aparecen en un playtest de las rutas que resulta que recorriste. Ver
+   [Validación e ids](/es/docs/beasty-visual-novel/production/validation-and-ids/).
+2. **Revisa el Time Config** si tu juego usa tiempo de juego. Se asigna en el BeastyManager, y **dejarlo vacío
+   apaga el sistema de tiempo**: no se escribe ninguna variable de tiempo y toda condición de tiempo se evalúa
+   como falsa. Un juego cuyas rutinas silenciosamente no hacen nada en la build normalmente tiene un Time
+   Config vacío. Ver [Tiempo de juego](/es/docs/beasty-visual-novel/world/game-time/).
+3. **Reconstruye el contenido de Addressables** si usas streaming. Un catálogo desactualizado significa que el
+   arte transmitido no se resuelve. Ver [Streaming](/es/docs/beasty-visual-novel/production/streaming/).
+4. Revisa los totales de [localización](/es/docs/beasty-visual-novel/production/localization/): el validador informa cuántas traducciones faltan o
+   están desactualizadas.
+
+## Relación de aspecto y resolución
+
+La resolución de diseño vive en [VN settings](/es/docs/beasty-visual-novel/production/vn-settings/) (`targetWidth` y `targetHeight`, 1920x1080 por
+defecto).
+
+Para asegurarte de que el juego se ENCUADRA igual en cada monitor, agrega el **Beasty Aspect Ratio Enforcer**
+(`Add Component > Beasty > Beasty Aspect Ratio Enforcer`) a tu cámara. Fuerza a la cámara a presentarse con una
+relación de aspecto fija: una ventana más ancha recibe barras negras a la izquierda y derecha (pillarbox), una
+más alta recibe barras arriba y abajo (letterbox). La relación proviene de la resolución objetivo de VN
+settings por defecto, y se puede sobrescribir por cámara.
+
+> **Nota**
+> Para que la interfaz quede en letterbox junto con el juego, el Canvas debe estar en modo **Screen Space -
+> Camera** apuntando a esa cámara. Un canvas **Screen Space - Overlay** ignora por completo el viewport de la
+> cámara y sigue llenando todo el monitor.
+
+## La pantalla de carga
+
+Agrega el **Beasty Loading Screen** (`Add Component > Beasty > Beasty Loading Screen`) a un panel de tu canvas y
+el BeastyManager lo controla: aparece mientras el juego arranca y mientras se carga una partida.
+
+Se desvanece hacia adentro y hacia afuera, respeta un **tiempo de visualización mínimo** (1 segundo por
+defecto) para que una carga rápida no haga parpadear el panel por dos frames, y puede controlar una barra de
+progreso (un relleno de Image, un Slider, o ambos) que permanece oculta hasta que algo informa progreso. Todo su
+temporizado no está escalado, así que funciona mientras el juego está en pausa. Cada elemento visual es tuyo:
+restiliza los hijos libremente.
+
+Los programadores pueden reemplazarla por su propia implementación, y pueden mantener el arranque abierto hasta
+que sus propios sistemas estén listos. Ver [Controladores](/es/docs/beasty-visual-novel/scripting/controllers/).
+
+## Ver también
+
+- [Instalación](/es/docs/beasty-visual-novel/getting-started/installation/) — requisitos, importación, y qué hay en la carpeta.
+- [Streaming](/es/docs/beasty-visual-novel/production/streaming/) y [Proyectos grandes](/es/docs/beasty-visual-novel/production/large-projects/).
+- [Beasty Save System: plataformas y límites](/es/docs/beasty-save-system/advanced/platforms-and-limits/).

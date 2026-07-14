@@ -1,0 +1,47 @@
+---
+import { t, type Lang } from '../data/ui-strings';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+---
+
+<section class="ecosystem" id="ecosystem">
+  <h2>{t(lang, 'ecosystem.heading')}</h2>
+  <pre class="machine eco-diagram" aria-hidden="true"><code>beasty-visual-novel ──[includes]──&gt; beasty-save-system ··[optional]··&gt; beasty-debug-logger</code></pre>
+  <div class="eco-notes">
+    <p>{t(lang, 'ecosystem.note1')}</p>
+    <p>{t(lang, 'ecosystem.note2')}</p>
+  </div>
+  <p class="machine eco-reqs">{t(lang, 'ecosystem.requirements')}</p>
+</section>
+
+<style>
+  .ecosystem {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+
+  .eco-diagram {
+    padding: var(--space-3) var(--space-4);
+    border: 1px dashed var(--border-strong);
+    border-radius: var(--radius-md);
+    overflow-x: auto;
+    color: var(--text-muted);
+  }
+
+  .eco-notes {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+    gap: var(--space-4);
+    color: var(--text-muted);
+    font-size: var(--text-sm);
+  }
+
+  .eco-reqs {
+    color: var(--text-faint);
+  }
+</style>

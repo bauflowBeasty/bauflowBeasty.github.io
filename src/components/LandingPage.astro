@@ -1,0 +1,43 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import HeroScript from './HeroScript.astro';
+import ProductCard from './ProductCard.astro';
+import EcosystemNote from './EcosystemNote.astro';
+import { PRODUCTS } from '../data/products';
+import { t, type Lang } from '../data/ui-strings';
+import '../styles/landing.css';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const altHref = lang === 'en' ? '/es/' : '/';
+---
+
+<BaseLayout
+  title={lang === 'en' ? 'Beasty — Unity tools by bauflow' : 'Beasty — Herramientas para Unity por bauflow'}
+  description={t(lang, 'hero.sub')}
+  lang={lang}
+  altHref={altHref}
+>
+  <section class="hero container">
+    <div class="hero-copy">
+      <p class="eyebrow">{t(lang, 'hero.eyebrow')}</p>
+      <h1>{t(lang, 'hero.title')}</h1>
+      <p class="hero-sub">{t(lang, 'hero.sub')}</p>
+    </div>
+    <HeroScript lang={lang} />
+  </section>
+
+  <section class="products container" id="products">
+    <h2 class="visually-hidden">{t(lang, 'products.heading')}</h2>
+    <div class="product-grid">
+      {PRODUCTS.map((p, i) => <ProductCard product={p} lang={lang} index={i} />)}
+    </div>
+  </section>
+
+  <div class="container">
+    <EcosystemNote lang={lang} />
+  </div>
+</BaseLayout>
