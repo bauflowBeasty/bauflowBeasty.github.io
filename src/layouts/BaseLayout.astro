@@ -1,0 +1,53 @@
+---
+import '@fontsource-variable/bricolage-grotesque';
+import '@fontsource/ibm-plex-sans/400.css';
+import '@fontsource/ibm-plex-sans/400-italic.css';
+import '@fontsource/ibm-plex-sans/500.css';
+import '@fontsource/ibm-plex-sans/600.css';
+import '@fontsource/ibm-plex-mono/400.css';
+import '@fontsource/ibm-plex-mono/500.css';
+import '@fontsource/ibm-plex-mono/600.css';
+import '../styles/tokens.css';
+import '../styles/base.css';
+import '../styles/typography.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { t, type Lang } from '../data/ui-strings';
+import themeInit from '../scripts/theme-init.js?raw';
+
+interface Props {
+  title: string;
+  description: string;
+  lang: Lang;
+  /** URL of this same page in the other language. */
+  altHref: string;
+}
+
+const { title, description, lang, altHref } = Astro.props;
+const altLang: Lang = lang === 'en' ? 'es' : 'en';
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const altUrl = new URL(altHref, Astro.site);
+---
+
+<html lang={lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="alternate" hreflang={lang} href={canonical} />
+    <link rel="alternate" hreflang={altLang} href={altUrl} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <meta name="generator" content={Astro.generator} />
+    <script is:inline set:html={themeInit} />
+  </head>
+  <body>
+    <a href="#main" class="skip-link">{t(lang, 'skipToContent')}</a>
+    <Header lang={lang} altHref={altHref} />
+    <main id="main">
+      <slot />
+    </main>
+    <Footer lang={lang} />
+  </body>
+</html>

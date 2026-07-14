@@ -1,0 +1,57 @@
+---
+import { t, type Lang } from '../data/ui-strings';
+
+interface Props {
+  lang: Lang;
+  altHref: string;
+}
+
+const { lang, altHref } = Astro.props;
+const current = Astro.url.pathname;
+const enHref = lang === 'en' ? current : altHref;
+const esHref = lang === 'es' ? current : altHref;
+---
+
+<nav class="lang-switch" aria-label={t(lang, 'lang.switch')}>
+  <a href={enHref} data-set-lang="en" aria-current={lang === 'en' ? 'true' : undefined}>EN</a>
+  <span aria-hidden="true">/</span>
+  <a href={esHref} data-set-lang="es" aria-current={lang === 'es' ? 'true' : undefined}>ES</a>
+</nav>
+
+<style>
+  .lang-switch {
+    display: flex;
+    align-items: center;
+    gap: var(--space-1);
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    font-weight: 600;
+    color: var(--text-faint);
+  }
+
+  .lang-switch a {
+    padding: var(--space-1) var(--space-2);
+    border-radius: var(--radius-sm);
+    color: var(--text-muted);
+  }
+
+  .lang-switch a:hover {
+    text-decoration: none;
+    background: var(--accent-soft);
+    color: var(--text);
+  }
+
+  .lang-switch a[aria-current='true'] {
+    color: var(--accent-text);
+  }
+</style>
+
+<script>
+  document.addEventListener('click', (e) => {
+    const link = (e.target as HTMLElement).closest('[data-set-lang]');
+    if (!link) return;
+    try {
+      localStorage.setItem('bauflow_lang', (link as HTMLElement).dataset.setLang!);
+    } catch {}
+  });
+</script>

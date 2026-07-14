@@ -1,0 +1,109 @@
+---
+import ThemeToggle from './ThemeToggle.astro';
+import LangSwitch from './LangSwitch.astro';
+import { PRODUCTS } from '../data/products';
+import { type Lang } from '../data/ui-strings';
+import logoOnDark from '../assets/logo-on-dark.svg';
+import logoOnLight from '../assets/logo-on-light.svg';
+
+interface Props {
+  lang: Lang;
+  altHref: string;
+}
+
+const { lang, altHref } = Astro.props;
+const prefix = lang === 'es' ? '/es' : '';
+const shortNames: Record<string, string> = {
+  'beasty-visual-novel': 'Visual Novel',
+  'beasty-save-system': 'Save System',
+  'beasty-debug-logger': 'Debug Logger',
+};
+---
+
+<header class="site-header">
+  <div class="container header-row">
+    <a class="brand" href={`${prefix}/`}>
+      <img class="logo logo-dark" src={logoOnDark.src} alt="Beasty — home" width="110" />
+      <img class="logo logo-light" src={logoOnLight.src} alt="Beasty — home" width="110" />
+    </a>
+
+    <nav class="product-nav" aria-label="Products">
+      {
+        PRODUCTS.map((p) => (
+          <a href={`${prefix}${p.docsEntry}`}>{shortNames[p.id]}</a>
+        ))
+      }
+    </nav>
+
+    <div class="header-tools">
+      <LangSwitch lang={lang} altHref={altHref} />
+      <ThemeToggle lang={lang} />
+    </div>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 40;
+    height: var(--header-h);
+    background: color-mix(in srgb, var(--bg) 88%, transparent);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .header-row {
+    display: flex;
+    align-items: center;
+    gap: var(--space-5);
+    height: 100%;
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+  }
+
+  .logo {
+    height: 1.7rem;
+    width: auto;
+  }
+
+  :global(html[data-theme='dark']) .logo-light,
+  :global(html[data-theme='light']) .logo-dark {
+    display: none;
+  }
+
+  .product-nav {
+    display: flex;
+    gap: var(--space-4);
+    margin-left: var(--space-4);
+    font-size: var(--text-sm);
+    font-weight: 500;
+  }
+
+  .product-nav a {
+    color: var(--text-muted);
+    padding: var(--space-1) 0;
+  }
+
+  .product-nav a:hover {
+    color: var(--text);
+    text-decoration: none;
+  }
+
+  .header-tools {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    margin-left: auto;
+  }
+
+  @media (max-width: 720px) {
+    .product-nav {
+      display: none;
+    }
+  }
+</style>
