@@ -1,6 +1,6 @@
 ---
 title: "La ventana Save Manager"
-description: "Tools > Beasty Save System > Save Manager abre la única ventana de editor del paquete. Hace tres cosas: crea y configura el BeastySaveManager de la escena, ha"
+description: "Tools > Beasty Save System > Save Manager abre la única ventana de editor del paquete: crea el BeastySaveManager de la escena, hace guardables los objetos y muestra los archivos de guardado en disco."
 ---
 
 `Tools > Beasty Save System > Save Manager` abre la única ventana de editor del paquete. Hace tres
@@ -13,15 +13,15 @@ La ventana se titula **Beasty Save Manager**. Puedes anclarla donde quieras.
 
 ## Manager
 
-La sección superior busca el `BeastySaveManager` en la escena abierta — incluyendo uno en un objeto inactivo.
+La sección superior busca el `BeastySaveManager` en la escena abierta — incluso si está en un objeto inactivo.
 
-**Cuando no hay manager**, obtienes un mensaje ("No BeastySaveManager in the open scene.") y un botón:
+**Cuando no hay manager**, aparece un mensaje ("No BeastySaveManager in the open scene.") y un botón:
 
 - **Create Beasty Save Manager** — crea un GameObject llamado `Beasty Save Manager` con el componente en
   él. Es un solo paso deshacible, así que `Ctrl+Z` lo elimina limpiamente. Esta es la forma más rápida de configurar una
   escena nueva, y es donde empieza el camino sin código.
 
-**Cuando hay un manager**, obtienes un campo de objeto que apunta a él (haz clic para seleccionarlo en la
+**Cuando hay un manager**, aparece un campo de objeto que apunta a él (haz clic para seleccionarlo en la
 Hierarchy) y su inspector completo incrustado debajo.
 
 Ese inspector incrustado es donde editas **Settings** — la carpeta, la extensión, la ruta de datos,
@@ -34,12 +34,12 @@ qué archivos lista la ventana.
 
 ## Saveables in Scene
 
-La sección del medio trata sobre qué objetos se guardan.
+La sección del medio se ocupa de qué objetos se guardan.
 
 ### La zona de arrastre
 
 Una caja que dice **"Drag GameObjects here to make them saveable"**. Arrastra uno o más objetos desde la
-Hierarchy sobre ella y cada uno obtiene un componente `BeastySaveable` con un id nuevo. Es deshacible.
+Hierarchy sobre ella y cada uno recibe un componente `BeastySaveable` con un id nuevo. Se puede deshacer.
 
 Los objetos que ya tienen un `BeastySaveable` se ignoran, así que puedes arrastrar toda una selección sin
 preocuparte por duplicados.
@@ -53,14 +53,14 @@ preocuparte por duplicados.
 
 ### La lista
 
-Debajo de la zona de arrastre está cada `BeastySaveable` en la escena abierta, **incluyendo los de objetos inactivos**.
-Cada fila muestra tres cosas:
+Debajo de la zona de arrastre se lista cada `BeastySaveable` de la escena abierta, **incluidos los de objetos
+inactivos**. Cada fila muestra tres cosas:
 
 - El objeto en sí, como un campo de objeto. Haz clic para seleccionar el objeto.
 - Cuántos componentes guarda (`2 comp.`).
 - Su **id de guardado**.
 
-Esta lista es cómo auditas una escena. Dos cosas a buscar:
+Esta lista es tu herramienta para auditar la escena. Dos cosas que conviene buscar:
 
 - **Un saveable con `0 comp.`** — está registrado, está en el archivo de guardado, y no almacena nada. Alguien
   añadió el componente y nunca marcó nada.
@@ -70,10 +70,10 @@ Esta lista es cómo auditas una escena. Dos cosas a buscar:
 
 ### El inspector de BeastySaveable
 
-Seleccionar un saveable te da su propio inspector, que vale la pena describir aquí porque es donde ocurre
+Al seleccionar un saveable ves su propio inspector, que vale la pena describir aquí porque es donde ocurre
 el trabajo real:
 
-- **Save Id** — el id, editable, con un botón **New** que genera uno nuevo. Cambiar el id huérfaniza
+- **Save Id** — el id, editable, con un botón **New** que genera uno nuevo. Cambiar el id deja huérfanos
   los datos ya guardados bajo el anterior.
 - **Saved Components** — una lista de verificación de cada componente en el GameObject. Marca los que quieras en el
   guardado. Cada uno se etiqueta con la capa que lo convierte: `core` (siempre disponible), un id de módulo como
@@ -92,8 +92,8 @@ Dos botones en el encabezado:
 - **Refresh** — vuelve a leer la carpeta. La ventana no vigila el disco, así que después de guardar desde un
   juego en ejecución, haz clic aquí para ver el archivo nuevo. Nada se cachea entre un refresh y otro.
 - **Open Folder** — abre la carpeta de guardado en el explorador de archivos de tu sistema operativo. Esta es la forma fiable
-  de encontrar `persistentDataPath` sin tener que buscarlo. Úsala para abrir un archivo de guardado en un editor de texto, para copiar
-  uno a un lado antes de un experimento, o para enviarle uno a un colega.
+  de encontrar `persistentDataPath` sin tener que buscarlo. Úsala para abrir un archivo de guardado en un editor
+  de texto, para copiar uno aparte antes de un experimento, o para enviarle uno a un colega.
 
 Si no hay archivos, la sección lo indica ("No save files in the configured folder."). Si esperabas
 archivos y no ves ninguno, comprueba `Folder` y `Extension` en la sección Manager de arriba — la ventana busca
@@ -101,7 +101,7 @@ exactamente donde dicen tus settings.
 
 ### Cada slot
 
-Cada archivo de guardado obtiene una fila:
+Cada archivo de guardado tiene su fila:
 
 **El nombre del slot.** El nombre que pasarías a `SaveAll`, `Load` o `Delete`. Sin extensión, sin ruta.
 
@@ -112,11 +112,11 @@ encriptado**, así que el resumen funciona esté o no encriptado el archivo, y s
 [slots-and-metadata.md](/es/docs/beasty-save-system/guides/slots-and-metadata/).
 
 Si el archivo no se puede leer en absoluto, el resumen se reemplaza por `unreadable:` y el error — `Corrupt`,
-`ParseError`, `VersionTooNew` y así sucesivamente. Eso es un diagnóstico, y los códigos de error se explican en
+`ParseError`, `VersionTooNew`, etcétera. Eso es un diagnóstico, y los códigos de error se explican en
 [results-and-errors.md](/es/docs/beasty-save-system/reference/results-and-errors/).
 
 **Restore Backup.** Copia el archivo `.bak` del slot sobre el slot. Pide confirmación primero ("Replace
-slot 'x' with its .bak file?"), y está **desactivado cuando no hay `.bak`** — incluyendo para un slot que
+slot 'x' with its .bak file?"), y está **desactivado cuando no hay `.bak`** — incluso para un slot que
 solo se ha guardado una vez, porque el primer guardado de un slot no crea backup.
 
 Úsalo cuando un slot se lea como `unreadable`, o cuando quieras deshacer el último guardado durante las pruebas. El `.bak`
@@ -127,7 +127,7 @@ explica qué es un `.bak` y cuándo aparece uno.
 its backup)?"). No hay deshacer — son archivos en disco, no assets en tu proyecto.
 
 Úsalo para volver a un estado limpio entre pruebas. Si quieres conservar el archivo, usa **Open Folder** y
-muévelo a otro lugar en su lugar.
+muévelo a otra carpeta.
 
 ## Ver también
 

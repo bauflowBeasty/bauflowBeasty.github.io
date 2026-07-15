@@ -1,179 +1,178 @@
 ---
 title: "Preguntas frecuentes"
-description: "Respuestas breves, con un enlace a la página que tiene la larga."
+description: "Respuestas cortas, con un enlace a la página donde está la explicación completa."
 ---
 
-Respuestas breves, con un enlace a la página que tiene la larga.
+Respuestas cortas, con un enlace a la página donde está la explicación completa.
 
 ## ¿Necesito saber programar?
 
-No. Todo el camino de creación es ventanas, menús y prefabs.
+No. Todo el proceso de creación se hace con ventanas, menús y prefabs.
 
 Escribir la historia, ramificarla, definir personajes y variables, misiones, rutinas, tiempo de juego, salas y
-puertas, el inventario, la localización, el guardado y la carga, los menús y el HUD: todo se hace en la
-ventana Beasty VN y en el inspector de Unity. Nunca abres un archivo C#, y la escena incluida se ejecuta sin
-una sola línea de tu código.
+puertas, el inventario, la localización, el guardado y la carga, los menús y el HUD: todo eso se hace en la
+ventana Beasty VN y en el inspector de Unity. No necesitas abrir un solo archivo de C#, y la escena incluida
+funciona sin una sola línea de código tuyo.
 
-El código se vuelve necesario en exactamente tres lugares:
+Solo necesitas código en tres casos:
 
-- Quieres un **modo de juego propio** - un minijuego, un combate, una pantalla de mapa. Eso va en el estado
-  de aplicación `Custom`. Ver [Modo personalizado](/es/docs/beasty-visual-novel/scripting/custom-mode/).
-- Quieres **leer o dirigir el juego desde tus propios scripts** - reaccionar a una elección, leer el estado
-  de una misión, escribir una variable. Ver [La API estática VN](/es/docs/beasty-visual-novel/scripting/vn-api/).
-- Quieres un **comportamiento de UI** que los prefabs no tienen. Restilizar no necesita código; un
-  comportamiento nuevo sí.
+- Quieres un **modo de juego propio** — un minijuego, un combate, una pantalla de mapa. Eso va en el estado
+  de aplicación `Custom`. Consulta [Modo personalizado](/es/docs/beasty-visual-novel/scripting/custom-mode/).
+- Quieres **leer o controlar el juego desde tus propios scripts** — reaccionar a una elección, consultar el
+  estado de una misión, modificar una variable. Consulta [La API estática VN](/es/docs/beasty-visual-novel/scripting/vn-api/).
+- Quieres un **comportamiento de UI** que los prefabs no traen. Cambiar el estilo no requiere código; un
+  comportamiento nuevo, sí.
 
 ## ¿Qué render pipelines son compatibles?
 
 Built-in, URP y HDRP. El paquete dibuja con sprites estándar de Unity, uGUI y TextMeshPro, y no incluye
-shaders ni materiales propios, así que no hay nada específico de pipeline que se pueda romper.
+shaders ni materiales propios, así que no hay nada atado a un pipeline en particular que pueda romperse.
 
-Ver [Compilación y plataformas](/es/docs/beasty-visual-novel/production/building-and-platforms/).
+Consulta [Compilación y plataformas](/es/docs/beasty-visual-novel/production/building-and-platforms/).
 
 ## ¿Qué versión de Unity necesito?
 
 Unity 6000.2 o más reciente.
 
-Ver [Instalación](/es/docs/beasty-visual-novel/getting-started/installation/).
+Consulta [Instalación](/es/docs/beasty-visual-novel/getting-started/installation/).
 
 ## ¿Funciona con el Input System?
 
-Sí - y con el Input Manager clásico, y con ambos a la vez. La capa de entrada la elige la propia
-configuración **Active Input Handling** de Unity, así que el paquete compila en un proyecto que nunca
+Sí — y también con el Input Manager clásico, o con ambos a la vez. La capa de entrada la decide la propia
+configuración **Active Input Handling** de Unity, así que el paquete compila incluso en un proyecto que nunca
 instaló el paquete Input System.
 
-Los bindings se editan en la sección **Controls** del inspector de BeastyManager, con desplegables. Es una
-configuración serializada, no un asset `.inputactions`. El jugador puede reasignar controles en tiempo de
-ejecución, y las anulaciones se guardan.
+Los bindings se editan con desplegables en la sección **Controls** del inspector de BeastyManager. Es una
+configuración serializada, no un asset `.inputactions`. El jugador puede reasignar los controles durante la
+partida, y esos cambios quedan guardados.
 
-Ver [Entrada y controles](/es/docs/beasty-visual-novel/production/input-and-controls/).
+Consulta [Entrada y controles](/es/docs/beasty-visual-novel/production/input-and-controls/).
 
 ## ¿Necesito Addressables?
 
-No. Lo predeterminado son referencias directas, que se resuelven de forma síncrona y no cuestan nada.
+No. Por defecto se usan referencias directas, que se resuelven de forma síncrona y no cuestan nada.
 
-Addressables solo se necesita si activas el streaming, que es opcional y beta en 1.0.0. Sin el paquete
-instalado, el módulo de streaming ni siquiera compila, y todo funciona con normalidad.
+Addressables solo hace falta si activas el streaming, que es opcional y está en beta en 1.0.0. Si el paquete
+no está instalado, el módulo de streaming ni siquiera se compila, y todo lo demás funciona con normalidad.
 
-Ver [Streaming](/es/docs/beasty-visual-novel/production/streaming/).
+Consulta [Streaming](/es/docs/beasty-visual-novel/production/streaming/).
 
-## ¿Necesito Newtonsoft, o algún otro paquete?
+## ¿Necesito Newtonsoft u otro paquete?
 
-No. No hay dependencias de terceros. El sistema de guardado tiene su propio motor JSON, así que no se
-incluye nada que pueda entrar en conflicto con un paquete que ya uses.
+No. No hay dependencias de terceros. El sistema de guardado trae su propio motor JSON, así que no se incluye
+nada que pueda chocar con un paquete que ya uses.
 
 ## ¿Incluye un sistema de guardado?
 
-Sí. Beasty Save System viene incluido dentro de este paquete - sin importación extra, sin compra extra.
+Sí. Beasty Save System viene incluido dentro de este paquete — no hay que importar nada aparte ni pagar nada
+extra.
 
 El guardado, la carga, el autoguardado, los slots, las miniaturas PNG, las copias de seguridad y la
-encriptación opcional funcionan de fábrica. Un guardado contiene todo el almacén de variables, la posición
-en la historia, el escenario, el estado de mundo libre, el historial de rebobinado y el estado de los
-componentes `BeastySaveable` en tu escena.
+encriptación opcional funcionan de fábrica. Una partida guardada contiene todo el almacén de variables, la
+posición en la historia, el escenario, el estado del mundo libre, el historial de rebobinado y el estado de
+los componentes `BeastySaveable` de tu escena.
 
-Ver [Guardado y carga](/es/docs/beasty-visual-novel/production/saving-and-loading/) y la
+Consulta [Guardado y carga](/es/docs/beasty-visual-novel/production/saving-and-loading/) y la
 [documentación de Beasty Save System](/es/docs/beasty-save-system/).
 
-## ¿Mi guionista puede trabajar en un archivo de texto mientras yo construyo en el grafo?
+## ¿Puede mi guionista trabajar en un archivo de texto mientras yo armo el grafo?
 
-Sí. Cada historia puede llevar un script `.vnbeasty`: un archivo, una escena, texto plano, versionable,
+Sí. Cada historia puede llevar un script `.vnbeasty`: un solo archivo, una escena, texto plano, versionable y
 comparable línea a línea (diffable).
 
-El contrato en un párrafo. El grafo es la fuente de verdad. Guardar el archivo aplica el texto al grafo;
-**Sync from graph** escribe el grafo en el texto. Si ambos lados cambiaron, gana el guardado más reciente y
-se deja un `.bak` con marca de tiempo del lado sobrescrito junto al archivo. Una importación que no se puede
-parsear, que está vacía, o que destruiría contenido, se rechaza, y el grafo queda intacto. Los assets se
-resuelven por GUID, así que renombrar arte no rompe un nodo sincronizado.
+Cómo funciona, en un párrafo: el grafo es la fuente de verdad. Guardar el archivo aplica el texto al grafo;
+**Sync from graph** escribe el grafo en el texto. Si los dos lados cambiaron, gana el guardado más reciente,
+y junto al archivo queda un `.bak` con marca de tiempo del lado sobrescrito. Si una importación no se puede
+parsear, está vacía o destruiría contenido, se rechaza y el grafo queda intacto. Los assets se resuelven por
+GUID, así que renombrar el arte no rompe ningún nodo sincronizado.
 
-El límite que conviene conocer de antemano: **un backdrop con más de una capa de sprite no tiene forma de
-texto**. Esas escenas se quedan solo en el grafo.
+El límite que conviene conocer desde el principio: **un backdrop con más de una capa de sprite no tiene forma
+de texto**. Esas escenas viven solo en el grafo.
 
-Ver [El script de texto](/es/docs/beasty-visual-novel/authoring/text-script/) y
+Consulta [El script de texto](/es/docs/beasty-visual-novel/authoring/text-script/) y
 [la sintaxis de .vnbeasty](/es/docs/beasty-visual-novel/authoring/vnbeasty-syntax/).
 
 ## ¿Puedo usar mi propia UI?
 
-Sí. Todo lo que ve el jugador es un prefab uGUI con su arte en una sola carpeta. Restiliza los prefabs, o
-apunta las vistas a un canvas propio.
+Sí. Todo lo que ve el jugador es un prefab de uGUI con su arte en una sola carpeta. Puedes cambiar el estilo
+de los prefabs, o apuntar las vistas a un canvas tuyo.
 
 `Tools > Beasty VN > Setup > Upgrade UI Prefabs (keep customizations)` actualiza los prefabs incluidos sin
 descartar tus cambios.
 
-El motor de la historia (`Core`) es un ensamblado separado de la capa de vista, así que puedes reemplazar la
-presentación sin tocar el motor.
+El motor de la historia (`Core`) vive en un ensamblado separado de la capa de vista, así que puedes reemplazar
+toda la presentación sin tocar el motor.
 
-Ver [Prefabs de UI](/es/docs/beasty-visual-novel/production/ui-prefabs/) y [Prefabs](/es/docs/beasty-visual-novel/reference/prefabs/).
+Consulta [Prefabs de UI](/es/docs/beasty-visual-novel/production/ui-prefabs/) y [Prefabs](/es/docs/beasty-visual-novel/reference/prefabs/).
 
 ## ¿Puedo usarlo para un dating sim, un life sim o un juego de detectives?
 
-Sí. Más allá de la novela visual, el paquete incluye los sistemas que esos géneros necesitan:
+Sí. Además de la novela visual, el paquete trae los sistemas que esos géneros necesitan:
 
 - **Dating sim**: stats de personaje, variables de afecto, un menú de conversación por personaje, elecciones
   condicionales, alias y estilos de entrega.
 - **Life sim**: tiempo de juego con momentos del día, rutinas y perfiles de personaje, salas de mundo libre,
   misiones con recurrencia diaria y semanal.
 - **Juego de detectives**: un inventario con ítems clave, puertas condicionales, nodos de decisión, un
-  diccionario de tokens editables por el jugador, objetivos de misión con pistas.
+  diccionario de tokens que el jugador puede editar, objetivos de misión con pistas.
 
-Empieza en [Conceptos fundamentales](/es/docs/beasty-visual-novel/getting-started/core-concepts/), y luego lee las páginas bajo `world/`.
+Empieza por [Conceptos fundamentales](/es/docs/beasty-visual-novel/getting-started/core-concepts/) y después revisa las páginas dentro de `world/`.
 
 ## ¿Es compatible con WebGL?
 
 No. WebGL no es una plataforma compatible.
 
-Ver [Compilación y plataformas](/es/docs/beasty-visual-novel/production/building-and-platforms/).
+Consulta [Compilación y plataformas](/es/docs/beasty-visual-novel/production/building-and-platforms/).
 
-## ¿Puedo localizar a cualquier número de idiomas?
+## ¿Puedo localizar el juego a cuantos idiomas quiera?
 
 Sí. Una tabla de localización es una grilla de claves por idioma, y puedes agregar tantos idiomas como
 quieras. El índice 0 es el idioma de origen.
 
-Cada celda registra una huella digital del texto de origen a partir del cual se tradujo, así que cuando
-editas una línea sus traducciones se marcan como **Stale**, y puedes exportar exactamente las líneas que
-cambiaron como CSV o TSV.
+Cada celda guarda una huella del texto original del que se tradujo, así que al editar una línea sus
+traducciones se marcan como **Stale**, y puedes exportar en CSV o TSV exactamente las líneas que cambiaron.
 
-Ver [Localización](/es/docs/beasty-visual-novel/production/localization/).
+Consulta [Localización](/es/docs/beasty-visual-novel/production/localization/).
 
 ## ¿El jugador puede cambiar de idioma a mitad de partida?
 
-Sí, en vivo. La línea actual, las elecciones y el menú de conversación se vuelven a renderizar de
-inmediato. Hay una única fuente de verdad para el idioma activo, compartida por el texto de la historia y
-la interfaz.
+Sí, en vivo. La línea actual, las elecciones y el menú de conversación se vuelven a dibujar al instante. El
+idioma activo tiene una única fuente de verdad, compartida entre el texto de la historia y la interfaz.
 
-Al iniciar, el juego usa la elección guardada del jugador, luego el idioma del sistema operativo si
-`autoDetectSystemLanguage` está activado, y luego el predeterminado.
+Al arrancar, el juego usa el idioma que el jugador eligió y quedó guardado; si no hay ninguno, el del sistema
+operativo (cuando `autoDetectSystemLanguage` está activado), y si no, el predeterminado.
 
 ## ¿Puedo agregar mi propio minijuego?
 
-Sí. Para eso está el estado de aplicación `Custom`. Entra en él con `EnterCustom`, captura tu estado en
-`customStateJson`, y se guarda, se carga y hace rollback junto con todo lo demás - el almacén de variables,
-la posición en la historia y el tiempo se mantienen consistentes.
+Sí. Para eso existe el estado de aplicación `Custom`. Entra con `EnterCustom`, guarda tu estado en
+`customStateJson`, y ese estado se guarda, se carga y se rebobina junto con todo lo demás — el almacén de
+variables, la posición en la historia y el tiempo se mantienen consistentes entre sí.
 
-Ver [Modo personalizado](/es/docs/beasty-visual-novel/scripting/custom-mode/).
+Consulta [Modo personalizado](/es/docs/beasty-visual-novel/scripting/custom-mode/).
 
 ## ¿Se incluye el código fuente en C#?
 
 Sí. Código fuente completo, sin DLLs. `Core` es lógica pura sin UI de Unity, en su propio ensamblado;
-`Runtime` es lo que se incluye en un build; `Editor` contiene las herramientas de creación.
+`Runtime` es lo que entra en un build; `Editor` contiene las herramientas de creación.
 
-Ver [Resumen de scripting](/es/docs/beasty-visual-novel/scripting/overview/).
+Consulta [Resumen de scripting](/es/docs/beasty-visual-novel/scripting/overview/).
 
 ## ¿Cómo migro desde Ren'Py?
 
-No hay un importador automático de Ren'Py. Reescribes el script.
+No hay un importador automático de Ren'Py: el script se reescribe a mano.
 
-Es menos doloroso de lo que suena, porque el formato `.vnbeasty` está deliberadamente cerca de lo que ya
-escribes: `label`, `jump`, `show`, `hide`, `scene` (aquí `backdrop`), un hablante seguido de una línea entre
-comillas, menús como líneas `choice` con condiciones. Pega una escena, renombra los comandos, y la pestaña
-Text te dice qué no puede resolver.
+Es menos doloroso de lo que suena, porque el formato `.vnbeasty` se parece a propósito a lo que ya escribes:
+`label`, `jump`, `show`, `hide`, `scene` (aquí `backdrop`), un hablante seguido de su línea entre comillas,
+menús como líneas `choice` con condiciones. Pega una escena, renombra los comandos, y la pestaña Text te dirá
+qué no pudo resolver.
 
-Dos diferencias para las que hay que planificar:
+Dos diferencias que conviene tener en cuenta:
 
-- **La configuración no está en el script.** Los personajes, las variables, el diccionario, los ítems y la
+- **La configuración no vive en el script.** Los personajes, las variables, el diccionario, los ítems y la
   localización se crean en las ventanas visuales. El script solo los referencia por nombre.
 - **El grafo es la fuente de verdad.** El texto es una vista sobre él, no la copia maestra.
 
-Ver [la sintaxis de .vnbeasty](/es/docs/beasty-visual-novel/authoring/vnbeasty-syntax/).
+Consulta [la sintaxis de .vnbeasty](/es/docs/beasty-visual-novel/authoring/vnbeasty-syntax/).
 
 ## Ver también
 

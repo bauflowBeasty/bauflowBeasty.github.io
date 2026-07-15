@@ -1,10 +1,10 @@
 ---
 title: "Guardado y carga asíncronos"
-description: "Tres métodos te permiten guardar y cargar sin bloquear el hilo principal en la IO de disco. Esta página muestra cómo usarlos, y es precisa sobre qué mueven y "
+description: "Tres métodos te permiten guardar y cargar sin bloquear el hilo principal en la IO de disco. Esta página muestra cómo usarlos y deja claro qué mueven fuera del hilo principal y qué no."
 ---
 
-Tres métodos te permiten guardar y cargar sin bloquear el hilo principal en la IO de disco. Esta página muestra cómo
-usarlos, y es precisa sobre qué mueven y qué no mueven fuera del hilo principal.
+Tres métodos te permiten guardar y cargar sin bloquear el hilo principal en la IO de disco. Esta página muestra
+cómo usarlos, y deja claro qué mueven fuera del hilo principal y qué no.
 
 ## Los tres métodos
 
@@ -25,7 +25,7 @@ vuelve con el mismo tipo de resultado. Nada lanza excepciones; compruebas el res
 > La **IO de archivos** es asíncrona. **La serialización y la encriptación no lo son** — se ejecutan en el hilo que
 > llama al método, que normalmente es el hilo principal.
 
-Esta es la descripción honesta, y es la que deberías tener en cuenta al planificar.
+Esa es la descripción honesta, y es la que conviene tener en cuenta al planificar.
 
 Un guardado tiene dos costes: convertir tu grafo de objetos en texto, y enviar ese texto al disco. El segundo coste
 es el impredecible — un disco duro lento, el almacenamiento flash de un teléfono bajo carga, un requisito de
@@ -34,13 +34,14 @@ estaba.
 
 Así que:
 
-- Un guardado con un **grafo de objetos grande** todavía te costará tiempo de hilo principal en `SaveAsync`, antes de que
-  la IO siquiera empiece. Hacer la llamada asíncrona no hace gratuita la serialización.
-- Un guardado con un **grafo de objetos modesto en un disco lento** es exactamente para lo que sirven estos métodos. El hitch
-  que estabas viendo era el disco, y el disco ahora está fuera del hilo principal.
+- Un guardado con un **grafo de objetos grande** todavía te costará tiempo de hilo principal en `SaveAsync`, antes
+  de que la IO siquiera empiece. Hacer la llamada asíncrona no hace que la serialización sea gratis.
+- Un guardado con un **grafo de objetos modesto en un disco lento** es exactamente para lo que sirven estos
+  métodos. El hitch que estabas viendo era el disco, y ahora el disco está fuera del hilo principal.
 
-No son un trabajo en segundo plano. No hay ningún hilo de trabajo (worker thread) procesando tu guardado mientras el juego
-sigue funcionando. Si tu guardado es genuinamente enorme, la respuesta es un guardado más pequeño, no uno asíncrono.
+No son un trabajo en segundo plano. No hay ningún hilo de trabajo (worker thread) procesando tu guardado mientras
+el juego sigue funcionando. Si tu guardado es realmente enorme, la respuesta es un guardado más pequeño, no uno
+asíncrono.
 
 ## Cuándo usarlos
 
@@ -49,20 +50,20 @@ Usa las variantes asíncronas cuando:
 - Guardas durante el juego — un autoguardado, un checkpoint, un guardado al cambiar de sala — y el jugador notaría
   un frame perdido.
 - Estás publicando en consola o móvil, donde el almacenamiento es más lento y menos predecible que un SSD de escritorio.
-- Tu guardado es lo bastante grande como para que la escritura tarde lo suficiente como para notarse.
+- Tu guardado es lo bastante grande como para que la escritura se alcance a notar.
 
 Usa las síncronas cuando:
 
-- Guardas desde un menú en el que el jugador ya está sentado, donde unos pocos milisegundos no importan.
-- Estás cargando un guardado como parte de una transición de escena, donde ya estás mostrando una pantalla de carga de todos modos.
+- Guardas desde un menú en el que el jugador ya está detenido, donde unos pocos milisegundos no importan.
+- Cargas un guardado durante una transición de escena, cuando de todos modos ya estás mostrando una pantalla de carga.
 
 Cargar un guardado al inicio de un nivel normalmente no necesita ser asíncrono. Ya estás bloqueado por la
 carga del nivel.
 
 ## Esperarlos con await
 
-Unity no necesita una corrutina para esto. Marca tu método `async` y haz `await` de la llamada. La continuación
-vuelve en el hilo principal de Unity, así que puedes tocar la escena justo después del `await`.
+Unity no necesita una corrutina para esto. Marca tu método como `async` y espera la llamada con `await`. La
+continuación vuelve en el hilo principal de Unity, así que puedes tocar la escena justo después del `await`.
 
 ```csharp
 using System.Threading.Tasks;
@@ -94,8 +95,9 @@ public sealed class Autosave : MonoBehaviour
 
 ## Desactivar el botón de guardado mientras un guardado está en curso
 
-Un jugador que machaca el botón de guardado puede iniciar una segunda escritura al mismo slot antes de que la primera haya
-terminado. No lo permitas. Protege la llamada con un flag, y desactiva el botón mientras esté activo.
+Un jugador que machaca el botón de guardado puede iniciar una segunda escritura al mismo slot antes de que la
+primera termine. No lo permitas. Protege la llamada con un flag, y desactiva el botón mientras el guardado esté
+en curso.
 
 ```csharp
 using System.Threading.Tasks;
@@ -138,8 +140,8 @@ public sealed class SaveButton : MonoBehaviour
 }
 ```
 
-El `try`/`finally` importa. Si el guardado falla, el botón debe volver, o un solo guardado malo dejará
-al jugador sin poder guardar por el resto de la sesión.
+El `try`/`finally` importa. Si el guardado falla, el botón tiene que volver a habilitarse, o un solo guardado
+fallido dejará al jugador sin poder guardar durante el resto de la sesión.
 
 Una precaución más: no dispares un autoguardado y un guardado manual al mismo slot al mismo tiempo. Como las
 escrituras son atómicas no terminarás con un archivo a medio escribir, pero una de las dos escrituras puede fallar con

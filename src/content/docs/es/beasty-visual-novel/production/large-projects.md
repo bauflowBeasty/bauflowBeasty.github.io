@@ -1,20 +1,20 @@
 ---
 title: "Proyectos grandes"
-description: "Un juego de veinte horas no es un juego de dos horas con más nodos. Esta página trata sobre las partes del paquete construidas para escalar, y los hábitos que evitan que una"
+description: "Un juego de veinte horas no es un juego de dos horas con más nodos. Esta página trata de las partes del paquete construidas para escalar, y de los hábitos que evitan que una producción larga se estanque."
 ---
 
-Un juego de veinte horas no es un juego de dos horas con más nodos. Esta página trata sobre las partes del
-paquete construidas para escalar, y los hábitos que evitan que una producción larga se estanque.
+Un juego de veinte horas no es un juego de dos horas con más nodos. Esta página trata de las partes del
+paquete construidas para escalar, y de los hábitos que evitan que una producción larga se estanque.
 
 ## Lo que el editor ya hace por ti
 
-No tienes que planificar para esto. Así es como funcionan las ventanas.
+No tienes que preparar nada de esto; las ventanas ya funcionan así.
 
 - **Listas virtualizadas.** Las listas de variables, misiones, ítems, personajes, salas y nodos dibujan solo
   las filas que están en pantalla. Una lista con miles de entradas se desplaza tan rápido como una lista con
   diez.
-- **Búsqueda y agrupación** en esas listas, así que encontrar una variable entre miles es escribir, no
-  desplazarse.
+- **Búsqueda y agrupación** en esas listas, así que encontrar una variable entre miles es cuestión de
+  escribir, no de desplazarse.
 - **Selección múltiple y borrado masivo.** Clic, shift-clic para un rango, ctrl-clic para agregar — luego
   **Delete selected (N)**. Disponible en las listas de variables, ítems, misiones, personajes y pantallas.
   Limpiar un centenar de banderas obsoletas es una sola operación.
@@ -27,27 +27,27 @@ No escribas un juego de veinte horas como un solo `DialogueScene`. Divídelo —
 — y muévete entre ellos con el bloque de flujo **Go to VN scene** (o la línea `goto-scene` en un guion de
 texto).
 
-Lo que hace que esto funcione: **el almacén de variables sobrevive al salto**. El Capítulo 2 abre con cada
-bandera, cada estadística de personaje, el reloj del juego, los estados de las misiones y el inventario
+Lo que hace que esto funcione: **el almacén de variables sobrevive al salto**. El Capítulo 2 arranca con
+cada bandera, cada stat de personaje, el reloj del juego, los estados de las misiones y el inventario
 exactamente como los dejó el Capítulo 1, porque todo vive en un solo almacén que pertenece al juego, no a la
 escena. También puedes entrar a un nodo específico de la escena destino en lugar de a su nodo de entrada.
 
-Lo que obtienes con esto:
+Qué ganas con esto:
 
 - Cada escena es un asset más pequeño, así que el lienzo del grafo, el guion de texto y la tabla de
-  localización son todos manejables.
-- Dos escritores pueden trabajar en dos capítulos a la vez sin pelear por un solo archivo.
-- La exportación por **Section** de la pestaña Localization puede entregar un capítulo a un traductor.
+  localización se mantienen manejables.
+- Dos escritores pueden trabajar en dos capítulos a la vez sin pelearse por un mismo archivo.
+- La exportación por **Section** de la pestaña Localization te permite entregar un capítulo a un traductor.
 
 ## Reutilización con subgrafos
 
 Cualquier cosa que escribas más de una vez debería ser un subgrafo: una tienda, una pelea, una escena de "hacer
 té", una secuencia de sueño. Un nodo de subgrafo llama a un grafo anidado y enruta según el resultado que este
-devuelve, así que una secuencia autorada sirve a cada llamador y cada llamador decide qué pasa después. Ver
-[Subgrafos](/es/docs/beasty-visual-novel/authoring/subgraphs/).
+devuelve, así que una misma secuencia sirve a todos los que la llaman, y cada uno decide qué pasa después.
+Consulta [Subgrafos](/es/docs/beasty-visual-novel/authoring/subgraphs/).
 
-El validador comprueba que cada llamador enrute cada resultado que el subgrafo puede devolver, o tenga un
-respaldo — que es el modo de fallo que muerde cuando un subgrafo adquiere un nuevo final tarde en la
+El validador comprueba que cada llamador enrute todos los resultados que el subgrafo puede devolver, o tenga
+un respaldo — justo el fallo que aparece cuando a un subgrafo le agregas un final nuevo tarde en la
 producción.
 
 ## Mantener manejable la localización
@@ -56,21 +56,21 @@ La tabla de traducción de un juego largo es grande, y reenviarla completa cada 
 el tiempo de tu traductor y tu dinero.
 
 - Exporta **Missing or stale only**. Contiene exactamente las celdas que necesitan trabajo, y nada más. Como
-  cada celda traducida recuerda el texto de origen a partir del cual se hizo, esto se mantiene preciso después
-  de cualquier cantidad de reescritura.
+  cada celda traducida recuerda el texto de origen del que se tradujo, la exportación sigue siendo precisa
+  por más que reescribas.
 - Exporta **por sección** para entregar un capítulo a la vez.
-- Barre **Unused keys** periódicamente. Eliminar contenido de la historia deja sus claves atrás.
+- Barre **Unused keys** periódicamente. Cuando eliminas contenido de la historia, sus claves quedan atrás.
 
-Ver [Localización](/es/docs/beasty-visual-novel/production/localization/).
+Consulta [Localización](/es/docs/beasty-visual-novel/production/localization/).
 
 ## Cuándo activar el streaming
 
-Actívalo cuando tu arte sea genuinamente el problema — un juego largo cuyos fondos y sprites de personaje no
-necesitan estar todos residentes a la vez, o una plataforma con memoria limitada. Es opcional, y es beta en
-1.0.0, así que es una decisión deliberada en lugar de un valor predeterminado. También es reversible en
+Actívalo cuando el arte sea de verdad el problema — un juego largo cuyos fondos y sprites de personaje no
+necesitan estar todos cargados en memoria a la vez, o una plataforma con memoria limitada. Es opcional, y es
+beta en 1.0.0, así que activarlo es una decisión deliberada, no un valor predeterminado. Y es reversible en
 cualquier momento.
 
-Ver [Streaming](/es/docs/beasty-visual-novel/production/streaming/).
+Consulta [Streaming](/es/docs/beasty-visual-novel/production/streaming/).
 
 ## Ejecuta el validador regularmente
 
@@ -80,7 +80,7 @@ vez que juegas; en uno grande se queda en una rama que nadie ha recorrido en tre
 antes de una compilación.
 
 Duplicar assets en la ventana Project también es más común en un equipo grande — así que ejecuta
-`Find duplicate ids` cuando las cosas empiecen a comportarse de forma extraña. Ver
+`Find duplicate ids` cuando las cosas empiecen a comportarse raro. Consulta
 [Validación e ids](/es/docs/beasty-visual-novel/production/validation-and-ids/).
 
 ## Ver también

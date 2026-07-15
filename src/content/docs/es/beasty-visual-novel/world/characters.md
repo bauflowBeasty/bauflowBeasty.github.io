@@ -1,11 +1,11 @@
 ---
 title: "Personajes"
-description: "Un personaje es un miembro del reparto: un nombre, un conjunto de sprites, una forma de hablar, y un conjunto de números que la historia cambia. Esta página cubre todo lo que aut"
+description: "Un personaje es un miembro del reparto: un nombre, un conjunto de sprites, una forma de hablar y un puñado de números que la historia cambia. Esta página cubre todo lo que defines en un personaje."
 ---
 
-Un personaje es un miembro del reparto: un nombre, un conjunto de sprites, una forma de hablar, y un conjunto de
-números que la historia cambia. Esta página cubre todo lo que autoras en un personaje. No cubre lo que
-dicen — eso es [Diálogo y escenario](/es/docs/beasty-visual-novel/authoring/dialogue-and-stage/).
+Un personaje es un miembro del reparto: un nombre, un conjunto de sprites, una forma de hablar y un puñado de
+números que la historia cambia. Esta página cubre todo lo que defines en un personaje. No cubre lo que
+dicen — eso está en [Diálogo y escenario](/es/docs/beasty-visual-novel/authoring/dialogue-and-stage/).
 
 ## Crear un personaje
 
@@ -13,12 +13,12 @@ Dos formas, el mismo resultado:
 
 - `Create > Beasty VN > Characters > Character Definition` en la ventana Project.
 - Abre `Tools > Beasty VN > Editor`, ve a la pestaña **Characters**, subpestaña **Cast**, y pulsa
-  **+ New Character**. Esta es la forma que normalmente usarás, porque el personaje se añade al
-  contexto compartido por ti.
+  **+ New Character**. Esta es la forma que normalmente usarás, porque el personaje queda añadido al
+  contexto compartido sin que tengas que hacerlo tú.
 
 La pestaña Characters también está disponible por sí sola a través de
 `Tools > Beasty VN > Content > Character Database`. Tiene cuatro subpestañas: **Cast** (identidad, alias,
-expresiones, estilos de interpretación, retratos), **Variables** (estadísticas), **Quests** y **Talk Menu**.
+expresiones, estilos de entrega, retratos), **Variables** (estadísticas), **Quests** y **Talk Menu**.
 
 ![La pestaña Characters, subpestaña Cast, con un personaje seleccionado](/docs-images/beasty-visual-novel/vn-characters-cast.png)
 
@@ -34,8 +34,8 @@ expresiones, estilos de interpretación, retratos), **Variables** (estadísticas
 | **Category** | `Main` o `Secondary`. Agrupa el reparto en el editor. |
 | **Tags** | Etiquetas libres (`feminine`, una facción, un capítulo). Agrupan y filtran la lista del reparto en el editor. Añádelas con **+ Tag**. |
 
-El id es a lo que apunta todo lo demás: bloques, condiciones, misiones, rutinas. El display name es solo
-presentación, y puede cambiar durante el juego. Renombra el id y el editor propaga el renombrado; consulta
+Todo lo demás apunta al id: bloques, condiciones, misiones, rutinas. El display name es solo
+presentación, y puede cambiar durante el juego. Si renombras el id, el editor propaga el cambio; consulta
 [Validación e ids](/es/docs/beasty-visual-novel/production/validation-and-ids/).
 
 > **Nota**
@@ -61,8 +61,8 @@ expression asked for  ->  base expression  ->  nothing
 portrait asked for    ->  base portrait    ->  the stage sprite for that expression
 ```
 
-Así que un personaje con solo sprites de escenario aun así consigue un retrato: el motor reutiliza el sprite de escenario. Un
-personaje sin una expresión `base` no muestra nada, que es el único caso al que hay que estar atento.
+Así que un personaje que solo tiene sprites de escenario igual obtiene un retrato: el motor reutiliza el sprite de escenario. Un
+personaje sin expresión `base` no muestra nada — ese es el único caso al que hay que estar atento.
 
 ## Estilos de interpretación
 
@@ -83,8 +83,8 @@ Cada estilo define:
 | **Name prefix** / **Name suffix** | Decora la placa de nombre para este estado, p. ej. un sufijo de `" (pensando)"`. |
 | **Text effect** | Una decoración animada sobre el texto del cuerpo: `None`, `Wave`, `Shake`, `Fade` o `Pulse`. |
 
-Todo lo que dejes sin tocar recae en los valores por defecto propios del personaje. Un personaje que no define ningún estilo para
-un estado simplemente habla con normalidad en él — nunca tienes que rellenar los cuatro.
+Todo lo que dejes sin tocar cae en los valores por defecto del propio personaje. Un personaje que no define ningún estilo para
+un estado simplemente habla con normalidad — nunca estás obligado a rellenar los cuatro.
 
 ## Alias: mostrar un nombre distinto
 
@@ -116,7 +116,7 @@ Para dejar que el jugador nombre a un personaje él mismo, usa el bloque **Ask -
 
 ## Variables de personaje (estadísticas)
 
-Una variable de personaje es un número o una bandera que lleva el personaje: `affection`, `met`, `trust`. Provienen
+Una variable de personaje es un número o una bandera que lleva el personaje: `affection`, `met`, `trust`. Salen
 de dos sitios, y un personaje tiene ambos:
 
 1. **El Character Variable Schema** — los campos que tiene **todo** personaje. Un asset por proyecto
@@ -137,26 +137,26 @@ Cada campo tiene:
 | **Clamp** + **Min** / **Max** | Mantiene el valor dentro de un rango cuando el jugador lo edita. |
 | **Step** | Cuánto suma o resta cada pulsación de +/-. |
 
-Ambos indicadores de presentación empiezan desactivados. Un campo nuevo es primero estado del juego; ponerlo delante del
+Ambos indicadores de presentación empiezan desactivados. Un campo nuevo es, antes que nada, estado del juego; mostrárselo al
 jugador es una decisión que tomas a propósito.
 
 ### Anular el valor por defecto del esquema para un personaje
 
 Todos empiezan con `affection = 0`, pero Maya empieza con 10 porque es tu hermana. No necesitas un
 segundo campo para eso. En la subpestaña **Variables** del personaje, anula el valor por defecto del campo universal
-solo para este personaje. También puedes anular si ese campo en concreto se muestra en la pantalla de estadísticas de
-*este* personaje, sin tocar el esquema.
+solo para este personaje. También puedes cambiar, solo para *este* personaje, si ese campo en concreto se muestra en su
+pantalla de estadísticas, sin tocar el esquema.
 
-Cambiar una variable de personaje desde la historia es el bloque **Character variable** (categoría de paleta
-**State**): elige el personaje, elige el campo, elige la operación. Leer una en una condición es
+Para cambiar una variable de personaje desde la historia está el bloque **Character variable** (categoría de paleta
+**State**): elige el personaje, elige el campo, elige la operación. Para leerla en una condición:
 `maya.affection > 5`. Ambas cosas se explican en
 [Variables y condiciones](/es/docs/beasty-visual-novel/world/variables-and-conditions/).
 
 ## El sprite FreeRoam
 
-**FreeRoam sprite** es el sprite usado cuando el personaje está de pie en una sala, colocado ahí por su rutina.
-Déjalo vacío y se usa en su lugar la expresión `base` del personaje. Dónde se para y cuán grande es lo decide
-el prefab de la sala, no aquí — consulta [Rutinas de personajes](/es/docs/beasty-visual-novel/world/character-routines/).
+**FreeRoam sprite** es el sprite que se usa cuando el personaje está de pie en una sala, colocado ahí por su rutina.
+Si lo dejas vacío, se usa la expresión `base` del personaje. Dónde se para y qué tamaño tiene lo decide
+el prefab de la sala, no este campo — consulta [Rutinas de personajes](/es/docs/beasty-visual-novel/world/character-routines/).
 
 Dos interruptores relacionados controlan qué puede ver el jugador sobre el paradero del personaje:
 
@@ -172,8 +172,8 @@ quién está en ella:
   personaje que el jugador nunca debe poder consultar.
 - **Shown when** — una condición. Por defecto, todo personaje usa una condición *compartida*, escrita una vez con
   el marcador `@self`: una condición de `@self.met == true` revela a cada personaje en cuanto se activa su
-  propia bandera `met`. Activa la anulación por personaje para darle a uno su propia condición
-  en su lugar — un villano crucial para la historia que aparece solo después del capítulo 3, por ejemplo.
+  propia bandera `met`. Activa la anulación por personaje para darle a uno una condición propia
+  — por ejemplo, un villano clave para la historia que aparece solo después del capítulo 3.
 
 Una condición vacía significa "siempre mostrado". `@self` se explica en
 [Variables y condiciones](/es/docs/beasty-visual-novel/world/variables-and-conditions/#condiciones-compartidas-y-self), y las propias pantallas
@@ -181,7 +181,7 @@ en [Pantallas de personaje](/es/docs/beasty-visual-novel/world/character-screens
 
 ## El menú de conversación
 
-Cada personaje tiene un menú de conversación: la lista de cosas que el jugador puede decirle ahora mismo. Se autora en
+Cada personaje tiene un menú de conversación: la lista de cosas que el jugador puede decirle ahora mismo. Se edita en
 la subpestaña **Characters > Talk Menu**, y los pasos de misión que apuntan a este personaje se añaden a él
 automáticamente. Consulta [El menú de conversación](/es/docs/beasty-visual-novel/world/talk-menu/).
 

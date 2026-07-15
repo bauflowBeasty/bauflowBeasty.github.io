@@ -6,8 +6,8 @@ description: "El mundo entre conversaciones: un mapa de salas por las que el jug
 El mundo entre conversaciones: un mapa de salas por las que el jugador puede caminar, hacer clic en los objetos y salir hacia una
 escena. Esta página es para guionistas y diseñadores.
 
-El modo de mundo libre es opcional. Una novela kinética pura nunca lo usa. Pero en el momento en que quieres que el jugador elija
-adónde ir y con quién hablar, este es el modo en el que entras.
+El modo de mundo libre es opcional. Una novela kinética pura nunca lo usa. Pero en cuanto quieres que el jugador
+elija adónde ir y con quién hablar, este es el modo al que entras.
 
 ## El grafo del mapa
 
@@ -24,7 +24,7 @@ el asset y haciendo clic en **Open in Beasty VN (FreeRoam tab)**.
 > **Nota**
 > **La vista de mapa es un diagrama, no un editor del contenido de la sala.** Muestra las salas como cajas y las puertas entre
 > ellas como líneas. Puedes crear una sala, definir la sala de entrada, eliminar una sala. Todo lo demás — el nombre, el
-> fondo, los objetos, las puertas — lo autoras **entrando en la sala**: haz doble clic en ella. Las líneas
+> fondo, los objetos, las puertas — lo editas **entrando en la sala**: haz doble clic en ella. Las líneas
 > entre salas son de solo lectura; representan las puertas que existen dentro de las salas.
 
 ## Qué es una sala
@@ -32,10 +32,10 @@ el asset y haciendo clic en **Open in Beasty VN (FreeRoam tab)**.
 | Campo | Qué es |
 |---|---|
 | **Id** | El id estable. Las puertas y rutinas se refieren a la sala por él. |
-| **Display Name** | Cómo la llamas. Se mantiene idéntico al nombre de archivo del prefab de la sala. |
+| **Display Name** | Cómo la llamas. Coincide siempre con el nombre de archivo del prefab de la sala. |
 | **Background (default)** | El sprite que se muestra cuando no se aplica ningún fondo condicional. |
 | **Conditional backgrounds** | Una lista ordenada de casos condición-más-sprite. Ver más abajo. |
-| **Room Prefab (visual)** | El prefab que posee el arte y las posiciones. |
+| **Room Prefab (visual)** | El prefab que contiene el arte y las posiciones. |
 | **Buttons** | Los objetos y puertas de la sala. Consulta [Interactuables y puertas](/es/docs/beasty-visual-novel/world/interactables-and-doors/). |
 
 La división que hay que tener presente: **el prefab define cómo se ven las cosas y dónde están; el grafo del mapa define qué
@@ -51,7 +51,7 @@ reproduce esta escena" en el editor de la sala. Ambos están vinculados por el n
    mantienen sincronizados: renombra la sala y el archivo del prefab la sigue; renombra el archivo del prefab y la sala lo sigue.
 
 Si cancelas el diálogo de guardado, la sala se crea sin prefab; puedes asignar uno más tarde en la configuración de la sala.
-Una sala sin prefab todavía puede visitarse, pero no puede tener puntos de personaje.
+Una sala sin prefab se puede visitar igualmente, pero no puede tener puntos de personaje.
 
 La primera sala que crees se convierte automáticamente en la **sala de entrada**. Para cambiarla, selecciona una sala en el mapa y
 marca **Entry Room** (o haz clic derecho en ella y elige **Set as Entry Room**).
@@ -71,15 +71,15 @@ Como una condición vacía siempre se cumple, un caso sin condición absorbe tod
 lista del caso más específico al más general.
 
 El editor de detalle presenta esto como **Background by time & presence**, agrupado en una sección **Any time**
-más una sección por franja horaria, de modo que el caso habitual se lee tal como lo piensas:
+más una sección por momento del día, de modo que el caso habitual se lee tal como lo piensas:
 
 - **Background** — el sprite de este caso.
 - **Characters present** — una lista de casillas; el caso solo se aplica mientras esos personajes estén en la sala.
 - **Weekdays (any = all)** — una lista de casillas; déjala vacía para todos los días.
 - **Advanced condition** — la condición en bruto, para todo lo que las listas de casillas no puedan expresar.
 
-Hacer clic en el encabezado de una franja horaria en la línea de tiempo de la sala centra el editor solo en esa franja horaria, que es la
-forma rápida de crear "la cocina de noche".
+Hacer clic en el encabezado de un momento del día en la línea de tiempo de la sala centra el editor solo en ese
+momento, que es la forma rápida de crear "la cocina de noche".
 
 Por debajo, estos son los mismos casos ordenados de condición-más-sprite; las secciones son una comodidad, no un
 modelo distinto.
@@ -125,8 +125,8 @@ La historia y el mapa son dos modos de la aplicación; pasas de uno a otro con *
 | **Return to room** | Vuelve a la sala de la que venía el jugador. |
 | **Choose room** | Deja que el jugador elija una sala de una lista. |
 
-Un bloque **Go to FreeRoam** toma un escenario opcional (el grafo del mapa) y un id de sala; deja la sala vacía para
-aterrizar en la sala de entrada del mapa. En el guion de texto es una sola línea:
+Un bloque **Go to FreeRoam** recibe un escenario opcional (el grafo del mapa) y un id de sala; deja la sala vacía
+para aterrizar en la sala de entrada del mapa. En el guion de texto es una sola línea:
 
 ```text
 freeroam town/square
@@ -140,7 +140,7 @@ puerta sin retorno.
 
 > **Nota**
 > Una escena a la que se entra desde una sala mantiene detrás el fondo de la sala, a menos que la escena establezca su propio
-> fondo. Esto es deliberado: un breve intercambio con un tendero debe parecer que ocurre en la tienda.
+> fondo. Esto es deliberado: una charla breve con un tendero debe dar la sensación de ocurrir dentro de la tienda.
 
 Los bloques de flujo y los nodos de flujo se explican en detalle en [Transiciones](/es/docs/beasty-visual-novel/authoring/transitions/).
 

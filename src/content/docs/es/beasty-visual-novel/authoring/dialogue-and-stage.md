@@ -1,12 +1,12 @@
 ---
 title: "Diálogo y el escenario"
-description: "Esta página trata sobre las dos cosas que haces con más frecuencia: escribir una línea, y ambientar la escena en la que ocurre. Ambas viven dentro de un Nodo de"
+description: "Las dos cosas que haces con más frecuencia: escribir una línea y ambientar la escena en la que ocurre. Ambas viven como bloques dentro de un Dialogue Node."
 ---
 
-Esta página trata sobre las dos cosas que haces con más frecuencia: escribir una línea, y ambientar la
+Esta página trata sobre las dos cosas que haces con más frecuencia: escribir una línea y ambientar la
 escena en la que ocurre. Ambas viven dentro de un Dialogue Node, como bloques. Si no has leído
 [Referencia de bloques](/es/docs/beasty-visual-novel/authoring/blocks-reference/), la versión corta es: los bloques se ejecutan de arriba abajo, y solo un
-bloque Dialogue se detiene y espera al jugador.
+bloque Dialogue se detiene a esperar al jugador.
 
 El patrón de casi todas las escenas es el mismo. Monta el escenario, luego habla.
 
@@ -18,7 +18,7 @@ Dialogue         (no speaker): "The light through the curtain was already yellow
 ```
 
 El fondo y el personaje aparecen en el mismo instante que la primera línea. El jugador ve una escena ya
-montada, no una diapositiva de cómo se construye.
+montada, no el paso a paso de cómo se construye.
 
 ## El bloque Dialogue
 
@@ -51,15 +51,14 @@ personaje que habla, y un estilo puede cambiar:
 | El estilo puede fijar | Efecto en la línea |
 |---|---|
 | Font | Una fuente TMP distinta para este estado. |
-| Text colour | Sobrescribe el color de cuerpo normal del personaje. |
+| Text colour | Reemplaza el color de texto normal del personaje. |
 | Font size multiplier | Por ejemplo 1.3 para hacer un Shout físicamente más grande. |
 | Name prefix / suffix | Decora la placa de nombre, por ejemplo "Maya (thinking)". |
 | Text effect | `None`, `Wave`, `Shake`, `Fade` o `Pulse`, animado sobre el texto en tiempo de ejecución. |
 
-Así que `Shout` en Maya puede significar una línea más grande, roja y temblorosa, y `Whisper` puede
-significar una pequeña, gris y que respira —y consigues ambas eligiendo una palabra en un desplegable, una
-vez que has definido los estilos en el personaje. Un personaje sin estilo para un estado recurre a sus
-valores por defecto.
+Así que `Shout` en Maya puede significar una línea más grande, roja y temblorosa, y `Whisper` una pequeña,
+gris y que respira —y consigues ambas eligiendo una palabra en un desplegable, una vez definidos los
+estilos en el personaje. Un personaje sin estilo para un estado recurre a sus valores por defecto.
 
 Los delivery styles se definen por personaje. Consulta [Personajes](/es/docs/beasty-visual-novel/world/characters/).
 
@@ -67,7 +66,7 @@ Los delivery styles se definen por personaje. Consulta [Personajes](/es/docs/bea
 
 El campo **Display name alias** muestra al speaker bajo un nombre distinto **solo para esta línea**.
 
-El uso clásico: el jugador aún no ha sido presentado, así que la mujer misteriosa habla como "The Stranger"
+El uso clásico: todavía no se la presentan al jugador, así que la mujer misteriosa habla como "The Stranger"
 durante dos capítulos. Sigues definiéndola como Maya —el mismo personaje, las mismas variables, las mismas
 expresiones— y cada línea simplemente lleva el alias. En el momento en que se presenta, dejas de fijar el
 alias, y a partir de ahí es Maya.
@@ -77,8 +76,8 @@ otro sitio, ni el valor de `@char:maya:@name`.
 
 > **Nota**
 > El alias es por línea. Para cambiar el nombre de un personaje de forma permanente —porque el jugador lo
-> renombró, o porque fue desenmascarado— usa en su lugar el bloque **Character name**. Escribe una anulación
-> persistida.
+> renombró, o porque fue desenmascarado— usa el bloque **Character name**. Ese bloque escribe un cambio que
+> queda guardado.
 
 ## El escenario
 
@@ -87,7 +86,7 @@ mantiene su valor actual hasta que un bloque del mismo canal lo cambia. Nunca re
 
 ### Backdrop
 
-Un fondo es **o bien** capas de sprites **o bien** un video. No puede ser ambos.
+Un fondo es capas de sprites **o** un video. No puede ser las dos cosas.
 
 **Layers** es el caso normal. Hasta cinco capas de sprites, cada una con:
 
@@ -97,8 +96,8 @@ Un fondo es **o bien** capas de sprites **o bien** un video. No puede ser ambos.
 - un factor de **parallax** (0 = estático, 1 = se mueve por completo con la cámara),
 - una lista opcional de **sprites condicionales**.
 
-Los sprites condicionales son cómo un fondo se convierte en cuatro. Le das a la capa una lista ordenada de
-casos, cada uno con una condición; el primer caso cuya condición se cumpla gana, y si ninguno lo hace, se
+Con los sprites condicionales, un solo fondo se convierte en cuatro. Le das a la capa una lista ordenada de
+casos, cada uno con una condición; el primer caso cuya condición se cumpla gana, y si ninguno se cumple, se
 usa el sprite por defecto de la capa. Una capa de dormitorio con casos para `time.daypart == Night` y
 `time.daypart == Evening` es un dormitorio que se oscurece solo, sin ningún bloque adicional en ningún lugar
 de la historia. Una condición vacía siempre se cumple, así que un caso sin condición actúa como comodín:
@@ -128,12 +127,12 @@ Pone a un personaje en el escenario, o lo reemplaza si ya está ahí.
 | Expression | Qué sprite de escenario usar. Por defecto, `base`. |
 | Portrait | Opcional. Fija un retrato de UI distinto de la expresión en escena. Vacío = el retrato sigue a la expresión. |
 | Position | `Left`, `CenterLeft`, `Center`, `CenterRight`, `Right`, o `Custom` (una X normalizada de 0 a 1). |
-| Scale | Multiplicador de tamaño. Úsalo para la distancia. |
-| Flip | Refleja el sprite, así un solo sprite mira hacia ambos lados. |
+| Scale | Multiplicador de tamaño. Úsalo para dar sensación de distancia. |
+| Flip | Refleja el sprite, así un mismo sprite puede mirar hacia ambos lados. |
 | Layer | Slot de 0 a 4. El más alto se dibuja delante. Dos personajes en el mismo anclaje necesitan capas distintas, o se superponen. |
 
 Quién está en escena es independiente de quién está hablando. Un personaje puede hablar sin estar en escena,
-y quedarse en escena toda una escena sin decir una palabra.
+o quedarse en el escenario toda una escena sin decir una palabra.
 
 ### Expression
 
@@ -143,8 +142,8 @@ character, y es lo que usas entre líneas.
 Tiene una opción extra que vale la pena conocer: **also set the portrait**. Actívala y el bloque también
 fija el retrato del cuadro de diálogo, ya sea a una clave de retrato que nombres, o al retrato base del
 personaje si la dejas vacía. Eso permite que el sprite de escenario y el pequeño icono de cabeza discrepen a
-propósito, algo útil cuando el personaje está de espaldas, u ocultando lo que siente de todos menos del
-jugador.
+propósito, algo útil cuando el personaje está de espaldas, o cuando les oculta lo que siente a todos menos
+al jugador.
 
 ### Hide character
 
@@ -164,19 +163,19 @@ opciones que una capa de fondo, sprites condicionales incluidos.
 | **Clear > Backdrop** | El fondo, capas de sprites o video. Así es como vas a negro. |
 | **Clear > Props** | Todos los props. |
 
-Son la única forma de dejar en blanco un canal. Asignar nada a un bloque Backdrop, Show character o Props no
-lo limpia: simplemente se salta el bloque.
+Son la única forma de dejar en blanco un canal. Dejar vacío un bloque Backdrop, Show character o Props no
+limpia el canal: el bloque simplemente se salta.
 
 ## La cadena de reserva de expresión y retrato
 
-No vas a dibujar cada expresión para cada personaje, y no lo necesitas. Cuando el motor necesita arte para un
+No vas a dibujar cada expresión para cada personaje, y no hace falta. Cuando el motor necesita arte para un
 personaje, recorre una cadena:
 
 **la expresión que pediste -> el `base` del personaje -> el sprite de escenario del personaje**
 
 La misma cadena se aplica a los retratos. Así que un personaje con solo un sprite `base` sigue funcionando
 en todas partes: pides `angry`, obtienes `base`, y el juego funciona. Nada da error, nada se vuelve rosa,
-nada desaparece. Dibuja el sprite `angry` más tarde y cada línea que ya lo pedía empieza a mostrarlo.
+nada desaparece. Dibuja el sprite `angry` más tarde y todas las líneas que ya lo pedían empiezan a mostrarlo.
 
 La clave de expresión por defecto es `base`. Las expresiones y los retratos se configuran por personaje en
 [Personajes](/es/docs/beasty-visual-novel/world/characters/).

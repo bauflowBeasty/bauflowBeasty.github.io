@@ -103,7 +103,7 @@ export const SIDEBARS: Record<Product['id'], SidebarGroup[]> = {
     },
     {
       label: L.help,
-      items: ['troubleshooting', 'faq'],
+      items: ['troubleshooting', 'faq', 'changelog'],
     },
   ],
 
@@ -148,7 +148,7 @@ export const SIDEBARS: Record<Product['id'], SidebarGroup[]> = {
     },
     {
       label: L.help,
-      items: ['troubleshooting', 'faq'],
+      items: ['troubleshooting', 'faq', 'changelog'],
     },
   ],
 

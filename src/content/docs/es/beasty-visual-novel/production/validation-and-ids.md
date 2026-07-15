@@ -1,10 +1,10 @@
 ---
 title: "Validación e ids"
-description: "Dos herramientas que encuentran los problemas que de otro modo encontrarían tus jugadores por ti: el validador, que recorre un proyecto en busca de referencias que apuntan a la"
+description: "Dos herramientas que encuentran por ti los problemas que, de otro modo, encontrarían tus jugadores: el validador, que recorre el proyecto en busca de referencias que apuntan a nada, y las herramientas de ids, que arreglan el único error que rompe una historia en silencio."
 ---
 
-Dos herramientas que encuentran los problemas que de otro modo encontrarían tus jugadores por ti: el validador,
-que recorre un proyecto en busca de referencias que apuntan a nada, y las herramientas de ids, que arreglan el
+Dos herramientas que encuentran por ti los problemas que, de otro modo, encontrarían tus jugadores: el validador,
+que recorre el proyecto en busca de referencias que apuntan a nada, y las herramientas de ids, que arreglan el
 único error que rompe una historia en silencio.
 
 ## El validador
@@ -31,7 +31,7 @@ Qué comprueba:
   bloque de abrir pantalla que nombra una pantalla que no existe, un paso de conversación con un diálogo pero
   sin nodo de inicio, una misión `SpecificDays` sin días seleccionados (nunca se ejecutaría).
 - **Localización.** Claves sin texto en el idioma de origen, los totales de traducciones faltantes y
-  desactualizadas, y claves que la tabla contiene pero que ya nada referencia. Ver [Localización](/es/docs/beasty-visual-novel/production/localization/).
+  desactualizadas, y claves que la tabla contiene pero que ya nada referencia. Consulta [Localización](/es/docs/beasty-visual-novel/production/localization/).
 - **Colisiones de tokens.** Un nombre de `[token]` definido en más de una fuente (una variable, el diccionario,
   la tabla de localización, un id de personaje), lo que te dice cuál gana antes de que te sorprenda.
 
@@ -40,18 +40,18 @@ nada.
 
 ## Ids
 
-Cada asset de Beasty lleva un id: nodos de historia, grafos, escenas de diálogo, personajes. Los ids son a lo
-que apuntan los saltos, las elecciones, las rutinas y las puertas de deambulación libre.
+Cada asset de Beasty lleva un id: nodos de historia, grafos, escenas de diálogo, personajes. A esos ids
+apuntan los saltos, las elecciones, las rutinas y las puertas de mundo libre.
 
-**Se generan automáticamente, pero son tuyos para editar.** Renombrar un id se propaga en cascada: las
+**Se generan automáticamente, pero puedes editarlos.** Renombrar un id se propaga en cascada: las
 referencias que lo usaban se reescriben con él. Así que un id generado por máquina puede convertirse en
 `chapter1_intro` si eso es más fácil de manejar.
 
 ### Ids duplicados
 
 Un id solo se autogenera cuando está VACÍO. Así que cuando duplicas un asset en la ventana Project (Ctrl+D), la
-copia lleva el id del original — y nada aguas abajo puede distinguir a los dos. Un salto enruta hacia el que la
-búsqueda encuentre primero. Dos personajes se convierten en alias el uno del otro.
+copia lleva el id del original — y a partir de ahí nada puede distinguir a los dos. Un salto enruta hacia el que
+la búsqueda encuentre primero. Dos personajes se convierten en alias el uno del otro.
 
 Dos herramientas:
 
@@ -64,9 +64,9 @@ Dos herramientas:
   de entrada) sigue apuntando a donde lo pusiste.
 
 > **Advertencia**
-> La reparación no puede saber sobre referencias de OTROS assets — un botón de deambulación libre que nombra un
-> id de nodo dentro de la escena que acabas de re-idear, o un bloque `Go to VN scene`. Te dice cuántos ids
-> cambió; reapúntalos a mano.
+> La reparación no puede conocer las referencias de OTROS assets — un botón de mundo libre que nombra un
+> id de nodo dentro de la escena a la que acabas de regenerar los ids, o un bloque `Go to VN scene`. Te dice
+> cuántos ids cambió; esas referencias externas tendrás que reapuntarlas a mano.
 
 ## Limpiar después de una eliminación
 
@@ -74,12 +74,12 @@ Dos herramientas:
 un asset de Beasty:
 
 - Slots nulos que quedan en la lista de personajes del contexto y en la lista de nodos de un grafo.
-- Strings de id de nodo colgantes que apuntan a un nodo cuyo asset ya no existe. Estos son ids, no referencias
-  a objetos, así que Unity no puede anularlos por ti.
+- Strings de id de nodo colgantes que apuntan a un nodo cuyo asset ya no existe. Son ids, no referencias
+  a objetos, así que Unity no puede vaciarlos por ti.
 - Código generado desactualizado: `VNVars` y `VNChars` se reconstruyen, así que una variable o personaje que
   eliminaste deja de existir también en tu C# (ver [Accesores generados](/es/docs/beasty-visual-novel/scripting/generated-accessors/)).
 
-Es idempotente y económico, así que ejecutarlo nunca es un riesgo.
+Es idempotente y ligero, así que ejecutarlo nunca es un riesgo.
 
 ## Auto-wire
 
@@ -94,7 +94,7 @@ Qué garantiza:
 hiciste tú mismo.** Así que puedes presionarlo en cualquier momento, en cualquier escena, sin perder una
 conexión deliberada.
 
-También es lo primero que probar cuando el juego arranca en una pantalla negra sin errores — ver
+También es lo primero que conviene probar cuando el juego arranca en una pantalla negra sin errores — consulta
 [UI prefabs](/es/docs/beasty-visual-novel/production/ui-prefabs/).
 
 ## Ver también

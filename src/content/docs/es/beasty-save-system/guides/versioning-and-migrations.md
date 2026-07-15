@@ -1,9 +1,9 @@
 ---
 title: "Versionado y migraciones"
-description: "Publicaste. Los jugadores tienen guardados. Ahora necesitas cambiar tu clase de datos. Esta página trata sobre cómo hacerlo sin romper los archivos que esos j"
+description: "Publicaste, los jugadores tienen guardados y ahora necesitas cambiar tu clase de datos. Cómo hacerlo sin romper los archivos que esos jugadores ya tienen en disco."
 ---
 
-Publicaste. Los jugadores tienen guardados. Ahora necesitas cambiar tu clase de datos. Esta página trata sobre cómo hacerlo
+Publicaste. Los jugadores tienen guardados. Ahora necesitas cambiar tu clase de datos. Esta página explica cómo hacerlo
 sin romper los archivos que esos jugadores ya tienen en disco.
 
 ## La situación
@@ -31,7 +31,7 @@ public sealed class PlayerData
 ```
 
 Cada guardado en el disco de cada jugador todavía contiene `name` y `volume`. Cargar uno ahora perdería el nombre y
-ambos volúmenes. Una migración es cómo los trasladas.
+ambos volúmenes. Una migración es la forma de trasladarlos.
 
 ## DataVersion
 
@@ -46,7 +46,7 @@ guardado, y se lee de vuelta en cada carga. El sistema compara la versión **en 
 | Una versión **más alta** | La carga se rechaza con el error `VersionTooNew`. |
 
 Esa última fila es un rechazo deliberado, y vale la pena entenderlo. Un guardado con una versión más alta fue
-escrito por un **build más nuevo de tu juego** que el que se está ejecutando — un jugador retrocediendo un parche, o un guardado
+escrito por un **build más nuevo de tu juego** que el que se está ejecutando — un jugador que volvió a un parche anterior, o un guardado
 de beta abierto por el build de release. Ese archivo puede contener campos que este build nunca ha conocido y formas que
 no puede interpretar. En lugar de leerlo a medias y producir un juego sutilmente roto, el sistema lo rechaza y
 te dice por qué:
@@ -70,7 +70,7 @@ static void RegisterMigration(int fromVersion, int toVersion, Func<JsonNode, Jso
 `JsonNode` es el tipo de nodo JSON propio del paquete — consulta [El motor JSON](/es/docs/beasty-save-system/reference/json-engine/) para
 la API completa. Para una migración necesitas muy poco de ella: leer un miembro, escribir un miembro, eliminar un miembro.
 
-Aquí está el cambio descrito arriba, como una migración de la versión de datos 1 a la 2:
+Este es el cambio de arriba, escrito como una migración de la versión de datos 1 a la 2:
 
 ```csharp
 using System;
@@ -109,7 +109,7 @@ public static class SaveMigrations
 Configura `DataVersion = 2` en tus settings, registra el paso, y cada guardado de 1.0 ahora se abre en 1.1 con su
 nombre y sus volúmenes intactos.
 
-Puntos para copiar de ese ejemplo:
+Qué conviene copiar de ese ejemplo:
 
 - **Protege la forma.** El nodo viene de un archivo, y un archivo puede ser cualquier cosa. Comprueba `Kind` antes de
   indexarlo. Leer un miembro del tipo equivocado lanza una excepción, y una migración que lanza excepciones hace fallar la carga
@@ -117,7 +117,7 @@ Puntos para copiar de ese ejemplo:
 - **Devuelve el nodo.** Puedes mutar el nodo que recibiste y devolverlo, como arriba, o construir uno nuevo
   y devolver ese. Devolver `null` deja los datos sin cambios en lugar de borrarlos.
 - **Mantenla pura.** Una migración debería transformar datos y nada más. No toques la escena, no cargues
-  assets, ni leas el estado actual de tu juego a partir de ella. Se ejecuta durante una carga, antes de que tus objetos existan.
+  assets ni leas el estado actual de tu juego desde dentro de ella. Se ejecuta durante una carga, antes de que tus objetos existan.
 
 ## Las migraciones se encadenan
 
@@ -182,26 +182,26 @@ Los módulos convertidores, registrados con `RegisterModule`, no se ven afectado
 ## Migrar un guardado de escena
 
 Todo lo anterior aplica a `BeastySave.Save`, donde el nodo de datos es tu propia clase. Un guardado de escena escrito
-por `SaveAll` tiene una forma fija en su lugar — un documento de ids de saveable, cada uno con tipos de componente y
-sus datos. Una migración sobre esos datos recibe ese documento, no tu clase. Es factible, pero estás
-editando una estructura que el paquete posee; lee [El formato del archivo de guardado](/es/docs/beasty-save-system/reference/save-file-format/) primero
-para que sepas exactamente qué estás reformando.
+por `SaveAll`, en cambio, tiene una forma fija — un documento de ids de saveable, cada uno con sus tipos de componente y
+sus datos. Una migración sobre esos datos recibe ese documento, no tu clase. Se puede hacer, pero estarías
+editando una estructura que pertenece al paquete; lee primero [El formato del archivo de guardado](/es/docs/beasty-save-system/reference/save-file-format/)
+para saber exactamente qué estás modificando.
 
 ## Consejos prácticos
 
 **Sube `DataVersion` en el mismo commit que el cambio a tu clase de datos.** La versión y la forma que describe son
-una sola cosa. Dividirlas entre dos commits es cómo terminas con guardados cuyo número de versión miente sobre
-su contenido, y ninguna migración puede arreglar eso.
+una sola cosa. Si las separas en dos commits, terminas con guardados cuyo número de versión miente sobre
+su contenido, y eso no lo arregla ninguna migración.
 
 **Escribe la migración en ese mismo commit también**, mientras aún recuerdas qué significaba el campo antiguo.
 
 **Conserva cada migración para siempre.** Un jugador puede instalar tu juego hoy, jugar el build 1.0 que compró en
 un disco, y abrir ese guardado en el build 2.4 después de una actualización. El paso de 1 a 2 todavía tiene que estar ahí. La
-cadena solo es tan larga como la historia de tu juego, y cada paso son unas pocas líneas; borrar los antiguos no te ahorra
-nada y eventualmente le cuesta a un jugador su guardado.
+cadena nunca es más larga que la historia de tu juego, y cada paso son unas pocas líneas; borrar los antiguos no te ahorra
+nada y tarde o temprano le cuesta a un jugador su guardado.
 
 **Prueba la cadena.** Guarda un archivo de guardado de cada versión publicada en tu proyecto y cárgalos todos en un test.
-La cadena es exactamente el tipo de código que nunca se ejercita hasta que lo ejercita un jugador.
+La cadena es exactamente el tipo de código que nunca se ejecuta hasta que lo ejecuta un jugador.
 
 ## Ver también
 

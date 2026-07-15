@@ -1,10 +1,10 @@
 ---
 title: "Transiciones: abandonar la novela"
-description: "Una novela visual en Beasty no es todo el juego. Es uno de los modos en los que puede estar el juego: los otros son el mundo libre, donde el jugador camina por"
+description: "Una novela visual en Beasty no es todo el juego: es uno de sus modos. Una transición es el momento en que la historia entrega el control a otro modo."
 ---
 
 Una novela visual en Beasty no es todo el juego. Es uno de los modos en los que puede estar el juego: los
-otros son el mundo libre, donde el jugador camina por habitaciones y hace clic en cosas, y lo que tú mismo
+otros son el mundo libre, donde el jugador camina por salas y hace clic en cosas, y lo que tú mismo
 construyas. Una **transición** es el momento en que la historia entrega el control.
 
 Hay cuatro transiciones. Existen de dos formas: como **bloques** que pones dentro de un nodo de diálogo, y
@@ -15,32 +15,30 @@ se lee el grafo.
 
 ### Go to FreeRoam
 
-Abandona la novela y pone al jugador en una habitación.
+Abandona la novela y pone al jugador en una sala.
 
 - **Map**: el mapa de mundo libre al que entrar.
-- **Room**: dónde llegar. Déjalo vacío y el jugador llega a la habitación de entrada del mapa.
+- **Room**: dónde llegar. Déjalo vacío y el jugador llega a la sala de entrada del mapa.
 
 Úsalo para el final de un capítulo que abre el mundo: la intro termina, y ahora puedes caminar.
 
 ### Return to room
 
-Vuelve a la habitación de mundo libre en la que estaba el jugador **justo antes de que empezara esta
-novela**.
+Vuelve a la sala de mundo libre en la que estaba el jugador **justo antes de que empezara esta novela**.
 
-No eliges nada. "De dónde viniste" es implícito, que es exactamente el punto: el mismo nodo de conversación
-puede alcanzarse desde la cocina, el jardín y la tienda, y esta salida devuelve al jugador a donde estaba
-cada vez. Si el jugador no venía de mundo libre en absoluto, llega en su lugar a la habitación de entrada del
-mapa.
+No eliges nada. "De dónde viniste" está implícito, y esa es justamente la idea: el mismo nodo de
+conversación puede alcanzarse desde la cocina, el jardín y la tienda, y esta salida devuelve al jugador a
+donde estaba cada vez. Si el jugador no venía de mundo libre, llega a la sala de entrada del mapa.
 
 Esta es la salida con la que termina casi cualquier conversación normal.
 
 ### Choose room
 
-Abandona la novela y deja que el **jugador** elija a qué habitación ir. Se abre un selector de habitación;
-al elegir, llega ahí.
+Abandona la novela y deja que el **jugador** elija a qué sala ir. Se abre un selector de salas; al elegir
+una, llega ahí.
 
-- **Map**: el mapa cuyas habitaciones se ofrecen.
-- **Allowed rooms**: una lista blanca opcional. Déjala vacía y se ofrece cada habitación del mapa.
+- **Map**: el mapa cuyas salas se ofrecen.
+- **Allowed rooms**: una lista blanca opcional. Déjala vacía y se ofrecen todas las salas del mapa.
 
 Úsalo para un momento de viaje rápido: "¿A dónde quieres ir esta noche?"
 
@@ -61,8 +59,8 @@ variables de personaje, el tiempo de juego, las misiones, el inventario, el dicc
 igual al otro lado.
 
 Eso es lo que hace que funcionen los juegos de varias escenas. Una bandera que fijaste en la intro se puede
-leer en el Capítulo 4. El oro gastado en una conversación desaparece cuando el jugador llega a la tienda,
-tres habitaciones y dos días después. No llevas nada de un lado a otro a mano, y no hay nada que conectar.
+leer en el Capítulo 4. El oro gastado en una conversación sigue gastado cuando el jugador llega a la tienda,
+tres salas y dos días después. No llevas nada de un lado a otro a mano, y no hay nada que conectar.
 
 ## ¿Bloque de salida o nodo Flow?
 
@@ -70,7 +68,7 @@ tres habitaciones y dos días después. No llevas nada de un lado a otro a mano,
 
 Añade la salida como el último bloque de un nodo de diálogo. Se ejecuta **cuando el jugador avanza más allá
 de la última línea**, no mientras la línea está en pantalla. El jugador lee la despedida, hace clic, y la
-habitación aparece con un fundido.
+sala aparece con un fundido.
 
 Úsalo cuando la salida es el final natural de lo que el nodo ya está haciendo:
 
@@ -102,14 +100,14 @@ propia caja:
 - Cualquier cosa que quieras poder señalar en una revisión y decir "ahí es donde el juego deja de ser una
   novela".
 
-La regla general: **si la salida pertenece a una línea concreta, hazla un bloque. Si pertenece a la forma de
-la historia, hazla un nodo.**
+La regla general: **si la salida pertenece a una línea concreta, que sea un bloque. Si pertenece a la forma
+de la historia, que sea un nodo.**
 
 ## Salidas como destino de una elección o una decisión
 
-Una opción de elección y una rama de decisión pueden apuntar ambas a una salida de flujo en lugar de a un
-nodo. Fija el destino de la opción a un destino de flujo y entrega el control fuera de la novela cuando se
-elige, en lugar de saltar a otro nodo.
+Tanto una opción de elección como una rama de decisión pueden apuntar a una salida de flujo en lugar de a un
+nodo. Apunta el destino de la opción a una salida de flujo y, al elegirla, el control sale de la novela en
+lugar de saltar a otro nodo.
 
 Los destinos ofrecidos son:
 
@@ -134,7 +132,7 @@ El jugador ve tres opciones. Dos continúan la conversación; una la termina y l
 
 ## Ver también
 
-- [Habitaciones de mundo libre](/es/docs/beasty-visual-novel/world/free-roam-rooms/) — los mapas y habitaciones a los que llevan estas salidas.
+- [Salas de mundo libre](/es/docs/beasty-visual-novel/world/free-roam-rooms/) — los mapas y salas a los que llevan estas salidas.
 - [Referencia de bloques](/es/docs/beasty-visual-novel/authoring/blocks-reference/) — la categoría Flow.
 - [El grafo de la historia](/es/docs/beasty-visual-novel/authoring/story-graph/) — el Flow (Mode Switch) Node.
 - [Elecciones y decisiones](/es/docs/beasty-visual-novel/authoring/choices-and-decisions/) — opciones y ramas.

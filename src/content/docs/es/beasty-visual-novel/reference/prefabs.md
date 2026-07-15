@@ -1,10 +1,10 @@
 ---
 title: "Prefabs"
-description: "Cada prefab que incluye el paquete, y exactamente qué componentes monta. Usa esta página para encontrar el prefab que abrir cuando quieras rediseñar una pantall"
+description: "Cada prefab que incluye el paquete, y exactamente qué componentes monta. Usa esta página para saber qué prefab abrir cuando quieras rediseñar una pantalla."
 ---
 
-Cada prefab que incluye el paquete, y exactamente qué componentes monta. Usa esta página para encontrar el
-prefab que abrir cuando quieras rediseñar una pantalla.
+Cada prefab que incluye el paquete, y exactamente qué componentes monta. Usa esta página para saber qué
+prefab abrir cuando quieras rediseñar una pantalla.
 
 Todo lo que ve el jugador es un prefab uGUI. Nada se dibuja desde código, así que puedes rediseñar cualquier
 pantalla sin tocar C#. Cómo rediseñar de forma segura, y cómo conservar tus cambios cuando el paquete se
@@ -19,7 +19,7 @@ Los prefabs viven en `BeastyVN/Prefabs/`, excepto `VNMenuRoot` y `VNBacklogEntry
 |---|---|---|
 | `VisualNovelScene` | `BeastyManager`, `VNGameController`, `VisualNovelController`, `StageController`, `FreeRoamController`, `FreeRoamScreenController`, `VNAudioManager`, `VNInputModuleInstaller`, `BeastyAspectRatioEnforcer`, `BeastyLoadingScreen`, `VNMenuManager`, `DialogueView`, `ChoiceView`, `FreeRoamScenario` | Una escena completa lista para usar: arrástrala y presiona Play. |
 | `VN_Canvas` | `DialogueView`, `ChoiceView`, `ContinueIndicatorBlink`, `DialogueTextEffect`, `VNMenuManager`, `MainMenuScreen`, `GameMenuScreen`, `SaveLoadScreen`, `PreferencesScreen`, `HistoryScreen`, `CreditsScreen`, `HelpScreen`, `VNConfirmDialog`, `BeastyLoadingScreen`, `VNLocalizedText` | Toda la interfaz en un solo prefab. |
-| `Stage` | `FreeRoamScenario` | El escenario raíz y el escenario de free roam. |
+| `Stage` | `FreeRoamScenario` | El escenario raíz y el escenario de mundo libre. |
 | `DialogPanel` | `DialogueTextEffect` | El cuadro de diálogo: placa de nombre, texto, indicador de continuar. |
 | `ChoiseRoot` | (solo uGUI) | El contenedor donde se instancian los botones de opción. |
 | `ChoiseBtn` | (solo uGUI) | Un botón de opción, instanciado por cada opción. |
@@ -40,7 +40,7 @@ Los prefabs viven en `BeastyVN/Prefabs/`, excepto `VNMenuRoot` y `VNBacklogEntry
 ## Los prefabs de escena
 
 `VisualNovelScene` es una escena completa. Monta el BeastyManager con cada manager que posee, el Stage y el
-Canvas. `Tools > Beasty VN > Setup > Create Scene` construye el mismo rig en tu propia escena en su lugar,
+Canvas. `Tools > Beasty VN > Setup > Create Scene` construye ese mismo rig directamente en tu propia escena,
 que es lo que quieres en un proyecto real.
 
 `Stage` lleva el componente `FreeRoamScenario`. Ahí es donde asignas tu `FreeRoamMapGraph`.
@@ -54,11 +54,11 @@ opciones.
 - Para rediseñar las opciones, edita `ChoiseBtn` (un botón) y `ChoiseRoot` (su contenedor). `ChoiceView`
   instancia `ChoiseBtn` una vez por cada opción que pasa su condición.
 
-`ChoiseRoot` y `ChoiseBtn` no montan ningún componente de Beasty. Son objetos uGUI ordinarios, lo que
+`ChoiseRoot` y `ChoiseBtn` no montan ningún componente de Beasty. Son objetos uGUI comunes, lo que
 significa que puedes reconstruirlos como quieras siempre que las partes que la vista busca sigan ahí.
 
-Ver [Diálogo y escenario](/es/docs/beasty-visual-novel/authoring/dialogue-and-stage/) y
-[Opciones y decisiones](/es/docs/beasty-visual-novel/authoring/choices-and-decisions/).
+Consulta [Diálogo y escenario](/es/docs/beasty-visual-novel/authoring/dialogue-and-stage/) y
+[Elecciones y decisiones](/es/docs/beasty-visual-novel/authoring/choices-and-decisions/).
 
 ## Los prefabs de menú
 
@@ -70,7 +70,7 @@ de BeastyManager en tiempo de ejecución, así que puedes soltarlo bajo cualquie
 quieres rediseñar un menú en vez del conjunto completo.
 
 `VNSaveSlot` y `VNBacklogEntry` son plantillas: una se instancia por cada ranura de guardado, otra por cada
-línea de historial. Rediseña la plantilla y cada fila lo sigue.
+línea de historial. Rediseña la plantilla y todas las filas cambian con ella.
 
 `Tools > Beasty VN > Setup > Build Default Menu Prefabs` los reconstruye desde cero y te avisa antes de
 sobrescribir nada. `Tools > Beasty VN > Setup > Upgrade UI Prefabs (keep customizations)` los actualiza
@@ -90,26 +90,26 @@ proyecto y registrando la copia como una pantalla en el VNContext.
 | La grilla de inventario, una ranura, el popup de detalle del objeto | `Inventory` |
 | La lista de elenco | `CharactersMenu` |
 | El perfil de un personaje, su barra de pestañas, sus secciones | `CharacterProfile` |
-| El panel de estadísticas solo | `CharacterStats` |
+| Solo el panel de estadísticas | `CharacterStats` |
 | Una pantalla overlay organizada como grilla | `GridMenu` más `GridItemScreenElement` |
 | Una pantalla overlay organizada como lista | `VerticalMenu` más `VerticalItemScreenElement` |
 
 `VariableBoundLabel` en las plantillas de elemento es lo que le permite a una etiqueta de HUD mostrar una
 variable en vivo.
 
-Ver [Objetos e inventario](/es/docs/beasty-visual-novel/world/items-and-inventory/),
+Consulta [Objetos e inventario](/es/docs/beasty-visual-novel/world/items-and-inventory/),
 [Pantallas de personaje](/es/docs/beasty-visual-novel/world/character-screens/) y [Pantallas y HUD](/es/docs/beasty-visual-novel/world/screens-and-hud/).
 
 ## El mixer
 
 `BeastyVNMixer` es un AudioMixer estándar de Unity con un grupo por canal: Music, Ambient, Sfx y Voice. Los
-sliders de volumen de la pantalla de Preferencias escriben en él. Apunta el audio manager a tu propio mixer
-si prefieres, siempre que exponga los mismos cuatro grupos.
+sliders de volumen de la pantalla de Preferencias escriben en él. Si lo prefieres, apunta el audio manager a
+tu propio mixer, siempre que exponga los mismos cuatro grupos.
 
-Ver [Audio y música](/es/docs/beasty-visual-novel/production/audio-and-music/).
+Consulta [Audio y música](/es/docs/beasty-visual-novel/production/audio-and-music/).
 
 ## Ver también
 
-- [Prefabs de UI](/es/docs/beasty-visual-novel/production/ui-prefabs/) - rediseño y actualización, en detalle
+- [Prefabs de UI](/es/docs/beasty-visual-novel/production/ui-prefabs/) — rediseño y actualización, en detalle
 - [Menús](/es/docs/beasty-visual-novel/reference/menu-items/)
 - [Assets](/es/docs/beasty-visual-novel/reference/assets/)

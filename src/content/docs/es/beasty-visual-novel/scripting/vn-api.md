@@ -1,6 +1,6 @@
 ---
 title: "La API estática VN"
-description: "VN es el punto de entrada estático a la historia en ejecución. Tus scripts nunca necesitan una referencia a un controlador: llaman a VN.Advance, leen VN.GetBool, se suscriben a VN"
+description: "VN es el punto de entrada estático a la historia en ejecución. Tus scripts nunca necesitan una referencia a un controlador: llaman a VN.Advance, leen VN.GetBool y se suscriben a VN.OnLineShown."
 ---
 
 `VN` es el punto de entrada estático a la historia en ejecución. Tus scripts nunca necesitan una referencia a
@@ -64,8 +64,8 @@ public static event Action<string, string> OnVariableChanged;
 
 - `OnNodeChanged` se dispara en cada nodo, incluyendo los nodos invisibles Decision, SubGraph y Return.
 - `OnLineShown` se dispara cuando una línea ha terminado de revelarse en pantalla. Su `DialogueLine` lleva
-  `SpeakerName`, `Body`, `NameColor`, `TextColor`, `Font`, `FontSizeMultiplier`, `Effect` y `Portrait`. Puede
-  ser null.
+  `SpeakerName`, `Body`, `NameColor`, `TextColor`, `Font`, `FontSizeMultiplier`, `Effect` y `Portrait`. El
+  `DialogueLine` puede ser null.
 - `OnChoiceChosen` lleva el índice dentro de la lista que te dio `OnChoicePresented`, y se dispara antes de
   que la ruta avance.
 - `OnVariableChanged` lleva `(key, newValue)`. El valor es un string — así es como el almacén guarda todo — y
@@ -73,7 +73,7 @@ public static event Action<string, string> OnVariableChanged;
 
 Estos son eventos estáticos en una clase estática. Sobreviven entre historias, y sobreviven a Fast Enter Play
 Mode porque la clase reinicia sus estáticos en `SubsystemRegistration`. Aun así, desuscríbete en `OnDestroy`:
-un evento que todavía mantiene una referencia a un MonoBehaviour destruido llamará sobre él.
+un evento que todavía retiene una referencia a un MonoBehaviour destruido lo va a invocar igual.
 
 ## Control
 
@@ -109,8 +109,7 @@ public static void SetBool  (string key, bool value);
 ```
 
 Las claves son las que declaraste en la pestaña Variables. Un error de tipeo no lanza excepción: lee el
-valor de respaldo. Eso es exactamente lo que existen los [accesores generados](/es/docs/beasty-visual-novel/scripting/generated-accessors/)
-para evitar.
+valor de respaldo. Justo para evitar eso existen los [accesores generados](/es/docs/beasty-visual-novel/scripting/generated-accessors/).
 
 ## Variables de personaje
 
@@ -125,7 +124,7 @@ public static void SetCharFloat (string characterId, string field, float value);
 public static void SetCharString(string characterId, string field, string value);
 ```
 
-Respaldadas por el mismo almacén, bajo las claves reservadas `@char:<id>:<field>`. Ver
+Respaldadas por el mismo almacén, bajo las claves reservadas `@char:<id>:<field>`. Consulta
 [Claves de variables](/es/docs/beasty-visual-novel/reference/variable-keys/).
 
 ## Tokens y nombres
@@ -153,7 +152,7 @@ public static void StopBackgroundMusic(float fadeSeconds = 1f);
 
 Estos manejan la capa de música persistente por modo, no las cues de un solo disparo del bloque Music. Son
 globales, no están atados a la sesión, así que funcionan en todos los estados de la aplicación. `Suspend` /
-`Resume` es el par a usar cuando una cue debe poseer el canal Music durante un rato. Ver
+`Resume` es el par que usas cuando una cue necesita quedarse con el canal Music durante un rato. Consulta
 [Audio y música](/es/docs/beasty-visual-novel/production/audio-and-music/).
 
 ## Ejemplo: manejar un sistema de voces desde OnLineShown
@@ -184,8 +183,8 @@ public sealed class VoiceOverDirector : MonoBehaviour
 ```
 
 `OnLineShown` se dispara después de que la línea termina de revelarse, así que un clip de voz iniciado aquí
-no compite con la máquina de escribir. Si quieres que el clip empiece cuando comienza el texto, maneja eso
-desde el bloque **Voice** autorado en su lugar.
+no compite con la máquina de escribir. Si quieres que el clip empiece junto con el texto, usa mejor el bloque
+**Voice** de la propia escena.
 
 ## Ejemplo: registrar elecciones en analytics
 
@@ -285,9 +284,9 @@ public sealed class MoneyHud : MonoBehaviour
 ```
 
 `OnVariableChanged` solo se dispara mientras una historia está en ejecución. Para un HUD que también deba
-actualizarse en FreeRoam y en tu propio modo, suscríbete en cambio a
+actualizarse en FreeRoam y en tu propio modo, suscríbete mejor a
 `VNGameController.Instance.SharedVariables.Changed` — la misma firma `(key, value)`, pero en el almacén que
-todos los modos comparten. Los widgets de HUD integrados hacen exactamente esto; ver
+todos los modos comparten. Los widgets de HUD integrados hacen exactamente esto; consulta
 [Pantallas y HUD](/es/docs/beasty-visual-novel/world/screens-and-hud/).
 
 ## Ver también

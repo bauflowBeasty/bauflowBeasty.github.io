@@ -1,10 +1,10 @@
 ---
 title: "Plataformas y límites"
-description: "Dónde funciona el paquete, dónde no, y los límites que un juego publicado realmente encuentra. Lee la sección de WebGL antes de planear una build de navegador."
+description: "Dónde funciona el paquete, dónde no, y los límites con los que un juego publicado se topa en la práctica. Lee la sección de WebGL antes de planear una build de navegador."
 ---
 
-Dónde funciona el paquete, dónde no, y los límites que un juego publicado realmente encuentra. Lee la sección
-de WebGL antes de planear una build de navegador.
+Dónde funciona el paquete, dónde no, y los límites con los que un juego publicado se topa en la práctica.
+Lee la sección de WebGL antes de planear una build de navegador.
 
 ## Versión de Unity
 
@@ -21,7 +21,7 @@ IL2CPP importa aquí porque el paquete usa reflexión para mapear campos, y la c
 código de reflexión ingenuo se rompe: los caminos genéricos de tipos de valor se eliminan (stripping),
 `Activator.CreateInstance` en un tipo al que nada hace referencia estáticamente falla, y una librería que
 funciona en el editor explota en el player. Los caminos de serialización se ejercitan con una escena de humo
-(smoke scene) corrida contra una **build IL2CPP real**, no contra el editor con el backend cambiado. Los
+(smoke scene) ejecutada contra una **build IL2CPP real**, no contra el editor con el backend cambiado. Los
 ciclos de ida y vuelta de los tipos soportados, los convertidores integrados, el cifrado y el guardado de
 grupo se ejecutan todos ahí.
 
@@ -45,17 +45,18 @@ Cualquier plataforma con un `Application.persistentDataPath` con permisos de esc
 
 Los guardados viven en `{DataPath o Application.persistentDataPath}/{Folder}/{slot}.{Extension}`. Deja
 `BeastySaveSettings.DataPath` vacío y obtienes `persistentDataPath`, que es la ubicación correcta, con
-permisos de escritura, por usuario, en todas las plataformas anteriores. Configúralo solo cuando sepas por
-qué. Consulta [Configuración](/es/docs/beasty-save-system/guides/settings/).
+permisos de escritura, por usuario, en todas las plataformas de la tabla. Cámbialo solo si sabes por qué lo
+haces. Consulta [Configuración](/es/docs/beasty-save-system/guides/settings/).
 
-La certificación de consolas a menudo tiene reglas sobre las escrituras de guardado (sin escrituras durante
-la suspensión, un ícono de guardado requerido, una comprobación de espacio libre mínimo requerida). El
-paquete te da las piezas — `SaveResult`, `SaveCompleted`, `SaveAllNow` — pero no implementa por ti los
-requisitos de certificación de ninguna plataforma.
+La certificación de consolas suele tener reglas sobre las escrituras de guardado (no escribir durante la
+suspensión, mostrar un ícono de guardado, comprobar que haya un espacio libre mínimo). El paquete te da las
+piezas — `SaveResult`, `SaveCompleted`, `SaveAllNow` — pero no implementa por ti los requisitos de
+certificación de ninguna plataforma.
 
 ## WebGL
 
-**WebGL no está soportado en 1.0.0.** No "sin probar". No "funciona con un plugin". No soportado.
+**WebGL no está soportado en 1.0.0.** No es que esté "sin probar", ni que "funcione con un plugin". No está
+soportado.
 
 Dos razones, ambas estructurales:
 
@@ -66,9 +67,9 @@ Dos razones, ambas estructurales:
 2. **Las variantes asíncronas.** `SaveAsync`, `LoadAsync` y `LoadIntoAsync` están basadas en `Task`. WebGL es
    de un solo hilo y no las ejecuta como espera el resto de la API.
 
-No hay ninguna configuración que active esto, y ninguna solución alternativa soportada. Si necesitas
-guardados en navegador, necesitas una capa de persistencia distinta — una construida sobre `PlayerPrefs`,
-IndexedDB o un servidor. Planifica eso antes de construir, no después.
+No hay ninguna opción que lo active, ni ninguna solución alternativa soportada. Si necesitas guardados en
+navegador, necesitas una capa de persistencia distinta — una construida sobre `PlayerPrefs`, IndexedDB o un
+servidor. Planéalo antes de construir, no después.
 
 ## Límites
 
@@ -76,23 +77,23 @@ IndexedDB o un servidor. Planifica eso antes de construir, no después.
 
 La serialización es **síncrona**, incluso dentro de las variantes asíncronas. `SaveAsync` realiza la E/S de
 archivo de forma asíncrona; construir el grafo de nodes JSON, renderizar el texto y cifrarlo se ejecutan
-todos en el hilo que la llamó — que es tu hilo principal. Un guardado muy grande por lo tanto cuesta un
-tirón de frame proporcional a su tamaño, y hacerle `await` no elimina ese tirón. Las variantes asíncronas
+todos en el hilo que la llamó — que es tu hilo principal. Por eso un guardado muy grande cuesta un tirón
+de frame proporcional a su tamaño, y hacerle `await` no elimina ese tirón. Las variantes asíncronas
 mantienen al juego fuera del bloqueo de **E/S**, no fuera del trabajo de serialización. Consulta [Guardado asíncrono](/es/docs/beasty-save-system/guides/async-saving/).
 
 Las consecuencias prácticas:
 
-- Mantén el guardado limitado al estado del juego, no a un volcado de la escena. Marca solo los componentes
+- Limita el guardado al estado del juego; no vuelques la escena entera. Marca solo los componentes
   que realmente llevan estado en cada `BeastySaveable`.
-- Autoguarda en momentos donde un tirón es invisible — una transición de sala, un menú abierto — no en medio
-  del combate.
+- Autoguarda en momentos en los que un tirón pasa desapercibido — una transición de sala, un menú abierto —
+  no en medio del combate.
 - Si un guardado ha crecido a un tamaño que se nota, la solución es menos componentes guardados o un objeto
   de datos más pequeño, no una llamada distinta.
 
 ### Profundidad de anidación JSON
 
-El parser limita el anidamiento a **512 niveles** (`JsonParser.DefaultMaxDepth`). Los datos anidados más
-profundo que eso fallan al guardar. En la práctica nada legítimo llega a 512 — una lista enlazada almacenada
+El parser limita el anidamiento a **512 niveles** (`JsonParser.DefaultMaxDepth`). Los datos anidados a más
+profundidad fallan al guardar. En la práctica nada legítimo llega a 512 — una lista enlazada almacenada
 como objetos anidados, o una estructura profunda accidental, es lo que te lleva ahí. Un **ciclo de
 referencias** es un fallo distinto y duro: el guardado falla con "save data must be acyclic". Tus datos de
 guardado deben ser un árbol.
@@ -101,14 +102,14 @@ guardado deben ser un árbol.
 
 Un archivo de guardado es JSON, indentado con dos espacios, UTF-8 sin BOM. Ese es un compromiso deliberado:
 
-- **Sin cifrar, un guardado es legible y editable a mano por humanos.** Bueno para depurar, bueno para
-  soporte, y una invitación abierta a un jugador con un editor de texto.
+- **Sin cifrar, un guardado se puede leer y editar a mano.** Bueno para depurar, bueno para
+  soporte, y una invitación abierta a cualquier jugador con un editor de texto.
 - **Cifrado, no lo es** — pero el cifrado tiene un costo de tamaño. El payload se cifra con AES y luego se
   codifica en Base64, lo que infla los bytes en aproximadamente un tercio, más un IV aleatorio de 16 bytes
   por guardado y relleno (padding) de bloque. El sobre y el diccionario `meta` permanecen en texto plano de
   todos modos, que es lo que permite que `ReadMeta` construya una lista de slots sin la clave.
 
-Y sé honesto contigo mismo sobre lo que compra el cifrado: es ofuscación contra la edición casual del
+Y sé honesto contigo mismo sobre lo que te da el cifrado: es ofuscación contra la edición casual del
 guardado, no seguridad. La clave viaja dentro de tu juego. Consulta [Cifrado](/es/docs/beasty-save-system/guides/encryption/).
 
 El texto también significa que el archivo es más grande de lo que sería un formato binario. Si tu guardado
@@ -116,8 +117,7 @@ se mide en decenas de megabytes, el formato es parte de la razón.
 
 ### Seguridad de hilos
 
-Llama a la API desde el **hilo principal**. Esa es la expectativa alrededor de la cual está construido el
-paquete.
+Llama a la API desde el **hilo principal**. El paquete está construido alrededor de esa expectativa.
 
 - Leer el estado de un componente significa tocar la API de Unity, y la API de Unity es exclusiva del hilo
   principal. Cualquier guardado que incluya estado de escena — cada `SaveAll`, cada convertidor que lee un
@@ -128,10 +128,10 @@ paquete.
   concurrente al mismo slot sea segura contra la corrupción en disco — un archivo escrito a medias nunca
   reemplaza a uno bueno — pero cuál de los dos gana no es algo en lo que debas confiar.
 
-Las partes internas que deben ser seguras son: la resolución de convertidores se cachea en un diccionario
-concurrente, y el estado de tolerancia por carga del mapper es local al hilo (thread-local). Eso es
-suficiente para que los caminos asíncronos sean sólidos. No es una licencia para serializar una escena desde
-un hilo secundario.
+Las partes internas que deben ser seguras entre hilos lo son: la resolución de convertidores se cachea en un
+diccionario concurrente, y el estado de tolerancia por carga del mapper es local al hilo (thread-local). Eso
+alcanza para que los caminos asíncronos sean sólidos. No es una licencia para serializar una escena desde un
+hilo secundario.
 
 ### Límites de datos
 

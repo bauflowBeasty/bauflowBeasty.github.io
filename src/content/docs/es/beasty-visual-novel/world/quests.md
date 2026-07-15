@@ -15,7 +15,7 @@ conectado a tu contexto compartido la primera vez que abres la pestaña.
 
 | Campo | Qué es |
 |---|---|
-| **Id** | El id estable. Los bloques y las condiciones nombran la misión por él. Editable; renombrarlo re-apunta todo lo que lo referenciaba. |
+| **Id** | El id estable. Los bloques y las condiciones nombran la misión por él. Editable; al renombrarlo se actualiza todo lo que lo referenciaba. |
 | **Title** | Lo que ve el jugador en el registro de misiones. |
 | **Description** | El texto más largo. |
 | **Owner** | El personaje al que pertenece esta misión. **Déjalo vacío para una misión global, de la historia principal.** |
@@ -29,8 +29,8 @@ conectado a tu contexto compartido la primera vez que abres la pestaña.
 | **Penalty on failure** | Efectos de variable aplicados una vez, cuando la misión falla. |
 | **Objectives** | Los pasos. Ver más abajo. |
 
-El propietario es lo que hace que una misión aparezca en el perfil de ese personaje. Una misión con propietario es "el
-reparto de Maya"; una misión sin propietario es "la historia principal".
+El propietario es lo que hace que una misión aparezca en el perfil de ese personaje. Una misión con propietario es
+"el encargo de Maya"; una misión sin propietario es "la historia principal".
 
 ### Estados
 
@@ -49,13 +49,13 @@ manejarlo desde una escena cuando la historia lo requiera, con el bloque **Updat
 **Quests**): fija el estado, fija la etapa, avanza la etapa, o marca un objetivo como hecho. Llegar a `completed`
 o `failed` de esa forma sigue pagando la recompensa o la penalización, exactamente una vez.
 
-No hay un botón de "iniciar misión" que recordar: **un inicio manual se autora como una condición.** Fija una variable en
+No hay un botón de "iniciar misión" que recordar: **un inicio manual se define como una condición.** Fija una variable en
 la escena donde el jugador acepta el encargo, y haz que esa variable sea el **Starts when** de la misión.
 
 ### Recompensas y penalizaciones
 
-Ambas son listas de efectos de variable: `gold += 50`, `maya.affection += 1`, `item.bread = 3`. Las concesiones de
-objetos son solo efectos sobre el contador del objeto. Cada una se **traba (latch)** — se dispara una sola vez, sin
+Ambas son listas de efectos de variable: `gold += 50`, `maya.affection += 1`, `item.bread = 3`. Dar objetos es
+solo un efecto sobre el contador del objeto. Cada una se **traba (latch)** — se dispara una sola vez, sin
 importar cuántas veces se recalcule la misión.
 
 ## Etapas, y qué significa "ordenado"
@@ -71,8 +71,8 @@ En una misión **Free** no hay etapa: todos los objetivos están abiertos desde 
 el jugador puede hacerlos en cualquier orden.
 
 Puedes mover la etapa tú mismo con el bloque **Update quest** — **Set stage** para saltar a un paso, **Advance
-stage** para sumarle. Así es como una conversación empuja una misión hacia adelante sin que el jugador tenga que activar una
-condición:
+stage** para sumar uno. Así es como una conversación empuja una misión hacia adelante sin que el jugador tenga que
+activar una condición:
 
 ```text
 [Dialogue]      Maya: "Good. Now take this to the miller."
@@ -92,22 +92,22 @@ quest bread_run objective run = true
 | Campo | Qué es |
 |---|---|
 | **Id** | Estable dentro de la misión. |
-| **Description** | El "qué hacer" de una línea, mostrado en el registro de misiones y usado como etiqueta del menú de conversación. |
+| **Description** | El "qué hacer" en una línea; se muestra en el registro de misiones y sirve de etiqueta en el menú de conversación. |
 | **Hint** | El texto de guía que muestra el registro de misiones. Consulta [La pista](#la-pista). |
 | **Type** | Uno de los ocho de abajo. |
 | **Required** | Desactivado = opcional. Los objetivos opcionales no bloquean la finalización. |
 
 ### Los ocho tipos de objetivo
 
-Cada tipo es una plantilla que escribe por debajo una **condición de finalización**. La condición sigue siendo la verdad;
-el tipo solo te da los selectores adecuados en lugar de claves en bruto. **Todos resuelven en una condición de finalización
-excepto GatherDeliver**, que se completa entregando los objetos.
+Cada tipo es una plantilla que escribe por debajo una **condición de finalización**. La condición sigue siendo la
+fuente de verdad; el tipo solo te da los selectores adecuados en lugar de claves en bruto. **Todos se traducen en
+una condición de finalización excepto GatherDeliver**, que se completa entregando los objetos.
 
 | Tipo | Úsalo cuando | Qué pide |
 |---|---|---|
 | **InteractObject** | El jugador debe clicar una cosa específica. | Una variable de bandera que la escena del objeto fija. Hecho cuando la bandera es verdadera. |
 | **TalkTo** | El jugador debe ir a hablar con alguien. | Nada más que su **paso de conversación** de abajo. Se completa cuando esa conversación termina (**Complete on talk** está activado por defecto para este tipo). |
-| **AcquireItem** | El jugador debe estar en posesión de algo. | Un objeto y un contador. Hecho cuando el inventario contiene esa cantidad. |
+| **AcquireItem** | El jugador debe tener algo en su poder. | Un objeto y un contador. Hecho cuando el inventario contiene esa cantidad. |
 | **InteractMany** | El jugador debe hacer lo mismo N veces. | Una variable contador y un número. Hecho cuando el contador lo alcanza. La escena que hace la acción incrementa el contador con un bloque Set variable. |
 | **GatherDeliver** | El jugador debe conseguir cosas y entregarlas. | Los objetos y los contadores. **No** es una condición — ver más abajo. |
 | **SubQuest** | Este paso es toda otra misión. | Una misión. Hecho cuando esa misión está `completed`. |
@@ -123,17 +123,17 @@ botón **Rewrite from the type's pickers** en lugar de sobrescribir tu trabajo.
 ### GatherDeliver: la que no es una condición
 
 Un objetivo **GatherDeliver** no se completa con una condición — se completa **entregando los objetos**.
-Tenerlos no es suficiente; el jugador tiene que dárselos a alguien.
+Tenerlos no basta; el jugador tiene que dárselos a alguien.
 
 - **Items to deliver** — una lista de objeto y cantidad.
 - **Any-of total** — si es mayor que 0, exige esa cantidad de objetos en **total** de entre los ids listados, e
   ignora los contadores individuales. "Tráeme cinco hierbas, las que sean."
-- **Delivery timing** — cuándo se asienta la entrega:
+- **Delivery timing** — cuándo se hace efectiva la entrega:
 
 | Timing | Qué ocurre |
 |---|---|
 | `OnPick` | Los objetos se consumen en el instante en que se elige la entrada del menú, así que el diálogo que sigue ya ve el objetivo hecho. |
-| `OnBranchEnd` | El diálogo se reproduce primero; la entrega se asienta cuando termina la rama. |
+| `OnBranchEnd` | El diálogo se reproduce primero; la entrega se hace efectiva cuando termina la rama. |
 | `DialogueBlock` | Nada automático. Pones un bloque **Deliver items** dentro del diálogo, justo donde el personaje toma la cesta. |
 
 La entrega en sí ocurre desde el [menú de conversación](/es/docs/beasty-visual-novel/world/talk-menu/) del personaje — aparece una entrada ahí
@@ -158,7 +158,7 @@ Un objetivo puede ser algo que le dices a alguien. Abre **Talk step (character m
 | Campo | Qué es |
 |---|---|
 | **Talks to** | A quién. Vacío = el propietario de la misión. |
-| **Dialogue** | La escena presentada desde el menú de conversación de ese personaje mientras este paso es el actual. |
+| **Dialogue** | La escena que se ofrece desde el menú de conversación de ese personaje mientras este paso es el actual. |
 | **Node** | Qué nodo de ella. |
 | **Menu label (optional)** | La etiqueta en el menú. Vacío = la descripción del objetivo, o el título de la misión. |
 | **Complete on talk** | Marca este objetivo como hecho cuando termina la rama. |
@@ -168,15 +168,15 @@ mantienes un menú. Consulta [El menú de conversación](/es/docs/beasty-visual-
 
 ### El marcador de mapa
 
-Cuando un paso mueve a un personaje (abajo), puedes decir cómo se ve donde ha sido movida:
+Cuando un paso mueve a un personaje (ver más abajo), puedes decidir qué aspecto tiene allí donde lo moviste:
 
 - **Marker sprite** — el arte. Fijar uno aquí hace que gane sobre todo lo demás.
 - **Conditional marker sprites** — una lista ordenada; **gana el primer caso cuya condición se cumpla**, si no, el
-  sprite por defecto. Una pose distinta por franja horaria, o por variable.
-- **Position**, **Scale**, **Sorting order** — dónde en la sala, cuán grande, cuán al frente. Sorting order 0
-  significa "justo encima del fondo de la sala".
+  sprite por defecto. Una pose distinta por momento del día, o por variable.
+- **Position**, **Scale**, **Sorting order** — en qué punto de la sala, qué tamaño tiene y qué tan al frente se
+  dibuja. Sorting order 0 significa "justo encima del fondo de la sala".
 
-Deja el sprite vacío y el marcador recae en lo visual propio de la rutina, y luego en un punto de personaje en la
+Deja el sprite vacío y el marcador usa lo visual propio de la rutina y, si no lo hay, un punto de personaje en la
 sala con el sprite de mundo libre del personaje.
 
 ### La anulación de rutina
@@ -189,11 +189,11 @@ otra sala**, anulando su rutina por completo.
 | **Move character while current** | Activa la anulación. |
 | **Room** | Adónde va. |
 | **Days** | Lista de casillas de días de la semana. Vacía = todos los días. |
-| **Dayparts** | Lista de casillas de franjas horarias. Vacía = todas las franjas horarias. |
+| **Dayparts** | Lista de casillas de momentos del día. Vacía = todos los momentos del día. |
 
-La variable `location` del personaje sigue la anulación, así que toda condición del juego concuerda con lo que
-puede ver el jugador. Si varios pasos podrían mover al mismo personaje, **gana el primer paso que coincida** (orden del
-catálogo). Cuando el paso termina, o la misión acaba, ella vuelve a su rutina.
+La variable `location` del personaje sigue la anulación, así que toda condición del juego coincide con lo que
+puede ver el jugador. Si varios pasos podrían mover al mismo personaje, **gana el primer paso que coincida** (orden
+del catálogo). Cuando el paso termina, o la misión acaba, el personaje vuelve a su rutina.
 
 Así es como funciona "encuéntrame en los muelles a medianoche" sin una sola línea de scripting. Consulta
 [Rutinas de personajes](/es/docs/beasty-visual-novel/world/character-routines/).
@@ -203,7 +203,7 @@ Así es como funciona "encuéntrame en los muelles a medianoche" sin una sola l�
 Una misión se completa cuando **hay suficientes objetivos requeridos hechos**:
 
 - **Completion threshold 0** (el valor por defecto) significa *todos* los objetivos requeridos.
-- Un umbral de N significa *al menos N* de ellos — "limpia cualquiera de 3 de las 4 salas".
+- Un umbral de N significa *al menos N* de ellos — "limpia 3 de las 4 salas, las que sean".
 - Si **ningún** objetivo está marcado como requerido, el umbral se mide contra los objetivos que existen (todos
   ellos, o tu umbral). Una misión con solo objetivos opcionales no es dinero gratis.
 
@@ -229,9 +229,10 @@ cuando avanzas el tiempo.
 - si estaba activa y no completada, **se paga la penalización** y su resultado se registra como `failed`;
 - una misión que nunca empezó no tiene nada que liquidar — simplemente sigue esperando su **Starts when**.
 
-Luego la misión se reinicia para el nuevo periodo: se limpia cada objetivo, la etapa vuelve a 0, y los trabas de
+Luego la misión se reinicia para el nuevo periodo: se limpia cada objetivo, la etapa vuelve a 0, y las trabas de
 recompensa y penalización se liberan para que puedan dispararse de nuevo. Una misión `Daily`/`Weekly` se reactiva
-de inmediato; una misión `SpecificDays` solo se rearma en uno de sus días de la semana programados y permanece inactiva el resto.
+de inmediato; una misión `SpecificDays` solo se rearma en uno de sus días de la semana programados y permanece
+inactiva el resto.
 
 El resultado del último periodo liquidado se puede leer como `@quest:<id>:@lastResult` (`completed` o `failed`), que
 es lo que compruebas cuando la consecuencia llega a la mañana siguiente: "No entregaste ayer. Mi prima se
@@ -243,10 +244,10 @@ va a enterar de esto."
 
 ## Ejemplo trabajado: cinco manzanas para Ana, cada día
 
-**Objetivo.** Cada día, el jugador debe traerle a Ana cinco manzanas. Ella recompensa con 20 monedas. Si el día termina sin la
-entrega, pierde un poco de afecto.
+**Objetivo.** Cada día, el jugador debe traerle a Ana cinco manzanas. Ella da 20 monedas de recompensa. Si el día
+termina sin la entrega, su afecto baja un poco.
 
-**Antes de empezar**, asegúrate de tener: un Time Config en el BeastyManager con franjas horarias y días de la semana
+**Antes de empezar**, asegúrate de tener: un Time Config en el BeastyManager con momentos del día y días de la semana
 ([tiempo de juego](/es/docs/beasty-visual-novel/world/game-time/)), un objeto `apple` ([objetos e inventario](/es/docs/beasty-visual-novel/world/items-and-inventory/)), un personaje
 `ana` con una rutina para que esté en algún sitio donde el jugador pueda encontrarla
 ([rutinas de personajes](/es/docs/beasty-visual-novel/world/character-routines/)), y una variable `gold`.
@@ -308,9 +309,9 @@ entrega, pierde un poco de afecto.
 
 **Variaciones que vale la pena conocer.**
 
-- Hazla **Weekly** y se convierte en un encargo fijo que se liquida cada semana en su lugar.
+- Hazla **Weekly** y se convierte en un encargo fijo que se liquida cada semana.
 - Hazla **SpecificDays** y marca martes y viernes, y Ana solo querrá manzanas en días de mercado.
-- Pon **Any-of total** en 5 y lista `apple`, `pear`, `plum`, y valdrán cualesquiera cinco de ellas.
+- Pon **Any-of total** en 5 y lista `apple`, `pear`, `plum`, y servirán cinco frutas cualesquiera de esas.
 - Pon **Delivery timing** en `DialogueBlock` y coloca un bloque **Deliver items** a mitad de `Ana_Delivery`,
   y la cesta cambia de manos en la línea exacta en que ella se estira para tomarla.
 

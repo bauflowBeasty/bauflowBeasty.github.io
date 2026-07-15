@@ -1,6 +1,6 @@
 ---
 title: "Guardado y carga"
-description: "El guardado funciona desde el primer momento. No escribes ningún código, y no tienes que decirle al sistema qué guardar. Esta página es para el diseñador que quiere saber qu"
+description: "El guardado funciona desde el primer momento. No escribes ningún código, y no tienes que decirle al sistema qué guardar. Esta página es para el diseñador que quiere saber qué es un slot, qué contiene y qué ve el jugador cuando algo sale mal."
 ---
 
 El guardado funciona desde el primer momento. No escribes ningún código, y no tienes que decirle al sistema qué
@@ -18,7 +18,7 @@ Una partida guardada vive en un slot. Hay dos tipos:
 
 Junto a cada archivo de guardado el juego escribe una **miniatura PNG** con el mismo nombre, así que la
 pantalla de guardado muestra una imagen del momento en que el jugador guardó. Si falta una miniatura o no se
-puede leer, el slot recae en el sprite de miniatura predeterminado de [VN Settings](/es/docs/beasty-visual-novel/production/vn-settings/). (Un slot VACÍO
+puede leer, el slot usa el sprite de miniatura predeterminado de [VN Settings](/es/docs/beasty-visual-novel/production/vn-settings/). (Un slot VACÍO
 muestra en su lugar el arte de stock del prefab del slot, no ese respaldo.)
 
 Cada slot también lleva un **nombre**. Si `allowSaveNaming` está activado, el campo de texto de la pantalla de
@@ -28,7 +28,7 @@ hora locales en que se creó.
 La pantalla de guardado muestra una **página** de slots manuales a la vez — `saveSlotsPerPage` de ellos — con
 botones de paginación. `saveManualPages` establece cuántas páginas se muestran inicialmente, y las páginas
 **crecen automáticamente**: siempre hay al menos una página vacía después de la última que usó el jugador, así
-que nunca se quedan sin espacio. Los autoguardados tienen su propia página dedicada, que es **solo para
+que nunca se queda sin espacio. Los autoguardados tienen su propia página dedicada, que es **solo para
 cargar** — el jugador no puede sobrescribir un autoguardado a mano.
 
 ## Autoguardado
@@ -36,7 +36,7 @@ cargar** — el jugador no puede sobrescribir un autoguardado a mano.
 El autoguardado está activado por defecto (`autosaveEnabled`). El juego autoguarda cuando el jugador llega a
 una decisión.
 
-La política:
+Las reglas:
 
 - Los slots de autoguardado forman un **anillo** de como máximo `maxAutosaves` entradas (6 por defecto). Cuando
   el anillo está lleno, el autoguardado MÁS ANTIGUO es el que se sobrescribe.
@@ -48,31 +48,31 @@ La política:
   sus autoguardados reales.
 
 El orden se deriva de la marca de tiempo de creación de cada archivo, así que sobrevive a un reinicio sin
-contabilidad extra.
+registros adicionales.
 
 ## Qué contiene realmente una partida guardada
 
-Todo. Esta es la parte tranquilizadora, así que aquí está la lista:
+Todo. Esta es la parte tranquilizadora; aquí va la lista:
 
 - El id del proyecto, la **ruta del grafo** a través de cualquier subgrafo anidado, el nodo actual y el paso
   dentro de él.
 - El **idioma** activo.
 - **Todo el almacén de variables** — tus variables, las variables de personaje, el tiempo de juego, el estado
   de las misiones, el inventario, y el diccionario. Todos viven en un solo almacén, por eso todos se guardan
-  sin estar registrados en ningún lado. Ver [Variables y condiciones](/es/docs/beasty-visual-novel/world/variables-and-conditions/).
+  sin estar registrados en ningún lado. Consulta [Variables y condiciones](/es/docs/beasty-visual-novel/world/variables-and-conditions/).
 - Los **nodos visitados** (así que el "texto visto" y el salto de texto se mantienen correctos).
 - Las **pantallas abiertas** — las superposiciones secundarias que estaban abiertas, la más interna al final,
   así que cargar reabre la misma pila de navegación.
-- El **estado de deambulación libre**: el escenario, la sala actual, y las salas que el jugador ha visitado.
+- El **estado del mundo libre**: el escenario, la sala actual, y las salas que el jugador ha visitado.
 - El **escenario**: el fondo, los personajes en él y los props — restaurados incluso cuando la escena en
   pantalla se heredó de un nodo anterior.
 - El **historial de rebobinado** y la cola de retroceso entre modos, así que `Back` sigue cruzando líneas y
   modos después de cargar en lugar de detenerse en la línea restaurada.
 - El resultado pendiente del menú de conversación, así que una partida guardada en medio de una rama de
-  conversación aún aplica su desenlace.
+  conversación sigue aplicando su desenlace.
 - El estado de cada componente **`BeastySaveable`** en tu escena — tus propios GameObjects, guardados junto con
   la historia.
-- Un blob `customStateJson` que es tuyo para llenar (ver abajo).
+- Un blob `customStateJson` reservado para que lo llenes tú (más abajo).
 
 Los sprites, prefabs y otras referencias a objetos de Unity nunca se escriben en una partida guardada. Se
 vuelven a resolver a partir de tus assets al cargar, así que mover o restilizar el arte no invalida una partida
@@ -81,11 +81,11 @@ antigua.
 ## Cargar, y una partida dañada
 
 Cargar un slot restaura todo lo de la lista anterior y devuelve al jugador exactamente al lugar donde estaba,
-incluido el modo en el que se encontraba — novela visual, deambulación libre o un modo personalizado.
+incluido el modo en el que se encontraba — novela visual, mundo libre o un modo personalizado.
 
-Cada escritura es atómica y rota el archivo bueno anterior a un hermano `.bak`. Así que cuando un slot no se
-puede leer — un archivo a medio escribir tras un corte de energía, una partida manipulada — la carga informa
-que hay una copia de respaldo disponible, y la pantalla de guardado ofrece al jugador un diálogo de
+Cada escritura es atómica y conserva el archivo bueno anterior como un `.bak` junto a él. Así que cuando un
+slot no se puede leer — un archivo a medio escribir tras un corte de energía, una partida manipulada — la
+carga informa que hay una copia de respaldo disponible, y la pantalla de guardado ofrece al jugador un diálogo de
 confirmación: **"Esta partida está dañada. ¿Restaurar la copia de respaldo?"**. Aceptar restaura la versión
 anterior de ese slot y reintenta la carga. Un slot dañado permanece VISIBLE en la lista, etiquetado como
 `Partida dañada`, así que el jugador puede restaurarlo o eliminarlo en lugar de ver su partida desaparecer en
@@ -107,12 +107,12 @@ documentado como un producto propio:
 ## Guardar el estado de tu propio juego
 
 Si eres programador y tu juego tiene estado que el motor de historia no conoce — un minijuego, un sistema de
-batalla, una pantalla de mapa — tienes dos formas de entrar:
+batalla, una pantalla de mapa — tienes dos opciones:
 
 - Pon un `BeastySaveable` en tus GameObjects. Su estado se captura con la partida y se restaura con ella, sin
-  código. Ver [Estado de escena](/es/docs/beasty-save-system/guides/scene-state/).
+  código. Consulta [Estado de escena](/es/docs/beasty-save-system/guides/scene-state/).
 - Usa el estado de app **Custom** y su blob `customStateJson`, que se guarda, carga y retrocede junto con todo
-  lo demás. Ver [Modo personalizado](/es/docs/beasty-visual-novel/scripting/custom-mode/).
+  lo demás. Consulta [Modo personalizado](/es/docs/beasty-visual-novel/scripting/custom-mode/).
 
 ## Ver también
 

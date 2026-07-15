@@ -1,6 +1,6 @@
 ---
 title: "Objetos e inventario"
-description: "Los objetos son cosas que lleva el jugador. Una llave que abre una puerta, una poción que se bebe, tres flores que le pidieron recolectar. Esta página cubre cómo definir un objeto,"
+description: "Los objetos son cosas que lleva el jugador: una llave que abre una puerta, una poción que se bebe, tres flores que le pidieron recolectar. Cómo definirlos, entregarlos, y la pantalla de inventario."
 ---
 
 Los objetos son cosas que lleva el jugador. Una llave que abre una puerta, una poción que se bebe, tres flores que le
@@ -14,15 +14,15 @@ contexto compartido, así que una sola lista sirve a todas las escenas del juego
 
 | Campo | Qué es |
 |---|---|
-| **Id** | El nombre estable (`potion`). Se genera automáticamente, y es editable. Todo apunta a este. |
-| **Icon** | El sprite que se muestra en la cuadrícula del inventario y en el popup de detalle. |
+| **Id** | El nombre estable (`potion`). Se genera automáticamente, y es editable. Todo apunta a él. |
+| **Icon** | El sprite que se muestra en la grilla del inventario y en el popup de detalle. |
 | **Kind** | `Key` o `Consumable`. |
-| **Max quantity** | Hasta qué punto se apila un consumible. Un objeto `Key` siempre está limitado a 1, diga lo que diga esto. |
+| **Max quantity** | Cuánto se puede apilar un consumible. Un objeto `Key` siempre está limitado a 1, diga lo que diga este campo. |
 | **Name key** | La clave de localización del nombre mostrado del objeto, en la tabla de UI global. Escribes el texto directamente en la pestaña Items. |
 | **Description key** | La clave de localización de la descripción mostrada en el popup de detalle. |
 
-Un objeto **Key** es una bandera de posesión: el jugador la tiene o no. Un **Consumable** se apila desde 0 hasta
-su máximo.
+Un objeto **Key** es una bandera de posesión: el jugador lo tiene o no lo tiene. Un **Consumable** se apila desde
+0 hasta su máximo.
 
 ### Al usar
 
@@ -37,8 +37,8 @@ cuando se ejecuta un bloque **Use**.
 | **Jump to scene** (+ **start node**) | Una escena VN a la que saltar cuando se usa el objeto — una cinemática de "beber la poción". Vacío = te quedas donde estás. |
 | **Consume amount** | Cuántos se eliminan. Los consumibles usan 1 por defecto. Ponlo en 0 para un objeto llave, que se usa pero no se gasta. |
 
-Esta es la misma condición y los mismos efectos que usa el resto del motor, así que la lógica de los objetos se comporta
-exactamente como la lógica de una elección. Consulta [Variables y condiciones](/es/docs/beasty-visual-novel/world/variables-and-conditions/).
+Son la misma condición y los mismos efectos que usa el resto del motor, así que la lógica de los objetos se
+comporta exactamente igual que la de una elección. Consulta [Variables y condiciones](/es/docs/beasty-visual-novel/world/variables-and-conditions/).
 
 ## Los bloques
 
@@ -58,11 +58,11 @@ En el guion de texto estas son `give 3 potion`, `take 1 potion`, `item potion = 
 
 ## El contador de un objeto es solo una variable
 
-El número de un objeto que tiene el jugador vive en el almacén de variables compartido bajo la clave `item.<id>`. Es
-un número simple: `item.potion` es `3`, `item.rusty_key` es `0` o `1`.
+La cantidad que el jugador tiene de un objeto vive en el almacén de variables compartido bajo la clave
+`item.<id>`. Es un número simple: `item.potion` es `3`, `item.rusty_key` es `0` o `1`.
 
-Eso es todo el inventario. No hay un archivo de guardado de inventario aparte, ni un sistema de inventario con el que hablar.
-Lo que significa:
+Eso es todo el inventario. No hay un archivo de guardado del inventario aparte, ni un sistema de inventario al
+que consultarle nada. Eso significa que:
 
 - **Cualquier condición puede preguntar sobre objetos.** `item.potion >= 3` es una cláusula como cualquier otra. Ponla en
   una elección, una puerta, un objetivo de misión, una regla de rutina, un botón de pantalla.
@@ -84,15 +84,15 @@ que explica por qué, hasta que la encuentren. Consulta
 
 ## La pantalla de inventario
 
-El prefab `Inventory` es una superposición ya hecha: una cuadrícula de los objetos que el jugador tiene actualmente, y
-un popup de detalle.
+El prefab `Inventory` es una superposición ya hecha: una grilla de los objetos que el jugador lleva en ese
+momento, y un popup de detalle.
 
-- **La cuadrícula** es dinámica. Muestra una ranura por cada objeto con una cantidad de al menos 1, en el orden de
-  ranura guardado del jugador. Usa la última poción y la ranura desaparece y la cuadrícula se recoloca. Recoge algo
+- **La grilla** es dinámica. Muestra una ranura por cada objeto con una cantidad de al menos 1, en el orden de
+  ranura guardado del jugador. Usa la última poción y la ranura desaparece y la grilla se recoloca. Recoge algo
   nuevo y se añade al final.
 - **Una ranura** muestra el icono del objeto y cuántos se tienen.
 - **El popup de detalle** se abre cuando el jugador clica una ranura. Muestra el icono, el nombre, la descripción
-  y un botón Use, que ejecuta exactamente la lógica on-use de arriba — incluido rechazar, con tu mensaje,
+  y un botón Use, que ejecuta exactamente la lógica on-use de arriba — incluido el rechazo, con tu mensaje,
   cuando la condición de uso falla.
 
 Es un prefab uGUI normal. Restilízalo, mueve cosas de sitio, reemplaza el arte; consulta
@@ -101,10 +101,10 @@ Es un prefab uGUI normal. Restilízalo, mueve cosas de sitio, reemplaza el arte;
 ### Añadirla y abrirla
 
 En la pestaña **Screens** del editor, pulsa **+ Inventory (ready-made)**. Eso copia el prefab a tu
-proyecto y lo registra como pantalla secundaria con un id. Solo se crea un inventario; pulsa el botón
-dos veces y selecciona el existente.
+proyecto y lo registra como pantalla secundaria con un id. Solo se crea un inventario: si pulsas el botón
+dos veces, se selecciona el que ya existe.
 
-El jugador la alcanza de una de dos formas:
+El jugador llega a ella de dos formas:
 
 - **Un botón del HUD.** Añade un elemento a tu pantalla de HUD con la acción **OpenScreen**, apuntando al id de pantalla
   del inventario. Esta es la forma habitual.

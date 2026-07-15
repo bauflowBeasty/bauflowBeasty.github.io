@@ -1,11 +1,11 @@
 ---
 title: "Estado de la escena"
-description: "Cómo guardar los objetos que ya están en tu escena: BeastySaveable marca un objeto como digno de guardarse, BeastySaveManager los escribe todos en un archivo."
+description: "Cómo guardar los objetos que ya están en tu escena: BeastySaveable marca un objeto para que se guarde, BeastySaveManager los escribe todos en un archivo."
 ---
 
-Cómo guardar los objetos que ya están en tu escena: `BeastySaveable` marca un objeto como digno de guardarse,
-`BeastySaveManager` los escribe todos en un archivo. Esta página cubre ambos, y los cuatro comportamientos alrededor
-de los ids que deciden si tus objetos vuelven o no.
+Cómo guardar los objetos que ya están en tu escena: `BeastySaveable` marca un objeto para que se guarde,
+`BeastySaveManager` los escribe todos en un archivo. Esta página cubre ambos, y los cuatro comportamientos en
+torno a los ids que deciden si tus objetos vuelven o no.
 
 Si aún no has construido la configuración básica, [save-without-code.md](/es/docs/beasty-save-system/getting-started/save-without-code/)
 la explica clic por clic. Esta página explica qué hace realmente esa configuración.
@@ -16,44 +16,44 @@ la explica clic por clic. Esta página explica qué hace realmente esa configura
 **componentes** a capturar. Uno por GameObject — el componente no permite duplicados.
 
 **`BeastySaveManager`** va en un objeto de la escena. Mantiene el `BeastySaveSettings` usado por el
-guardado de escena, y es sobre el que llamas `SaveAll` y `LoadAll`. Mantiene una `Instance` estática.
+guardado de escena, y es en el que llamas a `SaveAll` y `LoadAll`. Expone una `Instance` estática.
 
-Cada `BeastySaveable` habilitado se registra a sí mismo con el manager. `SaveAll` recorre ese registro, pide a cada
-componente marcado de cada saveable su estado, y escribe todo en un archivo, indexado por id.
+Cada `BeastySaveable` habilitado se registra automáticamente con el manager. `SaveAll` recorre ese registro, le
+pide su estado a cada componente marcado de cada saveable, y escribe todo en un archivo, indexado por id.
 
 ## Ids
 
-El id es cómo un archivo de guardado reconoce un objeto entre sesiones. Todo sobre el guardado de escena se reduce a
-si el id es el mismo la próxima vez que el juego se ejecute.
+El id es la forma en que un archivo de guardado reconoce un objeto entre sesiones. Todo en el guardado de escena
+se reduce a si el id es el mismo la próxima vez que el juego corra.
 
 ### Se autogenera, y es editable
 
-Añade un `BeastySaveable` y obtiene un id automáticamente. El inspector lo muestra como **Save Id**, con un
+Añade un `BeastySaveable` y recibe un id automáticamente. El inspector lo muestra como **Save Id**, con un
 botón **New** al lado que genera uno nuevo.
 
 Puedes editar el id a mano, y hay buenas razones para hacerlo — `player`, `door.cellar`, `chest.tutorial` son
 más fáciles de encontrar en un archivo de guardado que un string aleatorio.
 
 > **Advertencia**
-> **Cambiar un id huérfaniza los datos ya guardados bajo el anterior.** El estado sigue en el archivo, bajo
-> una clave que nada en la escena reclama ya, y el objeto con el nuevo id no lo encontrará. Decide tus ids
-> antes de tener guardados que te importen. El botón **New** tiene exactamente el mismo efecto: descarta la conexión
-> del objeto con cada guardado existente.
+> **Cambiar un id deja huérfanos los datos ya guardados bajo el anterior.** El estado sigue en el archivo, bajo
+> una clave que ya nada en la escena reclama, y el objeto con el nuevo id no lo encontrará. Decide tus ids
+> antes de tener guardados que te importen. El botón **New** tiene exactamente el mismo efecto: rompe la conexión
+> del objeto con todos los guardados existentes.
 
 ### Un asset de prefab no lleva ningún id
 
-El asset de prefab en sí no tiene id. Cada **instancia** obtiene el suyo propio, generado cuando se crea. Dos copias
-del mismo prefab en una escena son dos saveables diferentes con dos ids diferentes, que es lo que quieres —
+El asset de prefab en sí no tiene id. Cada **instancia** recibe el suyo propio, generado cuando se crea. Dos
+copias del mismo prefab en una escena son dos saveables distintos con dos ids distintos, que es lo que quieres —
 son dos cofres diferentes.
 
 ### Un objeto generado en tiempo de ejecución obtiene un id nuevo cada vez
 
 Este es el que atrapa a la gente.
 
-Un objeto que `Instantiate`s mientras el juego se ejecuta obtiene un **id completamente nuevo, cada vez**. Juega el
-juego, genera un enemigo, guarda: el estado del enemigo va al archivo bajo un id generado en esa sesión.
-Reinicia, genera un enemigo, carga: el nuevo enemigo tiene un id diferente, no encuentra nada en el archivo, y mantiene su
-estado por defecto. El estado antiguo se queda en el archivo, inalcanzable, para siempre.
+Un objeto que instancias con `Instantiate` mientras el juego corre recibe un **id completamente nuevo, cada
+vez**. Juega, genera un enemigo, guarda: el estado del enemigo va al archivo bajo un id generado en esa sesión.
+Reinicia, genera un enemigo, carga: el enemigo nuevo tiene otro id, no encuentra nada en el archivo, y se queda
+con su estado por defecto. El estado antiguo se queda en el archivo, inalcanzable, para siempre.
 
 La solución es darle al objeto generado un id que tú controles, en el momento de generarlo:
 
@@ -89,7 +89,8 @@ El que no tiene id usa el que el objeto ya tenga, lo cual solo es útil para obj
 de la escena. **Para cualquier cosa que generes, usa el overload que recibe un id.**
 
 El id tiene que ser algo que puedas reproducir en la siguiente ejecución. `enemy.goblin.3` derivado de los datos de tu
-propio juego es estable. `enemy.` más `Guid.NewGuid()` no lo es — es el mismo problema de nuevo, en tu propio código.
+propio juego es estable. `enemy.` más `Guid.NewGuid()` no lo es — es el mismo problema otra vez, ahora en tu
+propio código.
 
 Las contrapartes, cuando un objeto desaparece definitivamente:
 
@@ -102,7 +103,7 @@ BeastySaveManager.SyncSceneSaveables();     // vuelve a escanear la escena en bu
 ### Dos objetos con el mismo id: el segundo desaparece
 
 Si dos saveables terminan con el mismo id, **el segundo no se registra**. Se registra un error, y
-ese objeto silenciosamente queda fuera del guardado — no se escribe, y no se restaura.
+ese objeto queda fuera del guardado sin más aviso — no se escribe, y no se restaura.
 
 Los ids duplicados ocurren cuando copias y pegas un GameObject que ya tiene un id escrito a mano, o cuando generas
 dos objetos y pasas el mismo id a `Register`. Si un objeto se niega misteriosamente a persistir, revisa la
@@ -120,9 +121,9 @@ Destruir el objeto es lo que lo elimina del guardado.
 
 ## Varios componentes del mismo tipo
 
-Dos componentes `BoxCollider` en un mismo GameObject se guardan y recuperan correctamente ambos. Se almacenan por separado en el
-archivo (el segundo obtiene un sufijo `#1` en su clave) y se restauran a los slots correctos. No tienes que hacer nada
-para que esto funcione.
+Dos componentes `BoxCollider` en un mismo GameObject se guardan y recuperan bien los dos. Se almacenan por
+separado en el archivo (el segundo lleva un sufijo `#1` en su clave) y cada uno se restaura donde corresponde. No
+tienes que hacer nada para que esto funcione.
 
 ## Guardando y cargando
 
@@ -148,7 +149,7 @@ if (!loaded.Success)
 ```
 
 `SaveAllNow` y `LoadAllNow` son los que **devuelven un resultado**. Úsalos siempre que quieras saber
-si funcionó — lo cual es siempre, en código de producción. `SaveAllNow` también recibe un diccionario de
+si funcionó — o sea, siempre, en código de producción. `SaveAllNow` también recibe un diccionario de
 metadatos opcional:
 
 ```csharp
@@ -200,8 +201,8 @@ void OnLoaded(LoadResult result)
 ```
 
 `SaveCompleted` y `LoadCompleted` se disparan en cada guardado y carga, tanto desde los botones como desde código.
-Son el lugar correcto para poner el toast de "Game saved", y el lugar correcto para ofrecer la copia de seguridad cuando una carga
-falla. `LoadResult.BackupAvailable` se rellena en cada resultado de carga, éxito o fallo — consulta
+Son el lugar correcto para poner el toast de "Game saved", y también para ofrecer la copia de seguridad cuando
+una carga falla. `LoadResult.BackupAvailable` se rellena en cada resultado de carga, éxito o fallo — consulta
 [backups-and-corruption.md](/es/docs/beasty-save-system/guides/backups-and-corruption/).
 
 ## Qué termina realmente en el archivo
@@ -234,7 +235,7 @@ La lista **Saved Components** etiqueta cada componente con la capa que puede con
 id de módulo como `ugui`, o `dev` para un convertidor que registraste tú mismo.
 
 Si marcas un componente que nada sabe convertir, el inspector te avisa, y un guardado fallará con
-`TypeUnavailable`. Ya sea desmárcalo, activa el módulo que necesita
+`TypeUnavailable`. Desmárcalo, activa el módulo que necesita
 ([converter-modules.md](/es/docs/beasty-save-system/reference/converter-modules/)), o escribe un convertidor para él
 ([custom-converters.md](/es/docs/beasty-save-system/advanced/custom-converters/)).
 

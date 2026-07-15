@@ -1,11 +1,11 @@
 ---
 title: "Streaming (Addressables)"
-description: "Carga el arte bajo demanda en lugar de cargar todo el juego en memoria. El streaming es opcional, y es beta en 1.0.0 — funciona, y las pruebas lo cubren, pero la API"
+description: "Carga el arte bajo demanda en lugar de cargar todo el juego en memoria. El streaming es opcional, y es beta en 1.0.0 — funciona, y las pruebas lo cubren, pero la API puede cambiar en una versión menor."
 ---
 
 Carga el arte bajo demanda en lugar de cargar todo el juego en memoria. El streaming es **opcional**, y es
-**beta en 1.0.0** — funciona, y las pruebas lo cubren, pero la API puede cambiar en una versión menor. Si ese no
-es un riesgo que quieras en un proyecto que vas a lanzar, déjalo desactivado: todo lo de abajo está desactivado
+**beta en 1.0.0** — funciona, y las pruebas lo cubren, pero la API puede cambiar en una versión menor. Si no
+quieres ese riesgo en un proyecto que vas a lanzar, déjalo desactivado: todo lo de abajo está desactivado
 por defecto y no te cuesta nada.
 
 ## Por qué lo querrías
@@ -26,14 +26,14 @@ Cada campo de arte transmisible es un **par**: una referencia directa, y una dir
 exactamente el comportamiento de un proyecto que nunca ha oído hablar de Addressables. Nada se difiere, nada es
 asíncrono, nada puede aparecer con un frame de retraso.
 
-La resolución solo se vuelve asíncrona cuando las tres condiciones siguientes son verdaderas:
+La resolución solo se vuelve asíncrona cuando se cumplen las tres condiciones siguientes:
 
 1. La referencia directa está vacía, Y
 2. hay una dirección configurada en ese campo, Y
 3. hay un proveedor registrado — lo cual sucede automáticamente cuando el paquete Addressables está instalado.
 
-Si alguna de ellas es falsa, obtienes la referencia directa, de forma síncrona. Por eso activar el streaming no
-es un salto de fe: un campo que no migraste sigue comportándose exactamente igual que antes, junto a uno que sí.
+Si alguna no se cumple, obtienes la referencia directa, de forma síncrona. Por eso activar el streaming no
+es un acto de fe: un campo que no migraste sigue comportándose exactamente igual que antes, junto a uno que sí.
 
 El propio módulo de streaming solo compila cuando `com.unity.addressables` está en el proyecto. Sin el paquete,
 el módulo no existe y no hay nada que pueda salir mal.
@@ -44,7 +44,7 @@ el módulo no existe y no hay nada que pueda salir mal.
 2. Ejecuta `Tools > Beasty VN > Streaming > Convert To Streamed Content`.
 
 El conversor recorre cada campo de arte migrable en el proyecto — expresiones de personajes, retratos y sprites
-de deambulación libre, íconos de ítems, marcadores de mapa de misión, fondos de sala y sus casos condicionales,
+de mundo libre, íconos de ítems, marcadores de mapa de misión, fondos de sala y sus casos condicionales,
 y las capas de fondo y props dentro de tus nodos de diálogo —, marca cada sprite como Addressable, y limpia la
 referencia directa.
 
@@ -52,14 +52,14 @@ Los sprites se colocan en tres grupos:
 
 | Grupo | Qué entra en él |
 |---|---|
-| `VN_Characters` | Expresiones, retratos, sprites de personaje de deambulación libre. |
+| `VN_Characters` | Expresiones, retratos, sprites de personaje de mundo libre. |
 | `VN_Rooms` | Fondos de sala, capas de fondo y props, marcadores de mapa de misión. |
 | `VN_Items` | Íconos de ítems. |
 
 Las direcciones son el GUID del asset con el nombre del sprite entre corchetes, así que mover o renombrar el
 archivo no rompe la referencia.
 
-### No es una puerta de un solo sentido
+### No es un camino sin retorno
 
 `Tools > Beasty VN > Streaming > Convert To Direct References` hace lo inverso: resuelve cada dirección de
 vuelta a su sprite y restaura la referencia directa. **Ese comando siempre está disponible, incluso si
@@ -74,25 +74,25 @@ funcionando exactamente como siempre:
 - Clips de audio.
 - Clips de video.
 - Fuentes.
-- Arte de objetos de deambulación libre y arte de hover.
+- Arte de objetos de mundo libre y arte de hover.
 - Imágenes de elecciones e imágenes de menú de conversación.
 - Íconos de HUD y de pantalla.
 - Miniaturas de guardado.
 
 ## Streaming de nodos
 
-Por separado del arte, los nodos se cargan a través de una ventana deslizante: el nodo actual, el anterior (para
+Aparte del arte, los nodos se cargan a través de una ventana deslizante: el nodo actual, el anterior (para
 que `Back` siga funcionando), y los nodos que el actual puede alcanzar — una **lista de precarga por nodo**,
-mantenida en el propio nodo. Los nodos que quedan fuera de esa ventana se liberan. Con todo en memoria esto es
-solo contabilidad; con un proveedor de streaming detrás, es gestión de memoria real.
+mantenida en el propio nodo. Los nodos que quedan fuera de esa ventana se liberan. Con todo en memoria esto no
+pasa de ser un registro interno; con un proveedor de streaming detrás, es gestión de memoria real.
 
 ## El detalle que debes conocer
 
 > **Advertencia**
-> **Después de reconstruir, debes reconstruir el contenido de Addressables.** El arte transmitido se resuelve
+> **Después de reconstruir, reconstruye también el contenido de Addressables.** El arte transmitido se resuelve
 > a través del catálogo de Addressables, y un catálogo desactualizado no sabe nada de los sprites que acabas de
-> migrar o cambiar — así que el arte no se resolverá en tiempo de ejecución. Haz de "Build Addressables
-> content" un paso en tu checklist de compilación, justo al lado de ejecutar el validador. Ver
+> migrar o cambiar — así que el arte no se resolverá en tiempo de ejecución. Convierte "Build Addressables
+> content" en un paso de tu checklist de compilación, justo al lado de ejecutar el validador. Consulta
 > [Compilación y plataformas](/es/docs/beasty-visual-novel/production/building-and-platforms/).
 
 ## Ver también

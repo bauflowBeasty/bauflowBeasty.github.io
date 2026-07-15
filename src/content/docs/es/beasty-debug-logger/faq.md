@@ -1,18 +1,18 @@
 ---
 title: "Preguntas frecuentes"
-description: "No. La Beasty Console escucha en paralelo a la Consola de Unity, sobre el mismo flujo de logs. Ambas ventanas muestran las mismas entradas; la de Beasty las clasifica por nivel"
+description: "Respuestas cortas a las dudas más comunes: qué reemplaza y qué no, qué cuesta en una build, y por qué a veces un mensaje se ve recortado."
 ---
 
 ## ¿Reemplaza a la Consola de Unity?
 
 No. La Beasty Console escucha en paralelo a la Consola de Unity, sobre el mismo flujo de logs. Ambas
 ventanas muestran las mismas entradas; la de Beasty las clasifica por nivel y te permite filtrar y buscar.
-Mantén abierta la Consola de Unity si te gusta — nada entra en conflicto.
+Si quieres, deja abierta la Consola de Unity — no hay ningún conflicto entre las dos.
 
 ## ¿Escribe un archivo de log?
 
 No. Llama a `UnityEngine.Debug` y nada más. La persistencia es la que Unity ya te da, que en una build de
-escritorio es `Player.log`. Si necesitas tu propio archivo, escríbelo desde tu propio código.
+escritorio es `Player.log`. Si necesitas un archivo propio, escríbelo desde tu propio código.
 
 ## ¿Cuesta rendimiento en una build de lanzamiento?
 
@@ -31,11 +31,11 @@ System, consulta [Trabajar con los demás paquetes Beasty](/es/docs/beasty-debug
 No como un nivel nuevo. Los once niveles son fijos: cada uno tiene una etiqueta, un color y un toggle de
 filtro en la consola, y el clasificador los identifica.
 
-Lo que puedes hacer en su lugar:
+Lo que sí puedes hacer:
 
 - usar la sobrecarga `LogColor` de `Log` para colorear un mensaje sin la etiqueta de un nivel;
-- escribir una fachada estática delgada sobre la API que anteponga tu propia etiqueta y mantenga tus propios
-  interruptores, y loguear a través de ella. Beasty Visual Novel hace exactamente esto. Consulta
+- escribir una fachada estática ligera sobre la API que anteponga tu propia etiqueta y maneje tus propios
+  interruptores, y loguear a través de ella. Beasty Visual Novel hace exactamente eso. Consulta
   [Logging](/es/docs/beasty-debug-logger/guides/logging/) y [Trabajar con los demás paquetes Beasty](/es/docs/beasty-debug-logger/guides/beasty-integration/).
 
 ## ¿Por qué a mi mensaje le falta una parte?
@@ -49,12 +49,12 @@ el mensaje sin ellos. Consulta [La ventana Beasty Console](/es/docs/beasty-debug
 
 ## ¿Por qué desaparecieron mis logs?
 
-Lo más probable es una recompilación de script. Un domain reload limpia la lista de la consola, así que todo
-lo logueado antes de la compilación desaparece.
+La causa más probable es una recompilación de scripts. Un domain reload limpia la lista de la consola, así
+que todo lo logueado antes de la compilación desaparece.
 
-Los otros dos candidatos: Clear on Play está activado, y entraste en Play Mode; o el toggle de filtro del
-nivel está desactivado, así que las entradas están ahí pero ocultas. El contador del toggle sigue contando
-de todas formas.
+Las otras dos causas posibles: que Clear on Play esté activado y hayas entrado en Play Mode, o que el toggle
+de filtro del nivel esté desactivado — las entradas están ahí, solo que ocultas. El contador del toggle sigue
+sumando de todas formas.
 
 ## ¿Por qué la ventana está bajo el menú Beasty VN?
 

@@ -1,15 +1,15 @@
 ---
 title: "Qué se guarda"
-description: "Las reglas del sistema: qué parte de tus datos termina en el archivo, cuál no, y qué errores hacen fallar un guardado por completo. Lee esta página una vez, "
+description: "Las reglas del sistema: qué parte de tus datos termina en el archivo, cuál no, y qué errores hacen fallar un guardado por completo. Léela una vez, cuanto antes."
 ---
 
 Las reglas del sistema: qué parte de tus datos termina en el archivo, cuál no, y qué errores hacen
-fallar un guardado por completo. Lee esta página una vez, pronto. Es la diferencia entre un sistema de guardado que
-funciona y una tarde entera preguntándote por qué el sombrero del jugador ha desaparecido.
+fallar un guardado por completo. Lee esta página una vez, cuanto antes. Es la diferencia entre un sistema de guardado que
+funciona y una tarde entera preguntándote por qué desapareció el sombrero del jugador.
 
 ## La versión corta
 
-Beasty Save System guarda **campos**, no propiedades. Guarda los mismos campos que Unity mismo serializaría:
+Beasty Save System guarda **campos**, no propiedades. Guarda los mismos campos que serializaría el propio Unity:
 los `public` y los marcados con `[SerializeField]`. Guarda casi todos los tipos de datos ordinarios de C# y de Unity.
 
 **No** guarda referencias a objetos de Unity — un `Sprite`, un `GameObject`, un `AudioClip`, otro
@@ -31,7 +31,7 @@ Si aparece en el propio inspector de Unity, es el tipo de cosa que se guarda.
 
 > **Advertencia**
 > Las propiedades no se guardan. `public int Level { get; set; }` no escribe nada en el archivo y no lee nada
-> de vuelta. Esta es la sorpresa más común de todas. Si un valor debe persistir, hazlo un campo.
+> de vuelta. Esta es la sorpresa más común de todas. Si un valor debe persistir, conviértelo en un campo.
 
 ### Tipos
 
@@ -49,14 +49,14 @@ Todos estos se guardan y recuperan correctamente:
 
 ### Componentes en la escena
 
-Cuando guardas una escena con `BeastySaveManager.SaveAll`, cada componente que marcaste en un `BeastySaveable` es
-escrito por un convertidor. `Transform`, `Camera`, `Light`, `SpriteRenderer`, `Texture2D` y cualquier
+Cuando guardas una escena con `BeastySaveManager.SaveAll`, cada componente que marcaste en un `BeastySaveable` lo
+escribe un convertidor. `Transform`, `Camera`, `Light`, `SpriteRenderer`, `Texture2D` y cualquier
 `MonoBehaviour` que escribiste están siempre disponibles. `Animator`, `AudioSource`, `ParticleSystem`, colliders,
 `TMP_Text` y los componentes de uGUI vienen de módulos opcionales.
 
-Cada convertidor almacena una lista específica y documentada de campos — no "todo". Qué campos, exactamente, está
-en [converter-modules.md](/es/docs/beasty-save-system/reference/converter-modules/). Léela antes de confiar en uno. Algunas de las
-lagunas son notables: los **triggers de `Animator` se ignoran**, `MeshCollider.sharedMesh` **nunca se guarda**, y
+Cada convertidor almacena una lista específica y documentada de campos — no "todo". La lista exacta de campos está
+en [converter-modules.md](/es/docs/beasty-save-system/reference/converter-modules/). Léela antes de confiar en uno. Algunas
+lagunas llaman la atención: los **triggers de `Animator` se ignoran**, `MeshCollider.sharedMesh` **nunca se guarda**, y
 `Light.cookie` se escribe pero **nunca se restaura**.
 
 ## Qué NO se guarda
@@ -64,7 +64,7 @@ lagunas son notables: los **triggers de `Animator` se ignoran**, `MeshCollider.s
 ### Referencias a objetos de Unity
 
 Un campo que apunta a un `UnityEngine.Object` — un `Sprite`, un `GameObject`, un `Transform`, un
-`AudioClip`, un `Material`, otro `MonoBehaviour` — **no** se escribe en el archivo de guardado. Tampoco lo es una
+`AudioClip`, un `Material`, otro `MonoBehaviour` — **no** se escribe en el archivo de guardado. Tampoco se guarda una
 colección de ellos (`List<GameObject>`, `Sprite[]`).
 
 Al guardar un `MonoBehaviour`, esos campos se omiten. Al cargar, se dejan exactamente como están.
@@ -75,10 +75,10 @@ Al guardar un `MonoBehaviour`, esos campos se omiten. Al cargar, se dejan exacta
 - Tus enlaces de prefab, tus asignaciones de sprite, tus slots de material — todo sigue ahí después de una carga.
 - Un archivo de guardado no puede editarse para hacer que tu juego cargue un asset arbitrario.
 
-La conexión de la escena sobrevive a una carga. Esa es la propiedad que quieres.
+El cableado de la escena sobrevive a una carga. Eso es exactamente lo que quieres.
 
 > **Advertencia**
-> Una excepción con dientes: un campo `UnityEngine.Object` dentro de una **clase C# plana** (no un
+> Una excepción peligrosa: un campo `UnityEngine.Object` dentro de una **clase C# plana** (no un
 > `MonoBehaviour`) no se omite — hace que **el guardado falle** con `SerializationFailed`. Si le das a
 > `BeastySave.Save` una clase de datos que contiene un `Sprite`, obtienes un resultado de error, no un archivo. Mantén las
 > referencias a objetos de Unity completamente fuera de tus clases de guardado.
@@ -129,17 +129,17 @@ id en tu propio script y resuélvelo tú mismo, como arriba.
 
 ## Los errores que hacen fallar un guardado
 
-Estos no son omisiones silenciosas. Cada uno hace que `BeastySave.Save` devuelva un `SaveResult` fallido, y no se
+Estos errores no se omiten en silencio: cada uno hace que `BeastySave.Save` devuelva un `SaveResult` fallido, y no se
 escribe ningún archivo.
 
 ### Un ciclo de referencias
 
-**Síntoma.** El guardado falla con un mensaje sobre que los datos de guardado deben ser acíclicos.
+**Síntoma.** El guardado falla con un mensaje que dice que los datos de guardado deben ser acíclicos.
 
 **Causa.** El objeto A contiene a B, y B contiene a A. O un nodo contiene a su padre, que contiene a sus hijos. JSON es un
 árbol; no tiene forma de expresar "esto es el mismo objeto otra vez".
 
-**Solución.** Rompe el ciclo antes de guardar. La respuesta habitual es mantener el enlace de hijo-a-padre fuera de los
+**Solución.** Rompe el ciclo antes de guardar. La respuesta habitual es mantener el enlace de hijo a padre fuera de los
 datos de guardado — almacena un *id* de padre en lugar de una *referencia* al padre, y reconstruye los enlaces después de cargar.
 
 ### NaN o Infinity
@@ -149,8 +149,8 @@ datos de guardado — almacena un *id* de padre en lugar de una *referencia* al 
 **Causa.** `NaN` e `Infinity` no son números JSON válidos. No hay forma de escribirlos.
 
 **Solución.** Casi siempre significan que algo ya salió mal en la lógica de tu juego — una división por cero, una
-normalización de un vector cero. Encuentra dónde el valor se volvió `NaN` y arréglalo. Si un valor genuinamente puede
-estar ausente, usa un nullable (`float?`) en lugar de un `NaN` mágico.
+normalización de un vector cero. Encuentra dónde el valor se volvió `NaN` y arréglalo. Si un valor realmente puede
+faltar, usa un nullable (`float?`) en lugar de un `NaN` mágico.
 
 ### Un diccionario con una clave que no es string-like
 
@@ -160,7 +160,7 @@ estar ausente, usa un nullable (`float?`) en lugar de un `NaN` mágico.
 `string`, primitivos, y enums. Cualquier otra cosa — una clave `Vector3`, una clave de tu propia clase — no se puede
 escribir.
 
-**Solución.** Cambia el tipo de la clave a un `string`, un `int` o un enum. Si tu clave es genuinamente un valor compuesto,
+**Solución.** Cambia el tipo de la clave a un `string`, un `int` o un enum. Si tu clave es de verdad un valor compuesto,
 codifícala en un string, o reemplaza el diccionario por una `List` de pares clave/valor.
 
 ### Anidamiento más profundo que 512 niveles

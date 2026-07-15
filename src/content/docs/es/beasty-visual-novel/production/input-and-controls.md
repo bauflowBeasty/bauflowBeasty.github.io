@@ -1,10 +1,10 @@
 ---
 title: "Entrada y controles"
-description: "Cada acción que una novela visual necesita está enlazada desde el primer momento, en ambos backends de entrada de Unity. Esta página lista las acciones y sus valores predet"
+description: "Cada acción que una novela visual necesita viene enlazada de fábrica, en los dos backends de entrada de Unity. Esta página lista las acciones y sus valores predeterminados, y muestra cómo cambiarlos y cómo los reasigna el jugador."
 ---
 
-Cada acción que una novela visual necesita está enlazada desde el primer momento, en ambos backends de entrada
-de Unity. Esta página lista las acciones y sus valores predeterminados, muestra dónde los cambias, y explica
+Cada acción que una novela visual necesita viene enlazada de fábrica, en los dos backends de entrada de
+Unity. Esta página lista las acciones y sus valores predeterminados, muestra dónde los cambias, y explica
 cómo el jugador los reasigna.
 
 ## Las acciones y sus valores predeterminados
@@ -25,13 +25,13 @@ cómo el jugador los reasigna.
 | Elección 1-9 | Dígitos 1-9 (y numpad 1-9) | — | — |
 
 Retroceder con la rueda del mouse (hacia arriba para retroceder, hacia abajo para reavanzar) y las teclas de
-elección son fijas. Cada otra fila de arriba es tuya para cambiar.
+elección son fijas. Las demás filas de la tabla las puedes cambiar libremente.
 
 ## Reasignar en el editor
 
 Selecciona el GameObject **BeastyManager** en tu escena y abre la sección **Controls** de su inspector. Cada
 acción es una fila con tres desplegables: **Primary**, **Secondary** y **Mouse**. Elige una tecla de la lista;
-un espacio vacío (—) significa "sin enlace para ese espacio".
+una casilla vacía (—) significa que esa casilla queda sin enlace.
 
 Hay tres botones debajo de la tabla:
 
@@ -39,7 +39,7 @@ Hay tres botones debajo de la tabla:
   puedas empezar a editar.
 - **Restore default values** — devuelve la tabla a los valores predeterminados.
 - **Clear (use engine defaults)** — vacía la tabla. Una configuración vacía no es "sin controles": significa
-  que se aplican los valores predeterminados incorporados, que son ligeramente más ricos de lo que la tabla
+  que se aplican los valores predeterminados incorporados, que son algo más completos de lo que la tabla
   amigable puede expresar (Enter del numpad para Avanzar, ambas teclas Ctrl para Saltar).
 
 > **Nota**
@@ -54,7 +54,7 @@ ambos.
 Tú no eliges. La propia configuración **Active Input Handling** de Unity (en `Edit > Project Settings > Player`)
 elige la capa:
 
-- Con el paquete Input System instalado y habilitado, el backend de Input System se registra a sí mismo al
+- Con el paquete Input System instalado y habilitado, el backend de Input System se registra solo al
   arrancar y gestiona los enlaces.
 - De lo contrario, el backend clásico de Input Manager lee los mismos enlaces.
 
@@ -70,8 +70,8 @@ lo configura en el propio Input Manager de Unity.
 
 ## Reasignación por parte del jugador
 
-Los enlaces de arriba son los valores PREDETERMINADOS con los que se lanza tu juego. Las propias reasignaciones
-del jugador son una capa separada aplicada por encima de ellos, y persisten: se guardan en `PlayerPrefs` y se
+Los enlaces de arriba son los valores PREDETERMINADOS con los que se lanza tu juego. Las reasignaciones del
+jugador son una capa aparte que se aplica encima, y persisten: se guardan en `PlayerPrefs` y se
 vuelven a aplicar en el siguiente arranque. Una pantalla de controles puede guardarlas, recargarlas o borrarlas
 (`SaveOverrides`, `LoadOverrides`, `ResetOverrides` en las acciones de entrada), y borrarlas devuelve el juego a
 tus valores predeterminados.
@@ -81,9 +81,9 @@ empieza de nuevo desde tus valores predeterminados en lugar de intentar leer el 
 
 ## Escribir suprime cada atajo
 
-Este es el detalle que ahorra tickets de soporte. **Mientras el jugador está escribiendo en un campo de texto,
-cada acción de entrada se suprime.** Presionar `b` mientras nombra a su personaje escribe una `b` — no abre el
-historial. Presionar `a` no alterna Auto. Space no avanza la línea. Las teclas de elección no devuelven nada.
+Este es el detalle que ahorra tickets de soporte. **Mientras el jugador escribe en un campo de texto, todas
+las acciones de entrada se suprimen.** Presionar `b` mientras nombra a su personaje escribe una `b` — no abre
+el historial. Presionar `a` no alterna Auto. Space no avanza la línea. Las teclas de elección no hacen nada.
 
 Se aplica tanto a TextMeshPro como a los campos de entrada uGUI antiguos, lo que cubre el prompt de nombrado, el
 campo de nombre de partida y cualquier campo que agregues tú mismo.

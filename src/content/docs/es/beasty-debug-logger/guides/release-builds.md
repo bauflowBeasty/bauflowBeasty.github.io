@@ -1,6 +1,6 @@
 ---
 title: "Builds de lanzamiento"
-description: "Lo que te cuesta el logging en un juego lanzado, y qué hace y qué no hace el interruptor maestro. Lee esta página antes de esparcir mil llamadas de log por tu"
+description: "Lo que te cuesta el logging en un juego lanzado, y qué hace y qué no hace el interruptor maestro. Lee esta página antes de esparcir mil llamadas de log por tu proyecto."
 ---
 
 Lo que te cuesta el logging en un juego lanzado, y qué hace y qué no hace el interruptor maestro. Lee esta
@@ -12,8 +12,8 @@ página antes de esparcir mil llamadas de log por tu proyecto.
 BeastyDebugLogger.IsEnabled = false;
 ```
 
-Eso silencia todos los niveles en tiempo de ejecución. Ningún nivel imprime nada mientras sea false,
-incluyendo warnings, errors y exceptions.
+Eso silencia todos los niveles en tiempo de ejecución. Ningún nivel imprime nada mientras esté en false,
+incluidos warnings, errors y exceptions.
 
 ## Lo que no hace
 
@@ -35,12 +35,12 @@ Lo mismo aplica para `canPrint`: es un parámetro, así que se evalúa en el sit
 ya está construido para cuando el método lo revisa. `canPrint` filtra la salida; no te ahorra el costo de
 producir el mensaje.
 
-**2. `IsEnabled` se restablece a `true` al inicio de cada corrida.** El paquete lo restablece durante la
+**2. `IsEnabled` se restablece a `true` al inicio de cada ejecución.** El paquete lo restablece durante la
 inicialización en tiempo de ejecución de Unity, así que vuelve a `true` cada vez que entras en Play Mode, y
-de nuevo cada vez que inicia una build. No puedes apagarlo desde un script de editor, o desde una sesión
-anterior, y esperar que se mantenga.
+de nuevo cada vez que arranca una build. No puedes apagarlo desde un script de editor, o desde una sesión
+anterior, y esperar que se quede así.
 
-## Qué hacer en su lugar
+## Qué hacer entonces
 
 **Configúralo desde un script de arranque (bootstrap), al inicio.** Ponlo en un objeto de tu primera
 escena, o en un `RuntimeInitializeOnLoadMethod`, para que corra después del reinicio:
@@ -77,15 +77,15 @@ un trabajo que ya se hizo fuera de él.
 en una línea. Es la herramienta incorrecta para "esto no debe costar nada en una build de lanzamiento".
 Consulta [Logging](/es/docs/beasty-debug-logger/guides/logging/).
 
-**O elimínalos por compilación.** Si los logs de un sistema no deben existir en absoluto en una build de
+**O elimínalos al compilar.** Si los logs de un sistema no deben existir en absoluto en una build de
 lanzamiento, pon las llamadas detrás de tus propios bloques `#if DEVELOPMENT_BUILD || UNITY_EDITOR`. Eso es
 lo único que realmente los elimina.
 
 ## El paquete nunca escribe un archivo
 
-Beasty Debug Logger no abre un archivo, no rota un log, y no sube nada. Llama a `UnityEngine.Debug`. La
+Beasty Debug Logger no abre archivos, no rota logs y no sube nada. Llama a `UnityEngine.Debug`. La
 persistencia es la que Unity ya te da: en una build de escritorio, eso es `Player.log`. Si necesitas tu
-propio archivo de log, escribe uno desde tu propio código.
+propio archivo de log, escríbelo desde tu propio código.
 
 Por eso también una build etiqueta sus líneas en ASCII en lugar de emoji — `Player.log` se lee como texto
 plano. Consulta [Logging](/es/docs/beasty-debug-logger/guides/logging/).

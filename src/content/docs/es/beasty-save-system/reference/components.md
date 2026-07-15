@@ -1,6 +1,6 @@
 ---
 title: "Componentes"
-description: "Los dos MonoBehaviours del sistema de guardado. BeastySaveable marca un GameObject como parte de un guardado de escena; BeastySaveManager contiene la configuración y hace el guardado"
+description: "Los dos MonoBehaviours del sistema de guardado: BeastySaveable marca un GameObject como parte de un guardado de escena; BeastySaveManager contiene la configuración y hace el guardado."
 ---
 
 Los dos MonoBehaviours del sistema de guardado. `BeastySaveable` marca un GameObject como parte de un
@@ -18,11 +18,11 @@ estado captura `SaveAll` y restaura `LoadAll`.
 
 | Campo | Tipo | Significado |
 |---|---|---|
-| Save Id (`id`) | `string` | Identificador estable que indexa este objeto dentro de los archivos de guardado. Se autogenera; editable — cambiarlo deja huérfanos los datos guardados bajo el id anterior. |
+| Save Id (`id`) | `string` | Identificador estable que indexa este objeto dentro de los archivos de guardado. Se autogenera y es editable — si lo cambias, los datos guardados bajo el id anterior quedan huérfanos. |
 | Saved Components (`components`) | `List<Component>` | Componentes de este GameObject capturados por SaveAll y restaurados por LoadAll. |
 
 El inspector personalizado muestra el Save Id con un botón **New** que lo regenera, y los componentes como
-una lista de verificación de cada componente del GameObject, cada uno etiquetado con la capa que lo convierte
+una lista con casillas de cada componente del GameObject, cada uno etiquetado con la capa que lo convierte
 (`dev`, un id de módulo, o `core`). Marcar un componente sin convertidor muestra una advertencia: SaveAll
 fallará con `TypeUnavailable`.
 
@@ -40,7 +40,7 @@ El id actual.
 public IReadOnlyList<Component> SavedComponents { get; }
 ```
 
-Los componentes seleccionados, con las entradas destruidas o faltantes filtradas.
+Los componentes seleccionados, sin las entradas destruidas o faltantes.
 
 ```csharp
 public void EnsureId()
@@ -64,7 +64,7 @@ ejecución se empareja con sus datos entre sesiones: dale el mismo id que le dis
 - Un objeto que instancias con `Instantiate` en tiempo de ejecución obtiene un **id nuevo cada vez**, así que
   su estado no puede volver a encontrarse en un guardado anterior. Usa
   `BeastySaveManager.Register(go, "a.stable.id", components)` para objetos generados dinámicamente.
-- Dos saveables con el mismo id: el segundo **no se registra** y se registra un error en el log. Queda fuera
+- Dos saveables con el mismo id: el segundo **no se registra** y se escribe un error en el log. Queda fuera
   del guardado.
 
 ## BeastySaveManager
@@ -135,8 +135,8 @@ public static BeastySaveable Register(GameObject target, params Component[] comp
 public static BeastySaveable Register(GameObject target, string id, params Component[] components)
 ```
 
-Añade (o reutiliza) un `BeastySaveable` en `target`, fija su selección de componentes, y lo registra. No
-pasar componentes mantiene la selección actual. Ambos lanzan `ArgumentNullException` cuando `target` es nulo;
+Añade (o reutiliza) un `BeastySaveable` en `target`, fija su selección de componentes, y lo registra. Si no
+pasas componentes, se mantiene la selección actual. Ambos lanzan `ArgumentNullException` cuando `target` es nulo;
 el segundo lanza `ArgumentException` cuando `id` está vacío.
 
 Usa la **sobrecarga con id para cualquier cosa que generes en tiempo de ejecución**. Sin un id fijado, el
@@ -149,7 +149,7 @@ public static void SyncSceneSaveables()
 
 Registra cada `BeastySaveable` en las escenas cargadas, **incluidos los de GameObjects inactivos**. Se llama
 automáticamente antes de cada captura y cada aplicación. Los saveables se registran desde `OnEnable`, que un
-objeto que empieza desactivado nunca ejecuta — sin esto faltarían silenciosamente del guardado.
+objeto que empieza desactivado nunca ejecuta — sin esto, quedarían fuera del guardado sin aviso.
 
 ```csharp
 public static void Unregister(GameObject target)

@@ -1,10 +1,10 @@
 ---
 title: "Convertidores personalizados"
-description: "Un convertidor le enseña al sistema de guardado cómo convertir una familia de tipos en JSON y viceversa. Escribe uno cuando el camino por defecto no puede alcanzar tu est"
+description: "Un convertidor le enseña al sistema de guardado a convertir una familia de tipos en JSON y viceversa. Escribe uno cuando el camino por defecto no llega a tu estado, o para reemplazar un convertidor integrado."
 ---
 
 Un convertidor le enseña al sistema de guardado cómo convertir una familia de tipos en JSON y viceversa.
-Escribe uno cuando el camino por defecto no puede alcanzar tu estado, o cuando quieres reemplazar lo que
+Escribe uno cuando el camino por defecto no puede llegar a tu estado, o cuando quieres reemplazar lo que
 almacena un convertidor integrado. Esta página es para programadores.
 
 El camino por defecto serializa un componente por sus campos serializables por Unity: campos `public` y
@@ -41,15 +41,15 @@ Dos reglas, y no son negociables.
 escena no puede crearse a partir de datos: pertenece a un GameObject, tiene referencias que la escena
 conectó, y el cargador lo está restaurando en su lugar. Así que `Read` convierte `existing` con un cast, lo
 muta, y lo devuelve. Si `existing` es `null`, lanza una `JsonException` con un mensaje que lo indique — el
-pipeline convierte eso en un resultado tipado `FieldMapFailed` en lugar de una excepción en la cara del
-jugador.
+pipeline convierte eso en un resultado tipado `FieldMapFailed` en lugar de soltarle una excepción al
+jugador en plena partida.
 
 **Los convertidores de tipo de valor construyen un valor nuevo e ignoran `existing`.** Un `Vector3` no tiene
 nada que rellenar. Lee los miembros, construye, devuelve.
 
 Tercera regla, para cuando tocas campos: **respeta `mapper.StrictPopulate` y `mapper.FieldSkipReporter`.**
-Llevan la tolerancia que pidió quien llama hasta tu convertidor. Si delegas la restauración de campos al
-mapper, pásalos directamente:
+Trasladan hasta tu convertidor la tolerancia que pidió quien hizo la llamada. Si delegas la restauración de
+campos al mapper, pásalos directamente:
 
 ```csharp
 mapper.PopulateFields(existing, node, mapper.StrictPopulate, mapper.FieldSkipReporter);
@@ -58,7 +58,7 @@ mapper.PopulateFields(existing, node, mapper.StrictPopulate, mapper.FieldSkipRep
 Fijar `strict: true` ahí significaría que una carga tolerante descarta todo el componente por un solo campo
 incorrecto. Consulta [Carga estricta vs. tolerante](/es/docs/beasty-save-system/guides/strict-vs-tolerant/).
 
-## Un ejemplo trabajado
+## Un ejemplo completo
 
 Este componente es un caso realista que el camino por defecto no puede manejar. Su contenido vive en un
 campo privado que Unity no serializa, y su temperatura es una propiedad — y las propiedades nunca se
@@ -84,8 +84,8 @@ public sealed class Furnace : MonoBehaviour
 }
 ```
 
-Marca `Furnace` en el inspector de `BeastySaveable` hoy y el archivo de guardado obtiene un objeto vacío. Aquí
-está el convertidor que lo arregla.
+Marca `Furnace` en el inspector de `BeastySaveable` tal como está y el archivo de guardado termina con un
+objeto vacío. Este es el convertidor que lo arregla.
 
 ```csharp
 using System;
@@ -174,7 +174,7 @@ public sealed class GridCellConverter : IBeastyConverter
 }
 ```
 
-## Sobrescribiendo un convertidor integrado
+## Sobrescribir un convertidor integrado
 
 Un convertidor que registras tú mismo se ubica en la capa `dev`, que supera a todo lo demás. Para reemplazar
 uno integrado, escribe un convertidor cuyo `CanConvert` reclame el mismo tipo. Este solo almacena la posición
@@ -212,13 +212,14 @@ public sealed class PositionOnlyTransformConverter : IBeastyConverter
 }
 ```
 
-Regístralo y cada `Transform` en cada guardado pasará ahora por tu código en lugar del `core` integrado.
+Regístralo y, a partir de ahí, todos los `Transform` de todos los guardados pasarán por tu código en lugar
+del `core` integrado.
 
 > **Advertencia**
 > Sobrescribir un convertidor integrado cambia la forma de los datos en disco. Los guardados escritos por el
 > convertidor anterior todavía contienen los miembros anteriores. Los miembros que ya no lees se ignoran, y
-> los miembros que ahora lees pero están ausentes recaen en silencio — pero si el significado de un miembro
-> cambió, escribe una migración. Consulta [Versionado y migraciones](/es/docs/beasty-save-system/guides/versioning-and-migrations/).
+> los miembros que ahora lees pero no están presentes recurren en silencio a su fallback — pero si el
+> significado de un miembro cambió, escribe una migración. Consulta [Versionado y migraciones](/es/docs/beasty-save-system/guides/versioning-and-migrations/).
 
 ## ConverterUtil
 
@@ -237,7 +238,7 @@ estricta/tolerante por ti.
 | `WriteEnum(JsonNode obj, string name, Enum value)` | Almacena el enum **por nombre**, así que reordenar el enum más tarde no corrompe los guardados antiguos. |
 | `ReadEnum<T>(JsonNode obj, string name, T fallback)` | `where T : struct, Enum`. Parsea sin distinguir mayúsculas/minúsculas. |
 
-Pasa el valor actual del componente como el `fallback`. Eso es lo que hace que un convertidor sobreviva a un
+Pasa el valor actual del componente como `fallback`. Eso es lo que hace que un convertidor sobreviva a un
 guardado escrito por una build anterior.
 
 ### La regla del fallback
@@ -248,7 +249,7 @@ Esta es la parte que decide cómo se comporta tu convertidor frente a datos impe
   advertencia, sin fallo. Esto es deliberado: permite que un guardado antiguo se cargue en una build nueva
   que añadió un miembro.
 - Un miembro que está **presente pero tiene el tipo incorrecto** es diferente. Eso son datos corruptos o
-  ajenos, y tragárselos descartaría estado real sin decir nada en ningún lugar. En una carga **estricta**
+  ajenos, y tragárselos descartaría estado real sin avisar en ninguna parte. En una carga **estricta**
   lanza una excepción, y el pipeline reporta `FieldMapFailed`. En una carga **tolerante** mantiene el
   fallback y añade una advertencia a `LoadResult.Warnings`.
 
@@ -268,7 +269,7 @@ reciente, así que registrar un segundo convertidor para el mismo tipo eclipsa a
 sobrescribes uno integrado.
 
 **`RegisterModule`** registra un grupo con nombre. Es **idempotente por id**: registrar `"mystudio.rpg"` dos
-veces reemplaza el conjunto en lugar de duplicarlo. El id importa más allá de la contabilidad — se escribe en
+veces reemplaza el conjunto en lugar de duplicarlo. Y el id no es solo para llevar la cuenta — se escribe en
 **cada entrada de un guardado de escena**:
 
 ```json
@@ -293,8 +294,8 @@ BeastySave.RegisterModule("mystudio.rpg", new IBeastyConverter[]
 dev  >  modules  >  core
 ```
 
-El primer convertidor cuyo `CanConvert` devuelve verdadero, recorriendo las capas en ese orden, maneja el
-tipo. La resolución se cachea por tipo y la caché se limpia en cada registro.
+Las capas se recorren en ese orden, y el tipo lo maneja el primer convertidor cuyo `CanConvert` devuelva
+verdadero. La resolución se cachea por tipo y la caché se limpia en cada registro.
 
 `BeastySave.TryDescribeConverter(Type type, out string source)` te dice qué capa manejaría un tipo: `"dev"`,
 un id de módulo, o `"core"`. El inspector de `BeastySaveable` lo usa para etiquetar cada componente en la
@@ -328,8 +329,8 @@ public static class GameConverters
 ```
 
 Usa `BeforeSceneLoad`, no `SubsystemRegistration`. El reinicio en sí se ejecuta en `SubsystemRegistration`, y
-el orden de dos métodos con el mismo load type no está definido — registrar ahí puede ser borrado por el
-reinicio que le sigue.
+el orden de dos métodos con el mismo load type no está definido — lo que registres ahí puede quedar borrado
+por el reinicio que viene después.
 
 Esto también aplica con Fast Enter Play Mode (recarga de dominio desactivada), que es la razón por la que
 existe el reinicio: evita que convertidores y migraciones de una sesión de Play se filtren a la siguiente.
@@ -340,5 +341,5 @@ existe el reinicio: evita que convertidores y migraciones de una sesión de Play
 - [Módulos de convertidores](/es/docs/beasty-save-system/reference/converter-modules/) — los siete módulos integrados y qué almacena cada uno.
 - [Carga estricta vs. tolerante](/es/docs/beasty-save-system/guides/strict-vs-tolerant/) — la tolerancia que tu convertidor debe respetar.
 - [El motor JSON](/es/docs/beasty-save-system/reference/json-engine/) — `JsonNode`, `JsonMapper`, `JsonParser`, `JsonWriter`.
-- [El formato del archivo de guardado](/es/docs/beasty-save-system/reference/save-file-format/) — dónde termina el id de `module`.
+- [El formato del archivo de guardado](/es/docs/beasty-save-system/reference/save-file-format/) — adónde va a parar el id de `module`.
 - [Resultados y errores](/es/docs/beasty-save-system/reference/results-and-errors/) — `FieldMapFailed`, `TypeUnavailable`.

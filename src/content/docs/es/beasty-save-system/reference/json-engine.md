@@ -1,6 +1,6 @@
 ---
 title: "El motor JSON"
-description: "Beasty Save System incluye su propio motor JSON en BeastySaveSystemCore.Json. Es público y utilizable por sí solo, para cualquier cosa: archivos de configuración, payload"
+description: "Beasty Save System incluye su propio motor JSON, público y utilizable por sí solo: sirve para archivos de configuración, payloads de red o herramientas."
 ---
 
 Beasty Save System incluye su propio motor JSON en `Beasty_SaveSystemCore.Json`. Es público y utilizable por
@@ -14,8 +14,8 @@ entrar en conflicto de versiones con lo que tu proyecto u otro asset ya tenga. T
 guardado necesita está aquí.
 
 También es **seguro para AOT** (solo reflexión de campos, sin generación de código) y **determinista**: el
-escritor conserva el orden de los miembros del objeto, que es lo que permite que un archivo de guardado
-tenga checksum siquiera.
+escritor conserva el orden de los miembros del objeto, que es lo que hace posible que un archivo de guardado
+tenga checksum.
 
 ## JsonNode
 
@@ -96,7 +96,7 @@ caracteres de control sin escapar dentro de strings, escapes inválidos, y cualq
 final del documento. Una clave de objeto duplicada mantiene el último valor.
 
 El **límite de profundidad de 512 niveles** evita que una entrada hostil o corrupta desborde la pila.
-Anidar más profundo que eso lanza una excepción. Auméntalo con el argumento `maxDepth` si genuinamente lo
+Anidar más profundo que eso lanza una excepción. Auméntalo con el argumento `maxDepth` si de verdad lo
 necesitas, pero un guardado tan profundo suele ser un bug.
 
 Los fallos lanzan `JsonParseException`.
@@ -205,13 +205,13 @@ public interface IJsonConverterResolver
 }
 ```
 
-El gancho que el mapper consulta antes de la reflexión, en ambas direcciones. Devuelve false para declinar y
-dejar correr el camino por defecto. El sistema de guardado conecta aquí su registro de convertidores; si usas
-el motor JSON por su cuenta, aquí es donde tomas el control del mapeo para tus propios tipos.
+El gancho que el mapper consulta antes de la reflexión, en ambas direcciones. Devuelve false para no intervenir
+y dejar que siga el camino por defecto. El sistema de guardado conecta aquí su registro de convertidores; si
+usas el motor JSON por separado, aquí es donde tomas el control del mapeo para tus propios tipos.
 
 ## Un ejemplo trabajado
 
-Construyendo un node a mano, escribiéndolo, y volviendo a parsearlo:
+Construir un node a mano, escribirlo y volver a parsearlo:
 
 ```csharp
 using Beasty_SaveSystemCore.Json;
@@ -235,7 +235,7 @@ int count = parsed["items"].Count;                // 2
 bool same = parsed.DeepEquals(root);              // true
 ```
 
-Mapeando un objeto en lugar de construir el árbol:
+Mapear un objeto en lugar de construir el árbol:
 
 ```csharp
 var mapper = new JsonMapper();

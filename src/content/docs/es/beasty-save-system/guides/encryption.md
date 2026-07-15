@@ -1,6 +1,6 @@
 ---
 title: "Encriptación"
-description: "El sistema de guardado puede encriptar el contenido de un archivo de guardado para que un jugador no pueda abrirlo en un editor de texto y cambiar su oro a 99"
+description: "El sistema de guardado puede encriptar un archivo de guardado para que un jugador no pueda abrirlo en un editor de texto y cambiar su oro a 999999. Esta página muestra cómo activarla y qué vale de verdad."
 ---
 
 El sistema de guardado puede encriptar el contenido de un archivo de guardado para que un jugador no pueda abrirlo en un
@@ -17,10 +17,10 @@ editor de texto y cambiar su oro a 999999. Esta página muestra cómo activarla,
 > medida anti-trampas en un juego multijugador — si un valor debe ser fiable, tiene que validarse en un
 > servidor que tú controles, no almacenarse en el disco del jugador.
 
-Esa es toda la advertencia, y aplica a toda característica de encriptación de guardado en todo asset, no solo en
-este. Es una propiedad de enviarle la clave al atacante. Con eso entendido, la encriptación aún
-vale la pena activarla: hace que la edición casual de guardados sea una molestia en lugar de un trabajo de cinco segundos, y evita
-que tu archivo de guardado sea una lista en texto plano llena de spoilers de cada capítulo de tu juego.
+Esa es toda la advertencia, y aplica a cualquier función de encriptación de guardados de cualquier asset, no solo
+a este. Es la consecuencia de enviarle la clave al atacante dentro del propio juego. Dicho esto, aun así vale la
+pena activarla: convierte la edición casual de guardados en una molestia en lugar de un trabajo de cinco segundos,
+y evita que tu archivo de guardado sea una lista en texto plano llena de spoilers de cada capítulo de tu juego.
 
 ## Activarla
 
@@ -29,7 +29,7 @@ Dos campos en [BeastySaveSettings](/es/docs/beasty-save-system/guides/settings/)
 | Campo | Configúralo a |
 |---|---|
 | `Encrypted` | `true` |
-| `EncryptionKey` | Un string tuyo propio |
+| `EncryptionKey` | Un string propio |
 
 En el inspector, están en el componente `BeastySaveManager`. En código:
 
@@ -48,12 +48,12 @@ Eso es todo. `Save`, `Load`, `SaveAll` y `LoadAll` se comportan exactamente igua
 ## Qué hace
 
 El payload se encripta con AES-256 (CBC). La clave puede ser **cualquier string no vacío** — no tiene
-que tener 32 caracteres, ni ser hexadecimal, ni nada más. Lo que sea que escribas se hashea con SHA-256 para producir la
-clave de 256 bits.
+que tener 32 caracteres, ni ser hexadecimal, ni nada por el estilo. Escribas lo que escribas, se hashea con
+SHA-256 para producir la clave de 256 bits.
 
-Se genera un vector de inicialización aleatorio de 16 bytes nuevo para cada guardado y se almacena junto con el ciphertext.
-La consecuencia práctica: guardar los mismos datos dos veces produce dos archivos distintos. Esto es correcto e
-intencional. No compares archivos de guardado byte por byte para decidir si algo cambió.
+Para cada guardado se genera un vector de inicialización aleatorio de 16 bytes nuevo, que se almacena junto al
+ciphertext. La consecuencia práctica: guardar los mismos datos dos veces produce dos archivos distintos. Esto es
+correcto e intencional. No compares archivos de guardado byte por byte para decidir si algo cambió.
 
 Lo que **no** está encriptado:
 
@@ -67,7 +67,7 @@ prefieras que el jugador no lea.
 
 ## Si dejas la clave vacía
 
-Obtienes encriptación, y obtienes una advertencia:
+La encriptación funciona igual, pero recibes una advertencia:
 
 ```text
 Encryption is on but EncryptionKey is the shared default that ships with Beasty Save System:
@@ -76,15 +76,16 @@ BeastySaveSettings.EncryptionKey (on the BeastySaveManager, or on the settings y
 BeastySave) to a string of your own before shipping.
 ```
 
-Un `EncryptionKey` vacío recae en una clave por defecto que es una constante pública en el paquete. Cada
-copia del asset contiene el mismo string. La encriptación sigue funcionando, pero cualquier otro propietario del asset puede
-desencriptar los guardados de tus jugadores sin ningún esfuerzo.
+Un `EncryptionKey` vacío usa como respaldo una clave por defecto, que es una constante pública del paquete. Cada
+copia del asset contiene el mismo string. La encriptación sigue funcionando, pero cualquier otro dueño del asset
+puede desencriptar los guardados de tus jugadores sin ningún esfuerzo.
 
-La advertencia aparece una vez por sesión, solo en el editor y en builds de desarrollo. Se compila fuera de los
-builds de release — a un jugador que lea su propio archivo de log no se le debería decir que el candado de sus guardados es
-público.
+La advertencia aparece una vez por sesión, solo en el editor y en builds de desarrollo. En los builds de release ni
+siquiera se compila — a un jugador que lea su propio archivo de log no se le debería decir que el candado de sus
+guardados es público.
 
-Configura tu propia clave. Cualquier string sirve. Hazlo antes de publicar, no después: consulta la siguiente sección para saber por qué.
+Configura tu propia clave. Cualquier string sirve. Hazlo antes de publicar, no después: la siguiente sección
+explica por qué.
 
 ## El flag Encrypted debe coincidir con el archivo
 
@@ -95,8 +96,8 @@ archivo, y ambos deben coincidir.
   el mensaje "This save is not encrypted, but this game only loads encrypted saves."
 - Un juego con `Encrypted = false` tampoco puede leer un guardado encriptado. La carga falla.
 
-El rechazo es deliberado, no un descuido. Si un juego encriptado aceptara alegremente guardados en texto plano, entonces
-cualquiera podría escribir a mano un guardado en texto plano y el juego lo cargaría — y la encriptación no protegería
+El rechazo es deliberado, no un descuido. Si un juego encriptado aceptara alegremente guardados en texto plano,
+cualquiera podría escribir uno a mano y el juego lo cargaría — y la encriptación no protegería
 nada en absoluto.
 
 Lo mismo aplica a la clave en sí: cambia la clave y los guardados antiguos fallan con `DecryptFailed`, exactamente
@@ -104,15 +105,15 @@ como si hubieran sido escritos por otro juego.
 
 > **Advertencia**
 > Activar la encriptación (o cambiar la clave) a mitad de producción invalida todos los guardados existentes.
-> Los jugadores que ya tengan tu juego encontrarán sus guardados rechazados. Decide esto antes de publicar.
+> A los jugadores que ya tengan tu juego se les rechazarán sus guardados. Decide esto antes de publicar.
 
 ## Si de todos modos tienes que cambiar
 
 Tienes dos opciones.
 
-**Migrar al cargar.** Prueba primero la configuración actual. Si la carga falla con `DecryptFailed`, prueba de nuevo con
-una copia en texto plano de las settings, y si eso funciona, escríbelo de vuelta encriptado directamente. El jugador
-carga un guardado antiguo una vez, y a partir de ahí es un guardado nuevo.
+**Migrar al cargar.** Prueba primero la configuración actual. Si la carga falla con `DecryptFailed`, vuelve a
+intentarlo con una copia de las settings en texto plano y, si funciona, reescribe el guardado encriptado ahí
+mismo. El jugador carga un guardado antiguo una vez, y a partir de ahí es un guardado nuevo.
 
 ```csharp
 using Beasty_SaveSystem;
@@ -161,8 +162,8 @@ clave además de activar la encriptación. Si estás rotando una clave, las sett
 **antigua**, no `Encrypted = false`.
 
 **O conserva ambas.** Publica la actualización con `Encrypted = false` para los guardados antiguos y encripta solo los nuevos, usando
-dos objetos de settings y un marcador en los metadatos para distinguirlos. Esto es más código y más formas de
-equivocarse. Prefiere la migración.
+dos objetos de settings y un marcador en los metadatos para distinguirlos. Es más código y más maneras de
+equivocarse. Mejor quédate con la migración.
 
 ## Ver también
 

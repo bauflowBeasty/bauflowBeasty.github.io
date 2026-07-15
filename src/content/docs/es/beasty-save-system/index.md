@@ -1,6 +1,6 @@
 ---
 title: "Beasty Save System"
-description: "Beasty Save System guarda y carga los datos de tu juego como archivos JSON en disco, sin dependencias externas y sin excepciones inesperadas. Funciona de dos "
+description: "Beasty Save System guarda y carga los datos de tu juego como archivos JSON en disco, sin dependencias externas y sin excepciones inesperadas."
 ---
 
 Beasty Save System guarda y carga los datos de tu juego como archivos JSON en disco, sin dependencias externas
@@ -10,11 +10,11 @@ llama a una API de C# de cinco líneas desde tu propio código.
 ## Qué lo hace diferente
 
 **Cero dependencias.** El paquete incluye su propio motor JSON. Sin Newtonsoft, sin los límites de `JsonUtility`, sin
-entradas en el package manager que reconciliar con el resto de tu proyecto.
+entradas del package manager que tengas que cuadrar con el resto de tu proyecto.
 
 **Cada llamada devuelve un resultado tipado.** `BeastySave.Save` devuelve un `SaveResult`. `BeastySave.Load<T>`
 devuelve un `LoadResult<T>`. Nada lanza excepciones. Compruebas `Success`, lees el código de `Error` y decides
-qué ve el jugador — incluyendo ofrecer la copia de seguridad automática cuando un archivo resulta estar corrupto.
+qué ve el jugador — por ejemplo, ofrecer la copia de seguridad automática cuando un archivo resulta estar corrupto.
 
 **Seguro por defecto.** Los guardados se escriben de forma atómica: en un archivo temporal, que luego se
 intercambia por el slot. Un cierre inesperado a mitad de la escritura no puede dejarte con un guardado a medias. El
@@ -28,7 +28,7 @@ buena.
 - Escrituras atómicas, copias de seguridad `.bak` automáticas, checksums SHA-256 y restauración de copia de seguridad con una sola llamada.
 - Encriptación AES-256 opcional. Lee [encryption.md](/es/docs/beasty-save-system/guides/encryption/) para conocer sus límites reales.
 - Metadatos en texto plano (nivel, tiempo de juego, capítulo) legibles sin desencriptar el archivo, para que una
-  pantalla de slots de guardado pueda listarlos de forma económica.
+  pantalla de slots de guardado pueda listarlos a bajo costo.
 - Carga estricta (todo o nada, con rollback) o tolerante (omitir y advertir).
 - Versionado de datos con migraciones registradas, para que una actualización pueda leer los guardados que tus jugadores ya tienen.
 - Variantes asíncronas para la IO de archivos.
@@ -45,14 +45,14 @@ desde una escena vacía hasta un guardado y una carga funcionando, solo con clic
 **Si sí escribes C#**, ve a [save-with-code.md](/es/docs/beasty-save-system/getting-started/save-with-code/). Cinco minutos, una clase de
 datos y un archivo de guardado en disco.
 
-De cualquier forma, instala primero: [installation.md](/es/docs/beasty-save-system/getting-started/installation/).
+En cualquiera de los dos casos, primero instala: [installation.md](/es/docs/beasty-save-system/getting-started/installation/).
 
 ## La única página que todos deberían leer
 
-[what-gets-saved.md](/es/docs/beasty-save-system/guides/what-gets-saved/). Te dice qué tipos se guardan y recuperan correctamente y — más
+[what-gets-saved.md](/es/docs/beasty-save-system/guides/what-gets-saved/). Te dice qué tipos se guardan y recuperan correctamente y — lo más
 importante — que las referencias a objetos de Unity (un sprite, un prefab, otro componente) **no** se guardan.
-Eso es deliberado, y hay una forma correcta de trabajar con ello. Leer esa página antes de construir una pantalla
-de guardado vale los diez minutos.
+Eso es deliberado, y hay una forma correcta de trabajar con ello. Leer esa página antes de armar una pantalla
+de guardado bien vale los diez minutos.
 
 ## Guías
 

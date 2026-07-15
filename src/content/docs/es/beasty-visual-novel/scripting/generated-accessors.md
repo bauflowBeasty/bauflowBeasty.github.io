@@ -1,17 +1,17 @@
 ---
 title: "Accesores generados: VNVars y VNChars"
-description: "VNVars y VNChars son archivos C# que el editor genera a partir de las variables y personajes de tu proyecto. Convierten un error de tipeo en una clave de una resp"
+description: "VNVars y VNChars son archivos C# que el editor genera a partir de las variables y personajes de tu proyecto. Hacen que un error de tipeo en una clave deje de ser una respuesta equivocada y silenciosa y pase a ser un error de compilación."
 ---
 
 `VNVars` y `VNChars` son archivos C# que el editor genera a partir de las variables y personajes de tu
-proyecto. Convierten un error de tipeo en una clave de una respuesta silenciosamente equivocada en un error
-de compilación.
+proyecto. Hacen que un error de tipeo en una clave deje de ser una respuesta equivocada y silenciosa y pase a
+ser un error de compilación.
 
 ## El problema que resuelven
 
 El almacén de variables se indexa por string. `VN.GetBool("met_maya")` sobre una clave que en realidad
 escribiste como `met_Maya` no lanza excepción ni advierte: devuelve el valor de respaldo, `false`. La
-condición nunca se dispara, la rama nunca se ejecuta, y buscas el bug en el grafo.
+condición nunca se dispara, la rama nunca se ejecuta, y terminas buscando el bug en el grafo.
 
 ```csharp
 VN.SetInt("money", 100);      // compila sin importar lo que escribas
@@ -62,7 +62,7 @@ personaje se convierte en el nombre de la clase anidada.
 | `Tools > Beasty VN > Codegen > Regenerate VNChars Accessors` | `VNChars` — una clase anidada por personaje |
 
 Regenera después de añadir, renombrar o eliminar una variable, una variable de personaje o un personaje.
-Nada más los cambia, y nada te avisa que están desactualizados — una variable renombrada deja un accesor
+Nada más los cambia, y nada te avisa cuando quedan desactualizados — una variable renombrada deja un accesor
 apuntando a una clave que ya no existe, que lee el valor de respaldo exactamente igual que lo haría un error
 de tipeo.
 
@@ -104,8 +104,8 @@ declararla es lo que la hace visible para el selector de condiciones, el validad
 ## ItemIds
 
 La pestaña Items genera el mismo tipo de archivo para los ids de inventario: una clase `ItemIds` de
-constantes de string, pensada para pasarse a `Inventory.Item(...)`. Las mismas reglas — regenera cuando tus
-ids cambien, no la edites a mano. Ver [APIs de gameplay](/es/docs/beasty-visual-novel/scripting/gameplay-apis/).
+constantes de string, pensada para pasarse a `Inventory.Item(...)`. Aplican las mismas reglas — regenera
+cuando tus ids cambien, no la edites a mano. Consulta [APIs de gameplay](/es/docs/beasty-visual-novel/scripting/gameplay-apis/).
 
 ## Ver también
 

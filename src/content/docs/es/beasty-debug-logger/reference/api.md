@@ -1,10 +1,10 @@
 ---
 title: "Referencia de la API"
-description: "Cada miembro público de BeastyDebugLoggerConsole.BeastyDebugLogger. La clase es estática. Object es UnityEngine.Object."
+description: "Todos los miembros públicos de BeastyDebugLoggerConsole.BeastyDebugLogger. La clase es estática. Object es UnityEngine.Object."
 ---
 
-Cada miembro público de `BeastyDebugLoggerConsole.BeastyDebugLogger`. La clase es estática. `Object` es
-`UnityEngine.Object`.
+Todos los miembros públicos de `BeastyDebugLoggerConsole.BeastyDebugLogger`. La clase es estática. `Object`
+es `UnityEngine.Object`.
 
 Assembly: `Beasty.DebugLogger` (runtime, todas las plataformas). No referencia nada.
 
@@ -40,7 +40,7 @@ public static void PrintLongMessage(string message, int chunkSize = 9999, bool c
                                     string label = "");
 ```
 
-Parámetros, en cada método:
+Parámetros comunes a todos los métodos:
 
 - `canPrint` — pasa false para silenciar esta llamada en particular. Se evalúa en el sitio de la llamada;
   no evita que el mensaje se construya.
@@ -48,8 +48,8 @@ Parámetros, en cada método:
   Jerarquía.
 
 `PrintLongMessage` divide `message` en fragmentos de `chunkSize` caracteres y loguea cada uno en el nivel
-Highlight, con prefijo de su offset y `label`. `chunkSize` debe ser mayor que 0; 0 o un valor negativo
-cuelga el editor. Un `message` nulo o vacío loguea una advertencia y retorna.
+Highlight, cada uno con el prefijo de su offset y `label`. `chunkSize` debe ser mayor que 0; 0 o un valor
+negativo cuelga el editor. Un `message` nulo o vacío loguea una advertencia y no hace nada más.
 
 ## LogColor
 

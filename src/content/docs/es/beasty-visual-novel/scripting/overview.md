@@ -54,11 +54,11 @@ ellos:
 | `MainMenu` | Sin historia, sin sala. Los menús poseen la pantalla. |
 | `VisualNovel` | Una sesión de `VisualNovelController` está reproduciendo una `DialogueScene`. |
 | `FreeRoam` | El jugador está en una sala en un `FreeRoamMapGraph`. |
-| `Custom` | Tu código. El motor no tiene UI para este estado — ese es todo el sentido. |
+| `Custom` | Tu código. El motor no tiene UI para este estado — esa es justamente la idea. |
 
 `VNGameController.StateChanged` se dispara en cada transición. El guardado registra qué estado estaba activo,
-así que una carga restaura el subsistema correcto. Ver [Controladores](/es/docs/beasty-visual-novel/scripting/controllers/) para los métodos
-que se mueven entre ellos, y [Modo personalizado](/es/docs/beasty-visual-novel/scripting/custom-mode/) para el cuarto.
+así que una carga restaura el subsistema correcto. Consulta [Controladores](/es/docs/beasty-visual-novel/scripting/controllers/) para ver los métodos
+que te mueven entre ellos, y [Modo personalizado](/es/docs/beasty-visual-novel/scripting/custom-mode/) para el cuarto.
 
 ## Quiero X -> usa Y
 

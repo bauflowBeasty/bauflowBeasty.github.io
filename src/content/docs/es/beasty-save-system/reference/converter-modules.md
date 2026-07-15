@@ -1,10 +1,10 @@
 ---
 title: "Módulos de convertidores"
-description: "Un convertidor convierte un tipo en JSON y viceversa. La capa core siempre está presente; siete módulos opcionales cubren los paquetes de Unity que puedas o no tener. Esta p"
+description: "Un convertidor convierte un tipo en JSON y viceversa. Esta página lista exactamente qué campos almacena cada convertidor, para que sepas qué volverá y qué no."
 ---
 
 Un convertidor convierte un tipo en JSON y viceversa. La capa `core` siempre está presente; siete módulos
-opcionales cubren los paquetes de Unity que puedas o no tener. Esta página lista exactamente qué campos
+opcionales cubren paquetes de Unity que quizá tengas en el proyecto, quizá no. Esta página lista exactamente qué campos
 almacena cada convertidor, para que sepas qué volverá y qué no.
 
 ## Los módulos
@@ -40,10 +40,10 @@ convertidor. Consulta [Convertidores personalizados](/es/docs/beasty-save-system
 el guardado contiene el nombre del asset, y la carga lo vuelve a resolver con `Resources.Load`. Eso
 significa que **el asset solo vuelve si vive en una carpeta `Resources/`**. Si el nombre no se resuelve, la
 referencia conectada en la escena se deja intacta — nada se rompe, pero tampoco cambia nada. Si tu juego
-intercambia estos elementos en tiempo de ejecución y no usas `Resources`, guarda un identificador propio en
-un campo de `MonoBehaviour` en su lugar.
+intercambia estos elementos en tiempo de ejecución y no usas `Resources`, guarda mejor un identificador propio
+en un campo de `MonoBehaviour`.
 
-**Un miembro faltante recae en silencio. Un miembro del tipo incorrecto no.** Si el guardado no lleva un
+**Un miembro faltante pasa en silencio. Un miembro del tipo incorrecto, no.** Si el guardado no lleva un
 campo, el convertidor mantiene el valor en vivo — eso es lo que hace que las cargas sean resilientes entre
 versiones de Unity. Si el guardado lleva el campo pero con el tipo JSON incorrecto, una carga estricta falla
 con `FieldMapFailed` y una carga tolerante mantiene el valor en vivo y añade una advertencia.
@@ -67,7 +67,7 @@ con `FieldMapFailed` y una carga tolerante mantiene el valor en vivo y añade un
 `position`, `rotation`, `localPosition`, `localRotation`, `localScale`.
 
 Al cargar, los valores de mundo se aplican primero y los valores locales segundo, así que para un objeto con
-padre ganan los valores locales. El padre en sí no se guarda: volver a asignar el padre no se restaura.
+padre ganan los valores locales. El padre en sí no se guarda: un cambio de padre no se restaura.
 
 Se empareja por tipo exacto. Un `RectTransform` **no** es un `Transform` aquí — necesita el módulo UGUI.
 
@@ -127,7 +127,7 @@ actual y su `normalizedTime`.
 para el estado de tu juego, contrólalo desde un bool que fijes tú mismo.
 
 Un `Animator` sin `runtimeAnimatorController` escribe un node vacío y al cargar no hace nada. Los parámetros
-en el archivo que ya no existen en el controlador en vivo se omiten silenciosamente.
+en el archivo que ya no existen en el controlador en vivo se omiten en silencio.
 
 ## Audio
 
@@ -201,8 +201,8 @@ El asset de fuente no se almacena.
 | `Toggle` | `isOn` |
 
 **`Slider` y `Toggle` se restauran sin disparar `onValueChanged`.** Cargar un guardado no debe parecer que el
-jugador arrastró el control o marcó la casilla: los juegos cuelgan cambios de volumen, sonidos de clic y
-eventos de analítica de esos callbacks. El `Slider` amplía su rango, coloca el valor con
+jugador arrastró el control o marcó la casilla: los juegos conectan a esos callbacks cambios de volumen,
+sonidos de clic y eventos de analítica. El `Slider` amplía su rango, coloca el valor con
 `SetValueWithoutNotify` y luego vuelve a estrechar el rango, de modo que ni siquiera el recorte (clamping)
 puede notificar. El `Toggle` usa `SetIsOnWithoutNotify`. Si necesitas que tu UI reaccione a un valor cargado,
 hazlo desde `BeastySaveManager.LoadCompleted`.
@@ -211,7 +211,7 @@ hazlo desde `BeastySaveManager.LoadCompleted`.
 
 ## Cuando un módulo no está
 
-**Al guardar** el componente no tiene convertidor, y el guardado falla con `TypeUnavailable`:
+**Al guardar**, el componente no tiene convertidor y el guardado falla con `TypeUnavailable`:
 
 ```text
 UnityEngine.UI.Slider on 'VolumeSlider' has no registered converter; enable its converter module
@@ -219,10 +219,10 @@ or register a custom IBeastyConverter.
 ```
 
 No se escribe nada. El editor te advierte de esto antes de que pulses Play: el inspector de `BeastySaveable`
-marca un componente ticado sin convertidor.
+señala cualquier componente marcado que no tenga convertidor.
 
-**Al cargar** el archivo de guardado registra qué módulo escribió cada componente, así que el mensaje lo
-nombra:
+**Al cargar**, el archivo de guardado lleva registrado qué módulo escribió cada componente, así que el mensaje
+lo nombra:
 
 ```text
 UnityEngine.UI.Slider on saveable 'a3f…' has no registered converter. The save was written by

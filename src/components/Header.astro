@@ -2,7 +2,7 @@
 import ThemeToggle from './ThemeToggle.astro';
 import LangSwitch from './LangSwitch.astro';
 import { PRODUCTS } from '../data/products';
-import { type Lang } from '../data/ui-strings';
+import { t, type Lang } from '../data/ui-strings';
 import logoOnDark from '../assets/logo-on-dark.svg';
 import logoOnLight from '../assets/logo-on-light.svg';
 
@@ -23,8 +23,8 @@ const shortNames: Record<string, string> = {
 <header class="site-header">
   <div class="container header-row">
     <a class="brand" href={`${prefix}/`}>
-      <img class="logo logo-dark" src={logoOnDark.src} alt="Beasty — home" width="110" />
-      <img class="logo logo-light" src={logoOnLight.src} alt="Beasty — home" width="110" />
+      <img class="logo logo-dark" src={logoOnDark.src} alt={t(lang, 'logo.alt')} width="110" />
+      <img class="logo logo-light" src={logoOnLight.src} alt={t(lang, 'logo.alt')} width="110" />
     </a>
 
     <nav class="product-nav" aria-label="Products">

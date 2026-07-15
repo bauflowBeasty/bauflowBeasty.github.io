@@ -1,6 +1,6 @@
 ---
 title: "Subgrafos"
-description: "Un subgrafo es un grafo dentro de un nodo. Lo usas para plegar un tramo de historia en una sola caja del lienzo padre, y para llamar a ese tramo desde más de un"
+description: "Un subgrafo es un grafo dentro de un nodo: pliega un tramo de historia en una sola caja del lienzo padre y te deja llamarlo desde más de un lugar."
 ---
 
 Un subgrafo es un grafo dentro de un nodo. Lo usas para plegar un tramo de historia en una sola caja del
@@ -8,7 +8,7 @@ lienzo padre, y para llamar a ese tramo desde más de un lugar.
 
 ## Por qué
 
-Aparecen tres casos una y otra vez:
+Hay tres casos que se repiten una y otra vez:
 
 - **Un encuentro reutilizable.** La emboscada de bandidos ocurre en tres caminos distintos. Escríbela una
   vez. Cada uno de los tres caminos tiene un SubGraph Node que la llama, y cada uno enruta el resultado a su
@@ -17,10 +17,10 @@ Aparecen tres casos una y otra vez:
   Conviértelo en un subgrafo y el grafo de nivel superior se vuelve legible: cinco cajas y los cables entre
   ellas.
 - **Una escena autocontenida con un resultado.** Un combate, una negociación, un examen. La escena decide
-  algo —ganado, perdido, huido— y la historia de fuera necesita saber cuál, sin que le importe cómo.
+  algo —ganado, perdido, huido— y a la historia de afuera le interesa saber cuál, sin importarle cómo.
 
-Lo que un subgrafo te da que un simple grupo de nodos no da es el **resultado**: una única palabra devuelta a
-quien lo llama, y quien lo llama enruta según ella.
+Lo que un subgrafo te da, y un simple grupo de nodos no, es el **resultado**: una sola palabra que se
+devuelve a quien lo llama, para que este enrute según ella.
 
 ## Crear un subgrafo
 
@@ -35,8 +35,8 @@ vuelva.)
 
 - **Abrir el subgrafo**: haz clic derecho en el nodo y elige `Open Subgraph`, o pulsa el botón
   `open subgraph` del propio nodo.
-- **Saber dónde estás**: aparece una miga de pan en la barra de herramientas de la pestaña Story mostrando el
-  camino por el que has entrado.
+- **Saber dónde estás**: en la barra de herramientas de la pestaña Story aparece una miga de pan que muestra
+  el camino por el que entraste.
 - **Volver arriba**: el botón **`↥ Up`** junto a la miga de pan.
 
 Dentro, es el mismo lienzo con los mismos siete tipos de nodo y las mismas reglas. Tiene su propio nodo de
@@ -54,7 +54,7 @@ Tiene dos campos:
 | **Outcome key** | La palabra devuelta a quien lo llama: `win`, `refused`, `fled`. Tú la eliges. |
 | **Effects** | Cambios de variables aplicados al salir: las mismas filas `variable, operación, valor` que una opción de elección. |
 
-Los efectos son cómo un subgrafo reporta *qué cambió*; el resultado es cómo reporta *qué pasó*. Un subgrafo
+Con los efectos, un subgrafo reporta *qué cambió*; con el resultado, *qué pasó*. Un subgrafo
 de combate podría devolver el resultado `win` y, en sus efectos, sumar 20 de oro y fijar `bandits_beaten` en
 true.
 
@@ -68,17 +68,18 @@ De vuelta en el grafo padre, selecciona el SubGraph Node. Tiene:
 - Una lista de **rutas de resultado**, añadidas con el botón `+ outcome`. Cada una es una clave de resultado
   más un puerto. Escribe la clave exactamente como la escribe el Return Node, y luego conecta el puerto a
   donde ese resultado deba continuar.
-- Un puerto **`fallback →`**, tomado para cualquier resultado que no hayas enrutado, incluido uno vacío.
+- Un puerto **`fallback →`**, que se toma para cualquier resultado que no hayas enrutado, incluido uno
+  vacío.
 
 > **Advertencia**
 > El fallback no es opcional. Si un Return Node devuelve `fled` y solo enrutaste `win` y `lost`, la historia
 > va al fallback. Si el fallback no está conectado, la historia se detiene. Conéctalo, aunque solo lleve al
 > mismo nodo que el resultado más probable.
 
-## Un ejemplo trabajado
+## Un ejemplo completo
 
-El jugador puede ser emboscado en el camino del norte, el camino del sur, y en las afueras del molino. Los
-tres son la misma pelea.
+Al jugador lo pueden emboscar en el camino del norte, en el del sur y en las afueras del molino. Los tres
+casos son la misma pelea.
 
 **1. Construye la pelea una sola vez.**
 
@@ -108,19 +109,19 @@ Pulsa `↥ Up`. Selecciona el nodo `Ambush` y añade dos rutas de resultado:
 - `talked` -> el nodo donde el camino continúa, y los bandidos se despiden con la mano.
 
 Deja `fled` sin enrutar. Conecta `fallback →` al nodo donde el jugador despierta de vuelta en el pueblo
-anterior. Ahora `fled` —y cualquier resultado que añadas más tarde y olvides enrutar— aterriza en algún sitio
-sensato.
+anterior. Ahora `fled` —y cualquier resultado que añadas más tarde y olvides enrutar— aterriza en un lugar
+razonable.
 
 **4. Llámalo desde los otros dos lugares.**
 
 En el camino del sur y en las afueras del molino, crea un SubGraph Node en cada uno, y apunta cada
-`subGraph` al mismo asset de grafo. Cada uno de los tres llamadores enruta `win` y `talked` a *su propia*
-continuación, porque las rutas viven en quien llama, no en el subgrafo. La pelea se escribe una vez; las
-consecuencias son locales.
+`subGraph` al mismo asset de grafo. Cada uno de los tres puntos que la llaman enruta `win` y `talked` a *su
+propia* continuación, porque las rutas viven en quien llama, no en el subgrafo. La pelea se escribe una vez;
+las consecuencias son locales.
 
 Las variables que la pelea cambió —el oro, las banderas, la confianza— están en el mismo almacén compartido,
-así que son visibles para toda condición en cualquier parte después, y se guardan y retroceden con todo lo
-demás.
+así que cualquier condición puede verlas en cualquier parte de ahí en adelante, y se guardan y rebobinan con
+todo lo demás.
 
 ## Ver también
 

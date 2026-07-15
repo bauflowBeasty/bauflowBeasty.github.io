@@ -7,20 +7,20 @@ Síntoma, causa, solución. Encuentra tu síntoma, aplica la solución, y vuelve
 
 ## El juego arranca en pantalla negra. El motor está corriendo. No hay errores en la consola.
 
-**Causa.** El cableado de la escena se rompió. Reordenar la jerarquía, editar un prefab de menú, o mover un
-objeto puede tirar una referencia que estaba conectada en la escena. Nada lanza un error, porque nada falta
-en tiempo de compilación - las vistas a las que apuntaban los controladores simplemente ya no están.
+**Causa.** El cableado de la escena se rompió. Reordenar la jerarquía, editar un prefab de menú o mover un
+objeto puede romper una referencia que estaba conectada en la escena. Nada lanza un error, porque nada falta
+en tiempo de compilación — las vistas a las que apuntaban los controladores simplemente ya no están.
 
 **Solución.** Selecciona el **BeastyManager** en la escena y presiona **Auto-wire / Repair** en su inspector.
 
 Eso casi siempre lo soluciona. Auto-wire garantiza que exista cada manager y vuelve a resolver las vistas de
-la escena por tipo. Solo rellena referencias vacías - nunca sobrescribe un cableado que hiciste tú mismo, así
-que es seguro presionarlo en cualquier momento. Que sea tu primer movimiento cada vez que una escena se
-comporte mal y la consola esté limpia.
+la escena por tipo. Solo rellena referencias vacías — nunca sobrescribe un cableado que hiciste tú mismo, así
+que es seguro presionarlo en cualquier momento. Que sea lo primero que pruebes cada vez que una escena se
+comporte raro y la consola esté limpia.
 
 Si a la escena le faltan objetos enteros (sin Canvas, sin Stage), vuelve a ejecutar `Tools > Beasty VN > Setup > Create Scene`.
 Reutiliza la cámara, el EventSystem y el canvas que ya están ahí, así que es seguro ejecutarlo sobre una
-escena existente. Ver [Elementos de menú](/es/docs/beasty-visual-novel/reference/menu-items/).
+escena existente. Consulta [Elementos de menú](/es/docs/beasty-visual-novel/reference/menu-items/).
 
 ## Mis condiciones de tiempo son todas falsas
 
@@ -35,26 +35,26 @@ campo está vacío.
 Luego recuerda que el tiempo nunca avanza por sí solo. Lo mueves con un bloque **Advance time**, con la
 propiedad `advanceTimeOnClick` de un objeto de mundo libre, o desde código.
 
-Ver [Tiempo de juego](/es/docs/beasty-visual-novel/world/game-time/) y [Claves de variables](/es/docs/beasty-visual-novel/reference/variable-keys/).
+Consulta [Tiempo de juego](/es/docs/beasty-visual-novel/world/game-time/) y [Claves de variables](/es/docs/beasty-visual-novel/reference/variable-keys/).
 
 ## Mi personaje nunca aparece en una sala
 
 Dos causas, en este orden.
 
 **Causa 1: la regla que coincidió tiene una sala vacía.** Una regla de rutina sin sala significa que el
-personaje está **ausente** - no en esa sala, no en ningún lugar del mapa. Si la primera regla cuya condición
+personaje está **ausente** — no en esa sala, no en ningún lugar del mapa. Si la primera regla cuya condición
 se cumple tiene una sala vacía, esa es tu respuesta. Recuerda que la regla de respaldo también cuenta.
 
 **Solución.** Abre la pestaña **FreeRoam**, cambia a **Routines**, y filtra por ese personaje. La grilla
 muestra qué se resuelve en cada día y momento del día. Completa la sala en la regla que está ganando, o
 reordena las reglas para que gane otra distinta.
 
-**Causa 2: otro personaje tomó el lugar primero.** Si dos personajes resuelven al mismo lugar, solo se coloca
+**Causa 2: otro personaje ocupó el punto primero.** Si dos personajes resuelven al mismo punto, solo se coloca
 el primero. Los demás se omiten, con un aviso en la consola.
 
-**Solución.** Dales lugares distintos en el prefab de la sala, o mueve a uno de ellos a otra sala.
+**Solución.** Dales puntos distintos en el prefab de la sala, o mueve a uno de ellos a otra sala.
 
-Ver [Rutinas de personajes](/es/docs/beasty-visual-novel/world/character-routines/).
+Consulta [Rutinas de personajes](/es/docs/beasty-visual-novel/world/character-routines/).
 
 ## Un bloque no hace nada
 
@@ -62,7 +62,7 @@ Ver [Rutinas de personajes](/es/docs/beasty-visual-novel/world/character-routine
 clip, un bloque Show character sin personaje: todos se omiten. Lo que esté en pantalla se queda en pantalla,
 y lo que esté sonando sigue sonando.
 
-Esto es deliberado. Significa que un bloque a medio completar nunca borra tu escena por accidente.
+Es deliberado: así un bloque a medio completar nunca borra tu escena por accidente.
 
 **Solución.** Asigna el asset. Si lo que realmente querías era borrar algo a propósito, usa el bloque que
 hace eso:
@@ -74,7 +74,7 @@ hace eso:
 | Quitar todos los props | **Clear > Props** |
 | Silenciar música, ambiente, SFX o voz | **Audio > Stop channel** |
 
-Ver [Referencia de bloques](/es/docs/beasty-visual-novel/authoring/blocks-reference/).
+Consulta [Referencia de bloques](/es/docs/beasty-visual-novel/authoring/blocks-reference/).
 
 ## Guardar el script de texto borró un bloque
 
@@ -82,12 +82,12 @@ Ver [Referencia de bloques](/es/docs/beasty-visual-novel/authoring/blocks-refere
 que cuando el archivo se aplica de vuelta al grafo, el bloque también desaparece del grafo.
 
 **Solución.** Asigna el asset del bloque **antes** de guardar el script. Un backdrop con más de una capa de
-sprite tampoco tiene forma de texto - mantén esas escenas solo en el grafo, y no las sincronices a través de
+sprite tampoco tiene forma de texto — mantén esas escenas solo en el grafo, y no las sincronices a través de
 la pestaña Text.
 
 Si la importación escribió un `.bak` con marca de tiempo junto a tu script, el lado sobrescrito está ahí.
 
-Ver [El script de texto](/es/docs/beasty-visual-novel/authoring/text-script/).
+Consulta [El script de texto](/es/docs/beasty-visual-novel/authoring/text-script/).
 
 ## Mi script no se importa
 
@@ -97,14 +97,14 @@ estaba. No has perdido nada.
 
 **Solución.** Lee la línea reportada. El mensaje la identifica.
 
-La que sorprende a la gente: un nombre de asset que no se resuelve, o que comparten varios assets, es un
-**error**, no una advertencia. El importador se rehúsa en lugar de adivinar qué sprite querías decir.
+El caso que sorprende a todos: un nombre de asset que no se resuelve, o que comparten varios assets, es un
+**error**, no una advertencia. El importador se rehúsa antes que adivinar a qué sprite te referías.
 Renombra el duplicado, o usa una ruta (`backdrop interiors/bedroom`) para desambiguar.
 
 Los assets se resuelven por GUID una vez que un nodo está sincronizado, así que mover o renombrar arte más
 tarde no rompe nada.
 
-Ver [El script de texto](/es/docs/beasty-visual-novel/authoring/text-script/) y [la sintaxis de .vnbeasty](/es/docs/beasty-visual-novel/authoring/vnbeasty-syntax/).
+Consulta [El script de texto](/es/docs/beasty-visual-novel/authoring/text-script/) y [la sintaxis de .vnbeasty](/es/docs/beasty-visual-novel/authoring/vnbeasty-syntax/).
 
 ## El grafo y el texto no coinciden
 
@@ -119,11 +119,11 @@ advertencia en el alternador **Graph** cuando detecta esto.
 
 Acuerda una dirección con tu equipo antes de que dos personas editen la misma escena.
 
-Ver [El script de texto](/es/docs/beasty-visual-novel/authoring/text-script/).
+Consulta [El script de texto](/es/docs/beasty-visual-novel/authoring/text-script/).
 
 ## Una elección nunca aparece
 
-**Causa.** Su condición es falsa. Una elección solo se lista cuando su condición se cumple.
+**Causa.** Su condición es falsa. Una elección solo aparece en la lista cuando su condición se cumple.
 
 **Solución.** Abre la elección y lee su condición. Dos reglas explican casi todos los casos:
 
@@ -133,14 +133,14 @@ Ver [El script de texto](/es/docs/beasty-visual-novel/authoring/text-script/).
   reporta una vez. Una condición a medio completar oculta la elección.
 
 Si todas las opciones quedan bloqueadas, el nodo Choice va a su nodo siguiente predeterminado, así que la
-historia no se atasca - simplemente se salta el menú.
+historia no se atasca — simplemente se salta el menú.
 
-Ver [Elecciones y decisiones](/es/docs/beasty-visual-novel/authoring/choices-and-decisions/) y
+Consulta [Elecciones y decisiones](/es/docs/beasty-visual-novel/authoring/choices-and-decisions/) y
 [Claves de variables](/es/docs/beasty-visual-novel/reference/variable-keys/).
 
 ## Mi condición de variable nunca se dispara
 
-**Causa.** Las uniones. **AND ata más fuerte que OR**, y no hay paréntesis.
+**Causa.** Los conectores. **AND agrupa con más fuerza que OR**, y no hay paréntesis.
 
 `a AND b OR c` significa `(a AND b) OR c`. Si querías decir `a AND (b OR c)`, no lo escribiste así.
 
@@ -150,7 +150,7 @@ ramas de un nodo Decision.
 Ya que estás ahí, revisa el tipo de valor. El estado de una misión es un string (`active`, `completed`), no
 un número.
 
-Ver [Variables y condiciones](/es/docs/beasty-visual-novel/world/variables-and-conditions/).
+Consulta [Variables y condiciones](/es/docs/beasty-visual-novel/world/variables-and-conditions/).
 
 ## Falta el arte en streaming
 
@@ -163,41 +163,41 @@ y luego compila los groups). Cada vez que conviertas a contenido en streaming, o
 streaming, recompila.
 
 Para volver atrás, ejecuta `Tools > Beasty VN > Streaming > Convert To Direct References`. Siempre está
-disponible, y restaura las referencias directas para que el arte vuelva a cargar de forma síncrona.
+disponible, y restaura las referencias directas para que el arte vuelva a cargarse de forma síncrona.
 
 > **Advertencia**
 > El streaming es opcional y beta en 1.0.0. Si no estás lanzando un juego muy grande, déjalo apagado. El
 > audio, el video, las fuentes, el arte de mundo libre y de hover, las imágenes de elecciones y del menú de
 > conversación, los íconos del HUD y las miniaturas de guardado nunca se transmiten en streaming.
 
-Ver [Streaming](/es/docs/beasty-visual-novel/production/streaming/).
+Consulta [Streaming](/es/docs/beasty-visual-novel/production/streaming/).
 
 ## Dos assets se comportan como uno
 
-**Causa.** Comparten un id. Los ids son a lo que se refieren las condiciones, los scripts y los guardados,
+**Causa.** Comparten un id. Las condiciones, los scripts y los guardados se refieren a las cosas por su id,
 así que dos assets con el mismo id son indistinguibles para el motor. Esto suele pasar después de duplicar
 un asset con Ctrl+D.
 
-**Solución.** Ejecuta `Tools > Beasty VN > Validate > Find duplicate ids`. Reporta cada colisión. Luego haz
+**Solución.** Ejecuta `Tools > Beasty VN > Validate > Find duplicate ids`, que reporta cada colisión. Luego haz
 clic derecho en el equivocado dentro de la ventana Project y elige
 `Assets > Beasty VN > Give this asset fresh ids (fix a duplicate)`.
 
 Los ids se generan automáticamente pero son editables, y renombrar uno se propaga en cascada. Hazlo antes de
-que tus jugadores encuentren el problema.
+que tus jugadores se topen con el problema.
 
-Ver [Validación e ids](/es/docs/beasty-visual-novel/production/validation-and-ids/).
+Consulta [Validación e ids](/es/docs/beasty-visual-novel/production/validation-and-ids/).
 
 ## Una traducción se ve desactualizada
 
 **Causa.** Lo está. La celda está **Stale**. Cada celda traducida registra una huella digital del texto de
 origen a partir del cual se tradujo. Cuando editas la línea de origen, cada traducción de esa línea se marca
-como Stale - el texto anterior sigue ahí, pero ya no coincide.
+como Stale — el texto anterior sigue ahí, pero ya no coincide.
 
 **Solución.** Abre la pestaña **Localization**. El estado se muestra por celda. Usa `Export` y elige
 **Missing or stale only** para enviarle a tu traductor exactamente las líneas que cambiaron, y luego importa
 el resultado.
 
-Ver [Localización](/es/docs/beasty-visual-novel/production/localization/).
+Consulta [Localización](/es/docs/beasty-visual-novel/production/localization/).
 
 ## Nada de esto coincide
 

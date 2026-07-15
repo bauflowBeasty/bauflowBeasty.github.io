@@ -46,16 +46,16 @@ La ventana está en `Tools > Beasty VN > Diagnostics > Console`.
 Lo que ves:
 
 - Una barra de herramientas: Clear, Collapse, Clear on Play, Error Pause, y un campo de búsqueda.
-- Una segunda barra de toggles de filtro, uno por nivel, cada uno mostrando cuántas entradas de ese nivel
+- Una segunda barra de toggles de filtro, uno por nivel; cada uno muestra cuántas entradas de ese nivel
   han llegado. Haz clic en uno para ocultar ese nivel.
 - La lista, una fila por entrada: el glifo del nivel, la hora, el mensaje.
 - Un panel de detalle debajo. Selecciona una fila para leer el mensaje completo y su stack trace.
 
-La consola no reemplaza la Consola de Unity. Escucha en paralelo a ella, así que muestra cada log del
-proyecto, incluyendo llamadas simples a `Debug.Log` de tu propio código y de paquetes de terceros.
+La consola no reemplaza la Consola de Unity. Escucha en paralelo a ella, así que muestra todos los logs del
+proyecto, incluidas las llamadas simples a `Debug.Log` de tu propio código y de paquetes de terceros.
 
-## Siguiente
+## Siguientes pasos
 
-- [Logging](/es/docs/beasty-debug-logger/guides/logging/) — los once niveles, y cuándo recurrir a cada uno.
+- [Logging](/es/docs/beasty-debug-logger/guides/logging/) — los once niveles, y cuándo usar cada uno.
 - [La ventana Beasty Console](/es/docs/beasty-debug-logger/guides/console-window/) — cada control, y los comportamientos que
-  sorprenden a la gente.
+  sorprenden a más de uno.

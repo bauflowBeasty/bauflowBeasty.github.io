@@ -27,10 +27,10 @@ mayoría de los proyectos tienen exactamente uno y nunca tocan esto.
 | Configuración | Qué hace |
 |---|---|
 | `defaultLanguage` | El código de idioma en el que arranca el juego cuando el jugador no ha elegido uno (`en` por defecto). También el idioma de origen para proyectos nuevos. |
-| `autoDetectSystemLanguage` | Desactivado por defecto. Cuando está activado, un jugador de primera vez recibe el idioma del sistema operativo SI la tabla de UI lo tiene; de lo contrario, el predeterminado. |
+| `autoDetectSystemLanguage` | Desactivado por defecto. Cuando está activado, un jugador que abre el juego por primera vez recibe el idioma del sistema operativo SI la tabla de UI lo tiene; de lo contrario, el predeterminado. |
 | `uiLocalization` | La tabla de traducción GLOBAL de la interfaz: menús, HUD, botones, diálogos. Separada de la tabla de historia en el contexto. |
 
-Ver [Localización](/es/docs/beasty-visual-novel/production/localization/) para el orden de arranque y las dos tablas.
+Consulta [Localización](/es/docs/beasty-visual-novel/production/localization/) para el orden de arranque y las dos tablas.
 
 ## Guardado
 
@@ -44,13 +44,13 @@ Ver [Localización](/es/docs/beasty-visual-novel/production/localization/) para 
 | `allowSaveNaming` | Si el jugador puede titular una partida. Cuando está desactivado, un slot se etiqueta con su marca de tiempo de creación local. |
 | `defaultSaveThumbnail` | La imagen de respaldo mostrada para un slot GUARDADO cuyo PNG de miniatura falta o no se puede leer. Los slots vacíos usan en su lugar el arte de stock del prefab del slot, no esto. |
 
-Ver [Guardado y carga](/es/docs/beasty-visual-novel/production/saving-and-loading/).
+Consulta [Guardado y carga](/es/docs/beasty-visual-novel/production/saving-and-loading/).
 
 ## Retroceso
 
 | Configuración | Qué hace |
 |---|---|
-| `maxRollbackSteps` | El número máximo de pasos de retroceso mantenidos en memoria y persistidos en la partida guardada. 20 por defecto. Súbelo para un alcance de `Back` más largo; cuesta memoria y tamaño de guardado. |
+| `maxRollbackSteps` | El número máximo de pasos de retroceso mantenidos en memoria y persistidos en la partida guardada. 20 por defecto. Súbelo si quieres que `Back` llegue más lejos; cuesta memoria y tamaño de guardado. |
 
 ## Guiones de texto (.vnbeasty)
 
@@ -59,15 +59,15 @@ Ver [Guardado y carga](/es/docs/beasty-visual-novel/production/saving-and-loadin
 | `spriteIndexFolders` | Carpetas relativas al proyecto indexadas para la búsqueda de sprites por NOMBRE en un guion `.vnbeasty`. |
 | `audioIndexFolders` | Lo mismo, para clips de audio. |
 
-Déjalas vacías y el sistema resuelve la carpeta `Sprites` / `Audio` del proyecto, preguntándote si no puede
-encontrar una.
+Déjalas vacías y el sistema usa la carpeta `Sprites` / `Audio` del proyecto; si no puede encontrarla, te
+pregunta.
 
 > **Nota**
-> Estas carpetas mantienen los nombres cortos y sin ambigüedad — **no** son una compuerta. Un asset fuera de
+> Estas carpetas mantienen los nombres cortos y sin ambigüedad — **no** son un filtro. Un asset fuera de
 > ellas igual se resuelve por nombre en todo el proyecto. Lo que las carpetas te dan es un espacio de nombres
 > pequeño y limpio para escribir.
 
-Ver [El guion de texto](/es/docs/beasty-visual-novel/authoring/text-script/).
+Consulta [El guion de texto](/es/docs/beasty-visual-novel/authoring/text-script/).
 
 ## Diálogo y valores predeterminados de texto
 
@@ -75,7 +75,7 @@ Ver [El guion de texto](/es/docs/beasty-visual-novel/authoring/text-script/).
 |---|---|
 | `typewriterCharsPerSecond` | Velocidad de la máquina de escribir, en caracteres por segundo. |
 | `autoAdvance` | Si el auto-avance empieza activado. |
-| `autoAdvanceDelay` | Segundos a esperar en una línea antes de auto-avanzar. |
+| `autoAdvanceDelay` | Segundos de espera en una línea antes de auto-avanzar. |
 | `defaultTextColor`, `defaultNameColor` | Los colores usados cuando un personaje no los sobrescribe. |
 | `defaultFontSizeMultiplier` | Escala la fuente del diálogo. |
 | `defaultDeliveryState` | El estado de entrega usado por una línea que lo deja vacío (`Normal`). |
@@ -109,9 +109,9 @@ Estos acotan los deslizadores que el jugador ve en la pantalla de preferencias.
 | `characterHeightFraction` | La fracción de la altura de pantalla que debe ocupar un personaje del escenario. |
 | `portraitHeightFraction` | La fracción de la altura de pantalla usada como el tamaño (cuadrado) del retrato. |
 
-Ver [Compilación y plataformas](/es/docs/beasty-visual-novel/production/building-and-platforms/) para el forzador de relación de aspecto.
+Consulta [Compilación y plataformas](/es/docs/beasty-visual-novel/production/building-and-platforms/) para el forzador de relación de aspecto.
 
-## Retroalimentación de botones de deambulación libre
+## Retroalimentación de botones de mundo libre
 
 | Configuración | Qué hace |
 |---|---|
@@ -119,7 +119,7 @@ Ver [Compilación y plataformas](/es/docs/beasty-visual-novel/production/buildin
 | `freeRoamHighlightColor` | El tinte usado para resaltar un interactuable. |
 | `freeRoamHoverTween` | Los segundos que tarda el zoom/resaltado de hover. |
 
-Ver [Interactuables y puertas](/es/docs/beasty-visual-novel/world/interactables-and-doors/).
+Consulta [Interactuables y puertas](/es/docs/beasty-visual-novel/world/interactables-and-doors/).
 
 ## Límites suaves
 
@@ -127,7 +127,7 @@ Ver [Interactuables y puertas](/es/docs/beasty-visual-novel/world/interactables-
 |---|---|
 | `maxCharacters` | Personajes en el escenario a la vez. |
 | `maxBackdropLayers` | Capas de sprite en un fondo. |
-| `maxBlocksPerNode` | Bloques en un nodo. Excederlo lo informa el validador. |
+| `maxBlocksPerNode` | Bloques en un nodo. Si lo excedes, el validador lo informa. |
 
 ## Ver también
 

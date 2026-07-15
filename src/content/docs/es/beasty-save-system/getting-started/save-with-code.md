@@ -1,6 +1,6 @@
 ---
 title: "Guardar con código"
-description: "El camino de cinco minutos: una clase de datos, un BeastySaveSettings, BeastySave.Save, BeastySave.Load<T>. Esta página es para quienes escriben C#. Si prefer"
+description: "El camino de cinco minutos: una clase de datos, un BeastySaveSettings, BeastySave.Save, BeastySave.Load<T>. Esta página es para quienes escriben C#; si prefieres hacer clic, hay una guía sin código."
 ---
 
 El camino de cinco minutos: una clase de datos, un `BeastySaveSettings`, `BeastySave.Save`, `BeastySave.Load<T>`. Esta
@@ -40,15 +40,15 @@ public class PlayerData
 }
 ```
 
-Los arrays, `List`, `Dictionary`, `HashSet`, `SortedSet`, `Queue`, `Stack`, enums, nullables, `DateTime` y
-los tipos de valor de Unity se guardan y recuperan correctamente todos. Lo que no: cualquier referencia a un `UnityEngine.Object`. Lee
+Los arrays, `List`, `Dictionary`, `HashSet`, `SortedSet`, `Queue`, `Stack`, enums, nullables, `DateTime` y los
+tipos de valor de Unity se guardan y recuperan todos sin problema. Lo que no: cualquier referencia a un `UnityEngine.Object`. Lee
 [what-gets-saved.md](/es/docs/beasty-save-system/guides/what-gets-saved/) antes de diseñar tu clase de guardado — es corta, y
 te ahorrará un rediseño.
 
 ## 2. Settings
 
 Cada llamada recibe un `BeastySaveSettings`. Lleva la ubicación, el flag de encriptación, el flag de backup, el
-modo de carga y la versión de datos. Los valores por defecto son utilizables tal cual.
+modo de carga y la versión de datos. Los valores por defecto sirven tal cual.
 
 ```csharp
 private static readonly BeastySaveSettings Settings = new BeastySaveSettings
@@ -160,14 +160,14 @@ public void LoadGame()
 }
 ```
 
-Tres cosas que vale la pena nombrar:
+Tres detalles que vale la pena señalar:
 
 - **`BackupAvailable` se rellena en cada resultado de carga**, éxito o fallo. Puedes comprobarlo antes de
   necesitarlo.
 - **`RestoreBackup` deja el `.bak` en su lugar.** Restaurar dos veces es seguro.
 - **`result.Warnings`** es un `IReadOnlyList<string>` que se llena en modo tolerante
-  (`Settings.Strict = false`): campos que se omitieron en lugar de ser fatales. En modo estricto un campo malo hace fallar
-  toda la carga y no se aplica nada. Consulta
+  (`Settings.Strict = false`): campos que se omitieron en lugar de hacer fallar la carga. En modo estricto un campo
+  malo hace fallar toda la carga y no se aplica nada. Consulta
   [strict-vs-tolerant.md](/es/docs/beasty-save-system/guides/strict-vs-tolerant/).
 
 Hay 13 códigos de error. Cada uno tiene un significado específico y una solución específica; están listados en
@@ -176,7 +176,7 @@ Hay 13 códigos de error. Cada uno tiene un significado específico y una soluci
 ## 5. LoadInto — cargar sobre un objeto que ya tienes
 
 `Load<T>` construye un objeto nuevo. `LoadInto` rellena uno que ya existe, que es lo que quieres para un
-`MonoBehaviour` o cualquier objeto al que otro código ya tiene una referencia.
+`MonoBehaviour` o cualquier objeto al que otro código ya guarda una referencia.
 
 ```csharp
 LoadResult result = BeastySave.LoadInto(Data, "slot1", Settings);
@@ -209,8 +209,8 @@ LoadResult<PlayerData> loaded = await BeastySave.LoadAsync<PlayerData>("slot1", 
 ```
 
 Mismos resultados, mismos códigos de error. La IO de archivos ocurre de forma asíncrona; la serialización y la
-encriptación siguen ejecutándose en el hilo que llama. Evitan que un guardado grande bloquee el hilo principal en la IO —
-no son un trabajo en segundo plano. [async-saving.md](/es/docs/beasty-save-system/guides/async-saving/) es preciso al respecto.
+encriptación siguen ejecutándose en el hilo que llama. Evitan que un guardado grande bloquee el hilo principal en
+la IO — no son un trabajo en segundo plano. [async-saving.md](/es/docs/beasty-save-system/guides/async-saving/) lo explica con precisión.
 
 ## Adónde ir a continuación
 

@@ -1,12 +1,12 @@
 ---
 title: "Referencia de bloques"
-description: "Un bloque es una instrucción dentro de un Nodo de Diálogo. Los bloques son todo el vocabulario de autoría de la novela visual: una línea de diálogo, un fondo, un personaje"
+description: "Un bloque es una instrucción dentro de un Dialogue Node: una línea de diálogo, un fondo, un personaje que entra en escena. Aquí está el catálogo completo, en el orden de la paleta."
 ---
 
 Un bloque es una instrucción dentro de un Dialogue Node. Los bloques son todo el vocabulario de autoría de
 la novela visual: una línea de diálogo, un fondo, un personaje que entra caminando, una variable que sube,
-una puerta hacia el mundo. Esta página enumera todos los bloques que existen, en el orden en que la paleta
-los muestra.
+una puerta hacia el mundo. Esta página recorre todos los bloques que existen, en el orden en que los muestra
+la paleta.
 
 ## El panel Add blocks
 
@@ -36,7 +36,7 @@ Además de Dialogue, otros tres bloques también se detienen:
 
 - Los tres bloques de **Input** (`Ask → variable`, `Ask → dictionary`, `Ask → character name`) muestran su
   pregunta y abren el cuadro de texto a la vez, y esperan a que el jugador escriba.
-- Un bloque **Wait** puesto a **0 segundos** espera a que el jugador haga clic. Ver más abajo.
+- Un bloque **Wait** puesto a **0 segundos** espera a que el jugador haga clic. Se explica más abajo.
 
 ### Dos comportamientos que sorprenden
 
@@ -55,7 +55,7 @@ Además de Dialogue, otros tres bloques también se detienen:
 
 Los bloques de Scene (Backdrop, Show character, Expression, Hide character, Props, y los tres bloques de
 Clear) describen *el estado del escenario*, no una acción. No repites el fondo en cada línea; lo fijas una
-vez y se mantiene hasta que algo más lo cambia. Esto es lo que hace segura la retrocesión del jugador: el
+vez y se mantiene hasta que algo más lo cambia. Esto es lo que hace seguro el rebobinado del jugador: el
 motor reconstruye el escenario para la línea en la que aterriza, en lugar de intentar deshacer una secuencia
 de acciones.
 
@@ -71,8 +71,8 @@ espera al jugador.
 | Opción | Qué hace |
 |---|---|
 | Speaker | El personaje que la dice. **Déjalo vacío para el narrador**: sin placa de nombre, sin retrato. |
-| Delivery | El estado de interpretación: Normal, Whisper, Shout, Thinking, o uno que hayas definido. Selecciona la fuente, el color y el efecto de texto de ese personaje. |
-| Text | La línea. Se almacena bajo una clave de localización por ti. |
+| Delivery | El estado de interpretación: Normal, Whisper, Shout, Thinking, o uno que hayas definido. Determina la fuente, el color y el efecto de texto de ese personaje. |
+| Text | La línea. Se guarda automáticamente bajo una clave de localización. |
 | Display name alias | Muestra esta línea concreta bajo un alias, por ejemplo "The Stranger", sin cambiar el nombre del personaje. |
 
 Se explica en profundidad en [Diálogo y el escenario](/es/docs/beasty-visual-novel/authoring/dialogue-and-stage/).
@@ -85,7 +85,7 @@ Todo en esta categoría se explica en profundidad en [Diálogo y el escenario](/
 
 ### Backdrop
 
-Fija el fondo. Un fondo es **o bien** capas de sprites **o bien** un clip de video, nunca ambos.
+Fija el fondo. Un fondo es capas de sprites **o** un clip de video, nunca ambas cosas.
 
 - Modo **Layers**: hasta cinco capas de sprites. Cada capa tiene un sprite, un orden de dibujado (0 es la
   más al fondo), un desplazamiento, un factor de parallax y una lista opcional de sprites condicionales (el
@@ -133,7 +133,7 @@ Limpia el escenario de personajes: **todos**, o solo una **posición** (un ancla
 ### Backdrop
 
 Elimina el fondo por completo, capas de sprites o video. Es el bloque que usas para ir a negro: un bloque
-Backdrop vacío no lo hará.
+Backdrop vacío no sirve para eso.
 
 ### Props
 
@@ -143,7 +143,7 @@ Elimina todos los props.
 
 ## State
 
-Estos bloques escriben en el almacén de variables, el mismo almacén que leen las condiciones y que persisten
+Estos bloques escriben en el almacén de variables, el mismo que leen las condiciones y el que se conserva en
 las partidas guardadas. Consulta
 [Variables y condiciones](/es/docs/beasty-visual-novel/world/variables-and-conditions/).
 
@@ -173,10 +173,10 @@ Cambia el nombre **mostrado** de un personaje durante el resto del juego. Su id 
 | Alias | Uno de los alias que definiste en el personaje. |
 | Text | Un nombre que escribes. Puede ser texto plano, o una clave de localización. |
 | Variable | El valor actual de una variable o token de diccionario, por ejemplo un nombre que el jugador escribió antes. |
-| Reset to base | Elimina la anulación; el personaje vuelve a su propio nombre. |
+| Reset to base | Elimina el cambio; el personaje vuelve a su propio nombre. |
 
-La anulación se persiste, así que sobrevive a una partida guardada y a una retrocesión. Para mostrar un
-alias en **una sola línea** sin cambiar nada, usa en su lugar el display-name alias del bloque Dialogue.
+El cambio queda guardado, así que sobrevive al guardado y al rebobinado. Para mostrar un alias en **una sola
+línea** sin cambiar nada, usa el display-name alias del bloque Dialogue.
 
 ---
 
@@ -193,7 +193,7 @@ Actualiza una misión. Cuatro acciones:
 | Set state | Escribe el estado de la misión: `notstarted`, `active`, `completed` o `failed`. |
 | Set stage | Fija el índice de etapa de una misión ordenada. |
 | Advance stage | Suma al índice de etapa de una misión ordenada. |
-| Set objective | Marca un objetivo como hecho, o lo despeja. |
+| Set objective | Marca un objetivo como hecho, o lo desmarca. |
 
 ### Deliver items
 
@@ -202,8 +202,8 @@ marca el objetivo como hecho.
 
 > **Nota**
 > Si el jugador no tiene los ítems, este bloque **no hace nada y no dice nada**. Es un no-op silencioso.
-> Bloquea con una condición de inventario la rama que llega a él, o el jugador entrega tres pociones que
-> nunca tuvo y nadie se da cuenta.
+> Protege con una condición de inventario la rama que llega hasta él, o el jugador entregará tres pociones
+> que nunca tuvo y nadie se dará cuenta.
 
 ---
 
@@ -211,8 +211,8 @@ marca el objetivo como hecho.
 
 ### Wait
 
-Se pausa durante un número de segundos. **0 segundos espera al clic del jugador en su lugar** (ver la
-advertencia de arriba).
+Pausa la historia durante un número de segundos. **Con 0 segundos, espera al clic del jugador** (consulta
+la advertencia de arriba).
 
 ### Advance time
 
@@ -274,7 +274,7 @@ Hace un crossfade de un clip en el canal Music.
 | Loop | Repite cuando termina. |
 | Volume | De 0 a 1. |
 | Fade | Duración del crossfade en segundos. |
-| Pause background | Activado por defecto. Pausa la cola persistente de música de fondo mientras suena esta pista, y deja que se reanude cuando la historia llega a un nodo sin ninguna pista que pause. |
+| Pause background | Activado por defecto. Pausa la cola persistente de música de fondo mientras suena esta pista, y deja que se reanude cuando la historia llega a un nodo sin ninguna pista que la pause. |
 
 ### Ambient
 
@@ -282,17 +282,17 @@ Hace un crossfade del sonido ambiente en el canal Ambient. Clip, loop, volumen y
 
 ### Voice
 
-Reproduce un clip de voz en el canal Voice. Clip y volumen. Empezar una nueva línea de voz detiene la
-anterior.
+Reproduce un clip de voz en el canal Voice. Clip y volumen. Al empezar una nueva línea de voz, la anterior
+se detiene.
 
 ### Sound effect
 
-Reproduce un disparo único en el canal SFX. Clip y volumen.
+Reproduce un sonido único (one-shot) en el canal SFX. Clip y volumen.
 
 ### Stop channel
 
-Detiene un canal —`Music`, `Ambient`, `Sfx` o `Voice`— con un fade. Así es como silencias algo
-deliberadamente. Un bloque Music vacío no lo hará.
+Detiene un canal —`Music`, `Ambient`, `Sfx` o `Voice`— con un fade. Esta es la forma de silenciar algo a
+propósito; un bloque Music vacío no lo hace.
 
 ---
 
@@ -326,33 +326,34 @@ protagonista.
 
 ## Flow
 
-Un bloque de flujo entrega el control **fuera** de la visual novel. Ponlo al final de un nodo de diálogo y
+Un bloque de flujo entrega el control **fuera** de la novela visual. Ponlo al final de un nodo de diálogo y
 se ejecuta cuando el jugador avanza más allá de la última línea. El almacén de variables sobrevive al salto:
 no se pierde nada.
 
-Las mismas cuatro salidas también existen como un Flow (Mode Switch) Node dedicado. Cuál usar se explica en
-[Transiciones](/es/docs/beasty-visual-novel/authoring/transitions/). Las habitaciones se explican en [Habitaciones de mundo libre](/es/docs/beasty-visual-novel/world/free-roam-rooms/).
+Las mismas cuatro salidas también existen como un Flow (Mode Switch) Node dedicado. En
+[Transiciones](/es/docs/beasty-visual-novel/authoring/transitions/) se explica cuál usar. Las salas se
+explican en [Salas de mundo libre](/es/docs/beasty-visual-novel/world/free-roam-rooms/).
 
 ### Go to FreeRoam
 
-Abandona la novela y entra en una habitación. Elige el mapa, y opcionalmente la habitación; deja la
-habitación vacía para llegar a la habitación de entrada del mapa.
+Sale de la novela y entra en una sala. Elige el mapa y, opcionalmente, la sala; déjala vacía para llegar a
+la sala de entrada del mapa.
 
 ### Return to room
 
-Vuelve a la habitación de mundo libre en la que estaba el jugador justo antes de que empezara esta novela.
-No eliges nada: "de dónde viniste" es implícito. Si el jugador no venía de mundo libre, llega en su lugar a
-la habitación de entrada.
+Vuelve a la sala de mundo libre en la que estaba el jugador justo antes de que empezara esta novela.
+No eliges nada: "de dónde viniste" está implícito. Si el jugador no venía de mundo libre, llega a la sala
+de entrada.
 
 ### Choose room
 
-Abandona la novela y deja que el **jugador** elija a qué habitación ir. Opcionalmente restringe la lista a
-una lista blanca de habitaciones; déjala vacía y se ofrece cada habitación del mapa.
+Sale de la novela y deja que el **jugador** elija a qué sala ir. Puedes restringir la lista a una lista
+blanca de salas; déjala vacía y se ofrecen todas las salas del mapa.
 
 ### Go to VN scene
 
-Salta a otra Visual Novel —de la Intro al Capítulo 1— sin pasar por mundo libre. Opcionalmente empieza en un
-nodo concreto dentro de ella en lugar de en su nodo de entrada. Esto cambia todo el asset de historia, a
+Salta a otra Visual Novel —de la Intro al Capítulo 1— sin pasar por mundo libre. Puede empezar en un nodo
+concreto dentro de ella, en lugar de en su nodo de entrada. Esto cambia todo el asset de historia, a
 diferencia de un subgrafo, que se queda dentro del actual.
 
 ## Ver también

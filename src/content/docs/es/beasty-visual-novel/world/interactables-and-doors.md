@@ -6,8 +6,8 @@ description: "Todo lo que el jugador puede clicar dentro de una sala: objetos, p
 Todo lo que el jugador puede clicar dentro de una sala: objetos, puertas y los personajes que hay en ella. Esta página es
 para guionistas y diseñadores.
 
-Cada cosa clicable en una sala es el mismo tipo de registro — un **botón** — con un trabajo distinto. Los autoras
-entrando en una sala en la pestaña **FreeRoam** (`Tools > Beasty VN > Editor`) y seleccionando el objeto.
+Cada cosa clicable en una sala es el mismo tipo de registro — un **botón** — con un trabajo distinto. Los editas
+entrando en la sala desde la pestaña **FreeRoam** (`Tools > Beasty VN > Editor`) y seleccionando el objeto.
 
 Recuerda la división: **el prefab de la sala define el arte y la posición; el grafo del mapa define qué hace la cosa.**
 Están vinculados por el nombre.
@@ -25,7 +25,7 @@ Un botón tiene un **tipo** (kind) y una **función** (su acción).
 |---|---|
 | **Door (go to room)** | Ir a la sala de destino. |
 | **Enter VN** | Reproducir una escena de novela visual y luego volver a esta sala. |
-| **Custom** | Levantar un id de evento personalizado para que tu propio código lo gestione. |
+| **Custom** | Lanzar un id de evento personalizado para que tu propio código lo gestione. |
 | **Talk menu** | Abrir el [menú de conversación](/es/docs/beasty-visual-novel/world/talk-menu/) de un personaje. Solo se ofrece en un objeto que tiene un personaje propietario. |
 
 Para **Enter VN** eliges la escena y, opcionalmente, un **nodo de inicio** dentro de ella (vacío significa el nodo de
@@ -43,8 +43,8 @@ enganche para un minijuego, una tienda, un puzle — cualquier cosa que no sea u
 | **Scale** | Su tamaño. |
 | **Sorting Order** | Orden de dibujado dentro de la sala. Más alto queda delante. |
 
-Cuando la sala tiene un prefab, estos campos se reflejan en el objeto hijo correspondiente del prefab, así que también
-puedes simplemente arrastrar el objeto dentro del prefab y el registro de la sala lo sigue.
+Cuando la sala tiene un prefab, estos campos se reflejan en el objeto hijo correspondiente del prefab, así que
+también puedes arrastrar el objeto directamente dentro del prefab y el registro de la sala lo sigue.
 
 El área de clic se construye a partir del sprite. Por defecto es la forma del sprite — pero consulta
 [Áreas de clic ajustadas](#áreas-de-clic-ajustadas) si tu arte es mayormente transparente.
@@ -65,7 +65,7 @@ escala, así que ahí no se ofrece el zoom.)
 
 Cosas a tener en cuenta:
 
-- **Swap sin sprite de hover recae en Tint.** Un objeto siempre tiene algún tipo de respuesta visual; nunca se queda inerte.
+- **Swap sin sprite de hover se comporta como Tint.** Un objeto siempre tiene algún tipo de respuesta visual; nunca se queda inerte.
 - **Tint** usa el color de resaltado global de [VN Settings](/es/docs/beasty-visual-novel/production/vn-settings/) a menos que marques
   **Custom tint** y elijas el tuyo propio.
 - **Animation necesita un prefab de sala** — los clips viven en el objeto del prefab. Asigna un clip de reposo y/o uno de
@@ -102,13 +102,13 @@ En su lugar reproduce su **Blocked Dialogue** (con un nodo de inicio opcional) y
 puerta que dice "Está cerrada con llave. Necesitaría la llave." en lugar de la puerta que se niega en silencio.
 
 > **Nota**
-> Una puerta cerrada sin diálogo de bloqueo se muestra y es clicable pero no hace absolutamente nada. Si la puerta debería
-> ser invisible en su lugar, usa su condición **Visible when** en vez del indicador de acceso.
+> Una puerta cerrada sin diálogo de bloqueo se muestra y es clicable pero no hace absolutamente nada. Si lo que
+> quieres es que la puerta sea invisible, usa su condición **Visible when** en vez del indicador de acceso.
 
 **Access exceptions** es una lista ordenada de casos condicionales. Cada uno tiene una condición, un indicador de accesible, y
 opcionalmente su propio diálogo de bloqueo. **Gana el primer caso cuya condición se cumpla; si ninguno se cumple, se usa el
-indicador por defecto de arriba.** Un caso sin diálogo de bloqueo propio recae en el diálogo por defecto de la puerta, así que
-puedes cerrar una puerta condicionalmente sin repetir la escena de "está cerrada".
+indicador por defecto de arriba.** Un caso sin diálogo de bloqueo propio usa el diálogo por defecto de la puerta,
+así que puedes cerrar una puerta condicionalmente sin repetir la escena de "está cerrada".
 
 Cerrada de noche, abierta de día:
 
@@ -147,8 +147,8 @@ el detalle de la sala con **+ Character** (elige quién) y luego **+ Pose** para
   brazos cruzados. Cada pose es un objeto separado con su propio sprite, posición y condición **Show pose when**.
 - **Solo se muestra la primera pose visible por propietario.** La lista es un orden de prioridad: se dibuja la primera pose cuya
   condición se cumpla y el resto se omite. El personaje nunca se dibuja dos veces.
-- El editor inyecta la presencia del personaje en la visibilidad de la pose, así que una pose solo aparece mientras
-  la rutina del personaje realmente la ponga en esta sala. No tienes que escribir a mano "y Maya está aquí".
+- El editor inyecta la presencia del personaje en la visibilidad de la pose, así que una pose solo aparece
+  mientras la rutina realmente tenga al personaje en esta sala. No tienes que escribir a mano "y Maya está aquí".
 - **Una pose visible reemplaza al marcador genérico de la rutina.** Sin una pose, el personaje se dibuja en un punto de personaje
   usando su sprite de mundo libre; con una, gana tu arte.
 
@@ -162,7 +162,7 @@ Un objeto de sala puede mover el reloj del juego por sí mismo. Dos campos en el
 | Campo | Qué hace |
 |---|---|
 | **Advance time on click** | Actívalo para aplicar un cambio de tiempo cuando se clica el objeto. |
-| **Time effect** | Las mismas operaciones que el bloque **Advance time**: avanzar franjas horarias, horas o días; fijar la franja horaria, la hora o el día de la semana. |
+| **Time effect** | Las mismas operaciones que el bloque **Advance time**: avanzar momentos del día, horas o días; fijar el momento del día, la hora o el día de la semana. |
 
 Este es el atajo para una **cama** o un **reloj** — un objeto cuyo único trabajo es mover el tiempo.
 
@@ -186,8 +186,8 @@ correctamente.
 ## Áreas de clic ajustadas
 
 El área de clic de un objeto proviene de su sprite. Para un arte cuyo cuadro delimitador es mucho más grande que la cosa que
-realmente quieres que sea clicable — una fina cadena de lámpara, una espada tumbada en diagonal, un recorte de personaje con
-muchas esquinas vacías — la caja atrapa clics que estaban destinados a la sala detrás de ella.
+realmente quieres que sea clicable — una fina cadena de lámpara, una espada tumbada en diagonal, un recorte de
+personaje con muchas esquinas vacías — la caja atrapa clics destinados a la sala que tiene detrás.
 
 Selecciona los sprites y ejecuta:
 
@@ -199,7 +199,7 @@ Esto construye un área de clic que sigue los **píxeles opacos** del sprite en 
 
 > **Advertencia**
 > Esto importa sobre todo para superposiciones con un borde suave y mayormente transparente — una capa de niebla, una viñeta,
-> un brillo tenue. Dejado con la forma de un cuadro delimitador, ese sprite se traga en silencio todos los clics de la sala.
+> un brillo tenue. Si lo dejas con la forma del cuadro delimitador, ese sprite se traga en silencio todos los clics de la sala.
 > Si una sala deja de responder a los clics después de añadir una superposición, esta es la razón.
 
 ## Ver también

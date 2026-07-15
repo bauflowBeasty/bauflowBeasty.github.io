@@ -1,6 +1,6 @@
 ---
 title: "Carga estricta vs. tolerante"
-description: "Hay dos formas de cargar un guardado cuyo contenido ya no coincide del todo con tu código. Estricta rechaza el archivo entero. Tolerante carga lo que puede y "
+description: "Hay dos formas de cargar un guardado que ya no coincide del todo con tu código: la estricta rechaza el archivo entero; la tolerante carga lo que puede y te dice qué omitió."
 ---
 
 Hay dos formas de cargar un guardado cuyo contenido ya no coincide del todo con tu código. Estricta rechaza el archivo
@@ -23,19 +23,19 @@ Estricto es el valor por defecto porque es el modo que no puede dejar tu juego e
 código. Si un solo campo en el guardado no se puede mapear a tu clase, la carga falla y **no se
 aplica nada**.
 
-Esta es una garantía real, no un mejor esfuerzo. Dos mecanismos la respaldan:
+Es una garantía real, no un simple intento. Dos mecanismos la respaldan:
 
 - Al mapear un objeto, cada campo se prepara primero. Los valores solo se asignan una vez que todos se han
   leído correctamente. Un fallo a mitad de camino no deja asignada la primera mitad.
 - Al cargar una escena (`LoadAll`), el archivo completo se valida contra la escena **antes de que se mute nada**.
-  Si un componente aún falla mientras se aplica, los componentes ya aplicados se
+  Si aun así un componente falla al aplicarse, los componentes ya aplicados se
   revierten al estado en el que estaban.
 
 Así que una carga estricta que falla deja el mundo exactamente como estaba antes de que la llamaras. El jugador ve
 un mensaje de error y sigue jugando. No ve un guardado a medio cargar con el inventario correcto y la
 posición incorrecta.
 
-El fallo vuelve como el error `FieldMapFailed`, con un mensaje que nombra el campo:
+El fallo se reporta con el error `FieldMapFailed`, con un mensaje que nombra el campo:
 
 ```text
 Field 'PlayerData.stamina' failed to load: expected Number, found String.
@@ -81,13 +81,13 @@ foreach (string warning in result.Warnings)
 Apply(result.Value);
 ```
 
-Las advertencias también se escriben en el log por ti, así que las verás durante el desarrollo sin añadir
+Las advertencias también quedan en el log automáticamente, así que las verás durante el desarrollo sin añadir
 ningún código. Lo que no puedes hacer es ignorarlas y asumir que la carga fue limpia — una carga tolerante que omitió
 cinco campos sigue reportando `Success = true`. Si te importa, comprueba `result.Warnings.Count`.
 
 ## Cuándo usar tolerante
 
-Úsalo cuando un guardado antiguo debe abrirse contra código nuevo, y un campo faltante es aceptable.
+Úsalo cuando un guardado antiguo debe abrirse con código nuevo, y perder un campo es aceptable.
 
 El caso habitual es un renombrado. Publicaste una demo, los jugadores tienen guardados, y desde entonces renombraste
 `PlayerData.hp` a `PlayerData.health`. Bajo estricto, esos guardados fallan. Bajo tolerante, cargan: `hp` en
@@ -95,10 +95,10 @@ el archivo no coincide con nada y se omite, `health` en tu clase mantiene su val
 pasa correctamente. El jugador pierde un valor en lugar de todo el archivo.
 
 Fíjate en lo que tolerante no es. Es una forma de sobrevivir a un desajuste, no una forma de arreglarlo — el valor en el
-campo antiguo se descarta, no se mueve. Cuando realmente quieras trasladar el valor antiguo, quieres una
+campo antiguo se descarta, no se mueve. Cuando realmente quieras trasladar el valor antiguo, lo que necesitas es una
 migración, que reescribe el contenido del guardado antes de que empiece el mapeo:
-[Versionado y migraciones](/es/docs/beasty-save-system/guides/versioning-and-migrations/). Las migraciones preservan datos. La carga tolerante
-meramente tolera su pérdida.
+[Versionado y migraciones](/es/docs/beasty-save-system/guides/versioning-and-migrations/). Las migraciones conservan los datos. La carga tolerante
+solo tolera perderlos.
 
 Una política razonable para un juego publicado: mantén `Strict = true`, y recurre a tolerante solo cuando una
 actualización específica lo necesite.
@@ -108,7 +108,7 @@ actualización específica lo necesite.
 > **Advertencia**
 > La carga tolerante solo aplica cuando el objeto raíz que cargas es una **clase**. Si cargas un struct, un
 > string, una colección (un array, una `List`, un `Dictionary`) o un primitivo, el mapeo es estricto sin importar
-> lo que `Strict` esté configurado. Un campo malo dentro de esos aún hace fallar toda la carga.
+> cómo esté configurado `Strict`. Un campo malo dentro de esos sigue haciendo fallar toda la carga.
 
 En la práctica esto rara vez es un problema, porque una raíz de guardado casi siempre es una clase — un `PlayerData`, un
 `GameState`. Pero si guardas una `List<InventoryEntry>` directamente en la raíz, `Strict = false` no te
@@ -116,8 +116,8 @@ protegerá de un campo renombrado dentro de `InventoryEntry`. Envuélvelo en una
 
 Dos comportamientos más, en ambos modos:
 
-- Un miembro que está **faltante o null** en el archivo recae silenciosamente en lo que el campo ya
-  contenga. Eso no es una advertencia en ningún modo. Añadir un campo nuevo a tu clase de datos no rompe los guardados
+- Un miembro que está **ausente o es null** en el archivo conserva en silencio el valor que el campo ya
+  tenga. Eso no es una advertencia en ningún modo. Añadir un campo nuevo a tu clase de datos no rompe los guardados
   antiguos; el campo nuevo simplemente mantiene su valor por defecto.
 - Un saveable que está en la escena pero no tiene datos en el archivo se deja intacto, con una advertencia. No se
   reinicia.

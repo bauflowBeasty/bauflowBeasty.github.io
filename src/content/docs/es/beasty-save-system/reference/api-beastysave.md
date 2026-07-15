@@ -1,6 +1,6 @@
 ---
 title: "API de BeastySave"
-description: "BeastySave es la fachada estática y el único punto de entrada del sistema de guardado. Cada método recibe un BeastySaveSettings y devuelve un resultado tipado. Nada en est"
+description: "BeastySave es la fachada estática y el único punto de entrada del sistema de guardado. Cada método recibe un BeastySaveSettings y devuelve un resultado tipado."
 ---
 
 `BeastySave` es la fachada estática y el único punto de entrada del sistema de guardado. Cada método recibe un
@@ -18,11 +18,11 @@ using Beasty_SaveSystemCore.Json; // JsonNode — necesario solo para migracione
 
 ## Nombres de slot
 
-Todo método que recibe un `slot` lo valida. Un slot es un nombre de archivo desnudo. Se rechaza con
+Todo método que recibe un `slot` lo valida. Un slot es un nombre de archivo a secas, sin ruta. Se rechaza con
 `InvalidArgument` cuando está vacío o solo contiene espacios, contiene `/` o `\`, contiene `..`, es una ruta
 enraizada, contiene caracteres inválidos en un nombre de archivo, o es un nombre de dispositivo reservado de
 Windows (`CON`, `PRN`, `AUX`, `NUL`, `COM1`-`COM9`, `LPT1`-`LPT9`). Los nombres de dispositivo se rechazan en
-todas las plataformas, de modo que una carpeta de guardado escrita en Linux se mantiene utilizable en Windows.
+todas las plataformas, de modo que una carpeta de guardado escrita en Linux sigue siendo utilizable en Windows.
 
 ## Guardar
 
@@ -46,7 +46,7 @@ public static Task<SaveResult> SaveAsync(object data, string slot, BeastySaveSet
 ```
 
 Mismo contrato, con la escritura del archivo realizada de forma asíncrona. La serialización y el cifrado
-igualmente se ejecutan en el hilo que llama. Mismos códigos de error. Consulta [Guardado asíncrono](/es/docs/beasty-save-system/guides/async-saving/).
+se siguen ejecutando en el hilo que llama. Mismos códigos de error. Consulta [Guardado asíncrono](/es/docs/beasty-save-system/guides/async-saving/).
 
 ## Cargar
 
@@ -101,14 +101,14 @@ public static bool Delete(string slot, BeastySaveSettings settings)
 ```
 
 Elimina el archivo del slot y su `.bak`. Devuelve verdadero cuando el archivo del slot en sí fue eliminado.
-Best effort: un archivo bloqueado se omite silenciosamente, nunca se lanza una excepción.
+Hace lo que puede: un archivo bloqueado se omite en silencio, y nunca se lanza una excepción.
 
 ```csharp
 public static string[] ListSlots(BeastySaveSettings settings)
 ```
 
 Nombres de slot en la carpeta de guardado, ordenados en orden ordinal. Las copias de seguridad (`.bak`) y los
-archivos temporales en vuelo (`.tmp`) quedan excluidos. Devuelve un array vacío cuando la carpeta no existe.
+archivos temporales a medio escribir (`.tmp`) quedan excluidos. Devuelve un array vacío cuando la carpeta no existe.
 
 ```csharp
 public static LoadResult<Dictionary<string, string>> ReadMeta(string slot, BeastySaveSettings settings)
@@ -139,8 +139,8 @@ public static void RegisterMigration(int fromVersion, int toVersion, Func<JsonNo
 Registra un paso de la cadena de migración, aplicado al `JsonNode` crudo en el momento de carga cuando el
 `dataVersion` del archivo es más antiguo que `BeastySaveSettings.DataVersion`. Los pasos se encadenan: de 1 a
 2, de 2 a 3, y así sucesivamente. Lanza `ArgumentNullException` cuando `migrate` es nulo y
-`ArgumentException` cuando `toVersion` no es mayor que `fromVersion` — estos son errores del desarrollador,
-no hechos sobre un archivo. Consulta [Versionado y migraciones](/es/docs/beasty-save-system/guides/versioning-and-migrations/).
+`ArgumentException` cuando `toVersion` no es mayor que `fromVersion` — son errores del desarrollador,
+no un problema del archivo. Consulta [Versionado y migraciones](/es/docs/beasty-save-system/guides/versioning-and-migrations/).
 
 ```csharp
 public static void RegisterConverter(IBeastyConverter converter)

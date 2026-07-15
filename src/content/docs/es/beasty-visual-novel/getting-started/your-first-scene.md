@@ -1,14 +1,14 @@
 ---
 title: "Tu primera escena"
-description: "De un proyecto de Unity vacío a una escena en la que puedes pulsar Play: un fondo, un personaje que dice dos frases, y una decisión que se ramifica. No escribirás ni un"
+description: "De un proyecto de Unity vacío a una escena en la que puedes pulsar Play: un backdrop, un personaje que dice dos líneas, y una elección que se ramifica. Sin escribir una sola línea de código."
 ---
 
 De un proyecto de Unity vacío a una escena en la que puedes pulsar Play: un backdrop, un personaje que dice
-dos líneas, y una elección que se ramifica. No escribirás ni una sola línea de código, y toma unos diez
-minutos.
+dos líneas, y una elección que se ramifica. No escribirás ni una sola línea de código, y te tomará unos
+diez minutos.
 
 Antes de empezar, asegúrate de que el paquete está importado y de que existe el menú **Tools > Beasty VN**.
-Ver [Instalación](/es/docs/beasty-visual-novel/getting-started/installation/).
+Consulta [Instalación](/es/docs/beasty-visual-novel/getting-started/installation/).
 
 ## 1. Construye la escena
 
@@ -28,9 +28,9 @@ Esto construye todo el rig por ti. Cuando termina tienes cinco objetos en la Hie
 | **Main Camera** | Una cámara ortográfica, si la escena todavía no tenía una. |
 | **EventSystem** | Para que la UI reciba clics. El módulo de entrada correcto se instala al arrancar, sea cual sea el backend de entrada que use tu proyecto. |
 
-Luego se auto-cablea: cada referencia que la escena necesita se resuelve por ti.
+Luego se auto-cablea: todas las referencias que la escena necesita se resuelven solas.
 
-**Create Scene es seguro de volver a ejecutar.** Reutiliza la cámara, el EventSystem y el canvas que ya
+**Create Scene se puede volver a ejecutar sin riesgo.** Reutiliza la cámara, el EventSystem y el canvas que ya
 están ahí en lugar de duplicarlos, y auto-wire **solo rellena referencias vacías — nunca sobrescribe tu
 cableado**. Si alguna vez una escena aparece rota, volver a ejecutarlo es lo primero que hay que probar.
 
@@ -46,15 +46,15 @@ Tools > Beasty VN > Content > Create Base Assets (intro + FreeRoam map)
 ```
 
 Crea **solo lo que falta**, lo cablea, y nunca duplica ni sobrescribe nada. Si quieres un proyecto de
-historia y nada más — sin mapa de mundo libre — usa en su lugar `Tools > Beasty VN > Setup > Blank Canvas`.
-De cualquier forma terminas con cuatro assets. Esto es lo que **es** cada uno:
+historia y nada más — sin mapa de mundo libre — usa mejor `Tools > Beasty VN > Setup > Blank Canvas`.
+En ambos casos terminas con cuatro assets. Esto es lo que **es** cada uno:
 
 | Asset | Qué es |
 |---|---|
-| **DialogueScene** (llamado `intro`) | Una historia. Este es el asset raíz — lo que abres en el editor y lo que juega el juego. |
+| **DialogueScene** (llamado `intro`) | Una historia. Este es el asset raíz — lo que abres en el editor y lo que el juego reproduce. |
 | **VNContext** | El único mundo compartido: el reparto, las variables, el diccionario, los ítems, las misiones, las pantallas. Cada DialogueScene de tu juego lo comparte. Solo existe uno. |
 | **StoryGraph** | El lienzo donde viven tus nodos. Viene con un nodo Dialogue ya puesto, marcado como el nodo de entrada — ahí es donde empieza la reproducción. |
-| **LocalizationTable** | Cada línea de texto de la historia, con clave, una columna por idioma. Tu diálogo vive aquí incluso si nunca lo traduces. |
+| **LocalizationTable** | Cada línea de texto de la historia, con su clave y una columna por idioma. Tu diálogo vive aquí incluso si nunca lo traduces. |
 
 Si esas cuatro palabras no significan nada para ti todavía, no pasa nada — sigue adelante, y lee
 [Conceptos fundamentales](/es/docs/beasty-visual-novel/getting-started/core-concepts/) después.
@@ -66,7 +66,7 @@ Tools > Beasty VN > Editor
 ```
 
 La ventana Beasty VN se abre con tu DialogueScene ya puesta en el campo de la barra superior. Nueve
-pestañas arriba. Hoy necesitas dos de ellas: **Characters** y **Story**. Para el resto, ver el
+pestañas arriba. Hoy necesitas dos de ellas: **Characters** y **Story**. Para el resto, consulta el
 [Recorrido del editor](/es/docs/beasty-visual-novel/getting-started/editor-tour/).
 
 ## 4. Crea un personaje
@@ -76,18 +76,18 @@ Ve a la pestaña **Characters**, sub-pestaña **Cast**.
 1. Presiona **+ New Character**. Elige dónde guardarlo. El personaje aparece en la lista de la izquierda y
    se abre a la derecha.
 2. **Id (stable)** — el nombre interno que usa la historia para referirse a este personaje, por ejemplo
-   `juan`. Se genera a partir del nombre del asset. Todo lo que menciona a este personaje menciona este id,
-   así que elígelo ahora y no lo cambies después.
+   `juan`. Se genera a partir del nombre del asset. Todo lo que hace referencia a este personaje usa este
+   id, así que elígelo ahora y no lo cambies después.
 3. **Display name** — el nombre que ve el jugador, por ejemplo `Juan`. Cambia esto cuando quieras.
 4. Baja hasta **Expressions (key -> stage sprite)** y presiona **+ Add expression**. Aparece una fila con
    la clave `base`. Arrastra un sprite al campo de al lado.
 
 `base` es la expresión predeterminada: cuando un bloque no dice qué expresión usar, esta es la que se
-muestra. Una expresión alcanza para terminar esta página. Agrega `happy` y `sad` más adelante.
+muestra. Con una expresión alcanza para terminar esta página. Agrega `happy` y `sad` más adelante.
 
 > **Nota**
-> Cualquier sprite sirve por ahora — el paquete incluye arte de relleno en `Sprites/`. A nada de esto le
-> importa qué imagen sea.
+> Cualquier sprite sirve por ahora — el paquete incluye arte de relleno en `Sprites/`. Da igual qué imagen
+> sea.
 
 Detalle completo: [Personajes](/es/docs/beasty-visual-novel/world/characters/).
 
@@ -113,8 +113,8 @@ Ese es todo el nodo: un backdrop, un personaje, y dos líneas. Los bloques se ej
 y un bloque Dialogue **se detiene y espera al jugador** — por eso son dos líneas separadas en lugar de un
 muro de texto.
 
-Al hacer clic en un bloque de la paleta se agrega al final. Para insertarlo en un punto intermedio en
-cambio, **arrástralo sobre la lista de bloques** en la posición que quieras.
+Al hacer clic en un bloque de la paleta se agrega al final. Si quieres insertarlo en un punto intermedio,
+**arrástralo sobre la lista de bloques** hasta la posición que quieras.
 
 ![La pestaña Story: la paleta Add blocks, el grafo, y el inspector de nodo con cuatro bloques](/docs-images/beasty-visual-novel/vn-story-tab-first-node.png)
 
@@ -146,7 +146,7 @@ dos veces. Para cada una:
   segunda.
 - El **target** — a dónde va esa opción. Déjalo vacío por ahora; lo apuntarás a un nodo en un momento.
 
-**Dale a las opciones algún lugar a dónde ir.** Haz clic derecho en el lienzo dos veces más y crea dos
+**Dales un destino a las opciones.** Haz clic derecho en el lienzo dos veces más y crea dos
 nodos **Dialogue**. Pon un bloque Dialogue en cada uno con una línea distinta (`You run.` / `You stay.`).
 Luego vuelve al nodo Choice y asigna el target de cada opción a uno de ellos — ya sea desde el campo target
 de la opción, o arrastrando desde el puerto de esa opción en el grafo hasta el nodo.
@@ -169,21 +169,21 @@ Haz clic en uno, y caes en el nodo al que apunta.
 Eso es una novela visual.
 
 Avanzar es **Espacio**, **Enter** o **clic izquierdo**. **Escape** o clic derecho abre el menú de juego,
-donde **Save** y **Load** ya funcionan. Ver [Entrada y controles](/es/docs/beasty-visual-novel/production/input-and-controls/).
+donde **Save** y **Load** ya funcionan. Consulta [Entrada y controles](/es/docs/beasty-visual-novel/production/input-and-controls/).
 
 ## 8. Dos cosas para hacer antes de seguir avanzando
 
 ### Previsualiza un nodo sin entrar en Play Mode
 
-Esperar a Play Mode para ver una línea se vuelve pesado rápido.
+Esperar a Play Mode para ver una línea se vuelve pesado enseguida.
 
 ```text
 Tools > Beasty VN > Dialogue Preview
 ```
 
 Esto reproduce un nodo — backdrop, personajes, props, cuadro de diálogo — dentro de una ventana de editor,
-sin entrar en Play Mode. Puedes adelantar hasta un bloque específico, así que puedes mirar el momento exacto
-en el que estás trabajando. No toca nada de tu escena y no guarda nada. Ver
+sin entrar en Play Mode. Puedes adelantarte hasta un bloque específico para ver el momento exacto en el que
+estás trabajando. No toca nada de tu escena y no guarda nada. Consulta
 [Vista previa de diálogo](/es/docs/beasty-visual-novel/authoring/dialogue-preview/).
 
 ### Valida
@@ -192,8 +192,8 @@ En la barra superior de la ventana Beasty VN, presiona **Validate**.
 
 El validador recorre el grafo raíz y cada subgrafo y reporta referencias colgantes: una línea hablada por
 un id de personaje que ya no existe, una condición sobre una variable que borraste, un token de diccionario
-que no está definido. Cuesta un segundo. Ejecútalo antes de que tus jugadores encuentren el problema por ti.
-Ver [Validación e ids](/es/docs/beasty-visual-novel/production/validation-and-ids/).
+que no está definido. Tarda un segundo. Ejecútalo antes de que tus jugadores encuentren el problema por ti.
+Consulta [Validación e ids](/es/docs/beasty-visual-novel/production/validation-and-ids/).
 
 ## Hacia dónde ir después
 

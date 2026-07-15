@@ -1,10 +1,10 @@
 ---
 title: "APIs de gameplay"
-description: "Cuatro clases estáticas en Beasty.VN.Runtime: BeastyTime, BeastyRoutines, BeastyQuests e Inventory. Son la cara en código de los sistemas de mundo que autoras en e"
+description: "Cuatro clases estáticas en Beasty.VN.Runtime: BeastyTime, BeastyRoutines, BeastyQuests e Inventory. Son la cara en código de los sistemas de mundo que creas en el editor."
 ---
 
 Cuatro clases estáticas en `Beasty.VN.Runtime`: `BeastyTime`, `BeastyRoutines`, `BeastyQuests` e `Inventory`.
-Son la cara en código de los sistemas de mundo que autoras en el editor.
+Son la cara en código de los sistemas de mundo que creas en el editor.
 
 Las cuatro leen y escriben el mismo `VariableStore` — `VNGameController.SharedVariables` — bajo namespaces
 de claves reservados. Tres consecuencias, y sí importan:
@@ -14,7 +14,7 @@ de claves reservados. Tres consecuencias, y sí importan:
 - Todo lo que tocan está en el guardado, automáticamente. Nunca serializas una misión o un objeto tú mismo.
 - Todo lo que tocan se rebobina con la historia, porque el rebobinado restaura el almacén.
 
-Cada miembro se degrada de forma segura: sin manager, sin configuración, sin contexto significa un valor por
+Cada miembro se degrada de forma segura: si no hay manager, configuración o contexto, obtienes un valor por
 defecto o un no-op, nunca una excepción.
 
 ## BeastyTime
@@ -39,21 +39,21 @@ public static void SetHour(int hour);         // Solo en modo Clock
 public static void SetWeekday(string weekday);
 ```
 
-`Enabled` es false cuando no hay ningún `VNTimeConfig` asignado en el `BeastyManager`. Entonces el tiempo
+`Enabled` es false cuando no hay ningún `VNTimeConfig` asignado en el `BeastyManager`. En ese caso el tiempo
 está apagado: no se escribe ninguna clave `@time:`, cada getter devuelve su valor por defecto y cada
 condición de tiempo evalúa a false.
 
 `Read()` devuelve un `VNTimeSnapshot`, un struct readonly con `Day`, `Hour`, `Daypart`, `Weekday`, `Season`.
-Úsalo cuando necesites varios campos en un momento consistente.
+Úsalo cuando necesites varios campos tomados en el mismo instante.
 
 > **Advertencia**
 > El tiempo lo maneja el autor. El runtime NUNCA avanza el reloj por sí solo. Nada sucede a menos que se
 > ejecute un bloque Advance Time, se use un objeto de FreeRoam con `advanceTimeOnClick`, o llames a uno de
 > los métodos de arriba. Un juego en el que nada se mueve es un juego en el que el tiempo nunca avanzó.
 
-Establece las variables `@time:` crudas a mano y te saltas la republicación de valores derivados (daypart a
-partir de la hora, weekday, season) y las notificaciones de las que depende la UI reactiva. Usa estos
-métodos en su lugar.
+Si escribes a mano las variables `@time:` crudas, te saltas la republicación de los valores derivados
+(daypart a partir de la hora, weekday, season) y las notificaciones de las que depende la UI reactiva. Mejor
+usa estos métodos.
 
 ```csharp
 using Beasty.VN.Runtime;
@@ -75,7 +75,7 @@ public sealed class Bed : MonoBehaviour
 }
 ```
 
-`SetWeekday` siempre avanza hacia la próxima ocurrencia de ese weekday (hoy cuenta). Ver
+`SetWeekday` siempre avanza hacia la próxima ocurrencia de ese weekday (hoy cuenta). Consulta
 [Tiempo de juego](/es/docs/beasty-visual-novel/world/game-time/).
 
 ## BeastyRoutines
@@ -111,8 +111,8 @@ public static IReadOnlyList<(string daypart, RoutinePlacement placement)> DaySch
 tiempo en la copia y resolviendo contra esa copia. Es pura: preguntar dónde estará alguien esta noche nunca
 hace que sea de noche.
 
-La copia es el costo. Una pregunta está bien; una pantalla llena de ellas no. Para una grilla, toma un
-`Snapshot()` y pregunta contra él con `ResolveIn`:
+La copia es el costo. Una pregunta está bien; una pantalla llena de ellas, no. Para una grilla, toma un
+`Snapshot()` y haz todas las consultas contra él con `ResolveIn`:
 
 ```csharp
 using Beasty.VN.Runtime;
@@ -139,8 +139,8 @@ public sealed class WhereIsEveryone : MonoBehaviour
 }
 ```
 
-`DaySchedule` devuelve una entrada por daypart en la configuración de tiempo, en orden, y una lista vacía
-cuando el tiempo está apagado. Ver [Rutinas de personaje](/es/docs/beasty-visual-novel/world/character-routines/).
+`DaySchedule` devuelve una entrada por momento del día de la configuración de tiempo, en orden, y una lista
+vacía cuando el tiempo está apagado. Consulta [Rutinas de personaje](/es/docs/beasty-visual-novel/world/character-routines/).
 
 ## BeastyQuests
 
@@ -194,7 +194,7 @@ public sealed class QuestBoard : MonoBehaviour
 }
 ```
 
-Ver [Misiones](/es/docs/beasty-visual-novel/world/quests/).
+Consulta [Misiones](/es/docs/beasty-visual-novel/world/quests/).
 
 ## Inventory
 
@@ -221,12 +221,12 @@ public static event Action<string, int> ItemChanged;   // (id, nueva cantidad)
 ```
 
 Cada mutación se limita al tipo del objeto: un objeto Key es 0 o 1, un Consumable va de 0 a su máximo.
-Llegar a 0 elimina el objeto del orden de ranuras y desaparece de la UI de inventario; la primera
-adquisición lo añade.
+Al llegar a 0, el objeto sale del orden de ranuras y desaparece de la UI de inventario; al adquirirlo por
+primera vez, se añade.
 
 `Use` aplica los efectos del objeto, consume `consumeAmount`, y — cuando `jumpScene` es true — salta a la
-escena de VN del objeto. Devuelve false cuando la condición de uso no se cumple actualmente. `Order()`
-devuelve los objetos que se tienen en el orden guardado del jugador.
+escena de VN del objeto. Devuelve false cuando la condición de uso no se cumple en ese momento. `Order()`
+devuelve los objetos en posesión, en el orden que el jugador dejó guardado.
 
 `ItemHandle` es un handle tipado sobre un id, con `Count`, `Owned`, `Max`, `CanUse`, `Give`, `Take`, `Set`,
 `Use`. Combínalo con las constantes generadas `ItemIds` para mantenerte lejos de strings mágicos:
@@ -264,7 +264,7 @@ public sealed class PotionButton : MonoBehaviour
 ```
 
 `ItemIds` se regenera desde la pestaña Items cada vez que tus ids cambian, exactamente igual que los
-accesores en [Accesores generados](/es/docs/beasty-visual-novel/scripting/generated-accessors/). Ver
+accesores en [Accesores generados](/es/docs/beasty-visual-novel/scripting/generated-accessors/). Consulta
 [Objetos e inventario](/es/docs/beasty-visual-novel/world/items-and-inventory/).
 
 ## Ver también

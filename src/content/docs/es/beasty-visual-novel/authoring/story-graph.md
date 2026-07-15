@@ -1,6 +1,6 @@
 ---
 title: "El grafo de la historia"
-description: "El grafo de la historia es el lienzo donde construyes una escena. Sueltas nodos en él, los conectas entre sí y el juego los reproduce en el orden que describen los cables. Esta"
+description: "El grafo de la historia es el lienzo donde construyes una escena: sueltas nodos, los conectas y el juego los reproduce en el orden de los cables. Aquí se cubren el lienzo y los siete tipos de nodo."
 ---
 
 El grafo de la historia es el lienzo donde construyes una escena. Sueltas nodos en él, los conectas entre sí
@@ -21,7 +21,7 @@ La pestaña Story tiene tres partes:
 - El **lienzo del grafo** en el centro. Los nodos y los cables entre ellos.
 - El **inspector de nodos** a la derecha. Todo sobre el nodo que tienes seleccionado.
 
-Desplázate con el botón central del ratón, haz zoom con la rueda, selecciona por rectángulo arrastrando.
+Desplázate con el botón central del mouse, haz zoom con la rueda, selecciona por rectángulo arrastrando.
 
 ### Crear un nodo
 
@@ -43,14 +43,14 @@ automáticamente en el nodo de entrada.
 Todo nodo tiene un puerto de entrada, `In`, en su lado izquierdo. Acepta cualquier cantidad de cables
 entrantes: varios nodos pueden llevar al mismo lugar.
 
-Los puertos de salida están a la derecha, y lo que son depende del tipo de nodo (ver más abajo). Arrastra
-desde un puerto de salida hasta el puerto `In` de otro nodo para conectarlos. Arrastra un cable lejos y
+Los puertos de salida están a la derecha, y cuáles son depende del tipo de nodo (se describen más abajo).
+Arrastra desde un puerto de salida hasta el puerto `In` de otro nodo para conectarlos. Arrastra un cable y
 suéltalo en el lienzo vacío para desconectarlo, o selecciona el cable y pulsa Delete.
 
 ### El nodo de entrada
 
-La reproducción empieza en el nodo de entrada del grafo. Su barra de título está teñida para que puedas
-encontrarlo de un vistazo. Para mover el inicio de la escena, haz clic derecho en un nodo y elige
+La reproducción empieza en el nodo de entrada del grafo. Su barra de título está resaltada con color para
+que lo ubiques de un vistazo. Para mover el inicio de la escena, haz clic derecho en un nodo y elige
 `Set as Entry Node`.
 
 ### El menú contextual del nodo
@@ -112,7 +112,7 @@ Un nodo de decisión es un enrutador, no un menú. No muestra nada. El jugador n
 nada, y no puede notar que está ahí. Cuando la historia llega a él, recorre sus ramas de arriba abajo, toma
 la primera cuya condición se cumpla, aplica los efectos de esa rama y salta.
 
-Esta es la distinción que la gente confunde. Si quieres que el jugador elija, usa un Choice Node. Si quieres
+Esta es la distinción que más se confunde. Si quieres que el jugador elija, usa un Choice Node. Si quieres
 que el *estado del mundo* elija —el jugador ya tiene la llave, ya es viernes, el cariño ya está por encima de
 40— usa un Decision Node.
 
@@ -128,9 +128,9 @@ Añade una rama con el botón `+ branch` del nodo.
 
 **Recurre a él cuando abandonar la novela merece su propia caja en el grafo.**
 
-Un nodo de flujo lleva exactamente una salida: entrar en mundo libre, volver a la habitación de la que vino
-el jugador, dejar que el jugador elija una habitación, o saltar a otra Visual Novel. Cuando la historia llega
-a él, entrega el control y la visual novel se detiene.
+Un nodo de flujo lleva exactamente una salida: entrar en mundo libre, volver a la sala de la que vino el
+jugador, dejar que el jugador elija una sala, o saltar a otra Visual Novel. Cuando la historia llega a él,
+entrega el control y la novela visual se detiene.
 
 No tiene puerto de salida. No hay un "después" dentro de este grafo.
 
@@ -171,8 +171,7 @@ Un nodo de retorno solo tiene sentido dentro de un subgrafo. Consulta [Subgrafos
 Un nodo de menú de conversación nombra a un personaje y presenta el menú de conversación de ese personaje
 —las entradas que definiste en `Characters > Talk Menu`, más los pasos de conversación de sus misiones
 activas, que se insertan automáticamente. Es el centro de conversación al que accedes al hacer clic en un
-personaje dentro de una habitación, expuesto como nodo para que puedas llegar a él desde dentro de una
-escena.
+personaje dentro de una sala, expuesto como nodo para que puedas llegar a él desde dentro de una escena.
 
 Puertos:
 

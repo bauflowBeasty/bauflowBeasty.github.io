@@ -1,10 +1,10 @@
 ---
 title: "Slots y metadatos"
-description: "Un slot es un archivo de guardado. Esta página cubre cómo se nombran, listan y eliminan los slots, y cómo adjuntar un pequeño bloque de metadatos a cada uno p"
+description: "Un slot es un archivo de guardado. Cómo se nombran, listan y eliminan los slots, y cómo adjuntarles metadatos para armar una pantalla de slots sin cargar los guardados."
 ---
 
-Un slot es un archivo de guardado. Esta página cubre cómo se nombran, listan y eliminan los slots, y cómo adjuntar un
-pequeño bloque de metadatos a cada uno para que puedas construir una pantalla de slots de guardado sin cargar los guardados.
+Un slot es un archivo de guardado. Esta página explica cómo se nombran, listan y eliminan los slots, y cómo adjuntar un
+pequeño bloque de metadatos a cada uno para que puedas armar una pantalla de slots de guardado sin cargar los guardados.
 
 ## Qué es un slot
 
@@ -31,9 +31,9 @@ string file   = BeastySave.GetSlotPath("slot1", settings);
 
 ## Reglas de nombrado
 
-Un nombre de slot debe ser un nombre de archivo desnudo. Se rechaza si:
+Un nombre de slot debe ser un nombre de archivo a secas, sin ruta. Se rechaza si:
 
-- está vacío o solo espacios en blanco,
+- está vacío o solo contiene espacios,
 - contiene `/` o `\`,
 - contiene `..`,
 - es una ruta con raíz (`C:\saves\x`, `/saves/x`),
@@ -41,16 +41,16 @@ Un nombre de slot debe ser un nombre de archivo desnudo. Se rechaza si:
 - es un nombre de dispositivo reservado de Windows: `CON`, `PRN`, `AUX`, `NUL`, `COM1`-`COM9`, `LPT1`-`LPT9`.
 
 Los nombres de dispositivo se rechazan en todas las plataformas, no solo en Windows, así que una carpeta de guardado escrita en
-macOS o Linux se mantiene utilizable cuando el mismo jugador se pasa a una máquina Windows.
+macOS o Linux sigue siendo utilizable cuando el mismo jugador se pasa a Windows.
 
-Un nombre rechazado nunca toca el disco. La llamada vuelve como un resultado fallido con el error
+Un nombre rechazado nunca toca el disco. La llamada devuelve un resultado fallido con el error
 `InvalidArgument` y un mensaje que dice por qué:
 
 ```text
 Invalid slot name '../hack': it contains '..'.
 ```
 
-Cualquier otra cosa está bien: `slot1`, `autosave`, `quicksave`, `Chapter 2 - the well`. Si dejas que el jugador
+Cualquier otro nombre es válido: `slot1`, `autosave`, `quicksave`, `Chapter 2 - the well`. Si dejas que el jugador
 escriba el nombre del slot, compruébalo antes de usarlo, o simplemente muestra el mensaje que te da el resultado. Consulta
 [Resultados y errores](/es/docs/beasty-save-system/reference/results-and-errors/).
 
@@ -67,8 +67,8 @@ no queda nada que restaurar. Y devuelve `false` cuando no había ningún archivo
 no es un error.
 
 `ListSlots` devuelve solo los nombres de slot, sin la extensión, y excluye los backups `.bak` y
-cualquier archivo `.tmp` residual. La lista está ordenada en orden **ordinal**, que es carácter por carácter, no
-amigable para humanos: `slot10` se ordena antes que `slot2`. Si eso te importa, o bien rellena tus nombres con ceros
+cualquier archivo `.tmp` residual. La lista viene en orden **ordinal** — carácter por carácter, no como la
+ordenaría una persona: `slot10` queda antes que `slot2`. Si eso te importa, o bien rellena tus nombres con ceros
 (`slot01`, `slot02`, `slot10`) o bien ordena la lista tú mismo una vez que hayas leído los metadatos — que es la
 siguiente sección, y la razón por la que existe esta página.
 
@@ -79,7 +79,7 @@ el inventario completo del jugador. Cargar doce guardados completos para imprimi
 si los guardados están encriptados es peor: tendrías que desencriptarlos todos.
 
 Así que `Save` recibe un diccionario opcional de strings. Se escribe en el archivo de guardado junto a los datos, y
-se puede leer de vuelta por sí solo.
+después puede leerse por sí solo.
 
 ```csharp
 using System;
@@ -98,10 +98,10 @@ var meta = new Dictionary<string, string>
 SaveResult result = BeastySave.Save(playerData, "slot1", settings, meta);
 ```
 
-Las claves y los valores son ambos strings. Los números, fechas y cualquier otra cosa entran como texto, y salen
+Tanto las claves como los valores son strings. Los números, fechas y cualquier otra cosa entran como texto, y salen
 como texto; convertirlos de vuelta es tarea tuya.
 
-El mismo parámetro existe en el camino de guardado de escena:
+El mismo parámetro existe en el flujo de guardado de escena:
 
 ```csharp
 BeastySaveManager.Instance.SaveAllNow("slot1", meta);
@@ -122,7 +122,7 @@ checksum, y no necesita la clave de encriptación.
 
 ## Los metadatos son texto plano, incluso cuando el guardado está encriptado
 
-Este es el trade-off deliberado que hace barata una lista de slots, y debes saberlo.
+Este trade-off es deliberado — es lo que hace barata una lista de slots — y conviene que lo tengas claro.
 
 Los datos de un guardado pueden estar encriptados. Los metadatos nunca lo están. Se quedan en texto plano en el archivo, así que
 `ReadMeta` puede construir tu lista de slots en un juego encriptado sin desencriptar nada, y así
@@ -136,7 +136,7 @@ Dos consecuencias:
 > nombre del capítulo en los metadatos. No pongas ahí el oro del jugador y luego lo leas de vuelta como la verdad.
 > La verdad vive en el payload de datos, que se verifica con checksum al cargar.
 
-Tampoco pongas nada privado en ellos. Si un valor no debería ser visible en un editor de texto, pertenece en
+Tampoco pongas nada privado en ellos. Si un valor no debería ser visible en un editor de texto, su lugar está en
 los datos, no en el meta. Consulta [Encriptación](/es/docs/beasty-save-system/guides/encryption/).
 
 ## Un ejemplo trabajado: resúmenes de slot para una UI

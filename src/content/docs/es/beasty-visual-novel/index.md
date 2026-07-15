@@ -1,6 +1,6 @@
 ---
 title: "Beasty Visual Novel"
-description: "Tú escribes la historia. Beasty Visual Novel la reproduce. Es un motor completo de novela visual para Unity: una ventana de creación donde construyes la histo"
+description: "Tú escribes la historia. Beasty Visual Novel la reproduce. Un motor completo de novela visual para Unity: una ventana de creación donde construyes la historia, y un runtime que se la muestra al jugador sin necesidad de código."
 ---
 
 Tú escribes la historia. Beasty Visual Novel la reproduce. Es un motor completo de novela visual para Unity: una
@@ -12,7 +12,7 @@ código en ningún momento.
 Una escena tiene dos caras, y son la misma escena:
 
 - **El grafo.** Un lienzo de nodos. Cada nodo es un beat de la historia, y dentro de él una pila de bloques
-  se ejecuta de arriba a abajo: fija un backdrop, muestra un personaje, di una línea, cambia una variable.
+  se ejecuta de arriba a abajo: fija un backdrop, muestra un personaje, dice una línea, cambia una variable.
 - **El script de texto.** La misma escena escrita como un archivo `.vnbeasty`, en una sintaxis compacta
   similar a Ren'Py. `juan (whisper) "psst..."` es una línea. `label cruce (choice):` es un nodo de elección.
 
@@ -28,29 +28,29 @@ sincronizado.
 
 > **Nota**
 > Un límite que conviene conocer antes de empezar: un backdrop construido a partir de más de una capa de
-> sprite no tiene forma de texto. Esas escenas se quedan solo en el grafo. Ver [El script de texto](/es/docs/beasty-visual-novel/authoring/text-script/).
+> sprite no tiene forma de texto. Esas escenas se quedan solo en el grafo. Consulta [El script de texto](/es/docs/beasty-visual-novel/authoring/text-script/).
 
 ## Más que un reproductor de diálogos
 
 - **Salas de mundo libre.** Deja la novela por una sala explorable con puertas, interactuables y personajes
-  clicables, y luego vuelve. Ver [Salas de mundo libre](/es/docs/beasty-visual-novel/world/free-roam-rooms/).
+  clicables, y luego vuelve. Consulta [Salas de mundo libre](/es/docs/beasty-visual-novel/world/free-roam-rooms/).
 - **Tiempo de juego.** Momentos del día, un reloj opcional, días de la semana y estaciones. El tiempo nunca
-  avanza por sí solo — tú lo avanzas. Ver [Tiempo de juego](/es/docs/beasty-visual-novel/world/game-time/).
+  avanza por sí solo — tú lo avanzas. Consulta [Tiempo de juego](/es/docs/beasty-visual-novel/world/game-time/).
 - **Rutinas de personajes.** Dónde está cada personaje, por día y por momento del día, editado en una
-  grilla de semana x momento del día. Ver [Rutinas de personajes](/es/docs/beasty-visual-novel/world/character-routines/).
+  grilla de semana x momento del día. Consulta [Rutinas de personajes](/es/docs/beasty-visual-novel/world/character-routines/).
 - **Misiones y el menú de conversación.** Misiones con etapas, objetivos, recompensas y recurrencia; un
   centro de conversación por personaje que siempre lista exactamente lo que puedes decirle a ese personaje
-  ahora mismo. Ver [Misiones](/es/docs/beasty-visual-novel/world/quests/) y [El menú de conversación](/es/docs/beasty-visual-novel/world/talk-menu/).
+  ahora mismo. Consulta [Misiones](/es/docs/beasty-visual-novel/world/quests/) y [El menú de conversación](/es/docs/beasty-visual-novel/world/talk-menu/).
 - **Personajes con stats y pantallas.** Expresiones, retratos, estilos de entrega, alias, stats por
   personaje, y pantallas dentro del juego para la lista de reparto, el perfil, el calendario y el registro
-  de misiones. Ver [Personajes](/es/docs/beasty-visual-novel/world/characters/) y [Pantallas de personaje](/es/docs/beasty-visual-novel/world/character-screens/).
+  de misiones. Consulta [Personajes](/es/docs/beasty-visual-novel/world/characters/) y [Pantallas de personaje](/es/docs/beasty-visual-novel/world/character-screens/).
 - **Variables y condiciones en todas partes.** Cualquier bloque, cualquier elección, cualquier puerta,
-  cualquier regla de rutina puede condicionarse sobre las mismas variables. Ver
+  cualquier regla de rutina puede condicionarse sobre las mismas variables. Consulta
   [Variables y condiciones](/es/docs/beasty-visual-novel/world/variables-and-conditions/).
 - **Localización.** Tablas de traducción para la historia y para la UI, importación y exportación
-  CSV/TSV, seguimiento de desactualización, y cambio de idioma en vivo. Ver [Localización](/es/docs/beasty-visual-novel/production/localization/).
+  CSV/TSV, seguimiento de desactualización, y cambio de idioma en vivo. Consulta [Localización](/es/docs/beasty-visual-novel/production/localization/).
 - **Guardado y carga.** Slots con miniaturas, autoguardado, y un guardado que contiene todo el mundo: tus
-  variables, el tiempo, las misiones, el inventario, el escenario y el historial de rebobinado. Ver
+  variables, el tiempo, las misiones, el inventario, el escenario y el historial de rebobinado. Consulta
   [Guardado y carga](/es/docs/beasty-visual-novel/production/saving-and-loading/).
 
 Todo lo que ve el jugador es un prefab uGUI que puedes restilizar. Se incluye el código fuente completo en C#.
@@ -96,7 +96,8 @@ líneas habladas y una elección, sin escribir código. Después, elige tu camin
 4. [APIs de gameplay](/es/docs/beasty-visual-novel/scripting/gameplay-apis/) — `BeastyTime`, `BeastyRoutines`, `BeastyQuests`,
    `Inventory`.
 5. [Modo personalizado](/es/docs/beasty-visual-novel/scripting/custom-mode/) — mete tu propio minijuego o sistema de combate en el
-   juego como un estado de aplicación de primera clase que guarda, carga y hace rollback junto con todo lo demás.
+   juego como un estado de aplicación de primera clase que se guarda, se carga y se rebobina junto con todo
+   lo demás.
 6. [Accesores generados](/es/docs/beasty-visual-novel/scripting/generated-accessors/) — `VNVars` y `VNChars` te dan claves de
    variables y personajes verificadas en tiempo de compilación.
 

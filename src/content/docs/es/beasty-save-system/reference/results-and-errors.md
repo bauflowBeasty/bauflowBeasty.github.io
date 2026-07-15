@@ -1,6 +1,6 @@
 ---
 title: "Resultados y errores"
-description: "Cada llamada de guardado y carga devuelve un resultado tipado que contiene un BeastySaveError. Esta página lista los miembros del resultado y los trece valores de error, con"
+description: "Cada llamada de guardado y carga devuelve un resultado tipado con un BeastySaveError. Los miembros del resultado y los trece valores de error, con su causa y qué hacer en cada caso."
 ---
 
 Cada llamada de guardado y carga devuelve un resultado tipado que contiene un `BeastySaveError`. Esta página
@@ -14,8 +14,8 @@ funcionó. No hay excepción que capturar, ningún archivo parcialmente escrito 
 silencioso. Comprueba `Success`, y si es falso, lee `Error`.
 
 Los únicos métodos que lanzan excepciones son los de registro (`RegisterMigration`, `RegisterConverter`,
-`RegisterModule`): un registro incorrecto es un error en tu código en el arranque, no un hecho sobre un
-archivo, y debe detenerte de inmediato.
+`RegisterModule`): un registro incorrecto es un error en tu código al arrancar, no un problema del archivo,
+y debe detenerte de inmediato.
 
 ## SaveResult
 
@@ -26,7 +26,7 @@ Devuelto por `Save`, `SaveAsync`, `RestoreBackup`, `BeastySaveManager.SaveAllNow
 |---|---|---|
 | `Success` | `bool` | Verdadero cuando el archivo está en disco. |
 | `Error` | `BeastySaveError` | `None` en caso de éxito. |
-| `Message` | `string` | Detalle legible por humanos. Nulo en caso de éxito. |
+| `Message` | `string` | Detalle legible para humanos. Nulo en caso de éxito. |
 | `SaveResult.Ok()` | `static SaveResult` | Construye un resultado de éxito. |
 | `SaveResult.Fail(error, message)` | `static SaveResult` | Construye un resultado de fallo. |
 | `ToString()` | `string` | `"OK"`, o `"{Error}: {Message}"`. |
@@ -40,7 +40,7 @@ Devuelto por `LoadInto`, `LoadIntoAsync`, `BeastySaveManager.LoadAllNow` y
 |---|---|---|
 | `Success` | `bool` | Verdadero cuando los datos fueron aplicados. |
 | `Error` | `BeastySaveError` | `None` en caso de éxito. |
-| `Message` | `string` | Detalle legible por humanos. Nulo en caso de éxito. |
+| `Message` | `string` | Detalle legible para humanos. Nulo en caso de éxito. |
 | `BackupAvailable` | `bool` | Existe un `.bak` para este slot. Se completa en cada resultado de carga, éxito o fallo. |
 | `Warnings` | `IReadOnlyList<string>` | Campos y entradas omitidos por una carga tolerante. Nunca nulo; vacío cuando no hay nada que reportar. |
 | `LoadResult.Ok(warnings = null)` | `static LoadResult` | Construye un resultado de éxito. |
@@ -64,7 +64,7 @@ Devuelto por `Load<T>`, `LoadAsync<T>` y `ReadMeta`. Deriva de `LoadResult` y a�
 
 `Beasty_SaveSystemCore.BeastySaveError`, en orden de declaración.
 
-| Valor | Lo lanza | Causa |
+| Valor | Lo devuelve | Causa |
 |---|---|---|
 | `None` | — | Éxito. `Success` es verdadero. |
 | `InvalidArgument` | guardar, cargar, todos los métodos de slot | Datos nulos, objetivo nulo, settings nulo, o un nombre de slot inválido. |
@@ -85,7 +85,7 @@ Las secciones siguientes dan el diagnóstico y la solución para cada uno.
 ### InvalidArgument
 
 Pasaste algo con lo que la llamada no puede trabajar: `data` es nulo en `Save`, `target` es nulo en
-`LoadInto`, `settings` es nulo, o el nombre de slot es rechazado. Un slot es un nombre de archivo desnudo; se
+`LoadInto`, `settings` es nulo, o el nombre de slot es rechazado. Un slot es un nombre de archivo a secas; se
 rechaza cuando está vacío o solo contiene espacios, contiene `/` o `\`, contiene `..`, es una ruta enraizada,
 contiene caracteres inválidos en un nombre de archivo, o es un nombre de dispositivo reservado de Windows
 (`CON`, `PRN`, `AUX`, `NUL`, `COM1`-`COM9`, `LPT1`-`LPT9`).
@@ -95,8 +95,8 @@ valídalo antes de guardar y muéstrale por qué fue rechazado. No se escribió 
 
 ### SerializationFailed
 
-El grafo de objetos no pudo convertirse en JSON. `Message` nombra la ruta (`$.inventory.items[3].owner`). Las
-causas, todas ellas:
+El grafo de objetos no pudo convertirse en JSON. `Message` nombra la ruta (`$.inventory.items[3].owner`).
+Estas son todas las causas posibles:
 
 - Un **ciclo de referencias**. Los datos de guardado deben ser acíclicos.
 - Un float `NaN` o `Infinity`. No son números JSON válidos.
@@ -115,7 +115,7 @@ El sistema de archivos rechazó la operación. El disco está lleno, la carpeta 
 está bloqueado por otro proceso, la plataforma denegó el permiso. `Message` lleva el texto de la excepción
 subyacente y la ruta.
 
-**Qué hacer:** dile al jugador que el guardado falló y deja que reintente. No reintentes en un bucle cerrado.
+**Qué hacer:** dile al jugador que el guardado falló y deja que reintente. No reintentes en bucle.
 El archivo de guardado anterior, si lo había, queda intacto: la escritura es atómica, así que una escritura
 fallida no puede dejar un archivo a medias.
 
@@ -169,7 +169,7 @@ El caso inverso — una configuración en texto plano leyendo un archivo cifrado
 el checksum del texto cifrado no coincide con un hash del texto JSON.
 
 **Qué hacer:** haz que `BeastySaveSettings.Encrypted` y `EncryptionKey` coincidan con cómo se escribió el
-archivo. Si activaste el cifrado en una actualización, los guardados antiguos no se pueden leer: migralos
+archivo. Si activaste el cifrado en una actualización, los guardados antiguos no se pueden leer: mígralos
 antes de publicar, o mantén dos objetos de configuración. Consulta [Cifrado](/es/docs/beasty-save-system/guides/encryption/).
 
 ### TypeMismatch
@@ -229,8 +229,8 @@ registradas no pudo salvar la brecha. Tres causas, cada una nombrada en `Message
 El archivo fue leído, verificado y descifrado; los datos simplemente no encajan en el objeto. Causas:
 
 - **Un campo falló al convertir** en modo estricto. El mensaje es `Field '<Type>.<field>' failed to load:
-  ...` — normalmente un campo cuyo tipo cambió (un `string` se convirtió en `int`), o un campo que ahora falta
-  en el JSON como tipo de valor.
+  ...` — normalmente un campo cuyo tipo cambió (un `string` se convirtió en `int`), o un campo de tipo de
+  valor que ya no está en el JSON.
 - **Un tipo de colección no soportado.** El escritor convierte cualquier `IEnumerable` en un array, pero una
   colección sin `Add`, `Enqueue` o `Push` no se puede volver a leer.
 - **Un convertidor lanzó una excepción** al rellenar un componente.

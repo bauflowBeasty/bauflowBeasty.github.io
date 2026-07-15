@@ -18,7 +18,7 @@ define la lógica. La misma división que las salas.
 | **Secondary** | Una superposición. No está en pantalla hasta que algo la abre, y vuelve a cerrarse. El inventario, un mapa, un panel de ajustes. |
 
 Créalas con **+ Primary** y **+ Secondary** en la lista de pantallas de la pestaña. También hay algunas ya hechas:
-**+ Inventory (ready-made)**, **+ Menu** (una cuadrícula o una lista vertical) y **+ Characters**.
+**+ Inventory (ready-made)**, **+ Menu** (una grilla o una lista vertical) y **+ Characters**.
 
 ## Dónde aparece una pantalla
 
@@ -30,12 +30,12 @@ Créalas con **+ Primary** y **+ Secondary** en la lista de pantallas de la pest
 | **Mode** | `FreeRoam`, `VisualNovel` o `Both`. |
 | **Visible when** | Una condición. Vacío = siempre (dentro de su modo). |
 
-**Mode** es el interruptor grueso: un contador de dinero suele ser `Both`; un botón de "viajar a otra sala" es
+**Mode** es el ajuste grueso: un contador de dinero suele ser `Both`; un botón de "viajar a otra sala" es
 `FreeRoam`; un panel de "resumen" podría ser solo `VisualNovel`. **Visible when** es el fino: muestra la barra de
 resistencia solo después del tutorial, oculta el reloj bajo techo.
 
-Una pantalla primaria se muestra cuando su modo coincide con el estado actual de la aplicación **y** su condición se cumple. Ambas
-tienen que estar de acuerdo.
+Una pantalla primaria se muestra cuando su modo coincide con el estado actual de la aplicación **y** su condición
+se cumple. Las dos cosas tienen que darse a la vez.
 
 ## Elementos
 
@@ -56,14 +56,14 @@ Todo elemento, sea cual sea su rol, tiene:
 - **Variable (live)** — una variable cuyo valor actual se añade al texto, y **se mantiene actualizado en
   tiempo de ejecución**. Este es el contador de dinero en vivo: Text = `Money: `, Variable = `gold`, y la etiqueta dice
   `Money: 120` y cambia en el instante en que el jugador gana una moneda. Cualquier variable funciona, incluidas las reservadas
-  — elige `time.day` y tienes un contador de días; elige `time.daypart` y tienes la hora del día.
+  — elige `time.day` y tienes un contador de días; elige `time.daypart` y tienes el momento del día.
 - **Visible when** — una condición. Vacío = siempre mostrado.
 - **Conditional variants (icon/text)** — una lista ordenada de **casos**. Cada caso tiene una condición, un icono opcional y
   un texto opcional. **Gana el primer caso cuya condición se cumpla**; si ninguno lo hace, se aplican el icono y la etiqueta
   base del elemento. Un caso que solo fija un icono conserva la etiqueta base, y viceversa.
 
-Los casos son cómo un elemento dice varias cosas. Un icono de clima que cambia con la estación. Un retrato que
-cambia con el afecto. Un icono de puerta que muestra un candado mientras la tienda está cerrada.
+Los casos son la forma en que un elemento dice varias cosas. Un icono de clima que cambia con la estación. Un
+retrato que cambia con el afecto. Un icono de puerta que muestra un candado mientras la tienda está cerrada.
 
 ## Acciones
 
@@ -74,7 +74,7 @@ Un elemento **Button** tiene una acción:
 | `OpenScreen` | Abre una pantalla secundaria (tú eliges cuál). |
 | `Close` | Cierra **toda** la pila secundaria de una vez. El botón de "salir". |
 | `Back` | Retrocede **un** nivel: vuelve a mostrar la pantalla padre, o cierra la superposición si es el nivel superior. |
-| `Custom` | Levanta un id de evento personalizado para que tu propio script lo gestione. |
+| `Custom` | Lanza un id de evento personalizado para que tu propio script lo gestione. |
 | `EnterVN` | Entra en una escena de novela visual, opcionalmente en un nodo específico. La pila de superposición se cierra y se reproduce el diálogo. |
 | `AdvanceTime` | Cambia el reloj del juego, con las mismas operaciones que el bloque [Advance time](/es/docs/beasty-visual-novel/world/game-time/). Un botón de "esperar" o "dormir". Necesita un Time Config en el BeastyManager. |
 
@@ -97,8 +97,8 @@ Las pantallas secundarias forman una **pila**. Abrir una desde otra la apila y o
 superposición superior está en pantalla. **Back** desapila un nivel y vuelve a mostrar al padre; **Close** descarta toda la
 pila.
 
-Obtienes esto sin conectar nada: **a toda pantalla secundaria se le da un botón Back automáticamente** al
-crearla — un elemento arriba a la derecha con la acción `Back`. Clicar fuera del panel también cierra la superposición, y
+Todo esto lo obtienes sin conectar nada: **toda pantalla secundaria recibe un botón Back automáticamente** al
+crearse — un elemento arriba a la derecha con la acción `Back`. Clicar fuera del panel también cierra la superposición, y
 mientras cualquier pantalla secundaria está abierta hay un bloqueador detrás de ella, así que un clic destinado a la superposición
 nunca se filtra hacia la sala de debajo. Las pantallas secundarias son modales.
 

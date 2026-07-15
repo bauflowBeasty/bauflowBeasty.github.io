@@ -1,12 +1,12 @@
 ---
 title: "Modo personalizado"
-description: "VNAppState.Custom es la puerta abierta. No tiene UI incorporada: el motor cambia a este estado, te entrega la pantalla, y se detiene. Pon tu minijuego, sistema de "
+description: "VNAppState.Custom es la puerta abierta. No tiene UI incorporada: el motor cambia a este estado, te entrega la pantalla y se detiene. Pon ahí tu minijuego, tu sistema de batalla o tu mapa del mundo."
 ---
 
 `VNAppState.Custom` es la puerta abierta. No tiene UI incorporada: el motor cambia a este estado, te entrega
-la pantalla, y se detiene. Pon tu minijuego, sistema de batalla, ciclo de granja o mapa del mundo en él, y
-participa en todo lo demás que hace el motor — el almacén de variables compartido, el guardado, el rollback
-entre modos, el reloj, las misiones, el inventario.
+la pantalla y se detiene. Pon ahí tu minijuego, tu sistema de batalla, tu ciclo de granja o tu mapa del mundo,
+y participará de todo lo demás que hace el motor — el almacén de variables compartido, el guardado, el
+rollback entre modos, el reloj, las misiones, el inventario.
 
 ## Entrar y salir
 
@@ -14,7 +14,7 @@ entre modos, el reloj, las misiones, el inventario.
 VNGameController.Instance.EnterCustom();
 ```
 
-`EnterCustom` registra el modo que está dejando como un límite de rollback, detiene cualquier historia en
+`EnterCustom` registra el modo que estás dejando como un límite de rollback, detiene cualquier historia en
 ejecución, y establece `State` en `Custom`. No crea nada. Muestra tu propia UI desde un manejador de
 `StateChanged`:
 
@@ -65,7 +65,7 @@ public Func<string> CaptureCustomStateJson;   // tú lo llenas
 public Action<string> RestoreCustomStateJson; // tú lo llenas
 ```
 
-Asigna ambos una sola vez, temprano. Al guardar, si la aplicación está en el estado `Custom`, el controlador
+Asigna ambos una sola vez, al principio. Al guardar, si la aplicación está en el estado `Custom`, el controlador
 llama a `CaptureCustomStateJson` y escribe el resultado en `VisualNovelSaveData.customStateJson`. Al cargar,
 entra en `Custom` y devuelve el string a `RestoreCustomStateJson`. El motor nunca inspecciona el blob. JSON
 es el formato obvio — `JsonUtility.ToJson` alcanza — pero cualquier string funciona.
@@ -95,10 +95,10 @@ public Action<FreeRoamMapGraph, List<string>, Action<string>> RoomSelectionReque
 
 `ResolveRoomBackground` mapea un id de sala al sprite que esa sala muestra actualmente, con las condiciones
 ya resueltas. El motor lo llama después de una carga para repintar la sala detrás de un diálogo que no tiene
-su propio bloque Backdrop. Si tu modo posee las salas, conéctalo o ese fondo vuelve vacío.
+su propio bloque Backdrop. Si tu modo posee las salas, conéctalo, o ese fondo quedará vacío.
 
 `RoomSelectionRequested` es el hook que una UI de selector de sala registra para que un bloque **Choose
-room** tenga a quién preguntarle. Sin ninguno registrado, el motor elige una sala por defecto y registra un
+room** tenga a quién preguntarle. Si no hay ninguno registrado, el motor elige una sala por defecto y deja un
 aviso en el log.
 
 ## Los hooks de guardado
@@ -116,10 +116,11 @@ public static class VNSaveHooks
   Última oportunidad para añadirle algo.
 - `OnRestoreSave` se dispara después de que una instantánea cargada ha sido aplicada al mundo.
 - `OnSceneRestoreFailed` se dispara cuando el estado de objetos de escena de una carga no pudo aplicarse: la
-  historia está en la línea guardada, pero el mundo alrededor no es el que se guardó. Engánchalo y avísale al
-  jugador. Dejarlo en un mundo medio restaurado que simplemente se ve sutilmente mal es peor que decírselo.
+  historia está en la línea guardada, pero el mundo alrededor no es el que se guardó. Suscríbete y avísale al
+  jugador. Dejarlo en un mundo a medio restaurar que se ve sutilmente mal es peor que decírselo.
 
-Los tres reinician sus suscriptores en `SubsystemRegistration`, así que Fast Enter Play Mode no los filtra.
+Los tres reinician sus suscriptores en `SubsystemRegistration`, así que Fast Enter Play Mode no deja
+suscripciones colgadas.
 
 ## Persistir tu propio MonoBehaviour
 
@@ -128,8 +129,8 @@ escena, marca los componentes que quieres almacenar, y su estado viaja dentro de
 límite de rollback — el motor captura el grupo de escena como parte de `CaptureCurrent()` y lo aplica un
 frame después de que el modo restaurado ha reconstruido su mundo.
 
-Un fallo de captura hace fallar TODO el guardado, a propósito: mejor ningún guardado que uno que
-silenciosamente le falte estado que el jugador espera recuperar.
+Un fallo de captura hace fallar TODO el guardado, a propósito: mejor ningún guardado que uno al que, sin
+avisar, le falte estado que el jugador espera recuperar.
 
 Lee [Estado de escena](/es/docs/beasty-save-system/guides/scene-state/) antes de depender de esto — en
 particular, el sistema de guardado no almacena referencias a objetos de Unity (sprites, prefabs, otros
@@ -227,9 +228,9 @@ public sealed class ScoreMinigame : MonoBehaviour
 }
 ```
 
-Guarda mientras este modo está en ejecución y la ranura registra `appState = Custom`, tu blob, el almacén
-compartido, el reloj, las misiones, el inventario y la cola de rollback. Cárgala y estás de vuelta en el
-minijuego, con la misma puntuación, con `Back` todavía capaz de salir a la sala desde la que empezaste.
+Si guardas mientras este modo está en ejecución, la ranura registra `appState = Custom`, tu blob, el almacén
+compartido, el reloj, las misiones, el inventario y la cola de rollback. Al cargarla vuelves al minijuego, con
+la misma puntuación y con `Back` todavía capaz de salir a la sala desde la que empezaste.
 
 ## Ver también
 

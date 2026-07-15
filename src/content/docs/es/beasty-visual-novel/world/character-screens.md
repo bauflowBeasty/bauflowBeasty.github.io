@@ -1,21 +1,21 @@
 ---
 title: "Pantallas de personaje"
-description: "Estas son las pantallas que el jugador abre sobre un personaje: la lista de reparto, su perfil, sus estadísticas, su calendario semanal y su registro de misiones. Todas ell"
+description: "Las pantallas que el jugador abre sobre un personaje: la lista de reparto, su perfil, sus estadísticas, su calendario semanal y su registro de misiones. Todas son prefabs uGUI normales."
 ---
 
 Estas son las pantallas que el jugador abre *sobre* un personaje: la lista de reparto, su perfil, sus estadísticas,
-su calendario semanal y su registro de misiones. Todas ellas son prefabs uGUI normales. Puedes restilizar cada
-una de ellas, y puedes añadir una pestaña propia al perfil.
+su calendario semanal y su registro de misiones. Todas son prefabs uGUI normales. Puedes restilizar cada una,
+y puedes añadir una pestaña propia al perfil.
 
 ## Añadirlas
 
 En la pestaña **Screens** del editor, pulsa **+ Characters**. Eso copia los prefabs ya hechos a tu
-proyecto y los registra como pantallas secundarias. A partir de ahí son tuyas para editar.
+proyecto y los registra como pantallas secundarias. A partir de ahí son tuyos: edítalos como quieras.
 
 ## La lista de reparto
 
-La lista de reparto es una fila por cada personaje que el jugador puede consultar. Seleccionar una fila abre el
-perfil de ese personaje.
+La lista de reparto tiene una fila por cada personaje que el jugador puede consultar. Al seleccionar una fila
+se abre el perfil de ese personaje.
 
 Dos ajustes deciden quién está en ella, y viven en el personaje (consulta
 [Personajes](/es/docs/beasty-visual-novel/world/characters/#aparecer-en-la-lista-de-reparto)):
@@ -33,23 +33,23 @@ representa "el personaje que se está evaluando":
 Cada personaje se comprueba contra su propia bandera `met`, así que el reparto se va completando conforme el jugador
 va conociendo a la gente. Una condición compartida vacía significa que todos se muestran desde el principio.
 
-Un solo personaje puede optar por no usar la condición compartida y llevar la suya propia en su lugar — activa
-la anulación por personaje en ese personaje. Úsalo para la excepción, no para la regla: el villano que solo
+Un personaje concreto puede dejar de usar la condición compartida y llevar la suya propia: activa la
+anulación por personaje en él. Resérvalo para la excepción, no para la regla: el villano que solo
 aparece en la lista después del capítulo tres.
 
 La lista está virtualizada, así que un reparto de mil personajes se abre al instante.
 
 ## El perfil
 
-El perfil es el centro por personaje: un encabezado con su retrato y nombre, y una **barra de pestañas** debajo
-que alterna entre secciones. La primera pestaña se muestra cuando se abre.
+El perfil es el centro de todo lo relativo a un personaje: un encabezado con su retrato y nombre, y una
+**barra de pestañas** debajo que alterna entre secciones. La primera pestaña se muestra al abrirlo.
 
 La barra de pestañas es **extensible**. Una pestaña no es más que un botón y un panel: añade un botón a la barra, añade un
 panel, y añade el par a la lista de pestañas del perfil en el prefab. El panel se reconstruye para el personaje
 actual cuando se muestra, así que una sección propia — una galería, un gráfico de relaciones, una pantalla de regalos —
 es un panel que escribes y registras, sin ningún cambio en el motor.
 
-Las pestañas incluidas de fábrica son las tres de abajo.
+Las pestañas incluidas de fábrica son las tres siguientes.
 
 ## La pantalla de estadísticas
 
@@ -62,7 +62,7 @@ personaje puede anular ese indicador para un campo universal — así `age` pued
 [Personajes](/es/docs/beasty-visual-novel/world/characters/#variables-de-personaje-estadísticas).
 
 **Los campos editables** son los marcados como **Editable**. El jugador los cambia desde esta pantalla: botones `+` y
-`-` para un número, un interruptor para una bandera. El tamaño del paso y el límite mín/máx provienen del campo.
+`-` para un número, un interruptor para una bandera. El tamaño del paso y el límite mín/máx vienen del campo.
 Los campos que no son editables se muestran de solo lectura.
 
 Dos extras, ambos controlados por personaje:
@@ -76,14 +76,14 @@ Dos extras, ambos controlados por personaje:
 
 El calendario es el horario del personaje, en una de dos vistas, que el jugador alterna:
 
-- **Vista de día** — una fila por franja horaria, para hoy.
-- **Vista de semana** — la semana entera: franjas horarias hacia abajo, días de la semana en horizontal.
+- **Vista de día** — una fila por momento del día, para hoy.
+- **Vista de semana** — la semana entera: momentos del día hacia abajo, días de la semana a lo ancho.
 
-La columna de hoy está teñida, y la franja horaria actual dentro de ella está teñida con más intensidad, así que el jugador puede ver
-dónde está. Una casilla en la que el personaje no está en ningún sitio del mapa se lee como desconocida.
+La columna de hoy está resaltada, y el momento del día actual dentro de ella se resalta con más intensidad, así el jugador
+ve dónde está. Una celda en la que el personaje no está en ningún sitio del mapa se muestra como desconocida.
 
 El calendario solo se rellena para un personaje cuyo interruptor **Show routine** esté activado. Es una vista de las
-reglas de rutina que autoraste — consulta [Rutinas de personajes](/es/docs/beasty-visual-novel/world/character-routines/) — no una segunda copia de ellas,
+reglas de rutina que definiste — consulta [Rutinas de personajes](/es/docs/beasty-visual-novel/world/character-routines/) — no una segunda copia de ellas,
 así que sigue el perfil activo del personaje y se actualiza cuando la historia lo cambia.
 
 ## El registro de misiones
@@ -91,19 +91,19 @@ así que sigue el perfil activo del personaje y se actualiza cuando la historia 
 El registro de misiones es la guía. Enumera las misiones **activas** del personaje: el título de cada misión, y luego
 sus objetivos con la pista que escribiste para cada uno.
 
-Activa la opción "show global quests" del registro y, cuando se abre sin ningún personaje seleccionado, enumera en su lugar
-las misiones de la historia principal — las que no tienen propietario.
+Si activas la opción "show global quests" del registro, al abrirse sin ningún personaje seleccionado enumera
+las misiones de la historia principal — las que no tienen dueño.
 
 > **Nota**
 > **Sin spoilers.** En una misión **Ordered**, solo se revela la pista del objetivo **actual**. Los
 > objetivos que el jugador ya completó se muestran marcados; los que aún están por venir permanecen ocultos. Escribe
-> cada pista como si el jugador la estuviera leyendo justo en el momento en que ese paso se convierte en su siguiente paso, porque eso
-> es exactamente cuándo la leerá.
+> cada pista como si el jugador la estuviera leyendo justo cuando ese paso se convierte en el siguiente, porque ese
+> es exactamente el momento en que la leerá.
 
 Un objetivo de recolectar y entregar recibe un botón **Deliver** en el registro, para que el jugador entregue los objetos a
 este personaje desde ahí. Consulta [Misiones](/es/docs/beasty-visual-novel/world/quests/).
 
-El registro está en vivo: un objetivo completado mientras el panel está abierto se marca a sí mismo delante del jugador.
+El registro se actualiza en vivo: un objetivo que se completa con el panel abierto se marca delante del jugador.
 
 ## Cómo llega el jugador ahí
 

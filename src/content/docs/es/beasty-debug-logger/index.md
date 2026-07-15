@@ -1,13 +1,13 @@
 ---
 title: "Beasty Debug Logger"
-description: "Beasty Debug Logger es una API de logging estática con niveles semánticos que llamas en lugar de Debug.Log. También incluye una ventana de consola de editor que clasifica,"
+description: "Una API de logging estática con niveles semánticos que llamas en lugar de Debug.Log, más una consola de editor que clasifica, filtra y busca en todos los logs de tu proyecto."
 ---
 
 Beasty Debug Logger es una API de logging estática con niveles semánticos (info, verbose, trace, debug, notice,
 highlight, caution, success, warning, error, exception) que llamas en lugar de `Debug.Log`. También incluye
-una ventana de consola de editor que clasifica, filtra y busca en cada log que produce tu proyecto.
+una ventana de consola de editor que clasifica, filtra y busca en todos los logs que produce tu proyecto.
 
-Es para cualquiera que haya perdido un error real dentro de un muro de salida de `Debug.Log`: etiquetas cada
+Es para cualquiera que haya perdido un error real entre un muro de mensajes de `Debug.Log`: etiquetas cada
 mensaje con un nivel mientras lo escribes, y después desactivas niveles hasta que solo queden los que te
 importan.
 
@@ -23,7 +23,7 @@ lo necesitan a él. Consulta [Integración con Beasty](/es/docs/beasty-debug-log
 - Etiquetas de color y glifo en el editor, etiquetas ASCII simples en una build, de modo que el `Player.log`
   de un jugador se mantenga legible.
 - Un parámetro `context`: pasa un GameObject y la entrada de log lo resalta (ping) en la Jerarquía.
-- Un flag `canPrint` por llamada, de modo que un solo log pueda depender de tu propio interruptor de debug
+- Un flag `canPrint` por llamada, para que un solo log pueda depender de tu propio interruptor de debug
   por sistema.
 - Un interruptor maestro, `IsEnabled`, que silencia todos los niveles en tiempo de ejecución.
 - `PrintLongMessage`, que divide un string muy largo en fragmentos para que Unity no lo trunque.
@@ -36,5 +36,5 @@ lo necesitan a él. Consulta [Integración con Beasty](/es/docs/beasty-debug-log
 - [Logging](/es/docs/beasty-debug-logger/guides/logging/) — cada nivel y cuándo usarlo.
 - [La ventana Beasty Console](/es/docs/beasty-debug-logger/guides/console-window/) — la ventana, control por control.
 - [Builds de lanzamiento](/es/docs/beasty-debug-logger/guides/release-builds/) — lo que realmente te cuesta el logging en un juego lanzado.
-- [Referencia de la API](/es/docs/beasty-debug-logger/reference/api/) — cada miembro público.
+- [Referencia de la API](/es/docs/beasty-debug-logger/reference/api/) — todos los miembros públicos.
 - [Preguntas frecuentes](/es/docs/beasty-debug-logger/faq/)

@@ -1,10 +1,10 @@
 ---
 title: "Copias de seguridad y corrupción"
-description: "Un archivo de guardado es el tiempo del jugador. Esta página explica qué hace el paquete para asegurarse de que un crash, un corte de energía o un archivo da"
+description: "Un archivo de guardado es el tiempo del jugador. Esta página explica qué hace el paquete para que un crash, un corte de luz o un archivo dañado no se lleven ese tiempo, y cómo ofrecer una vuelta atrás."
 ---
 
-Un archivo de guardado es el tiempo del jugador. Esta página explica qué hace el paquete para asegurarse de que un
-crash, un corte de energía o un archivo dañado no se lleve ese tiempo, y cómo ofrecerle al jugador una vuelta atrás cuando
+Un archivo de guardado es el tiempo del jugador. Esta página explica qué hace el paquete para que un crash, un
+corte de luz o un archivo dañado no se lleven ese tiempo, y cómo ofrecerle al jugador una vuelta atrás cuando
 pasa de todos modos.
 
 ## Dos defensas
@@ -23,11 +23,11 @@ Cuando guardas en `slot1`, el sistema:
 2. Lo escribe en un archivo temporal junto al slot, con un nombre único (`slot1.save.<guid>.tmp`).
 3. Reemplaza el archivo del slot con el archivo temporal en una sola operación.
 
-El archivo del slot, por lo tanto, solo contiene un guardado completo en cualquier momento. Si el juego se cierra, el jugador
-tira del cable de alimentación, o el disco se llena a mitad del paso 2, el archivo temporal es la víctima. El
+Así, el archivo del slot contiene siempre un guardado completo. Si el juego se cierra, el jugador tira del cable
+de alimentación, o el disco se llena a mitad del paso 2, el archivo temporal es la víctima. El
 guardado real queda intacto: sigue siendo el último guardado que terminó.
 
-No tienes que hacer nada para obtener esto. No hay ninguna opción de "guardado seguro" que activar.
+No necesitas hacer nada para conseguir esto. No hay ninguna opción de "guardado seguro" que activar.
 
 > **Nota**
 > Esta es una de las razones por las que WebGL no está soportado: el build de navegador no tiene un reemplazo atómico de archivo. Consulta
@@ -60,7 +60,7 @@ en ese slot. Así que no escribas una UI que asuma que existe un backup. Comprue
 si el archivo actualmente en ese slot pasa su propio checksum. Si no lo pasa — el archivo está corrupto —
 se descarta en lugar de promoverlo a `.bak`. Esto importa más de lo que suena. Significa que guardar
 encima de un archivo roto no destruye la última copia funcional. El jugador puede pulsar "Save" en un slot corrupto
-tantas veces como quiera, y el `.bak` bueno debajo se mantiene bueno.
+tantas veces como quiera, y el `.bak` bueno de abajo sigue intacto.
 
 `Delete` es la excepción, y es deliberada: eliminar un slot elimina también su backup. Cuando el
 jugador dice "borra este guardado", lo dice en serio.
@@ -68,16 +68,16 @@ jugador dice "borra este guardado", lo dice en serio.
 ## Recuperación: qué hacer cuando una carga falla
 
 Una carga fallida te dice si hay una forma de volver. Todo `LoadResult` tiene un flag `BackupAvailable`, y
-cuando una carga falla — desde `Load`, `LoadInto`, `ReadMeta` o `LoadAllNow` — se configura para decir si existe un
+cuando una carga falla — desde `Load`, `LoadInto`, `ReadMeta` o `LoadAllNow` — ese flag indica si existe un
 archivo `.bak` para ese slot. No tienes que ir a buscarlo tú mismo en el disco.
 
-Eso te da el flujo de UI honesto. Cuando una carga falla y existe un backup, dile al jugador la verdad y
+Eso permite un flujo de UI honesto. Cuando una carga falla y existe un backup, dile al jugador la verdad y
 ofrécele la reparación:
 
 > Este archivo de guardado está dañado y no se puede cargar. ¿Restaurar la última versión funcional?
 
 `BeastySave.RestoreBackup(slot, settings)` realiza la reparación. Copia el `.bak` sobre el slot, usando
-la misma escritura atómica, y **deja el `.bak` en su lugar**. Si la restauración misma se interrumpe, el
+la misma escritura atómica, y **deja el `.bak` en su lugar**. Si la propia restauración se interrumpe, el
 backup sigue ahí y el jugador puede intentarlo de nuevo. Si no hay backup, falla con `FileNotFound`.
 
 ```csharp
@@ -134,11 +134,11 @@ public sealed class SaveLoader : MonoBehaviour
 }
 ```
 
-Dos detalles en ese código vale la pena copiar.
+Hay dos detalles de ese código que vale la pena copiar.
 
 Comprueba `BackupAvailable` en lugar del código de error. Un guardado puede fallar al cargar por muchas razones —
-`Corrupt`, `ParseError`, `IoError`, `FieldMapFailed` — y para la mayoría de ellas el backup es algo razonable
-para intentar. Consulta [Resultados y errores](/es/docs/beasty-save-system/reference/results-and-errors/) para la lista completa.
+`Corrupt`, `ParseError`, `IoError`, `FieldMapFailed` — y para la mayoría de ellas el backup es un intento
+razonable. Consulta [Resultados y errores](/es/docs/beasty-save-system/reference/results-and-errors/) para la lista completa.
 
 Vuelve a cargar después de restaurar, y también maneja el caso de que esa recarga falle. Un backup es un guardado como cualquier
 otro; también puede estar dañado. Restaurarlo no garantiza que se abra.
@@ -146,22 +146,22 @@ otro; también puede estar dañado. Restaurarlo no garantiza que se abra.
 ## Corrupción que puedes ver venir
 
 Un resultado `Corrupt` significa que el checksum del archivo no coincide con su contenido. Algo cambió el archivo
-después de que el juego lo escribiera: un jugador editándolo a mano, un disco defectuoso, un servicio de sincronización resolviendo un
-conflicto mal, una copia parcial a una memoria USB.
+después de que el juego lo escribiera: un jugador editándolo a mano, un disco defectuoso, un servicio de
+sincronización que resolvió mal un conflicto, una copia a medias a una memoria USB.
 
 El checksum no es una característica de seguridad — un editor decidido puede recalcularlo — pero sí atrapa de forma fiable
 el daño accidental, que es lo que realmente destruye los guardados en la práctica.
 
-Dos fallos no son corrupción y ningún backup los arreglará:
+Hay dos fallos que no son corrupción y que ningún backup va a arreglar:
 
 - `VersionTooNew` — el guardado fue escrito por un build más nuevo de tu juego. Consulta
   [Versionado y migraciones](/es/docs/beasty-save-system/guides/versioning-and-migrations/).
 - `DecryptFailed` — el guardado y el juego no están de acuerdo sobre la encriptación. Consulta [Encriptación](/es/docs/beasty-save-system/guides/encryption/).
 
-## Haciéndolo desde el editor
+## Cómo hacerlo desde el editor
 
 La [ventana Save Manager](/es/docs/beasty-save-system/guides/save-manager-window/) lista cada slot en disco con un botón **Restore Backup**
-(desactivado cuando no existe ningún `.bak`) y un botón **Delete**, ambos pidiendo confirmación. Úsala para
+(desactivado cuando no existe ningún `.bak`) y un botón **Delete**, ambos con confirmación previa. Úsala para
 probar el flujo de arriba: guarda dos veces, corrompe el archivo del slot en un editor de texto, carga, restaura.
 
 ## Ver también

@@ -1,16 +1,16 @@
 ---
 title: "Preguntas frecuentes"
-description: "Respuestas breves. Cada una enlaza a la página que lo explica en detalle."
+description: "Respuestas cortas, con un enlace a la página donde está la explicación completa."
 ---
 
-Respuestas breves. Cada una enlaza a la página que lo explica en detalle.
+Respuestas cortas, con un enlace a la página donde está la explicación completa.
 
 ## ¿Necesita Newtonsoft, o algún otro paquete?
 
 No. El paquete tiene **cero dependencias externas**. Incluye su propio motor JSON, así que no hay nada que
-instalar y nada que entre en conflicto con una versión de Newtonsoft que tu proyecto ya use. Los módulos convertidores
-opcionales necesitan los propios módulos de Unity (física, audio, uGUI, etc.), y si alguno de ellos no está presente
-el módulo simplemente no compila y el resto del paquete sigue funcionando.
+instalar y nada que entre en conflicto con una versión de Newtonsoft que tu proyecto ya use. Los módulos
+convertidores opcionales dependen de los módulos propios de Unity (física, audio, uGUI, etc.), y si alguno falta,
+ese módulo simplemente no compila y el resto del paquete sigue funcionando.
 
 Consulta [Instalación](/es/docs/beasty-save-system/getting-started/installation/) y
 [Módulos convertidores](/es/docs/beasty-save-system/reference/converter-modules/).
@@ -20,32 +20,32 @@ Consulta [Instalación](/es/docs/beasty-save-system/getting-started/installation
 No directamente. Un guardado de Beasty es un sobre (envelope) con su propia versión, checksum y payload, así que el sistema no puede
 leer un archivo escrito por otro asset de guardado o por tu propio serializador hecho a mano.
 
-La ruta de migración es algo puntual en tu código: lee tu archivo antiguo con lo que sea que lo escribió, construye tu objeto de
-datos a partir de él, y llama a `BeastySave.Save`. A partir de ese momento el archivo es un guardado de Beasty.
+La migración es un paso único en tu código: lee el archivo antiguo con el código que lo escribió, arma tu objeto
+de datos a partir de él, y llama a `BeastySave.Save`. Desde ese momento el archivo es un guardado de Beasty.
 `BeastySave.RegisterMigration` sirve para moverse **entre versiones de tus propios guardados de Beasty**, no para
 importar un formato ajeno. Consulta [Versionado y migraciones](/es/docs/beasty-save-system/guides/versioning-and-migrations/).
 
 ## ¿Funciona con IL2CPP?
 
-Sí. Mono e IL2CPP están ambos soportados, y las rutas de serialización — las que suelen romperse en builds AOT —
-se ejercitan mediante una escena de humo ejecutada contra un build real de IL2CPP, no contra el editor con el backend
+Sí. Tanto Mono como IL2CPP están soportados, y las rutas de serialización — las que suelen romperse en builds AOT —
+se prueban con una escena de humo que corre contra un build real de IL2CPP, no contra el editor con el backend
 cambiado. Consulta [Plataformas y límites](/es/docs/beasty-save-system/advanced/platforms-and-limits/).
 
 ## ¿Funciona en WebGL?
 
 **No.** WebGL no está soportado en 1.0.0. La escritura atómica depende de la semántica del sistema de archivos que el build de
-navegador no proporciona, y las variantes asíncronas están basadas en `Task`. No hay ninguna opción que lo active y
-ningún workaround soportado; un build de navegador necesita una capa de persistencia diferente.
+navegador no proporciona, y las variantes asíncronas están basadas en `Task`. No hay ninguna opción que lo active
+ni ningún workaround soportado; un build de navegador necesita una capa de persistencia diferente.
 [Plataformas y límites](/es/docs/beasty-save-system/advanced/platforms-and-limits/) explica exactamente por qué.
 
 ## ¿Es segura la encriptación?
 
 **No, y no deberías tratarla como si lo fuera.** Es AES-256, y es AES-256 real — pero la clave
 viene incluida dentro de tu juego y puede extraerse del build. Eso la convierte en ofuscación contra un jugador que
-edita su guardado en el Bloc de notas, no en seguridad contra un atacante decidido. No protegerá una
-tabla de clasificación ni una compra dentro de la aplicación.
+edita su guardado en el Bloc de notas, no en seguridad contra un atacante decidido. No va a proteger una
+tabla de clasificación ni una compra dentro del juego.
 
-Úsala para detener las trampas casuales, y diseña cualquier cosa que deba ser fiable para que se valide en un servidor.
+Úsala para frenar las trampas casuales, y haz que cualquier dato que deba ser confiable se valide en un servidor.
 Consulta [Encriptación](/es/docs/beasty-save-system/guides/encryption/).
 
 ## ¿Puedo guardar un Dictionary?
@@ -56,11 +56,11 @@ claves de un Dictionary deben ser strings, primitivos o enums — una clave de c
 
 ## ¿Puedo guardar una referencia a un ScriptableObject? ¿Un sprite? ¿Un prefab?
 
-No. Las referencias a `UnityEngine.Object` **nunca** se escriben en un archivo de guardado — ni como campos, ni dentro
-de colecciones. Este es el filo más afilado del paquete y es deliberado.
+No. Las referencias a `UnityEngine.Object` **nunca** se escriben en un archivo de guardado — ni como campos, ni
+dentro de colecciones. Es la restricción más dura del paquete, y es deliberada.
 
 La ventaja es que tampoco se sobrescriben al cargar: las referencias que conectaste en la escena sobreviven
-sin tocarse. El patrón es guardar un **id** — un string — y resolver el asset tú mismo después de cargar.
+intactas. El patrón es guardar un **id** — un string — y resolver el asset tú mismo después de cargar.
 Consulta [Qué se guarda](/es/docs/beasty-save-system/guides/what-gets-saved/).
 
 ## ¿Puedo tener configuraciones distintas para el autoguardado y el guardado manual?
@@ -70,27 +70,27 @@ instancia, así que puedes pasarle una diferente a cada llamada — una carpeta 
 encriptación activada para una y desactivada para la otra.
 
 El camino sin código usa un solo objeto de settings: `BeastySaveManager` mantiene un único campo `settings` que
-`SaveAll` y `LoadAll` usan ambos. Ten en cuenta que cambiar `Folder` o `Extension` cambia lo que `ListSlots`
+usan tanto `SaveAll` como `LoadAll`. Ten en cuenta que cambiar `Folder` o `Extension` cambia lo que `ListSlots`
 encuentra. Consulta [Settings](/es/docs/beasty-save-system/guides/settings/).
 
 ## ¿Cuán grande puede ser un guardado?
 
 No hay un límite estricto, pero la serialización es **síncrona** — incluso dentro de `SaveAsync`, que hace la
-IO de archivos de forma asíncrona mientras construye y encripta el JSON en el hilo que la llama. Así que un guardado muy grande
-cuesta un hitch de frame proporcional a su tamaño, y hacer `await` no elimina ese hitch.
+IO de archivos de forma asíncrona mientras construye y encripta el JSON en el hilo que llama. Así que un guardado
+muy grande cuesta un hitch de frame proporcional a su tamaño, y hacer `await` no elimina ese hitch.
 
-Guarda el estado del juego, no la escena completa, y autoguarda en momentos en los que un hitch sea invisible. Consulta
+Guarda el estado del juego, no la escena completa, y autoguarda en momentos donde un hitch pase desapercibido. Consulta
 [Plataformas y límites](/es/docs/beasty-save-system/advanced/platforms-and-limits/) y [Guardado asíncrono](/es/docs/beasty-save-system/guides/async-saving/).
 
 ## ¿Puedo leer un archivo de guardado a mano?
 
 Sí, a menos que lo hayas encriptado. Un guardado es JSON, indentado con dos espacios, UTF-8 sin BOM, y puedes
-abrirlo en cualquier editor de texto. Eso es útil para depurar y para soporte, y también es una invitación abierta
-para un jugador con un editor de texto — que es para lo que sirve la opción de encriptación.
+abrirlo en cualquier editor de texto. Eso es útil para depurar y para dar soporte, y también es una invitación
+abierta para cualquier jugador con un editor de texto — justo para eso existe la opción de encriptación.
 
-El diccionario `meta` permanece en texto plano **incluso cuando el guardado está encriptado**, así que una pantalla
-de selección de slot puede mostrar el nivel y el tiempo de juego sin la clave. Trátalo como datos de visualización no confiables: se lee antes de
-verificar el checksum. Consulta [El formato del archivo de guardado](/es/docs/beasty-save-system/reference/save-file-format/) y
+El diccionario `meta` se queda en texto plano **incluso cuando el guardado está encriptado**, así que una pantalla
+de selección de slot puede mostrar el nivel y el tiempo de juego sin la clave. Trátalo como datos de visualización
+en los que no se puede confiar: se lee antes de verificar el checksum. Consulta [El formato del archivo de guardado](/es/docs/beasty-save-system/reference/save-file-format/) y
 [Slots y metadatos](/es/docs/beasty-save-system/guides/slots-and-metadata/).
 
 ## ¿Es seguro para hilos (thread-safe)?
@@ -122,8 +122,8 @@ con el nombre del slot escrito en el inspector. Consulta
 ## ¿Qué pasa si un archivo de guardado se daña?
 
 La escritura es atómica — un cierre inesperado a mitad de la escritura no puede dejar un guardado a medias — y el archivo
-anterior se rota a `<slot>.<ext>.bak` en cada guardado después del primero. Un archivo corrupto nunca se rota hacia la
-copia de seguridad, así que el `.bak` siempre es la última copia que se verificó.
+anterior se rota a `<slot>.<ext>.bak` en cada guardado después del primero. Un archivo corrupto nunca se rota hacia
+la copia de seguridad, así que el `.bak` siempre es la última copia que pasó la verificación.
 
 Un archivo dañado falla al cargar con `Corrupt`, y todo `LoadResult` lleva `BackupAvailable`. Ofrécele al
 jugador `BeastySave.RestoreBackup`. Consulta [Copias de seguridad y corrupción](/es/docs/beasty-save-system/guides/backups-and-corruption/).

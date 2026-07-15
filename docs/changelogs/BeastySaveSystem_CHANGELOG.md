@@ -1,0 +1,56 @@
+# Changelog
+
+All notable changes to Beasty Save System. This project follows [Semantic Versioning](https://semver.org/).
+
+## 1.0.0 — unreleased
+
+First public release.
+
+### Core
+- Slot-based save/load, synchronous and awaitable, with a result object every call hands back: a failed save
+  reports why instead of looking like a successful one.
+- Its own JSON engine: **no Newtonsoft, no external dependencies**.
+- Atomic writes (temp file + swap), so a crash mid-write cannot leave a half-written slot.
+- Per-slot `.bak` backups, and recovery from them when a slot is damaged.
+- Optional AES-256 encryption with a random IV and a key derived via SHA-256. Obfuscation, not real security:
+  the key ships with the game.
+
+### Scene state
+- `BeastySaveable`: capture the components you tick on an object — including inactive objects, and several
+  components of the same type on one object.
+- Runtime-spawned objects: `BeastySaveManager.Register(go, "your.stable.id", components)` pins the id their data
+  is filed under, so a spawned chest or enemy finds its state again next session.
+- Strict loading is all-or-nothing across the whole scene: a failure on one component rolls back the ones already
+  applied instead of leaving the world half-loaded. Tolerant loading (`Strict = false`) skips the offending FIELD
+  and keeps the rest of the component.
+- Converter modules, each gated behind the Unity module it needs so a project without it still compiles:
+  audio, uGUI, particles, animation.
+
+### Platforms
+- Mono and IL2CPP (the reflection paths AOT builds tend to break are covered by a smoke scene).
+
+### Pre-release changes
+
+Behaviour changes made before 1.0.0 ships. Save files written by earlier builds still load unchanged.
+
+- **Encryption key.** The fallback key is now `BeastySaveSettings.SharedDefaultEncryptionKey` and is documented
+  as public: it ships identical in every copy of the asset. With encryption on and no key of your own, the
+  editor (and development builds) now warn once per session. The key's VALUE is unchanged, so saves encrypted
+  with the default still load.
+- **Slot names** are validated in one place: empty names, path separators, `..`, rooted paths and Windows
+  reserved device names (`CON`, `NUL`, `COM1`…) come back as an `InvalidArgument` result instead of writing
+  outside the save folder or producing a file the OS cannot open. `SaveFileInfo.GetFullPath(fileName)` applies
+  the same rules and throws `ArgumentException` on a name it rejects (**breaking**: it used to accept anything).
+- **Backups** no longer rotate a damaged slot. A file that fails its checksum or does not parse is overwritten
+  in place, leaving the last good `.bak` where it is — saving on top of a corrupt slot used to destroy the only
+  recoverable copy.
+- **Atomic writes** use a temp file that is unique per write, so two writes over the same slot (an autosave
+  landing while the player saves) can no longer trip over each other's temp.
+- **Converters** report a stored value of the wrong type instead of silently falling back to the live one: a
+  strict load fails with `FieldMapFailed`, a tolerant load skips the field with a warning (**breaking** for
+  custom converters that relied on `ConverterUtil.Read*` swallowing a mismatch). A missing member — or one
+  stored as null — still takes the fallback.
+- **uGUI:** restoring a `Slider` or a `Toggle` no longer fires `onValueChanged`, so loading a save does not
+  re-trigger the game logic wired to them (SFX, volume changes, callbacks).
+- **Removed** `PasswordGenerator`, which was unused, undocumented and biased (**breaking**). Any non-empty
+  string works as an encryption key; the cipher derives the AES key from it with SHA-256.

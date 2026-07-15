@@ -1,6 +1,6 @@
 ---
 title: "Referencia de sintaxis .vnbeasty"
-description: "Cada construcción del guion de texto .vnbeasty, para consulta. Un archivo es una escena: cada label es un nodo, jump conecta los nodos entre sí. Si no has usado"
+description: "Cada construcción del guion de texto .vnbeasty, para consulta. Un archivo es una escena: cada label es un nodo, y jump los conecta entre sí. Si nunca has usado el formato, empieza por El guion de texto."
 ---
 
 Cada construcción del guion de texto `.vnbeasty`, para consulta. Un archivo es una escena: cada `label` es un
@@ -43,7 +43,7 @@ label intro:             # un nodo (DialogueNode por defecto)
     jump cruce           # cable hacia otro label
 ```
 
-`jump <label>` fija el nodo siguiente por defecto del nodo. Un nodo de diálogo sin `jump` simplemente
+`jump <label>` fija cuál es el siguiente nodo por defecto. Un nodo de diálogo sin `jump` simplemente
 termina.
 
 ### Anotaciones de tipo
@@ -81,7 +81,7 @@ label intro:  #@id:8f2c1a7b-…
 ```
 
 El comentario `#@id:<guid>` se escribe automáticamente en cada ida y vuelta. Lleva la identidad del nodo, así
-que renombrar un `label` renombra el nodo en lugar de destruirlo y crear uno nuevo, lo que perdería la
+que renombrar un `label` renombra el nodo en lugar de destruirlo y crear uno nuevo — algo que perdería la
 posición del nodo en el lienzo y los cables que apuntan a él. Omítelo cuando escribas un label nuevo a mano;
 la siguiente sincronización lo añade.
 
@@ -112,7 +112,7 @@ backdrop video rain           # un clip de video en lugar de un sprite
 backdrop video rain once mute volume 0.5 manual
 ```
 
-Un fondo de video repite en bucle, reproduce su audio a volumen completo, y empieza al llegar. Cada
+Un fondo de video se reproduce en bucle, con su audio a volumen completo, y arranca en cuanto aparece. Cada
 modificador desactiva una de esas cosas:
 
 | Modificador | Efecto |
@@ -120,7 +120,7 @@ modificador desactiva una de esas cosas:
 | `once` | Reproduce una vez en lugar de repetir. |
 | `mute` | Silencia el audio del clip. |
 | `volume <0..1>` | Reproduce el audio del clip a este volumen. |
-| `manual` | No se reproduce automáticamente al llegar. |
+| `manual` | No arranca automáticamente al aparecer. |
 
 `clear` y `video` son palabras clave solo cuando no están entre comillas, así que un sprite realmente
 llamado `video` sigue funcionando si lo entrecomillas.
@@ -182,8 +182,8 @@ La forma es `<channel> <clip> [fade <s>] [vol <0..1>] [once] [keepbg]`.
 | `once` | Reproduce una vez en lugar de repetir. | `music`, `ambient` |
 | `keepbg` | No pausa la música de fondo. | `music` |
 
-Nota que un fondo de video escribe su volumen como `volume`, mientras que una pista de audio lo escribe
-como `vol`.
+Ten en cuenta que un fondo de video escribe su volumen como `volume`, mientras que una pista de audio lo
+escribe como `vol`.
 
 `stop <channel> [fade <s>]` detiene un canal. Los canales son `music`, `ambient`, `sfx` y `voice`.
 
@@ -257,20 +257,20 @@ Las formas de avance empiezan con una cantidad con signo, las formas de fijar em
 
 | Forma | Qué hace |
 |---|---|
-| `time +<n> dayparts` | Avanza n franjas horarias. |
+| `time +<n> dayparts` | Avanza n momentos del día. |
 | `time +<n> hours` | Avanza n horas. Solo en modo Clock. |
 | `time +<n> days` | Avanza n días. |
-| `time daypart <name>` | Fija la franja horaria. |
+| `time daypart <name>` | Fija el momento del día. |
 | `time hour <n>` | Fija la hora. Solo en modo Clock. |
 | `time weekday <name>` | Fija el día de la semana. Siempre hacia adelante; el mismo día cuenta. |
 
 La unidad puede ir en singular (`+1 day` es lo mismo que `+1 days`); la forma canónica escrita desde el
-grafo siempre es plural. Los nombres de franja horaria y día de la semana son los configurados en la
+grafo siempre es plural. Los nombres de momento del día y día de la semana son los configurados en la
 [configuración de tiempo](/es/docs/beasty-visual-novel/world/game-time/) del proyecto.
 
 ## Prompts
 
-Un prompt muestra una línea más un campo de texto, y escribe la respuesta del jugador en algún sitio.
+Un prompt muestra una línea más un campo de texto, y guarda la respuesta del jugador donde le indiques.
 
 ```text
 ask gold "How much gold?" default 0 required
@@ -301,20 +301,20 @@ name juan = var player_name       # ...desde el valor de una variable o token
 name juan reset                   # volver al nombre base
 ```
 
-Esto cambia el nombre de forma permanente, a diferencia del `as "..."` en una sola línea de un
-[línea de diálogo](#diálogo-y-narración).
+Esto cambia el nombre de forma permanente, a diferencia del `as "..."` de una
+[línea de diálogo](#diálogo-y-narración), que solo dura esa línea.
 
 ## Flujo y transiciones
 
 ```text
-freeroam town/square              # ir a una habitación de FreeRoam
-freeroam previous                 # volver a la habitación de la que vino el jugador
-freeroam choose town              # dejar que el jugador elija una habitación en ese mapa
+freeroam town/square              # ir a una sala de FreeRoam
+freeroam previous                 # volver a la sala de la que vino el jugador
+freeroam choose town              # dejar que el jugador elija una sala en ese mapa
 goto-scene Chapter2               # ir a otra DialogueScene
 goto-scene Chapter2 from intro    # ...empezando en un nodo concreto
 ```
 
-`freeroam <map>/<room>` nombra el grafo del mapa y la habitación en él.
+`freeroam <map>/<room>` nombra el grafo del mapa y la sala dentro de él.
 
 Una línea de flujo suelta como las de arriba es un **bloque de salida al final** dentro de un nodo de
 diálogo: se ejecuta después de los demás bloques del nodo. Para hacer que la transición sea **su propio
@@ -329,8 +329,8 @@ label leave:
     -> freeroam previous         # cualquier salida de flujo funciona: previous / choose <map> / goto-scene …
 ```
 
-Otros labels lo alcanzan con `jump to_town`, o con `-> to_town` como destino de una choice o una rama. Una
-ruta `->` hacia otro label se escribe como `jump <label>` en su lugar.
+Otros labels lo alcanzan con `jump to_town`, o con `-> to_town` como destino de una choice o una rama. Para
+ir a otro label, en cambio, no se usa la ruta `->`: se escribe `jump <label>`.
 
 ## Elecciones y decisiones
 
@@ -345,8 +345,8 @@ label cruce (choice):
     default -> alley                                             # usado si todo queda bloqueado
 ```
 
-Un **nodo de elección** muestra las opciones cuya condición se cumple. `default -> <label>` es a dónde va
-cuando todas las opciones quedan bloqueadas.
+Un **nodo de elección** muestra las opciones cuya condición se cumple. `default -> <label>` indica a dónde
+ir cuando todas las opciones quedan bloqueadas.
 
 ```text
 label ruta (decision):           # enrutador invisible (DecisionNode)
@@ -355,8 +355,8 @@ label ruta (decision):           # enrutador invisible (DecisionNode)
     else -> poor_end             # la rama de fallback (condición vacía)
 ```
 
-Un **nodo de decisión** enruta automáticamente e invisiblemente: gana la primera rama cuya condición se
-cumpla, si no, el fallback. El jugador no ve nada. `else if <condition> -> <label>` es una rama condicional,
+Un **nodo de decisión** enruta de forma automática e invisible: gana la primera rama cuya condición se
+cumpla y, si ninguna se cumple, el fallback. El jugador no ve nada. `else if <condition> -> <label>` es una rama condicional,
 no el fallback; un `else` a secas es el fallback.
 
 Tanto `choice` como `if` aceptan una condición opcional y un bloque de efectos opcional, en ese orden, antes
@@ -434,7 +434,7 @@ if gold > 100 { rich = true, toggle celebrated } -> rich_end
 - **Los nombres de asset** se resuelven a objetos por GUID, así que mover o renombrar un asset no rompe un
   nodo sincronizado. Ejecuta **Format** para actualizar el nombre escrito en el texto. Un nombre que no se
   resuelve —una errata, o un nombre que comparten varios assets— es un error: la importación se rechaza y el
-  grafo se deja intacto, así que una errata nunca puede destruir una referencia. Desambigua con una
+  grafo queda intacto, así que una errata nunca puede destruir una referencia. Desambigua con una
   subcarpeta: `backdrop interiors/bedroom`.
 - **Las carpetas listadas en [Configuración de VN](/es/docs/beasty-visual-novel/production/vn-settings/)** mantienen los nombres
   cortos y sin ambigüedad. No son una restricción excluyente: un asset que viva fuera de ellas se sigue
@@ -449,7 +449,7 @@ if gold > 100 { rich = true, toggle celebrated } -> rich_end
   `time`, `choice`, `if`, `else`, `default`, `freeroam`, `goto-scene` —además de tus ids de personaje, ya
   que una línea puede empezar con un speaker. Después de la palabra clave sugiere lo que esa palabra clave
   espera: personajes, expresiones, variables, tokens de diccionario, ítems, misiones y sus objetivos,
-  pantallas, perfiles de rutina, nombres de franja horaria y día de la semana, nombres de asset, y los
+  pantallas, perfiles de rutina, nombres de momento del día y día de la semana, nombres de asset, y los
   labels ya presentes en el archivo.
 
 ## Ver también
@@ -459,5 +459,5 @@ if gold > 100 { rich = true, toggle celebrated } -> rich_end
 - [El grafo de la historia](/es/docs/beasty-visual-novel/authoring/story-graph/) — los tipos de nodo a los que compila un guion.
 - [Personajes](/es/docs/beasty-visual-novel/world/characters/) — ids, expresiones, delivery styles y alias.
 - [Misiones](/es/docs/beasty-visual-novel/world/quests/) — ids de misión, etapas y objetivos.
-- [Tiempo de juego](/es/docs/beasty-visual-novel/world/game-time/) — franjas horarias, el reloj, y los dos modos de tiempo.
-- [Habitaciones de mundo libre](/es/docs/beasty-visual-novel/world/free-roam-rooms/) — los mapas y habitaciones que `freeroam` señala como destino.
+- [Tiempo de juego](/es/docs/beasty-visual-novel/world/game-time/) — momentos del día, el reloj, y los dos modos de tiempo.
+- [Salas de mundo libre](/es/docs/beasty-visual-novel/world/free-roam-rooms/) — los mapas y salas que `freeroam` señala como destino.

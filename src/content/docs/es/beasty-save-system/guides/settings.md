@@ -1,11 +1,11 @@
 ---
 title: "Settings"
-description: "BeastySaveSettings contiene todas las opciones que usa una llamada de guardado o carga: adónde va el archivo, si está encriptado, si se conserva un backup, cu"
+description: "BeastySaveSettings contiene todas las opciones que usa una llamada de guardado o carga: adónde va el archivo, encriptación, backup, qué tan estricta es la carga y la versión de datos."
 ---
 
-`BeastySaveSettings` contiene todas las opciones que usa una llamada de guardado o carga: adónde va el archivo, si está
-encriptado, si se conserva un backup, cuán estrictamente carga, y a qué versión de datos pertenece. Esta página
-lista cada campo, su valor por defecto, y la razón por la que lo cambiarías.
+`BeastySaveSettings` contiene todas las opciones que usa una llamada de guardado o carga: adónde va el archivo, si
+está encriptado, si se conserva un backup, qué tan estricta es la carga, y a qué versión de datos pertenece. Esta
+página lista cada campo, su valor por defecto, y la razón por la que lo cambiarías.
 
 ## Las settings son por llamada, no por proyecto
 
@@ -32,8 +32,9 @@ static readonly BeastySaveSettings Auto = new BeastySaveSettings
 };
 ```
 
-Si nunca escribes C#, obtienes un solo bloque de settings: el campo **Settings** en el componente `BeastySaveManager`,
-editado en el inspector o en la ventana Save Manager. Eso es suficiente para la mayoría de los juegos.
+Si nunca escribes C#, trabajas con un solo bloque de settings: el campo **Settings** del componente
+`BeastySaveManager`, editado en el inspector o en la ventana Save Manager. Con eso alcanza para la mayoría de los
+juegos.
 
 ## Los campos
 
@@ -55,7 +56,7 @@ La ruta final de un guardado es:
 ```
 
 `BeastySave.GetFolderPath(settings)` y `BeastySave.GetSlotPath("slot1", settings)` te dan esas rutas
-sin que tengas que ensamblarlas tú.
+sin que tengas que armarlas tú.
 
 ### Folder
 
@@ -73,9 +74,9 @@ significa que los archivos existentes de tus jugadores quedan invisibles para el
 Déjalo vacío. `Application.persistentDataPath` es la ubicación de escritura por usuario que Unity te da en cada
 plataforma, y es donde pertenecen los guardados.
 
-Configúralo cuando tengas una razón específica — una herramienta de editor que escribe dentro de la carpeta del proyecto, un test que
-escribe en un directorio temporal. Configurarlo a una ruta a la que el sistema operativo del jugador no te deje escribir es cómo
-consigues un `IoError`.
+Configúralo cuando tengas una razón específica — una herramienta de editor que escribe dentro de la carpeta del
+proyecto, un test que escribe en un directorio temporal. Si lo apuntas a una ruta donde el sistema operativo del
+jugador no te deja escribir, lo que consigues es un `IoError`.
 
 ### Encrypted
 
@@ -91,16 +92,16 @@ Dos cosas que debes saber antes de activarlo:
 
 ### EncryptionKey
 
-Cualquier string no vacío funciona — de él se deriva una clave AES de 32 bytes con SHA-256. No necesitas producir
-una clave de una longitud particular.
+Cualquier string no vacío funciona — de él se deriva una clave AES de 32 bytes con SHA-256. No necesitas una
+clave de una longitud concreta.
 
 Déjalo vacío y el sistema usa `BeastySaveSettings.SharedDefaultEncryptionKey`, que **viene incluido en
 cada copia del asset**. Cualquiera que posea Beasty Save System tiene ese string. Existe para que la encriptación funcione
 de fábrica, no para que la publiques con ella. Si la encriptación está activada y no has configurado tu propia clave, el
 sistema te avisa una vez en el editor y en los builds de desarrollo.
 
-Configura tu propia clave antes de publicar. Luego lee [encryption.md](/es/docs/beasty-save-system/guides/encryption/), que es honesta sobre el hecho de
-que tu clave también viene incluida dentro de tu juego.
+Configura tu propia clave antes de publicar. Luego lee [encryption.md](/es/docs/beasty-save-system/guides/encryption/), que no oculta que tu clave
+también viene incluida dentro de tu juego.
 
 ### Backup
 
@@ -114,8 +115,8 @@ Dos comportamientos que vale la pena conocer:
 - **Un slot cuyo checksum no verifica nunca se rota hacia el backup.** Un archivo corrupto no puede destruir
   tu última copia buena.
 
-Desactívalo solo donde guardes tan a menudo que el archivo extra sea un coste real — un autoguardado frecuente, por ejemplo. El
-valor por defecto está activado por una buena razón. Consulta [backups-and-corruption.md](/es/docs/beasty-save-system/guides/backups-and-corruption/).
+Desactívalo solo si guardas tan seguido que el archivo extra sea un coste real — un autoguardado frecuente, por
+ejemplo. El valor por defecto viene activado por una buena razón. Consulta [backups-and-corruption.md](/es/docs/beasty-save-system/guides/backups-and-corruption/).
 
 ### Strict
 
@@ -123,7 +124,7 @@ Activado por defecto. Una carga estricta es todo o nada: si un campo no se puede
 **no se aplica nada**. El estado de tu juego se queda exactamente como estaba, y obtienes un resultado de error para mostrarle
 al jugador.
 
-Tolerante (`Strict = false`) omite el campo que no pudo leer, lo registra en `LoadResult.Warnings`, y
+El modo tolerante (`Strict = false`) omite el campo que no pudo leer, lo registra en `LoadResult.Warnings`, y
 carga el resto.
 
 Publica en modo estricto. Usa el tolerante cuando renombraste un campo a mitad de producción y prefieres perder ese único valor a
@@ -135,30 +136,31 @@ de tipo struct, está en [strict-vs-tolerant.md](/es/docs/beasty-save-system/gui
 La versión de esquema de *tus* datos. Empieza en `1` y se escribe en cada archivo. Cuando cargas un archivo
 cuya versión es más baja que la actual, las migraciones registradas se ejecutan en orden para ponerlo al día.
 
-Lo subes cuando cambias la forma de tus datos de guardado de una manera que los archivos antiguos no pueden sobrevivir, y
-registras una migración para el paso. Un archivo con una versión **más alta** que tu configuración falla con `VersionTooNew` — un
-build antiguo se niega a adivinar sobre un guardado escrito por uno más nuevo, en lugar de corromperlo.
+Lo subes cuando cambias la forma de tus datos de guardado de una manera que los archivos antiguos no sobreviven,
+y registras una migración para ese paso. Un archivo con una versión **más alta** que tu configuración falla con
+`VersionTooNew` — un build antiguo se niega a adivinar qué hacer con un guardado escrito por uno más nuevo, en
+vez de corromperlo.
 
 Consulta [versioning-and-migrations.md](/es/docs/beasty-save-system/guides/versioning-and-migrations/).
 
 ## Nombres de slot
 
-El slot es el nombre de archivo desnudo, y el sistema lo valida. Un slot rechazado hace que la llamada falle con
+El slot es el nombre del archivo sin más, y el sistema lo valida. Un slot rechazado hace que la llamada falle con
 `InvalidArgument` y un mensaje que dice exactamente por qué.
 
-Un nombre de slot es rechazado cuando:
+Un nombre de slot se rechaza cuando:
 
-| Regla | Ejemplo que es rechazado | Por qué |
+| Regla | Ejemplo rechazado | Por qué |
 |---|---|---|
 | Está vacío o solo espacios en blanco | `""` | No hay nombre de archivo. |
 | Contiene un separador de ruta | `saves/slot1`, `saves\slot1` | Podría escribir fuera de la carpeta de guardado. |
 | Contiene `..` | `../slot1` | La misma razón. |
 | Es una ruta con raíz | `C:\slot1`, `/slot1` | La misma razón. |
 | Contiene caracteres que no son válidos en un nombre de archivo | `slot:1`, `slot*` | El sistema operativo no puede crear el archivo. |
-| Es un nombre de dispositivo reservado de Windows | `CON`, `PRN`, `AUX`, `NUL`, `COM1`–`COM9`, `LPT1`–`LPT9` | El nombre direcciona a un dispositivo, no a un archivo — `CON.save` incluido. |
+| Es un nombre de dispositivo reservado de Windows | `CON`, `PRN`, `AUX`, `NUL`, `COM1`–`COM9`, `LPT1`–`LPT9` | El nombre apunta a un dispositivo, no a un archivo — `CON.save` incluido. |
 
-Los nombres de dispositivo de Windows se rechazan en **todas** las plataformas, no solo en Windows. Una carpeta de guardado escrita en
-macOS o Linux se mantiene utilizable si el jugador luego la copia a una máquina Windows.
+Los nombres de dispositivo de Windows se rechazan en **todas** las plataformas, no solo en Windows. Una carpeta de
+guardado escrita en macOS o Linux sigue siendo utilizable si el jugador la copia después a una máquina Windows.
 
 Si tu juego deja que los jugadores nombren sus propios guardados, pasa el nombre por
 `BeastySave.Save` y muestra el mensaje `InvalidArgument`, o sanéalo primero. No asumas que un nombre está

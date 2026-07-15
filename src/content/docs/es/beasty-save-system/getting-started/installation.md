@@ -18,8 +18,8 @@ en qué plataformas funciona.
 **Sin dependencias** significa exactamente eso. El paquete incluye su propio motor JSON, así que no hay ningún paquete
 Newtonsoft que instalar ni nada que reconciliar con los paquetes que tu proyecto ya use.
 
-**Cualquier render pipeline** — Built-in, URP, HDRP — porque el paquete no contiene código de renderizado en absoluto. Él
-lee y escribe datos. Nunca dibuja nada.
+**Cualquier render pipeline** — Built-in, URP, HDRP — porque el paquete no contiene ni una línea de código de
+renderizado: solo lee y escribe datos. Nunca dibuja nada.
 
 ## Importar
 
@@ -27,7 +27,7 @@ lee y escribe datos. Nunca dibuja nada.
 2. Selecciona **My Assets**, busca Beasty Save System, y pulsa **Import**.
 3. Importa todo.
 
-El paquete queda ubicado en `Assets/BeastyComponents/BeastySaveSystem/`. Puedes mover esa carpeta a cualquier lugar de
+El paquete queda en `Assets/BeastyComponents/BeastySaveSystem/`. Puedes mover esa carpeta a cualquier lugar de
 `Assets` — nada dentro depende de su ubicación.
 
 Si no quieres los tests en tu proyecto, puedes dejar la carpeta `Tests` sin marcar en el diálogo de
@@ -59,11 +59,11 @@ Ve directo a la ruta que más te convenga:
 
 ## Los módulos convertidores
 
-Un convertidor enseña al sistema de guardado cómo almacenar un tipo. Los siempre disponibles — la capa `core` —
-cubren los tipos matemáticos de Unity (`Vector2`, `Vector3`, `Quaternion`, `Color`, `Rect`, `Bounds` y afines),
+Un convertidor le enseña al sistema de guardado cómo almacenar un tipo. Los que están siempre disponibles — la
+capa `core` — cubren los tipos matemáticos de Unity (`Vector2`, `Vector3`, `Quaternion`, `Color`, `Rect`, `Bounds` y afines),
 `Transform`, `Camera`, `Light`, `SpriteRenderer`, `Texture2D`, y cualquier `MonoBehaviour` que escribas tú mismo.
 
-Cualquier cosa más allá de eso viene de un módulo:
+Todo lo demás viene de un módulo:
 
 | Módulo | Tipos que puede guardar | Necesita el paquete de Unity |
 |---|---|---|
@@ -75,30 +75,32 @@ Cualquier cosa más allá de eso viene de un módulo:
 | TMPro | `TMP_Text` y sus subclases | `com.unity.textmeshpro`, o `com.unity.ugui` 2.0.0 o más reciente |
 | UGUI | `RectTransform`, `CanvasGroup`, `Image`, `RawImage`, `Slider`, `Toggle` | `com.unity.ugui` |
 
-No instalas estos módulos. Ya están en la carpeta, y cada uno **se registra a sí mismo automáticamente**
+Estos módulos no se instalan: ya están en la carpeta, y cada uno **se registra automáticamente**
 cuando el juego arranca.
 
-Cada módulo es un assembly separado condicionado por una restricción de define sobre el módulo de Unity que necesita. Si tu
-proyecto ha eliminado ese módulo de Unity, el assembly del módulo no compila, sus convertidores simplemente
+Cada módulo es un assembly aparte, condicionado por una restricción de define al módulo de Unity que necesita. Si
+tu proyecto eliminó ese módulo de Unity, el assembly del módulo no compila, sus convertidores simplemente
 no existen, y el resto del paquete sigue funcionando. Un proyecto sin física no falla al
 compilar por culpa de un convertidor de física que nunca iba a usar.
 
-La consecuencia que debes saber: si marcas un componente en `BeastySaveable` cuyo módulo no está presente, el guardado
+La consecuencia que conviene conocer: si marcas un componente en `BeastySaveable` cuyo módulo no está presente, el guardado
 falla con el error `TypeUnavailable` y un mensaje que te lo indica. Consulta
 [converter-modules.md](/es/docs/beasty-save-system/reference/converter-modules/) para saber exactamente qué campos almacena cada módulo, y
 [custom-converters.md](/es/docs/beasty-save-system/advanced/custom-converters/) para enseñarle al sistema un tipo que no conoce.
 
 ## Plataformas
 
-Beasty Save System funciona en cualquier lugar donde Unity te dé un `Application.persistentDataPath` con permisos de escritura:
+Beasty Save System funciona en cualquier plataforma donde Unity te dé un `Application.persistentDataPath` con
+permisos de escritura:
 
 - Windows, macOS, Linux
 - Android, iOS
 - Consolas
 
 > **Advertencia**
-> **WebGL no está soportado.** La ruta de escritura atómica depende de `File.Replace`, y los métodos asíncronos están
-> basados en `Task`. Un build de navegador no proporciona ninguno de los dos. Si publicas a WebGL, este paquete no es la herramienta adecuada.
+> **WebGL no está soportado.** La ruta de escritura atómica depende de `File.Replace`, y los métodos asíncronos
+> están basados en `Task`. Un build de navegador no ofrece ninguno de los dos. Si publicas en WebGL, este paquete
+> no es la herramienta adecuada.
 
 Más detalles sobre soporte de versiones, IL2CPP y rendimiento en
 [platforms-and-limits.md](/es/docs/beasty-save-system/advanced/platforms-and-limits/).

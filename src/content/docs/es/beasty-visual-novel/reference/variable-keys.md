@@ -1,10 +1,10 @@
 ---
 title: "Claves de variables"
-description: "Cada clave que vive en el almacén de variables, y cómo escribir una condición contra ella. Esta es la página para abrir cuando necesitas una condición sobre el t"
+description: "Cada clave que vive en el almacén de variables, y cómo escribir una condición sobre ella. Abre esta página cuando necesites una condición sobre el tiempo de juego, el estado de una misión, la ubicación de un personaje o el inventario del jugador."
 ---
 
-Cada clave que vive en el almacén de variables, y cómo escribir una condición contra ella. Esta es la página
-para abrir cuando necesitas una condición sobre el tiempo del juego, el estado de una misión, la ubicación de
+Cada clave que vive en el almacén de variables, y cómo escribir una condición sobre ella. Abre esta página
+cuando necesites una condición sobre el tiempo de juego, el estado de una misión, la ubicación de
 un personaje o el inventario del jugador.
 
 ## Un almacén para todo
@@ -25,17 +25,17 @@ rebobinan correctamente.
 | Inventario | `item.<id>`, `inventory.order` | `item.potion` |
 | Diccionario | la clave del token (sin prefijo) | `city` |
 
-Los campos reservados se escriben con un `@` inicial. Una clave definida por el autor nunca puede producir
-uno, así que tus variables nunca pueden colisionar con las del motor.
+Los campos reservados se escriben con un `@` inicial. Una clave definida por el autor nunca puede llevarlo,
+así que tus variables nunca pueden colisionar con las del motor.
 
 > **Nota**
-> Una clave que nunca se escribió se lee como un valor vacío. Una condición contra ella es false a menos que
+> Una clave que nunca se escribió se lee como un valor vacío. Una condición sobre ella da false a menos que
 > la compares con un valor vacío.
 
 ## Cómo escribes una condición
 
 En el editor nunca escribes una clave. Cada campo de condición tiene un selector con búsqueda que lista las
-claves e inserta la correcta. El selector muestra una etiqueta amigable, pero lo que se guarda siempre es la
+claves e inserta la correcta. El selector muestra una etiqueta legible, pero lo que se guarda siempre es la
 clave exacta de la tabla de arriba.
 
 | Namespace | Etiqueta en el selector |
@@ -48,7 +48,7 @@ clave exacta de la tabla de arriba.
 | Inventario | La clave misma: `item.potion` |
 
 En el script de texto `.vnbeasty` no hay selector, así que escribes la clave tú mismo, exactamente como
-aparece en la columna de clave: `if @time:daypart == Morning`, no `if time.daypart == Morning`. Ver
+aparece en la columna de clave: `if @time:daypart == Morning`, no `if time.daypart == Morning`. Consulta
 [la sintaxis de .vnbeasty](/es/docs/beasty-visual-novel/authoring/vnbeasty-syntax/).
 
 ### Operadores
@@ -59,10 +59,10 @@ aparece en la columna de clave: `if @time:daypart == Morning`, no `if time.daypa
 Las cláusulas se combinan con `And` u `Or`.
 
 > **Advertencia**
-> **AND liga más fuerte que OR.** `a AND b OR c` significa `(a AND b) OR c`, nunca `a AND (b OR c)`. No hay
+> **AND tiene prioridad sobre OR.** `a AND b OR c` significa `(a AND b) OR c`, nunca `a AND (b OR c)`. No hay
 > paréntesis. Reordena tus cláusulas, o divide la rama en dos.
 
-Dos reglas que atrapan a todos alguna vez:
+Dos reglas con las que todos tropiezan alguna vez:
 
 - Una **condición vacía siempre es true**. Ninguna condición significa "siempre".
 - Una cláusula **sin clave seleccionada está incompleta y evalúa a false**. Se reporta en la consola una
@@ -81,7 +81,7 @@ saw_intro == true
 player_class == Mage
 ```
 
-Una bandera desnuda en el script de texto significa `== true`:
+Una bandera sin comparación en el script de texto significa `== true`:
 
 ```text
 choice "Buy a sword" if gold >= 10 { gold -= 10 } -> smith
@@ -93,7 +93,7 @@ permitidos como un desplegable en el editor de condiciones en vez de texto libre
 
 ## Variables de personaje
 
-Cada campo en un personaje - los universales del `CharacterVariableSchema` y los propios del personaje - se
+Cada campo en un personaje — los universales del `CharacterVariableSchema` y los propios del personaje — se
 almacena bajo `@char:<id>:<field>`.
 
 | Clave | Significado |
@@ -113,7 +113,7 @@ maya.affection >= 3          etiqueta del selector
 Usa `@self` cuando una plantilla de condición tiene que aplicarse a todo el elenco, por ejemplo la regla de
 visibilidad de la lista de elenco dentro del juego.
 
-Ver [Personajes](/es/docs/beasty-visual-novel/world/characters/).
+Consulta [Personajes](/es/docs/beasty-visual-novel/world/characters/).
 
 ## Claves de rutina
 
@@ -140,7 +140,7 @@ Ejemplos de condiciones:
 `@routineMode` es la única clave de rutina que SÍ escribes. Establecerla con un bloque Set variable (o el
 bloque Routine override) cambia todo el horario de un personaje desde la historia.
 
-Ver [Rutinas de personaje](/es/docs/beasty-visual-novel/world/character-routines/).
+Consulta [Rutinas de personaje](/es/docs/beasty-visual-novel/world/character-routines/).
 
 ## Claves de tiempo
 
@@ -148,13 +148,13 @@ Cinco claves reservadas. Existen solo mientras haya un **Time Config** asignado 
 
 | Clave | Etiqueta en el selector | Disponibilidad | Valor |
 |---|---|---|---|
-| `@time:daypart` | `time.daypart` | Siempre | El nombre del daypart actual, p. ej. `Morning`. |
+| `@time:daypart` | `time.daypart` | Siempre | El nombre del momento del día actual, p. ej. `Morning`. |
 | `@time:hour` | `time.hour` | Solo en modo Clock | Un entero, p. ej. `14`. |
 | `@time:day` | `time.day` | Siempre | Un entero, empezando en 1. |
-| `@time:weekday` | `time.weekday` | Cuando hay weekdays configurados | El nombre del weekday. |
-| `@time:season` | `time.season` | Cuando hay seasons configuradas | El nombre de la season. |
+| `@time:weekday` | `time.weekday` | Cuando hay días de la semana configurados | El nombre del día de la semana. |
+| `@time:season` | `time.season` | Cuando hay estaciones configuradas | El nombre de la estación. |
 
-`@time:daypart` se ofrece como un desplegable de los nombres de daypart que configuraste.
+`@time:daypart` se ofrece como un desplegable con los momentos del día que configuraste.
 
 Ejemplos de condiciones:
 
@@ -172,7 +172,7 @@ Ejemplos de condiciones:
 > hacen nada".
 
 El tiempo nunca avanza por sí solo. Lo mueves con el bloque Advance time, con el `advanceTimeOnClick` de un
-objeto de free roam, o desde código. Ver [Tiempo de juego](/es/docs/beasty-visual-novel/world/game-time/).
+objeto de mundo libre, o desde código. Consulta [Tiempo de juego](/es/docs/beasty-visual-novel/world/game-time/).
 
 ## Claves de misión
 
@@ -201,16 +201,16 @@ Ejemplos de condiciones:
 @quest:ana_m1:@lastResult == failed      fallaron la diaria de ayer
 ```
 
-Compara un estado de misión contra el string, no contra un número. Los cuatro estados son en minúsculas.
+Compara un estado de misión con el string, no con un número. Los cuatro estados van en minúsculas.
 
-Ver [Misiones](/es/docs/beasty-visual-novel/world/quests/).
+Consulta [Misiones](/es/docs/beasty-visual-novel/world/quests/).
 
 ## Claves de inventario
 
 | Clave | Valor |
 |---|---|
 | `item.<id>` | Cuántos de ese objeto tiene el jugador. Un objeto `Key` se lee como bool, un `Consumable` como int. |
-| `inventory.order` | El orden de ranuras elegido por el jugador. No condiciones sobre esto. |
+| `inventory.order` | El orden de ranuras elegido por el jugador. No escribas condiciones sobre esta clave. |
 
 Ejemplos de condiciones:
 
@@ -220,31 +220,31 @@ item.rusty_key == true  un objeto Key que posee
 item.potion == 0        se quedó sin pociones
 ```
 
-Give y Take limitan al `maxQuantity` del objeto y a 0, así que un conteo de objeto nunca es negativo ni
+Give y Take respetan el `maxQuantity` del objeto y el 0, así que la cantidad de un objeto nunca es negativa ni
 supera el tope.
 
-Ver [Objetos e inventario](/es/docs/beasty-visual-novel/world/items-and-inventory/).
+Consulta [Objetos e inventario](/es/docs/beasty-visual-novel/world/items-and-inventory/).
 
 ## Claves de diccionario
 
 Un token del diccionario se almacena bajo su propia clave, sin prefijo, exactamente igual que una de tus
 variables. Cuando un bloque Set dictionary o el jugador escribe un valor, va al almacén y eclipsa el valor
-por defecto del autor - así que se guarda y rebobina como todo lo demás.
+por defecto del autor — así que se guarda y rebobina como todo lo demás.
 
 ```text
 city == Madrid
 ```
 
-Como un token de diccionario comparte el namespace plano con tus variables, dale a los tokens nombres
+Como un token de diccionario comparte el namespace plano con tus variables, dales a los tokens nombres
 distintos. `Tools > Beasty VN > Validate > Find duplicate ids` no detectará un token que eclipsa a una
 variable.
 
-Ver [El diccionario](/es/docs/beasty-visual-novel/world/dictionary/).
+Consulta [El diccionario](/es/docs/beasty-visual-novel/world/dictionary/).
 
 ## Ver también
 
-- [Variables y condiciones](/es/docs/beasty-visual-novel/world/variables-and-conditions/) - alcances, efectos, el editor de condiciones
-- [La sintaxis de .vnbeasty](/es/docs/beasty-visual-novel/authoring/vnbeasty-syntax/) - escribir condiciones como texto
-- [Accesores generados](/es/docs/beasty-visual-novel/scripting/generated-accessors/) - `VNVars` y `VNChars`, claves tipadas para C#
-- [APIs de gameplay](/es/docs/beasty-visual-novel/scripting/gameplay-apis/) - leer tiempo, rutinas, misiones e inventario en código
+- [Variables y condiciones](/es/docs/beasty-visual-novel/world/variables-and-conditions/) — alcances, efectos, el editor de condiciones
+- [La sintaxis de .vnbeasty](/es/docs/beasty-visual-novel/authoring/vnbeasty-syntax/) — escribir condiciones como texto
+- [Accesores generados](/es/docs/beasty-visual-novel/scripting/generated-accessors/) — `VNVars` y `VNChars`, claves tipadas para C#
+- [APIs de gameplay](/es/docs/beasty-visual-novel/scripting/gameplay-apis/) — leer tiempo, rutinas, misiones e inventario en código
 - [Assets](/es/docs/beasty-visual-novel/reference/assets/)

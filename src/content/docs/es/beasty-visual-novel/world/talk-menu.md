@@ -1,12 +1,12 @@
 ---
 title: "El menú de conversación"
-description: "El centro de conversación de cada personaje: el menú de \"qué puedo decirle a esta persona ahora mismo\". Clica un personaje en una sala y esto es lo que se abre. Esta página es pa"
+description: "El centro de conversación de cada personaje: el menú de \"qué puedo decirle a esta persona ahora mismo\". Clica un personaje en una sala y esto es lo que se abre."
 ---
 
 El centro de conversación de cada personaje: el menú de "qué puedo decirle a esta persona ahora mismo". Clica un personaje en una
 sala y esto es lo que se abre. Esta página es para guionistas y diseñadores.
 
-Si has jugado a un dating sim de Ren'Py, conoces la forma: te acercas a alguien y obtienes una lista corta de
+Si has jugado a un dating sim de Ren'Py, conoces la forma: te acercas a alguien y te aparece una lista corta de
 cosas que podrías comentar — el encargo que te pidió, el rumor que acabas de oír, "cómo te fue el día", "adiós".
 La lista es distinta cada vez, porque el mundo se ha movido.
 
@@ -25,10 +25,10 @@ Lo que eso significa en la práctica:
 - Un personaje con diez misiones a lo largo del juego sigue teniendo un menú pequeño en cualquier momento, porque solo se
   ofrece el paso **actual** de cada misión **activa**.
 
-Las entradas manuales de abajo son para lo que el personaje puede hablar *siempre*: la charla trivial, la tienda, el
-adiós.
+Las entradas manuales de abajo son para los temas de los que el personaje puede hablar *siempre*: la charla
+trivial, la tienda, el adiós.
 
-## Dónde lo autoras
+## Dónde lo editas
 
 `Tools > Beasty VN > Editor`, pestaña **Characters**, subpestaña **Talk Menu**. Elige un personaje arriba.
 
@@ -36,7 +36,7 @@ La pestaña te muestra dos cosas:
 
 1. **Mission steps (automatic)** — una vista previa de solo lectura de los pasos de misión que aparecerán en el menú de
    este personaje. Si está vacía, ningún objetivo de misión tiene un paso de conversación que apunte aquí.
-2. **Las entradas propias del personaje** — la lista que mantienes tú. **Create talk menu** siembra una primera entrada (un
+2. **Las entradas propias del personaje** — la lista que mantienes tú. **Create talk menu** crea una primera entrada (un
    "Adiós" que vuelve a la sala); **+ Entry** añade más.
 
 ### El aviso
@@ -45,15 +45,15 @@ La **Prompt line (optional)** es lo que dice el personaje mientras el menú est�
 vacía y no se muestra ningún cuadro de diálogo en absoluto: solo las opciones.
 
 También puedes darle al menú una **imagen de personaje** (una pose que se muestra junto a las opciones), con una lista ordenada
-de **imágenes condicionales**: gana el primer caso cuya condición se cumpla, si no, la por defecto. Una pose distinta por
-franja horaria, por sala, por estado de ánimo.
+de **imágenes condicionales**: gana el primer caso cuya condición se cumpla; si ninguno, la imagen por defecto. Una
+pose distinta por momento del día, por sala, por estado de ánimo.
 
 ### Una entrada
 
 | Campo | Qué es |
 |---|---|
 | **Label** | La línea en la que clica el jugador. Localizada, de la misma tabla que tus textos de elección. |
-| **Visible when** | La condición. **Vacío = siempre visible.** Está disponible todo el catálogo: salas, franjas horarias, misiones, objetos, variables de personaje. |
+| **Visible when** | La condición. **Vacío = siempre visible.** Está disponible todo el catálogo: salas, momentos del día, misiones, objetos, variables de personaje. |
 | **Dialogue** | La escena que se ejecuta cuando se elige la entrada. **Vacío = sin diálogo: se aplica el final de inmediato.** |
 | **Node** | Qué nodo de esa escena iniciar. |
 | **Ends by** | Qué pasa cuando termina la rama. Ver más abajo. |
@@ -70,13 +70,13 @@ lo contrario. Un bloque de flujo dentro de la rama siempre gana.
 | `GoToRoom` | Directo a otra sala. |
 | `None` | Nada. La rama decide por sí misma. |
 
-`GoToRoom` también toma un ajuste **Clock** para la llegada: déjalo vacío y el tiempo avanza **una franja horaria**
-(el clásico "pasáis la tarde juntos" de los dating sims); fíjalo para mantener el reloj y que nada se mueva; o
-nombra una franja horaria para saltar directamente a ella.
+`GoToRoom` también recibe un ajuste **Clock** para la llegada: déjalo vacío y el tiempo avanza **un momento del día**
+(el clásico "pasan la tarde juntos" de los dating sims); fíjalo para mantener el reloj y que nada se mueva; o
+nombra un momento del día para saltar directamente a él.
 
 Vale la pena entender `BackToMenu`: el menú se **reevalúa** cuando vuelves a él, así que una entrada que acaba de
 volverse falsa desaparece, y una que acaba de volverse verdadera está ahí. Entrega las manzanas, vuelve al menú, y
-la entrada de la entrega se ha desvanecido.
+la entrada de la entrega ya no está.
 
 ## Entregar objetos desde una conversación
 
@@ -85,14 +85,14 @@ el menú de conversación es donde eso ocurre.
 
 Una entrada para ello aparece en el menú del personaje **automáticamente, pero solo cuando el jugador realmente tiene
 los objetos**. Hasta entonces no hay nada que elegir — que es exactamente el comportamiento que quieres, y nada de
-eso está autorado.
+eso hay que crearlo a mano.
 
 Cuando el jugador la elige, el **Delivery timing** del objetivo decide cuándo cambia de manos la cesta:
 
 | Timing | Qué pasa |
 |---|---|
 | `OnPick` | Los objetos se consumen en el instante en que se elige la entrada. El diálogo que sigue ya ve el objetivo como hecho — así que puede empezar con "son perfectas". |
-| `OnBranchEnd` | El diálogo se reproduce primero; la entrega se asienta cuando termina la rama. |
+| `OnBranchEnd` | El diálogo se reproduce primero; la entrega se hace efectiva cuando termina la rama. |
 | `DialogueBlock` | Nada automático en absoluto. **Tú** pones un bloque **Deliver items** dentro del diálogo, en la línea exacta en la que ella se estira para tomar la cesta. |
 
 El bloque **Deliver items** (categoría de paleta **Quests**) nombra una misión y un objetivo. Verifica el
@@ -123,13 +123,13 @@ clic primero. Consulta [Interactuables y puertas](/es/docs/beasty-visual-novel/w
 [Rutinas de personajes](/es/docs/beasty-visual-novel/world/character-routines/).
 
 **Desde la historia** — un **nodo Talk Menu** en un grafo de historia. Haz clic derecho en el lienzo, `Create > Talk Menu Node`,
-y di el menú de quién mostrar. También toma un **nodo siguiente por defecto**: adónde continúa el flujo cuando el menú
-resuelve en ninguna entrada visible en absoluto. Esa es la protección contra callejones sin salida — configúrala.
+e indica de quién es el menú que se muestra. También recibe un **nodo siguiente por defecto**: adónde continúa el
+flujo cuando el menú no encuentra ninguna entrada visible. Esa es la protección contra callejones sin salida — configúrala.
 
 ## El orden de la lista
 
 1. Los pasos automáticos de misión, en orden de catálogo. Para una misión **Ordered**, solo se ofrece el objetivo
-   **actual**; para una misión **Free**, cada uno que no esté terminado.
+   **actual**; para una misión **Free**, todos los que no estén terminados.
 2. Tus entradas manuales, en el orden en que las escribiste, filtradas por sus condiciones.
 
 Un paso de misión solo aparece si su misión está **activa**, su objetivo **no está hecho**, y — para una entrega — el

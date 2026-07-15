@@ -1,6 +1,6 @@
 ---
 title: "El guion de texto"
-description: "Escribe una escena completa como un archivo de texto plano en lugar de conectar nodos con clics. El formato .vnbeasty es un guion al estilo Ren'Py que se mantiene"
+description: "Escribe una escena completa como texto plano en lugar de conectar nodos con clics. El formato .vnbeasty es un guion al estilo Ren'Py que se mantiene sincronizado con el grafo en ambos sentidos."
 ---
 
 Escribe una escena completa como un archivo de texto plano en lugar de conectar nodos con clics. El formato
@@ -35,8 +35,8 @@ un cable hacia el nodo llamado `cruce`. El mismo nodo, dibujado en el grafo, es 
 - **Diferencias de texto (diffs).** Un archivo de guion es legible en una revisión de código, en un diff de
   control de versiones, y en una búsqueda.
 
-No tienes que elegir uno y quedarte ahí. Las dos vistas son la misma escena, y puedes cambiar de una a otra
-a mitad de capítulo.
+No tienes que quedarte con una de las dos. Las dos vistas son la misma escena, y puedes cambiar de una a
+otra a mitad de capítulo.
 
 ## Activarlo
 
@@ -59,7 +59,7 @@ El editor es una superficie de código con números de línea, coloreado de sint
 **Suggestions** a la derecha que completa lo que estás escribiendo: la palabra clave al inicio de una línea,
 y luego lo que esa palabra clave espera —un id de personaje, una clave de expresión, una variable, un token
 de diccionario, un ítem, una misión y sus objetivos, un id de pantalla, un perfil de rutina, un nombre de
-franja horaria o día de la semana, un nombre de asset de fondo o audio, o una de las etiquetas ya presentes
+momento del día o día de la semana, un nombre de asset de fondo o audio, o una de las etiquetas ya presentes
 en el archivo. Las sugerencias se leen en vivo desde el proyecto, así que un personaje que añadiste hace un
 minuto ya está ahí. Haz clic en una sugerencia para insertarla.
 
@@ -72,8 +72,8 @@ La barra de herramientas:
 |---|---|
 | **Save & apply** | Aplica tu texto al grafo, y luego escribe el archivo. Esta es la única acción que mueve texto hacia el grafo. Se pone ámbar mientras tienes cambios sin guardar. |
 | **Format** | Aplica tus cambios, y luego reescribe el archivo en forma canónica: ordenado, indentado, con las anotaciones de id de nodo actualizadas. |
-| **Syntax** | Muestra u oculta una chuleta rápida de sintaxis junto al editor. |
-| **Unlink** | Deja de usar el guion. El grafo se queda como está, y el archivo `.vnbeasty` se deja en disco. |
+| **Syntax** | Muestra u oculta una guía rápida de sintaxis junto al editor. |
+| **Unlink** | Deja de usar el guion. El grafo se queda como está, y el archivo `.vnbeasty` se queda en disco. |
 
 Debajo del editor, un cuadro de reporte muestra el resultado de la última importación: qué se aplicó, qué se
 rechazó, y el número de línea de la sentencia problemática.
@@ -83,7 +83,7 @@ rechazó, y el número de línea de la sentencia problemática.
 Las dos direcciones no son simétricas, a propósito.
 
 **De grafo a texto es automático.** El archivo se mantiene como un espejo vivo del grafo. Edita un nodo en el
-grafo y el guion se reescribe por ti; abre la pestaña Text y siempre ves el grafo actual. **Format** fuerza
+grafo y el guion se reescribe solo; abre la pestaña Text y siempre ves el grafo actual. **Format** fuerza
 la misma reescritura a mano.
 
 **De texto a grafo es manual.** Nada de lo que escribas toca el grafo hasta que pulses **Save & apply**. Eso
@@ -97,8 +97,8 @@ pestaña Text.
 **Cuando los dos divergen.** Si ambos lados cambiaron desde la última sincronización, la pestaña Story marca
 su primer botón de interruptor con un marcador de advertencia (`Graph ⚠`) en lugar de `Graph`, para que lo
 notes antes de que tu próxima edición sobrescriba el otro lado. En ese punto nada se ha sobrescrito: el
-espejo automático se niega deliberadamente a elegir un ganador entre dos ediciones que un humano no ha
-reconciliado. Abre la pestaña Text, mira el guion, y guarda cuando estés conforme con él.
+espejo automático se niega a propósito a elegir un ganador entre dos ediciones que nadie ha reconciliado.
+Abre la pestaña Text, mira el guion, y guarda cuando estés conforme.
 
 ## El contrato de seguridad
 
@@ -107,34 +107,34 @@ de texto nunca pueda destruir en silencio el trabajo de autoría.
 
 - **El grafo es la fuente de verdad.** El guion es una proyección de él. Cada regla de abajo se deriva de
   esa única premisa.
-- **Un guion que no analiza sintácticamente nunca llega al grafo.** La importación se rechaza, el grafo se
+- **Un guion que no se puede parsear nunca llega al grafo.** La importación se rechaza, el grafo se
   deja exactamente como estaba, y la línea problemática se reporta con su número de línea. Tu texto se sigue
   guardando en el archivo, porque una errata no debe hacerte perder el párrafo que acabas de escribir, pero
   los nodos no se mueven.
 - **Un guion vacío nunca borra una escena en silencio.** Un archivo sin labels borraría todos los nodos.
-  Desde la pestaña Text obtienes un diálogo de confirmación que nombra el número de nodos en juego. Desde
+  Desde la pestaña Text aparece un diálogo de confirmación que te dice cuántos nodos están en juego. Desde
   una importación automática (un archivo guardado fuera de Unity, un pull de control de versiones) no hay
   nadie a quien preguntar, así que la importación se rechaza directamente.
 - **Un guion que contiene algo que el formato de texto no puede expresar se rechaza.** Si el grafo contiene
   contenido que no se puede volver a escribir como texto, entonces el archivo en disco no es un espejo fiel
   del grafo, y aplicarlo borraría exactamente el contenido que el escritor no pudo expresar. La importación
-  se aborta y lo dice.
+  se cancela y te lo dice.
 - **Un nombre que no se resuelve es un error.** Un fondo mal escrito, un clip de audio cuyo nombre coincide
   con dos assets, un `jump` a un label que no existe, un `goto-scene` a una escena desconocida: cada uno de
   estos rechaza la importación y señala la línea. Una errata nunca puede destruir una referencia borrándola
   en silencio. (Un nombre ambiguo te dice qué assets coincidieron, para que puedas desambiguar con una
   subcarpeta: `backdrop interiors/bedroom`.)
-- **Cualquier importación que perdería contenido deja una copia de seguridad.** Antes de una importación que
+- **Cualquier importación que perdería contenido deja antes una copia de seguridad.** Antes de una importación que
   borra o reescribe nodos, el estado actual del grafo se escribe junto al guion como un archivo con marca de
   tiempo: `MyScene.vnbeasty.2026-07-13-142530.bak`. Es una proyección `.vnbeasty` del grafo que sobrescribiste,
   así que puedes leerla, y puedes volver a pegarla. Cada importación destructiva obtiene su propio archivo de
   copia de seguridad: dos guardados malos seguidos no pueden dejarte solo con la copia degradada. Si la copia
   de seguridad no se puede escribir —una carpeta de solo lectura, un disco lleno— la importación se rechaza en
-  lugar de realizarse sin una red de seguridad.
+  lugar de ejecutarse sin red de seguridad.
 - **Si ambos lados cambiaron desde la última sincronización, gana el guardado más reciente**, y se deja un
-  `.bak` del lado sobrescrito junto al archivo. Se te dice qué lado se conservó y dónde está la copia de
-  seguridad.
-- **Los assets se resuelven por GUID.** El nombre en el guion es cómo *tú* encuentras el asset; el nodo
+  `.bak` del lado sobrescrito junto al archivo. El editor te dice qué lado se conservó y dónde quedó la
+  copia de seguridad.
+- **Los assets se resuelven por GUID.** El nombre en el guion es la forma en que *tú* encuentras el asset; el nodo
   guarda el asset en sí. Mueve `bedroom.png` a otra carpeta, o renómbralo, y el nodo sincronizado sigue
   apuntando a él. Ejecuta **Format** para actualizar el nombre escrito en el texto.
 
@@ -142,8 +142,9 @@ de texto nunca pueda destruir en silencio el trabajo de autoría.
 
 Dicho claramente, para que no los descubras por las malas.
 
-- **Un fondo con más de una capa de sprites no tiene forma de texto.** Una escena que use una se queda solo
-  en el grafo: su guion no se puede crear, y si añades un fondo por capas a una escena que ya tiene un guion,
+- **Un fondo con más de una capa de sprites no tiene forma de texto.** Una escena que use uno de esos
+  fondos se queda solo en el grafo: su guion no se puede crear, y si añades un fondo por capas a una escena
+  que ya tiene un guion,
   la pestaña Text te dice que el espejo está desactualizado en lugar de mostrarte una mentira. Lo mismo pasa
   con los props, con limpiar una sola posición de personaje (en lugar de todas), con los nodos de menú de
   conversación, y con un cambio de expresión que también cambia el retrato de UI. Esas son funciones del
@@ -154,7 +155,7 @@ Dicho claramente, para que no los descubras por las malas.
   `set gold = 10` no crea una variable llamada `gold`; usa la que ya definiste. Un id de speaker que no está
   en el reparto se reporta como una advertencia en la importación.
 - **Un bloque sin ningún asset asignado no se escribe en el guion.** Un bloque Backdrop vacío, o un bloque
-  Music sin clip, no hace nada en el juego: se salta, dejando lo que ya haya en pantalla o sonando. Como no
+  Music sin clip, no hace nada en el juego: se salta, y lo que ya haya en pantalla o sonando se queda. Como no
   hace nada, no tiene forma de texto, así que guardar el guion también elimina ese marcador de posición del
   grafo. Se te avisa antes de que ocurra. Para dejar el fondo en negro o silenciar un canal a propósito,
   escribe `backdrop clear` o `stop music`.
@@ -163,7 +164,7 @@ Dicho claramente, para que no los descubras por las malas.
 - **Los subgrafos anidan un solo nivel.** Un label `(subgraph)` posee labels hijos llamados `padre/hijo`; esos
   hijos no pueden ser a su vez subgrafos.
 
-## Un ejemplo trabajado
+## Un ejemplo completo
 
 Aquí tienes una escena completa, escrita desde cero como texto. Nada de esto existe todavía en el grafo.
 
@@ -216,11 +217,11 @@ Pulsa **Save & apply**, y el grafo ahora contiene cinco nodos:
 4. **polite** — un nodo Dialogue con una línea, mostrada bajo el alias "The Baker" en lugar del nombre de
    Maya. Luego a **leave**.
 5. **leave** — un nodo Flow, porque su única línea es una salida de flecha. Entrega el control fuera de la
-   visual novel y deja al jugador en la habitación `square` del mapa `town`.
+   novela visual y deja al jugador en la sala `square` del mapa `town`.
 
 `scene "The Bakery"` es el nombre legible de la escena, y `start morning` nombra el label de entrada: el
 nodo en el que empieza la reproducción. Cambia a la vista **Graph** y los cinco nodos están ahí, conectados,
-listos para moverse, previsualizarse, y editarse por alguien que nunca abre el archivo de texto.
+listos para que los mueva, los previsualice y los edite alguien que nunca abre el archivo de texto.
 
 ## Ver también
 

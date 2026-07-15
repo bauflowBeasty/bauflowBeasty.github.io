@@ -12,7 +12,7 @@ dependencia que tengas que satisfacer.
 ## Beasty Visual Novel
 
 [Beasty Visual Novel](/es/docs/beasty-visual-novel/) referencia este logger directamente y loguea a través
-de su propia fachada, `VNLog`. La fachada agrega tres cosas sobre la API:
+de su propia fachada, `VNLog`. La fachada suma tres cosas por encima de la API:
 
 - una etiqueta `[BeastyVN]` en cada mensaje, para que puedas encontrarlos con el campo de búsqueda de la
   consola;
@@ -22,7 +22,7 @@ de su propia fachada, `VNLog`. La fachada agrega tres cosas sobre la API:
   en una build de lanzamiento por defecto**. Una novela lanzada no escribe una línea por cada línea de
   diálogo que el jugador avanza.
 
-`VNLog` se apoya sobre `BeastyDebugLogger`, así que `IsEnabled` sigue aplicando: apagar el logger también
+`VNLog` se apoya en `BeastyDebugLogger`, así que `IsEnabled` sigue aplicando: apagar el logger también
 silencia la VN.
 
 ## Beasty Save System
@@ -34,7 +34,7 @@ primera vez que loguea algo:
   Console clasificados y coloreados;
 - si no está, el save system loguea a través de `UnityEngine.Debug`.
 
-Por eso ambos assets se distribuyen de forma independiente. Nunca tienes que instalar uno para usar el
+Por eso ambos assets se distribuyen de forma independiente: nunca necesitas instalar uno para usar el
 otro.
 
 > **Advertencia**

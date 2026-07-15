@@ -1,20 +1,20 @@
 ---
 title: "Rutinas de personajes"
-description: "Personajes que están donde deben estar, cuando deben estar. Una rutina dice: dado el día, la franja horaria y el estado del mundo, en qué sala está este perso"
+description: "Personajes que están donde deben estar, cuando deben estar. Una rutina dice: dado el día, el momento del día y el estado del mundo, en qué sala está este personaje — o si no está en ninguna."
 ---
 
-Personajes que están donde deben estar, cuando deben estar. Una rutina dice: dado el día, la franja horaria y
-el estado del mundo, en qué sala está este personaje — o si no está en ninguna parte. Esta página es para guionistas
-y diseñadores.
+Personajes que están donde deben estar, cuando deben estar. Una rutina dice: dado el día, el momento del día y
+el estado del mundo, en qué sala está este personaje — o si no está en ninguna parte. Esta página es para
+guionistas y diseñadores.
 
 Las rutinas necesitan [tiempo de juego](/es/docs/beasty-visual-novel/world/game-time/). Sin un Time Config asignado al BeastyManager, toda condición de
-tiempo es falsa y toda rutina cae en su valor de reserva.
+tiempo es falsa y toda rutina cae en su respaldo.
 
 ## Dónde vive una rutina
 
 Una rutina por personaje, guardada en el **FreeRoam Map Graph** — el mismo asset que contiene tus salas. Editas
 las rutinas en la pestaña **FreeRoam** de la ventana Beasty VN (`Tools > Beasty VN > Editor`), ya sea desde
-dentro de una sala (su línea de tiempo) o desde la cuadrícula **Routines**.
+dentro de una sala (su línea de tiempo) o desde la grilla **Routines**.
 
 Una rutina se compone de tres cosas, de fuera hacia dentro:
 
@@ -39,7 +39,7 @@ Dos formas de escribirlo:
 - un bloque **Set variable** sobre `maya.routineMode`, que hace exactamente lo mismo. El bloque es solo la
   versión tipada, guiada por selector.
 
-En el guion `.vnbeasty` lo mismo es una línea:
+En el script `.vnbeasty`, lo mismo es una línea:
 
 ```text
 routine maya Fired
@@ -50,66 +50,66 @@ Como el modo de rutina es una variable ordinaria, se guarda, se carga y se rebob
 
 ## Reglas: gana la primera coincidencia
 
-Un perfil contiene una lista ordenada de **reglas** y un **valor de reserva**. Cada regla es una condición más una sala.
+Un perfil contiene una lista ordenada de **reglas** y un **respaldo**. Cada regla es una condición más una sala.
 
 El resolutor recorre las reglas desde arriba y se detiene en **la primera regla cuya condición se cumpla**. Si ninguna
-regla coincide, se usa el valor de reserva.
+regla coincide, se usa el respaldo.
 
 > **Importante**
 > **Una regla con una sala vacía significa que el personaje está ausente** — no en esa sala, no en ninguna sala, no en el
-> mapa en absoluto. Así es como autoras "ella no está por aquí de noche": deja vacía la sala del valor de reserva.
+> mapa en absoluto. Así se escribe "ella no está por aquí de noche": deja vacía la sala del respaldo.
 
-Una condición vacía siempre se cumple, así que una regla sin condición colocada por encima de otras deja muertas todas las
+Una condición vacía siempre se cumple, así que una regla sin condición colocada por encima de otras anula todas las
 que están debajo. El orden importa.
 
-## El editor de cuadrícula de rutinas
+## El editor de grilla de rutinas
 
 La pestaña **FreeRoam** tiene un interruptor **Map / Routines** en su barra de herramientas. Cambia a **Routines** y obtienes un
-solo lienzo: **las columnas son días de la semana, las filas son franjas horarias**, más una fila **General** arriba y una fila **Fallback** al
+solo lienzo: **las columnas son días de la semana, las filas son momentos del día**, más una fila **General** arriba y una fila **Fallback** al
 final.
 
-Una barra de filtros controla qué muestra la cuadrícula y qué edita:
+Una barra de filtros controla qué muestra la grilla y qué edita:
 
 | Filtro | Efecto |
 |---|---|
-| **Character** | Elige uno y la cuadrícula edita la semana de ese personaje. Este es el modo de edición. |
+| **Character** | Elige uno y la grilla edita la semana de ese personaje. Este es el modo de edición. |
 | **Room** | Resalta las celdas que resuelven a esa sala, así puedes ver quién está en la panadería toda la semana. |
-| **Day** | Reduce la cuadrícula a un día de la semana. |
+| **Day** | Reduce la grilla a un día de la semana. |
 | **Profile** | Cuál de los perfiles del personaje estás editando. |
 
-Clica una celda vacía y elige una sala del menú; clica una celda ocupada para seleccionarla y edita su colocación en el
-inspector de la derecha (su sala, su arte, su posición). Arrastra por las celdas para pintar la misma sala sobre una
-serie de ellas. **Clear (absent)** vacía una celda.
+Haz clic en una celda vacía y elige una sala del menú; haz clic en una celda ocupada para seleccionarla y editar su
+colocación en el inspector de la derecha (su sala, su arte, su posición). Arrastra sobre las celdas para pintar la misma
+sala en varias de una vez. **Clear (absent)** vacía una celda.
 
 La fila **General** es para colocaciones que no dependen del día de la semana. Una regla creada ahí se aplica a
-todos los días, lo que mantiene la lista de reglas pequeña: un panadero que está en la panadería cada mañana es una regla, no siete.
+todos los días, lo que mantiene corta la lista de reglas: un panadero que está en la panadería cada mañana es una regla, no siete.
 
 > **Nota**
-> **La cuadrícula es una lente sobre la lista de reglas, no un segundo modelo.** Lee las reglas, las muestra como celdas, y las
-> vuelve a escribir como reglas. Una regla escrita a mano con una condición que la cuadrícula no puede dibujar (digamos, una que también
-> comprueba el estado de una misión) se conserva intacta y se marca como avanzada — la cuadrícula no la destruirá en silencio.
+> **La grilla es una lente sobre la lista de reglas, no un segundo modelo.** Lee las reglas, las muestra como celdas, y las
+> vuelve a escribir como reglas. Una regla escrita a mano con una condición que la grilla no puede dibujar (digamos, una que también
+> comprueba el estado de una misión) se conserva intacta y se marca como avanzada — la grilla no la destruirá en silencio.
 > Las reglas siguen siendo la verdad.
 
-La cuadrícula también saca a la luz los **conflictos**: un personaje colocado en dos salas en la misma franja horaria en días
-superpuestos. Soltar a un personaje en una sala elimina automáticamente su colocación en otras salas en esa franja horaria, así que
-rara vez creas uno a mano — pero las reglas escritas a mano sí pueden, y la cuadrícula te lo indica.
+La grilla también saca a la luz los **conflictos**: un personaje colocado en dos salas en el mismo momento del día en días
+superpuestos. Soltar a un personaje en una sala elimina automáticamente su colocación en otras salas en ese momento del día, así que
+rara vez creas uno a mano — pero las reglas escritas a mano sí pueden crearlos, y la grilla te lo indica.
 
 ## Las salas no son la única forma de estar en algún sitio
 
 Hay una segunda forma, centrada en la sala, de crear los mismos datos: entra en una sala en la vista **Map** y usa su
-línea de tiempo, que tiene un carril por franja horaria y un botón `+ Character` por carril. Añadir un personaje al
-carril de Morning de la Panadería escribe exactamente la regla que habría escrito la cuadrícula. Los dos editores son dos vistas de
-una misma lista de reglas; usa el que se ajuste a cómo estés pensando — "qué hace Maya esta semana" o "quién está en la panadería
+línea de tiempo, que tiene un carril por momento del día y un botón `+ Character` por carril. Añadir un personaje al
+carril de Morning de la Panadería escribe exactamente la regla que habría escrito la grilla. Los dos editores son dos vistas de
+una misma lista de reglas; usa el que encaje con cómo estás pensando — "qué hace Maya esta semana" o "quién está en la panadería
 por la mañana".
 
 ## Cómo se ve el personaje en la sala
 
-Una vez que una regla coloca a un personaje en una sala, el runtime tiene que dibujarla. Usa el primero de estos que exista:
+Una vez que una regla coloca a un personaje en una sala, el runtime tiene que dibujarlo. Usa el primero de estos que exista:
 
-1. **El sprite marcador del paso de la misión**, cuando una [anulación de rutina de misión](/es/docs/beasty-visual-novel/world/quests/) la movió
+1. **El sprite marcador del paso de la misión**, cuando una [anulación de rutina de misión](/es/docs/beasty-visual-novel/world/quests/) lo movió
    ahí y ese paso define un marcador.
 2. **Lo visual propio de la regla** — el sprite, la posición, la escala, el orden de dibujado y la respuesta al pasar el
-   cursor creados sobre la propia colocación (el inspector de la cuadrícula, o la línea de tiempo de la sala).
+   cursor definidos en la propia colocación (el inspector de la grilla, o la línea de tiempo de la sala).
 3. **Un punto de personaje libre** en el prefab de la sala, usando el sprite de mundo libre del personaje.
 4. **El centro de la sala**, si no quedan puntos.
 
@@ -122,9 +122,9 @@ Un **punto** es un objeto hijo dentro de un prefab de sala que lleva un componen
 se para alguien. Su **posición y escala son decisiones del prefab, no datos en la rutina** — lo colocas
 en la escena, a ojo, con las propias herramientas de Unity.
 
-Cada personaje colocado de forma genérica ocupa **el siguiente punto libre** de la sala. Dos personajes por tanto nunca
+Cada personaje colocado de forma genérica ocupa **el siguiente punto libre** de la sala. Por eso dos personajes nunca
 comparten un punto: el primero toma el primer punto, el segundo toma el segundo. Si a la sala se le acaban los puntos, el
-siguiente personaje recae en el centro de la sala — así que dale a una sala tantos puntos como pueda llegar a albergar a la vez. Consulta
+siguiente personaje cae al centro de la sala — así que dale a cada sala tantos puntos como personajes pueda llegar a albergar a la vez. Consulta
 [Salas de mundo libre](/es/docs/beasty-visual-novel/world/free-roam-rooms/) para saber cómo añadir uno.
 
 ### Las poses ganan a los marcadores
@@ -146,7 +146,7 @@ Cada recálculo publica tres variables reservadas por personaje:
 | `@char:<id>:@routineSpot` | `maya.spot` | El id del punto dentro de esa sala, o vacío. |
 | `@char:<id>:@routineMode` | `maya.routineMode` | El nombre del perfil activo. Escribir esto cambia su horario. |
 
-Lo que significa que puedes escribir condiciones sobre dónde está la gente, en cualquier lugar donde se acepten condiciones:
+Eso significa que puedes escribir condiciones sobre dónde está la gente, en cualquier sitio donde se acepten condiciones:
 
 ```text
 maya.location == Bakery
@@ -157,45 +157,45 @@ maya.routineMode == Working
 Un fondo de sala que cambia cuando hay alguien en la sala, una elección que solo aparece cuando el tendero está
 presente, una misión que empieza cuando el jugador la encuentra en el parque — todo eso es una sola condición.
 
-## Clicar en un personaje en una sala
+## Hacer clic en un personaje en una sala
 
-Clicar en un personaje en una sala ejecuta, en este orden:
+Al hacer clic en un personaje en una sala se ejecuta, en este orden:
 
 1. la lista de **on interact** de la rutina — el primer caso cuya condición se cumpla reproduce su escena;
 2. si no, el **[menú de conversación](/es/docs/beasty-visual-novel/world/talk-menu/)** del personaje, si resuelve en alguna entrada;
 3. si no, la escena de interacción por defecto de la rutina.
 
-Así que en el momento en que le das a un personaje un menú de conversación, clicarlo lo abre. No conectas nada.
+Así que en cuanto le das a un personaje un menú de conversación, hacer clic en él lo abre. No hay que conectar nada.
 
 ## Anulaciones de rutina por misión
 
 Una misión puede mover a un personaje. Mientras una misión está **activa** y uno de sus pasos de conversación es el
 actual, ese paso puede colocar a su personaje en otra sala — opcionalmente solo en ciertos días de la semana y durante
-ciertas franjas horarias. Se impone por completo a la rutina mientras se aplique, y la variable `location` del personaje
+ciertos momentos del día. Se impone por completo a la rutina mientras se aplique, y la variable `location` del personaje
 la sigue, así que toda condición del juego concuerda con lo que ve el jugador.
 
-Gana el primer paso que coincida (orden del catálogo). Autóralo en el objetivo, bajo **Talk step > Move character while current**.
+Gana el primer paso que coincida (orden del catálogo). Se define en el objetivo, bajo **Talk step > Move character while current**.
 Consulta [Misiones](/es/docs/beasty-visual-novel/world/quests/).
 
 ## El calendario de rutina dentro del juego
 
 Los jugadores pueden ver el horario de un personaje. La pantalla **Character Routine** muestra el calendario del
-personaje seleccionado en **vista de día** (una fila por franja horaria de hoy) o **vista de semana** (una fila por día de la
-semana y franja horaria). Solo se rellena cuando el indicador **Show routine** del personaje está activado, así que un
+personaje seleccionado en **vista de día** (una fila por momento del día de hoy) o **vista de semana** (una fila por día de la
+semana y momento del día). Solo se rellena cuando el indicador **Show routine** del personaje está activado, así que un
 extraño misterioso sigue siendo misterioso. Consulta [Pantallas de personaje](/es/docs/beasty-visual-novel/world/character-screens/).
 
 ## Ejemplo trabajado: una panadera
 
 **Objetivo.** Maya hornea por la mañana, pasea por el parque por la tarde, y no está por ningún lado de noche.
 
-1. **Tiempo.** Crea un Time Config (`Create > Beasty VN > Config > Time Config`), modo `SlotsOnly`, franjas horarias
+1. **Tiempo.** Crea un Time Config (`Create > Beasty VN > Config > Time Config`), modo `SlotsOnly`, momentos del día
    `Morning`, `Afternoon`, `Evening`, `Night`. Arrástralo al campo **Time Config** del BeastyManager.
 2. **Salas.** En la pestaña **FreeRoam**, crea las salas `Bakery` y `Park` (cada una recibe su prefab; consulta
    [Salas de mundo libre](/es/docs/beasty-visual-novel/world/free-roam-rooms/)).
 3. **Puntos.** Abre el prefab de Bakery, añade un objeto hijo llamado `Counter` donde Maya debería estar de pie, y ponle un
    componente `FreeRoamCharacterSpot`. Haz lo mismo para un `Bench` en el prefab de Park.
-4. **Rutina.** Cambia la pestaña FreeRoam a **Routines** y filtra por el personaje **Maya**. En la cuadrícula:
-   - La fila **General** no es lo que quieres aquí (la colocación depende de la franja horaria), así que usa las filas de franja horaria.
+4. **Rutina.** Cambia la pestaña FreeRoam a **Routines** y filtra por el personaje **Maya**. En la grilla:
+   - La fila **General** no es lo que quieres aquí (la colocación depende del momento del día), así que usa las filas de cada momento del día.
    - Fila **Morning**, todos los días de la semana: elige **Bakery**.
    - Fila **Evening**, todos los días de la semana: elige **Park**.
    - **Afternoon** y **Night**: déjalas vacías.
@@ -208,7 +208,7 @@ extraño misterioso sigue siendo misterioso. Consulta [Pantallas de personaje](/
 
 Ahora el giro de la historia. La despiden en el capítulo 3:
 
-1. En la cuadrícula de Routines, usa el filtro **Profile** para crear un segundo perfil llamado `Fired`, y complétalo:
+1. En la grilla de Routines, usa el filtro **Profile** para crear un segundo perfil llamado `Fired`, y complétalo:
    Morning en el `Park`, todo lo demás vacío.
 2. De vuelta en la historia, en el momento en que la despiden, coloca un bloque **Routine override**: personaje `maya`,
    perfil `Fired`.
@@ -218,7 +218,7 @@ y se rebobina correctamente si el jugador retrocede más allá de ese punto.
 
 ## Ver también
 
-- [Tiempo de juego](/es/docs/beasty-visual-novel/world/game-time/) — franjas horarias, el reloj, y cómo se mueve el tiempo.
+- [Tiempo de juego](/es/docs/beasty-visual-novel/world/game-time/) — momentos del día, el reloj, y cómo se mueve el tiempo.
 - [Salas de mundo libre](/es/docs/beasty-visual-novel/world/free-roam-rooms/) — salas, prefabs de sala, puntos de personaje.
 - [Interactuables y puertas](/es/docs/beasty-visual-novel/world/interactables-and-doors/) — poses de personaje.
 - [Misiones](/es/docs/beasty-visual-novel/world/quests/) — anulaciones de rutina por misión.

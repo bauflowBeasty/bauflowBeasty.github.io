@@ -1,6 +1,6 @@
 ---
 title: "Prefabs de UI"
-description: "Todo lo que el jugador ve es un prefab uGUI. No hay capa de renderizado personalizada, ningún framework de UI propietario y ningún canvas oculto: es Unity UI, en prefabs"
+description: "Todo lo que el jugador ve es un prefab uGUI. No hay capa de renderizado personalizada, ningún framework de UI propietario y ningún canvas oculto: es Unity UI, en prefabs que puedes abrir y editar."
 ---
 
 Todo lo que el jugador ve es un prefab uGUI. No hay capa de renderizado personalizada, ningún framework de UI
@@ -13,7 +13,7 @@ muestra las dos formas de restilizar el juego.
 |---|---|
 | `VisualNovelScene` | Una escena completa ya lista: todo lo de abajo, ya cableado. |
 | `VN_Canvas` | Toda la interfaz en un prefab: la vista de diálogo, la vista de elecciones, y el gestor de menús con el menú principal, el menú de juego, guardar/cargar, preferencias, historial, créditos y pantallas de ayuda, además del diálogo de confirmación y la pantalla de carga. |
-| `Stage` | El escenario (fondo, personajes, props) y el escenario de deambulación libre. |
+| `Stage` | El escenario (fondo, personajes, props) y el escenario de mundo libre. |
 | `DialogPanel` | El panel de diálogo: la placa de nombre y la línea. |
 | `ChoiseRoot`, `ChoiseBtn` | El contenedor de elecciones y la plantilla de botón de elección. |
 | `MainMenuScreen`, `GameMenuScreen`, `VNMenuRoot` | Los menús. |
@@ -33,8 +33,8 @@ decoración. Las vistas encuentran sus piezas a través de sus campos serializad
 sigan apuntando a algo, el prefab sigue funcionando. Este es el camino normal y no cuesta nada.
 
 **Opción 2: apunta las vistas a tu propio canvas.** Las vistas son MonoBehaviours comunes con referencias
-serializadas. Construye tu propio canvas, pon las vistas en él, cablea los campos, y el motor conduce tu UI en
-lugar de la nuestra. Nada en el runtime asume la jerarquía incluida.
+serializadas. Construye tu propio canvas, pon las vistas en él, cablea los campos, y el motor controla tu UI en
+lugar de la nuestra. Nada en el runtime da por sentada la jerarquía incluida.
 
 ## Los dos elementos de menú de prefabs
 
@@ -59,7 +59,7 @@ limpia para restilizar. Recurre a Upgrade en cualquier otro caso.
 
 Auto-wire vuelve a resolver las vistas de la escena y recrea cualquier gestor que haya desaparecido. Solo
 rellena referencias VACÍAS — nunca sobrescribe un cableado que hiciste tú mismo — así que es seguro presionarlo
-en cualquier momento. Ver [Validación e ids](/es/docs/beasty-visual-novel/production/validation-and-ids/) para saber exactamente qué garantiza.
+en cualquier momento. Consulta [Validación e ids](/es/docs/beasty-visual-novel/production/validation-and-ids/) para saber exactamente qué garantiza.
 
 ## Ver también
 

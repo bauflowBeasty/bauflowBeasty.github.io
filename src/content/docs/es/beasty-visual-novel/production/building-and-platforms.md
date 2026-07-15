@@ -36,7 +36,7 @@ Cualquiera con E/S de archivos normal — que es lo que el sistema de guardado n
 
 > **Advertencia**
 > **WebGL no es compatible en 1.0.0.** El pipeline de guardado es la razón: la escritura atómica necesita
-> `File.Replace`, y las variantes asíncronas de guardado/carga son basadas en `Task`. Una build de navegador no
+> `File.Replace`, y las variantes asíncronas de guardado/carga están basadas en `Task`. Una build de navegador no
 > provee ninguna de las dos. No hay un modo parcial — no planifiques un lanzamiento en WebGL con esta versión.
 > La explicación completa está en [plataformas y límites](/es/docs/beasty-save-system/advanced/platforms-and-limits/) del sistema de guardado.
 
@@ -47,14 +47,14 @@ Una checklist corta:
 1. **Ejecuta el validador** en cada `DialogueScene`
    (`Tools > Beasty VN > Maintenance > Validate Selected Project`). Encuentra el id de personaje colgante, el
    resultado de subgrafo sin enrutar y la clave de localización sin texto de origen — los fallos que no
-   arrojan excepción y por eso no aparecen en un playtest de las rutas que resulta que recorriste. Ver
+   lanzan excepción y por eso no aparecen al probar solo las rutas que casualmente recorriste. Consulta
    [Validación e ids](/es/docs/beasty-visual-novel/production/validation-and-ids/).
 2. **Revisa el Time Config** si tu juego usa tiempo de juego. Se asigna en el BeastyManager, y **dejarlo vacío
    apaga el sistema de tiempo**: no se escribe ninguna variable de tiempo y toda condición de tiempo se evalúa
-   como falsa. Un juego cuyas rutinas silenciosamente no hacen nada en la build normalmente tiene un Time
-   Config vacío. Ver [Tiempo de juego](/es/docs/beasty-visual-novel/world/game-time/).
+   como falsa. Un juego cuyas rutinas no hacen nada en la build, sin dar ningún error, suele tener un Time
+   Config vacío. Consulta [Tiempo de juego](/es/docs/beasty-visual-novel/world/game-time/).
 3. **Reconstruye el contenido de Addressables** si usas streaming. Un catálogo desactualizado significa que el
-   arte transmitido no se resuelve. Ver [Streaming](/es/docs/beasty-visual-novel/production/streaming/).
+   arte en streaming no se resuelve. Consulta [Streaming](/es/docs/beasty-visual-novel/production/streaming/).
 4. Revisa los totales de [localización](/es/docs/beasty-visual-novel/production/localization/): el validador informa cuántas traducciones faltan o
    están desactualizadas.
 
@@ -63,11 +63,11 @@ Una checklist corta:
 La resolución de diseño vive en [VN settings](/es/docs/beasty-visual-novel/production/vn-settings/) (`targetWidth` y `targetHeight`, 1920x1080 por
 defecto).
 
-Para asegurarte de que el juego se ENCUADRA igual en cada monitor, agrega el **Beasty Aspect Ratio Enforcer**
-(`Add Component > Beasty > Beasty Aspect Ratio Enforcer`) a tu cámara. Fuerza a la cámara a presentarse con una
-relación de aspecto fija: una ventana más ancha recibe barras negras a la izquierda y derecha (pillarbox), una
-más alta recibe barras arriba y abajo (letterbox). La relación proviene de la resolución objetivo de VN
-settings por defecto, y se puede sobrescribir por cámara.
+Para asegurarte de que el juego se ENCUADRE igual en cada monitor, agrega el **Beasty Aspect Ratio Enforcer**
+(`Add Component > Beasty > Beasty Aspect Ratio Enforcer`) a tu cámara. Obliga a la cámara a renderizarse con
+una relación de aspecto fija: una ventana más ancha recibe barras negras a los lados (pillarbox), una más
+alta recibe barras arriba y abajo (letterbox). La relación sale por defecto de la resolución objetivo de VN
+settings, y se puede sobrescribir por cámara.
 
 > **Nota**
 > Para que la interfaz quede en letterbox junto con el juego, el Canvas debe estar en modo **Screen Space -
@@ -79,14 +79,14 @@ settings por defecto, y se puede sobrescribir por cámara.
 Agrega el **Beasty Loading Screen** (`Add Component > Beasty > Beasty Loading Screen`) a un panel de tu canvas y
 el BeastyManager lo controla: aparece mientras el juego arranca y mientras se carga una partida.
 
-Se desvanece hacia adentro y hacia afuera, respeta un **tiempo de visualización mínimo** (1 segundo por
-defecto) para que una carga rápida no haga parpadear el panel por dos frames, y puede controlar una barra de
-progreso (un relleno de Image, un Slider, o ambos) que permanece oculta hasta que algo informa progreso. Todo su
-temporizado no está escalado, así que funciona mientras el juego está en pausa. Cada elemento visual es tuyo:
-restiliza los hijos libremente.
+Aparece y desaparece con un fundido, respeta un **tiempo de visualización mínimo** (1 segundo por defecto)
+para que una carga rápida no haga parpadear el panel por dos frames, y puede controlar una barra de progreso
+(un relleno de Image, un Slider, o ambos) que permanece oculta hasta que algo informa progreso. Todos sus
+tiempos usan tiempo sin escalar, así que funciona aunque el juego esté en pausa. Cada elemento visual es
+tuyo: restiliza los hijos libremente.
 
-Los programadores pueden reemplazarla por su propia implementación, y pueden mantener el arranque abierto hasta
-que sus propios sistemas estén listos. Ver [Controladores](/es/docs/beasty-visual-novel/scripting/controllers/).
+Los programadores pueden reemplazarla por su propia implementación, y mantener el arranque abierto hasta
+que sus propios sistemas estén listos. Consulta [Controladores](/es/docs/beasty-visual-novel/scripting/controllers/).
 
 ## Ver también
 
