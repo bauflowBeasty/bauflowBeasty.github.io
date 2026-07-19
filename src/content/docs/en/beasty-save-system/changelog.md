@@ -60,3 +60,7 @@ Behaviour changes made before 1.0.0 ships. Save files written by earlier builds 
   re-trigger the game logic wired to them (SFX, volume changes, callbacks).
 - **Removed** `PasswordGenerator`, which was unused, undocumented and biased (**breaking**). Any non-empty
   string works as an encryption key; the cipher derives the AES key from it with SHA-256.
+- **Logging got quieter by default.** The file-path dumps (`File Path: …`, `Folder Path …`) that used to
+  print on every file operation in the editor are now Verbose-only. And probing a slot that does not
+  exist — what a save-slot screen does for every empty slot each time it opens — no longer logs a
+  warning per slot; a real `Load` of a missing slot still warns.

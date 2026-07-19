@@ -64,3 +64,8 @@ siguen cargando sin cambios.
 - **Eliminado** `PasswordGenerator`, que no se usaba, no estaba documentado y estaba sesgado (**breaking**).
   Cualquier string no vacío sirve como clave de encriptación; el cifrador deriva la clave AES a partir de él
   con SHA-256.
+- **El logging ahora es más silencioso por defecto.** Los volcados de rutas de archivo (`File Path: …`,
+  `Folder Path …`) que antes se imprimían con cada operación de archivo en el editor ahora son solo del nivel
+  Verbose. Y sondear un slot que no existe — lo que hace una pantalla de ranuras de guardado con cada slot
+  vacío cada vez que se abre — ya no registra una advertencia por slot; un `Load` real de un slot ausente
+  sigue avisando.

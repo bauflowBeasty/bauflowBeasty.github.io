@@ -1,0 +1,17 @@
+{
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Write|Bash|PowerShell",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node .claude/hooks/project-map-reminder.mjs",
+            "timeout": 15,
+            "statusMessage": "Comprobando si hay que actualizar PROJECT_MAP.md"
+          }
+        ]
+      }
+    ]
+  }
+}
