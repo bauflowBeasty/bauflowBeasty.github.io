@@ -2,7 +2,7 @@
 
 > **Regla:** Leer este archivo ANTES de cualquier búsqueda en el proyecto. Si un cambio agrega, mueve, renombra o elimina archivos/carpetas (o cambia el propósito de algo listado aquí), actualizar este mapa en el mismo turno.
 >
-> Última actualización: 2026-07-17
+> Última actualización: 2026-07-21
 
 ## Qué es este proyecto
 
@@ -15,7 +15,9 @@ Sitio de documentación y portfolio **Beasty Components** (marca de bauflow) hec
 | `npm run dev` | Servidor de desarrollo (localhost:4321) |
 | `npm run build` | Build a `dist/` + índice Pagefind |
 | `npm run preview` | Previsualizar el build |
-| `node scripts/check-links.mjs` | Verificar enlaces internos rotos |
+| `npm run doc:links` | Verificar enlaces internos rotos (lee `dist/`: ejecutar DESPUÉS del build) |
+| `npm run doc:index` | Regenerar `docs/DOC-INDEX.md` (índice de páginas y símbolos) |
+| `npm run doc:sync` | Informar de qué documentación se ha quedado atrás respecto al proyecto Unity |
 
 ## Estructura
 
@@ -24,13 +26,15 @@ astro.config.mjs          → Config Astro: site URL, temas Shiki (github-light/
 package.json              → Deps: astro 5, fuentes (Bricolage Grotesque, IBM Plex), pagefind, puppeteer-core
 tsconfig.json             → Config TypeScript
 HOW-TO-ADD-PROJECT.md     → Guía manual: cómo agregar un producto nuevo al sitio
+FLUJO-DE-TRABAJO.md       → Guía para Álvaro: cómo se mantiene la doc entre los dos proyectos (referencia humana)
 PROJECT_MAP.md            → Este archivo
 CLAUDE.md                 → Reglas para Claude: leer el mapa antes de buscar, mantenerlo actualizado
 
 .claude/
 ├── settings.json         → Config del proyecto: hook PostToolUse que recuerda actualizar este mapa
 ├── settings.local.json   → Permisos locales (no se commitea)
-└── hooks/project-map-reminder.mjs → Script del hook (detecta cambios estructurales)
+├── hooks/project-map-reminder.mjs → Script del hook (detecta cambios estructurales)
+└── skills/sync-docs/SKILL.md → Comando /sync-docs: actualizar las docs desde el proyecto Unity
 
 .github/workflows/deploy.yml  → CI: build + deploy a GitHub Pages
 
@@ -76,25 +80,61 @@ public/
 └── projects/             → Imágenes legacy de productos (save-system/, debug-logger/)
 
 scripts/
-├── check-links.mjs       → Chequeo de enlaces internos
-└── migrate-docs.mjs      → Migración one-shot de docs viejas (histórico)
+├── check-links.mjs       → Chequeo de enlaces internos (lee dist/)
+├── doc-index.mjs         → Genera docs/DOC-INDEX.md a partir de las páginas EN
+├── sync-check.mjs        → Informa de desincronización con el proyecto Unity (changelogs + Plastic)
+└── migrate-docs.mjs      → Migración one-shot de docs viejas (histórico, ya sin origen que leer)
 
 docs/  (documentación INTERNA del repo, no se publica)
-├── changelogs/           → Changelogs fuente de los assets Unity (SaveSystem, VN)
+├── changelogs/           → Copia local de los changelogs de los assets (SaveSystem, VN)
+├── DOC-INDEX.md          → GENERADO: página → secciones, y símbolo → páginas que lo documentan
+├── sync-state.json       → Config de sync-check.mjs: ruta del proyecto Unity, cm.exe, assets
+├── DOCS-HOME.md          → Texto de portada rescatado del árbol antiguo; candidato a página /docs/
 ├── superpowers/plans/    → Planes de implementación (2026-07-13 site-redesign)
 ├── superpowers/specs/    → Specs de diseño (redesign, portada/marca/humanización ES)
-└── SCREENSHOTS.md        → Notas sobre capturas
+└── SCREENSHOTS.md        → Capturas pendientes de hacer (12), con nombre de archivo exacto
 
 projects/Inventory/       → Vacío (legacy)
 dist/                     → Salida del build (generado, no editar)
-
-DOC-UPDATES-Save-System-Logging-2026-07-17.md → Notas pendientes de actualización de docs (sin commit)
-PLAN-DE-PRUEBAS-TESTER.md                     → Plan de pruebas manual (sin commit)
 ```
+
+## Relación con el proyecto Unity
+
+**Este repositorio es la única copia de la documentación** (desde 2026-07-21). El proyecto Unity real,
+`E:\Beasty\BeastyVisualNovel`, ya no guarda documentación: su carpeta `Documentation/` se vació y solo
+queda un `README.md` que apunta aquí. Antes había un árbol canónico duplicado ahí, y las dos copias se
+desincronizaron en silencio en ambos sentidos.
+
+Lo que sigue viviendo en el proyecto Unity, en `Assets/BeastyComponents/<asset>/` (es lo que viaja dentro
+del `.unitypackage`):
+
+| Archivo | Papel |
+|---|---|
+| `<Asset>_CHANGELOG.md` | **Canal de traspaso**: lo que se anota ahí es lo que hay que documentar aquí. Se copia a `docs/changelogs/` y se refleja en las páginas `<producto>/changelog.md` (EN + ES). |
+| `README.md` | Presentación corta del paquete. |
+| `<Asset>_LICENSE.md` | Licencia. |
+
+El proyecto Unity tiene además su propio mapa de código, `docs/codemap/CODEMAP.md` (autogenerado, un archivo
+por ensamblado), útil para localizar el código detrás de un cambio. Está bajo **Plastic SCM**, no git.
+
+### Flujo de actualización
+
+1. Álvaro cambia código en el proyecto Unity y anota el cambio en el `CHANGELOG` del asset.
+2. Aquí se ejecuta el comando **`/sync-docs`** (`.claude/skills/sync-docs/SKILL.md`), que detecta lo
+   pendiente con `npm run doc:sync`, localiza las páginas con `docs/DOC-INDEX.md`, edita EN + ES, y
+   verifica con build + `doc:links` + `doc:index`.
+
+`scripts/migrate-docs.mjs` queda como **histórico**: fue la migración one-shot del árbol antiguo y ya no
+tiene origen que leer. Documenta la convención que sigue el contenido (H1 → `title`, enlaces relativos →
+rutas absolutas, imágenes → `/docs-images/<producto>/`) y el origen del defecto de las `description` EN
+truncadas (`.slice(0, 158)`).
 
 ## Reglas clave del proyecto
 
 - **EN es canónico**: todo cambio de contenido se hace primero en `src/content/docs/en/` y luego se refleja en `es/` (misma ruta de archivo).
 - **Un producto nuevo** requiere tocar: `src/data/products.ts`, `src/data/sidebars.ts`, contenido en `en/` y `es/`, e imágenes en `public/docs-images/`. Ver `HOW-TO-ADD-PROJECT.md`.
 - **La navegación lateral NO se genera sola**: agregar una página nueva exige registrarla en `src/data/sidebars.ts` (EN y ES).
+- **Para saber qué página documenta algo, usar `docs/DOC-INDEX.md`**, no abrir las 83 páginas: su índice
+  inverso va de símbolo (`MigratedFrom`, `BeastySaveLog`…) a página. Son 65 KB: buscar con Grep, no leerlo
+  entero. Regenerarlo con `npm run doc:index` después de tocar contenido.
 - **Terminología ES**: unificada según spec `docs/superpowers/specs/2026-07-13-portada-marca-y-humanizacion-es-design.md` (p. ej. «cifrado», no «encriptación»).

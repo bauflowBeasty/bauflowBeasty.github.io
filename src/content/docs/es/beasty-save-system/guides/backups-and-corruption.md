@@ -62,6 +62,15 @@ se descarta en lugar de promoverlo a `.bak`. Esto importa más de lo que suena. 
 encima de un archivo roto no destruye la última copia funcional. El jugador puede pulsar "Save" en un slot corrupto
 tantas veces como quiera, y el `.bak` bueno de abajo sigue intacto.
 
+Y tampoco ocurre en silencio. En el momento en que el sistema rechaza la rotación, avisa:
+
+```
+[BeastySave] 'slot1' failed its checksum; backup NOT rotated (any existing .bak is left untouched).
+```
+
+Esa línea en un log significa que el slot en disco está dañado y que el `.bak` puede ser la única copia buena
+que queda.
+
 `Delete` es la excepción, y es deliberada: eliminar un slot elimina también su backup. Cuando el
 jugador dice "borra este guardado", lo dice en serio.
 
@@ -169,5 +178,6 @@ probar el flujo de arriba: guarda dos veces, corrompe el archivo del slot en un 
 - [Slots y metadatos](/es/docs/beasty-save-system/guides/slots-and-metadata/) — listar slots, y mostrar uno dañado en la UI
 - [Settings](/es/docs/beasty-save-system/guides/settings/) — el campo `Backup`
 - [Resultados y errores](/es/docs/beasty-save-system/reference/results-and-errors/) — cada código de error y qué lo causa
+- [Logging](/es/docs/beasty-save-system/guides/logging/) — el aviso del checksum de arriba, y todo lo demás que imprime el save system
 - [El formato del archivo de guardado](/es/docs/beasty-save-system/reference/save-file-format/) — el envelope y el checksum
 - [Solución de problemas](/es/docs/beasty-save-system/troubleshooting/)

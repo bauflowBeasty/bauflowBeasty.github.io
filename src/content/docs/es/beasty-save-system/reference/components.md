@@ -74,11 +74,12 @@ Add Component: `Beasty > Beasty Save Manager`. Marcado `[DisallowMultipleCompone
 El punto de entrada a nivel de escena del flujo sin código. Contiene la configuración, rastrea cada
 `BeastySaveable` registrado, y escribe un documento de grupo por guardado.
 
-### Campo del inspector
+### Campos del inspector
 
 | Campo | Tipo | Significado |
 |---|---|---|
 | Settings (`settings`) | `BeastySaveSettings` | Ubicación, cifrado, copias de seguridad, carga estricta y versión de datos usados por SaveAll/LoadAll. |
+| Logs (`logs`) | `BeastySaveLogMode` | Cuánto imprime el save system: `Auto` (activo en el editor y en builds de desarrollo, apagado en release), `On`, `Verbose`, `Off`. Se aplica en `OnEnable` y `OnValidate`, así que cambiarlo en Play surte efecto al momento. Consulta [Logging](/es/docs/beasty-save-system/guides/logging/). |
 
 Cada campo de `BeastySaveSettings` está documentado en [Configuración](/es/docs/beasty-save-system/guides/settings/).
 

@@ -1,6 +1,6 @@
 # Screenshots still to capture
 
-The documentation is complete in text. Eleven places reference a screenshot that does not exist yet — the
+The documentation is complete in text. Twelve places reference a screenshot that does not exist yet — the
 pages read fine without them, but each one is a spot where a picture carries information the words cannot.
 
 Capture each in Unity, save it with the **exact filename** below, and drop it in the folder shown. Nothing
@@ -25,6 +25,7 @@ else needs to change: the pages already link to these paths.
 | `save-manager-window.png` | The Save Manager window with all three sections populated: Manager, Saveables in Scene, and at least two Slots on Disk. |
 | `save-saveable-inspector.png` | The Beasty Saveable inspector with the Save Id filled in and Transform ticked in Saved Components. |
 | `save-button-onclick.png` | A uGUI Button's OnClick list wired to `BeastySaveManager.SaveAll` with `slot1` typed into the string field. |
+| `save-manager-logging.png` | The BeastySaveManager inspector with the **Logging** dropdown open, showing Auto / On / Verbose / Off. |
 
 ## beasty-debug-logger/images/
 
@@ -35,6 +36,6 @@ else needs to change: the pages already link to these paths.
 ## Notes
 
 - Crop to the window. Do not screenshot the whole editor.
-- Use the light or the dark editor theme consistently across all eleven.
+- Use the light or the dark editor theme consistently across all twelve.
 - If you decide a screenshot is not worth taking, delete the `![...](...)` line from the page rather than
   leaving a broken image.

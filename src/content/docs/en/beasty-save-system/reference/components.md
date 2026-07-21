@@ -72,11 +72,12 @@ Add Component: `Beasty > Beasty Save Manager`. Marked `[DisallowMultipleComponen
 The scene-level entry point of the no-code flow. It holds the settings, tracks every registered
 `BeastySaveable`, and writes one group document per save.
 
-### Inspector field
+### Inspector fields
 
 | Field | Type | Meaning |
 |---|---|---|
 | Settings (`settings`) | `BeastySaveSettings` | Location, encryption, backup, strict loading and data version used by SaveAll/LoadAll. |
+| Logs (`logs`) | `BeastySaveLogMode` | How much the save system prints: `Auto` (on in the editor and development builds, off in release), `On`, `Verbose`, `Off`. Applied on `OnEnable` and `OnValidate`, so changing it in Play takes effect at once. See [Logging](/docs/beasty-save-system/guides/logging/). |
 
 Every field of `BeastySaveSettings` is documented in [Settings](/docs/beasty-save-system/guides/settings/).
 

@@ -8,6 +8,11 @@
 ## Reglas del proyecto
 
 - Idioma con el usuario: español.
+- **Este repo es la única copia de la documentación.** El proyecto Unity (`E:\Beasty\BeastyVisualNovel`)
+  solo conserva el `CHANGELOG`, `README` y `LICENSE` de cada asset. Para actualizar docs tras un cambio del
+  asset: comando `/sync-docs`.
+- Para localizar qué página documenta un símbolo, buscar con Grep en `docs/DOC-INDEX.md` (índice inverso);
+  no abrir las páginas una a una. Regenerar con `npm run doc:index` tras tocar contenido.
 - EN (`src/content/docs/en/`) es el contenido canónico; ES (`src/content/docs/es/`) es espejo 1:1 con las mismas rutas.
 - Página nueva de docs ⇒ registrarla en `src/data/sidebars.ts` (EN y ES).
 - Producto nuevo ⇒ seguir `HOW-TO-ADD-PROJECT.md`.

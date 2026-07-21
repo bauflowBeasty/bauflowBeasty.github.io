@@ -62,6 +62,14 @@ it is discarded rather than promoted to `.bak`. This matters more than it sounds
 top of a broken file does not destroy the last working copy. The player can hit "Save" on a corrupted
 slot as many times as they like, and the good `.bak` underneath stays good.
 
+It does not happen silently, either. The moment the system refuses the rotation, it warns:
+
+```
+[BeastySave] 'slot1' failed its checksum; backup NOT rotated (any existing .bak is left untouched).
+```
+
+That line in a log means the slot on disk is damaged and the `.bak` may be the only good copy left.
+
 `Delete` is the exception, and it is deliberate: deleting a slot deletes its backup as well. When the
 player says "delete this save", they mean it.
 
@@ -169,5 +177,6 @@ test the flow above: save twice, corrupt the slot file in a text editor, load, r
 - [Slots and metadata](/docs/beasty-save-system/guides/slots-and-metadata/) — listing slots, and showing a damaged one in the UI
 - [Settings](/docs/beasty-save-system/guides/settings/) — the `Backup` field
 - [Results and errors](/docs/beasty-save-system/reference/results-and-errors/) — every error code and what causes it
+- [Logging](/docs/beasty-save-system/guides/logging/) — the checksum warning above, and everything else the save system prints
 - [The save file format](/docs/beasty-save-system/reference/save-file-format/) — the envelope and the checksum
 - [Troubleshooting](/docs/beasty-save-system/troubleshooting/)

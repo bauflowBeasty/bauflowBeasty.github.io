@@ -69,6 +69,7 @@ Written for anyone, code or no code.
 | [versioning-and-migrations.md](/docs/beasty-save-system/guides/versioning-and-migrations/) | Shipping an update that reads old saves |
 | [async-saving.md](/docs/beasty-save-system/guides/async-saving/) | What the async methods really do |
 | [save-manager-window.md](/docs/beasty-save-system/guides/save-manager-window/) | The editor window, section by section |
+| [logging.md](/docs/beasty-save-system/guides/logging/) | The Logging toggle, what each mode prints, and sending logs elsewhere |
 
 ## Reference
 

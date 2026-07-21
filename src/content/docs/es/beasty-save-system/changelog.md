@@ -20,6 +20,19 @@ Primera versión pública.
 - Encriptación AES-256 opcional con IV aleatorio y clave derivada mediante SHA-256. Ofuscación, no seguridad
   real: la clave viaja dentro del juego.
 
+### Logging
+
+- Un desplegable **Logging** en `BeastySaveManager`: `Auto` (activo en el editor y en builds de desarrollo,
+  apagado en release), `On`, `Verbose`, `Off`. Cambiarlo en Play surte efecto al momento.
+- Los guardados, cargas, borrados, restauraciones y migraciones ahora lo dicen, con tamaño y tiempo. Antes
+  eran silenciosos: el sistema solo hablaba cuando algo fallaba.
+- Un slot que no pasa su checksum y por tanto se queda fuera de la rotación de copias de seguridad ahora
+  avisa en lugar de hacerlo calladamente — ese es el momento en que el `.bak` es la última copia del jugador.
+- `SaveResult.BytesWritten` y `LoadResult.MigratedFrom`: el tamaño que escribió un guardado, y la versión
+  desde la que migró una carga, para tu propia UI.
+- Un solo logger en lugar de dos: el `DebugLogger` interno desaparece y todo pasa por `BeastySaveLog`, que
+  tiene el sink intercambiable.
+
 ### Estado de escena
 
 - `BeastySaveable`: captura los componentes que marcas en un objeto — incluidos objetos inactivos, y varios

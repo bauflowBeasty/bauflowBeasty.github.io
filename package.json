@@ -6,7 +6,10 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build && pagefind --site dist",
-    "preview": "astro preview"
+    "preview": "astro preview",
+    "doc:index": "node scripts/doc-index.mjs",
+    "doc:sync": "node scripts/sync-check.mjs",
+    "doc:links": "node scripts/check-links.mjs"
   },
   "dependencies": {
     "@fontsource-variable/bricolage-grotesque": "^5.2.10",

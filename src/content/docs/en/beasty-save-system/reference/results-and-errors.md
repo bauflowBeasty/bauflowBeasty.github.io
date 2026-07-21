@@ -26,7 +26,8 @@ Returned by `Save`, `SaveAsync`, `RestoreBackup`, `BeastySaveManager.SaveAllNow`
 | `Success` | `bool` | True when the file is on disk. |
 | `Error` | `BeastySaveError` | `None` on success. |
 | `Message` | `string` | Human-readable detail. Null on success. |
-| `SaveResult.Ok()` | `static SaveResult` | Builds a success result. |
+| `BytesWritten` | `int` | Size of the file this call wrote. 0 when unknown: any failure, and successes that write no file (`CaptureGroupNode`, `RestoreBackup`). |
+| `SaveResult.Ok(bytesWritten = 0)` | `static SaveResult` | Builds a success result. |
 | `SaveResult.Fail(error, message)` | `static SaveResult` | Builds a failure result. |
 | `ToString()` | `string` | `"OK"`, or `"{Error}: {Message}"`. |
 
@@ -41,6 +42,7 @@ Returned by `LoadInto`, `LoadIntoAsync`, `BeastySaveManager.LoadAllNow` and
 | `Error` | `BeastySaveError` | `None` on success. |
 | `Message` | `string` | Human-readable detail. Null on success. |
 | `BackupAvailable` | `bool` | A `.bak` exists for this slot. Filled in on every load result, success or failure. |
+| `MigratedFrom` | `int` | The data version this file was migrated **from**, or 0 when no migration ran. See [versioning-and-migrations.md](/docs/beasty-save-system/guides/versioning-and-migrations/). |
 | `Warnings` | `IReadOnlyList<string>` | Fields and entries skipped by a tolerant load. Never null; empty when there is nothing to report. |
 | `LoadResult.Ok(warnings = null)` | `static LoadResult` | Builds a success result. |
 | `LoadResult.Fail(error, message, backupAvailable = false)` | `static LoadResult` | Builds a failure result. |

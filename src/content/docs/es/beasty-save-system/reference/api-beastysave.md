@@ -12,7 +12,7 @@ métodos de registro, que lanzan excepciones ante un error del desarrollador.
 ```csharp
 using Beasty_SaveSystem;          // BeastySave, BeastySaveable, BeastySaveManager
 using Beasty_SaveSystemCore;      // BeastySaveSettings, SaveResult, LoadResult, BeastySaveError,
-                                  // IBeastyConverter, ConverterUtil, BeastySaveLog
+                                  // IBeastyConverter, ConverterUtil, BeastySaveLog, BeastySaveLogLevel
 using Beasty_SaveSystemCore.Json; // JsonNode — necesario solo para migraciones y convertidores personalizados
 ```
 
@@ -186,6 +186,27 @@ public static string GetSlotPath(string slot, BeastySaveSettings settings)
 
 La ruta absoluta del archivo de un slot: `{folder}/{slot}.{Extension}`. No crea nada y no valida el nombre
 del slot.
+
+## Logging
+
+```csharp
+public static BeastySaveLogLevel Level { get; set; }   // Off, Normal, Verbose
+public static BeastySaveLogLevel DefaultLevel { get; } // Normal en el editor y en builds de desarrollo, Off en release
+public static bool EnableLogs { get; set; }            // atajo: false es Off, true es Normal
+public static IBeastySaveLogSink Sink;
+
+public static void Verbose(string message);
+public static void Info(string message);
+public static void Warning(string message);
+public static void Error(string message);
+```
+
+`BeastySaveLog` es la fachada de logging del save system. `Level` es la fuente de verdad y adopta
+`DefaultLevel` de forma perezosa. Cada línea lleva el prefijo `[BeastySave]`. `Verbose` guarda silencio a
+menos que `Level` sea `BeastySaveLogLevel.Verbose`; un sink propio recibe las líneas verbose por `Info`.
+
+El inspector de `BeastySaveManager` gobierna `Level` desde su desplegable **Logging**, y lo vuelve a aplicar
+en `OnEnable` y `OnValidate`. La historia completa está en [logging.md](/es/docs/beasty-save-system/guides/logging/).
 
 ## Ver también
 

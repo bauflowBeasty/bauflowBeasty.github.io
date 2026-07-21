@@ -203,6 +203,17 @@ nada y tarde o temprano le cuesta a un jugador su guardado.
 **Prueba la cadena.** Guarda un archivo de guardado de cada versión publicada en tu proyecto y cárgalos todos en un test.
 La cadena es exactamente el tipo de código que nunca se ejecuta hasta que lo ejecuta un jugador.
 
+**Puedes saber cuándo se ejecutó una migración.** Con el logging activo (lo normal en el editor — consulta
+[Logging](/es/docs/beasty-save-system/guides/logging/)), una carga que migró un archivo lo dice:
+
+```
+[BeastySave] Migrated 'slot1' data v1 → v2
+```
+
+El código tiene ese mismo dato: `LoadResult.MigratedFrom` es la versión de datos **desde la que** se migró el
+archivo, o 0 si no hubo migración. Úsalo para contarle la verdad al jugador — «tu partida se actualizó desde
+una versión anterior del juego» — en lugar de migrar en silencio.
+
 ## Ver también
 
 - [Settings](/es/docs/beasty-save-system/guides/settings/) — el campo `DataVersion`
@@ -211,3 +222,4 @@ La cadena es exactamente el tipo de código que nunca se ejecuta hasta que lo ej
 - [El formato del archivo de guardado](/es/docs/beasty-save-system/reference/save-file-format/) — dónde vive `dataVersion` en el archivo
 - [Resultados y errores](/es/docs/beasty-save-system/reference/results-and-errors/) — `VersionTooNew` y `MigrationFailed`
 - [Convertidores personalizados](/es/docs/beasty-save-system/advanced/custom-converters/) — el mismo reinicio de Play Mode, para convertidores
+- [Logging](/es/docs/beasty-save-system/guides/logging/) — la línea de migración de arriba, y todo lo demás que imprime el save system

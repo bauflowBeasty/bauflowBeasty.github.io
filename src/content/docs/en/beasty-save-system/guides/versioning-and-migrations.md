@@ -203,6 +203,17 @@ nothing and eventually costs a player their save.
 **Test the chain.** Keep a save file from each shipped version in your project and load them all in a test.
 The chain is exactly the kind of code that is never exercised until it is exercised by a player.
 
+**You can tell when a migration ran.** With logging on (the default in the editor — see
+[Logging](/docs/beasty-save-system/guides/logging/)), a load that migrated a file says so:
+
+```
+[BeastySave] Migrated 'slot1' data v1 → v2
+```
+
+Code gets the same fact: `LoadResult.MigratedFrom` is the data version the file was migrated **from**,
+or 0 when no migration ran. Use it to tell the player the truth — "your save was updated from an older
+version of the game" — instead of migrating silently.
+
 ## See also
 
 - [Settings](/docs/beasty-save-system/guides/settings/) — the `DataVersion` field
@@ -211,3 +222,4 @@ The chain is exactly the kind of code that is never exercised until it is exerci
 - [The save file format](/docs/beasty-save-system/reference/save-file-format/) — where `dataVersion` lives in the file
 - [Results and errors](/docs/beasty-save-system/reference/results-and-errors/) — `VersionTooNew` and `MigrationFailed`
 - [Custom converters](/docs/beasty-save-system/advanced/custom-converters/) — the same Play Mode reset, for converters
+- [Logging](/docs/beasty-save-system/guides/logging/) — the migration line above, and everything else the save system prints

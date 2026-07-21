@@ -70,6 +70,7 @@ Escritas para cualquiera, con o sin código.
 | [versioning-and-migrations.md](/es/docs/beasty-save-system/guides/versioning-and-migrations/) | Publicar una actualización que lee guardados antiguos |
 | [async-saving.md](/es/docs/beasty-save-system/guides/async-saving/) | Qué hacen realmente los métodos asíncronos |
 | [save-manager-window.md](/es/docs/beasty-save-system/guides/save-manager-window/) | La ventana del editor, sección por sección |
+| [logging.md](/es/docs/beasty-save-system/guides/logging/) | El interruptor Logging, qué imprime cada modo, y cómo mandar los logs a otro sitio |
 
 ## Referencia
 

@@ -129,6 +129,7 @@ export const SIDEBARS: Record<Product['id'], SidebarGroup[]> = {
         'guides/versioning-and-migrations',
         'guides/async-saving',
         'guides/save-manager-window',
+        'guides/logging',
       ],
     },
     {

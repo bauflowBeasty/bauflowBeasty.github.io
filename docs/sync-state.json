@@ -1,0 +1,15 @@
+{
+  "_comentario": "Configuración de scripts/sync-check.mjs. La ruta del proyecto Unity se puede sobrescribir con la variable de entorno BEASTY_PROJECT.",
+  "proyectoUnity": "E:\\Beasty\\BeastyVisualNovel",
+  "plasticCli": "C:\\Program Files\\PlasticSCM5\\client\\cm.exe",
+  "assets": {
+    "BeastySaveSystem": {
+      "producto": "beasty-save-system",
+      "changelog": "BeastySaveSystem_CHANGELOG.md"
+    },
+    "BeastyVN": {
+      "producto": "beasty-visual-novel",
+      "changelog": "BeastyVN_CHANGELOG.md"
+    }
+  }
+}

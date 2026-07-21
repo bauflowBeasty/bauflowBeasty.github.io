@@ -19,6 +19,19 @@ First public release.
 - Optional AES-256 encryption with a random IV and a key derived via SHA-256. Obfuscation, not real security:
   the key ships with the game.
 
+### Logging
+
+- A **Logging** dropdown on `BeastySaveManager`: `Auto` (on in the editor and development builds, off in
+  release), `On`, `Verbose`, `Off`. Changing it in Play takes effect immediately.
+- Saves, loads, deletes, restores and migrations now say so, with size and timing. They used to be silent:
+  the system only spoke when something failed.
+- A slot that fails its checksum and is therefore kept out of the backup rotation now warns instead of
+  doing it quietly — that is the moment the `.bak` is the player's last copy.
+- `SaveResult.BytesWritten` and `LoadResult.MigratedFrom`: the size a save wrote, and the version a load
+  migrated from, for your own UI.
+- One logger instead of two: the internal `DebugLogger` is gone and everything goes through
+  `BeastySaveLog`, which has the pluggable sink.
+
 ### Scene state
 
 - `BeastySaveable`: capture the components you tick on an object — including inactive objects, and several
@@ -26,7 +39,7 @@ First public release.
 - Runtime-spawned objects: `BeastySaveManager.Register(go, "your.stable.id", components)` pins the id their data
   is filed under, so a spawned chest or enemy finds its state again next session.
 - Strict loading is all-or-nothing across the whole scene: a failure on one component rolls back the ones already
-  applied instead of leaving the world half-loaded. Tolerant loading (`Strict = false`) skips the offending field
+  applied instead of leaving the world half-loaded. Tolerant loading (`Strict = false`) skips the offending FIELD
   and keeps the rest of the component.
 - Converter modules, each gated behind the Unity module it needs so a project without it still compiles:
   audio, uGUI, particles, animation.
@@ -41,7 +54,7 @@ Behaviour changes made before 1.0.0 ships. Save files written by earlier builds 
 
 - **Encryption key.** The fallback key is now `BeastySaveSettings.SharedDefaultEncryptionKey` and is documented
   as public: it ships identical in every copy of the asset. With encryption on and no key of your own, the
-  editor (and development builds) now warn once per session. The key's value is unchanged, so saves encrypted
+  editor (and development builds) now warn once per session. The key's VALUE is unchanged, so saves encrypted
   with the default still load.
 - **Slot names** are validated in one place: empty names, path separators, `..`, rooted paths and Windows
   reserved device names (`CON`, `NUL`, `COM1`…) come back as an `InvalidArgument` result instead of writing
