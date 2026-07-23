@@ -32,6 +32,8 @@ trivial, la tienda, el adiós.
 
 `Tools > Beasty VN > Editor`, pestaña **Characters**, subpestaña **Talk Menu**. Elige un personaje arriba.
 
+![La sub-pestaña Talk Menu: la pregunta y la lista de entradas](/docs-images/beasty-visual-novel/vn-talk-menu-tab.png)
+
 La pestaña te muestra dos cosas:
 
 1. **Mission steps (automatic)** — una vista previa de solo lectura de los pasos de misión que aparecerán en el menú de
@@ -49,6 +51,8 @@ de **imágenes condicionales**: gana el primer caso cuya condición se cumpla; s
 pose distinta por momento del día, por sala, por estado de ánimo.
 
 ### Una entrada
+
+![Una entrada del menú de conversación: etiqueta, condición, escena y cómo termina](/docs-images/beasty-visual-novel/vn-talk-menu-entry.png)
 
 | Campo | Qué es |
 |---|---|
@@ -115,6 +119,8 @@ menú reevaluado, así que el jugador ve desaparecer la entrada.
 ## Cómo llega el jugador al menú
 
 Dos formas, y usarás ambas.
+
+![El menú de conversación tal y como lo ve el jugador tras hacer clic en un personaje](/docs-images/beasty-visual-novel/vn-talk-menu-ingame.png)
 
 **Desde una sala** — la habitual. Cualquier objeto de una sala cuyo **personaje propietario** esté definido, con la función
 **Talk menu**, abre el menú de ese personaje. Y lo obtienes gratis de todos modos: **clicar a un personaje de pie en

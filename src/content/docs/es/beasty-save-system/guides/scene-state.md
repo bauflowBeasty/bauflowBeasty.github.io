@@ -26,6 +26,8 @@ pide su estado a cada componente marcado de cada saveable, y escribe todo en un 
 El id es la forma en que un archivo de guardado reconoce un objeto entre sesiones. Todo en el guardado de escena
 se reduce a si el id es el mismo la próxima vez que el juego corra.
 
+![El campo Save Id con su botón New](/docs-images/beasty-save-system/save-saveable-id.png)
+
 ### Se autogenera, y es editable
 
 Añade un `BeastySaveable` y recibe un id automáticamente. El inspector lo muestra como **Save Id**, con un
@@ -124,6 +126,8 @@ Destruir el objeto es lo que lo elimina del guardado.
 Dos componentes `BoxCollider` en un mismo GameObject se guardan y recuperan bien los dos. Se almacenan por
 separado en el archivo (el segundo lleva un sufijo `#1` en su clave) y cada uno se restaura donde corresponde. No
 tienes que hacer nada para que esto funcione.
+
+![Una lista Saved Components con dos componentes del mismo tipo marcados](/docs-images/beasty-save-system/save-saveable-multiple-components.png)
 
 ## Guardando y cargando
 

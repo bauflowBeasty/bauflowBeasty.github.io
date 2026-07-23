@@ -12,6 +12,8 @@ a story.
 Run it from the **Validate** button in the Beasty VN window, or select a `DialogueScene` in the Project window
 and use `Tools > Beasty VN > Maintenance > Validate Selected Project`.
 
+![The validator's report, listing dangling references](/docs-images/beasty-visual-novel/vn-validator-report.png)
+
 It walks the root graph and **every subgraph reachable from it**, and reports what it finds in the console —
 and, per node, as a badge on the graph canvas, so you can see which node is complaining without reading a log.
 
@@ -49,6 +51,8 @@ are rewritten with it. So a machine-generated id can become `chapter1_intro` if 
 An id only auto-generates when it is EMPTY. So when you duplicate an asset in the Project window (Ctrl+D), the
 copy carries the original's id — and nothing downstream can tell the two apart. A jump routes to whichever the
 lookup hits first. Two characters become aliases of each other.
+
+![A duplicate id reported by the validator](/docs-images/beasty-visual-novel/vn-duplicate-ids.png)
 
 Two tools:
 

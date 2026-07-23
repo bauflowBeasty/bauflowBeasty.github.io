@@ -58,11 +58,15 @@ importing.
 project. Without it, everything works normally with direct references — which is the default and costs
 nothing. See [Streaming](/docs/beasty-visual-novel/production/streaming/).
 
-## Beasty Save System is bundled
+## Beasty Save System and Beasty Console are bundled
 
-**Beasty Save System ships inside this package. Do not import it separately.** If you already own it as a
-standalone package, do not import both — you would end up with two copies of the same assemblies and the
-project will not compile.
+**Beasty Save System and Beasty Console ship inside this package. Do not import them separately.** If you
+already own either one as a standalone package, do not import both copies — you would end up with two
+copies of the same assemblies and the project will not compile.
+
+You get the full version of each, not a cut-down one. Saving is
+[Beasty Save System](/docs/beasty-save-system/), and every message the VN prints goes to the
+[Beasty Console](/docs/beasty-console/) window — see [Logging](/docs/beasty-visual-novel/production/logging/).
 
 There are no other dependencies. No third-party libraries, no external packages, nothing to install from
 a registry.
@@ -86,19 +90,23 @@ Both **Mono** and **IL2CPP** scripting backends are supported. See
 
 ## Importing
 
+![The Import Unity Package dialog with the Beasty VN contents ticked](/docs-images/beasty-visual-novel/vn-import-package.png)
+
 1. In Unity, open **Window > Package Manager**, select **My Assets**, find **Beasty Visual Novel** and
    press **Download**, then **Import**.
 2. Import **everything**. The folders depend on each other: the editor tools need the core data model, and
    the runtime needs the prefabs.
 3. Wait for the compile to finish. You should now have a **Tools > Beasty VN** menu.
 4. If the menu is not there, look for compile errors in the Console. The usual cause is a second copy of
-   Beasty Save System already in the project (see above).
+   Beasty Save System or Beasty Console already in the project (see above).
 
 Next: [Your first scene](/docs/beasty-visual-novel/getting-started/your-first-scene/).
 
 ## What is in the package
 
 The package installs under `Assets/BeastyComponents/BeastyVN/`.
+
+![The BeastyComponents folder in the Project window, with the three assets inside](/docs-images/beasty-visual-novel/vn-package-folder.png)
 
 | Folder | What it is |
 |---|---|

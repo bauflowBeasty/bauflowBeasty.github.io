@@ -17,6 +17,8 @@ project and registers them as secondary screens. From then on they are yours to 
 The cast list is one row per character the player may browse. Selecting a row opens that character's
 profile.
 
+![The cast list in game, one row per character met](/docs-images/beasty-visual-novel/vn-cast-list-ingame.png)
+
 Two settings decide who is on it, and they live on the character (see
 [Characters](/docs/beasty-visual-novel/world/characters/#appearing-in-the-cast-list)):
 
@@ -44,6 +46,8 @@ The list is virtualized, so a cast of a thousand opens instantly.
 The profile is the per-character hub: a header with their portrait and name, and a **tab bar** underneath
 that swaps between sections. The first tab is shown when it opens.
 
+![A character profile: header, portrait and the tab bar](/docs-images/beasty-visual-novel/vn-profile-ingame.png)
+
 The tab bar is **extensible**. A tab is nothing but a button and a panel: add a button to the bar, add a
 panel, and add the pair to the profile's tab list on the prefab. The panel rebuilds itself for the current
 character when it is shown, so a section of your own — a gallery, a relationship chart, a gift screen —
@@ -54,6 +58,8 @@ The shipped tabs are the three below.
 ## The stats screen
 
 The stats screen shows the character's portrait, name, and a row per field.
+
+![The stats screen: a row per field, some of them editable](/docs-images/beasty-visual-novel/vn-stats-ingame.png)
 
 **Which fields appear** is your decision, field by field: only the ones flagged **Show on stats** are
 listed. Both the universal fields from the Character Variable Schema and the character's own fields can be
@@ -76,6 +82,8 @@ Two extras, both controlled per character:
 
 The calendar is the character's schedule, in one of two views, toggled by the player:
 
+![The routine calendar in game, in week view](/docs-images/beasty-visual-novel/vn-routine-calendar-ingame.png)
+
 - **Day view** — one row per daypart, for today.
 - **Week view** — the whole week: dayparts down, weekdays across.
 
@@ -90,6 +98,8 @@ so it follows the character's active profile and updates when the story switches
 
 The quest log is the walkthrough. It lists the character's **active** quests: each quest's title, then its
 objectives with the hint you wrote for each one.
+
+![The quest log: active quests, objectives and the current hint](/docs-images/beasty-visual-novel/vn-quest-log-ingame.png)
 
 Set the log's "show global quests" option and, when it is opened with no character selected, it lists the
 main-story quests instead — the ones with no owner.

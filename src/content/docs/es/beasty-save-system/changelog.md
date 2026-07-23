@@ -32,6 +32,9 @@ Primera versión pública.
   desde la que migró una carga, para tu propia UI.
 - Un solo logger en lugar de dos: el `DebugLogger` interno desaparece y todo pasa por `BeastySaveLog`, que
   tiene el sink intercambiable.
+- Los logs aterrizan en la ventana **Beasty Console** cuando ese asset está en el proyecto, y en la consola de
+  Unity cuando no lo está. La detección es por reflexión, sin referencia de ensamblado en ninguna dirección,
+  así que ninguno de los dos paquetes necesita al otro y cada uno se puede importar por separado.
 
 ### Estado de escena
 

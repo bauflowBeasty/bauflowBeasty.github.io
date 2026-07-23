@@ -15,6 +15,8 @@ La ventana se titula **Beasty Save Manager**. Puedes anclarla donde quieras.
 
 La sección superior busca el `BeastySaveManager` en la escena abierta — incluso si está en un objeto inactivo.
 
+![La sección Manager con el inspector del BeastySaveManager embebido](/docs-images/beasty-save-system/save-manager-inspector.png)
+
 **Cuando no hay manager**, aparece un mensaje ("No BeastySaveManager in the open scene.") y un botón:
 
 - **Create Beasty Save Manager** — crea un GameObject llamado `Beasty Save Manager` con el componente en
@@ -41,6 +43,8 @@ La sección del medio se ocupa de qué objetos se guardan.
 Una caja que dice **"Drag GameObjects here to make them saveable"**. Arrastra uno o más objetos desde la
 Hierarchy sobre ella y cada uno recibe un componente `BeastySaveable` con un id nuevo. Se puede deshacer.
 
+![La zona de arrastre que convierte en saveables los GameObjects que sueltas en ella](/docs-images/beasty-save-system/save-manager-dropzone.png)
+
 Los objetos que ya tienen un `BeastySaveable` se ignoran, así que puedes arrastrar toda una selección sin
 preocuparte por duplicados.
 
@@ -55,6 +59,8 @@ preocuparte por duplicados.
 
 Debajo de la zona de arrastre se lista cada `BeastySaveable` de la escena abierta, **incluidos los de objetos
 inactivos**. Cada fila muestra tres cosas:
+
+![La lista de saveables de la escena, con el número de componentes y los ids](/docs-images/beasty-save-system/save-manager-saveables-list.png)
 
 - El objeto en sí, como un campo de objeto. Haz clic para seleccionar el objeto.
 - Cuántos componentes guarda (`2 comp.`).
@@ -86,6 +92,8 @@ el trabajo real:
 
 La sección inferior lista los archivos reales en la carpeta a la que apuntan tus settings. Esta es la parte que mantendrás
 abierta mientras pruebas.
+
+![La sección Slots on Disk con los archivos de guardado y su resumen de metadata](/docs-images/beasty-save-system/save-manager-slots.png)
 
 Dos botones en el encabezado:
 

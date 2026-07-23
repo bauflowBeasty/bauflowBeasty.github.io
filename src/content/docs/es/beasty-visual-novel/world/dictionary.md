@@ -22,6 +22,8 @@ que no.
 
 Abre `Tools > Beasty VN > Editor`, ve a la pestaña **Dictionary** y pulsa **+ Add Term**.
 
+![Una entrada de diccionario: clave, valor por defecto y la marca de editable por el jugador](/docs-images/beasty-visual-novel/vn-dictionary-entry.png)
+
 | Campo | Qué es |
 |---|---|
 | **Key** | El nombre del token, escrito sin corchetes: `city`. Lo usas en el texto como `[city]`. |
@@ -33,6 +35,8 @@ Deja **Player editable** desactivado para un token que fijas tú desde la histor
 ## Usarlo en una línea
 
 Escribe la clave entre corchetes, en cualquier parte del texto de un bloque **Dialogue**:
+
+![Una línea renderizada con el token sustituido por el valor del jugador](/docs-images/beasty-visual-novel/vn-dictionary-ingame.png)
 
 ```text
 maya "So you're from [city]? I've never been."

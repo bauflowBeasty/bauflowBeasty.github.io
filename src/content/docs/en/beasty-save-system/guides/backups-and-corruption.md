@@ -38,6 +38,8 @@ You do not have to do anything to get this. There is no "safe save" option to en
 The replace step in an atomic write is what produces the backup. The file that was in the slot does not
 get thrown away; it is moved to:
 
+![A slot file and its .bak sitting side by side in the save folder](/docs-images/beasty-save-system/save-backup-files.png)
+
 ```text
 {Folder}/{slot}.{Extension}.bak
 ```
@@ -171,6 +173,8 @@ Two failures are not corruption and no backup will fix them:
 The [Save Manager window](/docs/beasty-save-system/guides/save-manager-window/) lists every slot on disk with a **Restore Backup**
 button (disabled when no `.bak` exists) and a **Delete** button, both asking for confirmation. Use it to
 test the flow above: save twice, corrupt the slot file in a text editor, load, restore.
+
+![The Restore Backup confirmation in the Save Manager window](/docs-images/beasty-save-system/save-restore-backup.png)
 
 ## See also
 

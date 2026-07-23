@@ -14,6 +14,8 @@ where to go and who to talk to, this is the mode you enter.
 Everything lives on one asset, the **FreeRoam Map Graph**
 (`Create > Beasty VN > FreeRoam > FreeRoam Map Graph`). It holds:
 
+![The FreeRoam map: rooms as boxes, doors as lines, the entry room marked](/docs-images/beasty-visual-novel/vn-freeroam-map.png)
+
 - the **rooms**,
 - the **entry room** — where the player lands when free roam starts,
 - the **routines** — see [Character routines](/docs/beasty-visual-novel/world/character-routines/).
@@ -29,6 +31,8 @@ the asset and clicking **Open in Beasty VN (FreeRoam tab)**.
 
 ## What a room is
 
+![A room's settings after drilling into it](/docs-images/beasty-visual-novel/vn-room-settings.png)
+
 | Field | What it is |
 |---|---|
 | **Id** | The stable id. Doors and routines refer to the room by it. |
@@ -43,6 +47,8 @@ they do.** You place a lamp in the prefab with Unity's own tools, and you say "c
 scene" in the room's editor. The two are linked by name.
 
 ## Creating a room and its prefab together
+
+![Create Room, and the dialog that asks where to save the room prefab](/docs-images/beasty-visual-novel/vn-room-create.png)
 
 1. In the **FreeRoam** tab, **Map** mode, right-click the empty canvas and choose **Create Room**.
 2. Beasty immediately asks where to save the room's **prefab**, and creates it: a `FreeRoamRoom` root with a
@@ -67,6 +73,8 @@ A room does not need one look. Give it an **ordered list of cases**: each case i
 change with the time of day, the season, whether it is raining, whether a character is standing in it, or any
 variable in your game.
 
+![Background by time & presence: the conditional background cases of a room](/docs-images/beasty-visual-novel/vn-room-backgrounds.png)
+
 Because an empty condition always passes, a case with no condition swallows everything below it. Order the
 list from the most specific case to the most general.
 
@@ -88,6 +96,8 @@ different model.
 
 The prefab is a normal Unity prefab. Open it and build the room the way you would build any 2D scene.
 
+![A room prefab open, with FreeRoamRoom, its background and its interactables](/docs-images/beasty-visual-novel/vn-room-prefab.png)
+
 | Component | What it marks |
 |---|---|
 | `FreeRoamRoom` | The prefab root. Collects the background renderer, the interactables and the spots. |
@@ -100,6 +110,8 @@ Rename objects from the room editor, not from the Hierarchy, and the two stay in
 ### Character spots
 
 A **spot** is a child object with a `FreeRoamCharacterSpot` component. It marks where someone stands.
+
+![Character spots placed in a room prefab](/docs-images/beasty-visual-novel/vn-room-spots.png)
 
 1. Open the room prefab.
 2. Create a child GameObject and place it — position and scale — where the character should be.
@@ -118,6 +130,8 @@ it can ever hold at once. See [Character routines](/docs/beasty-visual-novel/wor
 
 The story and the map are two app modes; you cross between them with **Flow blocks** (palette category
 **Flow**), which are also offered as targets on any choice.
+
+![A room in game: background, objects, a door and a character standing in it](/docs-images/beasty-visual-novel/vn-freeroam-ingame.png)
 
 | Block | What it does |
 |---|---|

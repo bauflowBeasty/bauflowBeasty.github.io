@@ -32,6 +32,8 @@ Select the **BeastyManager** GameObject in your scene and open the **Controls** 
 action is one row with three dropdowns: **Primary**, **Secondary** and **Mouse**. Pick a key from the list; an
 empty (—) slot means "no binding for that slot".
 
+![The input config asset: the actions and their default bindings](/docs-images/beasty-visual-novel/vn-input-config.png)
+
 Three buttons sit under the table:
 
 - **Edit controls (load defaults)** — fills the table with the shipped defaults so you can start editing.
@@ -70,6 +72,8 @@ The bindings above are the DEFAULTS your game ships with. The player's own rebin
 on top of them, and they persist: they are saved to `PlayerPrefs` and re-applied on the next launch. A controls
 screen can save, reload or clear them (`SaveOverrides`, `LoadOverrides`, `ResetOverrides` on the input
 actions), and clearing them returns the game to your defaults.
+
+![The player rebinding a key in game](/docs-images/beasty-visual-novel/vn-input-rebind-ingame.png)
 
 Each backend stores its overrides under its own key, so a project that switches backend starts from your
 defaults again instead of trying to read the other backend's format.

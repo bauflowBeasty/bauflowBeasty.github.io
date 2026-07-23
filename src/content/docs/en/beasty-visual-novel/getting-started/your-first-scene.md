@@ -13,6 +13,8 @@ Before you start, make sure the package is imported and the **Tools > Beasty VN*
 
 Create or open a scene, then run:
 
+![The Setup menu with Create Scene in it](/docs-images/beasty-visual-novel/vn-create-scene-menu.png)
+
 ```text
 Tools > Beasty VN > Setup > Create Scene
 ```
@@ -72,6 +74,8 @@ You need two of them today: **Characters** and **Story**. For the rest, see the
 
 Go to the **Characters** tab, **Cast** sub-tab.
 
+![A brand-new character in the Cast sub-tab, with an id and a base expression](/docs-images/beasty-visual-novel/vn-first-character.png)
+
 1. Press **+ New Character**. Choose where to save it. The character appears in the list on the left and
    opens on the right.
 2. **Id (stable)** — the internal name the story uses to refer to this character, for example `juan`. It
@@ -127,6 +131,8 @@ Full detail: [Dialogue and the stage](/docs/beasty-visual-novel/authoring/dialog
 
 Right-click an empty spot on the graph canvas:
 
+![The first Choice node with two options, wired to two dialogue nodes](/docs-images/beasty-visual-novel/vn-first-choice-node.png)
+
 ```text
 Create > Choice Node
 ```
@@ -159,6 +165,8 @@ Full detail: [Choices and decisions](/docs/beasty-visual-novel/authoring/choices
 
 Save the scene, then press Play.
 
+![The first scene running: backdrop, character, name plate and dialogue box](/docs-images/beasty-visual-novel/vn-first-play.png)
+
 The **main menu** comes up. Press **Start**. Your backdrop appears, Juan appears, and he says his first
 line. Click, or press Space, to advance. After the second line the two buttons appear. Click one, and you
 land in the node it points at.
@@ -186,6 +194,8 @@ on. It touches nothing in your scene and saves nothing. See
 ### Validate
 
 In the top bar of the Beasty VN window, press **Validate**.
+
+![The validator's report after walking the graph](/docs-images/beasty-visual-novel/vn-validate-report.png)
 
 The validator walks the root graph and every subgraph and reports dangling references: a line spoken by a
 character id that no longer exists, a condition on a variable you deleted, a dictionary token that is not

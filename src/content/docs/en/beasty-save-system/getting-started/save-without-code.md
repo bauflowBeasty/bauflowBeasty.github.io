@@ -19,6 +19,8 @@ Once that works, everything else in the package is a variation on it.
 
 Open a new scene. Add a cube: `GameObject > 3D Object > Cube`. Move it somewhere you will recognise.
 
+![The tutorial scene: a cube, a floor and the two buttons](/docs-images/beasty-save-system/save-cube-scene.png)
+
 That cube is the thing whose state you want to keep. In your real game it will be the player, a door, a
 chest — but the steps are identical.
 
@@ -100,6 +102,8 @@ rejected (anything with a slash, anything with `..`, and the old Windows device 
 Do steps 4 and 5 again, with two changes: call the button `Load`, and pick **BeastySaveManager > LoadAll
 (string)** in the dropdown. Type the same slot name, `slot1`.
 
+![The Load button's OnClick wired to BeastySaveManager.LoadAll with the same slot name](/docs-images/beasty-save-system/save-load-button-onclick.png)
+
 The two slot names must match. `SaveAll("slot1")` writes the file; `LoadAll("slot1")` reads it back. If you
 type `slot1` on one button and `Slot1` on the other, nothing will load and you will lose twenty minutes
 wondering why.
@@ -107,6 +111,8 @@ wondering why.
 ## 7. Try it
 
 Press **Play**.
+
+![Play Mode: the cube moved, then restored to its saved position](/docs-images/beasty-save-system/save-playmode-test.png)
 
 1. Move the cube in the Scene view while the game is running. Drag it somewhere obviously different.
 2. Click **Save**.
@@ -126,6 +132,8 @@ That state survived a stop and a restart because it is on disk, not in memory. Y
 Go back to the Save Manager window (`Tools > Beasty Save System > Save Manager`) and scroll to **Slots on
 Disk**. Click **Refresh**. Your slot is listed. Click **Open Folder** and your file browser opens right on
 it.
+
+![The save folder in the file explorer, with the slot file inside](/docs-images/beasty-save-system/save-folder-explorer.png)
 
 The file is `slot1.save`. Its full path is `<persistentDataPath>/Saves/slot1.save`, where
 `persistentDataPath` is Unity's per-user writable folder — on Windows that is under

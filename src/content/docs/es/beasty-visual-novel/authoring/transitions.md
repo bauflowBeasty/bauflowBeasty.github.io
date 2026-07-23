@@ -13,6 +13,8 @@ se lee el grafo.
 
 ## Las cuatro salidas
 
+![Los cuatro bloques de salida en la categoría Flow de la paleta](/docs-images/beasty-visual-novel/vn-flow-blocks.png)
+
 ### Go to FreeRoam
 
 Abandona la novela y pone al jugador en una sala.
@@ -89,6 +91,8 @@ nodo aparte para la salida añadiría un cable y una caja y no le diría nada nu
 
 Crea un **Flow (Mode Switch) Node** y dale una salida. No tiene puerto de salida: no hay un "después" dentro
 de este grafo.
+
+![Un nodo Flow dedicado como destino de dos ramas](/docs-images/beasty-visual-novel/vn-flow-node.png)
 
 Úsalo cuando la transición es un **hecho estructural de la historia**, y quieres que sea visible como su
 propia caja:

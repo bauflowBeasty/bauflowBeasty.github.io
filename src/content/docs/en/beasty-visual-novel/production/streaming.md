@@ -39,6 +39,8 @@ the module does not exist and there is nothing to go wrong.
 
 ## Turning it on
 
+![Turning Addressables streaming on](/docs-images/beasty-visual-novel/vn-streaming-settings.png)
+
 1. Install the **Addressables** package (`com.unity.addressables`) from the Package Manager.
 2. Run `Tools > Beasty VN > Streaming > Convert To Streamed Content`.
 

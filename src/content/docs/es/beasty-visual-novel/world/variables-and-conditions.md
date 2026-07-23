@@ -11,6 +11,8 @@ las dos ideas de abajo, y en cuanto entiendes el almacén, los entiendes todos.
 
 Abre `Tools > Beasty VN > Editor`, ve a la pestaña **Variables** y pulsa **+ New Variable**.
 
+![Creando una variable en la pestaña Variables](/docs-images/beasty-visual-novel/vn-variables-tab-new.png)
+
 Una variable tiene:
 
 | Campo | Qué es |
@@ -35,6 +37,8 @@ cambian lo que te ofrece el editor:
 
 Dos formas de dejar que el jugador rellene una variable:
 
+![Un bloque Ask -> variable: la pregunta, el valor por defecto y la marca de obligatorio](/docs-images/beasty-visual-novel/vn-block-ask.png)
+
 - Activa **Prompt at runtime** en la propia variable, y dale una etiqueta de pregunta. Se le pregunta al jugador
   por ella al principio.
 - Usa el bloque **Ask -> variable** (categoría de paleta **Input**) en cualquier parte de la historia. Es una
@@ -50,6 +54,8 @@ para un [token de diccionario](/es/docs/beasty-visual-novel/world/dictionary/) y
 
 El bloque **Set variable** (categoría de paleta **State**) es todo lo que hay. Elige una variable, elige una
 operación, escribe un valor:
+
+![Un bloque Set variable: variable, operación y valor](/docs-images/beasty-visual-novel/vn-block-set-variable.png)
 
 | Operación | Qué hace |
 |---|---|
@@ -110,6 +116,8 @@ las muestran con etiquetas amigables: `time.daypart`, `time.hour`, `maya.locatio
 
 Una condición es una lista de **cláusulas**. Una cláusula tiene tres partes: un **token** (cualquier clave del
 almacén), un **operador** y un **valor**.
+
+![El editor de condiciones: cláusulas con token, operador, valor y uniones And/Or](/docs-images/beasty-visual-novel/vn-condition-editor.png)
 
 ### Dónde puedes adjuntar una
 
@@ -175,6 +183,8 @@ lógica entre dos ramas de un nodo de decisión.
 Un **efecto** es el mismo cambio que hace un bloque **Set variable**, aplicado en un momento en el que un bloque
 no puede ejecutarse. Tiene los mismos tres campos — una clave, una operación (Assign / Add / Subtract / Toggle),
 un valor — y se comporta de forma idéntica.
+
+![El editor de efectos adjunto a una opción de elección](/docs-images/beasty-visual-novel/vn-effects-editor.png)
 
 Los efectos se adjuntan a:
 

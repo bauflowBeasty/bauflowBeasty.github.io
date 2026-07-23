@@ -26,6 +26,8 @@ saveable's ticked components for their state, and writes the lot into one file, 
 The id is how a save file recognises an object across sessions. Everything about scene saving comes down to
 whether the id is the same the next time the game runs.
 
+![The Save Id field with its New button](/docs-images/beasty-save-system/save-saveable-id.png)
+
 ### It is auto-generated, and it is editable
 
 Add a `BeastySaveable` and it gets an id automatically. The inspector shows it as **Save Id**, with a
@@ -123,6 +125,8 @@ Destroying the object is what removes it from the save.
 Two `BoxCollider` components on one GameObject both round-trip. They are stored separately in the file (the
 second one gets a `#1` suffix on its key) and restored to the right slots. You do not have to do anything
 for this to work.
+
+![A Saved Components checklist with two components of the same type ticked](/docs-images/beasty-save-system/save-saveable-multiple-components.png)
 
 ## Saving and loading
 

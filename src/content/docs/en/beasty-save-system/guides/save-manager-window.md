@@ -15,6 +15,8 @@ The window is titled **Beasty Save Manager**. You can dock it anywhere.
 
 The top section finds the `BeastySaveManager` in the open scene — including one on an inactive object.
 
+![The Manager section with the BeastySaveManager inspector embedded](/docs-images/beasty-save-system/save-manager-inspector.png)
+
 **When there is no manager**, you get a message ("No BeastySaveManager in the open scene.") and one button:
 
 - **Create Beasty Save Manager** — creates a GameObject called `Beasty Save Manager` with the component on
@@ -41,6 +43,8 @@ The middle section is about which objects get saved.
 A box that says **"Drag GameObjects here to make them saveable"**. Drag one or more objects from the
 Hierarchy onto it and each gets a `BeastySaveable` component with a fresh id. It is undoable.
 
+![The drop zone that turns dragged GameObjects into saveables](/docs-images/beasty-save-system/save-manager-dropzone.png)
+
 Objects that already have a `BeastySaveable` are ignored, so you can drag a whole selection over without
 worrying about duplicates.
 
@@ -55,6 +59,8 @@ Use it when you are setting up a scene and want to mark ten objects at once inst
 
 Below the drop zone is every `BeastySaveable` in the open scene, **including the ones on inactive objects**.
 Each row shows three things:
+
+![The list of saveables in the scene, with component counts and ids](/docs-images/beasty-save-system/save-manager-saveables-list.png)
 
 - The object itself, as an object field. Click it to select the object.
 - How many components it saves (`2 comp.`).
@@ -86,6 +92,8 @@ real work happens:
 
 The bottom section lists the actual files in the folder your settings point at. This is the part you will
 keep open while you test.
+
+![The Slots on Disk section listing save files with their metadata summary](/docs-images/beasty-save-system/save-manager-slots.png)
 
 Two buttons in the header:
 

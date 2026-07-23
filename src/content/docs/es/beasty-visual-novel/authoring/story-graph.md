@@ -27,6 +27,8 @@ Desplázate con el botón central del mouse, haz zoom con la rueda, selecciona p
 
 Haz clic derecho en una parte vacía del lienzo y elige en `Create`:
 
+![El menú Create del clic derecho sobre el lienzo, con los tipos de nodo](/docs-images/beasty-visual-novel/vn-graph-create-menu.png)
+
 - `Create > Dialogue Node`
 - `Create > Choice Node`
 - `Create > Decision Node`
@@ -43,6 +45,8 @@ automáticamente en el nodo de entrada.
 Todo nodo tiene un puerto de entrada, `In`, en su lado izquierdo. Acepta cualquier cantidad de cables
 entrantes: varios nodos pueden llevar al mismo lugar.
 
+![Arrastrando un cable del puerto de salida de un nodo a la entrada de otro](/docs-images/beasty-visual-novel/vn-graph-wiring.png)
+
 Los puertos de salida están a la derecha, y cuáles son depende del tipo de nodo (se describen más abajo).
 Arrastra desde un puerto de salida hasta el puerto `In` de otro nodo para conectarlos. Arrastra un cable y
 suéltalo en el lienzo vacío para desconectarlo, o selecciona el cable y pulsa Delete.
@@ -56,6 +60,8 @@ que lo ubiques de un vistazo. Para mover el inicio de la escena, haz clic derech
 ### El menú contextual del nodo
 
 Haz clic derecho en un nodo:
+
+![El menú contextual de un nodo: Rename, Set as Entry Node, Create Subgraph, Delete Node](/docs-images/beasty-visual-novel/vn-graph-node-menu.png)
 
 | Elemento | Qué hace |
 |---|---|
@@ -72,7 +78,11 @@ Los nodos se colorean según su tipo. Un nodo de diálogo, un nodo de elección 
 colores distintos en el lienzo, así que puedes leer la forma de una escena sin abrir nada. El color es
 cosmético y no tiene ningún efecto en el juego.
 
+![Un grafo con un nodo de cada tipo, para distinguir los colores](/docs-images/beasty-visual-novel/vn-graph-colors.png)
+
 ## Dialogue Node
+
+![El inspector de un nodo Dialogue, con su lista de bloques](/docs-images/beasty-visual-novel/vn-node-dialogue.png)
 
 **Recurre a él cuando el jugador solo necesita que le cuenten algo.** Es el nodo que más usarás.
 
@@ -86,6 +96,8 @@ Todo lo que un nodo de diálogo puede contener está en la [Referencia de bloque
 dos bloques que más usarás se explican en profundidad en [Diálogo y el escenario](/es/docs/beasty-visual-novel/authoring/dialogue-and-stage/).
 
 ## Choice Node
+
+![El inspector de un nodo Choice: sus opciones, con condiciones, efectos y destinos](/docs-images/beasty-visual-novel/vn-node-choice.png)
 
 **Recurre a él cuando el jugador deba elegir.** Muestra un menú de opciones y espera.
 
@@ -105,6 +117,8 @@ Una opción también puede apuntar a una salida de flujo en lugar de a un nodo, 
 Consulta [Elecciones y decisiones](/es/docs/beasty-visual-novel/authoring/choices-and-decisions/).
 
 ## Decision Node
+
+![El inspector de un nodo Decision, con sus ramas condicionales](/docs-images/beasty-visual-novel/vn-node-decision.png)
 
 **Recurre a él cuando la historia debe ramificarse pero el jugador no debe saber que se está ramificando.**
 
@@ -126,6 +140,8 @@ Añade una rama con el botón `+ branch` del nodo.
 
 ## Flow (Mode Switch) Node
 
+![El inspector de un nodo Flow (Mode Switch)](/docs-images/beasty-visual-novel/vn-node-flow.png)
+
 **Recurre a él cuando abandonar la novela merece su propia caja en el grafo.**
 
 Un nodo de flujo lleva exactamente una salida: entrar en mundo libre, volver a la sala de la que vino el
@@ -138,6 +154,8 @@ Las mismas cuatro salidas también existen como bloques que puedes poner al fina
 Cuándo usar cada una se explica en [Transiciones](/es/docs/beasty-visual-novel/authoring/transitions/).
 
 ## SubGraph Node
+
+![Un nodo SubGraph con sus rutas de resultado](/docs-images/beasty-visual-novel/vn-node-subgraph.png)
 
 **Recurre a él cuando un tramo de la historia es reutilizable, o suficientemente grande como para merecer su
 propio lienzo.**
@@ -165,6 +183,8 @@ No tiene puerto de salida. Es un terminador: el control vuelve a quien lo llamó
 Un nodo de retorno solo tiene sentido dentro de un subgrafo. Consulta [Subgrafos](/es/docs/beasty-visual-novel/authoring/subgraphs/).
 
 ## Talk Menu Node
+
+![Un nodo Talk Menu en el grafo](/docs-images/beasty-visual-novel/vn-node-talkmenu.png)
 
 **Recurre a él cuando el jugador deba elegir qué decirle a un personaje concreto.**
 

@@ -38,6 +38,8 @@ No necesitas hacer nada para conseguir esto. No hay ninguna opción de "guardado
 El paso de reemplazo en una escritura atómica es lo que produce el backup. El archivo que estaba en el slot no
 se descarta; se mueve a:
 
+![El archivo de un slot y su .bak, uno al lado del otro en la carpeta de guardado](/docs-images/beasty-save-system/save-backup-files.png)
+
 ```text
 {Folder}/{slot}.{Extension}.bak
 ```
@@ -172,6 +174,8 @@ Hay dos fallos que no son corrupción y que ningún backup va a arreglar:
 La [ventana Save Manager](/es/docs/beasty-save-system/guides/save-manager-window/) lista cada slot en disco con un botón **Restore Backup**
 (desactivado cuando no existe ningún `.bak`) y un botón **Delete**, ambos con confirmación previa. Úsala para
 probar el flujo de arriba: guarda dos veces, corrompe el archivo del slot en un editor de texto, carga, restaura.
+
+![La confirmación de Restore Backup en la ventana Save Manager](/docs-images/beasty-save-system/save-restore-backup.png)
 
 ## Ver también
 

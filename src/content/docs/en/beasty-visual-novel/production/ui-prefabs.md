@@ -9,6 +9,8 @@ ways to restyle the game.
 
 ## The prefabs
 
+![The prefabs folder of the package in the Project window](/docs-images/beasty-visual-novel/vn-ui-prefabs-folder.png)
+
 | Prefab | What it mounts |
 |---|---|
 | `VisualNovelScene` | A whole ready-made scene: everything below, already wired. |
@@ -38,6 +40,8 @@ of ours. Nothing in the runtime assumes the shipped hierarchy.
 
 ## The two prefab menu items
 
+![The confirmation dialog before rebuilding or upgrading the UI prefabs](/docs-images/beasty-visual-novel/vn-upgrade-prefabs.png)
+
 | Menu item | Use it when |
 |---|---|
 | `Tools > Beasty VN > Setup > Upgrade UI Prefabs (keep customizations)` | You want the shipped prefabs brought up to date — new pieces a newer version added — **without losing your restyling**. It only adds what is missing and leaves your changes alone. This is the one you normally want. |
@@ -47,6 +51,8 @@ Reach for Build Default Menu Prefabs when a menu prefab is broken beyond repair,
 baseline to restyle. Reach for Upgrade in every other case.
 
 ## The black screen, and the button that fixes it
+
+![The black screen, and the button that fixes it](/docs-images/beasty-visual-novel/vn-black-screen-fix.png)
 
 > **Warning**
 > The prefabs reference each other, and the scene resolves the views **by type** rather than by a path you

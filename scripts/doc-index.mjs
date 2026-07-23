@@ -18,7 +18,7 @@ const OUT = join('docs', 'DOC-INDEX.md');
 const SIGLA = {
   'beasty-visual-novel': 'VN',
   'beasty-save-system': 'SS',
-  'beasty-debug-logger': 'DL',
+  'beasty-console': 'BC',
 };
 
 /** Símbolos demasiado genéricos para servir de pista: aparecen en casi cualquier página. */

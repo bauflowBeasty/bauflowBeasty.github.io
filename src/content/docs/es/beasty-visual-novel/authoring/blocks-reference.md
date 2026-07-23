@@ -13,6 +13,8 @@ la paleta.
 El panel a la izquierda de la pestaña **Story** es la paleta. Selecciona un Dialogue Node en el grafo y la
 paleta se activa.
 
+![La paleta Add blocks con todas las categorías desplegadas](/docs-images/beasty-visual-novel/vn-add-blocks-palette.png)
+
 - **Haz clic** en un botón de bloque para añadirlo al final de la pila del nodo seleccionado.
 - **Arrastra** un botón de bloque hasta la lista de bloques para insertarlo en una posición concreta.
 - Escribe en el campo de búsqueda de arriba para filtrar todo el catálogo por nombre.

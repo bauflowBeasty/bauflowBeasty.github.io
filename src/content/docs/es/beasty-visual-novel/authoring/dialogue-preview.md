@@ -31,6 +31,8 @@ Haz clic en una y la vista previa la sigue.
 
 No tienes que hacer clic desde el inicio de un nodo para llegar a la línea once.
 
+![El botón de vista previa que lleva cada bloque en el inspector del nodo](/docs-images/beasty-visual-novel/vn-preview-block-button.png)
+
 En la pestaña Story, cada bloque de la pila del nodo seleccionado tiene un pequeño botón de vista previa en
 su fila (su tooltip dice "Preview up to this block"). Púlsalo y se abre la ventana de vista previa,
 **adelantada hasta el momento exacto en que se ejecuta ese bloque**: el escenario montado tal como va a

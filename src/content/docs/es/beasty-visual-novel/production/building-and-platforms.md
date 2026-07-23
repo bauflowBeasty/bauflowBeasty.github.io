@@ -63,6 +63,8 @@ Una checklist corta:
 La resolución de diseño vive en [VN settings](/es/docs/beasty-visual-novel/production/vn-settings/) (`targetWidth` y `targetHeight`, 1920x1080 por
 defecto).
 
+![El forzador de relación de aspecto y los ajustes de resolución](/docs-images/beasty-visual-novel/vn-aspect-ratio.png)
+
 Para asegurarte de que el juego se ENCUADRE igual en cada monitor, agrega el **Beasty Aspect Ratio Enforcer**
 (`Add Component > Beasty > Beasty Aspect Ratio Enforcer`) a tu cámara. Obliga a la cámara a renderizarse con
 una relación de aspecto fija: una ventana más ancha recibe barras negras a los lados (pillarbox), una más
@@ -78,6 +80,8 @@ settings, y se puede sobrescribir por cámara.
 
 Agrega el **Beasty Loading Screen** (`Add Component > Beasty > Beasty Loading Screen`) a un panel de tu canvas y
 el BeastyManager lo controla: aparece mientras el juego arranca y mientras se carga una partida.
+
+![La pantalla de carga cubriendo los primeros fotogramas del juego](/docs-images/beasty-visual-novel/vn-loading-screen.png)
 
 Aparece y desaparece con un fundido, respeta un **tiempo de visualización mínimo** (1 segundo por defecto)
 para que una carga rápida no haga parpadear el panel por dos frames, y puede controlar una barra de progreso

@@ -11,6 +11,8 @@ namespace `Beasty_SaveSystem`.
 
 Add Component: `Beasty > Beasty Saveable`. Marcado `[DisallowMultipleComponent]`.
 
+![La lista Saved Components, con cada componente etiquetado con su capa de conversor](/docs-images/beasty-save-system/save-saveable-components-checklist.png)
+
 Marca un GameObject como parte de los guardados de escena: un id estable, más la lista de componentes cuyo
 estado captura `SaveAll` y restaura `LoadAll`.
 

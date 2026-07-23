@@ -40,6 +40,8 @@ el módulo no existe y no hay nada que pueda salir mal.
 
 ## Cómo activarlo
 
+![Activando el streaming con Addressables](/docs-images/beasty-visual-novel/vn-streaming-settings.png)
+
 1. Instala el paquete **Addressables** (`com.unity.addressables`) desde el Package Manager.
 2. Ejecuta `Tools > Beasty VN > Streaming > Convert To Streamed Content`.
 

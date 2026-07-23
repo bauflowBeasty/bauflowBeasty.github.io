@@ -11,6 +11,8 @@ on the two ideas below, and once you understand the store you understand all of 
 
 Open `Tools > Beasty VN > Editor`, go to the **Variables** tab and press **+ New Variable**.
 
+![Creating a variable in the Variables tab](/docs-images/beasty-visual-novel/vn-variables-tab-new.png)
+
 A variable has:
 
 | Field | What it is |
@@ -35,6 +37,8 @@ change what the editor offers you:
 
 Two ways to let the player fill a variable:
 
+![An Ask -> variable block: the question, the default and the required flag](/docs-images/beasty-visual-novel/vn-block-ask.png)
+
 - Turn on **Prompt at runtime** on the variable itself, and give it a prompt label. The player is asked
   for it at the start.
 - Use the **Ask -> variable** block (palette category **Input**) anywhere in the story. It is a
@@ -50,6 +54,8 @@ thing for a [dictionary token](/docs/beasty-visual-novel/world/dictionary/) and 
 
 The **Set variable** block (palette category **State**) is the whole story. Pick a variable, pick an
 operation, type a value:
+
+![A Set variable block: variable, operation and value](/docs-images/beasty-visual-novel/vn-block-set-variable.png)
 
 | Operation | What it does |
 |---|---|
@@ -110,6 +116,8 @@ they show them with friendly labels: `time.daypart`, `time.hour`, `maya.location
 
 A condition is a list of **clauses**. A clause is three things: a **token** (any key in the store), an
 **operator**, and a **value**.
+
+![The condition editor: clauses with token, operator, value and And/Or joins](/docs-images/beasty-visual-novel/vn-condition-editor.png)
 
 ### Where you can attach one
 
@@ -175,6 +183,8 @@ clauses or split the logic across two branches of a decision node.
 An **effect** is the same change a **Set variable** block makes, applied at a moment when a block cannot
 run. It is the same three fields — a key, an operation (Assign / Add / Subtract / Toggle), a value — and
 it behaves identically.
+
+![The effects editor attached to a choice option](/docs-images/beasty-visual-novel/vn-effects-editor.png)
 
 Effects are attached to:
 

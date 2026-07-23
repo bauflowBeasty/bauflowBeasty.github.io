@@ -26,6 +26,9 @@ First public release.
   migrated from, for your own UI.
 - One logger instead of two: the internal `DebugLogger` is gone and everything goes through
   `BeastySaveLog`, which has the pluggable sink.
+- Logs land in the **Beasty Console** window when that asset is in the project, and in Unity's console when it
+  is not. The detection is by reflection, with no assembly reference either way, so neither package needs the
+  other and each can be imported on its own.
 
 ### Scene state
 - `BeastySaveable`: capture the components you tick on an object — including inactive objects, and several

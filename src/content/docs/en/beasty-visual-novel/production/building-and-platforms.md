@@ -61,6 +61,8 @@ A short checklist:
 The design resolution lives in [VN settings](/docs/beasty-visual-novel/production/vn-settings/) (`targetWidth` and `targetHeight`, 1920x1080 by
 default).
 
+![The aspect-ratio enforcer and the resolution settings](/docs-images/beasty-visual-novel/vn-aspect-ratio.png)
+
 To make sure the game is FRAMED the same on every monitor, add the **Beasty Aspect Ratio Enforcer**
 (`Add Component > Beasty > Beasty Aspect Ratio Enforcer`) to your camera. It forces the camera to present at a
 fixed aspect ratio: a wider window gets black bars left and right (pillarbox), a taller one gets bars top and
@@ -76,6 +78,8 @@ per camera.
 
 Add the **Beasty Loading Screen** (`Add Component > Beasty > Beasty Loading Screen`) to a panel on your canvas
 and the BeastyManager drives it: it comes up while the game boots and while a save loads.
+
+![The loading screen covering the first frames of the game](/docs-images/beasty-visual-novel/vn-loading-screen.png)
 
 It fades in and out, honours a **minimum display time** (1 second by default) so a fast load does not flash the
 panel for two frames, and can drive a progress bar (an Image fill, a Slider, or both) that stays hidden until

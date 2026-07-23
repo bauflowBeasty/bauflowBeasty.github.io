@@ -35,6 +35,8 @@ dialog. Everything else is needed.
 
 ## What is in the folder
 
+![The Beasty Save System folder in the Project window](/docs-images/beasty-save-system/save-package-folder.png)
+
 | Folder | What it is |
 |---|---|
 | `Scripts/BeastySave.cs` | The public static facade. The only entry point you call. |
@@ -61,6 +63,8 @@ Go straight to whichever path suits you:
 A converter teaches the save system how to store one type. The always-available ones — the `core` layer —
 cover the Unity maths types (`Vector2`, `Vector3`, `Quaternion`, `Color`, `Rect`, `Bounds` and friends),
 `Transform`, `Camera`, `Light`, `SpriteRenderer`, `Texture2D`, and any `MonoBehaviour` you write yourself.
+
+![The converter modules folder, one file per module](/docs-images/beasty-save-system/save-converter-modules.png)
 
 Anything beyond that comes from a module:
 

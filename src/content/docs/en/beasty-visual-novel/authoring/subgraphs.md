@@ -25,11 +25,15 @@ back to the caller, which the caller routes on.
 Right-click a node in the graph and choose **`Create Subgraph`**. The node now owns a nested graph, and the
 menu item on it becomes **`Open Subgraph`**.
 
+![Create Subgraph on the node context menu](/docs-images/beasty-visual-novel/vn-subgraph-create.png)
+
 You will normally do this on a **SubGraph Node**, because that is the node type that knows how to route an
 outcome. (Any node can carry a nested graph, but only a SubGraph Node calls one and branches on what comes
 back.)
 
 ## Navigating in and out
+
+![The subgraph breadcrumb and the Up button](/docs-images/beasty-visual-novel/vn-subgraph-breadcrumb.png)
 
 - **Open the subgraph**: right-click the node and choose `Open Subgraph`, or press the `open subgraph` button
   on the node itself.
@@ -43,6 +47,8 @@ and playback of the subgraph starts there.
 
 A subgraph ends at a **Return Node**. It is a terminator: it has no output port, because control goes back to
 the caller.
+
+![A Return node with its outcome and its effects](/docs-images/beasty-visual-novel/vn-return-node.png)
 
 It has two fields:
 

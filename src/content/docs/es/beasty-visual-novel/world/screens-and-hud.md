@@ -12,6 +12,8 @@ define la lógica. La misma división que las salas.
 
 ## Dos tipos de pantalla
 
+![La pestaña Screens: la lista de pantallas, sus ajustes y la vista previa del prefab](/docs-images/beasty-visual-novel/vn-tab-screens.png)
+
 | Tipo | Qué es |
 |---|---|
 | **Primary** (Is Main) | Un HUD persistente. Está en pantalla siempre que su modo y su condición lo permitan. El dinero, el día, un retrato, un botón que abre el inventario. |
@@ -21,6 +23,8 @@ Créalas con **+ Primary** y **+ Secondary** en la lista de pantallas de la pest
 **+ Inventory (ready-made)**, **+ Menu** (una grilla o una lista vertical) y **+ Characters**.
 
 ## Dónde aparece una pantalla
+
+![Un HUD en el juego: un contador de dinero en vivo, el día, y un botón que abre una pantalla](/docs-images/beasty-visual-novel/vn-hud-ingame.png)
 
 | Campo | Qué hace |
 |---|---|
@@ -41,6 +45,8 @@ se cumple. Las dos cosas tienen que darse a la vez.
 
 Un **elemento** (item) es una cosa dentro de la pantalla: un icono, una etiqueta, un botón. **Un elemento recibe el nombre
 de un objeto en el prefab** — el registro y el elemento del prefab se emparejan por nombre, así que nunca escribes un id.
+
+![Un elemento de pantalla: texto, variable en vivo, condición de visibilidad y variantes condicionales](/docs-images/beasty-visual-novel/vn-screen-item.png)
 
 Añade uno con el campo de nombre más **+ Item** (decoración) o **+ Button** (interactivo). La pestaña crea el
 elemento dentro del prefab por ti y añade su registro. Renombrar un elemento renombra ambos lados.
@@ -68,6 +74,8 @@ retrato que cambia con el afecto. Un icono de puerta que muestra un candado mien
 ## Acciones
 
 Un elemento **Button** tiene una acción:
+
+![Un elemento de tipo botón con su desplegable de acción abierto](/docs-images/beasty-visual-novel/vn-screen-button-action.png)
 
 | Acción | Qué hace |
 |---|---|
@@ -131,6 +139,8 @@ La pestaña Screens muestra una vista previa del prefab de la pantalla seleccion
 lleva al prefab para mover cosas de sitio; **Refresh** vuelve a renderizar la vista previa. El desplegable **Hierarchy (who opens what)**
 muestra el árbol de pantallas y qué botón abre cuál — y te deja añadir o desvincular una pantalla hija
 sin tener que buscar el botón que lo hace.
+
+![La vista previa de la pantalla junto a sus ajustes, con el desplegable de jerarquía](/docs-images/beasty-visual-novel/vn-screen-preview.png)
 
 ## Ver también
 

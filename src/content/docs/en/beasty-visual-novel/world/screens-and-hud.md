@@ -12,6 +12,8 @@ the logic. Same split as rooms.
 
 ## Two kinds of screen
 
+![The Screens tab: the screen list, its settings and the prefab preview](/docs-images/beasty-visual-novel/vn-tab-screens.png)
+
 | Kind | What it is |
 |---|---|
 | **Primary** (Is Main) | A persistent HUD. It is on screen whenever its mode and its condition allow. Money, the day, a portrait, a button that opens the inventory. |
@@ -21,6 +23,8 @@ Create them with **+ Primary** and **+ Secondary** in the tab's screen list. The
 **+ Inventory (ready-made)**, **+ Menu** (a grid or a vertical list) and **+ Characters**.
 
 ## Where a screen shows up
+
+![A HUD in game: a live money counter, the day, and a button that opens a screen](/docs-images/beasty-visual-novel/vn-hud-ingame.png)
 
 | Field | What it does |
 |---|---|
@@ -41,6 +45,8 @@ to agree.
 
 An **item** is one thing inside the screen: an icon, a label, a button. **An item is named after an object in
 the prefab** — the record and the prefab element are matched by name, so you never type an id.
+
+![A screen item: text, live variable, visibility condition and conditional variants](/docs-images/beasty-visual-novel/vn-screen-item.png)
 
 Add one with the name field plus **+ Item** (decoration) or **+ Button** (interactive). The tab creates the
 element inside the prefab for you and adds its record. Renaming an item renames both sides.
@@ -68,6 +74,8 @@ changes with affection. A door icon that shows a padlock while the shop is close
 ## Actions
 
 A **Button** item has one action:
+
+![A button item with its action dropdown open](/docs-images/beasty-visual-novel/vn-screen-button-action.png)
 
 | Action | What it does |
 |---|---|
@@ -130,6 +138,8 @@ The Screens tab previews the selected screen's prefab beside its settings. **Edi
 you to the prefab to move things around; **Refresh** re-renders the preview. The **Hierarchy (who opens what)**
 foldout shows the tree of screens and which button opens which — and lets you add or unlink a child screen
 without hunting for the button that does it.
+
+![The screen preview beside its settings, with the hierarchy foldout](/docs-images/beasty-visual-novel/vn-screen-preview.png)
 
 ## See also
 

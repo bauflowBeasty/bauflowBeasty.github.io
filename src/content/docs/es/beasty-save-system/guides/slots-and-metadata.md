@@ -78,6 +78,8 @@ Para dibujar una pantalla de slots de guardado necesitas el nombre del capítulo
 el inventario completo del jugador. Cargar doce guardados completos para imprimir doce líneas de texto es un desperdicio, y
 si los guardados están encriptados es peor: tendrías que desencriptarlos todos.
 
+![La metadata de un slot, resumida en la ventana Save Manager](/docs-images/beasty-save-system/save-slot-metadata.png)
+
 Así que `Save` recibe un diccionario opcional de strings. Se escribe en el archivo de guardado junto a los datos, y
 después puede leerse por sí solo.
 

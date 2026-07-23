@@ -13,6 +13,8 @@ Every setting below has a working default. You can ship without touching this pa
 
 ## Shared context
 
+![The VN Settings asset, top to bottom](/docs-images/beasty-visual-novel/vn-settings-inspector.png)
+
 | Setting | What it does |
 |---|---|
 | `gameContext` | The single shared `VNContext` for the whole game: the cast, the variables, the character schema, the dictionary, the story localization table, the screens, the items, the quest catalog, the music config. Because the settings asset lives in `Resources`, this is what makes the context resolvable at runtime even from a scene that does not reference it directly. |
@@ -68,6 +70,8 @@ See [The text script](/docs/beasty-visual-novel/authoring/text-script/).
 
 ## Dialogue and text defaults
 
+![The dialogue and text defaults section of VN Settings](/docs-images/beasty-visual-novel/vn-settings-text.png)
+
 | Setting | What it does |
 |---|---|
 | `typewriterCharsPerSecond` | Typewriter speed, in characters per second. |
@@ -88,6 +92,8 @@ These bound the sliders the player sees in the preferences screen.
 | `skipUnreadByDefault` | The default for "allow skipping unread text". Read text can always be fast-forwarded. |
 
 ## Stage
+
+![The stage section of VN Settings](/docs-images/beasty-visual-novel/vn-settings-stage.png)
 
 | Setting | What it does |
 |---|---|

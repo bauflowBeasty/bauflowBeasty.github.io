@@ -17,6 +17,8 @@ proyecto y los registra como pantallas secundarias. A partir de ahí son tuyos: 
 La lista de reparto tiene una fila por cada personaje que el jugador puede consultar. Al seleccionar una fila
 se abre el perfil de ese personaje.
 
+![La lista del reparto en el juego, una fila por personaje conocido](/docs-images/beasty-visual-novel/vn-cast-list-ingame.png)
+
 Dos ajustes deciden quién está en ella, y viven en el personaje (consulta
 [Personajes](/es/docs/beasty-visual-novel/world/characters/#aparecer-en-la-lista-de-reparto)):
 
@@ -44,6 +46,8 @@ La lista está virtualizada, así que un reparto de mil personajes se abre al in
 El perfil es el centro de todo lo relativo a un personaje: un encabezado con su retrato y nombre, y una
 **barra de pestañas** debajo que alterna entre secciones. La primera pestaña se muestra al abrirlo.
 
+![El perfil de un personaje: cabecera, retrato y la barra de pestañas](/docs-images/beasty-visual-novel/vn-profile-ingame.png)
+
 La barra de pestañas es **extensible**. Una pestaña no es más que un botón y un panel: añade un botón a la barra, añade un
 panel, y añade el par a la lista de pestañas del perfil en el prefab. El panel se reconstruye para el personaje
 actual cuando se muestra, así que una sección propia — una galería, un gráfico de relaciones, una pantalla de regalos —
@@ -54,6 +58,8 @@ Las pestañas incluidas de fábrica son las tres siguientes.
 ## La pantalla de estadísticas
 
 La pantalla de estadísticas muestra el retrato del personaje, su nombre, y una fila por campo.
+
+![La pantalla de estadísticas: una fila por campo, algunos editables](/docs-images/beasty-visual-novel/vn-stats-ingame.png)
 
 **Qué campos aparecen** es una decisión tuya, campo por campo: solo se listan los marcados como **Show on stats**. Tanto
 los campos universales del Character Variable Schema como los propios del personaje pueden marcarse, y un
@@ -76,6 +82,8 @@ Dos extras, ambos controlados por personaje:
 
 El calendario es el horario del personaje, en una de dos vistas, que el jugador alterna:
 
+![El calendario de rutina en el juego, en vista de semana](/docs-images/beasty-visual-novel/vn-routine-calendar-ingame.png)
+
 - **Vista de día** — una fila por momento del día, para hoy.
 - **Vista de semana** — la semana entera: momentos del día hacia abajo, días de la semana a lo ancho.
 
@@ -90,6 +98,8 @@ así que sigue el perfil activo del personaje y se actualiza cuando la historia 
 
 El registro de misiones es la guía. Enumera las misiones **activas** del personaje: el título de cada misión, y luego
 sus objetivos con la pista que escribiste para cada uno.
+
+![El registro de misiones: misiones activas, objetivos y la pista actual](/docs-images/beasty-visual-novel/vn-quest-log-ingame.png)
 
 Si activas la opción "show global quests" del registro, al abrirse sin ningún personaje seleccionado enumera
 las misiones de la historia principal — las que no tienen dueño.

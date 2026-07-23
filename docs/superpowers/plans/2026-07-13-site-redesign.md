@@ -91,7 +91,7 @@ html[data-theme="light"] {
 // products.ts
 export type StoreLink = { store: 'unity' | 'itch' | string; label: string; url: string | null };
 export type Product = {
-  id: 'beasty-visual-novel' | 'beasty-save-system' | 'beasty-debug-logger';
+  id: 'beasty-visual-novel' | 'beasty-save-system' | 'beasty-console';
   name: string; tagline: { en: string; es: string }; blurb: { en: string; es: string };
   storeLinks: StoreLink[]; docsEntry: string; // ruta de la primera página de docs
 };

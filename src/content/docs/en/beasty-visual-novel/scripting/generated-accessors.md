@@ -28,6 +28,8 @@ int m = VNVars.Mony;          // CS0117: 'VNVars' does not contain a definition 
 
 `VNVars` is a flat static class, one property per variable, typed from the variable's declared value type:
 
+![The generated VNVars file open in a code editor](/docs-images/beasty-visual-novel/vn-generated-vnvars.png)
+
 ```csharp
 public static class VNVars
 {

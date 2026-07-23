@@ -9,6 +9,8 @@ muestra las dos formas de restilizar el juego.
 
 ## Los prefabs
 
+![La carpeta de prefabs del paquete en la ventana Project](/docs-images/beasty-visual-novel/vn-ui-prefabs-folder.png)
+
 | Prefab | Qué monta |
 |---|---|
 | `VisualNovelScene` | Una escena completa ya lista: todo lo de abajo, ya cableado. |
@@ -38,6 +40,8 @@ lugar de la nuestra. Nada en el runtime da por sentada la jerarquía incluida.
 
 ## Los dos elementos de menú de prefabs
 
+![El diálogo de confirmación antes de reconstruir o actualizar los prefabs de UI](/docs-images/beasty-visual-novel/vn-upgrade-prefabs.png)
+
 | Elemento de menú | Úsalo cuando |
 |---|---|
 | `Tools > Beasty VN > Setup > Upgrade UI Prefabs (keep customizations)` | Quieres que los prefabs incluidos se actualicen — piezas nuevas que agregó una versión más reciente — **sin perder tu restilizado**. Solo agrega lo que falta y deja tus cambios intactos. Este es el que normalmente quieres. |
@@ -47,6 +51,8 @@ Recurre a Build Default Menu Prefabs cuando un prefab de menú está roto sin re
 limpia para restilizar. Recurre a Upgrade en cualquier otro caso.
 
 ## La pantalla negra, y el botón que la arregla
+
+![La pantalla en negro, y el botón que la arregla](/docs-images/beasty-visual-novel/vn-black-screen-fix.png)
 
 > **Advertencia**
 > Los prefabs se referencian entre sí, y la escena resuelve las vistas **por tipo** en lugar de por una ruta

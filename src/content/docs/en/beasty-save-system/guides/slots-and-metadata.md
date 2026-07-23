@@ -78,6 +78,8 @@ To draw a save-slot screen you need the chapter name, the playtime, the level, t
 the player's full inventory. Loading twelve complete saves to print twelve lines of text is wasteful, and
 if the saves are encrypted it is worse: you would have to decrypt all of them.
 
+![The metadata of a slot, summarised in the Save Manager window](/docs-images/beasty-save-system/save-slot-metadata.png)
+
 So `Save` takes an optional dictionary of strings. It is written into the save file next to the data, and
 it can be read back on its own.
 

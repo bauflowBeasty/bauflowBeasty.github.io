@@ -51,6 +51,8 @@ El payload se encripta con AES-256 (CBC). La clave puede ser **cualquier string 
 que tener 32 caracteres, ni ser hexadecimal, ni nada por el estilo. Escribas lo que escribas, se hashea con
 SHA-256 para producir la clave de 256 bits.
 
+![Un guardado cifrado abierto en un editor de texto: el payload es ilegible, la metadata no](/docs-images/beasty-save-system/save-encrypted-file.png)
+
 Para cada guardado se genera un vector de inicialización aleatorio de 16 bytes nuevo, que se almacena junto al
 ciphertext. La consecuencia práctica: guardar los mismos datos dos veces produce dos archivos distintos. Esto es
 correcto e intencional. No compares archivos de guardado byte por byte para decidir si algo cambió.

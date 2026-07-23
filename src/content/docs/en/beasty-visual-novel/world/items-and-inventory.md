@@ -12,6 +12,8 @@ opens.
 Open `Tools > Beasty VN > Editor`, go to the **Items** tab and press **+ Item**. Items live in the shared
 context, so one list serves every scene in the game.
 
+![An item definition: id, icon, kind, max quantity and its text keys](/docs-images/beasty-visual-novel/vn-items-tab.png)
+
 | Field | What it is |
 |---|---|
 | **Id** | The stable name (`potion`). Auto-generated, and editable. Everything points at this. |
@@ -28,6 +30,8 @@ its maximum.
 
 Every item has an **on use** section. It is what happens when the player presses Use in the inventory, or
 when a **Use** block runs.
+
+![The on-use section of an item: condition, effects, jump-to scene and consume amount](/docs-images/beasty-visual-novel/vn-item-onuse.png)
 
 | Field | What it does |
 |---|---|
@@ -87,6 +91,8 @@ explaining why, until they find it. See
 The `Inventory` prefab is a ready-made overlay: a grid of the items the player currently holds, and a
 detail popup.
 
+![The inventory screen in game: the grid of held items and the detail popup](/docs-images/beasty-visual-novel/vn-inventory-ingame.png)
+
 - **The grid** is dynamic. It shows one slot per item with a quantity of at least 1, in the player's saved
   slot order. Use the last potion and the slot disappears and the grid closes up. Pick up something new
   and it is appended.
@@ -103,6 +109,8 @@ It is a normal uGUI prefab. Restyle it, move things around, replace the art; see
 In the editor's **Screens** tab, press **+ Inventory (ready-made)**. That copies the prefab into your
 project and registers it as a secondary screen with an id. Only one inventory is ever created — press it
 twice and it selects the existing one.
+
+![The + Inventory (ready-made) button in the Screens tab](/docs-images/beasty-visual-novel/vn-screens-add-inventory.png)
 
 The player reaches it in one of two ways:
 

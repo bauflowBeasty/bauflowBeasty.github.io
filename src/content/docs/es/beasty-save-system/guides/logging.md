@@ -31,6 +31,8 @@ incluido el código que llama a `BeastySave` directamente. Si no hay manager en 
 
 En **On**:
 
+![Qué aspecto tienen en la consola los logs del sistema de guardado](/docs-images/beasty-save-system/save-logging-output.png)
+
 ```
 [BeastySave] Saved 'slot1' — 4.2 KB, 8 ms, 12 saveables
 [BeastySave] Loaded 'slot1' — 6 ms, 12 saveables
@@ -95,7 +97,7 @@ BeastySaveLog.Sink = new FileSink();
 
 Las líneas de Verbose llegan a tu sink a través de `Info`.
 
-Si no hay sink asignado, la primera línea de log elige uno: el asset **Beasty Debug Logger** si está en el
+Si no hay sink asignado, la primera línea de log elige uno: el asset **Beasty Console** si está en el
 proyecto (lo detecta por reflexión — los dos assets se distribuyen por separado y ninguno necesita al otro),
 y `UnityEngine.Debug` en caso contrario.
 

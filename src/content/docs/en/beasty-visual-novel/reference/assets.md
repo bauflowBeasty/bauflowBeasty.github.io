@@ -11,6 +11,8 @@ fields. Use this page as a lookup. The concepts behind these assets are explaine
 
 Most assets are per-story or per-character. A few are singletons for the whole game.
 
+![The asset scaffolding a project ends up with, in the Project window](/docs-images/beasty-visual-novel/vn-assets-project.png)
+
 | Asset | How many |
 |---|---|
 | `VNSettings` | Exactly one, in a `Resources` folder. Created for you. |

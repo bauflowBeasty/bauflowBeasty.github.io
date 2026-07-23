@@ -14,6 +14,8 @@ Consulta [Instalación](/es/docs/beasty-visual-novel/getting-started/installatio
 
 Crea o abre una escena, y luego ejecuta:
 
+![El menú Setup con Create Scene dentro](/docs-images/beasty-visual-novel/vn-create-scene-menu.png)
+
 ```text
 Tools > Beasty VN > Setup > Create Scene
 ```
@@ -73,6 +75,8 @@ pestañas arriba. Hoy necesitas dos de ellas: **Characters** y **Story**. Para e
 
 Ve a la pestaña **Characters**, sub-pestaña **Cast**.
 
+![Un personaje recién creado en la sub-pestaña Cast, con id y expresión base](/docs-images/beasty-visual-novel/vn-first-character.png)
+
 1. Presiona **+ New Character**. Elige dónde guardarlo. El personaje aparece en la lista de la izquierda y
    se abre a la derecha.
 2. **Id (stable)** — el nombre interno que usa la historia para referirse a este personaje, por ejemplo
@@ -129,6 +133,8 @@ Detalle completo: [Diálogo y el escenario](/es/docs/beasty-visual-novel/authori
 
 Haz clic derecho en un punto vacío del lienzo del grafo:
 
+![El primer nodo Choice con dos opciones, conectado a dos nodos de diálogo](/docs-images/beasty-visual-novel/vn-first-choice-node.png)
+
 ```text
 Create > Choice Node
 ```
@@ -162,6 +168,8 @@ Detalle completo: [Elecciones y decisiones](/es/docs/beasty-visual-novel/authori
 
 Guarda la escena, y luego presiona Play.
 
+![La primera escena en marcha: fondo, personaje, placa de nombre y caja de diálogo](/docs-images/beasty-visual-novel/vn-first-play.png)
+
 Aparece el **menú principal**. Presiona **Start**. Tu backdrop aparece, Juan aparece, y dice su primera
 línea. Haz clic, o presiona Espacio, para avanzar. Después de la segunda línea aparecen los dos botones.
 Haz clic en uno, y caes en el nodo al que apunta.
@@ -189,6 +197,8 @@ estás trabajando. No toca nada de tu escena y no guarda nada. Consulta
 ### Valida
 
 En la barra superior de la ventana Beasty VN, presiona **Validate**.
+
+![El informe del validador después de recorrer el grafo](/docs-images/beasty-visual-novel/vn-validate-report.png)
 
 El validador recorre el grafo raíz y cada subgrafo y reporta referencias colgantes: una línea hablada por
 un id de personaje que ya no existe, una condición sobre una variable que borraste, un token de diccionario

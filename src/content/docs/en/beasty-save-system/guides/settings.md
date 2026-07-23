@@ -37,6 +37,8 @@ component, edited in the inspector or in the Save Manager window. That is enough
 
 ## The fields
 
+![The settings fields on the BeastySaveManager inspector](/docs-images/beasty-save-system/save-settings-inspector.png)
+
 | Field | Type | Default | What it does |
 |---|---|---|---|
 | `Folder` | string | `"Saves"` | Subfolder under `DataPath` that holds the save files. |

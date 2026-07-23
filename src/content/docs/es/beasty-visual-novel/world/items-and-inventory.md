@@ -12,6 +12,8 @@ abre.
 Abre `Tools > Beasty VN > Editor`, ve a la pestaña **Items** y pulsa **+ Item**. Los objetos viven en el
 contexto compartido, así que una sola lista sirve a todas las escenas del juego.
 
+![La definición de un ítem: id, icono, kind, cantidad máxima y sus claves de texto](/docs-images/beasty-visual-novel/vn-items-tab.png)
+
 | Campo | Qué es |
 |---|---|
 | **Id** | El nombre estable (`potion`). Se genera automáticamente, y es editable. Todo apunta a él. |
@@ -28,6 +30,8 @@ Un objeto **Key** es una bandera de posesión: el jugador lo tiene o no lo tiene
 
 Todo objeto tiene una sección **on use**. Es lo que ocurre cuando el jugador pulsa Use en el inventario, o
 cuando se ejecuta un bloque **Use**.
+
+![La sección «al usar» de un ítem: condición, efectos, escena de salto y cantidad consumida](/docs-images/beasty-visual-novel/vn-item-onuse.png)
 
 | Campo | Qué hace |
 |---|---|
@@ -87,6 +91,8 @@ que explica por qué, hasta que la encuentren. Consulta
 El prefab `Inventory` es una superposición ya hecha: una grilla de los objetos que el jugador lleva en ese
 momento, y un popup de detalle.
 
+![La pantalla de inventario en el juego: la grilla de ítems y el popup de detalle](/docs-images/beasty-visual-novel/vn-inventory-ingame.png)
+
 - **La grilla** es dinámica. Muestra una ranura por cada objeto con una cantidad de al menos 1, en el orden de
   ranura guardado del jugador. Usa la última poción y la ranura desaparece y la grilla se recoloca. Recoge algo
   nuevo y se añade al final.
@@ -103,6 +109,8 @@ Es un prefab uGUI normal. Restilízalo, mueve cosas de sitio, reemplaza el arte;
 En la pestaña **Screens** del editor, pulsa **+ Inventory (ready-made)**. Eso copia el prefab a tu
 proyecto y lo registra como pantalla secundaria con un id. Solo se crea un inventario: si pulsas el botón
 dos veces, se selecciona el que ya existe.
+
+![El botón + Inventory (ready-made) en la pestaña Screens](/docs-images/beasty-visual-novel/vn-screens-add-inventory.png)
 
 El jugador llega a ella de dos formas:
 

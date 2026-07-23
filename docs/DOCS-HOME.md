@@ -17,14 +17,14 @@ Three Unity packages. Each one works on its own, and they fit together when you 
 |---|---|---|
 | **[Beasty Visual Novel](/docs/beasty-visual-novel/)** | A complete visual novel engine: a story graph and a Ren'Py-like text script kept in sync, free-roam rooms, quests, game time, character routines, localization and saves. | [Your first scene](/docs/beasty-visual-novel/getting-started/your-first-scene/) |
 | **[Beasty Save System](/docs/beasty-save-system/)** | Slot-based save and load with its own JSON engine and no external dependencies. Atomic writes, per-slot backups, optional encryption, and scene state from a component you tick. | [Save without writing code](/docs/beasty-save-system/getting-started/save-without-code/) |
-| **[Beasty Debug Logger](/docs/beasty-debug-logger/)** | A logging API with semantic levels, plus an editor console that classifies, filters and searches everything your project logs. | [Getting started](/docs/beasty-debug-logger/getting-started/) |
+| **[Beasty Console](/docs/beasty-console/)** | A logging API with semantic levels, plus an editor console that classifies, filters and searches everything your project logs. | [Getting started](/docs/beasty-console/getting-started/) |
 
 ## How the three relate
 
 Beasty Save System **ships inside** Beasty Visual Novel. If you bought the novel engine, the save system
 is already there — do not import it a second time.
 
-Beasty Debug Logger is optional for the save system, which detects it at runtime and falls back to Unity's
+Beasty Console is optional for the save system, which detects it at runtime and falls back to Unity's
 own console when it is absent. That is why each package can be bought and imported on its own.
 
 ## Who each page is for

@@ -26,6 +26,8 @@ A game normally has several DialogueScenes. They all share one world.
 
 A **VNContext** is everything that is true about your game rather than about one scene:
 
+![The VNContext inspector: the one shared world](/docs-images/beasty-visual-novel/vn-context-inspector.png)
+
 - the **cast** — every character
 - the **variables** you defined, and the **character schema** (the fields every character has)
 - the **dictionary** — text tokens the player can edit
@@ -149,6 +151,8 @@ Full detail: [Variables and conditions](/docs/beasty-visual-novel/world/variable
 [Variable keys](/docs/beasty-visual-novel/reference/variable-keys/) for every reserved namespace.
 
 ## BeastyManager - the one object
+
+![The BeastyManager inspector, with the managers and configs it owns](/docs-images/beasty-visual-novel/vn-beastymanager-inspector.png)
 
 **BeastyManager** is the single GameObject you drag into a Unity scene. It owns every manager — the story
 director, the stage, the audio, the input, the save system, the free-roam controller — as hidden

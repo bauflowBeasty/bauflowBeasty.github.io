@@ -31,7 +31,7 @@ monolítico, cada pieza fácil de localizar y modificar.
 |---|---|---|
 | beasty-visual-novel | Beasty Visual Novel | Documentation/beasty-visual-novel (~60 páginas) |
 | beasty-save-system | Beasty Save System | Documentation/beasty-save-system (~20 páginas) |
-| beasty-debug-logger | Beasty Debug Logger | Documentation/beasty-debug-logger (~8 páginas) |
+| beasty-console | Beasty Console | Documentation/beasty-console (~8 páginas) |
 
 Relaciones (del README de Documentation): Save System se incluye dentro de Visual Novel;
 Debug Logger es opcional para Save System (detección en runtime). Requisitos: Unity 6000.2+,

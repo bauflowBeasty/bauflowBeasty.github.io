@@ -24,6 +24,8 @@ The format is JSON, indented with two spaces, UTF-8 **without a BOM**.
 
 ## The envelope
 
+![A save file opened in a text editor, showing the envelope fields](/docs-images/beasty-save-system/save-file-envelope.png)
+
 ```json
 {
   "beasty": 2,

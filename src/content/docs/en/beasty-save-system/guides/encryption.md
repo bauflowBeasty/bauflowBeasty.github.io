@@ -51,6 +51,8 @@ The payload is encrypted with AES-256 (CBC). The key can be **any non-empty stri
 to be 32 characters, or hex, or anything else. Whatever you type is hashed with SHA-256 to produce the
 256-bit key.
 
+![An encrypted save opened in a text editor: the payload is unreadable, the meta is not](/docs-images/beasty-save-system/save-encrypted-file.png)
+
 A fresh random 16-byte initialisation vector is generated for every save and stored with the ciphertext.
 The practical consequence: saving the same data twice produces two different files. This is correct and
 intended. Do not compare save files byte-for-byte to decide whether something changed.

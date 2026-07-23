@@ -17,6 +17,8 @@ Tools > Beasty VN > Editor
 
 La franja que cruza la parte superior de la ventana es la misma en cada pestaña.
 
+![La barra superior de la ventana Beasty VN: DialogueScene, Context, Characters, Validate y Global Settings](/docs-images/beasty-visual-novel/vn-editor-top-bar.png)
+
 | Control | Qué hace |
 |---|---|
 | Campo **DialogueScene** | Qué historia estás editando. Suelta una DialogueScene aquí, o haz doble clic en una dentro de la ventana Project y el editor se abre sobre ella. |
@@ -31,6 +33,8 @@ Si no hay ninguna DialogueScene asignada, la pestaña Story ofrece un botón **S
 crea todo el andamiaje con un solo clic.
 
 ## Las nueve pestañas
+
+![Las nueve pestañas de la ventana Beasty VN](/docs-images/beasty-visual-novel/vn-editor-tabs.png)
 
 ### Story
 
@@ -69,6 +73,8 @@ Más detalle en: [El grafo de la historia](/es/docs/beasty-visual-novel/authorin
 
 El reparto, y todo lo que está conectado a un personaje. Cuatro sub-pestañas:
 
+![La pestaña Characters y sus cuatro sub-pestañas](/docs-images/beasty-visual-novel/vn-tab-characters.png)
+
 - **Cast** — identidad (id, display name, colores, categoría, tags), alias, expresiones, estilos de
   entrega, retratos. **+ New Character** crea uno; **Add existing** adopta una CharacterDefinition que ya
   tengas.
@@ -86,6 +92,8 @@ Tus variables globales: clave, tipo, valor predeterminado, y cómo se comporta l
 master-detail, y las variables de personaje tienen una lista de personajes a la izquierda para que puedas
 saltar rápido de un personaje a otro.
 
+![La pestaña Variables: la lista maestro-detalle de variables globales](/docs-images/beasty-visual-novel/vn-tab-variables.png)
+
 Más detalle en: [Variables y condiciones](/es/docs/beasty-visual-novel/world/variables-and-conditions/).
 
 ### Localization
@@ -93,6 +101,8 @@ Más detalle en: [Variables y condiciones](/es/docs/beasty-visual-novel/world/va
 La grilla de traducción: una fila por clave, una columna por idioma. Un alternador **Story / UI (global)**
 cambia entre la tabla propia de la historia y la tabla compartida de UI que leen todos los menús y
 pantallas.
+
+![La pestaña Localization con el alternador Story / UI (global)](/docs-images/beasty-visual-novel/vn-tab-localization.png)
 
 Aquí agregas idiomas, importas y exportas CSV/TSV, y ves de un vistazo qué celdas faltan, están
 desactualizadas o están terminadas.
@@ -105,6 +115,8 @@ Tokens de texto que el jugador puede cambiar — el nombre del jugador, su ciuda
 historia le deje decidir. Un token tiene una clave, un valor predeterminado, y una marca de si el jugador
 puede editarlo.
 
+![La pestaña Dictionary: los tokens de texto que el jugador puede cambiar](/docs-images/beasty-visual-novel/vn-tab-dictionary.png)
+
 Más detalle en: [El diccionario](/es/docs/beasty-visual-novel/world/dictionary/).
 
 ### Music
@@ -112,6 +124,8 @@ Más detalle en: [El diccionario](/es/docs/beasty-visual-novel/world/dictionary/
 La cola de música para cada modo de aplicación: el menú principal, la novela visual, mundo libre, y tu
 propio modo personalizado. Cada cola tiene sus clips, un modo de reproducción, un volumen y un tiempo de
 crossfade.
+
+![La pestaña Music: una cola por modo de la aplicación](/docs-images/beasty-visual-novel/vn-tab-music.png)
 
 Más detalle en: [Audio y música](/es/docs/beasty-visual-novel/production/audio-and-music/).
 
@@ -121,6 +135,8 @@ El editor de salas, incrustado en la ventana. Tiene una vista **Map** — un dia
 pasajes entre ellas — y **edición en profundidad** de una sala, que es el único lugar donde creas el fondo
 de esa sala, sus puertas y sus objetos interactuables. Un alternador **Routines** cambia el lienzo por la
 grilla de rutinas: una vista de semana x momento del día sobre los horarios de tus personajes.
+
+![La pestaña FreeRoam en vista Map, con las salas como cajas y las puertas como líneas](/docs-images/beasty-visual-novel/vn-tab-freeroam-map.png)
 
 Más detalle en: [Salas de mundo libre](/es/docs/beasty-visual-novel/world/free-roam-rooms/),
 [Interactuables y puertas](/es/docs/beasty-visual-novel/world/interactables-and-doors/),
@@ -132,12 +148,16 @@ Pantallas de HUD y superposición: la barra persistente que siempre está en pan
 abren encima del juego. Cada pantalla es un prefab más una lista de los objetos dentro de ella que hacen
 algo.
 
+![La pestaña Screens: la lista de pantallas, sus ajustes y la vista previa del prefab](/docs-images/beasty-visual-novel/vn-tab-screens.png)
+
 Más detalle en: [Pantallas y HUD](/es/docs/beasty-visual-novel/world/screens-and-hud/).
 
 ### Items
 
 Definiciones de ítems: id, ícono, tipo (una llave o un consumible), cantidad máxima, claves de nombre y
 descripción, y qué pasa cuando el jugador usa uno.
+
+![La pestaña Items con un ítem seleccionado](/docs-images/beasty-visual-novel/vn-tab-items.png)
 
 Más detalle en: [Ítems e inventario](/es/docs/beasty-visual-novel/world/items-and-inventory/).
 
@@ -157,6 +177,8 @@ Más detalle en: [Vista previa de diálogo](/es/docs/beasty-visual-novel/authori
 
 ### Character Database
 
+![La Character Database en su propia ventana, junto al grafo](/docs-images/beasty-visual-novel/vn-character-database-window.png)
+
 ```text
 Tools > Beasty VN > Content > Character Database
 ```
@@ -165,6 +187,8 @@ La pestaña Characters en su propia ventana. Mismo editor, mismos datos — úti
 reparto abierto al lado del grafo en lugar de detrás.
 
 ### Global Settings
+
+![La ventana Global Settings: los ajustes de VN de todo el proyecto](/docs-images/beasty-visual-novel/vn-global-settings.png)
 
 ```text
 Tools > Beasty VN > Settings > Global Settings

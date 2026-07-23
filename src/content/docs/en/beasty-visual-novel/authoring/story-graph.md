@@ -27,6 +27,8 @@ Pan with the middle mouse button, zoom with the wheel, box-select with a drag.
 
 Right-click an empty part of the canvas and choose from `Create`:
 
+![The right-click Create menu on the graph canvas, listing the node types](/docs-images/beasty-visual-novel/vn-graph-create-menu.png)
+
 - `Create > Dialogue Node`
 - `Create > Choice Node`
 - `Create > Decision Node`
@@ -43,6 +45,8 @@ the entry node.
 Every node has one input port, `In`, on its left. It accepts any number of incoming wires — several nodes
 can lead to the same place.
 
+![Dragging a wire from a node's output port to another node's input](/docs-images/beasty-visual-novel/vn-graph-wiring.png)
+
 Output ports are on the right, and what they are depends on the node type (see below). Drag from an output
 port to another node's `In` port to connect them. Drag a wire away and drop it on empty canvas to
 disconnect it, or select the wire and press Delete.
@@ -55,6 +59,8 @@ the start of the scene, right-click a node and choose `Set as Entry Node`.
 ### The node context menu
 
 Right-click a node:
+
+![The node context menu: Rename, Set as Entry Node, Create Subgraph, Delete Node](/docs-images/beasty-visual-novel/vn-graph-node-menu.png)
 
 | Item | What it does |
 |---|---|
@@ -71,7 +77,11 @@ Nodes are coloured by type. A dialogue node, a choice node and a decision node a
 canvas, so you can read the shape of a scene without opening anything. The colour is cosmetic and has no
 effect on the game.
 
+![A graph with one node of each type, so the colours can be told apart](/docs-images/beasty-visual-novel/vn-graph-colors.png)
+
 ## Dialogue Node
+
+![A Dialogue node's inspector, with its block list](/docs-images/beasty-visual-novel/vn-node-dialogue.png)
 
 **Reach for it when the player just needs to be told something.** It is the node you will use most.
 
@@ -85,6 +95,8 @@ Everything a dialogue node can contain is on the [Blocks reference](/docs/beasty
 you will use most are covered in depth in [Dialogue and the stage](/docs/beasty-visual-novel/authoring/dialogue-and-stage/).
 
 ## Choice Node
+
+![A Choice node's inspector: its options, with conditions, effects and targets](/docs-images/beasty-visual-novel/vn-node-choice.png)
 
 **Reach for it when the player must pick.** It shows a menu of options and waits.
 
@@ -103,6 +115,8 @@ An option can also target a flow exit instead of a node, in which case it has no
 [Choices and decisions](/docs/beasty-visual-novel/authoring/choices-and-decisions/).
 
 ## Decision Node
+
+![A Decision node's inspector, with its conditional branches](/docs-images/beasty-visual-novel/vn-node-decision.png)
 
 **Reach for it when the story must branch but the player must not know it is branching.**
 
@@ -124,6 +138,8 @@ Add a branch with the `+ branch` button on the node.
 
 ## Flow (Mode Switch) Node
 
+![A Flow (Mode Switch) node's inspector](/docs-images/beasty-visual-novel/vn-node-flow.png)
+
 **Reach for it when leaving the novel deserves its own box in the graph.**
 
 A flow node carries exactly one exit: enter free roam, return to the room the player came from, let the
@@ -136,6 +152,8 @@ The same four exits also exist as blocks you can put at the end of a dialogue no
 covered in [Transitions](/docs/beasty-visual-novel/authoring/transitions/).
 
 ## SubGraph Node
+
+![A SubGraph node with its outcome routes](/docs-images/beasty-visual-novel/vn-node-subgraph.png)
 
 **Reach for it when a stretch of story is reusable, or big enough to deserve its own canvas.**
 
@@ -162,6 +180,8 @@ It has no output port. It is a terminator: control goes back to the caller, not 
 A return node only makes sense inside a subgraph. See [Subgraphs](/docs/beasty-visual-novel/authoring/subgraphs/).
 
 ## Talk Menu Node
+
+![A Talk Menu node in the graph](/docs-images/beasty-visual-novel/vn-node-talkmenu.png)
 
 **Reach for it when the player should choose what to say to a specific character.**
 

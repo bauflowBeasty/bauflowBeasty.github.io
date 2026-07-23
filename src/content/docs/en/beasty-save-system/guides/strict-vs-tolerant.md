@@ -61,6 +61,8 @@ There is no rollback in tolerant mode. That is the point: it applies what it can
 A tolerant load that succeeds can still have things to say. Read `Warnings` — it is never null, so you can
 iterate it without a check.
 
+![The warnings a tolerant load reports for the fields it skipped](/docs-images/beasty-save-system/save-tolerant-warnings.png)
+
 ```csharp
 using Beasty_SaveSystem;
 using Beasty_SaveSystemCore;

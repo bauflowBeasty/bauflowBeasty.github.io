@@ -16,6 +16,8 @@ Están vinculados por el nombre.
 
 Un botón tiene un **tipo** (kind) y una **función** (su acción).
 
+![La ficha de un objeto de sala: kind, función y su destino](/docs-images/beasty-visual-novel/vn-room-object-inspector.png)
+
 | Tipo | Qué significa |
 |---|---|
 | `Navigation` | Una puerta. Al clicarla, el jugador se mueve a otra sala. |
@@ -53,6 +55,8 @@ El área de clic se construye a partir del sprite. Por defecto es la forma del s
 
 Elige un **Mode**:
 
+![Los ajustes de resaltado al pasar el mouse, y lo que ve el jugador](/docs-images/beasty-visual-novel/vn-object-hover.png)
+
 | Modo | Qué ve el jugador |
 |---|---|
 | **Tint** | El sprite en reposo se tiñe. Este es el valor por defecto. |
@@ -83,6 +87,8 @@ tormenta, la nota sobre la mesa solo mientras la misión está activa, el puesto
 ## Puertas
 
 Una puerta es un botón de tipo `Navigation`. Además de los campos compartidos, tiene:
+
+![Una puerta: sala destino, id de pasaje, marca de accesible y diálogo de bloqueo](/docs-images/beasty-visual-novel/vn-door-inspector.png)
 
 | Campo | Qué es |
 |---|---|
@@ -129,6 +135,8 @@ Access exception 1  : if  item.rusty_key >= 1     -> Accessible = on
 Un objeto **Enter VN** tiene una escena por defecto, más una lista ordenada de casos de **VN condicional**. Al clicar,
 **se reproduce el primer caso cuya condición se cumpla; si ninguno lo hace, se reproduce la escena por defecto.**
 
+![Casos de VN condicional en un objeto: la cama que significa dos cosas distintas](/docs-images/beasty-visual-novel/vn-object-conditional-vn.png)
+
 La cama es el ejemplo que todo el mundo necesita:
 
 ```text
@@ -142,6 +150,8 @@ El objeto sigue siendo un solo objeto. Su significado cambia con el mundo.
 
 Dale a un objeto un **personaje propietario** y deja de ser un objeto: *es* ese personaje, de pie ahí. Autóralos desde
 el detalle de la sala con **+ Character** (elige quién) y luego **+ Pose** para cada aspecto.
+
+![Una pose de personaje en una sala, con su condición Show pose when](/docs-images/beasty-visual-novel/vn-room-character-pose.png)
 
 - Un personaje puede tener **varias poses en una misma sala** — sentado en el mostrador, apoyado en el marco de la puerta,
   brazos cruzados. Cada pose es un objeto separado con su propio sprite, posición y condición **Show pose when**.
@@ -188,6 +198,8 @@ correctamente.
 El área de clic de un objeto proviene de su sprite. Para un arte cuyo cuadro delimitador es mucho más grande que la cosa que
 realmente quieres que sea clicable — una fina cadena de lámpara, una espada tumbada en diagonal, un recorte de
 personaje con muchas esquinas vacías — la caja atrapa clics destinados a la sala que tiene detrás.
+
+![El ítem de menú que construye áreas de clic a partir de los píxeles opacos del sprite](/docs-images/beasty-visual-novel/vn-tight-click-shapes.png)
 
 Selecciona los sprites y ejecuta:
 

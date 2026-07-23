@@ -11,6 +11,8 @@ when something goes wrong.
 
 A save lives in a slot. There are two kinds:
 
+![The save/load screen: slots with thumbnails and their metadata](/docs-images/beasty-visual-novel/vn-save-load-ingame.png)
+
 | Kind | Slot name | Written by |
 |---|---|---|
 | Manual | `manual_0`, `manual_1`, ... | The player, from the save screen |
@@ -32,6 +34,8 @@ have their own dedicated page, which is **load-only** — the player cannot over
 ## Autosave
 
 Autosave is on by default (`autosaveEnabled`). The game autosaves when the player reaches a decision.
+
+![The autosave and slot settings in Global Settings](/docs-images/beasty-visual-novel/vn-autosave-settings.png)
 
 The policy:
 

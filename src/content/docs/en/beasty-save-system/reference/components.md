@@ -10,6 +10,8 @@ The two MonoBehaviours of the save system. `BeastySaveable` marks a GameObject a
 
 Add Component: `Beasty > Beasty Saveable`. Marked `[DisallowMultipleComponent]`.
 
+![The Saved Components checklist, each component labelled with its converter layer](/docs-images/beasty-save-system/save-saveable-components-checklist.png)
+
 Marks a GameObject as part of scene saves: a stable id, plus the list of components whose state
 `SaveAll` captures and `LoadAll` restores.
 

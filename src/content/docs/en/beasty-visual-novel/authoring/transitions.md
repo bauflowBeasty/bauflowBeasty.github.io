@@ -13,6 +13,8 @@ the graph reads.
 
 ## The four exits
 
+![The four exit blocks in the Flow category of the palette](/docs-images/beasty-visual-novel/vn-flow-blocks.png)
+
 ### Go to FreeRoam
 
 Leaves the novel and puts the player in a room.
@@ -87,6 +89,8 @@ separate node for the exit would add a wire and a box and tell the reader nothin
 
 Create a **Flow (Mode Switch) Node** and give it one exit. It has no output port — there is no "after" inside
 this graph.
+
+![A dedicated Flow node as the target of two branches](/docs-images/beasty-visual-novel/vn-flow-node.png)
 
 Use it when the transition is a **structural fact of the story**, and you want it visible as its own box:
 

@@ -19,6 +19,8 @@ Una vez que eso funcione, todo lo demás en el paquete es una variación de lo m
 
 Abre una escena nueva. Añade un cubo: `GameObject > 3D Object > Cube`. Muévelo a un lugar que reconozcas.
 
+![La escena del tutorial: un cubo, un suelo y los dos botones](/docs-images/beasty-save-system/save-cube-scene.png)
+
 Ese cubo es el objeto cuyo estado quieres conservar. En tu juego real será el jugador, una puerta, un
 cofre — pero los pasos son idénticos.
 
@@ -100,6 +102,8 @@ como `CON` o `PRN`); las razones están en [settings.md](/es/docs/beasty-save-sy
 Repite los pasos 4 y 5, con dos cambios: llama al botón `Load`, y elige **BeastySaveManager > LoadAll
 (string)** en el desplegable. Escribe el mismo nombre de slot, `slot1`.
 
+![El OnClick del botón Load conectado a BeastySaveManager.LoadAll con el mismo nombre de slot](/docs-images/beasty-save-system/save-load-button-onclick.png)
+
 Los dos nombres de slot deben coincidir. `SaveAll("slot1")` escribe el archivo; `LoadAll("slot1")` lo vuelve a leer. Si
 escribes `slot1` en un botón y `Slot1` en el otro, nada cargará y perderás veinte minutos
 preguntándote por qué.
@@ -107,6 +111,8 @@ preguntándote por qué.
 ## 7. Pruébalo
 
 Pulsa **Play**.
+
+![En Play: el cubo movido y luego devuelto a su posición guardada](/docs-images/beasty-save-system/save-playmode-test.png)
 
 1. Mueve el cubo en la vista Scene mientras el juego se ejecuta. Arrástralo a algún lugar obviamente distinto.
 2. Pulsa **Save**.
@@ -126,6 +132,8 @@ Ese estado sobrevivió a parar y reiniciar el juego porque está en disco, no en
 Vuelve a la ventana Save Manager (`Tools > Beasty Save System > Save Manager`) y desplázate hasta **Slots on
 Disk**. Pulsa **Refresh**. Tu slot aparece listado. Pulsa **Open Folder** y tu explorador de archivos se abre
 justo en esa carpeta.
+
+![La carpeta de guardado en el explorador de archivos, con el archivo del slot dentro](/docs-images/beasty-save-system/save-folder-explorer.png)
 
 El archivo es `slot1.save`. Su ruta completa es `<persistentDataPath>/Saves/slot1.save`, donde
 `persistentDataPath` es la carpeta de escritura por usuario de Unity — en Windows está bajo

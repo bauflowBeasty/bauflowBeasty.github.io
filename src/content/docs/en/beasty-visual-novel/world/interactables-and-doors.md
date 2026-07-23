@@ -16,6 +16,8 @@ They are linked by name.
 
 A button has a **kind** and a **function** (its action).
 
+![A room object's record: kind, function and its target](/docs-images/beasty-visual-novel/vn-room-object-inspector.png)
+
 | Kind | What it means |
 |---|---|
 | `Navigation` | A door. Clicking it moves the player to another room. |
@@ -53,6 +55,8 @@ The click area is built from the sprite. By default that is the sprite's shape �
 
 Pick one **Mode**:
 
+![The hover feedback settings, and what the player sees on hover](/docs-images/beasty-visual-novel/vn-object-hover.png)
+
 | Mode | What the player sees |
 |---|---|
 | **Tint** | The idle sprite is tinted. This is the default. |
@@ -83,6 +87,8 @@ storm, the note on the table only while the quest is active, the shopkeeper's st
 ## Doors
 
 A door is a button of kind `Navigation`. Beyond the shared fields it has:
+
+![A door: destination room, passage id, accessible flag and blocked dialogue](/docs-images/beasty-visual-novel/vn-door-inspector.png)
 
 | Field | What it is |
 |---|---|
@@ -129,6 +135,8 @@ Access exception 1  : if  item.rusty_key >= 1     -> Accessible = on
 An **Enter VN** object has a default scene, plus an ordered list of **conditional VN** cases. On click, **the
 first case whose condition passes plays; if none does, the default scene plays.**
 
+![Conditional VN cases on one object: the bed that means two different things](/docs-images/beasty-visual-novel/vn-object-conditional-vn.png)
+
 The bed is the example everyone needs:
 
 ```text
@@ -142,6 +150,8 @@ The object stays one object. Its meaning changes with the world.
 
 Give an object an **owner character** and it stops being an object: it *is* that character, standing there.
 Author them from the room's drill-in with **+ Character** (choose who) and then **+ Pose** for each look.
+
+![A character pose in a room, with its Show pose when condition](/docs-images/beasty-visual-novel/vn-room-character-pose.png)
 
 - A character can have **several poses in one room** — sitting at the counter, leaning on the doorframe, arms
   crossed. Each pose is a separate object with its own sprite, position and **Show pose when** condition.
@@ -188,6 +198,8 @@ correctly.
 The click area of an object comes from its sprite. For art whose bounding box is much bigger than the thing you
 actually want clickable — a thin lamp chain, a sword lying diagonally, a character cut-out with a lot of empty
 corners — the box catches clicks that were meant for the room behind it.
+
+![The menu item that builds click shapes from the sprite's opaque pixels](/docs-images/beasty-visual-novel/vn-tight-click-shapes.png)
 
 Select the sprites and run:
 

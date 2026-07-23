@@ -12,6 +12,8 @@ que recorre el proyecto en busca de referencias que apuntan a nada, y las herram
 Ejecútalo desde el botón **Validate** en la ventana de Beasty VN, o selecciona un `DialogueScene` en la ventana
 Project y usa `Tools > Beasty VN > Maintenance > Validate Selected Project`.
 
+![El informe del validador, con las referencias colgadas](/docs-images/beasty-visual-novel/vn-validator-report.png)
+
 Recorre el grafo raíz y **cada subgrafo alcanzable desde él**, e informa lo que encuentra en la consola — y,
 por nodo, como una insignia en el lienzo del grafo, así que puedes ver qué nodo se está quejando sin leer un
 log.
@@ -52,6 +54,8 @@ referencias que lo usaban se reescriben con él. Así que un id generado por má
 Un id solo se autogenera cuando está VACÍO. Así que cuando duplicas un asset en la ventana Project (Ctrl+D), la
 copia lleva el id del original — y a partir de ahí nada puede distinguir a los dos. Un salto enruta hacia el que
 la búsqueda encuentre primero. Dos personajes se convierten en alias el uno del otro.
+
+![Un id duplicado informado por el validador](/docs-images/beasty-visual-novel/vn-duplicate-ids.png)
 
 Dos herramientas:
 

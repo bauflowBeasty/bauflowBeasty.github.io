@@ -24,6 +24,8 @@ expressions, delivery styles, portraits), **Variables** (stats), **Quests** and 
 
 ## Identity
 
+![The identity block of a character: id, display name, colours, category and tags](/docs-images/beasty-visual-novel/vn-character-identity.png)
+
 | Field | What it is |
 |---|---|
 | **Id** | The stable name the whole engine uses (`maya`). Auto-filled from the asset name as a lower-case slug, and editable. |
@@ -47,6 +49,8 @@ presentation, and it can change during the game. Rename the id and the editor ca
 
 Two separate sprite sets, because they are two different pictures.
 
+![The expressions and portraits lists, sharing their keys](/docs-images/beasty-visual-novel/vn-character-expressions.png)
+
 - **Expressions** are the stage sprites — the full body or bust the player sees on the backdrop. Add them
   with **+ Add expression**. Each is a key plus a sprite: `base`, `sad`, `angry`, whatever you want. There
   is no fixed list.
@@ -69,6 +73,8 @@ character with no `base` expression shows nothing, which is the one case to watc
 A delivery style is how a character sounds when they are in a particular state. Add one with
 **+ Add delivery style** and pick the state it applies to.
 
+![A delivery style with its font, colour, size multiplier and text effect](/docs-images/beasty-visual-novel/vn-character-delivery.png)
+
 The built-in states are **Normal**, **Whisper**, **Shout** and **Thinking**. You may type any other key
 you like and use it as the delivery state on a **Dialogue** block; there is nothing special about the
 four built-ins.
@@ -90,6 +96,8 @@ a state simply speaks normally in it — you never have to fill in all four.
 
 An **alias** is another name for the *same* character. Use it when the player does not know who they are
 talking to yet.
+
+![A character's alias list](/docs-images/beasty-visual-novel/vn-character-aliases.png)
 
 Add aliases with **+ Add alias** — they are just strings ("The Stranger", "The Voice"). Then:
 
@@ -118,6 +126,8 @@ To let the player name a character themselves, use the **Ask -> character name**
 
 A character variable is a number or a flag the character carries: `affection`, `met`, `trust`. They come
 from two places, and a character has both:
+
+![The Variables sub-tab: universal schema fields and this character's own](/docs-images/beasty-visual-novel/vn-character-variables.png)
 
 1. **The Character Variable Schema** — the fields **every** character has. One asset per project
    (`Create > Beasty VN > Characters > Character Variable Schema`). Declare `affection` there once and the
@@ -153,6 +163,8 @@ Changing a character variable from the story is the **Character variable** block
 [Variables and conditions](/docs/beasty-visual-novel/world/variables-and-conditions/).
 
 ## The FreeRoam sprite
+
+![The FreeRoam sprite field, with the show-location and show-routine toggles](/docs-images/beasty-visual-novel/vn-character-freeroam-sprite.png)
 
 **FreeRoam sprite** is the sprite used when the character stands in a room, placed there by their routine.
 Leave it empty and the character's `base` expression sprite is used instead. Where they stand and how big

@@ -35,6 +35,8 @@ importación. Todo lo demás es necesario.
 
 ## Qué hay en la carpeta
 
+![La carpeta de Beasty Save System en la ventana Project](/docs-images/beasty-save-system/save-package-folder.png)
+
 | Carpeta | Qué es |
 |---|---|
 | `Scripts/BeastySave.cs` | La fachada estática pública. El único punto de entrada que llamas. |
@@ -62,6 +64,8 @@ Ve directo a la ruta que más te convenga:
 Un convertidor le enseña al sistema de guardado cómo almacenar un tipo. Los que están siempre disponibles — la
 capa `core` — cubren los tipos matemáticos de Unity (`Vector2`, `Vector3`, `Quaternion`, `Color`, `Rect`, `Bounds` y afines),
 `Transform`, `Camera`, `Light`, `SpriteRenderer`, `Texture2D`, y cualquier `MonoBehaviour` que escribas tú mismo.
+
+![La carpeta de módulos de conversores, un archivo por módulo](/docs-images/beasty-save-system/save-converter-modules.png)
 
 Todo lo demás viene de un módulo:
 

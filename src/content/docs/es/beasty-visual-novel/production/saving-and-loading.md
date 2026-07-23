@@ -11,6 +11,8 @@ cuando algo sale mal.
 
 Una partida guardada vive en un slot. Hay dos tipos:
 
+![La pantalla de guardar/cargar: slots con miniaturas y su metadata](/docs-images/beasty-visual-novel/vn-save-load-ingame.png)
+
 | Tipo | Nombre del slot | Escrito por |
 |---|---|---|
 | Manual | `manual_0`, `manual_1`, ... | El jugador, desde la pantalla de guardado |
@@ -35,6 +37,8 @@ cargar** — el jugador no puede sobrescribir un autoguardado a mano.
 
 El autoguardado está activado por defecto (`autosaveEnabled`). El juego autoguarda cuando el jugador llega a
 una decisión.
+
+![Los ajustes de autoguardado y de slots en Global Settings](/docs-images/beasty-visual-novel/vn-autosave-settings.png)
 
 Las reglas:
 

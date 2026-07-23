@@ -17,6 +17,8 @@ Tools > Beasty VN > Editor
 
 The strip across the top of the window is the same on every tab.
 
+![The top bar of the Beasty VN window: DialogueScene, Context, Characters, Validate and Global Settings](/docs-images/beasty-visual-novel/vn-editor-top-bar.png)
+
 | Control | What it does |
 |---|---|
 | **DialogueScene** field | Which story you are editing. Drop a DialogueScene here, or double-click one in the Project window and the editor opens on it. |
@@ -31,6 +33,8 @@ If no DialogueScene is assigned, the Story tab offers a **Setup blank canvas...*
 the whole scaffolding in one click.
 
 ## The nine tabs
+
+![The nine tabs of the Beasty VN window](/docs-images/beasty-visual-novel/vn-editor-tabs.png)
 
 ### Story
 
@@ -67,6 +71,8 @@ Covered by: [The story graph](/docs/beasty-visual-novel/authoring/story-graph/),
 
 The cast, and everything attached to a character. Four sub-tabs:
 
+![The Characters tab and its four sub-tabs](/docs-images/beasty-visual-novel/vn-tab-characters.png)
+
 - **Cast** — identity (id, display name, colours, category, tags), aliases, expressions, delivery styles,
   portraits. **+ New Character** creates one; **Add existing** adopts a CharacterDefinition you already
   have.
@@ -82,12 +88,16 @@ Covered by: [Characters](/docs/beasty-visual-novel/world/characters/), [Quests](
 Your global variables: key, type, default value, and how the variable behaves. It is a master-detail list,
 and character variables get a character list down the left so you can move between casts quickly.
 
+![The Variables tab: the master-detail list of global variables](/docs-images/beasty-visual-novel/vn-tab-variables.png)
+
 Covered by: [Variables and conditions](/docs/beasty-visual-novel/world/variables-and-conditions/).
 
 ### Localization
 
 The translation grid: one row per key, one column per language. A **Story / UI (global)** toggle switches
 between the story's own table and the shared UI table that every menu and screen reads from.
+
+![The Localization tab with the Story / UI (global) toggle](/docs-images/beasty-visual-novel/vn-tab-localization.png)
 
 Here you add languages, import and export CSV/TSV, and see at a glance which cells are missing, stale or
 done.
@@ -99,12 +109,16 @@ Covered by: [Localization](/docs/beasty-visual-novel/production/localization/).
 Text tokens the player can change — the player's name, their home town, whatever your story lets them
 decide. A token has a key, a default value, and a flag for whether the player may edit it.
 
+![The Dictionary tab: the player-editable text tokens](/docs-images/beasty-visual-novel/vn-tab-dictionary.png)
+
 Covered by: [The dictionary](/docs/beasty-visual-novel/world/dictionary/).
 
 ### Music
 
 The music queue for each app mode: the main menu, the visual novel, free roam, and your own custom mode.
 Each queue has its clips, a play mode, a volume and a crossfade time.
+
+![The Music tab: one queue per app mode](/docs-images/beasty-visual-novel/vn-tab-music.png)
 
 Covered by: [Audio and music](/docs/beasty-visual-novel/production/audio-and-music/).
 
@@ -115,6 +129,8 @@ between them — and **drill-in editing** of one room, which is the one place yo
 background, its doors and its interactable objects. A **Routines** toggle swaps the canvas for the routine
 grid: a week x daypart lens over your characters' schedules.
 
+![The FreeRoam tab in Map view, with rooms as boxes and doors as lines](/docs-images/beasty-visual-novel/vn-tab-freeroam-map.png)
+
 Covered by: [Free roam rooms](/docs/beasty-visual-novel/world/free-roam-rooms/),
 [Interactables and doors](/docs/beasty-visual-novel/world/interactables-and-doors/),
 [Character routines](/docs/beasty-visual-novel/world/character-routines/).
@@ -124,12 +140,16 @@ Covered by: [Free roam rooms](/docs/beasty-visual-novel/world/free-roam-rooms/),
 HUD and overlay screens: the persistent bar that is always on screen, and the panels that open on top of
 the game. Each screen is a prefab plus a list of the objects in it that do something.
 
+![The Screens tab: the screen list, its settings and the prefab preview](/docs-images/beasty-visual-novel/vn-tab-screens.png)
+
 Covered by: [Screens and HUD](/docs/beasty-visual-novel/world/screens-and-hud/).
 
 ### Items
 
 Item definitions: id, icon, kind (a key or a consumable), maximum quantity, name and description keys, and
 what happens when the player uses one.
+
+![The Items tab with an item selected](/docs-images/beasty-visual-novel/vn-tab-items.png)
 
 Covered by: [Items and inventory](/docs/beasty-visual-novel/world/items-and-inventory/).
 
@@ -149,6 +169,8 @@ Covered by: [Dialogue preview](/docs/beasty-visual-novel/authoring/dialogue-prev
 
 ### Character Database
 
+![The Character Database in a window of its own, beside the graph](/docs-images/beasty-visual-novel/vn-character-database-window.png)
+
 ```text
 Tools > Beasty VN > Content > Character Database
 ```
@@ -157,6 +179,8 @@ The Characters tab in a window of its own. Same editor, same data — useful whe
 beside the graph instead of behind it.
 
 ### Global Settings
+
+![The Global Settings window: the project-wide VN settings](/docs-images/beasty-visual-novel/vn-global-settings.png)
 
 ```text
 Tools > Beasty VN > Settings > Global Settings

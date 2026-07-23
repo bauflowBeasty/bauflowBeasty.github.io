@@ -10,6 +10,10 @@
     "BeastyVN": {
       "producto": "beasty-visual-novel",
       "changelog": "BeastyVN_CHANGELOG.md"
+    },
+    "BeastyConsole": {
+      "producto": "beasty-console",
+      "changelog": "BeastyConsole_CHANGELOG.md"
     }
   }
 }

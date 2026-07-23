@@ -14,6 +14,8 @@ One `.vnbeasty` file is one scene: one `DialogueScene` and its root `StoryGraph`
 is a node in the graph, and `jump` wires the nodes together. Everything you can put inside a node — a line
 of dialogue, a backdrop, a character, a music cue, a variable change, a choice — has a one-line text form.
 
+![A .vnbeasty file open in a code editor](/docs-images/beasty-visual-novel/vn-vnbeasty-file.png)
+
 ```text
 label intro:
     backdrop bedroom
@@ -77,6 +79,8 @@ the line number of the offending statement.
 ## How the two stay in sync
 
 The two directions are not symmetrical, on purpose.
+
+![The Text tab toolbar, with the sync buttons and the divergence marker](/docs-images/beasty-visual-novel/vn-text-sync-toolbar.png)
 
 **Graph to text is automatic.** The file is kept as a live mirror of the graph. Edit a node in the graph and
 the script is rewritten for you; open the Text tab and you always see the current graph. **Format** forces

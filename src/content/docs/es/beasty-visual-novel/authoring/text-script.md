@@ -15,6 +15,8 @@ un nodo en el grafo, y `jump` conecta los nodos entre sí. Todo lo que puedes po
 línea de diálogo, un fondo, un personaje, una pista de música, un cambio de variable, una elección— tiene
 una forma de texto en una línea.
 
+![Un archivo .vnbeasty abierto en un editor de código](/docs-images/beasty-visual-novel/vn-vnbeasty-file.png)
+
 ```text
 label intro:
     backdrop bedroom
@@ -81,6 +83,8 @@ rechazó, y el número de línea de la sentencia problemática.
 ## Cómo se mantienen sincronizados
 
 Las dos direcciones no son simétricas, a propósito.
+
+![La barra del modo Text, con los botones de sincronización y la marca de divergencia](/docs-images/beasty-visual-novel/vn-text-sync-toolbar.png)
 
 **De grafo a texto es automático.** El archivo se mantiene como un espejo vivo del grafo. Edita un nodo en el
 grafo y el guion se reescribe solo; abre la pestaña Text y siempre ves el grafo actual. **Format** fuerza

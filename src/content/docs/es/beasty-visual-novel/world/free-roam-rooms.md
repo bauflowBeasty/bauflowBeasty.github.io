@@ -14,6 +14,8 @@ elija adónde ir y con quién hablar, este es el modo al que entras.
 Todo vive en un solo asset, el **FreeRoam Map Graph**
 (`Create > Beasty VN > FreeRoam > FreeRoam Map Graph`). Contiene:
 
+![El mapa de mundo libre: salas como cajas, puertas como líneas, la sala de entrada marcada](/docs-images/beasty-visual-novel/vn-freeroam-map.png)
+
 - las **salas**,
 - la **sala de entrada** — donde aterriza el jugador cuando empieza el mundo libre,
 - las **rutinas** — consulta [Rutinas de personajes](/es/docs/beasty-visual-novel/world/character-routines/).
@@ -29,6 +31,8 @@ el asset y haciendo clic en **Open in Beasty VN (FreeRoam tab)**.
 
 ## Qué es una sala
 
+![Los ajustes de una sala tras entrar en ella](/docs-images/beasty-visual-novel/vn-room-settings.png)
+
 | Campo | Qué es |
 |---|---|
 | **Id** | El id estable. Las puertas y rutinas se refieren a la sala por él. |
@@ -43,6 +47,8 @@ hacen.** Colocas una lámpara en el prefab con las propias herramientas de Unity
 reproduce esta escena" en el editor de la sala. Ambos están vinculados por el nombre.
 
 ## Crear una sala y su prefab juntos
+
+![Create Room, y el diálogo que pregunta dónde guardar el prefab de la sala](/docs-images/beasty-visual-novel/vn-room-create.png)
 
 1. En la pestaña **FreeRoam**, modo **Map**, haz clic derecho en el lienzo vacío y elige **Create Room**.
 2. Beasty pregunta de inmediato dónde guardar el **prefab** de la sala, y lo crea: una raíz `FreeRoamRoom` con un
@@ -67,6 +73,8 @@ Una sala no tiene por qué tener un solo aspecto. Dale una **lista ordenada de c
 cambiar según la hora del día, la estación, si está lloviendo, si hay un personaje en ella, o cualquier
 variable de tu juego.
 
+![Fondo por momento y presencia: los casos de fondo condicional de una sala](/docs-images/beasty-visual-novel/vn-room-backgrounds.png)
+
 Como una condición vacía siempre se cumple, un caso sin condición absorbe todo lo que está debajo de él. Ordena la
 lista del caso más específico al más general.
 
@@ -88,6 +96,8 @@ modelo distinto.
 
 El prefab es un prefab de Unity normal. Ábrelo y construye la sala igual que construirías cualquier escena 2D.
 
+![Un prefab de sala abierto, con FreeRoamRoom, su fondo y sus interactuables](/docs-images/beasty-visual-novel/vn-room-prefab.png)
+
 | Componente | Qué marca |
 |---|---|
 | `FreeRoamRoom` | La raíz del prefab. Reúne el renderer del fondo, los interactuables y los puntos. |
@@ -100,6 +110,8 @@ Renombra los objetos desde el editor de la sala, no desde la Hierarchy, y ambos 
 ### Puntos de personaje
 
 Un **punto** es un objeto hijo con un componente `FreeRoamCharacterSpot`. Marca dónde se para alguien.
+
+![Puntos de personaje colocados en el prefab de una sala](/docs-images/beasty-visual-novel/vn-room-spots.png)
 
 1. Abre el prefab de la sala.
 2. Crea un GameObject hijo y colócalo — posición y escala — donde debería estar el personaje.
@@ -118,6 +130,8 @@ puntos como pueda llegar a albergar a la vez. Consulta [Rutinas de personajes](/
 
 La historia y el mapa son dos modos de la aplicación; pasas de uno a otro con **bloques de flujo** (categoría de paleta
 **Flow**), que también se ofrecen como destino en cualquier elección.
+
+![Una sala en el juego: fondo, objetos, una puerta y un personaje dentro](/docs-images/beasty-visual-novel/vn-freeroam-ingame.png)
 
 | Bloque | Qué hace |
 |---|---|

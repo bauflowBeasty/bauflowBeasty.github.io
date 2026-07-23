@@ -30,6 +30,8 @@ calls `BeastySave` directly. With no manager in the scene, `Auto` is what you ge
 
 At **On**:
 
+![What the save system's logs look like in the console](/docs-images/beasty-save-system/save-logging-output.png)
+
 ```
 [BeastySave] Saved 'slot1' — 4.2 KB, 8 ms, 12 saveables
 [BeastySave] Loaded 'slot1' — 6 ms, 12 saveables
@@ -94,7 +96,7 @@ BeastySaveLog.Sink = new FileSink();
 
 Verbose lines arrive at your sink through `Info`.
 
-With no sink assigned, the first log line picks one: the **Beasty Debug Logger** asset if it is in the
+With no sink assigned, the first log line picks one: the **Beasty Console** asset if it is in the
 project (detected by reflection — the two assets ship independently, neither needs the other), and
 `UnityEngine.Debug` otherwise.
 

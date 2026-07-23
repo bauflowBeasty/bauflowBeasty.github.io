@@ -29,6 +29,8 @@ por defecto**. El perfil activo es el que coincide con la variable de modo de ru
 (`@char:<id>:@routineMode`, mostrada en el selector de condiciones como `maya.routineMode`). Si esa variable está vacía,
 o nombra un perfil que no existe, se usa el perfil por defecto; y si tampoco existe, el primero.
 
+![Los perfiles de rutina de un personaje, con el perfil por defecto nombrado](/docs-images/beasty-visual-novel/vn-routine-profiles.png)
+
 Este es el sentido de los perfiles: **cuando la historia da un giro, cambias toda la semana de un personaje con un
 único bloque.** La despiden, él cae enfermo, se mudan a la costa — un bloque, no treinta ediciones de reglas.
 
@@ -52,6 +54,8 @@ Como el modo de rutina es una variable ordinaria, se guarda, se carga y se rebob
 
 Un perfil contiene una lista ordenada de **reglas** y un **respaldo**. Cada regla es una condición más una sala.
 
+![La lista ordenada de reglas de un perfil, con su fallback](/docs-images/beasty-visual-novel/vn-routine-rules.png)
+
 El resolutor recorre las reglas desde arriba y se detiene en **la primera regla cuya condición se cumpla**. Si ninguna
 regla coincide, se usa el respaldo.
 
@@ -67,6 +71,8 @@ que están debajo. El orden importa.
 La pestaña **FreeRoam** tiene un interruptor **Map / Routines** en su barra de herramientas. Cambia a **Routines** y obtienes un
 solo lienzo: **las columnas son días de la semana, las filas son momentos del día**, más una fila **General** arriba y una fila **Fallback** al
 final.
+
+![La grilla de rutinas: días de la semana en columnas, momentos del día en filas, con la barra de filtros](/docs-images/beasty-visual-novel/vn-routine-grid.png)
 
 Una barra de filtros controla qué muestra la grilla y qué edita:
 
@@ -101,6 +107,8 @@ línea de tiempo, que tiene un carril por momento del día y un botón `+ Charac
 carril de Morning de la Panadería escribe exactamente la regla que habría escrito la grilla. Los dos editores son dos vistas de
 una misma lista de reglas; usa el que encaje con cómo estás pensando — "qué hace Maya esta semana" o "quién está en la panadería
 por la mañana".
+
+![La línea de tiempo de una sala: un carril por momento del día, con + Character](/docs-images/beasty-visual-novel/vn-room-timeline.png)
 
 ## Cómo se ve el personaje en la sala
 
@@ -183,6 +191,8 @@ Los jugadores pueden ver el horario de un personaje. La pantalla **Character Rou
 personaje seleccionado en **vista de día** (una fila por momento del día de hoy) o **vista de semana** (una fila por día de la
 semana y momento del día). Solo se rellena cuando el indicador **Show routine** del personaje está activado, así que un
 extraño misterioso sigue siendo misterioso. Consulta [Pantallas de personaje](/es/docs/beasty-visual-novel/world/character-screens/).
+
+![El calendario de rutina en el juego, en vista de semana](/docs-images/beasty-visual-novel/vn-routine-calendar-ingame.png)
 
 ## Ejemplo trabajado: una panadera
 

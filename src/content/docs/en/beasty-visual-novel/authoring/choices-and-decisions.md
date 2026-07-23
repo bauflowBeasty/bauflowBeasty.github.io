@@ -17,10 +17,14 @@ authoring mistake, and it looks like a menu with one option in it.
 Add options with the `+ choice` button on the node, then fill them in on the right. Each option has four
 parts.
 
+![The Choice node inspector, option by option](/docs-images/beasty-visual-novel/vn-choice-inspector.png)
+
 ### The label
 
 A short name for the option. It appears on the node's port in the graph and in the inspector list. It is
 **for you** — the player never sees it. Name your ports and the graph stays readable at a glance.
+
+![The same choice as the player sees it: the prompt and its buttons](/docs-images/beasty-visual-novel/vn-choice-ingame.png)
 
 ### The prompt text
 
@@ -29,6 +33,8 @@ What the player actually reads on the button. It is a normal localizable line, l
 ### The condition
 
 Optional. Empty means the option is always offered.
+
+![The condition editor: clauses with token, operator, value and And/Or joins](/docs-images/beasty-visual-novel/vn-condition-editor.png)
 
 When you give an option a condition, the option is only shown if the condition passes. This is how you gate:
 
@@ -85,6 +91,8 @@ choice node.
 
 A decision node has no UI at all. **The player does not see it, does not click it, and cannot tell it
 exists.** It is a signpost the story reads by itself.
+
+![A Decision node: branches decided by the game, not the player](/docs-images/beasty-visual-novel/vn-decision-inspector.png)
 
 When the story arrives, the node walks its branches from top to bottom, takes the **first branch whose
 condition passes**, applies that branch's effects, and jumps. If no branch matches, it takes the

@@ -31,6 +31,8 @@ preview follows it.
 
 You do not have to click from the top of a node to get to line eleven.
 
+![The per-block preview button in the node inspector](/docs-images/beasty-visual-novel/vn-preview-block-button.png)
+
 In the Story tab, every block in the selected node's stack has a small preview button on its row (its tooltip
 reads "Preview up to this block"). Press it and the preview window opens, **fast-forwarded to the exact moment
 that block plays** — the stage dressed as it will be dressed, that line on screen.

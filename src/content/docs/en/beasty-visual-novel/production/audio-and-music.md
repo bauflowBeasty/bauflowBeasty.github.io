@@ -9,6 +9,8 @@ run through.
 
 ## The four channels
 
+![The BeastyVNMixer with one group per channel](/docs-images/beasty-visual-novel/vn-mixer.png)
+
 | Channel | What it carries |
 |---|---|
 | Music | The soundtrack: the background queue and any music cue from a block. |
@@ -34,6 +36,8 @@ of cutting.
 These are the blocks you drop into a node. Full details in the
 [blocks reference](/docs/beasty-visual-novel/authoring/blocks-reference/).
 
+![A Music block with its clip, fade and loop settings](/docs-images/beasty-visual-novel/vn-block-music.png)
+
 | Block | What it does |
 |---|---|
 | **Music** | Plays a clip on the Music channel: clip, loop, volume, fade, and whether to pause the background queue. |
@@ -54,6 +58,8 @@ fade of 0 swaps instantly.
 The persistent soundtrack is authored once, in a **Music Config** asset
 (`Create > Beasty VN > Config > Music Config`), and edited in the **Music** tab of the Beasty VN window. It
 holds one queue per top-level app mode:
+
+![The Music tab: one queue per app mode](/docs-images/beasty-visual-novel/vn-tab-music.png)
 
 | Queue | Plays while |
 |---|---|

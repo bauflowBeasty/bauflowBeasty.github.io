@@ -10,6 +10,8 @@ components (under `Add Component > Beasty`).
 
 ## Windows
 
+![The whole Tools > Beasty VN menu, expanded](/docs-images/beasty-visual-novel/vn-tools-menu.png)
+
 | Menu item | What it does | More |
 |---|---|---|
 | `Tools > Beasty VN > Editor` | Opens the main Beasty VN window: the nine authoring tabs. | [Editor tour](/docs/beasty-visual-novel/getting-started/editor-tour/) |
@@ -24,6 +26,7 @@ components (under `Add Component > Beasty`).
 | `Tools > Beasty VN > Setup > Blank Canvas` | Asks for a folder, then creates the empty scaffolding: a DialogueScene, a VNContext, a LocalizationTable, a root StoryGraph and a first Dialogue node, in subfolders. | [Assets](/docs/beasty-visual-novel/reference/assets/) |
 | `Tools > Beasty VN > Setup > Build Default Menu Prefabs` | Regenerates the menu prefabs from scratch. Warns before overwriting. | [UI prefabs](/docs/beasty-visual-novel/production/ui-prefabs/) |
 | `Tools > Beasty VN > Setup > Upgrade UI Prefabs (keep customizations)` | Updates the shipped UI prefabs while keeping your restyling. | [UI prefabs](/docs/beasty-visual-novel/production/ui-prefabs/) |
+| `Tools > Beasty VN > Setup > Bake Localized UI Labels` | Permanently adds `VNLocalizedText`, with its key, to every label in the open scene whose text matches a UI-table value - writing into the source prefabs. | [Localization](/docs/beasty-visual-novel/production/localization/) |
 
 ## Content
 

@@ -27,11 +27,15 @@ devuelve a quien lo llama, para que este enrute según ella.
 Haz clic derecho en un nodo del grafo y elige **`Create Subgraph`**. El nodo ahora contiene un grafo anidado,
 y el elemento del menú se convierte en **`Open Subgraph`**.
 
+![Create Subgraph en el menú contextual del nodo](/docs-images/beasty-visual-novel/vn-subgraph-create.png)
+
 Normalmente harás esto en un **SubGraph Node**, porque ese es el tipo de nodo que sabe enrutar un resultado.
 (Cualquier nodo puede llevar un grafo anidado, pero solo un SubGraph Node lo llama y se ramifica según lo que
 vuelva.)
 
 ## Entrar y salir
+
+![La miga de pan del subgrafo y el botón Up](/docs-images/beasty-visual-novel/vn-subgraph-breadcrumb.png)
 
 - **Abrir el subgrafo**: haz clic derecho en el nodo y elige `Open Subgraph`, o pulsa el botón
   `open subgraph` del propio nodo.
@@ -46,6 +50,8 @@ entrada, y la reproducción del subgrafo empieza ahí.
 
 Un subgrafo termina en un **Return Node**. Es un terminador: no tiene puerto de salida, porque el control
 vuelve a quien lo llamó.
+
+![Un nodo Return con su resultado y sus efectos](/docs-images/beasty-visual-novel/vn-return-node.png)
 
 Tiene dos campos:
 

@@ -22,6 +22,8 @@ deambula por una sala durante diez minutos no debería perderse el atardecer.
 
 ## Activar el tiempo
 
+![El Time Config asignado en el BeastyManager](/docs-images/beasty-visual-novel/vn-time-config-assign.png)
+
 1. Crea la configuración: `Create > Beasty VN > Config > Time Config`.
 2. Selecciona el **BeastyManager** en tu escena.
 3. Arrastra la configuración a su campo **Time Config**.
@@ -68,6 +70,8 @@ Night      startHour = 22
 
 ## Todos los campos de Time Config
 
+![Un asset Time Config con momentos del día, días de la semana y estaciones rellenos](/docs-images/beasty-visual-novel/vn-time-config-inspector.png)
+
 | Campo | Modo | Qué hace |
 |---|---|---|
 | `mode` | ambos | `SlotsOnly` o `Clock`. |
@@ -96,6 +100,8 @@ usan la longitud de tu lista de días de la semana (o 7 si no tienes ninguna).
 ### El bloque Advance time
 
 Añade un bloque **Advance time** (categoría de paleta **World**) a cualquier nodo. Tiene una operación:
+
+![Un bloque Advance time con su operación y su cantidad](/docs-images/beasty-visual-novel/vn-block-advance-time.png)
 
 | Operación | Qué hace |
 |---|---|
@@ -134,6 +140,8 @@ contenga un bloque Advance time. Consulta [Interactuables y puertas](/es/docs/be
 
 Un elemento de pantalla cuya acción sea **AdvanceTime** hace lo mismo desde el HUD. Consulta
 [Pantallas y HUD](/es/docs/beasty-visual-novel/world/screens-and-hud/).
+
+![El HUD mostrando el día y el momento del día durante la partida](/docs-images/beasty-visual-novel/vn-time-hud-ingame.png)
 
 ## Las variables de tiempo reservadas
 

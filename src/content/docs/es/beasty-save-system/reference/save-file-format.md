@@ -24,6 +24,8 @@ El formato es JSON, indentado con dos espacios, UTF-8 **sin BOM**.
 
 ## El sobre (envelope)
 
+![Un archivo de guardado abierto en un editor de texto, con los campos del sobre](/docs-images/beasty-save-system/save-file-envelope.png)
+
 ```json
 {
   "beasty": 2,

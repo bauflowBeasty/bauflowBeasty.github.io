@@ -38,6 +38,8 @@ juegos.
 
 ## Los campos
 
+![Los campos de ajustes en el inspector del BeastySaveManager](/docs-images/beasty-save-system/save-settings-inspector.png)
+
 | Campo | Tipo | Por defecto | Qué hace |
 |---|---|---|---|
 | `Folder` | string | `"Saves"` | Subcarpeta bajo `DataPath` que contiene los archivos de guardado. |

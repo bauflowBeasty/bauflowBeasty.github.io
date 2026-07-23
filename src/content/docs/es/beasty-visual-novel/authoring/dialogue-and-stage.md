@@ -22,6 +22,8 @@ montada, no el paso a paso de cómo se construye.
 
 ## El bloque Dialogue
 
+![Un bloque Dialogue: hablante, texto, estilo de entrega y alias](/docs-images/beasty-visual-novel/vn-block-dialogue.png)
+
 ### El speaker
 
 Elige el personaje en el desplegable. Su placa de nombre, el color de su nombre, su retrato y su fuente
@@ -84,9 +86,13 @@ otro sitio, ni el valor de `@char:maya:@name`.
 El escenario tiene tres canales independientes: el **fondo**, los **personajes** y los **props**. Cada uno
 mantiene su valor actual hasta que un bloque del mismo canal lo cambia. Nunca repites el fondo.
 
+![El escenario en el juego: fondo, dos personajes y la caja de diálogo](/docs-images/beasty-visual-novel/vn-stage-ingame.png)
+
 ### Backdrop
 
 Un fondo es capas de sprites **o** un video. No puede ser las dos cosas.
+
+![Un bloque Backdrop con su sprite y su transición](/docs-images/beasty-visual-novel/vn-block-backdrop.png)
 
 **Layers** es el caso normal. Hasta cinco capas de sprites, cada una con:
 
@@ -121,6 +127,8 @@ El modo **Video** reemplaza las capas por un clip de video:
 
 Pone a un personaje en el escenario, o lo reemplaza si ya está ahí.
 
+![Un bloque Show character: personaje, expresión y posición](/docs-images/beasty-visual-novel/vn-block-show-character.png)
+
 | Opción | Qué hace |
 |---|---|
 | Character | Quién entra. |
@@ -154,6 +162,8 @@ Retira a un personaje del escenario. Los demás se quedan.
 Los props son imágenes sueltas en primer o segundo plano superpuestas al fondo: una mesa, una hoja que cae,
 un marco de ventana. Un bloque Props fija todo el conjunto de props a la vez, y cada prop tiene las mismas
 opciones que una capa de fondo, sprites condicionales incluidos.
+
+![Un bloque Props con un par de props colocados](/docs-images/beasty-visual-novel/vn-block-props.png)
 
 ### Los tres bloques Clear
 

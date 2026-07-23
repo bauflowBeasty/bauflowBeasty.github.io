@@ -13,6 +13,8 @@ wired into your shared context the first time you open the tab.
 
 ## A quest
 
+![The Quests sub-tab: the quest list and the selected quest's fields](/docs-images/beasty-visual-novel/vn-quest-editor.png)
+
 | Field | What it is |
 |---|---|
 | **Id** | The stable id. Blocks and conditions name the quest by it. Editable; renaming re-points everything that referred to it. |
@@ -64,6 +66,8 @@ In an **Ordered** quest the objectives unlock top to bottom. **The current objec
 index** — the first objective that is not yet done. The stage is published as `@quest:<id>:@stage`, so a
 condition can ask "is the player on step 2 yet".
 
+![An Ordered quest's objective list, with the current stage highlighted](/docs-images/beasty-visual-novel/vn-quest-stages.png)
+
 Ordered gating only waits on **required** objectives. An optional objective the player skipped does not lock
 the rest of the quest forever.
 
@@ -88,6 +92,8 @@ quest bread_run objective run = true
 ```
 
 ## Objectives
+
+![An objective, with its type dropdown open showing the eight types](/docs-images/beasty-visual-novel/vn-quest-objective.png)
 
 | Field | What it is |
 |---|---|
@@ -155,6 +161,8 @@ a quest log is a hint system, not a spoiler. See [Character screens](/docs/beast
 
 An objective can be a thing you say to somebody. Open **Talk step (character menu)** on the objective:
 
+![The Talk step section of an objective](/docs-images/beasty-visual-novel/vn-quest-talk-step.png)
+
 | Field | What it is |
 |---|---|
 | **Talks to** | Who. Empty = the quest's owner. |
@@ -170,6 +178,8 @@ menu. See [Talk menu](/docs/beasty-visual-novel/world/talk-menu/), which owns th
 
 When a step moves a character (below), you can say what she looks like where she has been moved to:
 
+![The map marker of a quest step: sprite, position, scale and sorting order](/docs-images/beasty-visual-novel/vn-quest-marker.png)
+
 - **Marker sprite** — the art. Setting one here makes it win over everything else.
 - **Conditional marker sprites** — an ordered list; **the first case whose condition passes wins**, otherwise
   the default sprite. A different pose per daypart, or per variable.
@@ -183,6 +193,8 @@ room with the character's free-roam sprite.
 
 While the quest is **active** and this step is **the current one**, the step can **move its talk character to
 another room**, overriding her routine entirely.
+
+![Move character while current: the quest step that overrides a routine](/docs-images/beasty-visual-novel/vn-quest-routine-override.png)
 
 | Field | What it is |
 |---|---|

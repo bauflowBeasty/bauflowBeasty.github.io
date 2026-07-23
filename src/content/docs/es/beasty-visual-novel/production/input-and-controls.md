@@ -33,6 +33,8 @@ Selecciona el GameObject **BeastyManager** en tu escena y abre la sección **Con
 acción es una fila con tres desplegables: **Primary**, **Secondary** y **Mouse**. Elige una tecla de la lista;
 una casilla vacía (—) significa que esa casilla queda sin enlace.
 
+![El asset de configuración de entrada: las acciones y sus asignaciones por defecto](/docs-images/beasty-visual-novel/vn-input-config.png)
+
 Hay tres botones debajo de la tabla:
 
 - **Edit controls (load defaults)** — rellena la tabla con los valores predeterminados incluidos para que
@@ -75,6 +77,8 @@ jugador son una capa aparte que se aplica encima, y persisten: se guardan en `Pl
 vuelven a aplicar en el siguiente arranque. Una pantalla de controles puede guardarlas, recargarlas o borrarlas
 (`SaveOverrides`, `LoadOverrides`, `ResetOverrides` en las acciones de entrada), y borrarlas devuelve el juego a
 tus valores predeterminados.
+
+![El jugador reasignando una tecla en el juego](/docs-images/beasty-visual-novel/vn-input-rebind-ingame.png)
 
 Cada backend almacena sus reasignaciones bajo su propia clave, así que un proyecto que cambia de backend
 empieza de nuevo desde tus valores predeterminados en lugar de intentar leer el formato del otro backend.

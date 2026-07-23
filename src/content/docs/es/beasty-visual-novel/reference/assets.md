@@ -11,6 +11,8 @@ principales. Usa esta página como consulta. Los conceptos detrás de estos asse
 
 La mayoría de los assets son por historia o por personaje. Unos pocos son singletons para todo el juego.
 
+![El andamiaje de assets con el que acaba un proyecto, en la ventana Project](/docs-images/beasty-visual-novel/vn-assets-project.png)
+
 | Asset | Cuántos |
 |---|---|
 | `VNSettings` | Exactamente uno, en una carpeta `Resources`. Creado para ti. |

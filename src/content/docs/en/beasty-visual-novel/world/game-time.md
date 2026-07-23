@@ -22,6 +22,8 @@ for ten minutes should not miss the evening.
 
 ## Turning time on
 
+![The Time Config assigned on the BeastyManager](/docs-images/beasty-visual-novel/vn-time-config-assign.png)
+
 1. Create the config: `Create > Beasty VN > Config > Time Config`.
 2. Select the **BeastyManager** in your scene.
 3. Drag the config into its **Time Config** field.
@@ -68,6 +70,8 @@ Night      startHour = 22
 
 ## Every field of the Time Config
 
+![A Time Config asset with dayparts, weekdays and seasons filled in](/docs-images/beasty-visual-novel/vn-time-config-inspector.png)
+
 | Field | Mode | What it does |
 |---|---|---|
 | `mode` | both | `SlotsOnly` or `Clock`. |
@@ -96,6 +100,8 @@ quests use the length of your weekday list (or 7 when you have none).
 ### The Advance time block
 
 Add an **Advance time** block (palette category **World**) to any node. It has one operation:
+
+![An Advance time block with its operation and amount](/docs-images/beasty-visual-novel/vn-block-advance-time.png)
 
 | Operation | What it does |
 |---|---|
@@ -134,6 +140,8 @@ See [Interactables and doors](/docs/beasty-visual-novel/world/interactables-and-
 
 A screen item whose action is **AdvanceTime** does the same from the HUD. See
 [Screens and HUD](/docs/beasty-visual-novel/world/screens-and-hud/).
+
+![The HUD showing the day and the daypart while the game runs](/docs-images/beasty-visual-novel/vn-time-hud-ingame.png)
 
 ## The reserved time variables
 

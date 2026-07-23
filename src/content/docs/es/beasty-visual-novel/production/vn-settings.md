@@ -15,6 +15,8 @@ página.
 
 ## Contexto compartido
 
+![El asset de VN Settings, de arriba abajo](/docs-images/beasty-visual-novel/vn-settings-inspector.png)
+
 | Configuración | Qué hace |
 |---|---|
 | `gameContext` | El único `VNContext` compartido para todo el juego: el elenco, las variables, el esquema de personajes, el diccionario, la tabla de localización de la historia, las pantallas, los ítems, el catálogo de misiones, la configuración de música. Como el asset de settings vive en `Resources`, esto es lo que hace que el contexto sea resoluble en tiempo de ejecución incluso desde una escena que no lo referencia directamente. |
@@ -71,6 +73,8 @@ Consulta [El guion de texto](/es/docs/beasty-visual-novel/authoring/text-script/
 
 ## Diálogo y valores predeterminados de texto
 
+![La sección de valores por defecto de diálogo y texto de VN Settings](/docs-images/beasty-visual-novel/vn-settings-text.png)
+
 | Configuración | Qué hace |
 |---|---|
 | `typewriterCharsPerSecond` | Velocidad de la máquina de escribir, en caracteres por segundo. |
@@ -91,6 +95,8 @@ Estos acotan los deslizadores que el jugador ve en la pantalla de preferencias.
 | `skipUnreadByDefault` | El valor predeterminado para "permitir saltar texto no leído". El texto leído siempre se puede adelantar rápido. |
 
 ## Escenario
+
+![La sección de escenario de VN Settings](/docs-images/beasty-visual-novel/vn-settings-stage.png)
 
 | Configuración | Qué hace |
 |---|---|

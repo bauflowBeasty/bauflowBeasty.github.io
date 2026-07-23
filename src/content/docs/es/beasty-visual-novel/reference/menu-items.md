@@ -11,6 +11,8 @@ componentes (bajo `Add Component > Beasty`).
 
 ## Ventanas
 
+![El menú Tools > Beasty VN completo, desplegado](/docs-images/beasty-visual-novel/vn-tools-menu.png)
+
 | Elemento de menú | Qué hace | Más |
 |---|---|---|
 | `Tools > Beasty VN > Editor` | Abre la ventana principal de Beasty VN: las nueve pestañas de autoría. | [Recorrido del editor](/es/docs/beasty-visual-novel/getting-started/editor-tour/) |
@@ -25,6 +27,7 @@ componentes (bajo `Add Component > Beasty`).
 | `Tools > Beasty VN > Setup > Blank Canvas` | Pide una carpeta, y luego crea el andamiaje vacío: un DialogueScene, un VNContext, un LocalizationTable, un StoryGraph raíz y un primer nodo Dialogue, en subcarpetas. | [Assets](/es/docs/beasty-visual-novel/reference/assets/) |
 | `Tools > Beasty VN > Setup > Build Default Menu Prefabs` | Regenera los prefabs de menú desde cero. Avisa antes de sobrescribir. | [Prefabs de UI](/es/docs/beasty-visual-novel/production/ui-prefabs/) |
 | `Tools > Beasty VN > Setup > Upgrade UI Prefabs (keep customizations)` | Actualiza los prefabs de UI incluidos conservando tu rediseño. | [Prefabs de UI](/es/docs/beasty-visual-novel/production/ui-prefabs/) |
+| `Tools > Beasty VN > Setup > Bake Localized UI Labels` | Agrega de forma permanente `VNLocalizedText`, con su clave, a cada etiqueta de la escena abierta cuyo texto coincida con un valor de la tabla de UI - escribiendo en los prefabs de origen. | [Localización](/es/docs/beasty-visual-novel/production/localization/) |
 
 ## Content
 

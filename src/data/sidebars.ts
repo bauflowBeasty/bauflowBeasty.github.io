@@ -79,6 +79,7 @@ export const SIDEBARS: Record<Product['id'], SidebarGroup[]> = {
         'production/large-projects',
         'production/building-and-platforms',
         'production/validation-and-ids',
+        'production/logging',
       ],
     },
     {
@@ -153,7 +154,7 @@ export const SIDEBARS: Record<Product['id'], SidebarGroup[]> = {
     },
   ],
 
-  'beasty-debug-logger': [
+  'beasty-console': [
     {
       label: L.gettingStarted,
       items: ['getting-started'],
@@ -173,7 +174,7 @@ export const SIDEBARS: Record<Product['id'], SidebarGroup[]> = {
     },
     {
       label: L.help,
-      items: ['faq'],
+      items: ['faq', 'changelog'],
     },
   ],
 };

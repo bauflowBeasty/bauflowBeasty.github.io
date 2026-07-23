@@ -22,6 +22,8 @@ thing that does not.
 
 Open `Tools > Beasty VN > Editor`, go to the **Dictionary** tab and press **+ Add Term**.
 
+![A dictionary entry: key, default value and the player-editable flag](/docs-images/beasty-visual-novel/vn-dictionary-entry.png)
+
 | Field | What it is |
 |---|---|
 | **Key** | The token name, written without brackets: `city`. You use it in text as `[city]`. |
@@ -33,6 +35,8 @@ Leave **Player editable** off for a token you set from the story and the player 
 ## Using it in a line
 
 Write the key in square brackets, anywhere in the text of a **Dialogue** block:
+
+![A line rendered with the token replaced by the player's value](/docs-images/beasty-visual-novel/vn-dictionary-ingame.png)
 
 ```text
 maya "So you're from [city]? I've never been."

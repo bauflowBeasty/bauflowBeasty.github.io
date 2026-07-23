@@ -15,7 +15,7 @@ import { join, dirname, posix, relative, sep } from 'node:path';
 
 const SRC = 'Documentation';
 const DEST = join('src', 'content', 'docs', 'en');
-const PRODUCTS = ['beasty-visual-novel', 'beasty-save-system', 'beasty-debug-logger'];
+const PRODUCTS = ['beasty-visual-novel', 'beasty-save-system', 'beasty-console'];
 
 /** Recursively list .md files under dir. */
 function mdFiles(dir) {

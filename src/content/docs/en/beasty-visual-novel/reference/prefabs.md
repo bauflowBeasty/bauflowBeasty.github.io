@@ -15,6 +15,8 @@ The prefabs live in `BeastyVN/Prefabs/`, except `VNMenuRoot` and `VNBacklogEntry
 
 ## Lookup table
 
+![The package's prefabs in the Project window](/docs-images/beasty-visual-novel/vn-prefabs-folder.png)
+
 | Prefab | Mounts | What it is |
 |---|---|---|
 | `VisualNovelScene` | `BeastyManager`, `VNGameController`, `VisualNovelController`, `StageController`, `FreeRoamController`, `FreeRoamScreenController`, `VNAudioManager`, `VNInputModuleInstaller`, `BeastyAspectRatioEnforcer`, `BeastyLoadingScreen`, `VNMenuManager`, `DialogueView`, `ChoiceView`, `FreeRoamScenario` | A whole ready-made scene: drop it in and press Play. |
@@ -75,6 +77,10 @@ Restyle the template and every row follows.
 `Tools > Beasty VN > Setup > Build Default Menu Prefabs` rebuilds these from scratch and warns you before it
 overwrites anything. `Tools > Beasty VN > Setup > Upgrade UI Prefabs (keep customizations)` updates them
 while keeping your restyling.
+
+The `VNLocalizedText` components on these prefabs are what makes the menus follow the player's language. After
+rebuilding or restyling, run `Bake Localized UI Labels` so any label that lost its component gets it back -
+see [Localization](/docs/beasty-visual-novel/production/localization/).
 
 ## The gameplay screens
 

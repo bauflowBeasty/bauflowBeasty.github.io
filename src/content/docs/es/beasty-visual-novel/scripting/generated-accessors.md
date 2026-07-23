@@ -30,6 +30,8 @@ int m = VNVars.Mony;          // CS0117: 'VNVars' does not contain a definition 
 `VNVars` es una clase estática plana, una propiedad por variable, tipada según el tipo de valor declarado de
 la variable:
 
+![El archivo VNVars generado, abierto en un editor de código](/docs-images/beasty-visual-novel/vn-generated-vnvars.png)
+
 ```csharp
 public static class VNVars
 {

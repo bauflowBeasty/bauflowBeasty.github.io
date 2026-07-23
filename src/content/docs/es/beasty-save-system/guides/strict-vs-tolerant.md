@@ -60,6 +60,8 @@ No hay rollback en modo tolerante. Ese es el punto: aplica lo que puede.
 Una carga tolerante que tiene éxito aún puede tener cosas que decir. Lee `Warnings` — nunca es null, así que puedes
 iterarla sin comprobación.
 
+![Las advertencias que un cargado tolerante informa por los campos que omitió](/docs-images/beasty-save-system/save-tolerant-warnings.png)
+
 ```csharp
 using Beasty_SaveSystem;
 using Beasty_SaveSystemCore;

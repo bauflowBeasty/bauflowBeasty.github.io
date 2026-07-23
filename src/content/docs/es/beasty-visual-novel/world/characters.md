@@ -24,6 +24,8 @@ expresiones, estilos de entrega, retratos), **Variables** (estadísticas), **Que
 
 ## Identidad
 
+![El bloque de identidad de un personaje: id, nombre visible, colores, categoría y etiquetas](/docs-images/beasty-visual-novel/vn-character-identity.png)
+
 | Campo | Qué es |
 |---|---|
 | **Id** | El nombre estable que usa todo el motor (`maya`). Se rellena automáticamente a partir del nombre del asset como un slug en minúsculas, y es editable. |
@@ -47,6 +49,8 @@ presentación, y puede cambiar durante el juego. Si renombras el id, el editor p
 
 Dos conjuntos de sprites separados, porque son dos imágenes distintas.
 
+![Las listas de expresiones y retratos, compartiendo sus claves](/docs-images/beasty-visual-novel/vn-character-expressions.png)
+
 - Las **expressions** son los sprites de escenario — el cuerpo completo o busto que ve el jugador sobre el fondo. Añádelas
   con **+ Add expression**. Cada una es una clave más un sprite: `base`, `sad`, `angry`, lo que quieras. No hay
   una lista fija.
@@ -69,6 +73,8 @@ personaje sin expresión `base` no muestra nada — ese es el único caso al que
 Un estilo de interpretación es cómo suena un personaje cuando está en un estado concreto. Añade uno con
 **+ Add delivery style** y elige el estado al que se aplica.
 
+![Un estilo de entrega con su fuente, color, multiplicador de tamaño y efecto de texto](/docs-images/beasty-visual-novel/vn-character-delivery.png)
+
 Los estados integrados son **Normal**, **Whisper**, **Shout** y **Thinking**. Puedes escribir cualquier otra clave
 que quieras y usarla como estado de interpretación en un bloque **Dialogue**; no hay nada especial en los
 cuatro integrados.
@@ -90,6 +96,8 @@ un estado simplemente habla con normalidad — nunca estás obligado a rellenar 
 
 Un **alias** es otro nombre para el *mismo* personaje. Úsalo cuando el jugador aún no sabe con quién está
 hablando.
+
+![La lista de alias de un personaje](/docs-images/beasty-visual-novel/vn-character-aliases.png)
 
 Añade alias con **+ Add alias** — son solo cadenas de texto ("El Desconocido", "La Voz"). Luego:
 
@@ -118,6 +126,8 @@ Para dejar que el jugador nombre a un personaje él mismo, usa el bloque **Ask -
 
 Una variable de personaje es un número o una bandera que lleva el personaje: `affection`, `met`, `trust`. Salen
 de dos sitios, y un personaje tiene ambos:
+
+![La sub-pestaña Variables: campos del esquema universal y los propios del personaje](/docs-images/beasty-visual-novel/vn-character-variables.png)
 
 1. **El Character Variable Schema** — los campos que tiene **todo** personaje. Un asset por proyecto
    (`Create > Beasty VN > Characters > Character Variable Schema`). Declara `affection` ahí una vez y todo
@@ -153,6 +163,8 @@ Para cambiar una variable de personaje desde la historia está el bloque **Chara
 [Variables y condiciones](/es/docs/beasty-visual-novel/world/variables-and-conditions/).
 
 ## El sprite FreeRoam
+
+![El campo del sprite de mundo libre, con las marcas de mostrar ubicación y rutina](/docs-images/beasty-visual-novel/vn-character-freeroam-sprite.png)
 
 **FreeRoam sprite** es el sprite que se usa cuando el personaje está de pie en una sala, colocado ahí por su rutina.
 Si lo dejas vacío, se usa la expresión `base` del personaje. Dónde se para y qué tamaño tiene lo decide

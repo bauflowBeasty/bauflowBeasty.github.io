@@ -13,6 +13,8 @@ conectado a tu contexto compartido la primera vez que abres la pestaña.
 
 ## Una misión
 
+![La sub-pestaña Quests: la lista de misiones y los campos de la seleccionada](/docs-images/beasty-visual-novel/vn-quest-editor.png)
+
 | Campo | Qué es |
 |---|---|
 | **Id** | El id estable. Los bloques y las condiciones nombran la misión por él. Editable; al renombrarlo se actualiza todo lo que lo referenciaba. |
@@ -64,6 +66,8 @@ En una misión **Ordered** los objetivos se desbloquean de arriba a abajo. **El 
 índice de la etapa** — el primer objetivo que aún no está hecho. La etapa se publica como `@quest:<id>:@stage`, así que una
 condición puede preguntar "¿ya está el jugador en el paso 2?".
 
+![La lista de objetivos de una misión Ordered, con la etapa actual resaltada](/docs-images/beasty-visual-novel/vn-quest-stages.png)
+
 El bloqueo por orden solo espera a los objetivos **requeridos**. Un objetivo opcional que el jugador se saltó no
 bloquea el resto de la misión para siempre.
 
@@ -88,6 +92,8 @@ quest bread_run objective run = true
 ```
 
 ## Objetivos
+
+![Un objetivo, con su desplegable de tipo abierto mostrando los ocho tipos](/docs-images/beasty-visual-novel/vn-quest-objective.png)
 
 | Campo | Qué es |
 |---|---|
@@ -155,6 +161,8 @@ un registro de misiones es un sistema de pistas, no un spoiler. Consulta [Pantal
 
 Un objetivo puede ser algo que le dices a alguien. Abre **Talk step (character menu)** en el objetivo:
 
+![La sección Talk step de un objetivo](/docs-images/beasty-visual-novel/vn-quest-talk-step.png)
+
 | Campo | Qué es |
 |---|---|
 | **Talks to** | A quién. Vacío = el propietario de la misión. |
@@ -170,6 +178,8 @@ mantienes un menú. Consulta [El menú de conversación](/es/docs/beasty-visual-
 
 Cuando un paso mueve a un personaje (ver más abajo), puedes decidir qué aspecto tiene allí donde lo moviste:
 
+![El marcador de mapa de un paso de misión: sprite, posición, escala y orden de dibujo](/docs-images/beasty-visual-novel/vn-quest-marker.png)
+
 - **Marker sprite** — el arte. Fijar uno aquí hace que gane sobre todo lo demás.
 - **Conditional marker sprites** — una lista ordenada; **gana el primer caso cuya condición se cumpla**, si no, el
   sprite por defecto. Una pose distinta por momento del día, o por variable.
@@ -183,6 +193,8 @@ sala con el sprite de mundo libre del personaje.
 
 Mientras la misión está **activa** y este paso es **el actual**, el paso puede **mover a su personaje de conversación a
 otra sala**, anulando su rutina por completo.
+
+![Mover al personaje mientras es el paso actual: el paso de misión que anula una rutina](/docs-images/beasty-visual-novel/vn-quest-routine-override.png)
 
 | Campo | Qué es |
 |---|---|

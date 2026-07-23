@@ -12,6 +12,8 @@ This page lists every block that exists, in the order the palette shows them.
 The panel on the left of the **Story** tab is the palette. Select a Dialogue Node in the graph and the
 palette turns on.
 
+![The Add blocks palette with every category expanded](/docs-images/beasty-visual-novel/vn-add-blocks-palette.png)
+
 - **Click** a block button to add it at the end of the selected node's stack.
 - **Drag** a block button onto the block list to insert it at a specific position.
 - Type in the search field at the top to filter the whole catalogue by name.

@@ -29,6 +29,8 @@ name**. The active profile is the one whose name matches the character's routine
 (`@char:<id>:@routineMode`, shown in the condition picker as `maya.routineMode`). If that variable is empty,
 or names a profile that does not exist, the default profile is used; failing that, the first one.
 
+![A character's routine profiles, with the default one named](/docs-images/beasty-visual-novel/vn-routine-profiles.png)
+
 This is the point of profiles: **when the story turns, you switch a character's entire week with a single
 block.** She gets fired, he falls ill, they move to the coast — one block, not thirty rule edits.
 
@@ -52,6 +54,8 @@ Because the routine mode is an ordinary variable, it saves, loads and rewinds wi
 
 A profile holds an ordered list of **rules** and one **fallback**. Each rule is a condition plus a room.
 
+![The ordered rule list of a profile, with its fallback](/docs-images/beasty-visual-novel/vn-routine-rules.png)
+
 The resolver walks the rules from the top and stops at **the first rule whose condition passes**. If no rule
 matches, the fallback is used.
 
@@ -67,6 +71,8 @@ dead. Order matters.
 The **FreeRoam** tab has a **Map / Routines** toggle in its toolbar. Switch to **Routines** and you get one
 canvas: **columns are weekdays, rows are dayparts**, plus a **General** row on top and a **Fallback** row at
 the bottom.
+
+![The routine grid: weekdays across, dayparts down, with the filter bar](/docs-images/beasty-visual-novel/vn-routine-grid.png)
 
 A filter bar drives what the grid shows and what it edits:
 
@@ -101,6 +107,8 @@ timeline, which has a lane per daypart and a `+ Character` button per lane. Addi
 lane of the Bakery writes exactly the rule the grid would have written. The two editors are two views of one
 rule list; use whichever matches how you are thinking — "what does Maya do this week" or "who is in the bakery
 in the morning".
+
+![A room's timeline: one lane per daypart, with + Character](/docs-images/beasty-visual-novel/vn-room-timeline.png)
 
 ## What the character looks like in the room
 
@@ -183,6 +191,8 @@ Players can see a character's schedule. The **Character Routine** screen shows t
 calendar in **day view** (one row per daypart of today) or **week view** (one row per weekday and daypart). It
 is populated only when the character's **Show routine** flag is on, so a mysterious stranger stays mysterious.
 See [Character screens](/docs/beasty-visual-novel/world/character-screens/).
+
+![The routine calendar in game, in week view](/docs-images/beasty-visual-novel/vn-routine-calendar-ingame.png)
 
 ## Worked example: a baker
 

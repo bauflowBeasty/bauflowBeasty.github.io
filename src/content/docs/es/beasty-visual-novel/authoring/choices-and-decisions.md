@@ -17,10 +17,14 @@ de autoría más común, y se reconoce fácil: un menú con una sola opción den
 Añade opciones con el botón `+ choice` del nodo, y luego complétalas a la derecha. Cada opción tiene cuatro
 partes.
 
+![El inspector del nodo Choice, opción por opción](/docs-images/beasty-visual-novel/vn-choice-inspector.png)
+
 ### La etiqueta (label)
 
 Un nombre corto para la opción. Aparece en el puerto del nodo en el grafo y en la lista del inspector. Es
 **para ti**: el jugador nunca la ve. Nombra tus puertos y el grafo se mantiene legible de un vistazo.
+
+![La misma elección tal y como la ve el jugador: la pregunta y sus botones](/docs-images/beasty-visual-novel/vn-choice-ingame.png)
 
 ### El texto del prompt
 
@@ -29,6 +33,8 @@ Lo que el jugador realmente lee en el botón. Es una línea localizable normal, 
 ### La condición
 
 Opcional. Vacía significa que la opción siempre se ofrece.
+
+![El editor de condiciones: cláusulas con token, operador, valor y uniones And/Or](/docs-images/beasty-visual-novel/vn-condition-editor.png)
 
 Cuando le das una condición a una opción, la opción solo se muestra si la condición se cumple. Así es como
 restringes el acceso:
@@ -89,6 +95,8 @@ hiciste antes, sin duplicar el nodo de elección.
 
 Un nodo de decisión no tiene UI en absoluto. **El jugador no lo ve, no hace clic en él, y no puede saber que
 existe.** Es una señal que la historia lee por sí misma.
+
+![Un nodo Decision: ramas que decide el juego, no el jugador](/docs-images/beasty-visual-novel/vn-decision-inspector.png)
 
 Cuando la historia llega a él, el nodo recorre sus ramas de arriba abajo, toma la **primera rama cuya
 condición se cumpla**, aplica los efectos de esa rama, y salta. Si ninguna rama coincide, toma el puerto

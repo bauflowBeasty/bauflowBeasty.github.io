@@ -32,6 +32,8 @@ goodbye.
 
 `Tools > Beasty VN > Editor`, tab **Characters**, sub-tab **Talk Menu**. Pick a character at the top.
 
+![The Talk Menu sub-tab: the prompt and the list of entries](/docs-images/beasty-visual-novel/vn-talk-menu-tab.png)
+
 The tab shows you two things:
 
 1. **Mission steps (automatic)** — a read-only preview of the quest steps that will appear in this character's
@@ -49,6 +51,8 @@ You can also give the menu a **character image** (a pose shown beside the option
 daypart, per room, per mood.
 
 ### An entry
+
+![One talk menu entry: label, condition, scene and how it ends](/docs-images/beasty-visual-novel/vn-talk-menu-entry.png)
 
 | Field | What it is |
 |---|---|
@@ -115,6 +119,8 @@ re-evaluated menu, so the player sees the entry disappear.
 ## How the player reaches the menu
 
 Two ways, and you will use both.
+
+![The talk menu as the player sees it after clicking a character](/docs-images/beasty-visual-novel/vn-talk-menu-ingame.png)
 
 **From a room** — the usual one. Any object in a room whose **owner character** is set, with the function
 **Talk menu**, opens that character's menu. And you get it for free anyway: **clicking a character standing in

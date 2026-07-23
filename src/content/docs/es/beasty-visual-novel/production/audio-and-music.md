@@ -9,6 +9,8 @@ cubre ambas, y el mezclador por el que pasan.
 
 ## Los cuatro canales
 
+![El BeastyVNMixer con un grupo por canal](/docs-images/beasty-visual-novel/vn-mixer.png)
+
 | Canal | Qué transporta |
 |---|---|
 | Music | La banda sonora: la cola de fondo y cualquier cue de música de un bloque. |
@@ -34,6 +36,8 @@ hagan crossfade en lugar de cortarse.
 Estos son los bloques que colocas en un nodo. Detalles completos en la
 [referencia de bloques](/es/docs/beasty-visual-novel/authoring/blocks-reference/).
 
+![Un bloque Music con su clip, su fundido y sus ajustes de bucle](/docs-images/beasty-visual-novel/vn-block-music.png)
+
 | Bloque | Qué hace |
 |---|---|
 | **Music** | Reproduce un clip en el canal Music: clip, loop, volumen, fundido, y si pausar la cola de fondo. |
@@ -54,6 +58,8 @@ el tiempo de fundido del bloque. Un fundido de 0 hace el cambio al instante.
 La banda sonora persistente se define una vez, en un asset **Music Config**
 (`Create > Beasty VN > Config > Music Config`), y se edita en la pestaña **Music** de la ventana de Beasty VN.
 Contiene una cola por cada modo de app de nivel superior:
+
+![La pestaña Music: una cola por modo de la aplicación](/docs-images/beasty-visual-novel/vn-tab-music.png)
 
 | Cola | Suena mientras |
 |---|---|

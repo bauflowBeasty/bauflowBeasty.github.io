@@ -21,6 +21,8 @@ scene, not a slideshow of it being built.
 
 ## The Dialogue block
 
+![A Dialogue block: speaker, text, delivery state and alias](/docs-images/beasty-visual-novel/vn-block-dialogue.png)
+
 ### The speaker
 
 Pick the character from the dropdown. Their name plate, their name colour, their portrait and their font all
@@ -81,9 +83,13 @@ else, not the value of `@char:maya:@name`.
 The stage has three independent channels: the **backdrop**, the **characters**, and the **props**. Each keeps
 its current value until a block of the same channel changes it. You never repeat the backdrop.
 
+![The stage in game: backdrop, two characters and the dialogue box](/docs-images/beasty-visual-novel/vn-stage-ingame.png)
+
 ### Backdrop
 
 A backdrop is **either** sprite layers **or** a video. It cannot be both.
+
+![A Backdrop block with its sprite and transition](/docs-images/beasty-visual-novel/vn-block-backdrop.png)
 
 **Layers** is the normal case. Up to five sprite layers, each with:
 
@@ -117,6 +123,8 @@ with no condition acts as a catch-all — put it last.
 
 Puts a character on stage, or replaces them if they are already there.
 
+![A Show character block: character, expression and position](/docs-images/beasty-visual-novel/vn-block-show-character.png)
+
 | Option | What it does |
 |---|---|
 | Character | Who walks on. |
@@ -149,6 +157,8 @@ Takes one character off the stage. The others stay.
 Props are loose foreground or background images layered over the backdrop — a table, a falling leaf, a
 window frame. A Props block sets the whole prop set at once, and each prop has the same options as a backdrop
 layer, conditional sprites included.
+
+![A Props block with a couple of props placed](/docs-images/beasty-visual-novel/vn-block-props.png)
 
 ### The three Clear blocks
 

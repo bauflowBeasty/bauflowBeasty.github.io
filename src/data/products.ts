@@ -12,7 +12,7 @@ export type StoreLink = {
 };
 
 export type Product = {
-  id: 'beasty-visual-novel' | 'beasty-save-system' | 'beasty-debug-logger';
+  id: 'beasty-visual-novel' | 'beasty-save-system' | 'beasty-console';
   name: string;
   version: string;
   tagline: Record<Lang, string>;
@@ -60,8 +60,8 @@ export const PRODUCTS: Product[] = [
     docsEntry: '/docs/beasty-save-system/',
   },
   {
-    id: 'beasty-debug-logger',
-    name: 'Beasty Debug Logger',
+    id: 'beasty-console',
+    name: 'Beasty Console',
     version: '1.0.0',
     tagline: {
       en: 'Find the error inside the wall of logs.',
@@ -75,7 +75,7 @@ export const PRODUCTS: Product[] = [
       { store: 'unity', label: 'Unity Asset Store', url: null },
       { store: 'itch', label: 'itch.io', url: null },
     ],
-    docsEntry: '/docs/beasty-debug-logger/',
+    docsEntry: '/docs/beasty-console/',
   },
 ];
 
