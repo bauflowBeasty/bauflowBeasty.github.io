@@ -28,7 +28,7 @@ Primera versión pública.
 
 ### La ventana Beasty Console
 
-- Una consola de editor en `Tools > Beasty VN > Diagnostics > Console` que clasifica cada entrada por su nivel.
+- Una consola de editor en `Tools > Beasty Console > Console` que clasifica cada entrada por su nivel.
 - Filtros por nivel con recuentos en vivo, campo de búsqueda, Collapse, Clear on Play y Error Pause.
 - Un panel de detalle cuyas líneas de traza abren el archivo en la línea exacta dentro de tu IDE.
 
@@ -50,9 +50,12 @@ Cambios de comportamiento hechos antes de que salga la 1.0.0.
   `BeastyDebugLoggerConsole`); los ensamblados son `Beasty.Console` y `Beasty.Console.Editor` (antes
   `Beasty.DebugLogger` y `Beasty.DebugLogger.Editor`); y la carpeta es
   `Assets/BeastyComponents/BeastyConsole` (**breaking**: hay que renombrar el `using BeastyDebugLoggerConsole;`
-  y cada llamada `BeastyDebugLogger.Log*`). Los nombres y firmas de los métodos, la ventana de consola y su
-  entrada de menú `Tools > Beasty VN > Diagnostics > Console` no cambian.
+  y cada llamada `BeastyDebugLogger.Log*`). Los nombres y firmas de los métodos, y la ventana de consola en
+  sí, no cambian.
 - **La detección por reflexión sigue el nombre nuevo.** Beasty Save System ahora busca
   `BeastyConsoleLogger.BeastyConsole, Beasty.Console`, así que sus logs siguen llegando a esta ventana. Una
   copia del save system de una build anterior busca el ensamblado viejo, no lo encuentra, y cae a la consola
   de Unity hasta que también se actualice.
+- **La consola tiene su propio menú.** Ahora se abre desde `Tools > Beasty Console > Console` (antes
+  `Tools > Beasty VN > Diagnostics > Console`): Beasty Console es un asset independiente, así que ya no
+  cuelga del menú de Beasty VN y se puede abrir en un proyecto que no tenga Beasty Visual Novel.

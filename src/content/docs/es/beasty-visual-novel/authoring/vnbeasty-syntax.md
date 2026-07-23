@@ -13,6 +13,7 @@ seguridad.
 - [Estructura del archivo](#estructura-del-archivo)
 - [Diálogo y narración](#diálogo-y-narración)
 - [Fondos](#fondos)
+- [Atrezo](#atrezo)
 - [Personajes](#personajes)
 - [Audio](#audio)
 - [Estado e inventario](#estado-e-inventario)
@@ -22,6 +23,7 @@ seguridad.
 - [Nombres de personaje](#nombres-de-personaje)
 - [Flujo y transiciones](#flujo-y-transiciones)
 - [Elecciones y decisiones](#elecciones-y-decisiones)
+- [El menú de conversación](#el-menú-de-conversación)
 - [Subgrafos y retorno](#subgrafos-y-retorno)
 - [Condiciones y efectos](#condiciones-y-efectos)
 - [Notas](#notas)
@@ -59,6 +61,7 @@ se conserva en el ida y vuelta.
 | `(decision)` | `DecisionNode` | Contiene ramas `if` / `else`. Invisible para el jugador. |
 | `(subgraph)` | `SubGraphNode` | Contiene rutas `outcome`. Consulta [Subgrafos y retorno](#subgrafos-y-retorno). |
 | `(return "win")` | `ReturnNode` | Termina un subgrafo, devolviendo la clave de resultado entre comillas. |
+| `(talkmenu ana)` | `TalkMenuNode` | Abre el menú de conversación del personaje que nombra. Consulta [El menú de conversación](#el-menú-de-conversación). |
 
 Un label cuya **única** línea es una salida de flujo `->` es un `FlowNode`, sin necesidad de anotación.
 Consulta [Flujo y transiciones](#flujo-y-transiciones).
@@ -68,6 +71,7 @@ label cruce (choice):
 label ruta (decision):
 label combat (subgraph):
 label combat/done (return "win"):
+label charla (talkmenu ana):
 ```
 
 Un `(...)` al final de una línea de label cuenta como anotación de tipo solo cuando nombra un tipo conocido.
@@ -110,6 +114,7 @@ backdrop interiors/bedroom    # desambiguar por subcarpeta
 backdrop clear                # eliminar el fondo
 backdrop video rain           # un clip de video en lugar de un sprite
 backdrop video rain once mute volume 0.5 manual
+backdrop sky, hills parallax 0.4, street at 0 -20 order 2   # capas, de atrás hacia delante
 ```
 
 Un fondo de video se reproduce en bucle, con su audio a volumen completo, y arranca en cuanto aparece. Cada
@@ -125,21 +130,53 @@ modificador desactiva una de esas cosas:
 `clear` y `video` son palabras clave solo cuando no están entre comillas, así que un sprite realmente
 llamado `video` sigue funcionando si lo entrecomillas.
 
-> **Nota**
-> Un fondo con más de una capa de sprites no tiene forma de texto. Esas escenas se quedan solo en el grafo.
+### Capas
+
+Un fondo puede apilar varios sprites. Se escriben como una lista separada por comas, empezando por la capa
+del fondo, y cada uno lleva sus propias opciones:
+
+```text
+backdrop <sprite> [at <x> <y>] [parallax <f>] [order <n>][, <sprite> …]
+```
+
+| Opción | Qué hace |
+|---|---|
+| `at <x> <y>` | Desplaza la capa según estos dos números. Los dos son obligatorios. |
+| `parallax <f>` | El factor de parallax de la capa. |
+| `order <n>` | El orden de dibujado de la capa, un número entero. Sin él, las capas se ordenan según las escribiste. |
+
+Un fondo de un solo sprite no es más que el caso de una capa, y por eso `backdrop bedroom` no necesita
+puntuación. El máximo son cinco capas; una sexta es un error.
+
+## Atrezo
+
+El atrezo son los sprites de primer plano que se colocan sobre el fondo. Misma gramática de capas, mismas
+opciones:
+
+```text
+props crate                                   # un solo elemento
+props crate, barrel at 40 0, lamp order 3     # varios, de atrás hacia delante
+props clear                                   # retirarlos todos
+```
+
+`props clear` vacía la capa de atrezo. Igual que en `backdrop`, `clear` es palabra clave solo cuando no va
+entre comillas.
 
 ## Personajes
 
 ```text
 show juan happy at left                  # expresión + anclaje
 show maria base at right scale 1.2 flip
+show juan happy portrait angry slot 1    # retrato del diálogo + capa en escena
 expression juan sad
+expression juan sad portrait             # ...y cambia también el retrato, al base
 hide juan
 clear characters
+clear characters at left                 # solo esa posición
 ```
 
-`show <character> <expression> [at <anchor>] [scale <n>] [flip]`. La clave de expresión es la definida en el
-personaje; la clave por defecto es `base`.
+`show <character> <expression> [at <anchor>] [scale <n>] [flip] [portrait <key>] [slot <n>]`. La clave de
+expresión es la definida en el personaje; la clave por defecto es `base`.
 
 | Anclaje | Posición |
 |---|---|
@@ -153,8 +190,24 @@ personaje; la clave por defecto es `base`.
 `scale` es un multiplicador (1 es sin escalar, y se omite al escribirse desde el grafo). `flip` refleja el
 sprite horizontalmente.
 
-`expression <character> <expression>` cambia la expresión de un personaje ya en escena. `hide <character>`
-retira uno. `clear characters` retira a todos.
+`portrait <key>` fija además el retrato que se ve en la caja de diálogo, que por defecto se queda como
+esté. `slot <n>` es la capa de escena sobre la que va el sprite, un entero de 0 a 4: dos personajes en el
+mismo anclaje pero en capas distintas se superponen en un orden que tú controlas.
+
+`expression <character> <expression> [portrait [<key>]]` cambia la expresión de un personaje ya en escena.
+El sufijo `portrait` cambia a la vez el retrato del diálogo: con una clave usa ese retrato, y sin ninguna
+vuelve al retrato base del personaje.
+
+`hide <character>` retira a un personaje. `clear characters` retira a todos — o solo a una posición, si
+dices cuál:
+
+```text
+clear characters at <anchor> [layer <n>]
+clear characters at custom 0.35 layer 2
+```
+
+Los anclajes son los mismos que acepta `show`, `custom <x>` incluido. `layer <n>` (de 0 a 4) lo reduce a una
+sola capa de esa posición; sin él se despejan todas las capas de ese anclaje.
 
 ## Audio
 
@@ -211,7 +264,8 @@ wait                     # esperar al clic del jugador
 `set <key> = <value>` asigna; `+=` suma; `-=` resta. `toggle <key>` invierte un bool.
 
 Una clave que contiene un punto es una **variable de personaje**: `set juan.affection += 1` fija el campo
-`affection` del personaje `juan`.
+`affection` del personaje `juan`. La excepción es `item.<id>`, que es el recuento de un ítem:
+`set item.potion = 5` pasa por el inventario y respeta el máximo del ítem, igual que `give` y `take`.
 
 `dict <key> = "<value>"` fija un token de diccionario: un texto editable por el jugador.
 
@@ -298,11 +352,15 @@ ask gold "How much do you have?" by juan (whisper) as "The Stranger" default 0 r
 name juan = "Don Juan"            # fijar el nombre mostrado (texto literal)
 name juan = alias "The Stranger"  # ...desde uno de los alias del personaje
 name juan = var player_name       # ...desde el valor de una variable o token
+name juan = key char.juan.formal  # ...desde una clave de localización, para que se traduzca
 name juan reset                   # volver al nombre base
 ```
 
 Esto cambia el nombre de forma permanente, a diferencia del `as "..."` de una
 [línea de diálogo](#diálogo-y-narración), que solo dura esa línea.
+
+`= key <claveLoc>` nombra una clave de la tabla de localización, así que el nombre nuevo sigue el idioma del
+jugador. `= "..."` escribe el texto tal cual, en todos los idiomas.
 
 ## Flujo y transiciones
 
@@ -339,6 +397,8 @@ El destino después de `->` puede ser otro label o una salida de flujo (`freeroa
 
 ```text
 label cruce (choice):
+    image crossroads                                             # la imagen lateral (ver abajo)
+    image crossroads_night if @time:daypart == Night
     choice "Go left" -> cave
     choice "Buy a sword" if gold >= 10 { gold -= 10 } -> smith   # condición + efectos
     choice "Flee" -> freeroam town/square                        # destino de flujo
@@ -347,6 +407,12 @@ label cruce (choice):
 
 Un **nodo de elección** muestra las opciones cuya condición se cumple. `default -> <label>` indica a dónde
 ir cuando todas las opciones quedan bloqueadas.
+
+`image <sprite> [if <condición>]` es la ilustración que se muestra junto a las opciones. Escribe una línea
+`image` a secas para la imagen por defecto, y una línea condicional por variante; gana la primera variante
+cuya condición se cumpla, y la línea sin condición es el fallback. Solo puede haber una línea `image` sin
+condición —dos serían dos imágenes por defecto, y eso es un error—. Un nodo de elección sin ninguna línea
+`image` no muestra imagen.
 
 ```text
 label ruta (decision):           # enrutador invisible (DecisionNode)
@@ -365,6 +431,20 @@ de la flecha. Consulta [Condiciones y efectos](#condiciones-y-efectos).
 > **Nota**
 > No hay un bloque `menu:`. Escribe una línea `choice "text" -> label` por opción dentro de un nodo
 > `(choice)`.
+
+## El menú de conversación
+
+```text
+label charla (talkmenu ana):
+    default -> after_talk
+```
+
+Un label `(talkmenu <personaje>)` abre el menú de conversación de ese personaje: el centro de temas que se
+redacta en el personaje, no aquí. Todo su cuerpo es un `default -> <label>` opcional, que indica por dónde
+sigue la historia cuando el jugador cierra el menú. El id de personaje es obligatorio; si no existe, se avisa
+con una advertencia.
+
+Consulta [El menú de conversación](/es/docs/beasty-visual-novel/world/talk-menu/) para los temas en sí.
 
 ## Subgrafos y retorno
 
@@ -409,12 +489,32 @@ se lee como `(a and b) or c`. Una condición vacía siempre es verdadera.
 ```text
 if gold >= 10 -> smith
 if gold >= 10 and has_map -> smith
-if time.daypart == Morning or maya.location == Bakery -> visit
+if @time:daypart == Morning or maya.affection >= 2 -> visit
+if item.potion >= 2 -> heal
 if saw_intro -> chapter2
 ```
 
-Los tokens son claves de variable, variables de personaje (`maya.location`), y las claves reservadas de
-tiempo y misión. Consulta [Variables y condiciones](/es/docs/beasty-visual-novel/world/variables-and-conditions/) para la lista completa.
+Un token puede ser cualquiera de estos:
+
+| Token | Qué lee |
+|---|---|
+| `gold` | Una de tus variables. |
+| `maya.affection` | Una variable de personaje: el campo `affection` del personaje `maya`. |
+| `item.potion` | Cuántas unidades de ese ítem lleva el jugador. |
+| `@time:daypart` | Una clave reservada — tiempo, misiones, rutinas. Se escribe exactamente como la deletrea la columna de claves de [Claves de variable](/es/docs/beasty-visual-novel/reference/variable-keys/). |
+
+Un token con punto significa la misma clave en una condición, en un bloque de efectos y en `set`:
+`if maya.affection > 2` lee exactamente lo que escribió `set maya.affection += 1`, y `if item.potion >= 2`
+lee lo que escribieron `give`, `take` e `item potion = 5`.
+
+> **Nota**
+> El punto es **solo para variables de personaje e ítems**. Las claves reservadas no tienen forma con punto
+> en el guion de texto: escribe `@time:daypart`, no `time.daypart` — esto último leería un campo llamado
+> `daypart` de un personaje llamado `time`, que no es lo que querías. El selector de condiciones del grafo
+> enseña esas claves con una etiqueta amable con puntos; el guion quiere la clave cruda.
+
+Consulta [Variables y condiciones](/es/docs/beasty-visual-novel/world/variables-and-conditions/) y
+[Claves de variable](/es/docs/beasty-visual-novel/reference/variable-keys/) para la lista completa.
 
 **Un bloque de efectos** es una lista `{ … }` de mutaciones, separadas por comas, escrita después de la
 condición y antes de la flecha. Cada entrada es `key = value`, `key += n`, `key -= n`, o `toggle key`.
@@ -443,14 +543,23 @@ if gold > 100 { rich = true, toggle celebrated } -> rich_end
   hace nada en el juego: se salta, dejando lo que ya haya en pantalla o sonando. Tampoco se escribe en el
   guion, así que guardar el guion también elimina ese marcador de posición del grafo. Para dejar el fondo en
   negro o silenciar un canal a propósito, usa `backdrop clear` o `stop <channel>`.
-- **Autocompletado.** La pestaña Text sugiere, al inicio de una línea: `backdrop`, `show`, `expression`,
-  `hide`, `clear characters`, `jump`, `set`, `toggle`, `dict`, `give`, `take`, `use`, `item`, `deliver`,
-  `wait`, `music`, `sound`, `ambient`, `voice`, `stop`, `name`, `ask`, `quest`, `screen`, `routine`,
-  `time`, `choice`, `if`, `else`, `default`, `freeroam`, `goto-scene` —además de tus ids de personaje, ya
-  que una línea puede empezar con un speaker. Después de la palabra clave sugiere lo que esa palabra clave
-  espera: personajes, expresiones, variables, tokens de diccionario, ítems, misiones y sus objetivos,
-  pantallas, perfiles de rutina, nombres de momento del día y día de la semana, nombres de asset, y los
-  labels ya presentes en el archivo.
+- **Un nombre que no existe es una advertencia, no un error.** Los tokens de condición, las claves de
+  efecto, las claves de `set`, `toggle` y `dict`, los ids de ítem, de misión, de objetivo y de pantalla se
+  comprueban contra lo que declara el proyecto. Un nombre desconocido se reporta con su número de línea —la
+  importación sigue adelante, porque puede ser un nombre que estás a punto de crear—, pero ya no llega al
+  grafo en silencio apuntando a una clave que no usa nadie más. Los *assets* que no se resuelven y los
+  labels inexistentes siguen siendo errores y rechazan la importación.
+- **Autocompletado.** La pestaña Text sugiere, al inicio de una línea: `backdrop`, `props`, `image`, `show`,
+  `expression`, `hide`, `clear characters`, `jump`, `set`, `toggle`, `dict`, `give`, `take`, `use`, `item`,
+  `deliver`, `wait`, `music`, `sound`, `ambient`, `voice`, `stop`, `name`, `ask`, `quest`, `screen`,
+  `routine`, `time`, `choice`, `if`, `else`, `default`, `freeroam`, `goto-scene` —además de tus ids de
+  personaje, ya que una línea puede empezar con un speaker. Después de la palabra clave sugiere lo que esa
+  palabra clave espera: personajes, expresiones, claves de retrato, anclajes, variables, tokens de
+  diccionario, ítems, misiones y sus objetivos, pantallas, perfiles de rutina, nombres de momento del día y
+  día de la semana, nombres de asset, y los labels ya presentes en el archivo. Donde va una condición o un
+  efecto, ofrece el catálogo entero de variables —tus propias variables, campos de personaje escritos
+  `maya.affection`, recuentos `item.<id>`, tokens de diccionario y las claves reservadas `@time:` y
+  `@quest:`—, la misma lista que enseña el selector de condiciones del grafo.
 
 ## Ver también
 

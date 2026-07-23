@@ -39,13 +39,13 @@ delante.
 
 ## Abrir la consola
 
-La ventana está en `Tools > Beasty VN > Diagnostics > Console`.
+La ventana está en `Tools > Beasty Console > Console`.
 
-![El menú Tools > Beasty VN > Diagnostics con Console dentro](/docs-images/beasty-console/log-menu-diagnostics.png)
+![El menú Tools > Beasty Console con Console dentro](/docs-images/beasty-console/log-menu-console.png)
 
 > **Nota**
-> La ventana vive bajo el menú `Beasty VN` aunque este paquete no tiene ninguna dependencia de Beasty Visual
-> Novel y funciona perfectamente sin él. La ruta de menú es compartida; el código no.
+> El paquete tiene su propio menú, así que la ventana está ahí en cualquier proyecto — con Beasty Visual
+> Novel o sin él. Si venías de una versión anterior, se abría desde `Tools > Beasty VN > Diagnostics > Console`.
 
 Lo que ves:
 

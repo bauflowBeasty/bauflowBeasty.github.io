@@ -86,8 +86,8 @@ y junto al archivo queda un `.bak` con marca de tiempo del lado sobrescrito. Si 
 parsear, está vacía o destruiría contenido, se rechaza y el grafo queda intacto. Los assets se resuelven por
 GUID, así que renombrar el arte no rompe ningún nodo sincronizado.
 
-El límite que conviene conocer desde el principio: **un backdrop con más de una capa de sprite no tiene forma
-de texto**. Esas escenas viven solo en el grafo.
+Y el guionista no renuncia a nada: **el guion puede expresar todo lo que expresa el grafo**, fondos en capas,
+atrezo y nodos de menú de conversación incluidos.
 
 Consulta [El script de texto](/es/docs/beasty-visual-novel/authoring/text-script/) y
 [la sintaxis de .vnbeasty](/es/docs/beasty-visual-novel/authoring/vnbeasty-syntax/).

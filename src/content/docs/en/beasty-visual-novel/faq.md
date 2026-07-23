@@ -82,8 +82,8 @@ The contract in one paragraph. The graph is the source of truth. Saving the file
 destroy content is refused, and the graph is left untouched. Assets resolve by GUID, so renaming art does not
 break a synced node.
 
-The limit to know up front: **a backdrop with more than one sprite layer has no text form**. Those scenes
-stay graph-only.
+And there is nothing the writer has to give up: **the script can express everything the graph can**, layered
+backdrops, props and talk-menu nodes included.
 
 See [The text script](/docs/beasty-visual-novel/authoring/text-script/) and
 [the .vnbeasty syntax](/docs/beasty-visual-novel/authoring/vnbeasty-syntax/).

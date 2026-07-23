@@ -56,6 +56,21 @@ First public release.
 
 ### Pre-release changes
 
+- **`.vnbeasty` reaches 1:1 parity with the node graph.** Everything the nodes can express is now writable in
+  text: talk-menu nodes (`label charla (talkmenu ana):`), the choice node's side image (`image <sprite>
+  [if <cond>]`), props (`props <sprite>[, …]` / `props clear`), layered backdrops with offset/parallax/order,
+  `show … portrait <key> slot <n>`, `expression … portrait [<key>]`, positional `clear characters at <anchor>
+  [layer <n>]`, and localized character names (`name ana = key <locKey>`).
+- **Dotted variables work everywhere in text.** `ana.afecto` in a condition or an effect block now compiles
+  to the same per-character store key that `set ana.afecto` writes (before, it silently targeted a key that
+  never existed). `item.<id>` and raw `@time:`/`@quest:`/`@char:` keys are also valid condition tokens, and
+  `set item.<id>` routes through the inventory (clamping included).
+- **Typos warn at import.** Condition tokens, effect keys, `set`/`toggle`/`dict` keys, item ids, quest ids,
+  objectives and screen ids are checked against the project's declarations; an unknown name gets a warning
+  with its line number instead of silently creating a dead key at runtime.
+- **The text editor's autocomplete now offers every variable group** (globals, character fields as
+  `ana.afecto`, `item.<id>` counts, dictionary tokens, `@time:`/`@quest:` reserved keys) — the same catalog
+  the graph's condition picker uses — plus the new keywords, `portrait` keys and anchors.
 - **The Story window follows language changes**: deleting, restoring or renaming a language re-resolves the
   node card previews and the authoring-language selector immediately, and an authoring-language selection
   that no longer exists falls back to the main language instead of silently showing English.
@@ -67,6 +82,17 @@ First public release.
   existing scenes and prefabs follow the player's language without re-authoring anything. Custom label texts
   are never touched. The UI (global) localization tab also shows a repair button when the table's source
   column is not English.
+- **Story window edges no longer drift when zooming or panning.** On large graphs, a wire whose nodes had
+  been culled off-screen (or simplified by the far-zoom LOD) could reappear floating in mid-air or seemingly
+  attached to the wrong node until it was selected or the view moved again. Edges now recompute their
+  position as soon as they come back into view, and a wire is never drawn while one of its endpoints is
+  still hidden.
+- **VN logging no longer requires Beasty Console to be present.** `VNLog` now reaches the console by
+  reflection and falls back to `UnityEngine.Debug` when the console asset is not in the project — so VN
+  compiles and runs with or without it (before, its assemblies referenced `Beasty.Console` directly, and
+  deleting the console broke the build). When the console is present, logs keep landing in its window
+  exactly as before, and importing Beasty Console alongside a project that already bundles it no longer
+  risks a duplicate-assembly error.
 
 ### Persistence
 
@@ -76,7 +102,7 @@ First public release.
 ### Logging
 
 - Every VN log goes through `VNLog` into the Beasty Console window
-  (`Tools > Beasty VN > Diagnostics > Console`), tagged with a category — Data, Director, Stage, Streaming,
+  (`Tools > Beasty Console > Console`), tagged with a category — Data, Director, Stage, Streaming,
   Save, Verbose — so a noisy subsystem can be silenced without silencing the rest.
 - `VNLog.Enabled` is on in the editor and in development builds and off in a release build, so a shipped game
   does not write a line into the player's log for every dialogue line, choice and room change. Warnings, errors

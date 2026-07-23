@@ -14,6 +14,10 @@ One `.vnbeasty` file is one scene: one `DialogueScene` and its root `StoryGraph`
 is a node in the graph, and `jump` wires the nodes together. Everything you can put inside a node — a line
 of dialogue, a backdrop, a character, a music cue, a variable change, a choice — has a one-line text form.
 
+The two views are equal in power: **anything the graph can express, the script can write**, layered
+backdrops and props included, talk-menu nodes included, down to the portrait a character shows in the
+dialogue box and the stage slot the sprite stands on. Nothing is graph-only.
+
 ![A .vnbeasty file open in a code editor](/docs-images/beasty-visual-novel/vn-vnbeasty-file.png)
 
 ```text
@@ -47,8 +51,8 @@ left. The first time you open **Text** for a scene that has no script yet, the t
   and opens it for editing. The file lands in a `Scripts` folder beside the scene asset, named after the
   scene.
 
-If the graph holds something the text format cannot express, the button will tell you so instead of
-creating a half-true file. See [The limits](#the-limits).
+If the graph ever holds something the text format cannot express, the button tells you so instead of
+creating a half-true file. See [The safety contract](#the-safety-contract).
 
 ![The Story tab with the Graph / Text toggle and the script editor](/docs-images/beasty-visual-novel/vn-text-tab.png)
 
@@ -56,10 +60,17 @@ creating a half-true file. See [The limits](#the-limits).
 
 The editor is a code surface with line numbers, syntax colouring, and a **Suggestions** panel on the right
 that completes what you are typing: the keyword at the start of a line, then the thing that keyword expects
-— a character id, an expression key, a variable, a dictionary token, an item, a quest and its objectives, a
-screen id, a routine profile, a daypart or weekday name, a backdrop or audio asset name, or one of the
-labels already in the file. The suggestions are read live from the project, so a character you added a
-minute ago is already there. Click a suggestion to insert it.
+— a character id, an expression key, a portrait key, an anchor, a variable, a dictionary token, an item, a
+quest and its objectives, a screen id, a routine profile, a daypart or weekday name, a backdrop or audio
+asset name, or one of the labels already in the file. The suggestions are read live from the project, so a
+character you added a minute ago is already there. Click a suggestion to insert it.
+
+Where a condition or an effect goes, it offers the whole variable catalog — your own variables, character
+fields written `maya.affection`, `item.<id>` counts, dictionary tokens and the reserved `@time:` and
+`@quest:` keys. It is the same list the graph's condition picker shows, so you are not left guessing how a
+key is spelled when you leave the graph.
+
+![The Suggestions panel offering the variable catalog inside a condition](/docs-images/beasty-visual-novel/vn-text-suggestions-variables.png)
 
 `Tab` inserts four spaces. The arrow keys move the caret. `Ctrl+Z` and `Ctrl+Y` drive the editor's own undo
 stack.
@@ -74,7 +85,10 @@ The toolbar:
 | **Unlink** | Stops using the script. The graph stays as it is, and the `.vnbeasty` file is left on disk. |
 
 Under the editor, a report box shows the result of the last import: what was applied, what was refused, and
-the line number of the offending statement.
+the line number of the offending statement. Warnings land there too — a name that does not match anything
+the project declares is listed with its line, without stopping the import.
+
+![The report box under the editor, listing a warning with its line number](/docs-images/beasty-visual-novel/vn-text-import-report.png)
 
 ## How the two stay in sync
 
@@ -113,9 +127,10 @@ destroy authoring work.
   Text tab you get a confirmation dialog naming the number of nodes at stake. From an automatic import
   (a file saved outside Unity, a version-control pull) there is nobody to ask, so the import is refused
   outright.
-- **A script holding something the text format cannot express is refused.** If the graph contains content
-  that cannot be written back out as text, then the file on disk is not a faithful mirror of the graph, and
-  applying it would delete exactly the content the writer could not express. The import aborts and says so.
+- **A script holding something the text format cannot express is refused.** The two views are at parity
+  today, so this should never fire — but the check stays: if the graph ever contains content that cannot be
+  written back out as text, the file on disk is not a faithful mirror of the graph, and applying it would
+  delete exactly the content the writer could not express. The import aborts and says so.
 - **A name that does not resolve is an error.** A misspelled backdrop, an audio clip whose name matches two
   assets, a `jump` to a label that does not exist, a `goto-scene` to an unknown scene — each of these
   refuses the import and points at the line. A typo can never destroy a reference by silently clearing it.
@@ -137,16 +152,14 @@ destroy authoring work.
 
 Said plainly, so you do not find them the hard way.
 
-- **A backdrop with more than one sprite layer has no text form.** A scene that uses one stays graph-only:
-  its script cannot be created, and if you add a layered backdrop to a scene that already has a script, the
-  Text tab tells you the mirror is out of date rather than showing you a lie. The same is true of props, of
-  clearing a single character position (rather than all of them), of talk-menu nodes, and of an expression
-  change that also swaps the UI portrait. Those are graph features; the graph keeps them.
 - **Configuration is not authored in the script.** Characters, variables, the dictionary, items, quests,
   screens and localization live in the visual windows — the Characters, Variables, Dictionary, Items and
   Localization tabs. The script only *references* them by name. Writing `set gold = 10` does not create a
-  variable called `gold`; it uses the one you defined. A speaker id that is not in the cast is reported as
-  a warning on import.
+  variable called `gold`; it uses the one you defined. A name the project does not declare — a speaker who
+  is not in the cast, a variable, an item, a quest, an objective or a screen id that does not exist — is
+  reported as a warning with its line number. The import still goes through: the name may be one you are
+  about to create. But you are told, so a typo does not quietly become a key nothing else in the project
+  uses.
 - **A block with no asset assigned is not written to the script.** An empty Backdrop block, or a Music
   block with no clip, does nothing in game — it is skipped, leaving whatever is already on screen or
   playing. Because it does nothing, it has no text form, so saving the script removes that placeholder from

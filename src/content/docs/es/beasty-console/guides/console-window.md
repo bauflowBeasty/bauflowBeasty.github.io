@@ -6,7 +6,7 @@ description: "La ventana que te devuelve tus logs: clasifica cada entrada por ni
 La ventana que te devuelve tus logs: clasifica cada entrada por nivel, le da a cada nivel un toggle de
 filtro y un contador, y te lleva de una línea de stack trace al archivo en tu IDE.
 
-Ábrela en `Tools > Beasty VN > Diagnostics > Console`. Es una ventana de editor; no se incluye en una
+Ábrela en `Tools > Beasty Console > Console`. Es una ventana de editor; no se incluye en una
 build.
 
 ![La Beasty Console con los filtros de nivel y el panel de detalle](/docs-images/beasty-console/log-console-window.png)

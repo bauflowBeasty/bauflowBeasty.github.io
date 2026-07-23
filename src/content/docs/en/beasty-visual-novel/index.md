@@ -26,8 +26,8 @@ was. Any import that would lose content leaves a timestamped `.bak` next to the 
 referenced by GUID, so renaming or moving a sprite does not break a synced node.
 
 > **Note**
-> One limit worth knowing before you start: a backdrop built from more than one sprite layer has no text
-> form. Those scenes stay graph-only. See [The text script](/docs/beasty-visual-novel/authoring/text-script/).
+> The two views are at parity: anything the graph can express, the script can write — layered backdrops,
+> props and talk-menu nodes included. See [The text script](/docs/beasty-visual-novel/authoring/text-script/).
 
 ## More than a dialogue player
 

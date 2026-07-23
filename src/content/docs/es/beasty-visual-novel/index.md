@@ -27,8 +27,8 @@ tiempo junto al script. El arte se referencia por GUID, así que renombrar o mov
 sincronizado.
 
 > **Nota**
-> Un límite que conviene conocer antes de empezar: un backdrop construido a partir de más de una capa de
-> sprite no tiene forma de texto. Esas escenas se quedan solo en el grafo. Consulta [El script de texto](/es/docs/beasty-visual-novel/authoring/text-script/).
+> Las dos vistas están a la par: todo lo que el grafo puede expresar, el guion lo puede escribir — fondos en
+> capas, atrezo y nodos de menú de conversación incluidos. Consulta [El script de texto](/es/docs/beasty-visual-novel/authoring/text-script/).
 
 ## Más que un reproductor de diálogos
 

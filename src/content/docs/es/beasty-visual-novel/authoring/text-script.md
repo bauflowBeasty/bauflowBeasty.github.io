@@ -15,6 +15,11 @@ un nodo en el grafo, y `jump` conecta los nodos entre sí. Todo lo que puedes po
 línea de diálogo, un fondo, un personaje, una pista de música, un cambio de variable, una elección— tiene
 una forma de texto en una línea.
 
+Las dos vistas tienen la misma potencia: **todo lo que el grafo puede expresar, el guion lo puede
+escribir**, fondos en capas y atrezo incluidos, nodos de menú de conversación incluidos, hasta el retrato
+que muestra un personaje en la caja de diálogo y la capa de escena sobre la que se apoya el sprite. No hay
+nada que sea exclusivo del grafo.
+
 ![Un archivo .vnbeasty abierto en un editor de código](/docs-images/beasty-visual-novel/vn-vnbeasty-file.png)
 
 ```text
@@ -50,8 +55,8 @@ pestaña ofrece un único botón:
   lo abre para editar. El archivo se guarda en una carpeta `Scripts` junto al asset de la escena, con el
   nombre de la escena.
 
-Si el grafo contiene algo que el formato de texto no puede expresar, el botón te lo dirá en lugar de crear un
-archivo a medias. Consulta [Los límites](#los-límites).
+Si alguna vez el grafo contiene algo que el formato de texto no puede expresar, el botón te lo dice en lugar
+de crear un archivo a medias. Consulta [El contrato de seguridad](#el-contrato-de-seguridad).
 
 ![La pestaña Story con el interruptor Graph / Text y el editor de guion](/docs-images/beasty-visual-novel/vn-text-tab.png)
 
@@ -59,11 +64,18 @@ archivo a medias. Consulta [Los límites](#los-límites).
 
 El editor es una superficie de código con números de línea, coloreado de sintaxis, y un panel
 **Suggestions** a la derecha que completa lo que estás escribiendo: la palabra clave al inicio de una línea,
-y luego lo que esa palabra clave espera —un id de personaje, una clave de expresión, una variable, un token
-de diccionario, un ítem, una misión y sus objetivos, un id de pantalla, un perfil de rutina, un nombre de
-momento del día o día de la semana, un nombre de asset de fondo o audio, o una de las etiquetas ya presentes
-en el archivo. Las sugerencias se leen en vivo desde el proyecto, así que un personaje que añadiste hace un
-minuto ya está ahí. Haz clic en una sugerencia para insertarla.
+y luego lo que esa palabra clave espera —un id de personaje, una clave de expresión, una clave de retrato,
+un anclaje, una variable, un token de diccionario, un ítem, una misión y sus objetivos, un id de pantalla,
+un perfil de rutina, un nombre de momento del día o día de la semana, un nombre de asset de fondo o audio, o
+una de las etiquetas ya presentes en el archivo. Las sugerencias se leen en vivo desde el proyecto, así que
+un personaje que añadiste hace un minuto ya está ahí. Haz clic en una sugerencia para insertarla.
+
+Donde va una condición o un efecto, ofrece el catálogo entero de variables: tus propias variables, campos de
+personaje escritos `maya.affection`, recuentos `item.<id>`, tokens de diccionario y las claves reservadas
+`@time:` y `@quest:`. Es la misma lista que enseña el selector de condiciones del grafo, así que al salir
+del grafo no te quedas adivinando cómo se deletrea una clave.
+
+![El panel Suggestions ofreciendo el catálogo de variables dentro de una condición](/docs-images/beasty-visual-novel/vn-text-suggestions-variables.png)
 
 `Tab` inserta cuatro espacios. Las flechas mueven el cursor. `Ctrl+Z` y `Ctrl+Y` controlan la pila de
 deshacer propia del editor.
@@ -78,7 +90,11 @@ La barra de herramientas:
 | **Unlink** | Deja de usar el guion. El grafo se queda como está, y el archivo `.vnbeasty` se queda en disco. |
 
 Debajo del editor, un cuadro de reporte muestra el resultado de la última importación: qué se aplicó, qué se
-rechazó, y el número de línea de la sentencia problemática.
+rechazó, y el número de línea de la sentencia problemática. Las advertencias aterrizan ahí también: un
+nombre que no coincide con nada de lo que declara el proyecto se lista con su línea, sin detener la
+importación.
+
+![El cuadro de reporte bajo el editor, con una advertencia y su número de línea](/docs-images/beasty-visual-novel/vn-text-import-report.png)
 
 ## Cómo se mantienen sincronizados
 
@@ -119,10 +135,11 @@ de texto nunca pueda destruir en silencio el trabajo de autoría.
   Desde la pestaña Text aparece un diálogo de confirmación que te dice cuántos nodos están en juego. Desde
   una importación automática (un archivo guardado fuera de Unity, un pull de control de versiones) no hay
   nadie a quien preguntar, así que la importación se rechaza directamente.
-- **Un guion que contiene algo que el formato de texto no puede expresar se rechaza.** Si el grafo contiene
-  contenido que no se puede volver a escribir como texto, entonces el archivo en disco no es un espejo fiel
-  del grafo, y aplicarlo borraría exactamente el contenido que el escritor no pudo expresar. La importación
-  se cancela y te lo dice.
+- **Un guion que contiene algo que el formato de texto no puede expresar se rechaza.** Hoy las dos vistas
+  están a la par, así que esto no debería saltar nunca — pero la comprobación se queda: si alguna vez el
+  grafo contiene contenido que no se puede volver a escribir como texto, el archivo en disco no es un espejo
+  fiel del grafo, y aplicarlo borraría exactamente el contenido que el escritor no pudo expresar. La
+  importación se cancela y te lo dice.
 - **Un nombre que no se resuelve es un error.** Un fondo mal escrito, un clip de audio cuyo nombre coincide
   con dos assets, un `jump` a un label que no existe, un `goto-scene` a una escena desconocida: cada uno de
   estos rechaza la importación y señala la línea. Una errata nunca puede destruir una referencia borrándola
@@ -146,18 +163,14 @@ de texto nunca pueda destruir en silencio el trabajo de autoría.
 
 Dicho claramente, para que no los descubras por las malas.
 
-- **Un fondo con más de una capa de sprites no tiene forma de texto.** Una escena que use uno de esos
-  fondos se queda solo en el grafo: su guion no se puede crear, y si añades un fondo por capas a una escena
-  que ya tiene un guion,
-  la pestaña Text te dice que el espejo está desactualizado en lugar de mostrarte una mentira. Lo mismo pasa
-  con los props, con limpiar una sola posición de personaje (en lugar de todas), con los nodos de menú de
-  conversación, y con un cambio de expresión que también cambia el retrato de UI. Esas son funciones del
-  grafo; el grafo las conserva.
 - **La configuración no se define en el guion.** Los personajes, las variables, el diccionario, los ítems,
   las misiones, las pantallas y la localización viven en las ventanas visuales: las pestañas Characters,
   Variables, Dictionary, Items y Localization. El guion solo los *referencia* por nombre. Escribir
-  `set gold = 10` no crea una variable llamada `gold`; usa la que ya definiste. Un id de speaker que no está
-  en el reparto se reporta como una advertencia en la importación.
+  `set gold = 10` no crea una variable llamada `gold`; usa la que ya definiste. Un nombre que el proyecto no
+  declara —un speaker que no está en el reparto, una variable, un ítem, una misión, un objetivo o un id de
+  pantalla que no existen— se reporta como una advertencia con su número de línea. La importación se aplica
+  igualmente: puede ser un nombre que estás a punto de crear. Pero te enteras, y así una errata no se
+  convierte en silencio en una clave que no usa nadie más en el proyecto.
 - **Un bloque sin ningún asset asignado no se escribe en el guion.** Un bloque Backdrop vacío, o un bloque
   Music sin clip, no hace nada en el juego: se salta, y lo que ya haya en pantalla o sonando se queda. Como no
   hace nada, no tiene forma de texto, así que guardar el guion también elimina ese marcador de posición del

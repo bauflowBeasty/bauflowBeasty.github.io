@@ -81,9 +81,8 @@ Consulta [Referencia de bloques](/es/docs/beasty-visual-novel/authoring/blocks-r
 **Causa.** Un bloque sin asset asignado no tiene nada que escribir. No aparece en el archivo `.vnbeasty`, así
 que cuando el archivo se aplica de vuelta al grafo, el bloque también desaparece del grafo.
 
-**Solución.** Asigna el asset del bloque **antes** de guardar el script. Un backdrop con más de una capa de
-sprite tampoco tiene forma de texto — mantén esas escenas solo en el grafo, y no las sincronices a través de
-la pestaña Text.
+**Solución.** Asigna el asset del bloque **antes** de guardar el script. Esto va solo de bloques vacíos: un
+bloque que tiene su asset siempre tiene forma de texto, fondos en capas y atrezo incluidos.
 
 Si la importación escribió un `.bak` con marca de tiempo junto a tu script, el lado sobrescrito está ahí.
 

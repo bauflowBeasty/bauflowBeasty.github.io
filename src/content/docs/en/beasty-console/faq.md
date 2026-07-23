@@ -54,7 +54,8 @@ compile is gone.
 The other two candidates: Clear on Play is enabled, and you entered Play Mode; or the level's filter toggle
 is off, so the entries are there but hidden. The counter on the toggle keeps counting either way.
 
-## Why is the window under the Beasty VN menu?
+## The console used to be under the Beasty VN menu. Where is it now?
 
-`Tools > Beasty VN > Diagnostics > Console` is a shared menu path, not a dependency. The logger does not
-reference Beasty Visual Novel and works without it.
+At `Tools > Beasty Console > Console`. The package has its own menu: it is a standalone asset, so it no
+longer hangs off `Tools > Beasty VN > Diagnostics`, and it opens in a project that does not have Beasty
+Visual Novel installed. Nothing else about the window changed.

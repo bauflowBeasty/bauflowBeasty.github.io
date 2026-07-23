@@ -14,10 +14,16 @@ historia, avanzar un nodo, resolver un keyframe, escribir un guardado — pasa p
 del espacio de nombres `Beasty.VN.Core`, y de ahí a **Beasty Console**.
 
 Beasty Console viene dentro de este paquete, así que la ventana ya está ahí:
-`Tools > Beasty VN > Diagnostics > Console`. Consulta
+`Tools > Beasty Console > Console`. Consulta
 [La ventana Beasty Console](/es/docs/beasty-console/guides/console-window/) para ver lo que puede hacer:
 filtros por nivel con recuentos en vivo, búsqueda, Collapse, Clear on Play, y un panel de detalle cuyas líneas
 de traza abren el archivo en la línea exacta dentro de tu IDE.
+
+Eso sí, la VN no *depende* de la consola: `VNLog` la encuentra por reflexión, así que si borras Beasty
+Console del proyecto la VN sigue compilando y funcionando, y sus mensajes se van a la Consola de Unity —
+sin los filtros por nivel ni los colores por categoría. Eso es también lo que hace seguro tener Beasty
+Console por separado: borra la copia incluida, importa la tuya, y los logs de la VN siguen llegando a la
+ventana igual que antes.
 
 Cada mensaje lleva delante `[BeastyVN][Categoría]`, así que con el campo de búsqueda de la consola basta para
 aislar lo que imprime el paquete de lo que imprimes tú. Las excepciones se le entregan a la consola como el

@@ -12,6 +12,7 @@ Every construct of the `.vnbeasty` text script, for lookup. One file is one scen
 - [File structure](#file-structure)
 - [Dialogue and narration](#dialogue-and-narration)
 - [Backdrops](#backdrops)
+- [Props](#props)
 - [Characters](#characters)
 - [Audio](#audio)
 - [State and inventory](#state-and-inventory)
@@ -21,6 +22,7 @@ Every construct of the `.vnbeasty` text script, for lookup. One file is one scen
 - [Character names](#character-names)
 - [Flow and transitions](#flow-and-transitions)
 - [Choices and decisions](#choices-and-decisions)
+- [The talk menu](#the-talk-menu)
 - [Subgraphs and return](#subgraphs-and-return)
 - [Conditions and effects](#conditions-and-effects)
 - [Notes](#notes)
@@ -57,6 +59,7 @@ always round-tripped.
 | `(decision)` | `DecisionNode` | Holds `if` / `else` branches. Invisible to the player. |
 | `(subgraph)` | `SubGraphNode` | Holds `outcome` routes. See [Subgraphs and return](#subgraphs-and-return). |
 | `(return "win")` | `ReturnNode` | Ends a subgraph, returning the quoted outcome key. |
+| `(talkmenu ana)` | `TalkMenuNode` | Opens the talk menu of the named character. See [The talk menu](#the-talk-menu). |
 
 A label whose **only** line is a `->` flow exit is a `FlowNode`, with no annotation needed. See
 [Flow and transitions](#flow-and-transitions).
@@ -66,6 +69,7 @@ label cruce (choice):
 label ruta (decision):
 label combat (subgraph):
 label combat/done (return "win"):
+label charla (talkmenu ana):
 ```
 
 A trailing `(...)` on a label line counts as a type annotation only when it names a known type. `label
@@ -108,6 +112,7 @@ backdrop interiors/bedroom    # disambiguate by subfolder
 backdrop clear                # remove the backdrop
 backdrop video rain           # a video clip instead of a sprite
 backdrop video rain once mute volume 0.5 manual
+backdrop sky, hills parallax 0.4, street at 0 -20 order 2   # layers, back to front
 ```
 
 A video backdrop loops, plays its audio at full volume, and starts on arrival. Each modifier turns one of
@@ -123,21 +128,51 @@ those off:
 `clear` and `video` are keywords only when unquoted, so a sprite genuinely named `video` still works if you
 quote it.
 
-> **Note**
-> A backdrop with more than one sprite layer has no text form. Those scenes stay graph-only.
+### Layers
+
+A backdrop can stack several sprites. Write them as one comma-separated list, back layer first, each with
+its own options:
+
+```text
+backdrop <sprite> [at <x> <y>] [parallax <f>] [order <n>][, <sprite> …]
+```
+
+| Option | What it does |
+|---|---|
+| `at <x> <y>` | Offsets the layer by these two numbers. Both are required. |
+| `parallax <f>` | The layer's parallax factor. |
+| `order <n>` | The layer's sorting order, a whole number. Without it, layers sort by the order you wrote them. |
+
+A single-sprite backdrop is just the one-layer case, which is why `backdrop bedroom` needs no punctuation.
+Five layers is the maximum; a sixth is an error.
+
+## Props
+
+Props are the foreground sprites that sit over the backdrop. Same layer grammar, same options:
+
+```text
+props crate                                   # one prop
+props crate, barrel at 40 0, lamp order 3     # several, back to front
+props clear                                   # remove them all
+```
+
+`props clear` empties the prop layer. Like `backdrop`, `clear` is a keyword only when unquoted.
 
 ## Characters
 
 ```text
 show juan happy at left                  # expression + anchor
 show maria base at right scale 1.2 flip
+show juan happy portrait angry slot 1    # dialogue portrait + stage slot
 expression juan sad
+expression juan sad portrait             # ...and swap the portrait to the base one
 hide juan
 clear characters
+clear characters at left                 # only that position
 ```
 
-`show <character> <expression> [at <anchor>] [scale <n>] [flip]`. The expression key is the one defined on
-the character; the default key is `base`.
+`show <character> <expression> [at <anchor>] [scale <n>] [flip] [portrait <key>] [slot <n>]`. The expression
+key is the one defined on the character; the default key is `base`.
 
 | Anchor | Position |
 |---|---|
@@ -151,8 +186,24 @@ the character; the default key is `base`.
 `scale` is a multiplier (1 is unscaled, and is omitted when written back). `flip` mirrors the sprite
 horizontally.
 
-`expression <character> <expression>` changes the expression of a character already on stage.
-`hide <character>` removes one. `clear characters` removes all of them.
+`portrait <key>` also sets the portrait shown in the dialogue box, which is otherwise left as it is.
+`slot <n>` is the stage layer the sprite goes on, a whole number from 0 to 4: two characters at the same
+anchor on different slots overlap in a controlled order.
+
+`expression <character> <expression> [portrait [<key>]]` changes the expression of a character already on
+stage. The `portrait` suffix swaps the dialogue portrait at the same time; with a key it uses that portrait,
+without one it goes back to the character's base portrait.
+
+`hide <character>` removes one character. `clear characters` removes all of them —
+or only one position, if you say which:
+
+```text
+clear characters at <anchor> [layer <n>]
+clear characters at custom 0.35 layer 2
+```
+
+The anchors are the same ones `show` takes, `custom <x>` included. `layer <n>` (0 to 4) narrows it to a
+single slot at that position; without it, every slot at that anchor is cleared.
 
 ## Audio
 
@@ -208,7 +259,8 @@ wait                     # wait for the player to click
 `set <key> = <value>` assigns; `+=` adds; `-=` subtracts. `toggle <key>` flips a bool.
 
 A key containing a dot is a **character variable**: `set juan.affection += 1` sets the `affection` field on
-the character `juan`.
+the character `juan`. The exception is `item.<id>`, which is the item count: `set item.potion = 5` goes
+through the inventory, clamping to the item's maximum exactly as `give` and `take` do.
 
 `dict <key> = "<value>"` sets a dictionary token — a player-editable piece of text.
 
@@ -296,11 +348,15 @@ ask gold "How much do you have?" by juan (whisper) as "The Stranger" default 0 r
 name juan = "Don Juan"            # set the displayed name (literal text)
 name juan = alias "The Stranger"  # ...from one of the character's aliases
 name juan = var player_name       # ...from the value of a variable or token
+name juan = key char.juan.formal  # ...from a localization key, so it translates
 name juan reset                   # back to the base name
 ```
 
 This changes the name for good, unlike the one-line `as "..."` on a
 [dialogue line](#dialogue-and-narration).
+
+`= key <locKey>` names a key in the localization table, so the new name follows the player's language.
+`= "..."` writes the text as it is, in every language.
 
 ## Flow and transitions
 
@@ -336,6 +392,8 @@ target after `->` can be another label or a flow exit (`freeroam …` / `goto-sc
 
 ```text
 label cruce (choice):
+    image crossroads                                             # the side image (see below)
+    image crossroads_night if @time:daypart == Night
     choice "Go left" -> cave
     choice "Buy a sword" if gold >= 10 { gold -= 10 } -> smith   # condition + effects
     choice "Flee" -> freeroam town/square                        # flow target
@@ -344,6 +402,11 @@ label cruce (choice):
 
 A **choice node** shows the options whose condition passes. `default -> <label>` is where it goes when
 every option is gated out.
+
+`image <sprite> [if <condition>]` is the illustration shown beside the options. Write one plain `image` line
+for the default picture, and one conditional line per variant; the first variant whose condition passes
+wins, and the plain line is the fallback. Only one `image` line may go without a condition — two would mean
+two defaults, and that is an error. A choice node with no `image` line shows no picture.
 
 ```text
 label ruta (decision):           # invisible router (DecisionNode)
@@ -361,6 +424,19 @@ arrow. See [Conditions and effects](#conditions-and-effects).
 
 > **Note**
 > There is no `menu:` block. Write one `choice "text" -> label` line per option inside a `(choice)` node.
+
+## The talk menu
+
+```text
+label charla (talkmenu ana):
+    default -> after_talk
+```
+
+A `(talkmenu <character>)` label opens that character's talk menu — the hub of topics you author on the
+character, not here. Its whole body is an optional `default -> <label>`: where the story goes when the
+player closes the menu. The character id is required; an unknown one is reported as a warning.
+
+See [The talk menu](/docs/beasty-visual-novel/world/talk-menu/) for the topics themselves.
 
 ## Subgraphs and return
 
@@ -405,12 +481,32 @@ An empty condition is always true.
 ```text
 if gold >= 10 -> smith
 if gold >= 10 and has_map -> smith
-if time.daypart == Morning or maya.location == Bakery -> visit
+if @time:daypart == Morning or maya.affection >= 2 -> visit
+if item.potion >= 2 -> heal
 if saw_intro -> chapter2
 ```
 
-The tokens are variable keys, character variables (`maya.location`), and the reserved time and quest keys.
-See [Variables and conditions](/docs/beasty-visual-novel/world/variables-and-conditions/) for the full list.
+A token is any of these:
+
+| Token | What it reads |
+|---|---|
+| `gold` | One of your own variables. |
+| `maya.affection` | A character variable — the `affection` field of the character `maya`. |
+| `item.potion` | How many of that item the player carries. |
+| `@time:daypart` | A reserved key — time, quests, routines. Type it exactly as the key column of [Variable keys](/docs/beasty-visual-novel/reference/variable-keys/) spells it. |
+
+A dotted token means the same key in a condition, in an effect block and in `set`: `if maya.affection > 2`
+reads exactly what `set maya.affection += 1` wrote, and `if item.potion >= 2` reads what `give`, `take` and
+`item potion = 5` wrote.
+
+> **Note**
+> The dot is for **character variables and items only**. The reserved keys have no dotted form in the text
+> script: write `@time:daypart`, not `time.daypart` — the latter would read a field called `daypart` on a
+> character called `time`, which is not what you meant. The graph's condition picker shows those keys with a
+> friendly dotted label; the script wants the raw key.
+
+See [Variables and conditions](/docs/beasty-visual-novel/world/variables-and-conditions/) and
+[Variable keys](/docs/beasty-visual-novel/reference/variable-keys/) for the full list.
 
 **An effect block** is a `{ … }` list of mutations, separated by commas, written after the condition and
 before the arrow. Each entry is `key = value`, `key += n`, `key -= n`, or `toggle key`.
@@ -438,13 +534,22 @@ if gold > 100 { rich = true, toggle celebrated } -> rich_end
   does nothing in game: it is skipped, leaving whatever is already on screen or playing. It is not written
   to the script either, so saving the script removes that placeholder from the graph as well. To blank the
   backdrop or silence a channel on purpose, use `backdrop clear` or `stop <channel>`.
-- **Autocompletion.** The Text tab suggests, at the start of a line: `backdrop`, `show`, `expression`,
-  `hide`, `clear characters`, `jump`, `set`, `toggle`, `dict`, `give`, `take`, `use`, `item`, `deliver`,
-  `wait`, `music`, `sound`, `ambient`, `voice`, `stop`, `name`, `ask`, `quest`, `screen`, `routine`,
-  `time`, `choice`, `if`, `else`, `default`, `freeroam`, `goto-scene` — plus your character ids, since a
-  line can start with a speaker. After the keyword it suggests what that keyword expects: characters,
-  expressions, variables, dictionary tokens, items, quests and their objectives, screens, routine profiles,
-  daypart and weekday names, asset names, and the labels already in the file.
+- **A name that does not exist is a warning, not an error.** Condition tokens, effect keys, the keys of
+  `set`, `toggle` and `dict`, item ids, quest ids, objective ids and screen ids are all checked against what
+  the project declares. An unknown name is reported with its line number — the import still goes through,
+  because the name may be one you are about to create, but a typo no longer reaches the graph in silence and
+  targets a key nothing else uses. Unresolvable *assets* and unknown labels remain errors and refuse the
+  import.
+- **Autocompletion.** The Text tab suggests, at the start of a line: `backdrop`, `props`, `image`, `show`,
+  `expression`, `hide`, `clear characters`, `jump`, `set`, `toggle`, `dict`, `give`, `take`, `use`, `item`,
+  `deliver`, `wait`, `music`, `sound`, `ambient`, `voice`, `stop`, `name`, `ask`, `quest`, `screen`,
+  `routine`, `time`, `choice`, `if`, `else`, `default`, `freeroam`, `goto-scene` — plus your character ids,
+  since a line can start with a speaker. After the keyword it suggests what that keyword expects:
+  characters, expressions, portrait keys, anchors, variables, dictionary tokens, items, quests and their
+  objectives, screens, routine profiles, daypart and weekday names, asset names, and the labels already in
+  the file. Where a condition or an effect goes, it offers the whole variable catalog — your own variables,
+  character fields as `maya.affection`, `item.<id>` counts, dictionary tokens and the reserved `@time:` and
+  `@quest:` keys — the same list the graph's condition picker shows.
 
 ## See also
 

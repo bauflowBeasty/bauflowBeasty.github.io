@@ -11,8 +11,9 @@ have to satisfy.
 
 ## Beasty Visual Novel
 
-[Beasty Visual Novel](/docs/beasty-visual-novel/) references this logger directly and logs through
-its own facade, `VNLog`. The facade adds three things on top of the API:
+[Beasty Visual Novel](/docs/beasty-visual-novel/) logs through its own facade, `VNLog`, which finds this
+logger by reflection — the same way the save system does — and falls back to `UnityEngine.Debug` when the
+console is not in the project. The facade adds three things on top of the API:
 
 ![The console filled with Beasty VN logs, tagged by category](/docs-images/beasty-console/log-vn-categories.png)
 
@@ -25,9 +26,12 @@ its own facade, `VNLog`. The facade adds three things on top of the API:
 `VNLog` sits on top of `BeastyConsole`, so `IsEnabled` still applies: switching the logger off silences
 the VN too.
 
+The VN package bundles a full copy of this one, so the console is already there when you import it. Delete
+it and the VN keeps compiling and running — its logs simply go to Unity's Console instead.
+
 ## Beasty Save System
 
-[Beasty Save System](/docs/beasty-save-system/) does **not** reference this logger. It looks for it
+[Beasty Save System](/docs/beasty-save-system/) does **not** reference this logger either. It looks for it
 by reflection when it first logs something:
 
 - if the logger is in your project, the save system routes its messages through it, and they arrive in the

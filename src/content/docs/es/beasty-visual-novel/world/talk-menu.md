@@ -132,6 +132,16 @@ clic primero. Consulta [Interactuables y puertas](/es/docs/beasty-visual-novel/w
 e indica de quién es el menú que se muestra. También recibe un **nodo siguiente por defecto**: adónde continúa el
 flujo cuando el menú no encuentra ninguna entrada visible. Esa es la protección contra callejones sin salida — configúrala.
 
+En el guion de texto ese mismo nodo es un label con la anotación `(talkmenu <personaje>)`, y el nodo
+siguiente por defecto es su línea `default ->`:
+
+```text
+label charla (talkmenu ana):
+    default -> after_talk
+```
+
+Consulta [la sintaxis de .vnbeasty](/es/docs/beasty-visual-novel/authoring/vnbeasty-syntax/).
+
 ## El orden de la lista
 
 1. Los pasos automáticos de misión, en orden de catálogo. Para una misión **Ordered**, solo se ofrece el objetivo

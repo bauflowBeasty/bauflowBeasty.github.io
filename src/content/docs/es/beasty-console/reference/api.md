@@ -88,7 +88,7 @@ Una build etiqueta en ASCII porque `Player.log` es un archivo de texto plano.
 
 ## Ventana de editor
 
-`Tools > Beasty VN > Diagnostics > Console`. Assembly: `Beasty.Console.Editor`. Consulta
+`Tools > Beasty Console > Console`. Assembly: `Beasty.Console.Editor`. Consulta
 [La ventana Beasty Console](/es/docs/beasty-console/guides/console-window/).
 
 ## Ver también

@@ -59,6 +59,25 @@ Primera versión pública.
 
 ### Cambios previos a la publicación
 
+- **`.vnbeasty` alcanza la paridad 1:1 con el grafo de nodos.** Todo lo que los nodos pueden expresar se
+  escribe ya en texto: nodos de menú de conversación (`label charla (talkmenu ana):`), la imagen lateral del
+  nodo de elección (`image <sprite> [if <cond>]`), atrezo (`props <sprite>[, …]` / `props clear`), fondos en
+  capas con desplazamiento/parallax/orden, `show … portrait <clave> slot <n>`,
+  `expression … portrait [<clave>]`, el `clear characters at <ancla> [layer <n>]` posicional, y nombres de
+  personaje localizados (`name ana = key <claveLoc>`).
+- **Las variables con punto funcionan en cualquier parte del texto.** `ana.afecto` en una condición o en un
+  bloque de efecto compila ahora a la misma clave del almacén por personaje que escribe `set ana.afecto`
+  (antes apuntaba en silencio a una clave que no existía). `item.<id>` y las claves crudas
+  `@time:`/`@quest:`/`@char:` también valen como tokens de condición, y `set item.<id>` pasa por el
+  inventario (con su límite incluido).
+- **Las erratas avisan al importar.** Los tokens de condición, las claves de efecto, las claves de
+  `set`/`toggle`/`dict`, los ids de objeto, los ids de misión, los objetivos y los ids de pantalla se
+  comprueban contra lo declarado en el proyecto; un nombre desconocido da una advertencia con su número de
+  línea en lugar de crear en silencio una clave muerta en ejecución.
+- **El autocompletado del editor de texto ofrece ya todos los grupos de variables** (globales, campos de
+  personaje como `ana.afecto`, recuentos `item.<id>`, tokens de diccionario, claves reservadas
+  `@time:`/`@quest:`) — el mismo catálogo que usa el selector de condiciones del grafo — más las palabras
+  clave nuevas, las claves de `portrait` y las anclas.
 - **La ventana Story sigue los cambios de idioma**: eliminar, restaurar o renombrar un idioma vuelve a
   resolver al instante las vistas previas de las tarjetas de nodo y el selector de idioma de autoría, y una
   selección de idioma de autoría que ya no existe cae al idioma principal en lugar de mostrar inglés en
@@ -72,6 +91,17 @@ Primera versión pública.
   el idioma del jugador sin que tengas que rehacer nada. Los textos propios de tus etiquetas nunca se tocan.
   La pestaña de localización de UI (global) muestra además un botón de reparación cuando la columna de origen
   de la tabla no es el inglés.
+- **Las aristas de la ventana Story ya no se descolocan al hacer zoom o desplazarse.** En grafos grandes, un
+  cable cuyos nodos se habían descartado por estar fuera de pantalla (o simplificado por el LOD de zoom
+  lejano) podía reaparecer flotando en el aire o aparentemente enganchado al nodo equivocado hasta que lo
+  seleccionabas o movías la vista otra vez. Las aristas ahora recalculan su posición en cuanto vuelven a
+  entrar en vista, y un cable nunca se dibuja mientras uno de sus extremos siga oculto.
+- **El logging de la VN ya no necesita que Beasty Console esté presente.** `VNLog` llega ahora a la consola
+  por reflexión y cae a `UnityEngine.Debug` cuando el asset de la consola no está en el proyecto — así que la
+  VN compila y funciona con él o sin él (antes sus ensamblados referenciaban `Beasty.Console` directamente, y
+  borrar la consola rompía la build). Con la consola presente, los logs siguen llegando a su ventana
+  exactamente igual que antes, e importar Beasty Console junto a un proyecto que ya lo incluye deja de
+  arriesgar un error de ensamblado duplicado.
 
 ### Persistencia
 
@@ -81,7 +111,7 @@ Primera versión pública.
 ### Logging
 
 - Todos los logs de la VN pasan por `VNLog` hasta la ventana Beasty Console
-  (`Tools > Beasty VN > Diagnostics > Console`), etiquetados con una categoría — Data, Director, Stage,
+  (`Tools > Beasty Console > Console`), etiquetados con una categoría — Data, Director, Stage,
   Streaming, Save, Verbose — para que puedas silenciar un subsistema ruidoso sin silenciar el resto.
 - `VNLog.Enabled` está activo en el editor y en builds de desarrollo, y apagado en una build de release, para
   que un juego publicado no escriba una línea en el log del jugador por cada línea de diálogo, elección y

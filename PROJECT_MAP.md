@@ -96,7 +96,7 @@ docs/  (documentación INTERNA del repo, no se publica)
 ├── superpowers/plans/    → Planes de implementación (2026-07-13 site-redesign)
 ├── superpowers/specs/    → Specs de diseño (redesign, portada/marca/humanización ES)
 ├── screenshots.json      → Catálogo de capturas: por imagen, prioridad, desde qué vista se toma y qué debe verse
-└── SCREENSHOTS.md        → GENERADO (`npm run doc:shots`): guion de las 183 capturas, por producto y página
+└── SCREENSHOTS.md        → GENERADO (`npm run doc:shots`): guion de las 185 capturas, por producto y página
 
 projects/Inventory/       → Vacío (legacy)
 dist/                     → Salida del build (generado, no editar)

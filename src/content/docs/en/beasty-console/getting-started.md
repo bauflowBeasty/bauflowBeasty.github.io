@@ -38,13 +38,13 @@ Enter Play Mode. The line appears in Unity's own Console, in green, with an info
 
 ## Open the console
 
-The window is at `Tools > Beasty VN > Diagnostics > Console`.
+The window is at `Tools > Beasty Console > Console`.
 
-![The Tools > Beasty VN > Diagnostics menu with Console in it](/docs-images/beasty-console/log-menu-diagnostics.png)
+![The Tools > Beasty Console menu with Console in it](/docs-images/beasty-console/log-menu-console.png)
 
 > **Note**
-> The window lives under the `Beasty VN` menu even though this package has no dependency on Beasty Visual
-> Novel and works fine without it. The menu path is shared; the code is not.
+> The package has its own menu, so the window is there in any project — with or without Beasty Visual
+> Novel. If you used an earlier build, it opened from `Tools > Beasty VN > Diagnostics > Console`.
 
 What you see:
 

@@ -14,10 +14,16 @@ advancing a node, resolving a keyframe, writing a save — goes through `VNLog`,
 `Beasty.VN.Core` namespace, and from there into **Beasty Console**.
 
 Beasty Console ships inside this package, so the window is already there:
-`Tools > Beasty VN > Diagnostics > Console`. See
+`Tools > Beasty Console > Console`. See
 [The Beasty Console window](/docs/beasty-console/guides/console-window/) for what it can do — level filters
 with live counts, search, Collapse, Clear on Play, and a detail panel whose stack-trace lines open the file
 at the right line in your IDE.
+
+The VN does not *depend* on the console, though: `VNLog` finds it by reflection, so if you delete Beasty
+Console from the project the VN still compiles and runs, and its messages go to Unity's own Console
+instead — without the level filters and the category colours. That is also what makes it safe to own
+Beasty Console separately: delete the bundled copy, import your own, and the VN's logs keep landing in the
+window exactly as before.
 
 Every message is prefixed `[BeastyVN][Category]`, so the console's search field is enough to isolate the
 package's own output from yours. Exceptions are handed to the console as the exception object itself, which

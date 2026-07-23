@@ -11,8 +11,9 @@ dependencia que tengas que satisfacer.
 
 ## Beasty Visual Novel
 
-[Beasty Visual Novel](/es/docs/beasty-visual-novel/) referencia este logger directamente y loguea a través
-de su propia fachada, `VNLog`. La fachada suma tres cosas por encima de la API:
+[Beasty Visual Novel](/es/docs/beasty-visual-novel/) loguea a través de su propia fachada, `VNLog`, que
+encuentra este logger por reflexión — igual que hace el save system — y cae a `UnityEngine.Debug` cuando la
+consola no está en el proyecto. La fachada suma tres cosas por encima de la API:
 
 ![La consola con logs de Beasty VN, etiquetados por categoría](/docs-images/beasty-console/log-vn-categories.png)
 
@@ -27,9 +28,12 @@ de su propia fachada, `VNLog`. La fachada suma tres cosas por encima de la API:
 `VNLog` se apoya en `BeastyConsole`, así que `IsEnabled` sigue aplicando: apagar el logger también
 silencia la VN.
 
+El paquete de la VN incluye una copia completa de este, así que la consola ya está ahí cuando lo importas.
+Bórrala y la VN sigue compilando y funcionando — sus logs se van a la Consola de Unity y ya está.
+
 ## Beasty Save System
 
-[Beasty Save System](/es/docs/beasty-save-system/) **no** referencia este logger. Lo busca por reflexión la
+[Beasty Save System](/es/docs/beasty-save-system/) tampoco referencia este logger. Lo busca por reflexión la
 primera vez que loguea algo:
 
 - si el logger está en tu proyecto, el save system enruta sus mensajes a través de él, y llegan a la Beasty

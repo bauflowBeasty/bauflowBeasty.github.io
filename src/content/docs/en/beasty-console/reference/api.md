@@ -86,7 +86,7 @@ build tags in ASCII because `Player.log` is a plain text file.
 
 ## Editor window
 
-`Tools > Beasty VN > Diagnostics > Console`. Assembly: `Beasty.Console.Editor`. See
+`Tools > Beasty Console > Console`. Assembly: `Beasty.Console.Editor`. See
 [The Beasty Console window](/docs/beasty-console/guides/console-window/).
 
 ## See also

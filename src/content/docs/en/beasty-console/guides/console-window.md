@@ -6,7 +6,7 @@ description: "The window that reads your logs back to you: it classifies every e
 The window that reads your logs back to you: it classifies every entry by level, gives each level a filter
 toggle and a counter, and takes you from a stack-trace line to the file in your IDE.
 
-Open it at `Tools > Beasty VN > Diagnostics > Console`. It is an editor window; it does not ship in a
+Open it at `Tools > Beasty Console > Console`. It is an editor window; it does not ship in a
 build.
 
 ![The Beasty Console with the level filters and the detail panel](/docs-images/beasty-console/log-console-window.png)

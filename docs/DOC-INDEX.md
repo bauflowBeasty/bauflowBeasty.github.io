@@ -8,7 +8,7 @@
 **Identificadores.** `SS/guides/logging` es `src/content/docs/en/beasty-save-system/guides/logging.md`,
 y su espejo español es el mismo archivo bajo `es/`. Siglas: `BC` = beasty-console · `SS` = beasty-save-system · `VN` = beasty-visual-novel.
 
-Cobertura: **85 páginas** EN (y sus 85 espejos ES), **654 símbolos** indexados.
+Cobertura: **85 páginas** EN (y sus 85 espejos ES), **655 símbolos** indexados.
 
 ## Páginas
 
@@ -17,7 +17,7 @@ Cobertura: **85 páginas** EN (y sus 85 espejos ES), **654 símbolos** indexados
 | Página | Título | Secciones |
 |---|---|---|
 | `BC/changelog` | Changelog | 1.0.0 — unreleased |
-| `BC/faq` | FAQ | Does it replace Unity's Console? · Does it write a log file? · Does it cost performance in a release build? · Do I need the other Beasty packages? · Can I add my own level? · Why is my message missing a piece? · Why did my logs disappear? · Why is the window under the Beasty VN menu? |
+| `BC/faq` | FAQ | Does it replace Unity's Console? · Does it write a log file? · Does it cost performance in a release build? · Do I need the other Beasty packages? · Can I add my own level? · Why is my message missing a piece? · Why did my logs disappear? · The console used to be under the Beasty VN menu. Where is it now? |
 | `BC/getting-started` | Getting started | Requirements · Import · Your first log · Open the console · Next |
 | `BC/guides/beasty-integration` | Working with the other Beasty packages | Beasty Visual Novel · Beasty Save System · See also |
 | `BC/guides/console-window` | The Beasty Console window | The toolbar · The level filters · The list · Opening the file · The splitter · Behaviours worth knowing · See also |
@@ -69,7 +69,7 @@ Cobertura: **85 páginas** EN (y sus 85 espejos ES), **654 símbolos** indexados
 | `VN/authoring/subgraphs` | Subgraphs | Why · Creating a subgraph · Navigating in and out · The Return node · Routing the outcome · A worked example · See also |
 | `VN/authoring/text-script` | The text script | What it is · Why you would use it · Turning it on · The Text tab · How the two stay in sync · The safety contract · The limits · A worked example · See also |
 | `VN/authoring/transitions` | Transitions: leaving the novel | The four exits · The variable store survives the jump · Exit block or Flow node? · Exits as the target of a choice or a decision · See also |
-| `VN/authoring/vnbeasty-syntax` | .vnbeasty syntax reference | Contents · File structure · Dialogue and narration · Backdrops · Characters · Audio · State and inventory · Quests, screens and routines · Game time · Prompts · Character names · Flow and transitions · Choices and decisions · Subgraphs and return · Conditions and effects · Notes · See also |
+| `VN/authoring/vnbeasty-syntax` | .vnbeasty syntax reference | Contents · File structure · Dialogue and narration · Backdrops · Props · Characters · Audio · State and inventory · Quests, screens and routines · Game time · Prompts · Character names · Flow and transitions · Choices and decisions · The talk menu · Subgraphs and return · Conditions and effects · Notes · See also |
 | `VN/changelog` | Changelog | 1.0.0 — unreleased |
 | `VN/faq` | FAQ | Do I need to know how to code? · Which render pipelines are supported? · Which Unity version do I need? · Does it work with the Input System? · Do I need Addressables? · Do I need Newtonsoft, or any other package? · Does it include a save system? · Can my writer work in a text file while I build in the graph? · Can I use my own UI? · Can I use it for a dating sim, a life sim or a detective game? · Is WebGL supported? · Can I localize into any number of languages? · Can the player switch language mid-game? · Can I add my own minigame? · Is the C# source included? · How do I migrate from Ren'Py? · See also |
 | `VN/getting-started/core-concepts` | Core concepts | DialogueScene - one story · VNContext - the one shared world · StoryGraph - a canvas of nodes · Node - one beat · Block - one instruction · The variable store - the one that matters · BeastyManager - the one object · How a frame of the game flows · See also |
@@ -163,7 +163,7 @@ Cobertura: **85 páginas** EN (y sus 85 espejos ES), **654 símbolos** indexados
 | `Beasty_SaveSystemCore.ConverterUtil` | SS/advanced/custom-converters |
 | `Beasty_SaveSystemCore.IBeastyConverter` | SS/advanced/custom-converters |
 | `Beasty_SaveSystemCore.Json` | SS/reference/json-engine |
-| `Beasty.Console` | BC/changelog BC/index BC/reference/api |
+| `Beasty.Console` | BC/changelog BC/index BC/reference/api VN/changelog |
 | `Beasty.Console.Editor` | BC/changelog BC/index BC/reference/api |
 | `Beasty.DebugLogger` | BC/changelog |
 | `Beasty.DebugLogger.Editor` | BC/changelog |
@@ -661,6 +661,7 @@ Cobertura: **85 páginas** EN (y sus 85 espejos ES), **654 símbolos** indexados
 | `Tab` | VN/authoring/text-script VN/authoring/vnbeasty-syntax |
 | `Take` | VN/scripting/gameplay-apis |
 | `Talk` | VN/world/talk-menu |
+| `TalkMenuNode` | VN/authoring/vnbeasty-syntax |
 | `TargetNodeId` | VN/scripting/vn-api |
 | `Task` | SS/advanced/platforms-and-limits SS/faq SS/getting-started/installation SS/guides/async-saving SS/troubleshooting VN/production/building-and-platforms |
 | `Tests` | SS/getting-started/installation |
@@ -682,7 +683,7 @@ Cobertura: **85 páginas** EN (y sus 85 espejos ES), **654 símbolos** indexados
 | `TypeUnavailable` | SS/advanced/custom-converters SS/getting-started/installation SS/guides/save-manager-window SS/guides/scene-state SS/reference/components SS/reference/converter-modules SS/reference/results-and-errors |
 | `UILocalization` | VN/changelog |
 | `UILocalization.asset` | VN/getting-started/installation |
-| `UnityEngine.Debug` | BC/faq BC/guides/beasty-integration BC/guides/release-builds SS/guides/logging VN/production/logging |
+| `UnityEngine.Debug` | BC/faq BC/guides/beasty-integration BC/guides/release-builds SS/guides/logging VN/changelog VN/production/logging |
 | `UnityEngine.Object` | BC/guides/logging BC/reference/api SS/advanced/platforms-and-limits SS/faq SS/getting-started/save-with-code SS/guides/what-gets-saved SS/reference/api-beastysave SS/reference/converter-modules SS/reference/json-engine SS/reference/results-and-errors SS/troubleshooting |
 | `UnityEvent` | SS/guides/scene-state |
 | `Unreadable` | SS/guides/slots-and-metadata |

@@ -22,7 +22,7 @@ First public release.
 - `PrintLongMessage` splits a very long string into chunks and logs each one, so Unity does not truncate it.
 
 ### The Beasty Console window
-- An editor console at `Tools > Beasty VN > Diagnostics > Console` that classifies every entry by its level.
+- An editor console at `Tools > Beasty Console > Console` that classifies every entry by its level.
 - Per-level filter toggles with live counts, a search field, Collapse, Clear on Play and Error Pause.
 - A detail panel whose stack-trace lines open the file at the right line in your IDE.
 
@@ -41,9 +41,12 @@ Behaviour changes made before 1.0.0 ships.
   `BeastyDebugLogger`), in the `BeastyConsoleLogger` namespace (was `BeastyDebugLoggerConsole`); the assemblies
   are `Beasty.Console` and `Beasty.Console.Editor` (were `Beasty.DebugLogger` and `Beasty.DebugLogger.Editor`);
   and the folder is `Assets/BeastyComponents/BeastyConsole` (**breaking**: a `using BeastyDebugLoggerConsole;`
-  and every `BeastyDebugLogger.Log*` call has to be renamed). Method names and signatures, the console window
-  and its menu entry `Tools > Beasty VN > Diagnostics > Console` are unchanged.
+  and every `BeastyDebugLogger.Log*` call has to be renamed). Method names, signatures and the console window
+  itself are unchanged.
 - **The reflection probe follows the new name.** Beasty Save System now looks for
   `BeastyConsoleLogger.BeastyConsole, Beasty.Console`, so its logs keep landing in this window. A copy of the
   save system from an earlier build looks for the old assembly, does not find it, and falls back to Unity's
   console until it is updated too.
+- **The console has its own menu.** It now opens from `Tools > Beasty Console > Console` (was
+  `Tools > Beasty VN > Diagnostics > Console`): Beasty Console is a standalone asset, so it no longer sits
+  under the Beasty VN menu and is reachable in a project that does not have Beasty Visual Novel.

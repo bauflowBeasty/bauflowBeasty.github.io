@@ -79,8 +79,8 @@ See [Blocks reference](/docs/beasty-visual-novel/authoring/blocks-reference/).
 **Cause.** A block with no asset assigned has nothing to write. It does not appear in the `.vnbeasty` file,
 so when the file is applied back to the graph the block is gone from the graph too.
 
-**Fix.** Assign the block's asset **before** you save the script. A backdrop with more than one sprite layer
-also has no text form - keep those scenes graph-only, and do not sync them through the Text tab.
+**Fix.** Assign the block's asset **before** you save the script. This is about empty blocks only: a block
+that has its asset always has a text form, layered backdrops and props included.
 
 If the import wrote a timestamped `.bak` next to your script, the overwritten side is in it.
 

@@ -56,7 +56,8 @@ Las otras dos causas posibles: que Clear on Play esté activado y hayas entrado 
 de filtro del nivel esté desactivado — las entradas están ahí, solo que ocultas. El contador del toggle sigue
 sumando de todas formas.
 
-## ¿Por qué la ventana está bajo el menú Beasty VN?
+## Antes la consola estaba bajo el menú Beasty VN. ¿Dónde está ahora?
 
-`Tools > Beasty VN > Diagnostics > Console` es una ruta de menú compartida, no una dependencia. El logger no
-referencia Beasty Visual Novel y funciona sin él.
+En `Tools > Beasty Console > Console`. El paquete tiene su propio menú: es un asset independiente, así que ya
+no cuelga de `Tools > Beasty VN > Diagnostics` y se abre en un proyecto que no tenga Beasty Visual Novel
+instalado. Lo demás de la ventana no cambia.

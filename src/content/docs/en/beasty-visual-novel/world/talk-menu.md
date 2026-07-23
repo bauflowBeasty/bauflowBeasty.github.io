@@ -132,6 +132,16 @@ click first. See [Interactables and doors](/docs/beasty-visual-novel/world/inter
 and say whose menu to show. It also takes a **default next node**: where the flow continues when the menu
 resolves to no visible entries at all. That is the dead-end guard — set it.
 
+In the text script the same node is a label with a `(talkmenu <character>)` annotation, and the default next
+node is its `default ->` line:
+
+```text
+label charla (talkmenu ana):
+    default -> after_talk
+```
+
+See [the .vnbeasty syntax](/docs/beasty-visual-novel/authoring/vnbeasty-syntax/).
+
 ## The order of the list
 
 1. The automatic quest steps, in catalog order. For an **Ordered** quest, only the **current** objective is

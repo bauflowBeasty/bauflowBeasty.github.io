@@ -15,10 +15,10 @@ que el sitio nunca muestra una imagen rota.
 
 | | Total | Tomadas | Pendientes |
 |---|---:|---:|---:|
-| P1 · imprescindibles | 77 | 9 | 68 |
+| P1 · imprescindibles | 79 | 9 | 70 |
 | P2 · recomendadas | 75 | 8 | 67 |
 | P3 · complementarias | 31 | 3 | 28 |
-| **Total** | **183** | **20** | **163** |
+| **Total** | **185** | **20** | **165** |
 
 **Prioridades.** P1 es donde el texto solo no basta: la ventana principal y sus pestañas, los
 asistentes, las grillas y las pantallas que ve el jugador. P2 completa una página que ya se entiende.
@@ -38,7 +38,7 @@ P3 es un extra: si no la tomas, no se nota.
 
 ## Beasty Visual Novel
 
-Carpeta destino: `public/docs-images/beasty-visual-novel/` · 127 pendientes de 147.
+Carpeta destino: `public/docs-images/beasty-visual-novel/` · 129 pendientes de 149.
 
 ### Blocks reference · Referencia de bloques
 
@@ -235,6 +235,18 @@ Carpeta destino: `public/docs-images/beasty-visual-novel/` · 127 pendientes de 
 - **Sección:** Turning it on · Activarlo
 - **Vista:** Unity ▸ Tools > Beasty VN > Editor ▸ pestaña Story, modo Text
 - **Qué tiene que verse:** La pestaña Story cambiada a Text: el alternador Graph / Text bien visible arriba y el editor con una escena escrita de verdad (varias líneas de diálogo, una elección), no dos líneas sueltas.
+
+#### `vn-text-suggestions-variables.png` — P1 · ⬜ pendiente
+
+- **Sección:** The Text tab · La pestaña Text
+- **Vista:** Unity ▸ Tools > Beasty VN > Editor ▸ pestaña Story, modo Text
+- **Qué tiene que verse:** El panel Suggestions abierto con el catálogo de variables, disparado escribiendo una condición a medias (por ejemplo una línea `choice "…" if ` con el cursor detrás del `if`). Que la lista enseñe los cuatro grupos mezclados: una variable propia, un campo de personaje con punto (`ana.afecto`), un `item.<id>` y una clave reservada `@time:`. Es la foto que demuestra que al escribir a mano no hay que adivinar cómo se deletrea una clave.
+
+#### `vn-text-import-report.png` — P1 · ⬜ pendiente
+
+- **Sección:** The Text tab · La pestaña Text
+- **Vista:** Unity ▸ Tools > Beasty VN > Editor ▸ pestaña Story, modo Text
+- **Qué tiene que verse:** La caja de informe bajo el editor tras un Save & apply que ha dejado un aviso: escribe a propósito una errata en una clave (por ejemplo `set gld += 1` en vez de `gold`) y aplica. Tiene que verse el aviso con su número de línea Y que la importación se aplicó igualmente — es justo la diferencia entre aviso y error que cuenta el párrafo.
 
 #### `vn-text-sync-toolbar.png` — P2 · ⬜ pendiente
 
@@ -537,7 +549,7 @@ Carpeta destino: `public/docs-images/beasty-visual-novel/` · 127 pendientes de 
 #### `vn-log-categories.png` — P2 · ⬜ pendiente
 
 - **Sección:** Categories · Categorías
-- **Vista:** Unity ▸ Tools > Beasty VN > Diagnostics > Console, con una escena en Play
+- **Vista:** Unity ▸ Tools > Beasty Console > Console, con una escena en Play
 - **Qué tiene que verse:** La consola con logs de varias categorías de la VN a la vez (Data, Director, Stage, Streaming, Save, Verbose), para que se vea cómo va etiquetado cada mensaje.
 
 #### `vn-log-switches.png` — P2 · ⬜ pendiente
@@ -650,7 +662,7 @@ Carpeta destino: `public/docs-images/beasty-visual-novel/` · 127 pendientes de 
 
 - **Sección:** Windows · Ventanas
 - **Vista:** Unity ▸ barra de menús Tools
-- **Qué tiene que verse:** El menú Tools > Beasty VN abierto con TODOS sus submenús desplegados si tu sistema lo permite (Setup, Content, Codegen, Maintenance, Validate, Settings, Streaming, Export, Diagnostics). Si no caben todos, captura el primer nivel completo: esta imagen es el mapa de la tabla entera de la página.
+- **Qué tiene que verse:** El menú Tools > Beasty VN abierto con TODOS sus submenús desplegados si tu sistema lo permite (Setup, Content, Codegen, Maintenance, Validate, Settings, Streaming, Export). Si no caben todos, captura el primer nivel completo: esta imagen es el mapa de la tabla entera de la página.
 
 ### Prefabs · Prefabs
 
@@ -1179,7 +1191,7 @@ Carpeta destino: `public/docs-images/beasty-save-system/` · 26 pendientes de 26
 #### `save-logging-output.png` — P2 · ⬜ pendiente
 
 - **Sección:** What it looks like · Qué pinta tiene
-- **Vista:** Unity ▸ Tools > Beasty VN > Diagnostics > Console (o la consola de Unity), tras guardar y cargar en Play
+- **Vista:** Unity ▸ Tools > Beasty Console > Console (o la consola de Unity), tras guardar y cargar en Play
 - **Qué tiene que verse:** Guarda y carga una vez con Logging en Verbose y captura las líneas resultantes: se debe ver el slot, el tamaño y el resultado de la operación, que es lo que la página describe con palabras.
 
 ### The Save Manager window · La ventana Save Manager
@@ -1293,14 +1305,14 @@ Carpeta destino: `public/docs-images/beasty-console/` · 10 pendientes de 10.
 #### `log-first-log.png` — P2 · ⬜ pendiente
 
 - **Sección:** Your first log · Tu primer log
-- **Vista:** Unity ▸ Tools > Beasty VN > Diagnostics > Console, tras entrar en Play con el script de ejemplo
+- **Vista:** Unity ▸ Tools > Beasty Console > Console, tras entrar en Play con el script de ejemplo
 - **Qué tiene que verse:** La ventana con una sola fila: el mensaje del ejemplo de esta página. Es la foto de «funcionó»: lista casi vacía, un único mensaje con su glifo, su hora y su color.
 
-#### `log-menu-diagnostics.png` — P2 · ⬜ pendiente
+#### `log-menu-console.png` — P2 · ⬜ pendiente
 
 - **Sección:** Open the console · Abrir la consola
 - **Vista:** Unity ▸ barra de menús Tools
-- **Qué tiene que verse:** El menú Tools desplegado con la ruta Beasty VN > Diagnostics abierta y el ítem Console visible y resaltado. Captura solo la cascada del menú, no el editor entero.
+- **Qué tiene que verse:** El menú Tools desplegado con el submenú Beasty Console abierto y el ítem Console visible y resaltado. Que se vea que Beasty Console es una entrada de primer nivel de Tools, hermana de Beasty VN, no algo colgando de ella. Captura solo la cascada del menú, no el editor entero.
 
 ### Working with the other Beasty packages · Trabajar con los demás paquetes Beasty
 
@@ -1309,7 +1321,7 @@ Carpeta destino: `public/docs-images/beasty-console/` · 10 pendientes de 10.
 #### `log-vn-categories.png` — P2 · ⬜ pendiente
 
 - **Sección:** Beasty Visual Novel · Beasty Visual Novel
-- **Vista:** Unity ▸ Tools > Beasty VN > Diagnostics > Console, con una escena de VN en Play
+- **Vista:** Unity ▸ Tools > Beasty Console > Console, con una escena de VN en Play
 - **Qué tiene que verse:** Entra en Play en una escena de VN, avanza un par de líneas de diálogo y cambia de sala, y captura la lista: se deben ver logs con las categorías de la VN (Data, Director, Stage, Save) mezclados, que es lo que justifica poder silenciar una categoría sin silenciar el resto.
 
 ### The Beasty Console window · La ventana Beasty Console
@@ -1319,31 +1331,31 @@ Carpeta destino: `public/docs-images/beasty-console/` · 10 pendientes de 10.
 #### `log-console-window.png` — P1 · ⬜ pendiente
 
 - **Sección:** (entradilla) · (entradilla)
-- **Vista:** Unity ▸ Tools > Beasty VN > Diagnostics > Console
+- **Vista:** Unity ▸ Tools > Beasty Console > Console
 - **Qué tiene que verse:** La ventana entera, acoplada y ancha. Que se hayan logueado varios niveles distintos (info, éxito, aviso, error, excepción) para que los contadores de los filtros no estén a cero, y con una fila seleccionada, de modo que el panel de detalle de abajo muestre el mensaje completo y su stack trace.
 
 #### `log-console-toolbar.png` — P1 · ⬜ pendiente
 
 - **Sección:** The toolbar · La barra de herramientas
-- **Vista:** Unity ▸ Tools > Beasty VN > Diagnostics > Console
+- **Vista:** Unity ▸ Tools > Beasty Console > Console
 - **Qué tiene que verse:** Recorte de la franja superior de la ventana, solo la barra de herramientas: Clear, Collapse, Clear on Play, Error Pause y el campo de búsqueda. Que se lea el texto de cada botón; no hace falta que haya logs.
 
 #### `log-console-filters.png` — P1 · ⬜ pendiente
 
 - **Sección:** The level filters · Los filtros de nivel
-- **Vista:** Unity ▸ Tools > Beasty VN > Diagnostics > Console
+- **Vista:** Unity ▸ Tools > Beasty Console > Console
 - **Qué tiene que verse:** Recorte de la fila de filtros por nivel, justo debajo de la barra de herramientas. Loguea antes al menos un mensaje de cada nivel para que todos los contadores muestren un número, y deja uno o dos filtros APAGADOS para que se vea la diferencia visual entre activo e inactivo.
 
 #### `log-console-detail.png` — P1 · ⬜ pendiente
 
 - **Sección:** The list · La lista
-- **Vista:** Unity ▸ Tools > Beasty VN > Diagnostics > Console
+- **Vista:** Unity ▸ Tools > Beasty Console > Console
 - **Qué tiene que verse:** La lista con varias filas de niveles distintos (para que se vean los glifos, la hora [HH:mm:ss] y los colores) y UNA fila seleccionada, con el panel de detalle abierto abajo mostrando el mensaje completo y el stack trace. Si puedes, que una fila esté agrupada con Collapse para que se vea el (Nx) al final.
 
 #### `log-console-stack-link.png` — P3 · ⬜ pendiente
 
 - **Sección:** Opening the file · Abrir el archivo
-- **Vista:** Unity ▸ Tools > Beasty VN > Diagnostics > Console
+- **Vista:** Unity ▸ Tools > Beasty Console > Console
 - **Qué tiene que verse:** Recorte del panel de detalle con el stack trace de un error lanzado desde un script tuyo, con el cursor sobre una línea que apunte a un archivo real para que se vea que es un enlace (subrayado / cambio de color). Deben distinguirse las líneas enlazables de las de ensamblados compilados, que no lo son.
 
 ### Logging · Logging
@@ -1353,11 +1365,11 @@ Carpeta destino: `public/docs-images/beasty-console/` · 10 pendientes de 10.
 #### `log-levels-sample.png` — P1 · ⬜ pendiente
 
 - **Sección:** The levels, and when to use each one · Los niveles, y cuándo usar cada uno
-- **Vista:** Unity ▸ Tools > Beasty VN > Diagnostics > Console
+- **Vista:** Unity ▸ Tools > Beasty Console > Console
 - **Qué tiene que verse:** Loguea una línea por cada nivel de la API, en el mismo orden que la tabla de esta página, con un texto que diga qué nivel es (por ejemplo «Info: cargando datos»). Captura solo la lista: es la tabla de la página hecha imagen, y se debe poder comparar color y glifo de un vistazo.
 
 #### `log-color-sample.png` — P3 · ⬜ pendiente
 
 - **Sección:** Colour without a level · Color sin un nivel
-- **Vista:** Unity ▸ Tools > Beasty VN > Diagnostics > Console
+- **Vista:** Unity ▸ Tools > Beasty Console > Console
 - **Qué tiene que verse:** Tres o cuatro mensajes del mismo nivel pero con colores distintos (los de LogColor), uno detrás de otro, para que se vea que el color no cambia el nivel ni el glifo.
