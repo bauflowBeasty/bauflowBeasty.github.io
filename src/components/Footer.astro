@@ -6,6 +6,7 @@ interface Props {
 }
 
 const { lang } = Astro.props;
+const prefix = lang === 'es' ? '/es' : '';
 const year = new Date().getFullYear();
 ---
 
@@ -17,7 +18,7 @@ const year = new Date().getFullYear();
     </div>
     <div class="footer-contact">
       <span class="eyebrow">{t(lang, 'footer.contact')}</span>
-      <a href="mailto:bauflowbeasty+web@gmail.com">bauflowbeasty@gmail.com</a>
+      <a href={`${prefix}/contact/`}>{t(lang, 'footer.contactLink')}</a>
     </div>
   </div>
 </footer>
