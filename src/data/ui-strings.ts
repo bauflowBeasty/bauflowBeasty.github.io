@@ -37,6 +37,18 @@ export const UI: Record<Lang, Record<string, string>> = {
     'docs.buyStrip': 'Like what you read? Get',
     'docs.previous': 'Previous',
     'docs.next': 'Next',
+    'footer.contactLink': 'Contact form',
+    'contact.title': 'Contact',
+    'contact.metaDescription':
+      'Questions about a Beasty Components asset? Send a message and get a reply by email.',
+    'contact.intro':
+      'Found a bug, hit a wall, or have a pre-purchase question? Write below — replies go to the email you enter.',
+    'contact.emailLabel': 'Your email',
+    'contact.messageLabel': 'Message',
+    'contact.send': 'Send message',
+    'contact.sending': 'Sending…',
+    'contact.sent': 'Sent. You’ll get a reply by email.',
+    'contact.error': 'Something went wrong. Please try again in a minute.',
   },
   es: {
     skipToContent: 'Saltar al contenido',
@@ -72,6 +84,18 @@ export const UI: Record<Lang, Record<string, string>> = {
     'docs.buyStrip': '¿Te gusta lo que lees? Consigue',
     'docs.previous': 'Anterior',
     'docs.next': 'Siguiente',
+    'footer.contactLink': 'Formulario de contacto',
+    'contact.title': 'Contacto',
+    'contact.metaDescription':
+      '¿Dudas sobre un asset de Beasty Components? Envía un mensaje y recibe respuesta por correo.',
+    'contact.intro':
+      '¿Encontraste un bug, te atascaste o tienes una duda antes de comprar? Escribe aquí — la respuesta llega al correo que indiques.',
+    'contact.emailLabel': 'Tu correo',
+    'contact.messageLabel': 'Mensaje',
+    'contact.send': 'Enviar mensaje',
+    'contact.sending': 'Enviando…',
+    'contact.sent': 'Enviado. Recibirás respuesta por correo.',
+    'contact.error': 'Algo falló. Inténtalo de nuevo en un minuto.',
   },
 };
 
