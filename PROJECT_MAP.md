@@ -2,7 +2,7 @@
 
 > **Regla:** Leer este archivo ANTES de cualquier búsqueda en el proyecto. Si un cambio agrega, mueve, renombra o elimina archivos/carpetas (o cambia el propósito de algo listado aquí), actualizar este mapa en el mismo turno.
 >
-> Última actualización: 2026-07-22
+> Última actualización: 2026-07-24
 
 ## Qué es este proyecto
 
@@ -57,10 +57,12 @@ src/
 │   └── DocLayout.astro   → Layout de páginas de docs: sidebar + contenido + TOC + CTA compra
 ├── pages/
 │   ├── index.astro           → Portada EN (usa LandingPage.astro)
+│   ├── contact.astro         → Página de contacto EN (usa ContactPage.astro)
 │   ├── docs/[...slug].astro  → Ruta dinámica de todas las docs EN
-│   └── es/                   → index.astro + docs/[...slug].astro (equivalentes ES)
+│   └── es/                   → index.astro + contact.astro + docs/[...slug].astro (equivalentes ES)
 ├── components/
 │   ├── LandingPage.astro     → Portada completa (hero, grid de productos) — compartida EN/ES
+│   ├── ContactPage.astro     → Página de contacto: formulario de soporte vía Web3Forms — compartida EN/ES
 │   ├── Header.astro / Footer.astro
 │   ├── DocSidebar.astro      → Sidebar de navegación de docs
 │   ├── TableOfContents.astro → TOC de la página actual
@@ -93,7 +95,7 @@ docs/  (documentación INTERNA del repo, no se publica)
 ├── DOC-INDEX.md          → GENERADO: página → secciones, y símbolo → páginas que lo documentan
 ├── sync-state.json       → Config de sync-check.mjs: ruta del proyecto Unity, cm.exe, assets
 ├── DOCS-HOME.md          → Texto de portada rescatado del árbol antiguo; candidato a página /docs/
-├── superpowers/plans/    → Planes de implementación (2026-07-13 site-redesign)
+├── superpowers/plans/    → Planes de implementación (2026-07-13 site-redesign, 2026-07-24 contact-page)
 ├── superpowers/specs/    → Specs de diseño (redesign, portada/marca/humanización ES)
 ├── screenshots.json      → Catálogo de capturas: por imagen, prioridad, desde qué vista se toma y qué debe verse
 └── SCREENSHOTS.md        → GENERADO (`npm run doc:shots`): guion de las 185 capturas, por producto y página
