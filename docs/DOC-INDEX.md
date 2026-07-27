@@ -8,7 +8,7 @@
 **Identificadores.** `SS/guides/logging` es `src/content/docs/en/beasty-save-system/guides/logging.md`,
 y su espejo español es el mismo archivo bajo `es/`. Siglas: `BC` = beasty-console · `SS` = beasty-save-system · `VN` = beasty-visual-novel.
 
-Cobertura: **85 páginas** EN (y sus 85 espejos ES), **654 símbolos** indexados.
+Cobertura: **85 páginas** EN (y sus 85 espejos ES), **651 símbolos** indexados.
 
 ## Páginas
 
@@ -32,7 +32,7 @@ Cobertura: **85 páginas** EN (y sus 85 espejos ES), **654 símbolos** indexados
 |---|---|---|
 | `SS/advanced/custom-converters` | Custom converters | The interface · The contract · A worked example · Overriding a built-in · ConverterUtil · Registration · See also |
 | `SS/advanced/platforms-and-limits` | Platforms and limits | Unity version · Scripting backends · Platforms · WebGL · Limits · See also |
-| `SS/changelog` | Changelog | 1.0.0 — unreleased |
+| `SS/changelog` | Changelog | 1.0.0 — 2026-07-27 |
 | `SS/faq` | FAQ | Does it need Newtonsoft, or any other package? · Can I use it with my existing save data? · Does it work with IL2CPP? · Does it work on WebGL? · Is the encryption secure? · Can I save a Dictionary? · Can I save a ScriptableObject reference? A sprite? A prefab? · Can I have different settings for autosave and manual save? · How big can a save be? · Can I read a save file by hand? · Is it thread-safe? · Can I use just the JSON engine? · Does it work without the visual novel package? · Do I have to write code to use it? · What happens if a save file gets damaged? · Does it throw exceptions? · Can I add support for a type it does not know? · See also |
 | `SS/getting-started/installation` | Installation | Requirements · Import · What is in the folder · After importing · The converter modules · Platforms · See also |
 | `SS/getting-started/save-with-code` | Save with code | The two namespaces · 1. A data class · 2. Settings · 3. Save · 4. Load, and handle failure properly · 5. LoadInto — load onto an object you already have · 6. Exists, Delete, ListSlots · 7. Async · Where to go next |
@@ -218,7 +218,6 @@ Cobertura: **85 páginas** EN (y sus 85 espejos ES), **654 símbolos** indexados
 | `BeastySaveSettings.Encrypted` | SS/reference/results-and-errors |
 | `BeastySaveSettings.SharedDefaultEncryptionKey` | SS/changelog SS/guides/settings |
 | `BeastySaveSettings.Strict` | SS/reference/api-beastysave |
-| `BeastySaveSystem_LICENSE.md` | SS/changelog |
 | `BeastySaveSystem.asmdef` | SS/getting-started/installation |
 | `BeastyTime` | VN/index VN/scripting/gameplay-apis VN/scripting/overview VN/scripting/vn-api VN/world/game-time |
 | `BeastyVN_LICENSE.md` | VN/changelog |
@@ -297,7 +296,6 @@ Cobertura: **85 páginas** EN (y sus 85 espejos ES), **654 símbolos** indexados
 | `DaySchedule` | VN/scripting/gameplay-apis |
 | `Debug` | BC/guides/logging |
 | `Debug.Log` | BC/getting-started BC/guides/console-window BC/guides/logging BC/index |
-| `DebugLogger` | SS/changelog |
 | `DecisionNode` | VN/authoring/vnbeasty-syntax |
 | `Decoration` | VN/world/screens-and-hud |
 | `DecryptFailed` | SS/guides/backups-and-corruption SS/guides/encryption SS/reference/api-beastysave SS/reference/results-and-errors SS/reference/save-file-format |
@@ -521,7 +519,6 @@ Cobertura: **85 páginas** EN (y sus 85 espejos ES), **654 símbolos** indexados
 | `Parse` | SS/reference/json-engine |
 | `ParseError` | SS/guides/backups-and-corruption SS/guides/save-manager-window SS/reference/api-beastysave SS/reference/results-and-errors SS/reference/save-file-format SS/troubleshooting |
 | `ParticleSystem` | SS/getting-started/installation SS/guides/what-gets-saved SS/reference/converter-modules SS/troubleshooting |
-| `PasswordGenerator` | SS/changelog |
 | `PersistentStage` | VN/scripting/controllers |
 | `PersistentStage.Reset` | VN/scripting/controllers |
 | `Plain` | BC/guides/logging |
