@@ -41,7 +41,10 @@ La sección del medio se ocupa de qué objetos se guardan.
 ### La zona de arrastre
 
 Una caja que dice **"Drag GameObjects here to make them saveable"**. Arrastra uno o más objetos desde la
-Hierarchy sobre ella y cada uno recibe un componente `BeastySaveable` con un id nuevo. Se puede deshacer.
+Hierarchy sobre ella y cada uno recibe un componente `BeastySaveable` con un id nuevo. Todo el arrastre es
+**un solo** paso de deshacer, por muchos objetos que sueltes, y deshacerlo también revierte los ids que se
+generaron. La ventana se repinta justo después de un deshacer o rehacer, así que la lista que ves siempre
+está al día.
 
 ![La zona de arrastre que convierte en saveables los GameObjects que sueltas en ella](/docs-images/beasty-save-system/save-manager-dropzone.png)
 

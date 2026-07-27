@@ -41,7 +41,9 @@ The middle section is about which objects get saved.
 ### The drop zone
 
 A box that says **"Drag GameObjects here to make them saveable"**. Drag one or more objects from the
-Hierarchy onto it and each gets a `BeastySaveable` component with a fresh id. It is undoable.
+Hierarchy onto it and each gets a `BeastySaveable` component with a fresh id. The whole drop is **one**
+undo step, however many objects you dragged, and undoing it also reverts the ids that were generated. The
+window repaints right after an undo or redo, so the list you see is always current.
 
 ![The drop zone that turns dragged GameObjects into saveables](/docs-images/beasty-save-system/save-manager-dropzone.png)
 

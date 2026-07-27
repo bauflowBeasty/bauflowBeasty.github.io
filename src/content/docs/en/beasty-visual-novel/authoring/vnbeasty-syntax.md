@@ -46,35 +46,30 @@ label intro:             # a node (DialogueNode by default)
 
 `jump <label>` sets the node's default next node. A dialogue node with no `jump` simply ends.
 
-### Type annotations
+### Node kinds
 
-The node type is inferred from the body, or annotated explicitly on the label line. The annotation is
-always round-tripped.
+A node's header leads with its **kind keyword**, followed by its name. `label` is the plain dialogue
+node — the Ren'Py-familiar form — and every other kind has its own keyword:
 
-| Annotation | Node type | What it is |
+| Header | Node type | What it is |
 |---|---|---|
-| *(none)* | `DialogueNode` | Runs its blocks in order, then goes to its `jump` target. |
-| `(dialogue)` | `DialogueNode` | The explicit form of the default. |
-| `(choice)` | `ChoiceNode` | Holds `choice` lines. See [Choices and decisions](#choices-and-decisions). |
-| `(decision)` | `DecisionNode` | Holds `if` / `else` branches. Invisible to the player. |
-| `(subgraph)` | `SubGraphNode` | Holds `outcome` routes. See [Subgraphs and return](#subgraphs-and-return). |
-| `(return "win")` | `ReturnNode` | Ends a subgraph, returning the quoted outcome key. |
-| `(talkmenu ana)` | `TalkMenuNode` | Opens the talk menu of the named character. See [The talk menu](#the-talk-menu). |
+| `label intro:` | `DialogueNode` | Runs its blocks in order, then goes to its `jump` target. |
+| `dialogue intro:` | `DialogueNode` | The explicit form of `label`. |
+| `choice cruce:` | `ChoiceNode` | Holds `choice` lines. See [Choices and decisions](#choices-and-decisions). |
+| `decision ruta:` | `DecisionNode` | Holds `if` / `else` branches. Invisible to the player. |
+| `subgraph combat:` | `SubGraphNode` | Holds `outcome` routes. See [Subgraphs and return](#subgraphs-and-return). |
+| `return combat/done ("win"):` | `ReturnNode` | Ends a subgraph, returning the quoted outcome key. |
+| `talkmenu charla (ana):` | `TalkMenuNode` | Opens the talk menu of the character in parentheses. See [The talk menu](#the-talk-menu). |
+| `flow to_town:` | `FlowNode` | A transition as its own node. See [Flow and transitions](#flow-and-transitions). |
 
-A label whose **only** line is a `->` flow exit is a `FlowNode`, with no annotation needed. See
-[Flow and transitions](#flow-and-transitions).
+This kind-first form is what the writer emits: a linked script is rewritten to it on the next graph sync.
+A `label` whose **only** line is a `->` flow exit still compiles to a `FlowNode` without needing the `flow`
+keyword.
 
-```text
-label cruce (choice):
-label ruta (decision):
-label combat (subgraph):
-label combat/done (return "win"):
-label charla (talkmenu ana):
-```
-
-A trailing `(...)` on a label line counts as a type annotation only when it names a known type. `label
-Meeting (part 2):` is a node called `Meeting (part 2)`. Quote the label name when it contains `#`, `"`, or
-ends with `)`.
+The previous tag form, `label <name> (choice):`, still parses, so existing scripts keep working — but a
+tag that contradicts the keyword (`choice cruce (decision):`) is an import error. A trailing `(...)`
+counts as a type tag only when it names a known type: `label Meeting (part 2):` is a node called
+`Meeting (part 2)`. Quote the node name when it contains `#`, `"`, or ends with `)`.
 
 ### The id annotation
 
@@ -371,27 +366,28 @@ goto-scene Chapter2 from intro    # ...starting at a given node
 `freeroam <map>/<room>` names the map graph and the room in it.
 
 A bare flow line like the ones above is a **trailing exit block** inside a dialogue node: it runs after the
-node's other blocks. To make the transition its **own node** in the graph — a `FlowNode` — write a label
-whose only line is the exit, prefixed with the route arrow:
+node's other blocks. To make the transition its **own node** in the graph — a `FlowNode` — open a `flow`
+node whose only line is the exit, prefixed with the route arrow:
 
 ```text
-label to_town:
-    -> freeroam town/square      # this label compiles to a FlowNode
+flow to_town:
+    -> freeroam town/square      # a FlowNode
 
-label leave:
+flow leave:
     -> freeroam previous         # any flow exit works: previous / choose <map> / goto-scene …
 ```
 
-Other labels reach it with `jump to_town`, or with `-> to_town` as a choice or branch target. The arrow
-line must be the label's only content. A `->` route to another label is written `jump <label>` instead.
+Other nodes reach it with `jump to_town`, or with `-> to_town` as a choice or branch target. The arrow
+line must be the node's only content; a plain `label` whose only line is a `->` exit also compiles to a
+`FlowNode`. A `->` route to another label is written `jump <label>` instead.
 
 ## Choices and decisions
 
-Choices and decisions live in their **own** `label` and are reached with `jump`. One line per option. The
+Choices and decisions live in their **own** node and are reached with `jump`. One line per option. The
 target after `->` can be another label or a flow exit (`freeroam …` / `goto-scene …`).
 
 ```text
-label cruce (choice):
+choice cruce:
     image crossroads                                             # the side image (see below)
     image crossroads_night if @time:daypart == Night
     choice "Go left" -> cave
@@ -409,7 +405,7 @@ wins, and the plain line is the fallback. Only one `image` line may go without a
 two defaults, and that is an error. A choice node with no `image` line shows no picture.
 
 ```text
-label ruta (decision):           # invisible router (DecisionNode)
+decision ruta:                   # invisible router (DecisionNode)
     if gold > 100 { rich = true } -> rich_end
     if saw_intro -> chapter2
     else -> poor_end             # the fallback branch (empty condition)
@@ -423,28 +419,29 @@ Both `choice` and `if` take an optional condition and an optional effect block, 
 arrow. See [Conditions and effects](#conditions-and-effects).
 
 > **Note**
-> There is no `menu:` block. Write one `choice "text" -> label` line per option inside a `(choice)` node.
+> There is no `menu:` block. Write one `choice "text" -> label` line per option inside a `choice` node.
 
 ## The talk menu
 
 ```text
-label charla (talkmenu ana):
+talkmenu charla (ana):
     default -> after_talk
 ```
 
-A `(talkmenu <character>)` label opens that character's talk menu — the hub of topics you author on the
-character, not here. Its whole body is an optional `default -> <label>`: where the story goes when the
-player closes the menu. The character id is required; an unknown one is reported as a warning.
+A `talkmenu <name> (<character>):` node opens that character's talk menu — the hub of topics you author on
+the character, not here. Its whole body is an optional `default -> <label>`: where the story goes when the
+player closes the menu. The character id in parentheses is required; an unknown one is reported as a
+warning.
 
 See [The talk menu](/docs/beasty-visual-novel/world/talk-menu/) for the topics themselves.
 
 ## Subgraphs and return
 
-A `(subgraph)` node nests a `StoryGraph` made of child labels named `parent/child`. Its body routes the
+A `subgraph` node nests a `StoryGraph` made of child labels named `parent/child`. Its body routes the
 nested outcomes back to the outer graph.
 
 ```text
-label combat (subgraph):
+subgraph combat:
     outcome win -> after_win
     default -> after_combat
 
@@ -452,12 +449,12 @@ label combat/fight:              # a child node (the prefix is the parent label)
     "..."
     jump combat/done
 
-label combat/done (return "win"):  # a ReturnNode; effects via set / toggle
+return combat/done ("win"):      # a ReturnNode; effects via set / toggle
     toggle won_fight
 ```
 
-`outcome <key> -> <label>` routes one outcome key; `default -> <label>` catches the rest. A `(return
-"<key>")` node ends the nested graph and hands that key back. Its `set` and `toggle` lines are the return
+`outcome <key> -> <label>` routes one outcome key; `default -> <label>` catches the rest. A `return <name>
+("<key>"):` node ends the nested graph and hands that key back. Its `set` and `toggle` lines are the return
 node's effects.
 
 Subgraphs nest one level: a child label cannot itself be a subgraph.
@@ -540,7 +537,11 @@ if gold > 100 { rich = true, toggle celebrated } -> rich_end
   because the name may be one you are about to create, but a typo no longer reaches the graph in silence and
   targets a key nothing else uses. Unresolvable *assets* and unknown labels remain errors and refuse the
   import.
-- **Autocompletion.** The Text tab suggests, at the start of a line: `backdrop`, `props`, `image`, `show`,
+- **Autocompletion.** On a header line — column 0 — the Text tab suggests the node-kind keywords (`label`,
+  `choice`, `decision`, `subgraph`, `return`, `talkmenu`, `flow`) plus `scene` and `start`; `start `
+  suggests the script's labels, and `talkmenu ` suggests character ids for its `(<character>)` argument.
+  Header keywords are highlighted in the colour their node kind has in the graph. Inside a node, the Text
+  tab suggests, at the start of a line: `backdrop`, `props`, `image`, `show`,
   `expression`, `hide`, `clear characters`, `jump`, `set`, `toggle`, `dict`, `give`, `take`, `use`, `item`,
   `deliver`, `wait`, `music`, `sound`, `ambient`, `voice`, `stop`, `name`, `ask`, `quest`, `screen`,
   `routine`, `time`, `choice`, `if`, `else`, `default`, `freeroam`, `goto-scene` — plus your character ids,

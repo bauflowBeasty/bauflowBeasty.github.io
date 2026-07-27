@@ -450,6 +450,13 @@
       "captura": "El panel Suggestions abierto con el catálogo de variables, disparado escribiendo una condición a medias (por ejemplo una línea `choice \"…\" if ` con el cursor detrás del `if`). Que la lista enseñe los cuatro grupos mezclados: una variable propia, un campo de personaje con punto (`ana.afecto`), un `item.<id>` y una clave reservada `@time:`. Es la foto que demuestra que al escribir a mano no hay que adivinar cómo se deletrea una clave."
     },
     {
+      "file": "vn-text-suggestions-headers.png",
+      "page": "beasty-visual-novel/authoring/text-script",
+      "prioridad": 2,
+      "vista": "Unity ▸ Tools > Beasty VN > Editor ▸ pestaña Story, modo Text",
+      "captura": "El panel Suggestions abierto en una línea de encabezado: el cursor en la columna 0 de una línea nueva, con la lista ofreciendo las palabras clave de tipo de nodo (label, choice, decision, subgraph, return, talkmenu, flow) más scene y start. Que detrás se vea algún encabezado ya escrito con su palabra clave coloreada con el color del tipo de nodo, para enseñar también el resaltado."
+    },
+    {
       "file": "vn-text-import-report.png",
       "page": "beasty-visual-novel/authoring/text-script",
       "prioridad": 1,
@@ -651,6 +658,13 @@
       "prioridad": 2,
       "vista": "Unity ▸ Tools > Beasty VN > Editor ▸ pestaña Story, inspector del nodo",
       "captura": "Un bloque de audio desplegado con el clip asignado y sus opciones; mejor si al lado hay un bloque de otro canal (Ambient o Sfx) para comparar."
+    },
+    {
+      "file": "vn-background-music-foldout.png",
+      "page": "beasty-visual-novel/production/audio-and-music",
+      "prioridad": 2,
+      "vista": "Unity ▸ Inspector, con el BeastyManager de la escena seleccionado",
+      "captura": "Recorte del inspector del BeastyManager con el desplegable Background Music ABIERTO y el toggle Keep Previous When Empty visible (mejor desactivado, que es el valor con el que una cola vacía significa silencio). Solo el desplegable y un poco de contexto alrededor, no el inspector entero."
     },
     {
       "file": "vn-mixer.png",

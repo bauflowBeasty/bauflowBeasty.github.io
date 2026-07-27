@@ -41,6 +41,9 @@ La pestaña te muestra dos cosas:
 2. **Las entradas propias del personaje** — la lista que mantienes tú. **Create talk menu** crea una primera entrada (un
    "Adiós" que vuelve a la sala); **+ Entry** añade más.
 
+El menú entero también se puede eliminar (**Delete talk menu…**, con confirmación y deshacer), devolviendo
+al personaje a su estado de antes de tener menú de charla. Sus textos localizados se quedan en la tabla.
+
 ### El aviso
 
 La **Prompt line (optional)** es lo que dice el personaje mientras el menú está abierto — "¿Qué necesitas?". Déjala
@@ -132,11 +135,11 @@ clic primero. Consulta [Interactuables y puertas](/es/docs/beasty-visual-novel/w
 e indica de quién es el menú que se muestra. También recibe un **nodo siguiente por defecto**: adónde continúa el
 flujo cuando el menú no encuentra ninguna entrada visible. Esa es la protección contra callejones sin salida — configúrala.
 
-En el guion de texto ese mismo nodo es un label con la anotación `(talkmenu <personaje>)`, y el nodo
-siguiente por defecto es su línea `default ->`:
+En el guion de texto ese mismo nodo es un encabezado `talkmenu` con el id del personaje entre paréntesis,
+y el nodo siguiente por defecto es su línea `default ->`:
 
 ```text
-label charla (talkmenu ana):
+talkmenu charla (ana):
     default -> after_talk
 ```
 

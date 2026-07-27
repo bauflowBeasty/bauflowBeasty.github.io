@@ -12,6 +12,10 @@ them by drilling into a room in the **FreeRoam** tab (`Tools > Beasty VN > Edito
 Remember the split: **the room prefab owns the art and the position; the map graph owns what the thing does.**
 They are linked by name.
 
+Deleting works from the same place: the ✕ on a door or object chip in the room timeline, or the **Delete
+door… / Delete object… / Delete pose…** button in the selected element's inspector. Both ask for
+confirmation first, and both also remove the matching child from the room prefab, in one undo step.
+
 ## Kind and function
 
 A button has a **kind** and a **function** (its action).

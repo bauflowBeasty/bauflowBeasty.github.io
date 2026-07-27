@@ -14,7 +14,7 @@ A scene has two faces, and they are the same scene:
 - **The graph.** A canvas of nodes. Each node is one beat of the story, and inside it a stack of blocks
   runs top to bottom: set a backdrop, show a character, speak a line, change a variable.
 - **The text script.** The same scene written as a `.vnbeasty` file, in a compact Ren'Py-like syntax.
-  `juan (whisper) "psst..."` is a line. `label cruce (choice):` is a choice node.
+  `juan (whisper) "psst..."` is a line. `choice cruce:` is a choice node.
 
 The Story tab has a **Graph / Text** toggle. Write in whichever one suits the moment: block out the
 structure in the graph, then bang out a hundred lines of dialogue as text.

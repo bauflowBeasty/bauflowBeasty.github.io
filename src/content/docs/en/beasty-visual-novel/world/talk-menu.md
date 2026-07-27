@@ -41,6 +41,9 @@ The tab shows you two things:
 2. **The character's own entries** — the list you maintain. **Create talk menu** seeds a first entry (a
    "Goodbye" that returns to the room); **+ Entry** adds more.
 
+The whole menu can be deleted too (**Delete talk menu…**, with confirmation and undo), returning the
+character to its pre-talk-menu state. Its localized texts stay in the table.
+
 ### The prompt
 
 The **Prompt line (optional)** is what the character says while the menu is open — "What do you need?". Leave it
@@ -132,11 +135,11 @@ click first. See [Interactables and doors](/docs/beasty-visual-novel/world/inter
 and say whose menu to show. It also takes a **default next node**: where the flow continues when the menu
 resolves to no visible entries at all. That is the dead-end guard — set it.
 
-In the text script the same node is a label with a `(talkmenu <character>)` annotation, and the default next
-node is its `default ->` line:
+In the text script the same node is a `talkmenu` header with the character id in parentheses, and the
+default next node is its `default ->` line:
 
 ```text
-label charla (talkmenu ana):
+talkmenu charla (ana):
     default -> after_talk
 ```
 

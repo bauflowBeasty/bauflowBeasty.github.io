@@ -70,6 +70,14 @@ un perfil de rutina, un nombre de momento del día o día de la semana, un nombr
 una de las etiquetas ya presentes en el archivo. Las sugerencias se leen en vivo desde el proyecto, así que
 un personaje que añadiste hace un minuto ya está ahí. Haz clic en una sugerencia para insertarla.
 
+Las líneas de encabezado también se completan: en la columna 0 el panel ofrece las palabras clave de tipo
+de nodo (`label`, `choice`, `decision`, `subgraph`, `return`, `talkmenu`, `flow`) más `scene` y `start`;
+después de `start ` ofrece las etiquetas del guion, y después de `talkmenu ` los ids de personaje para su
+argumento `(<personaje>)`. Las palabras clave de encabezado se resaltan con el color que su tipo de nodo
+tiene en el grafo, y la guía **Syntax** muestra las formas de encabezado.
+
+![El panel Suggestions ofreciendo las palabras clave de tipo de nodo en una línea de encabezado](/docs-images/beasty-visual-novel/vn-text-suggestions-headers.png)
+
 Donde va una condición o un efecto, ofrece el catálogo entero de variables: tus propias variables, campos de
 personaje escritos `maya.affection`, recuentos `item.<id>`, tokens de diccionario y las claves reservadas
 `@time:` y `@quest:`. Es la misma lista que enseña el selector de condiciones del grafo, así que al salir
@@ -88,6 +96,11 @@ La barra de herramientas:
 | **Format** | Aplica tus cambios, y luego reescribe el archivo en forma canónica: ordenado, indentado, con las anotaciones de id de nodo actualizadas. |
 | **Syntax** | Muestra u oculta una guía rápida de sintaxis junto al editor. |
 | **Unlink** | Deja de usar el guion. El grafo se queda como está, y el archivo `.vnbeasty` se queda en disco. |
+
+**Save & apply se puede deshacer.** Un solo `Ctrl+Z` —en Unity, no en el editor de texto— restaura el
+grafo entero, sus nodos y los textos de localización a su estado previo a la importación. **Format**,
+enlazar un guion y **Unlink** también se pueden deshacer. Las importaciones automáticas (guardar el
+`.vnbeasty` en un editor externo) no cambian.
 
 Debajo del editor, un cuadro de reporte muestra el resultado de la última importación: qué se aplicó, qué se
 rechazó, y el número de línea de la sentencia problemática. Las advertencias aterrizan ahí también: un
@@ -178,7 +191,7 @@ Dicho claramente, para que no los descubras por las malas.
   escribe `backdrop clear` o `stop music`.
 - **Un archivo es una escena.** Un archivo `.vnbeasty` cubre una única `DialogueScene` y su grafo raíz,
   subgrafos incluidos. Cambia a otra escena con `goto-scene`.
-- **Los subgrafos anidan un solo nivel.** Un label `(subgraph)` posee labels hijos llamados `padre/hijo`; esos
+- **Los subgrafos anidan un solo nivel.** Un nodo `subgraph` posee labels hijos llamados `padre/hijo`; esos
   hijos no pueden ser a su vez subgrafos.
 
 ## Un ejemplo completo
@@ -199,7 +212,7 @@ label morning:
     set trust += 1
     jump offer
 
-label offer (choice):
+choice offer:
     choice "Buy a loaf" if gold >= 3 { gold -= 3, has_bread = true } -> bought
     choice "Just looking" -> polite
     default -> polite

@@ -73,3 +73,15 @@ Behaviour changes made before 1.0.0 ships. Save files written by earlier builds 
   print on every file operation in the editor are now Verbose-only. And probing a slot that does not
   exist — what a save-slot screen does for every empty slot each time it opens — no longer logs a
   warning per slot; a real `Load` of a missing slot still warns.
+- **The asset's internal tests no longer show up in your Test Runner.** The test assembly that ships with
+  the package now compiles only when the `BEASTY_DEV_TOOLS` scripting define is set, so importing the asset
+  no longer fills the Test Runner window with its internal tests. To run them, add `BEASTY_DEV_TOOLS` under
+  `Project Settings ▸ Player ▸ Scripting Define Symbols`.
+- **The Save Manager window plays nice with undo.** "Create Beasty Save Manager" can be undone and redone;
+  dragging several GameObjects in adds all their `BeastySaveable` components as ONE undo step (and undo also
+  reverts the ids generated for them); and the window repaints right after an undo/redo instead of showing a
+  stale list until the next mouse move.
+- **The package no longer ships its own license file.** `BeastySaveSystem_LICENSE.md` is gone: an asset bought
+  on the Unity Asset Store is licensed under the Asset Store EULA (https://unity.com/legal/as-terms), and an
+  independent license inside the package conflicts with it. `Third-Party Notices.txt` now points to that
+  EULA. Copies bought on itch.io get their own license file, added to the itch download at packaging time.

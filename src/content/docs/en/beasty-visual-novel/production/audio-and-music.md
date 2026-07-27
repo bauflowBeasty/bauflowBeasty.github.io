@@ -72,7 +72,7 @@ Each queue has four fields:
 
 | Field | Meaning |
 |---|---|
-| `clips` | The clips, in order. An empty queue means "no background music here". |
+| `clips` | The clips, in order. An empty queue means "no background music here" — entering that mode fades the music out. |
 | `mode` | How they are sequenced. |
 | `volume` | The queue's own volume (0-1), composed with the player's Music slider. |
 | `crossfadeSeconds` | The crossfade when the queue starts, and between its tracks. |
@@ -89,6 +89,13 @@ The play modes:
 The controller listens to the app mode and plays the matching queue. Re-entering a mode that is already
 playing its queue does not restart it — walking through a house whose rooms share the same music does not jump
 the track back to bar one.
+
+**An empty queue means silence.** Entering a mode whose queue has no clips fades the previous mode's music
+out instead of letting it play on — clips assigned only to the main menu do not keep sounding over gameplay.
+To deliberately carry the previous music across a mode change, enable **Keep Previous When Empty** on the
+controller, in the Beasty Manager inspector under the **Background Music** foldout.
+
+![The Background Music foldout on the Beasty Manager, with Keep Previous When Empty](/docs-images/beasty-visual-novel/vn-background-music-foldout.png)
 
 ## Overrides: a room, or a story
 

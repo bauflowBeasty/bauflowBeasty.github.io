@@ -48,35 +48,32 @@ label intro:             # un nodo (DialogueNode por defecto)
 `jump <label>` fija cuál es el siguiente nodo por defecto. Un nodo de diálogo sin `jump` simplemente
 termina.
 
-### Anotaciones de tipo
+### Tipos de nodo
 
-El tipo de nodo se infiere del cuerpo, o se anota explícitamente en la línea del label. La anotación siempre
-se conserva en el ida y vuelta.
+El encabezado de un nodo empieza por su **palabra clave de tipo**, seguida de su nombre. `label` es el nodo
+de diálogo normal —la forma familiar de Ren'Py— y cada uno de los demás tipos tiene su propia palabra
+clave:
 
-| Anotación | Tipo de nodo | Qué es |
+| Encabezado | Tipo de nodo | Qué es |
 |---|---|---|
-| *(ninguna)* | `DialogueNode` | Ejecuta sus bloques en orden, y luego va a su destino `jump`. |
-| `(dialogue)` | `DialogueNode` | La forma explícita del valor por defecto. |
-| `(choice)` | `ChoiceNode` | Contiene líneas `choice`. Consulta [Elecciones y decisiones](#elecciones-y-decisiones). |
-| `(decision)` | `DecisionNode` | Contiene ramas `if` / `else`. Invisible para el jugador. |
-| `(subgraph)` | `SubGraphNode` | Contiene rutas `outcome`. Consulta [Subgrafos y retorno](#subgrafos-y-retorno). |
-| `(return "win")` | `ReturnNode` | Termina un subgrafo, devolviendo la clave de resultado entre comillas. |
-| `(talkmenu ana)` | `TalkMenuNode` | Abre el menú de conversación del personaje que nombra. Consulta [El menú de conversación](#el-menú-de-conversación). |
+| `label intro:` | `DialogueNode` | Ejecuta sus bloques en orden, y luego va a su destino `jump`. |
+| `dialogue intro:` | `DialogueNode` | La forma explícita de `label`. |
+| `choice cruce:` | `ChoiceNode` | Contiene líneas `choice`. Consulta [Elecciones y decisiones](#elecciones-y-decisiones). |
+| `decision ruta:` | `DecisionNode` | Contiene ramas `if` / `else`. Invisible para el jugador. |
+| `subgraph combat:` | `SubGraphNode` | Contiene rutas `outcome`. Consulta [Subgrafos y retorno](#subgrafos-y-retorno). |
+| `return combat/done ("win"):` | `ReturnNode` | Termina un subgrafo, devolviendo la clave de resultado entre comillas. |
+| `talkmenu charla (ana):` | `TalkMenuNode` | Abre el menú de conversación del personaje entre paréntesis. Consulta [El menú de conversación](#el-menú-de-conversación). |
+| `flow to_town:` | `FlowNode` | Una transición como nodo propio. Consulta [Flujo y transiciones](#flujo-y-transiciones). |
 
-Un label cuya **única** línea es una salida de flujo `->` es un `FlowNode`, sin necesidad de anotación.
-Consulta [Flujo y transiciones](#flujo-y-transiciones).
+Esta forma con el tipo delante es la que emite el escritor: un guion enlazado se reescribe a ella en la
+siguiente sincronización con el grafo. Un `label` cuya **única** línea es una salida de flujo `->` sigue
+compilando a un `FlowNode` sin necesidad de la palabra clave `flow`.
 
-```text
-label cruce (choice):
-label ruta (decision):
-label combat (subgraph):
-label combat/done (return "win"):
-label charla (talkmenu ana):
-```
-
-Un `(...)` al final de una línea de label cuenta como anotación de tipo solo cuando nombra un tipo conocido.
-`label Meeting (part 2):` es un nodo llamado `Meeting (part 2)`. Entrecomilla el nombre del label cuando
-contenga `#`, `"`, o termine en `)`.
+La forma anterior con etiqueta, `label <nombre> (choice):`, se sigue parseando, así que los guiones
+existentes siguen funcionando — pero una etiqueta que contradice la palabra clave
+(`choice cruce (decision):`) es un error de importación. Un `(...)` al final cuenta como etiqueta de tipo
+solo cuando nombra un tipo conocido: `label Meeting (part 2):` es un nodo llamado `Meeting (part 2)`.
+Entrecomilla el nombre del nodo cuando contenga `#`, `"`, o termine en `)`.
 
 ### La anotación de id
 
@@ -376,27 +373,29 @@ goto-scene Chapter2 from intro    # ...empezando en un nodo concreto
 
 Una línea de flujo suelta como las de arriba es un **bloque de salida al final** dentro de un nodo de
 diálogo: se ejecuta después de los demás bloques del nodo. Para hacer que la transición sea **su propio
-nodo** en el grafo —un `FlowNode`— escribe un label cuya única línea sea la salida, con el prefijo de la
+nodo** en el grafo —un `FlowNode`— abre un nodo `flow` cuya única línea sea la salida, con el prefijo de la
 flecha de ruta:
 
 ```text
-label to_town:
-    -> freeroam town/square      # este label compila a un FlowNode
+flow to_town:
+    -> freeroam town/square      # un FlowNode
 
-label leave:
+flow leave:
     -> freeroam previous         # cualquier salida de flujo funciona: previous / choose <map> / goto-scene …
 ```
 
-Otros labels lo alcanzan con `jump to_town`, o con `-> to_town` como destino de una choice o una rama. Para
-ir a otro label, en cambio, no se usa la ruta `->`: se escribe `jump <label>`.
+Otros nodos lo alcanzan con `jump to_town`, o con `-> to_town` como destino de una choice o una rama. La
+línea de la flecha debe ser el único contenido del nodo; un `label` normal cuya única línea sea una salida
+`->` también compila a un `FlowNode`. Para ir a otro label, en cambio, no se usa la ruta `->`: se escribe
+`jump <label>`.
 
 ## Elecciones y decisiones
 
-Las elecciones y decisiones viven en su **propio** `label` y se alcanzan con `jump`. Una línea por opción.
+Las elecciones y decisiones viven en su **propio** nodo y se alcanzan con `jump`. Una línea por opción.
 El destino después de `->` puede ser otro label o una salida de flujo (`freeroam …` / `goto-scene …`).
 
 ```text
-label cruce (choice):
+choice cruce:
     image crossroads                                             # la imagen lateral (ver abajo)
     image crossroads_night if @time:daypart == Night
     choice "Go left" -> cave
@@ -415,7 +414,7 @@ condición —dos serían dos imágenes por defecto, y eso es un error—. Un no
 `image` no muestra imagen.
 
 ```text
-label ruta (decision):           # enrutador invisible (DecisionNode)
+decision ruta:                   # enrutador invisible (DecisionNode)
     if gold > 100 { rich = true } -> rich_end
     if saw_intro -> chapter2
     else -> poor_end             # la rama de fallback (condición vacía)
@@ -430,29 +429,29 @@ de la flecha. Consulta [Condiciones y efectos](#condiciones-y-efectos).
 
 > **Nota**
 > No hay un bloque `menu:`. Escribe una línea `choice "text" -> label` por opción dentro de un nodo
-> `(choice)`.
+> `choice`.
 
 ## El menú de conversación
 
 ```text
-label charla (talkmenu ana):
+talkmenu charla (ana):
     default -> after_talk
 ```
 
-Un label `(talkmenu <personaje>)` abre el menú de conversación de ese personaje: el centro de temas que se
-redacta en el personaje, no aquí. Todo su cuerpo es un `default -> <label>` opcional, que indica por dónde
-sigue la historia cuando el jugador cierra el menú. El id de personaje es obligatorio; si no existe, se avisa
-con una advertencia.
+Un nodo `talkmenu <nombre> (<personaje>):` abre el menú de conversación de ese personaje: el centro de
+temas que se redacta en el personaje, no aquí. Todo su cuerpo es un `default -> <label>` opcional, que
+indica por dónde sigue la historia cuando el jugador cierra el menú. El id de personaje entre paréntesis es
+obligatorio; si no existe, se avisa con una advertencia.
 
 Consulta [El menú de conversación](/es/docs/beasty-visual-novel/world/talk-menu/) para los temas en sí.
 
 ## Subgrafos y retorno
 
-Un nodo `(subgraph)` anida un `StoryGraph` formado por labels hijos llamados `padre/hijo`. Su cuerpo enruta
+Un nodo `subgraph` anida un `StoryGraph` formado por labels hijos llamados `padre/hijo`. Su cuerpo enruta
 los resultados anidados de vuelta al grafo exterior.
 
 ```text
-label combat (subgraph):
+subgraph combat:
     outcome win -> after_win
     default -> after_combat
 
@@ -460,13 +459,13 @@ label combat/fight:              # un nodo hijo (el prefijo es el label padre)
     "..."
     jump combat/done
 
-label combat/done (return "win"):  # un ReturnNode; efectos vía set / toggle
+return combat/done ("win"):      # un ReturnNode; efectos vía set / toggle
     toggle won_fight
 ```
 
 `outcome <key> -> <label>` enruta una clave de resultado; `default -> <label>` recoge el resto. Un nodo
-`(return "<key>")` termina el grafo anidado y devuelve esa clave. Sus líneas `set` y `toggle` son los
-efectos del nodo de retorno.
+`return <nombre> ("<clave>"):` termina el grafo anidado y devuelve esa clave. Sus líneas `set` y `toggle`
+son los efectos del nodo de retorno.
 
 Los subgrafos anidan un solo nivel: un label hijo no puede ser a su vez un subgrafo.
 
@@ -549,7 +548,12 @@ if gold > 100 { rich = true, toggle celebrated } -> rich_end
   importación sigue adelante, porque puede ser un nombre que estás a punto de crear—, pero ya no llega al
   grafo en silencio apuntando a una clave que no usa nadie más. Los *assets* que no se resuelven y los
   labels inexistentes siguen siendo errores y rechazan la importación.
-- **Autocompletado.** La pestaña Text sugiere, al inicio de una línea: `backdrop`, `props`, `image`, `show`,
+- **Autocompletado.** En una línea de encabezado —columna 0— la pestaña Text sugiere las palabras clave de
+  tipo de nodo (`label`, `choice`, `decision`, `subgraph`, `return`, `talkmenu`, `flow`) más `scene` y
+  `start`; `start ` sugiere las etiquetas del guion, y `talkmenu ` sugiere ids de personaje para su
+  argumento `(<personaje>)`. Las palabras clave de encabezado se resaltan con el color que su tipo de nodo
+  tiene en el grafo. Dentro de un nodo, la pestaña Text sugiere, al inicio de una línea: `backdrop`,
+  `props`, `image`, `show`,
   `expression`, `hide`, `clear characters`, `jump`, `set`, `toggle`, `dict`, `give`, `take`, `use`, `item`,
   `deliver`, `wait`, `music`, `sound`, `ambient`, `voice`, `stop`, `name`, `ask`, `quest`, `screen`,
   `routine`, `time`, `choice`, `if`, `else`, `default`, `freeroam`, `goto-scene` —además de tus ids de

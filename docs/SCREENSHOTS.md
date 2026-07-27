@@ -15,10 +15,10 @@ que el sitio nunca muestra una imagen rota.
 
 | | Total | Tomadas | Pendientes |
 |---|---:|---:|---:|
-| P1 · imprescindibles | 79 | 9 | 70 |
-| P2 · recomendadas | 75 | 8 | 67 |
-| P3 · complementarias | 31 | 3 | 28 |
-| **Total** | **185** | **20** | **165** |
+| P1 · imprescindibles | 79 | 19 | 60 |
+| P2 · recomendadas | 77 | 17 | 60 |
+| P3 · complementarias | 31 | 7 | 24 |
+| **Total** | **187** | **43** | **144** |
 
 **Prioridades.** P1 es donde el texto solo no basta: la ventana principal y sus pestañas, los
 asistentes, las grillas y las pantallas que ve el jugador. P2 completa una página que ya se entiende.
@@ -38,7 +38,7 @@ P3 es un extra: si no la tomas, no se nota.
 
 ## Beasty Visual Novel
 
-Carpeta destino: `public/docs-images/beasty-visual-novel/` · 129 pendientes de 149.
+Carpeta destino: `public/docs-images/beasty-visual-novel/` · 108 pendientes de 151.
 
 ### Blocks reference · Referencia de bloques
 
@@ -224,19 +224,25 @@ Carpeta destino: `public/docs-images/beasty-visual-novel/` · 129 pendientes de 
 
 `/docs/beasty-visual-novel/authoring/text-script/` — `/es/docs/beasty-visual-novel/authoring/text-script/`
 
-#### `vn-vnbeasty-file.png` — P3 · ⬜ pendiente
+#### `vn-vnbeasty-file.png` — P3 · ✅ tomada
 
 - **Sección:** What it is · Qué es
 - **Vista:** Tu editor de código (VS Code o el que uses)
 - **Qué tiene que verse:** Un `.vnbeasty` real abierto fuera de Unity, con una escena de veinte o treinta líneas. Es la prueba de que el guionista puede trabajar sin abrir Unity.
 
-#### `vn-text-tab.png` — P1 · ⬜ pendiente
+#### `vn-text-tab.png` — P1 · ✅ tomada
 
 - **Sección:** Turning it on · Activarlo
 - **Vista:** Unity ▸ Tools > Beasty VN > Editor ▸ pestaña Story, modo Text
 - **Qué tiene que verse:** La pestaña Story cambiada a Text: el alternador Graph / Text bien visible arriba y el editor con una escena escrita de verdad (varias líneas de diálogo, una elección), no dos líneas sueltas.
 
-#### `vn-text-suggestions-variables.png` — P1 · ⬜ pendiente
+#### `vn-text-suggestions-headers.png` — P2 · ⬜ pendiente
+
+- **Sección:** The Text tab · La pestaña Text
+- **Vista:** Unity ▸ Tools > Beasty VN > Editor ▸ pestaña Story, modo Text
+- **Qué tiene que verse:** El panel Suggestions abierto en una línea de encabezado: el cursor en la columna 0 de una línea nueva, con la lista ofreciendo las palabras clave de tipo de nodo (label, choice, decision, subgraph, return, talkmenu, flow) más scene y start. Que detrás se vea algún encabezado ya escrito con su palabra clave coloreada con el color del tipo de nodo, para enseñar también el resaltado.
+
+#### `vn-text-suggestions-variables.png` — P1 · ✅ tomada
 
 - **Sección:** The Text tab · La pestaña Text
 - **Vista:** Unity ▸ Tools > Beasty VN > Editor ▸ pestaña Story, modo Text
@@ -258,13 +264,13 @@ Carpeta destino: `public/docs-images/beasty-visual-novel/` · 129 pendientes de 
 
 `/docs/beasty-visual-novel/authoring/transitions/` — `/es/docs/beasty-visual-novel/authoring/transitions/`
 
-#### `vn-flow-blocks.png` — P2 · ⬜ pendiente
+#### `vn-flow-blocks.png` — P2 · ✅ tomada
 
 - **Sección:** The four exits · Las cuatro salidas
 - **Vista:** Unity ▸ Tools > Beasty VN > Editor ▸ pestaña Story, panel izquierdo
 - **Qué tiene que verse:** Recorte de la paleta con la categoría Flow desplegada y sus cuatro bloques legibles (Go to FreeRoam, Return to room, Choose room, Go to VN scene).
 
-#### `vn-flow-node.png` — P3 · ⬜ pendiente
+#### `vn-flow-node.png` — P3 · ✅ tomada
 
 - **Sección:** A dedicated Flow node · Un nodo Flow dedicado
 - **Vista:** Unity ▸ Tools > Beasty VN > Editor ▸ pestaña Story
@@ -274,13 +280,13 @@ Carpeta destino: `public/docs-images/beasty-visual-novel/` · 129 pendientes de 
 
 `/docs/beasty-visual-novel/getting-started/core-concepts/` — `/es/docs/beasty-visual-novel/getting-started/core-concepts/`
 
-#### `vn-context-inspector.png` — P2 · ⬜ pendiente
+#### `vn-context-inspector.png` — P2 · ✅ tomada
 
 - **Sección:** VNContext - the one shared world · VNContext - el único mundo compartido
 - **Vista:** Unity ▸ Inspector, con el asset VNContext seleccionado
 - **Qué tiene que verse:** El inspector del VNContext con sus campos llenos (tabla de localización, personajes, ítems, catálogo de misiones, idiomas). La idea que ilustra es «esto es lo único que comparten todas las escenas».
 
-#### `vn-beastymanager-inspector.png` — P2 · ⬜ pendiente
+#### `vn-beastymanager-inspector.png` — P2 · ✅ tomada
 
 - **Sección:** BeastyManager - the one object · BeastyManager - el único objeto
 - **Vista:** Unity ▸ Inspector, con el BeastyManager de la escena seleccionado
@@ -290,73 +296,73 @@ Carpeta destino: `public/docs-images/beasty-visual-novel/` · 129 pendientes de 
 
 `/docs/beasty-visual-novel/getting-started/editor-tour/` — `/es/docs/beasty-visual-novel/getting-started/editor-tour/`
 
-#### `vn-editor-top-bar.png` — P1 · ⬜ pendiente
+#### `vn-editor-top-bar.png` — P1 · ✅ tomada
 
 - **Sección:** The top bar · La barra superior
 - **Vista:** Unity ▸ Tools > Beasty VN > Editor
 - **Qué tiene que verse:** Recorte de la franja superior de la ventana, con el campo DialogueScene y el campo Context RELLENOS (con nombres reconocibles) y los tres botones de acción visibles sin colapsar en el menú `...`. Ensancha la ventana antes de capturar.
 
-#### `vn-editor-tabs.png` — P1 · ⬜ pendiente
+#### `vn-editor-tabs.png` — P1 · ✅ tomada
 
 - **Sección:** The nine tabs · Las nueve pestañas
 - **Vista:** Unity ▸ Tools > Beasty VN > Editor
 - **Qué tiene que verse:** Recorte de la fila de pestañas con las nueve visibles y legibles (Story, Characters, Variables, Localization, Dictionary, Music, FreeRoam, Screens, Items), con Story seleccionada. Es el índice visual de toda la herramienta.
 
-#### `vn-tab-characters.png` — P2 · ⬜ pendiente
+#### `vn-tab-characters.png` — P2 · ✅ tomada
 
 - **Sección:** Characters · Characters
 - **Vista:** Unity ▸ Tools > Beasty VN > Editor ▸ pestaña Characters
 - **Qué tiene que verse:** La pestaña completa con las cuatro sub-pestañas visibles (Cast, Variables, Quests, Talk Menu) y la lista del reparto a la izquierda con varios personajes. Aquí interesa el conjunto; el detalle de Cast ya tiene su propia captura.
 
-#### `vn-tab-variables.png` — P1 · ⬜ pendiente
+#### `vn-tab-variables.png` — P1 · ✅ tomada
 
 - **Sección:** Variables · Variables
 - **Vista:** Unity ▸ Tools > Beasty VN > Editor ▸ pestaña Variables
 - **Qué tiene que verse:** La pestaña con media docena de variables de tipos distintos (Int, Bool, String, Enum) en la lista de la izquierda y una seleccionada a la derecha, con su clave, tipo, kind y valor por defecto a la vista.
 
-#### `vn-tab-localization.png` — P1 · ⬜ pendiente
+#### `vn-tab-localization.png` — P1 · ✅ tomada
 
 - **Sección:** Localization · Localization
 - **Vista:** Unity ▸ Tools > Beasty VN > Editor ▸ pestaña Localization
 - **Qué tiene que verse:** La pestaña entera con el alternador Story / UI (global) arriba bien visible y la grilla debajo con dos o tres idiomas. Vista general: los detalles de la grilla tienen sus propias capturas.
 
-#### `vn-tab-dictionary.png` — P2 · ⬜ pendiente
+#### `vn-tab-dictionary.png` — P2 · ✅ tomada
 
 - **Sección:** Dictionary · Dictionary
 - **Vista:** Unity ▸ Tools > Beasty VN > Editor ▸ pestaña Dictionary
 - **Qué tiene que verse:** La pestaña con dos o tres tokens creados (por ejemplo el nombre del jugador y su ciudad), con clave, valor por defecto y la marca de editable por el jugador a la vista.
 
-#### `vn-tab-music.png` — P2 · ⬜ pendiente
+#### `vn-tab-music.png` — P2 · ✅ tomada
 
 - **Sección:** Music · Music
 - **Vista:** Unity ▸ Tools > Beasty VN > Editor ▸ pestaña Music
 - **Qué tiene que verse:** La pestaña con las colas de los modos (menú principal, novela visual, mundo libre) y al menos una con clips asignados, para que se vean el modo de reproducción, el volumen y el crossfade.
 
-#### `vn-tab-freeroam-map.png` — P1 · ⬜ pendiente
+#### `vn-tab-freeroam-map.png` — P1 · ✅ tomada
 
 - **Sección:** FreeRoam · FreeRoam
 - **Vista:** Unity ▸ Tools > Beasty VN > Editor ▸ pestaña FreeRoam, modo Map
 - **Qué tiene que verse:** El mapa con cuatro o cinco salas conectadas por puertas, la sala de entrada marcada, y el alternador Map / Routines visible en la barra de herramientas.
 
-#### `vn-tab-screens.png` — P1 · ⬜ pendiente
+#### `vn-tab-screens.png` — P1 · ✅ tomada
 
 - **Sección:** Screens · Screens
 - **Vista:** Unity ▸ Tools > Beasty VN > Editor ▸ pestaña Screens
 - **Qué tiene que verse:** La pestaña con la lista de pantallas a la izquierda (al menos un HUD primario y un par de secundarias, entre ellas el inventario), una seleccionada, y la vista previa de su prefab a la derecha.
 
-#### `vn-tab-items.png` — P1 · ⬜ pendiente
+#### `vn-tab-items.png` — P1 · ✅ tomada
 
 - **Sección:** Items · Items
 - **Vista:** Unity ▸ Tools > Beasty VN > Editor ▸ pestaña Items
 - **Qué tiene que verse:** La pestaña con varios ítems en la lista (una llave y un par de consumibles) y uno seleccionado, con su id, icono, kind, cantidad máxima y claves de nombre y descripción visibles.
 
-#### `vn-character-database-window.png` — P3 · ⬜ pendiente
+#### `vn-character-database-window.png` — P3 · ✅ tomada
 
 - **Sección:** Character Database · Character Database
 - **Vista:** Unity ▸ Tools > Beasty VN > Content > Character Database
 - **Qué tiene que verse:** La ventana de Character Database acoplada AL LADO de la ventana principal con el grafo abierto, que es justo el escenario que justifica su existencia.
 
-#### `vn-global-settings.png` — P1 · ⬜ pendiente
+#### `vn-global-settings.png` — P1 · ✅ tomada
 
 - **Sección:** Global Settings · Global Settings
 - **Vista:** Unity ▸ Tools > Beasty VN > Settings > Global Settings
@@ -366,13 +372,13 @@ Carpeta destino: `public/docs-images/beasty-visual-novel/` · 129 pendientes de 
 
 `/docs/beasty-visual-novel/getting-started/installation/` — `/es/docs/beasty-visual-novel/getting-started/installation/`
 
-#### `vn-import-package.png` — P3 · ⬜ pendiente
+#### `vn-import-package.png` — P3 · ✅ tomada
 
 - **Sección:** Importing · Importación
 - **Vista:** Unity ▸ diálogo Import Unity Package
 - **Qué tiene que verse:** El diálogo de importación con el árbol del paquete a la vista y todo marcado. Sirve para que se vea que se importa entero, sin decisiones que tomar.
 
-#### `vn-package-folder.png` — P2 · ⬜ pendiente
+#### `vn-package-folder.png` — P2 · ✅ tomada
 
 - **Sección:** What is in the package · Qué contiene el paquete
 - **Vista:** Unity ▸ ventana Project
@@ -440,11 +446,17 @@ Carpeta destino: `public/docs-images/beasty-visual-novel/` · 129 pendientes de 
 - **Vista:** Unity ▸ Tools > Beasty VN > Editor ▸ pestaña Story, inspector del nodo
 - **Qué tiene que verse:** Un bloque de audio desplegado con el clip asignado y sus opciones; mejor si al lado hay un bloque de otro canal (Ambient o Sfx) para comparar.
 
-#### `vn-tab-music.png` — P2 · ⬜ pendiente
+#### `vn-tab-music.png` — P2 · ✅ tomada
 
 - **Sección:** Background music per app mode · Música de fondo por modo de app
 - **Vista:** Unity ▸ Tools > Beasty VN > Editor ▸ pestaña Music
 - **Qué tiene que verse:** Reutiliza la captura de la pestaña Music del recorrido por el editor.
+
+#### `vn-background-music-foldout.png` — P2 · ⬜ pendiente
+
+- **Sección:** Background music per app mode · Música de fondo por modo de app
+- **Vista:** Unity ▸ Inspector, con el BeastyManager de la escena seleccionado
+- **Qué tiene que verse:** Recorte del inspector del BeastyManager con el desplegable Background Music ABIERTO y el toggle Keep Previous When Empty visible (mejor desactivado, que es el valor con el que una cola vacía significa silencio). Solo el desplegable y un poco de contexto alrededor, no el inspector entero.
 
 ### Building and platforms · Compilación y plataformas
 
@@ -1000,7 +1012,7 @@ Carpeta destino: `public/docs-images/beasty-visual-novel/` · 129 pendientes de 
 
 `/docs/beasty-visual-novel/world/screens-and-hud/` — `/es/docs/beasty-visual-novel/world/screens-and-hud/`
 
-#### `vn-tab-screens.png` — P2 · ⬜ pendiente
+#### `vn-tab-screens.png` — P2 · ✅ tomada
 
 - **Sección:** Two kinds of screen · Dos tipos de pantalla
 - **Vista:** Unity ▸ Tools > Beasty VN > Editor ▸ pestaña Screens

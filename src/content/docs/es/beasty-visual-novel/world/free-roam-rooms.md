@@ -29,6 +29,9 @@ el asset y haciendo clic en **Open in Beasty VN (FreeRoam tab)**.
 > fondo, los objetos, las puertas — lo editas **entrando en la sala**: haz doble clic en ella. Las líneas
 > entre salas son de solo lectura; representan las puertas que existen dentro de las salas.
 
+Eliminar una sala también ofrece eliminar su **asset de prefab de sala**, para que el prefab no se quede
+huérfano en el proyecto. Eliminar el asset no se puede deshacer — el aviso lo dice antes de que confirmes.
+
 ## Qué es una sala
 
 ![Los ajustes de una sala tras entrar en ella](/docs-images/beasty-visual-novel/vn-room-settings.png)

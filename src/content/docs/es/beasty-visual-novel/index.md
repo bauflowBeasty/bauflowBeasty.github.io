@@ -14,7 +14,7 @@ Una escena tiene dos caras, y son la misma escena:
 - **El grafo.** Un lienzo de nodos. Cada nodo es un beat de la historia, y dentro de él una pila de bloques
   se ejecuta de arriba a abajo: fija un backdrop, muestra un personaje, dice una línea, cambia una variable.
 - **El script de texto.** La misma escena escrita como un archivo `.vnbeasty`, en una sintaxis compacta
-  similar a Ren'Py. `juan (whisper) "psst..."` es una línea. `label cruce (choice):` es un nodo de elección.
+  similar a Ren'Py. `juan (whisper) "psst..."` es una línea. `choice cruce:` es un nodo de elección.
 
 La pestaña Story tiene un alternador **Graph / Text**. Escribe en el que mejor se ajuste al momento: esboza la
 estructura en el grafo, y luego escribe a toda velocidad cien líneas de diálogo como texto.

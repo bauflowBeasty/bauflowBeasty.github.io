@@ -50,6 +50,11 @@ routine maya            # back to the default profile
 
 Como el modo de rutina es una variable ordinaria, se guarda, se carga y se rebobina con todo lo demás.
 
+Un perfil que ya no necesitas se puede eliminar desde el selector de perfil (**Delete profile…**, con
+confirmación); el perfil `Default` integrado se queda. Una rutina de personaje que queda completamente
+vacía — sin colocaciones, sin respaldo, sin diálogos de interacción — se poda automáticamente del grafo del
+mapa, en el mismo paso de deshacer que la eliminación que la vació.
+
 ## Reglas: gana la primera coincidencia
 
 Un perfil contiene una lista ordenada de **reglas** y un **respaldo**. Cada regla es una condición más una sala.

@@ -5,15 +5,15 @@ description: "Todos los cambios relevantes de Beasty Console, versión por versi
 
 Todos los cambios relevantes de Beasty Console. Este proyecto sigue [Semantic Versioning](https://semver.org/).
 
-## 1.0.0 — sin publicar
+## 1.0.0 — 27 de julio de 2026
 
 Primera versión pública.
 
 ### API de logging
 
-- Once niveles semánticos en una sola clase estática — info, verbose, trace, debug, notice, highlight,
-  caution, success, warning, error y exception — para que un mensaje diga qué clase de mensaje es en el
-  mismo punto donde lo escribes.
+- Once niveles semánticos en una sola clase estática, `BeastyConsole` (espacio de nombres
+  `BeastyConsoleLogger`) — info, verbose, trace, debug, notice, highlight, caution, success, warning, error
+  y exception — para que un mensaje diga qué clase de mensaje es en el mismo punto donde lo escribes.
 - Solo warning, error y exception elevan la severidad de Unity. `LogCaution` es un aviso suave: no dispara
   Error Pause ni aparece como advertencia en la consola de Unity.
 - Etiquetas con color y glifo en el editor, y en ASCII plano en una build, para que el `Player.log` del
@@ -40,22 +40,6 @@ Primera versión pública.
   presente, pero ninguno de los dos paquetes necesita al otro: ambos se pueden comprar e importar por
   separado.
 - Mono e IL2CPP.
-
-### Cambios previos a la publicación
-
-Cambios de comportamiento hechos antes de que salga la 1.0.0.
-
-- **El asset ahora se llama Beasty Console**, no Beasty Debug Logger. La clase que llamas es `BeastyConsole`
-  (antes `BeastyDebugLogger`), en el espacio de nombres `BeastyConsoleLogger` (antes
-  `BeastyDebugLoggerConsole`); los ensamblados son `Beasty.Console` y `Beasty.Console.Editor` (antes
-  `Beasty.DebugLogger` y `Beasty.DebugLogger.Editor`); y la carpeta es
-  `Assets/BeastyComponents/BeastyConsole` (**breaking**: hay que renombrar el `using BeastyDebugLoggerConsole;`
-  y cada llamada `BeastyDebugLogger.Log*`). Los nombres y firmas de los métodos, y la ventana de consola en
-  sí, no cambian.
-- **La detección por reflexión sigue el nombre nuevo.** Beasty Save System ahora busca
-  `BeastyConsoleLogger.BeastyConsole, Beasty.Console`, así que sus logs siguen llegando a esta ventana. Una
-  copia del save system de una build anterior busca el ensamblado viejo, no lo encuentra, y cae a la consola
-  de Unity hasta que también se actualice.
-- **La consola tiene su propio menú.** Ahora se abre desde `Tools > Beasty Console > Console` (antes
-  `Tools > Beasty VN > Diagnostics > Console`): Beasty Console es un asset independiente, así que ya no
-  cuelga del menú de Beasty VN y se puede abrir en un proyecto que no tenga Beasty Visual Novel.
+- **Licencia.** Una copia comprada en la Unity Asset Store se licencia bajo el EULA de la Asset Store
+  (https://unity.com/legal/as-terms); `Third-Party Notices.txt` apunta a él. Una copia comprada en itch.io
+  incluye su propio archivo de licencia.

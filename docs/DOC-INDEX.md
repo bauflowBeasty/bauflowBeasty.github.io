@@ -8,7 +8,7 @@
 **Identificadores.** `SS/guides/logging` es `src/content/docs/en/beasty-save-system/guides/logging.md`,
 y su espejo español es el mismo archivo bajo `es/`. Siglas: `BC` = beasty-console · `SS` = beasty-save-system · `VN` = beasty-visual-novel.
 
-Cobertura: **85 páginas** EN (y sus 85 espejos ES), **655 símbolos** indexados.
+Cobertura: **85 páginas** EN (y sus 85 espejos ES), **654 símbolos** indexados.
 
 ## Páginas
 
@@ -16,7 +16,7 @@ Cobertura: **85 páginas** EN (y sus 85 espejos ES), **655 símbolos** indexados
 
 | Página | Título | Secciones |
 |---|---|---|
-| `BC/changelog` | Changelog | 1.0.0 — unreleased |
+| `BC/changelog` | Changelog | 1.0.0 — 2026-07-27 |
 | `BC/faq` | FAQ | Does it replace Unity's Console? · Does it write a log file? · Does it cost performance in a release build? · Do I need the other Beasty packages? · Can I add my own level? · Why is my message missing a piece? · Why did my logs disappear? · The console used to be under the Beasty VN menu. Where is it now? |
 | `BC/getting-started` | Getting started | Requirements · Import · Your first log · Open the console · Next |
 | `BC/guides/beasty-integration` | Working with the other Beasty packages | Beasty Visual Novel · Beasty Save System · See also |
@@ -157,6 +157,7 @@ Cobertura: **85 páginas** EN (y sus 85 espejos ES), **655 símbolos** indexados
 | `Backup` | SS/guides/backups-and-corruption SS/guides/settings |
 | `BackupAvailable` | SS/faq SS/getting-started/save-with-code SS/guides/backups-and-corruption SS/reference/results-and-errors SS/troubleshooting |
 | `Bakery` | VN/world/character-routines |
+| `BEASTY_DEV_TOOLS` | SS/changelog VN/changelog |
 | `Beasty_SaveSystem` | SS/reference/components |
 | `Beasty_SaveSystem.BeastySave` | SS/advanced/custom-converters |
 | `Beasty_SaveSystemCore.BeastySaveError` | SS/reference/results-and-errors |
@@ -165,8 +166,6 @@ Cobertura: **85 páginas** EN (y sus 85 espejos ES), **655 símbolos** indexados
 | `Beasty_SaveSystemCore.Json` | SS/reference/json-engine |
 | `Beasty.Console` | BC/changelog BC/index BC/reference/api VN/changelog |
 | `Beasty.Console.Editor` | BC/changelog BC/index BC/reference/api |
-| `Beasty.DebugLogger` | BC/changelog |
-| `Beasty.DebugLogger.Editor` | BC/changelog |
 | `Beasty.SaveGroup` | SS/guides/scene-state |
 | `Beasty.VN.Addressables` | VN/scripting/overview |
 | `Beasty.VN.Core` | VN/production/logging VN/scripting/overview |
@@ -179,8 +178,6 @@ Cobertura: **85 páginas** EN (y sus 85 espejos ES), **655 símbolos** indexados
 | `BeastyConsole.IsEnabled` | VN/production/logging |
 | `BeastyConsoleLogger` | BC/changelog |
 | `BeastyConsoleLogger.BeastyConsole` | BC/reference/api |
-| `BeastyDebugLogger` | BC/changelog |
-| `BeastyDebugLoggerConsole` | BC/changelog |
 | `BeastyLoadingScreen` | VN/reference/prefabs |
 | `BeastyManager` | VN/changelog VN/index VN/production/localization VN/reference/prefabs VN/scripting/controllers VN/scripting/gameplay-apis VN/scripting/overview |
 | `BeastyManager.Instance` | VN/scripting/controllers VN/scripting/overview |
@@ -221,8 +218,10 @@ Cobertura: **85 páginas** EN (y sus 85 espejos ES), **655 símbolos** indexados
 | `BeastySaveSettings.Encrypted` | SS/reference/results-and-errors |
 | `BeastySaveSettings.SharedDefaultEncryptionKey` | SS/changelog SS/guides/settings |
 | `BeastySaveSettings.Strict` | SS/reference/api-beastysave |
+| `BeastySaveSystem_LICENSE.md` | SS/changelog |
 | `BeastySaveSystem.asmdef` | SS/getting-started/installation |
 | `BeastyTime` | VN/index VN/scripting/gameplay-apis VN/scripting/overview VN/scripting/vn-api VN/world/game-time |
+| `BeastyVN_LICENSE.md` | VN/changelog |
 | `BeastyVNMixer` | VN/production/audio-and-music VN/production/ui-prefabs VN/reference/prefabs |
 | `BeforeSceneLoad` | SS/advanced/custom-converters |
 | `Bench` | VN/world/character-routines |

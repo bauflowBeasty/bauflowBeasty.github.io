@@ -93,6 +93,59 @@ First public release.
   deleting the console broke the build). When the console is present, logs keep landing in its window
   exactly as before, and importing Beasty Console alongside a project that already bundles it no longer
   risks a duplicate-assembly error.
+- **`.vnbeasty` node headers now lead with the node kind.** A node opens with its type keyword followed by
+  its name: `choice cross:`, `decision route:`, `subgraph combat:`, `return combat/done ("win"):`,
+  `talkmenu charla (ana):`, `flow to_town:` — and `label intro:` stays the plain dialogue node. This is the
+  form the writer now emits (a linked script is rewritten to it on the next graph sync); the previous
+  `label <name> (choice):` tag form still parses, so existing scripts keep working. A type tag that
+  contradicts the keyword (`choice cross (decision):`) is an import error.
+- **The text tab's autocomplete now works on header lines too.** Column 0 suggests the node-kind keywords
+  (`label`, `choice`, `decision`, `subgraph`, `return`, `talkmenu`, `flow`) plus `scene` and `start`;
+  `start ` suggests the script's labels, `talkmenu ` suggests character ids for its `(<character>)`
+  argument, and `jump` / route targets pick up labels declared with the new kind-first headers. Header
+  keywords are syntax-highlighted in their node kind's graph color, and the Syntax cheat-sheet shows the
+  new form.
+- **The asset's internal tests no longer show up in your Test Runner.** The test assemblies that ship with
+  the package now compile only when the `BEASTY_DEV_TOOLS` scripting define is set, so importing the asset
+  no longer fills the Test Runner window with its internal tests. To run them, add `BEASTY_DEV_TOOLS` under
+  `Project Settings ▸ Player ▸ Scripting Define Symbols`.
+- **An empty music queue now means silence in that mode.** Entering a mode (main menu, visual novel,
+  free-roam, custom) whose background-music queue has no clips fades the previous mode's music out instead of
+  letting it play on forever — clips assigned only to Main Menu no longer keep sounding over gameplay after
+  Play or a loaded save. To deliberately carry the previous music across a mode change, enable the
+  controller's **Keep Previous When Empty** toggle, now visible in the Beasty Manager inspector under the new
+  **Background Music** foldout (it used to be hidden, and on, with no way to see it).
+- **Per-project music now applies when entering a story.** The music queue used to resolve before the VN
+  session existed, so a project's music override could be ignored — or the previous project's music kept —
+  when starting a new game, opening a talk menu or loading a save; it is re-resolved once the session is
+  live. The current mode's music also starts on scene load regardless of component initialization order, and
+  auto-wire keeps the controller pointed at the same music config asset the Music tab edits.
+- **Doors and objects can finally be deleted from a room.** In the room timeline, door/object chips got a ✕
+  button, and the selected element's inspector a "Delete door… / Delete object… / Delete pose…" button. Both
+  confirm first and also remove the matching child from the room prefab, in one undo step. Before, a created
+  door or object could not be removed from the editor at all.
+- **Routine profiles can be deleted** from the profile selector ("Delete profile…", with confirmation; the
+  built-in Default profile stays). A character routine left completely empty — no placements, no fallback, no
+  interaction dialogues — is pruned from the map graph automatically, in the same undo step as the deletion
+  that emptied it.
+- **Deleting a room now offers to also delete its room prefab asset**, which used to stay behind as an
+  orphan in the project (asset deletion is not undoable; the prompt says so).
+- **A character's whole talk menu can be deleted** ("Delete talk menu…", with confirmation and undo),
+  returning the character to its pre-talk-menu state. Its localized texts stay in the table.
+- **"Save & apply" in the script Text view is now undoable.** One Ctrl+Z restores the entire graph, its
+  nodes and the localization texts to their pre-import state; "Format", linking and unlinking a script are
+  undoable too. Automatic imports (saving the `.vnbeasty` file externally) are unchanged.
+- **Undo now behaves like one step per gesture.** Deleting several nodes or edges in the Story graph,
+  creating a door/object/pose from a timeline lane, and Auto-wire / Repair each collapse into a single undo
+  step instead of several. Editing a character-list visibility condition now undoes itself rather than the
+  previous unrelated action, variable/item pickers and localization lookups refresh after an undo instead of
+  offering stale entries, and the FreeRoam timeline and routine grid drop a selection that an undo removed
+  instead of silently editing a disconnected copy.
+- **The package no longer ships its own license file.** `BeastyVN_LICENSE.md` is gone (and so are the bundled
+  save system's and console's): an asset bought on the Unity Asset Store is licensed under the Asset Store
+  EULA (https://unity.com/legal/as-terms), and an independent license inside the package conflicts with it.
+  Each `Third-Party Notices.txt` now points to that EULA. Copies bought on itch.io get their own license
+  file, added to the itch download at packaging time.
 
 ### Persistence
 

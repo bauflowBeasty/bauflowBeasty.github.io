@@ -227,7 +227,7 @@ label intro:
     juan "You should not be out here after dark."
     jump cruce
 
-label cruce (choice):
+choice cruce:
     choice "Run" -> ran
     choice "Talk to him" -> stayed
 ```

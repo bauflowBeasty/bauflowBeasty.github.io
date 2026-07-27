@@ -2,13 +2,14 @@
 
 All notable changes to Beasty Console. This project follows [Semantic Versioning](https://semver.org/).
 
-## 1.0.0 — unreleased
+## 1.0.0 — 2026-07-27
 
 First public release.
 
 ### Logging API
-- Eleven semantic levels on one static class — info, verbose, trace, debug, notice, highlight, caution,
-  success, warning, error and exception — so a message says what kind of message it is at the call site.
+- Eleven semantic levels on one static class, `BeastyConsole` (namespace `BeastyConsoleLogger`) — info,
+  verbose, trace, debug, notice, highlight, caution, success, warning, error and exception — so a message
+  says what kind of message it is at the call site.
 - Only warning, error and exception raise Unity's severity. `LogCaution` is a soft alert that does not trip
   Error Pause and does not show up as a warning in Unity's own Console.
 - Colour and glyph tags in the editor, plain ASCII tags in a build, so a player's `Player.log` stays
@@ -32,21 +33,6 @@ First public release.
 - Beasty Save System detects this asset by reflection and routes its logs through it when present, but
   neither package needs the other: both can be bought and imported on their own.
 - Mono and IL2CPP.
-
-### Pre-release changes
-
-Behaviour changes made before 1.0.0 ships.
-
-- **The asset is now Beasty Console**, not Beasty Debug Logger. The class you call is `BeastyConsole` (was
-  `BeastyDebugLogger`), in the `BeastyConsoleLogger` namespace (was `BeastyDebugLoggerConsole`); the assemblies
-  are `Beasty.Console` and `Beasty.Console.Editor` (were `Beasty.DebugLogger` and `Beasty.DebugLogger.Editor`);
-  and the folder is `Assets/BeastyComponents/BeastyConsole` (**breaking**: a `using BeastyDebugLoggerConsole;`
-  and every `BeastyDebugLogger.Log*` call has to be renamed). Method names, signatures and the console window
-  itself are unchanged.
-- **The reflection probe follows the new name.** Beasty Save System now looks for
-  `BeastyConsoleLogger.BeastyConsole, Beasty.Console`, so its logs keep landing in this window. A copy of the
-  save system from an earlier build looks for the old assembly, does not find it, and falls back to Unity's
-  console until it is updated too.
-- **The console has its own menu.** It now opens from `Tools > Beasty Console > Console` (was
-  `Tools > Beasty VN > Diagnostics > Console`): Beasty Console is a standalone asset, so it no longer sits
-  under the Beasty VN menu and is reachable in a project that does not have Beasty Visual Novel.
+- **Licensing.** A copy bought on the Unity Asset Store is licensed under the Asset Store EULA
+  (https://unity.com/legal/as-terms); `Third-Party Notices.txt` points to it. A copy bought on itch.io
+  includes its own license file.

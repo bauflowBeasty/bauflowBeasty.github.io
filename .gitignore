@@ -1,4 +1,5 @@
 node_modules/
 dist/
+dist-pdf/
 .astro/
 npm-debug.log*

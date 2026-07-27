@@ -2,7 +2,7 @@
 
 > **Regla:** Leer este archivo ANTES de cualquier búsqueda en el proyecto. Si un cambio agrega, mueve, renombra o elimina archivos/carpetas (o cambia el propósito de algo listado aquí), actualizar este mapa en el mismo turno.
 >
-> Última actualización: 2026-07-24
+> Última actualización: 2026-07-27
 
 ## Qué es este proyecto
 
@@ -19,6 +19,7 @@ Sitio de documentación y portfolio **Beasty Components** (marca de bauflow) hec
 | `npm run doc:index` | Regenerar `docs/DOC-INDEX.md` (índice de páginas y símbolos) |
 | `npm run doc:sync` | Informar de qué documentación se ha quedado atrás respecto al proyecto Unity |
 | `npm run doc:shots` | Regenerar `docs/SCREENSHOTS.md` (guion de capturas) desde las páginas + `docs/screenshots.json` |
+| `npm run doc:pdf` | Generar los PDF de docs básicas por asset (lee `dist/`: ejecutar DESPUÉS del build) y copiarlos al proyecto Unity |
 
 ## Estructura
 
@@ -88,6 +89,8 @@ scripts/
 ├── doc-index.mjs         → Genera docs/DOC-INDEX.md a partir de las páginas EN
 ├── sync-check.mjs        → Informa de desincronización con el proyecto Unity (changelogs + Plastic)
 ├── screenshots.mjs       → GENERA docs/SCREENSHOTS.md cruzando las páginas con docs/screenshots.json
+├── build-pdf.mjs         → GENERA un PDF de docs básicas por asset desde dist/ (npm run doc:pdf, tras build)
+│                           y lo copia a Assets/BeastyComponents/<asset>/ del proyecto Unity
 └── migrate-docs.mjs      → Migración one-shot de docs viejas (histórico, ya sin origen que leer)
 
 docs/  (documentación INTERNA del repo, no se publica)
@@ -98,10 +101,11 @@ docs/  (documentación INTERNA del repo, no se publica)
 ├── superpowers/plans/    → Planes de implementación (2026-07-13 site-redesign, 2026-07-24 contact-page)
 ├── superpowers/specs/    → Specs de diseño (redesign, portada/marca/humanización ES)
 ├── screenshots.json      → Catálogo de capturas: por imagen, prioridad, desde qué vista se toma y qué debe verse
-└── SCREENSHOTS.md        → GENERADO (`npm run doc:shots`): guion de las 185 capturas, por producto y página
+└── SCREENSHOTS.md        → GENERADO (`npm run doc:shots`): guion de las 187 capturas, por producto y página
 
 projects/Inventory/       → Vacío (legacy)
 dist/                     → Salida del build (generado, no editar)
+dist-pdf/                 → Salida de `npm run doc:pdf` (generado, no se commitea)
 ```
 
 ## Relación con el proyecto Unity

@@ -10,7 +10,8 @@
     "doc:index": "node scripts/doc-index.mjs",
     "doc:sync": "node scripts/sync-check.mjs",
     "doc:links": "node scripts/check-links.mjs",
-    "doc:shots": "node scripts/screenshots.mjs"
+    "doc:shots": "node scripts/screenshots.mjs",
+    "doc:pdf": "node scripts/build-pdf.mjs"
   },
   "dependencies": {
     "@fontsource-variable/bricolage-grotesque": "^5.2.10",

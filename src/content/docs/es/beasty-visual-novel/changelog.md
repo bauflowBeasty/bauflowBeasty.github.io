@@ -102,6 +102,67 @@ Primera versión pública.
   borrar la consola rompía la build). Con la consola presente, los logs siguen llegando a su ventana
   exactamente igual que antes, e importar Beasty Console junto a un proyecto que ya lo incluye deja de
   arriesgar un error de ensamblado duplicado.
+- **Los encabezados de nodo de `.vnbeasty` ahora empiezan por el tipo de nodo.** Un nodo se abre con su
+  palabra clave de tipo seguida de su nombre: `choice cruce:`, `decision ruta:`, `subgraph combate:`,
+  `return combate/fin ("win"):`, `talkmenu charla (ana):`, `flow al_pueblo:` — y `label intro:` sigue siendo
+  el nodo de diálogo normal. Esta es la forma que el escritor emite ahora (un guion enlazado se reescribe a
+  ella en la siguiente sincronización con el grafo); la forma anterior con etiqueta, `label <nombre>
+  (choice):`, se sigue parseando, así que los guiones existentes siguen funcionando. Una etiqueta de tipo que
+  contradice la palabra clave (`choice cruce (decision):`) es un error de importación.
+- **El autocompletado de la pestaña Text ahora también funciona en las líneas de encabezado.** La columna 0
+  sugiere las palabras clave de tipo de nodo (`label`, `choice`, `decision`, `subgraph`, `return`,
+  `talkmenu`, `flow`) más `scene` y `start`; `start ` sugiere las etiquetas del guion, `talkmenu ` sugiere
+  ids de personaje para su argumento `(<personaje>)`, y `jump` y los destinos de ruta reconocen las
+  etiquetas declaradas con los nuevos encabezados que empiezan por el tipo. Las palabras clave de encabezado
+  se resaltan con el color que su tipo de nodo tiene en el grafo, y la chuleta de sintaxis muestra la forma
+  nueva.
+- **Los tests internos del asset ya no aparecen en tu Test Runner.** Los ensamblados de tests que viajan con
+  el paquete ahora solo compilan cuando está definido el símbolo de scripting `BEASTY_DEV_TOOLS`, así que
+  importar el asset ya no llena la ventana Test Runner con sus tests internos. Para ejecutarlos, agrega
+  `BEASTY_DEV_TOOLS` en `Project Settings ▸ Player ▸ Scripting Define Symbols`.
+- **Una cola de música vacía ahora significa silencio en ese modo.** Entrar en un modo (menú principal,
+  novela visual, mundo libre, personalizado) cuya cola de música de fondo no tiene clips funde la música del
+  modo anterior en lugar de dejarla sonar para siempre — los clips asignados solo al menú principal ya no
+  siguen sonando sobre la partida tras darle a Play o cargar un guardado. Para arrastrar a propósito la
+  música anterior a través de un cambio de modo, activa el interruptor **Keep Previous When Empty** del
+  controlador, ahora visible en el inspector del Beasty Manager bajo el nuevo desplegable **Background
+  Music** (antes estaba oculto, y activado, sin forma de verlo).
+- **La música por proyecto ahora se aplica al entrar en una historia.** La cola de música se resolvía antes
+  de que existiera la sesión de VN, así que la música propia de un proyecto podía ignorarse — o quedarse la
+  del proyecto anterior — al empezar partida nueva, abrir un menú de charla o cargar un guardado; ahora se
+  vuelve a resolver cuando la sesión ya está viva. La música del modo actual también arranca al cargar la
+  escena sea cual sea el orden de inicialización de los componentes, y el auto-wire mantiene el controlador
+  apuntando al mismo asset de configuración de música que edita la pestaña Music.
+- **Las puertas y los objetos por fin se pueden eliminar de una sala.** En la línea de tiempo de la sala, las
+  fichas de puerta/objeto ganaron un botón ✕, y el inspector del elemento seleccionado un botón «Delete
+  door… / Delete object… / Delete pose…». Ambos piden confirmación y además quitan el hijo correspondiente
+  del prefab de la sala, en un solo paso de deshacer. Antes, una puerta o un objeto creados no se podían
+  quitar desde el editor de ninguna manera.
+- **Los perfiles de rutina se pueden eliminar** desde el selector de perfil («Delete profile…», con
+  confirmación; el perfil Default integrado se queda). Una rutina de personaje que queda completamente
+  vacía — sin colocaciones, sin fallback, sin diálogos de interacción — se poda automáticamente del grafo del
+  mapa, en el mismo paso de deshacer que la eliminación que la vació.
+- **Eliminar una sala ahora ofrece eliminar también su asset de prefab de sala**, que antes se quedaba
+  huérfano en el proyecto (la eliminación del asset no se puede deshacer; el aviso lo dice).
+- **El menú de charla completo de un personaje se puede eliminar** («Delete talk menu…», con confirmación y
+  deshacer), devolviendo al personaje a su estado de antes de tener menú de charla. Sus textos localizados se
+  quedan en la tabla.
+- **«Save & apply» en la vista Text del guion ahora se puede deshacer.** Un solo Ctrl+Z restaura el grafo
+  entero, sus nodos y los textos de localización a su estado previo a la importación; «Format», enlazar y
+  desenlazar un guion también se pueden deshacer. Las importaciones automáticas (guardar el `.vnbeasty` desde
+  fuera) no cambian.
+- **Deshacer ahora se comporta como un paso por gesto.** Eliminar varios nodos o aristas en el grafo de
+  Story, crear una puerta/objeto/pose desde un carril de la línea de tiempo, y Auto-wire / Repair colapsan
+  cada uno en un solo paso de deshacer en lugar de varios. Editar una condición de visibilidad de la lista de
+  personajes ahora se deshace a sí misma en lugar de deshacer la acción anterior sin relación, los selectores
+  de variables e ítems y las consultas de localización se refrescan tras un deshacer en lugar de ofrecer
+  entradas obsoletas, y la línea de tiempo de FreeRoam y la grilla de rutinas sueltan una selección que un
+  deshacer eliminó en lugar de editar en silencio una copia desconectada.
+- **El paquete ya no incluye su propio archivo de licencia.** `BeastyVN_LICENSE.md` desapareció (y también
+  los del save system y la consola incluidos): un asset comprado en la Unity Asset Store se licencia bajo el
+  EULA de la Asset Store (https://unity.com/legal/as-terms), y una licencia independiente dentro del paquete
+  entra en conflicto con él. Cada `Third-Party Notices.txt` ahora apunta a ese EULA. Las copias compradas en
+  itch.io reciben su propio archivo de licencia, que se añade a la descarga de itch al empaquetar.
 
 ### Persistencia
 

@@ -50,6 +50,11 @@ routine maya            # back to the default profile
 
 Because the routine mode is an ordinary variable, it saves, loads and rewinds with everything else.
 
+A profile you no longer need can be deleted from the profile selector (**Delete profile…**, with
+confirmation); the built-in `Default` profile stays. A character routine left completely empty — no
+placements, no fallback, no interaction dialogues — is pruned from the map graph automatically, in the same
+undo step as the deletion that emptied it.
+
 ## Rules: first match wins
 
 A profile holds an ordered list of **rules** and one **fallback**. Each rule is a condition plus a room.

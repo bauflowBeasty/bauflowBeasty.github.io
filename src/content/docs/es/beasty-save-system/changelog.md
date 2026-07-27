@@ -85,3 +85,17 @@ siguen cargando sin cambios.
   Verbose. Y sondear un slot que no existe — lo que hace una pantalla de ranuras de guardado con cada slot
   vacío cada vez que se abre — ya no registra una advertencia por slot; un `Load` real de un slot ausente
   sigue avisando.
+- **Los tests internos del asset ya no aparecen en tu Test Runner.** El ensamblado de tests que viaja con el
+  paquete ahora solo compila cuando está definido el símbolo de scripting `BEASTY_DEV_TOOLS`, así que importar
+  el asset ya no llena la ventana Test Runner con sus tests internos. Para ejecutarlos, agrega
+  `BEASTY_DEV_TOOLS` en `Project Settings ▸ Player ▸ Scripting Define Symbols`.
+- **La ventana Save Manager se lleva bien con deshacer.** «Create Beasty Save Manager» se puede deshacer y
+  rehacer; arrastrar varios GameObjects a la vez agrega todos sus componentes `BeastySaveable` como UN solo
+  paso de deshacer (y deshacer también revierte los ids generados para ellos); y la ventana se repinta justo
+  después de un deshacer/rehacer en lugar de mostrar una lista obsoleta hasta el siguiente movimiento del
+  mouse.
+- **El paquete ya no incluye su propio archivo de licencia.** `BeastySaveSystem_LICENSE.md` desapareció: un
+  asset comprado en la Unity Asset Store se licencia bajo el EULA de la Asset Store
+  (https://unity.com/legal/as-terms), y una licencia independiente dentro del paquete entra en conflicto con
+  él. `Third-Party Notices.txt` ahora apunta a ese EULA. Las copias compradas en itch.io reciben su propio
+  archivo de licencia, que se añade a la descarga de itch al empaquetar.

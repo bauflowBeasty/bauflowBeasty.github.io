@@ -12,6 +12,11 @@ entrando en la sala desde la pestaña **FreeRoam** (`Tools > Beasty VN > Editor`
 Recuerda la división: **el prefab de la sala define el arte y la posición; el grafo del mapa define qué hace la cosa.**
 Están vinculados por el nombre.
 
+Eliminar funciona desde el mismo sitio: el ✕ de la ficha de una puerta o un objeto en la línea de tiempo de
+la sala, o el botón **Delete door… / Delete object… / Delete pose…** del inspector del elemento
+seleccionado. Ambos piden confirmación primero, y ambos quitan además el hijo correspondiente del prefab de
+la sala, en un solo paso de deshacer.
+
 ## Tipo y función
 
 Un botón tiene un **tipo** (kind) y una **función** (su acción).

@@ -72,7 +72,7 @@ Cada cola tiene cuatro campos:
 
 | Campo | Significado |
 |---|---|
-| `clips` | Los clips, en orden. Una cola vacía significa "sin música de fondo aquí". |
+| `clips` | Los clips, en orden. Una cola vacía significa "sin música de fondo aquí" — entrar en ese modo funde la música hasta el silencio. |
 | `mode` | Cómo se secuencian. |
 | `volume` | El volumen propio de la cola (0-1), combinado con el deslizador Music del jugador. |
 | `crossfadeSeconds` | El crossfade cuando la cola comienza, y entre sus pistas. |
@@ -89,6 +89,14 @@ Los modos de reproducción:
 El controlador escucha el modo de app y reproduce la cola correspondiente. Volver a entrar a un modo cuya cola
 ya se está reproduciendo no la reinicia — caminar por una casa cuyas salas comparten la misma música no hace
 saltar la pista de vuelta al primer compás.
+
+**Una cola vacía significa silencio.** Entrar en un modo cuya cola no tiene clips funde la música del modo
+anterior en lugar de dejarla sonar — los clips asignados solo al menú principal no siguen sonando sobre la
+partida. Para arrastrar a propósito la música anterior a través de un cambio de modo, activa **Keep
+Previous When Empty** en el controlador, en el inspector del Beasty Manager bajo el desplegable
+**Background Music**.
+
+![El desplegable Background Music del Beasty Manager, con Keep Previous When Empty](/docs-images/beasty-visual-novel/vn-background-music-foldout.png)
 
 ## Overrides: una sala, o una historia
 

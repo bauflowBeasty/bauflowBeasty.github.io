@@ -29,6 +29,9 @@ the asset and clicking **Open in Beasty VN (FreeRoam tab)**.
 > background, the objects, the doors — you author by **drilling into the room**: double-click it. The lines
 > between rooms are read-only; they picture the doors that exist inside the rooms.
 
+Deleting a room also offers to delete its **room prefab asset**, so the prefab does not stay behind as an
+orphan in the project. Deleting the asset is not undoable — the prompt says so before you confirm.
+
 ## What a room is
 
 ![A room's settings after drilling into it](/docs-images/beasty-visual-novel/vn-room-settings.png)

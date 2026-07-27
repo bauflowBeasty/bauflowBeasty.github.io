@@ -65,6 +65,14 @@ quest and its objectives, a screen id, a routine profile, a daypart or weekday n
 asset name, or one of the labels already in the file. The suggestions are read live from the project, so a
 character you added a minute ago is already there. Click a suggestion to insert it.
 
+Header lines complete too: at column 0 the panel offers the node-kind keywords (`label`, `choice`,
+`decision`, `subgraph`, `return`, `talkmenu`, `flow`) plus `scene` and `start`; after `start ` it offers
+the script's labels, and after `talkmenu ` the character ids for its `(<character>)` argument. Header
+keywords are highlighted in the colour their node kind has in the graph, and the **Syntax** cheat sheet
+shows the header forms.
+
+![The Suggestions panel offering the node-kind keywords on a header line](/docs-images/beasty-visual-novel/vn-text-suggestions-headers.png)
+
 Where a condition or an effect goes, it offers the whole variable catalog — your own variables, character
 fields written `maya.affection`, `item.<id>` counts, dictionary tokens and the reserved `@time:` and
 `@quest:` keys. It is the same list the graph's condition picker shows, so you are not left guessing how a
@@ -83,6 +91,10 @@ The toolbar:
 | **Format** | Applies your edits, then rewrites the file in canonical form — sorted, indented, with the node-id annotations refreshed. |
 | **Syntax** | Toggles a quick syntax cheat sheet beside the editor. |
 | **Unlink** | Stops using the script. The graph stays as it is, and the `.vnbeasty` file is left on disk. |
+
+**Save & apply is undoable.** One `Ctrl+Z` — in Unity, not in the text editor — restores the entire graph,
+its nodes and the localization texts to their pre-import state. **Format**, linking a script and **Unlink**
+are undoable too. Automatic imports (saving the `.vnbeasty` file in an external editor) are unchanged.
 
 Under the editor, a report box shows the result of the last import: what was applied, what was refused, and
 the line number of the offending statement. Warnings land there too — a name that does not match anything
@@ -167,7 +179,7 @@ Said plainly, so you do not find them the hard way.
   write `backdrop clear` or `stop music`.
 - **One file is one scene.** A `.vnbeasty` file covers a single `DialogueScene` and its root graph,
   subgraphs included. Move to another scene with `goto-scene`.
-- **Subgraphs nest one level.** A `(subgraph)` label owns child labels named `parent/child`; those children
+- **Subgraphs nest one level.** A `subgraph` node owns child labels named `parent/child`; those children
   cannot themselves be subgraphs.
 
 ## A worked example
@@ -188,7 +200,7 @@ label morning:
     set trust += 1
     jump offer
 
-label offer (choice):
+choice offer:
     choice "Buy a loaf" if gold >= 3 { gold -= 3, has_bread = true } -> bought
     choice "Just looking" -> polite
     default -> polite
