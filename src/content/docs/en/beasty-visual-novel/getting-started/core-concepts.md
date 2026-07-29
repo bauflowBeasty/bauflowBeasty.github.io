@@ -1,10 +1,10 @@
 ---
 title: "Core concepts"
-description: "The mental model behind the whole package. Six ideas. Once you hold them, every other page in this documentation is just detail, and the editor stops surprisi"
+description: "The seven ideas behind the whole package, from scenes and nodes to the variable store. Hold them and every other page is detail."
 ---
 
-The mental model behind the whole package. Six ideas. Once you hold them, every other page in this
-documentation is just detail, and the editor stops surprising you.
+The mental model behind the whole package. Seven ideas. Once you hold them, every other page in this
+documentation is detail, and the editor stops surprising you.
 
 Read this after [Your first scene](/docs/beasty-visual-novel/getting-started/your-first-scene/), when you have seen the pieces move.
 

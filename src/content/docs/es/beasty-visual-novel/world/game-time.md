@@ -1,6 +1,6 @@
 ---
 title: "Tiempo de juego"
-description: "Momentos del día, un reloj opcional, días de la semana y estaciones. El tiempo de juego es la columna vertebral del mundo vivo: impulsa rutinas, fondos de sala, misiones recurrentes y cualquier condición que escribas."
+description: "Momentos del día, reloj opcional, días de la semana y estaciones. El tiempo lo mueves tú: impulsa rutinas, fondos condicionales y misiones recurrentes."
 ---
 
 Momentos del día, un reloj opcional, días de la semana y estaciones. El tiempo de juego es la columna vertebral del mundo vivo: impulsa

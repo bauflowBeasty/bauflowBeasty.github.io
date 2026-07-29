@@ -40,7 +40,7 @@ See [Localization](/docs/beasty-visual-novel/production/localization/) for the s
 | `autosaveAntiRollbackMargin` | Seconds. An autosave at the SAME position as the most recent one, within this margin, is skipped — so rolling back and re-picking the same option cannot flood the autosave ring. 2 seconds by default. |
 | `maxAutosaves` | How many autosave slots the ring holds. When it is full, the oldest is overwritten. 6 by default. |
 | `saveSlotsPerPage` | How many manual slots one page of the save screen shows. 6 by default. |
-| `saveManualPages` | How many manual pages are shown initially. The index grows automatically past this, without limit. |
+| `saveManualPages` | How many manual pages are shown initially. The number of pages grows automatically past this, without limit. |
 | `allowSaveNaming` | Whether the player may title a save. When off, a slot is labelled with its local creation timestamp. |
 | `defaultSaveThumbnail` | The fallback image shown for a SAVED slot whose thumbnail PNG is missing or unreadable. Empty slots use the stock art on the slot prefab instead, not this. |
 

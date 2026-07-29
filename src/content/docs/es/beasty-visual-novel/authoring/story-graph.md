@@ -1,6 +1,6 @@
 ---
 title: "El grafo de la historia"
-description: "El grafo de la historia es el lienzo donde construyes una escena: sueltas nodos, los conectas y el juego los reproduce en el orden de los cables. Aquí se cubren el lienzo y los siete tipos de nodo."
+description: "El lienzo donde construyes una escena: cómo crear, conectar y colorear nodos, y para qué sirve cada uno de los siete tipos de nodo."
 ---
 
 El grafo de la historia es el lienzo donde construyes una escena. Sueltas nodos en él, los conectas entre sí

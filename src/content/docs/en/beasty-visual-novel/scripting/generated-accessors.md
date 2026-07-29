@@ -1,6 +1,6 @@
 ---
 title: "Generated accessors: VNVars and VNChars"
-description: "VNVars and VNChars are C# files the editor generates from your project's variables and characters. They turn a key typo from a silent wrong answer into a comp"
+description: "VNVars and VNChars are generated C# accessors for your variables and characters. They turn a key typo into a compile error instead of a silent fallback."
 ---
 
 `VNVars` and `VNChars` are C# files the editor generates from your project's variables and characters. They turn

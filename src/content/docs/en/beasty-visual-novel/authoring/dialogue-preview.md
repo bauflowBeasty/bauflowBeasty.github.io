@@ -1,6 +1,6 @@
 ---
 title: "Dialogue preview"
-description: "The Dialogue Preview shows you what a node looks like — the backdrop, the characters, the props, the dialogue box — without entering Play Mode. It is for the"
+description: "See a node as the player will — backdrop, characters, dialogue box — without entering Play Mode, and jump straight to any block."
 ---
 
 The Dialogue Preview shows you what a node looks like — the backdrop, the characters, the props, the dialogue

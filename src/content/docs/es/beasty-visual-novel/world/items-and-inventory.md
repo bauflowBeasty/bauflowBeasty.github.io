@@ -1,6 +1,6 @@
 ---
 title: "Objetos e inventario"
-description: "Los objetos son cosas que lleva el jugador: una llave que abre una puerta, una poción que se bebe, tres flores que le pidieron recolectar. Cómo definirlos, entregarlos, y la pantalla de inventario."
+description: "Define los objetos que lleva el jugador, entrégalos con bloques y condiciona elecciones y puertas a ellos. Incluye la pantalla de inventario ya hecha."
 ---
 
 Los objetos son cosas que lleva el jugador. Una llave que abre una puerta, una poción que se bebe, tres flores que le

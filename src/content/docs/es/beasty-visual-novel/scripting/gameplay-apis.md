@@ -1,6 +1,6 @@
 ---
 title: "APIs de gameplay"
-description: "Cuatro clases estáticas en Beasty.VN.Runtime: BeastyTime, BeastyRoutines, BeastyQuests e Inventory. Son la cara en código de los sistemas de mundo que creas en el editor."
+description: "BeastyTime, BeastyRoutines, BeastyQuests e Inventory: clases estáticas para leer y escribir los sistemas del mundo desde código, en cualquier estado."
 ---
 
 Cuatro clases estáticas en `Beasty.VN.Runtime`: `BeastyTime`, `BeastyRoutines`, `BeastyQuests` e `Inventory`.

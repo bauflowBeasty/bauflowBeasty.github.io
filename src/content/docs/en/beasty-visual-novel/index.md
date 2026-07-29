@@ -1,6 +1,6 @@
 ---
 title: "Beasty Visual Novel"
-description: "You write the story. Beasty Visual Novel plays it. It is a complete visual novel engine for Unity: an authoring window where you build the story, and a runtim"
+description: "You write the story. Beasty Visual Novel plays it. A complete visual novel engine for Unity: authoring editor, runtime and no code required."
 ---
 
 You write the story. Beasty Visual Novel plays it. It is a complete visual novel engine for Unity: an
@@ -23,7 +23,8 @@ The package makes one promise about this, and it is the promise that matters whe
 work in a scene: **the graph is the source of truth.** A script that fails to parse, is empty, or would
 destroy content never overwrites your nodes — the import is refused and the graph is left exactly as it
 was. Any import that would lose content leaves a timestamped `.bak` next to the script first. Art is
-referenced by GUID, so renaming or moving a sprite does not break a synced node.
+referenced by GUID — Unity's permanent internal id for an asset — so renaming or moving a sprite does
+not break a synced node.
 
 > **Note**
 > The two views are at parity: anything the graph can express, the script can write — layered backdrops,
@@ -52,7 +53,8 @@ referenced by GUID, so renaming or moving a sprite does not break a synced node.
   variables, the time, the quests, the inventory, the stage and the rewind history. See
   [Saving and loading](/docs/beasty-visual-novel/production/saving-and-loading/).
 
-Everything the player sees is a uGUI prefab you can restyle. Full C# source is included.
+Everything the player sees is a standard Unity UI (uGUI) prefab you can restyle. Full C# source is
+included.
 
 ## Where to start
 
@@ -88,7 +90,7 @@ spoken lines and a choice, writing zero code. After that, pick your path.
 ### You are a programmer
 
 1. [Scripting overview](/docs/beasty-visual-novel/scripting/overview/) — the assemblies and where to hook in. `Core` is pure
-   logic with no Unity UI, in its own assembly from the view layer.
+   logic with no Unity UI, in its own assembly, separate from the view layer.
 2. [The VN API](/docs/beasty-visual-novel/scripting/vn-api/) — the static `VN` entry point, its state, events and control.
 3. [Controllers](/docs/beasty-visual-novel/scripting/controllers/) — `BeastyManager`, `VNGameController`,
    `VisualNovelController`.

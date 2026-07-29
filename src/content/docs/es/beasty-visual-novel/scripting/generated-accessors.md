@@ -1,6 +1,6 @@
 ---
 title: "Accesores generados: VNVars y VNChars"
-description: "VNVars y VNChars son archivos C# que el editor genera a partir de las variables y personajes de tu proyecto. Hacen que un error de tipeo en una clave deje de ser una respuesta equivocada y silenciosa y pase a ser un error de compilación."
+description: "Accesores C# generados para tus variables y personajes: VNVars y VNChars convierten un error de tipeo en error de compilación, no en un fallback silencioso."
 ---
 
 `VNVars` y `VNChars` son archivos C# que el editor genera a partir de las variables y personajes de tu

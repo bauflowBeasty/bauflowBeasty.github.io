@@ -1,6 +1,6 @@
 ---
 title: ".vnbeasty syntax reference"
-description: "Every construct of the .vnbeasty text script, for lookup. One file is one scene: every label is a node, jump wires the nodes together. If you have not used th"
+description: "The complete grammar of the .vnbeasty script: every statement, node header, condition and effect, with examples, for lookup."
 ---
 
 Every construct of the `.vnbeasty` text script, for lookup. One file is one scene: every `label` is a node,
@@ -62,7 +62,7 @@ node — the Ren'Py-familiar form — and every other kind has its own keyword:
 | `talkmenu charla (ana):` | `TalkMenuNode` | Opens the talk menu of the character in parentheses. See [The talk menu](#the-talk-menu). |
 | `flow to_town:` | `FlowNode` | A transition as its own node. See [Flow and transitions](#flow-and-transitions). |
 
-This kind-first form is what the writer emits: a linked script is rewritten to it on the next graph sync.
+This kind-first form is the canonical one: on the next graph sync, a linked script is rewritten to use it.
 A `label` whose **only** line is a `->` flow exit still compiles to a `FlowNode` without needing the `flow`
 keyword.
 
@@ -110,8 +110,8 @@ backdrop video rain once mute volume 0.5 manual
 backdrop sky, hills parallax 0.4, street at 0 -20 order 2   # layers, back to front
 ```
 
-A video backdrop loops, plays its audio at full volume, and starts on arrival. Each modifier turns one of
-those off:
+A video backdrop loops, plays its audio at full volume, and starts on arrival. Each modifier overrides one
+of those defaults:
 
 | Modifier | Effect |
 |---|---|
@@ -307,7 +307,7 @@ The advance forms lead with a signed amount, the set forms with the unit:
 | `time +<n> days` | Advance by n days. |
 | `time daypart <name>` | Set the daypart. |
 | `time hour <n>` | Set the hour. Clock mode only. |
-| `time weekday <name>` | Set the weekday. Always forward; the same day counts. |
+| `time weekday <name>` | Advance to the next matching weekday. If today already matches, the date does not move. |
 
 The unit may be singular (`+1 day` is the same as `+1 days`); the canonical form written back from the
 graph is always the plural. The daypart and weekday names are the ones configured in the project's

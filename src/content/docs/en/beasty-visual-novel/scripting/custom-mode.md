@@ -1,6 +1,6 @@
 ---
 title: "Custom mode"
-description: "VNAppState.Custom is the open door. It has no built-in UI: the engine switches to it, hands you the screen, and stops. Put your minigame, battle system, farmi"
+description: "VNAppState.Custom hands the screen to your own mode. How to enter it, leave it, and make your minigame save, load and rewind with the rest of the game."
 ---
 
 `VNAppState.Custom` is the open door. It has no built-in UI: the engine switches to it, hands you the screen, and
@@ -57,6 +57,7 @@ state — and returns false when there is nothing to step back into. Wire it to 
 ## Saving your mode
 
 The engine cannot know what your mode's state is, so it asks you for it, as a string, and stores it verbatim.
+Both hooks are fields on `VNGameController`:
 
 ```csharp
 public Func<string> CaptureCustomStateJson;   // you fill this
@@ -80,7 +81,8 @@ It does nothing if `CaptureCustomStateJson` is not wired.
 
 ## The FreeRoam hooks
 
-Same pattern, but the engine ships an implementation, so you only touch these if you are replacing FreeRoam:
+Same pattern — these are fields on `VNGameController` too — but the engine ships an implementation, so you
+only touch these if you are replacing FreeRoam:
 
 ```csharp
 public Func<FreeRoamSaveState> CaptureFreeRoamState;

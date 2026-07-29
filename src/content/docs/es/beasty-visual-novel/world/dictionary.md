@@ -1,6 +1,6 @@
 ---
 title: "El diccionario"
-description: "El diccionario guarda las palabras del propio jugador: su ciudad natal, el nombre de su mascota, cómo llama a su espada. Un token que se lee igual en todos los idiomas, porque lo escribió él."
+description: "Entradas de diccionario: tokens de texto con las palabras del propio jugador, nunca traducidas. Créalas, imprímelas en líneas y fíjalas desde la historia."
 ---
 
 El diccionario guarda las palabras del propio jugador. Una entrada de diccionario es un token de texto con

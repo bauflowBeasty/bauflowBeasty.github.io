@@ -1,6 +1,6 @@
 ---
 title: "Recorrido del editor"
-description: "Un recorrido guiado por la ventana Beasty VN y las demás ventanas del editor, para que sepas dónde está todo antes de necesitarlo. Cada sección dice qué haces en esa pestaña y qué página la cubre en detalle."
+description: "Un paseo por la ventana Beasty VN — la barra superior, las nueve pestañas y las ventanas auxiliares — para que sepas dónde está todo antes de necesitarlo."
 ---
 
 Un recorrido guiado por la ventana Beasty VN y las demás ventanas del editor, para que sepas dónde está todo
@@ -89,8 +89,8 @@ Más detalle en: [Personajes](/es/docs/beasty-visual-novel/world/characters/), [
 ### Variables
 
 Tus variables globales: clave, tipo, valor predeterminado, y cómo se comporta la variable. Es una lista
-master-detail, y las variables de personaje tienen una lista de personajes a la izquierda para que puedas
-saltar rápido de un personaje a otro.
+con un panel de detalle, y las variables de personaje tienen una lista de personajes a la izquierda para
+que puedas saltar rápido de un personaje a otro.
 
 ![La pestaña Variables: la lista maestro-detalle de variables globales](/docs-images/beasty-visual-novel/vn-tab-variables.png)
 

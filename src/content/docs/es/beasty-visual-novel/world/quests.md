@@ -1,6 +1,6 @@
 ---
 title: "Misiones"
-description: "El catálogo de misiones: qué se supone que debe hacer el jugador, cómo compruebas que lo hizo, y qué obtiene por ello. Esta página es para guionistas y diseñadores."
+description: "El catálogo de misiones: qué se supone que debe hacer el jugador, cómo compruebas que lo hizo y qué obtiene por ello. Para guionistas y diseñadores."
 ---
 
 El catálogo de misiones: qué se supone que debe hacer el jugador, cómo compruebas que lo hizo, y qué obtiene por
@@ -57,7 +57,7 @@ la escena donde el jugador acepta el encargo, y haz que esa variable sea el **St
 ### Recompensas y penalizaciones
 
 Ambas son listas de efectos de variable: `gold += 50`, `maya.affection += 1`, `item.bread = 3`. Dar objetos es
-solo un efecto sobre el contador del objeto. Cada una se **traba (latch)** — se dispara una sola vez, sin
+un efecto sobre el contador del objeto. Cada una se **traba (latch)** — se dispara una sola vez, sin
 importar cuántas veces se recalcule la misión.
 
 ## Etapas, y qué significa "ordenado"
@@ -106,7 +106,7 @@ quest bread_run objective run = true
 ### Los ocho tipos de objetivo
 
 Cada tipo es una plantilla que escribe por debajo una **condición de finalización**. La condición sigue siendo la
-fuente de verdad; el tipo solo te da los selectores adecuados en lugar de claves en bruto. **Todos se traducen en
+fuente de verdad; el tipo te da los selectores adecuados en lugar de claves en bruto. **Todos se traducen en
 una condición de finalización excepto GatherDeliver**, que se completa entregando los objetos.
 
 | Tipo | Úsalo cuando | Qué pide |
@@ -118,7 +118,7 @@ una condición de finalización excepto GatherDeliver**, que se completa entrega
 | **GatherDeliver** | El jugador debe conseguir cosas y entregarlas. | Los objetos y los contadores. **No** es una condición — ver más abajo. |
 | **SubQuest** | Este paso es toda otra misión. | Una misión. Hecho cuando esa misión está `completed`. |
 | **Condition** | Nada de lo anterior encaja. | La condición en bruto, la que quieras. La vía de escape. |
-| **WaitTime** | El jugador solo tiene que dejar pasar el tiempo. | **Wait days** y/o **Wait dayparts**, contados desde el momento en que se desbloqueó el objetivo. Ambos deben transcurrir. |
+| **WaitTime** | El jugador tiene que dejar pasar el tiempo. | **Wait days** y/o **Wait dayparts**, contados desde el momento en que se desbloqueó el objetivo. Ambos deben transcurrir. |
 
 > **Nota**
 > **WaitTime con ambos valores en 0 se completa de inmediato.** El editor te avisa.
@@ -176,7 +176,8 @@ mantienes un menú. Consulta [El menú de conversación](/es/docs/beasty-visual-
 
 ### El marcador de mapa
 
-Cuando un paso mueve a un personaje (ver más abajo), puedes decidir qué aspecto tiene allí donde lo moviste:
+Cuando un paso mueve a un personaje (ver más abajo), puedes decidir qué aspecto tiene en la sala a la que
+lo moviste:
 
 ![El marcador de mapa de un paso de misión: sprite, posición, escala y orden de dibujo](/docs-images/beasty-visual-novel/vn-quest-marker.png)
 
@@ -216,8 +217,9 @@ Una misión se completa cuando **hay suficientes objetivos requeridos hechos**:
 
 - **Completion threshold 0** (el valor por defecto) significa *todos* los objetivos requeridos.
 - Un umbral de N significa *al menos N* de ellos — "limpia 3 de las 4 salas, las que sean".
-- Si **ningún** objetivo está marcado como requerido, el umbral se mide contra los objetivos que existen (todos
-  ellos, o tu umbral). Una misión con solo objetivos opcionales no es dinero gratis.
+- Si **ningún** objetivo está marcado como requerido, el umbral se mide entonces contra **todos** los
+  objetivos: cada uno de ellos con umbral 0, o al menos N. Una misión con solo objetivos opcionales no es
+  dinero gratis.
 
 Cuando se completa, la recompensa se dispara una vez. Cuando **Fails when** se cumple mientras está activa, la misión falla y
 la penalización se dispara una vez.

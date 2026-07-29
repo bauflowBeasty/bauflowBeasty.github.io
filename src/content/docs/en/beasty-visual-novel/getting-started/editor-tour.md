@@ -1,6 +1,6 @@
 ---
 title: "Editor tour"
-description: "A guided walk through the Beasty VN window and the other editor windows, so you know where everything is before you need it. Each section says what you do in"
+description: "A walk through the Beasty VN window — the top bar, the nine tabs and the companion windows — so you know where everything is before you need it."
 ---
 
 A guided walk through the Beasty VN window and the other editor windows, so you know where everything is
@@ -85,8 +85,9 @@ Covered by: [Characters](/docs/beasty-visual-novel/world/characters/), [Quests](
 
 ### Variables
 
-Your global variables: key, type, default value, and how the variable behaves. It is a master-detail list,
-and character variables get a character list down the left so you can move between casts quickly.
+Your global variables: key, type, default value, and how the variable behaves. It is a list with a
+detail panel, and character variables get a character list down the left so you can move between
+characters quickly.
 
 ![The Variables tab: the master-detail list of global variables](/docs-images/beasty-visual-novel/vn-tab-variables.png)
 

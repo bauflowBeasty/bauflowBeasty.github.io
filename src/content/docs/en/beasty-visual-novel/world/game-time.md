@@ -1,6 +1,6 @@
 ---
 title: "Game time"
-description: "Dayparts, an optional clock, weekdays and seasons. Game time is the backbone of the living world: it drives character routines, conditional room backgrounds,"
+description: "Dayparts, an optional clock, weekdays and seasons. Author-driven time that powers character routines, conditional backgrounds and recurring quests."
 ---
 
 Dayparts, an optional clock, weekdays and seasons. Game time is the backbone of the living world: it drives

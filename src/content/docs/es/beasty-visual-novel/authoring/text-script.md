@@ -1,6 +1,6 @@
 ---
 title: "El guion de texto"
-description: "Escribe una escena completa como texto plano en lugar de conectar nodos con clics. El formato .vnbeasty es un guion al estilo Ren'Py que se mantiene sincronizado con el grafo en ambos sentidos."
+description: "Escribe una escena como guion .vnbeasty de texto plano, sincronizado en ambos sentidos con el grafo, con pestaña en el editor y un contrato de seguridad."
 ---
 
 Escribe una escena completa como un archivo de texto plano en lugar de conectar nodos con clics. El formato
@@ -100,7 +100,9 @@ La barra de herramientas:
 **Save & apply se puede deshacer.** Un solo `Ctrl+Z` —en Unity, no en el editor de texto— restaura el
 grafo entero, sus nodos y los textos de localización a su estado previo a la importación. **Format**,
 enlazar un guion y **Unlink** también se pueden deshacer. Las importaciones automáticas (guardar el
-`.vnbeasty` en un editor externo) no cambian.
+`.vnbeasty` en un editor externo) son la excepción: Unity no permite registrar un deshacer durante una
+importación de assets, así que `Ctrl+Z` no puede revertirlas. Su red de seguridad es la copia `.bak` con
+marca de tiempo descrita en [El contrato de seguridad](#el-contrato-de-seguridad).
 
 Debajo del editor, un cuadro de reporte muestra el resultado de la última importación: qué se aplicó, qué se
 rechazó, y el número de línea de la sentencia problemática. Las advertencias aterrizan ahí también: un
@@ -131,7 +133,10 @@ pestaña Text.
 su primer botón de interruptor con un marcador de advertencia (`Graph ⚠`) en lugar de `Graph`, para que lo
 notes antes de que tu próxima edición sobrescriba el otro lado. En ese punto nada se ha sobrescrito: el
 espejo automático se niega a propósito a elegir un ganador entre dos ediciones que nadie ha reconciliado.
-Abre la pestaña Text, mira el guion, y guarda cuando estés conforme.
+Abre la pestaña Text, mira el guion, y guarda cuando estés conforme. El empate solo dura hasta que un lado
+se guarda: en cuanto guardas el archivo `.vnbeasty` en un editor externo, la importación se ejecuta, gana
+el guion, y el estado previo del grafo se escribe en una copia `.bak` — consulta
+[El contrato de seguridad](#el-contrato-de-seguridad).
 
 ## El contrato de seguridad
 
@@ -165,8 +170,9 @@ de texto nunca pueda destruir en silencio el trabajo de autoría.
   copia de seguridad: dos guardados malos seguidos no pueden dejarte solo con la copia degradada. Si la copia
   de seguridad no se puede escribir —una carpeta de solo lectura, un disco lleno— la importación se rechaza en
   lugar de ejecutarse sin red de seguridad.
-- **Si ambos lados cambiaron desde la última sincronización, gana el guardado más reciente**, y se deja un
-  `.bak` del lado sobrescrito junto al archivo. El editor te dice qué lado se conservó y dónde quedó la
+- **Si ambos lados cambiaron desde la última sincronización, gana el guardado más reciente.** Guardar el
+  archivo `.vnbeasty` es lo que dispara la importación, así que el guion se conserva y el estado previo del
+  grafo va al `.bak` junto al archivo. El cuadro de reporte te dice qué lado se conservó y dónde quedó la
   copia de seguridad.
 - **Los assets se resuelven por GUID.** El nombre en el guion es la forma en que *tú* encuentras el asset; el nodo
   guarda el asset en sí. Mueve `bedroom.png` a otra carpeta, o renómbralo, y el nodo sincronizado sigue

@@ -1,9 +1,10 @@
 ---
 title: "Prefabs de UI"
-description: "Todo lo que el jugador ve es un prefab uGUI. No hay capa de renderizado personalizada, ningún framework de UI propietario y ningún canvas oculto: es Unity UI, en prefabs que puedes abrir y editar."
+description: "Cada pantalla que ve el jugador es un prefab de Unity UI editable. La lista de prefabs, dos formas de restilizar y la solución de la pantalla negra."
 ---
 
-Todo lo que el jugador ve es un prefab uGUI. No hay capa de renderizado personalizada, ningún framework de UI
+Todo lo que el jugador ve es un prefab uGUI (uGUI es el sistema de UI integrado de Unity). No hay capa de
+renderizado personalizada, ningún framework de UI
 propietario y ningún canvas oculto: es Unity UI, en prefabs que puedes abrir y editar. Esta página los lista, y
 muestra las dos formas de restilizar el juego.
 
@@ -31,11 +32,12 @@ La lista completa campo por campo está en la [referencia de prefabs](/es/docs/b
 ## Cómo restilizar
 
 **Opción 1: edita el prefab.** Ábrelo, cambia las fuentes, colores, sprites, layout y anclas, agrega tu propia
-decoración. Las vistas encuentran sus piezas a través de sus campos serializados, así que mientras esos campos
-sigan apuntando a algo, el prefab sigue funcionando. Este es el camino normal y no cuesta nada.
+decoración. Las vistas encuentran sus piezas a través de las referencias que ves en el Inspector, así que
+mientras esos campos sigan apuntando a algo, el prefab sigue funcionando. Este es el camino normal y no cuesta nada.
 
-**Opción 2: apunta las vistas a tu propio canvas.** Las vistas son MonoBehaviours comunes con referencias
-serializadas. Construye tu propio canvas, pon las vistas en él, cablea los campos, y el motor controla tu UI en
+**Opción 2: apunta las vistas a tu propio canvas.** Las vistas son MonoBehaviours comunes — componentes
+normales de Unity — con referencias que cableas en el Inspector. Construye tu propio canvas, pon las vistas
+en él, cablea los campos, y el motor controla tu UI en
 lugar de la nuestra. Nada en el runtime da por sentada la jerarquía incluida.
 
 ## Los dos elementos de menú de prefabs

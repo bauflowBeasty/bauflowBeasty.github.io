@@ -14,21 +14,25 @@ Qué necesita el paquete, dónde se ejecuta, y qué revisar antes de presionar B
 
 ## Render pipelines
 
+Un render pipeline es la parte de Unity que dibuja la pantalla. No tienes que preocuparte por cuál usa tu
+proyecto:
+
 **Built-in, URP (incluido el 2D Renderer) y HDRP funcionan todos, sin cambios.**
 
-La razón es simple: el paquete **no incluye shaders ni materiales**. Los fondos, personajes y props son
+La razón: el paquete **no incluye shaders ni materiales**. Los fondos, personajes y props son
 sprites; la interfaz es uGUI. No hay nada que actualizar cuando cambias de pipeline, y ningún material que se
 ponga magenta. Puedes mover un proyecto de Built-in a URP a mitad de la producción y la novela visual no se
 entera.
 
 ## Backends de scripting
 
-**Mono e IL2CPP.** Ambos son compatibles, y el pipeline de guardado está verificado contra una build real de
-IL2CPP.
+Mono e IL2CPP son las dos formas en que Unity convierte el código en una build. **Ambos son compatibles**, y
+el pipeline de guardado está verificado contra una build real de IL2CPP.
 
 ## Plataformas
 
-Cualquiera con E/S de archivos normal — que es lo que el sistema de guardado necesita:
+Cualquiera donde el juego pueda leer y escribir archivos normales — que es lo que el sistema de guardado
+necesita:
 
 - Windows, macOS, Linux
 - Android, iOS

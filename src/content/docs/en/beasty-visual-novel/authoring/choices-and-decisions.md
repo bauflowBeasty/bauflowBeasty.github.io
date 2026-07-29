@@ -1,6 +1,6 @@
 ---
 title: "Choices and decisions"
-description: "Two nodes branch the story, and they are not interchangeable."
+description: "Choice Nodes ask the player, Decision Nodes ask the world. How to build both, plus the conditions and effects that gate and drive them."
 ---
 
 Two nodes branch the story, and they are not interchangeable.
@@ -180,7 +180,7 @@ six months later.
 An effect is a variable change: **variable, operation, value**. The operations are `Assign`, `Add`,
 `Subtract` and `Toggle` (which flips a Bool and ignores the value).
 
-Effects exist in three places in this page's scope: on a choice option (applied when the player picks it), on
+Effects live in three places: on a choice option (applied when the player picks it), on
 a decision branch (applied when the branch is taken), and on a Return node (applied when a subgraph hands
 control back). They write to the same store as the **Set variable** block, so they persist in saves and they
 rewind correctly.

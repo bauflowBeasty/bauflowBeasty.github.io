@@ -1,6 +1,6 @@
 ---
 title: "Streaming (Addressables)"
-description: "Carga el arte bajo demanda en lugar de cargar todo el juego en memoria. El streaming es opcional, y es beta en 1.0.0 — funciona, y las pruebas lo cubren, pero la API puede cambiar en una versión menor."
+description: "Carga el arte bajo demanda en vez de tener todo el juego en memoria. Streaming vía Addressables es opcional y beta en 1.0.0: modelo, configuración y límites."
 ---
 
 Carga el arte bajo demanda en lugar de cargar todo el juego en memoria. El streaming es **opcional**, y es
@@ -91,7 +91,7 @@ pasa de ser un registro interno; con un proveedor de streaming detrás, es gesti
 ## El detalle que debes conocer
 
 > **Advertencia**
-> **Después de reconstruir, reconstruye también el contenido de Addressables.** El arte transmitido se resuelve
+> **Cada vez que compiles el juego, reconstruye también el contenido de Addressables.** El arte transmitido se resuelve
 > a través del catálogo de Addressables, y un catálogo desactualizado no sabe nada de los sprites que acabas de
 > migrar o cambiar — así que el arte no se resolverá en tiempo de ejecución. Convierte "Build Addressables
 > content" en un paso de tu checklist de compilación, justo al lado de ejecutar el validador. Consulta

@@ -1,6 +1,6 @@
 ---
 title: "Validation and ids"
-description: "Two tools that find the problems your players would otherwise find for you: the validator, which sweeps a project for references that point at nothing, and th"
+description: "The validator sweeps a project for references that point at nothing, and the id tools fix duplicate ids — the mistakes your players would otherwise find."
 ---
 
 Two tools that find the problems your players would otherwise find for you: the validator, which sweeps a
@@ -80,7 +80,7 @@ delete a Beasty asset:
 - Stale generated code: `VNVars` and `VNChars` are rebuilt, so a variable or character you deleted stops
   existing in your C# too (see [Generated accessors](/docs/beasty-visual-novel/scripting/generated-accessors/)).
 
-It is idempotent and cheap, so running it is never a risk.
+It is cheap, and running it twice does no more than running it once — so it is never a risk.
 
 ## Auto-wire
 

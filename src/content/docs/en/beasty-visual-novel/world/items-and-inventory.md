@@ -1,6 +1,6 @@
 ---
 title: "Items and inventory"
-description: "Items are things the player carries. A key that opens a door, a potion they drink, three flowers they were asked to gather. This page covers defining an item,"
+description: "Define the items the player carries, hand them out with blocks, and gate choices and doors on them. Includes the ready-made inventory screen."
 ---
 
 Items are things the player carries. A key that opens a door, a potion they drink, three flowers they were

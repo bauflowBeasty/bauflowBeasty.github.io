@@ -67,7 +67,7 @@ Elige un **Mode**:
 | **Tint** | El sprite en reposo se tiñe. Este es el valor por defecto. |
 | **Swap** | El sprite se intercambia por un **sprite de hover**. |
 | **None** | Sin cambio de color ni de sprite. |
-| **Animation** | Un **clip de reposo** y un **clip de hover**, con el Animator generado por ti. |
+| **Animation** | Un **clip de reposo** y un **clip de hover**, con el Animator ya generado para ti. |
 
 Además **Zoom on hover**, un interruptor independiente que se aplica a Tint, Swap y None. (Animation controla su propia
 escala, así que ahí no se ofrece el zoom.)
@@ -79,7 +79,7 @@ Cosas a tener en cuenta:
   **Custom tint** y elijas el tuyo propio.
 - **Animation necesita un prefab de sala** — los clips viven en el objeto del prefab. Asigna un clip de reposo y/o uno de
   hover y el AnimatorController se genera y se conecta automáticamente. Elegir de nuevo un sprite o un modo de tinte
-  borra los clips, de modo que el camino del sprite realmente se ejecuta.
+  borra los clips, y la respuesta visual basada en el sprite vuelve a tomar el mando.
 
 ## Visibilidad
 

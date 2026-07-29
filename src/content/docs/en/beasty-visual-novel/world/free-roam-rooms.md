@@ -6,7 +6,7 @@ description: "The world between conversations: a map of rooms the player can wal
 The world between conversations: a map of rooms the player can walk through, click around in, and leave for a
 scene. This page is for writers and designers.
 
-Free roam is optional. A pure kinetic novel never touches it. But the moment you want the player to choose
+Free roam is optional. A pure kinetic novel — a story with no choices — never touches it. But the moment you want the player to choose
 where to go and who to talk to, this is the mode you enter.
 
 ## The map graph
@@ -104,11 +104,14 @@ The prefab is a normal Unity prefab. Open it and build the room the way you woul
 | Component | What it marks |
 |---|---|
 | `FreeRoamRoom` | The prefab root. Collects the background renderer, the interactables and the spots. |
-| `FreeRoamInteractable` | One clickable object. Its **id is the GameObject's name**, which is how the map graph finds its logic. |
+| `FreeRoamInteractable` | One clickable object. Its id links it to the logic record in the map graph: the **Button Id** field if set, otherwise the GameObject's name. |
 | `FreeRoamCharacterSpot` | A place where a character stands. |
 
-Because ids are names, renaming a GameObject in the prefab renames the object the room's logic is attached to.
-Rename objects from the room editor, not from the Hierarchy, and the two stay in step.
+Objects created by the room editor arrive with **Button Id** already filled in, so renaming those
+GameObjects in the Hierarchy is harmless — the name is a label, and the next sync rewrites it to the
+object's Display Name anyway. An object you add to the prefab by hand with an empty Button Id is matched
+by its name instead: rename it and clicking it stops finding its logic, with only a Console notice to
+tell you. Fill in Button Id, or rename from the room editor.
 
 ### Character spots
 

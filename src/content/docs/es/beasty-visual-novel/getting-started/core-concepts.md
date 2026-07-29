@@ -1,10 +1,10 @@
 ---
 title: "Conceptos fundamentales"
-description: "El modelo mental detrás de todo el paquete. Seis ideas. Cuando las tienes claras, las demás páginas de esta documentación son solo detalle, y el editor deja de sorprenderte."
+description: "Las siete ideas detrás de todo el paquete, de las escenas y los nodos al almacén de variables. Tenlas claras y las demás páginas son detalle."
 ---
 
-El modelo mental detrás de todo el paquete. Seis ideas. Cuando las tienes claras, las demás páginas de esta
-documentación son solo detalle, y el editor deja de sorprenderte.
+El modelo mental detrás de todo el paquete. Siete ideas. Cuando las tienes claras, las demás páginas de
+esta documentación son detalle, y el editor deja de sorprenderte.
 
 Lee esto después de [Tu primera escena](/es/docs/beasty-visual-novel/getting-started/your-first-scene/), cuando ya hayas visto moverse las piezas.
 

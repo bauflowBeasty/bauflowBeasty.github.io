@@ -1,6 +1,6 @@
 ---
 title: "Guardado y carga"
-description: "El guardado funciona desde el primer momento. No escribes ningún código, y no tienes que decirle al sistema qué guardar. Esta página es para el diseñador que quiere saber qué es un slot, qué contiene y qué ve el jugador cuando algo sale mal."
+description: "El guardado funciona desde el primer momento. Qué es un slot, qué contiene, cómo se comporta el autoguardado y qué ve el jugador si una partida se daña."
 ---
 
 El guardado funciona desde el primer momento. No escribes ningún código, y no tienes que decirle al sistema qué
@@ -16,7 +16,7 @@ Una partida guardada vive en un slot. Hay dos tipos:
 | Tipo | Nombre del slot | Escrito por |
 |---|---|---|
 | Manual | `manual_0`, `manual_1`, ... | El jugador, desde la pantalla de guardado |
-| Autoguardado | `auto_0`, `auto_1`, ... | La cola de autoguardado |
+| Autoguardado | `auto_0`, `auto_1`, ... | El juego, automáticamente (ver [Autoguardado](#autoguardado)) |
 
 Junto a cada archivo de guardado el juego escribe una **miniatura PNG** con el mismo nombre, así que la
 pantalla de guardado muestra una imagen del momento en que el jugador guardó. Si falta una miniatura o no se
@@ -87,7 +87,8 @@ antigua.
 Cargar un slot restaura todo lo de la lista anterior y devuelve al jugador exactamente al lugar donde estaba,
 incluido el modo en el que se encontraba — novela visual, mundo libre o un modo personalizado.
 
-Cada escritura es atómica y conserva el archivo bueno anterior como un `.bak` junto a él. Así que cuando un
+Cada escritura es atómica — el archivo nuevo se escribe completo o no se escribe en absoluto — y el archivo
+bueno anterior se conserva junto a él como copia de respaldo `.bak`. Así que cuando un
 slot no se puede leer — un archivo a medio escribir tras un corte de energía, una partida manipulada — la
 carga informa que hay una copia de respaldo disponible, y la pantalla de guardado ofrece al jugador un diálogo de
 confirmación: **"Esta partida está dañada. ¿Restaurar la copia de respaldo?"**. Aceptar restaura la versión

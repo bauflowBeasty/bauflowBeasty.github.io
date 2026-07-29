@@ -1,6 +1,6 @@
 ---
 title: "Saving and loading"
-description: "Saves work out of the box. You do not write any code, and you do not have to tell the system what to save. This page is for the designer who wants to know wha"
+description: "Saves work out of the box. What a slot is, what a save contains, how autosave behaves, and what the player sees when a save is damaged."
 ---
 
 Saves work out of the box. You do not write any code, and you do not have to tell the system what to save.
@@ -16,7 +16,7 @@ A save lives in a slot. There are two kinds:
 | Kind | Slot name | Written by |
 |---|---|---|
 | Manual | `manual_0`, `manual_1`, ... | The player, from the save screen |
-| Autosave | `auto_0`, `auto_1`, ... | The autosave queue |
+| Autosave | `auto_0`, `auto_1`, ... | The game, automatically (see [Autosave](#autosave)) |
 
 Beside each save file the game writes a **PNG thumbnail** with the same name, so the save screen shows a
 picture of the moment the player saved. If a thumbnail is missing or unreadable, the slot falls back to the
@@ -77,7 +77,8 @@ your assets on load, so moving or restyling art does not invalidate an old save.
 Loading a slot restores everything in the list above and puts the player back exactly where they were,
 including the mode they were in — visual novel, free roam or a custom mode.
 
-Every write is atomic and rotates the previous good file to a `.bak` sibling. So when a slot cannot be read —
+Every write is atomic — the new file is fully written or not written at all — and the previous good file
+is kept beside it as a `.bak` backup. So when a slot cannot be read —
 a half-written file after a power cut, a tampered save — the load reports that a backup is available, and the
 save screen offers the player a confirmation dialog: **"This save is damaged. Restore the backup copy?"**.
 Accepting restores the previous version of that slot and retries the load. A damaged slot stays VISIBLE in the

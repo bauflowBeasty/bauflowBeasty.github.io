@@ -1,6 +1,6 @@
 ---
 title: "Referencia de bloques"
-description: "Un bloque es una instrucción dentro de un Dialogue Node: una línea de diálogo, un fondo, un personaje que entra en escena. Aquí está el catálogo completo, en el orden de la paleta."
+description: "Todos los bloques que puede contener un Dialogue Node, categoría a categoría: qué hace cada uno, sus opciones y los comportamientos que sorprenden."
 ---
 
 Un bloque es una instrucción dentro de un Dialogue Node. Los bloques son todo el vocabulario de autoría de
@@ -34,7 +34,7 @@ personajes, la música y el cambio de variable que hay encima de una línea ocur
 línea aparezca, en un solo fotograma, de forma invisible. Por eso una escena se escribe así: primero se
 monta el escenario, luego se dice algo.
 
-Además de Dialogue, otros tres bloques también se detienen:
+Además de Dialogue, otros cuatro bloques también se detienen:
 
 - Los tres bloques de **Input** (`Ask → variable`, `Ask → dictionary`, `Ask → character name`) muestran su
   pregunta y abren el cuadro de texto a la vez, y esperan a que el jugador escriba.
@@ -354,7 +354,7 @@ blanca de salas; déjala vacía y se ofrecen todas las salas del mapa.
 
 ### Go to VN scene
 
-Salta a otra Visual Novel —de la Intro al Capítulo 1— sin pasar por mundo libre. Puede empezar en un nodo
+Salta a otra Visual Novel —de la Intro al Capítulo 1, por ejemplo— sin pasar por mundo libre. Puede empezar en un nodo
 concreto dentro de ella, en lugar de en su nodo de entrada. Esto cambia todo el asset de historia, a
 diferencia de un subgrafo, que se queda dentro del actual.
 

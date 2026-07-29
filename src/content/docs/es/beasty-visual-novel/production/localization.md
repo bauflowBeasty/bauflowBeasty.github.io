@@ -1,6 +1,6 @@
 ---
 title: "Localización"
-description: "Traduce un juego que ya está escrito: las dos tablas de traducción, cómo agregar y eliminar idiomas, cómo saber qué traducciones quedaron desactualizadas, la importación y exportación de hojas de cálculo, la localización de la interfaz, y el cambio de idioma en plena partida."
+description: "Traduce un juego terminado: las dos tablas, el rastreo de traducciones obsoletas, importar y exportar hojas de cálculo, y el cambio de idioma en el juego."
 ---
 
 Traduce un juego que ya está escrito. Esta página cubre las dos tablas de traducción, cómo agregar y eliminar
@@ -127,7 +127,8 @@ La grilla muestra el estado de cada celda como una insignia, y la barra de filtr
 
 ## Importar y exportar
 
-La tabla exporta e importa texto delimitado (CSV o TSV, RFC 4180: las comillas se duplican, y cualquier campo
+La tabla viaja como un archivo de hoja de cálculo, así que un traductor nunca necesita Unity. Exporta e
+importa texto delimitado (CSV o TSV, RFC 4180: las comillas se duplican, y cualquier campo
 que contenga el delimitador, una comilla o un salto de línea se pone entre comillas). La puntuación dentro del
 diálogo nunca es un problema.
 
@@ -164,7 +165,8 @@ Hay dos cosas que la importación hace deliberadamente:
 
 ## Localizar la interfaz
 
-El texto de la historia se localiza solo: un nodo guarda una clave y la vista la resuelve. El texto de la
+El texto de la historia se localiza solo: un nodo guarda una clave, y el juego busca el texto del idioma
+activo en el momento de mostrar la línea. El texto de la
 interfaz, en cambio, tiene que ir enganchado a la etiqueta que lo muestra, y ese enganche es el componente
 `VNLocalizedText`: guarda una clave de la tabla de UI y reescribe su etiqueta TMP cada vez que cambia el
 idioma activo. Una etiqueta sin él muestra para siempre el texto con el que la escribiste.
@@ -175,7 +177,7 @@ idioma activo. Una etiqueta sin él muestra para siempre el texto con el que la 
 
 **Bake scene labels**, en la barra de herramientas de Localization ▸ UI (también
 `Tools > Beasty VN > Setup > Bake Localized UI Labels`), recorre todos los canvas de la escena abierta y
-agrega `VNLocalizedText`, con su clave ya serializada, a cada etiqueta cuyo texto coincida con un valor de la
+agrega `VNLocalizedText`, con su clave ya rellenada, a cada etiqueta cuyo texto coincida con un valor de la
 tabla de UI.
 
 Escribe **en los prefabs de origen**, no en las instancias de la escena, así que un solo bake arregla todas

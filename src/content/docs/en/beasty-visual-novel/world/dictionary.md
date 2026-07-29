@@ -1,6 +1,6 @@
 ---
 title: "The dictionary"
-description: "The dictionary holds the player's own words. A dictionary entry is a named text token you drop into a line — their home town, their pet's name, what they call"
+description: "Dictionary entries are named text tokens holding the player's own words — never translated. Create them, print them in lines, and set them from the story."
 ---
 
 The dictionary holds the player's own words. A dictionary entry is a named text token you drop into a
@@ -68,7 +68,7 @@ ask dict city "Where are you from?"
 game's customization screen, where they can set it whenever they like.
 
 However it is set, the value is written into the shared variable store under the token's key, where it
-shadows your default. So it is saved with the game, and it rewinds with everything else, and you did
+overrides your default. So it is saved with the game, and it rewinds with everything else, and you did
 nothing to make that happen. See [Variables and conditions](/docs/beasty-visual-novel/world/variables-and-conditions/#the-store).
 
 ## Dictionary token or String variable?

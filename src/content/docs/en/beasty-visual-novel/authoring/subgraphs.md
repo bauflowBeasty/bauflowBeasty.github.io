@@ -1,6 +1,6 @@
 ---
 title: "Subgraphs"
-description: "A subgraph is a graph inside a node. You use it to fold a stretch of story into a single box on the parent canvas, and to call that stretch from more than one"
+description: "Fold a stretch of story into one node, reuse it from several places, and route on the outcome its Return node hands back."
 ---
 
 A subgraph is a graph inside a node. You use it to fold a stretch of story into a single box on the parent
@@ -114,8 +114,8 @@ Now `fled` — and any outcome you add later and forget to route — lands somew
 
 **4. Call it from the other two places.**
 
-On the south road and outside the mill, create a SubGraph Node each, and point each one's `subGraph` at the
-same graph asset. Each of the three callers routes `win` and `talked` to *its own* continuation, because the
+On the south road and outside the mill, create a SubGraph Node each, and point each one's `subGraph` field
+at the same graph asset. Each of the three callers routes `win` and `talked` to *its own* continuation, because the
 routes live on the caller, not on the subgraph. The fight is written once; the aftermath is local.
 
 The variables the fight changed — the gold, the flags, the trust — are in the one shared store, so they are

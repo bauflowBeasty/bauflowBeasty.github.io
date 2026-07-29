@@ -1,6 +1,6 @@
 ---
 title: "Transiciones: abandonar la novela"
-description: "Una novela visual en Beasty no es todo el juego: es uno de sus modos. Una transición es el momento en que la historia entrega el control a otro modo."
+description: "Las cuatro salidas que entregan el control fuera de la novela visual, como bloques o como un nodo Flow, y cómo elegir entre las dos formas."
 ---
 
 Una novela visual en Beasty no es todo el juego. Es uno de los modos en los que puede estar el juego: los
@@ -46,7 +46,8 @@ una, llega ahí.
 
 ### Go to VN scene
 
-Salta directamente a **otra Visual Novel** —de la Intro al Capítulo 1— sin pasar por mundo libre.
+Salta directamente a **otra Visual Novel** —de la Intro al Capítulo 1, por ejemplo— sin pasar por mundo
+libre.
 
 - **Project**: la Visual Novel a la que cambiar.
 - **Start node**: opcional. Déjalo vacío para empezar en el nodo de entrada de ese proyecto.

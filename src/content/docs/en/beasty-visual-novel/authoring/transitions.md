@@ -1,6 +1,6 @@
 ---
 title: "Transitions: leaving the novel"
-description: "A visual novel in Beasty is not the whole game. It is one of the modes the game can be in — the others are free roam, where the player walks around rooms and"
+description: "The four exits that hand control out of the visual novel, as blocks or as a Flow node, and how to pick between the two forms."
 ---
 
 A visual novel in Beasty is not the whole game. It is one of the modes the game can be in — the others are
@@ -46,7 +46,8 @@ Use it for a fast-travel beat: "Where do you want to go tonight?"
 
 ### Go to VN scene
 
-Jumps straight to **another Visual Novel** — Intro to Chapter 1 — without passing through free roam.
+Jumps straight to **another Visual Novel** — from the Intro to Chapter 1, say — without passing through
+free roam.
 
 - **Project** — the Visual Novel to switch to.
 - **Start node** — optional. Leave it empty to start at that project's entry node.

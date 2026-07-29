@@ -1,6 +1,6 @@
 ---
 title: "Dialogue and the stage"
-description: "This page is about the two things you do most: writing a line, and dressing the scene it happens in. Both live inside a Dialogue Node, as blocks. If you have"
+description: "How to write a line and dress the scene around it: speakers, delivery states, backdrops, characters, props and the art fallback chain."
 ---
 
 This page is about the two things you do most: writing a line, and dressing the scene it happens in. Both
@@ -173,14 +173,20 @@ not clear it — it skips the block.
 
 ## The expression and portrait fallback chain
 
-You will not draw every expression for every character, and you do not need to. When the engine needs art for
-a character, it walks a chain:
+You will not draw every expression for every character, and you do not need to. On the **stage**, the
+chain is:
 
-**the expression you asked for -> the character's `base` -> the character's stage sprite**
+**the expression you asked for -> the character's `base` sprite**
 
-The same chain applies to portraits. So a character with only a `base` sprite still works everywhere: ask for
-`angry`, get `base`, and the game runs. Nothing errors, nothing goes pink, nothing goes missing. Draw the
-`angry` sprite later and every line that already asked for it starts showing it.
+So a character with only a `base` sprite still works everywhere: ask for `angry`, get `base`, and the game
+runs. Nothing errors, nothing goes pink. Draw the `angry` sprite later and every line that already asked
+for it starts showing it. Two edges worth knowing: a character with no `base` sprite renders as an empty,
+invisible slot with no warning, so give everyone a `base`; and an expression entry that exists but has no
+sprite assigned counts as art — it shows nothing rather than falling back.
+
+**Portraits** walk their own chain: the portrait key you asked for, then the character's `base` portrait.
+If neither exists, the dialogue box hides the portrait panel — it never borrows the stage sprite. A
+character with stage art but no portrait art simply speaks without a portrait.
 
 The default expression key is `base`. Expressions and portraits are set up per character in
 [Characters](/docs/beasty-visual-novel/world/characters/).

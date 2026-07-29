@@ -1,12 +1,12 @@
 ---
 title: "Salas de mundo libre"
-description: "El mundo entre conversaciones: un mapa de salas por las que el jugador puede caminar, hacer clic en los objetos y salir hacia una escena. Esta página es para guionistas y diseñadores."
+description: "El mundo entre conversaciones: un mapa de salas que el jugador recorre, clica y deja para entrar en una escena. Para guionistas y diseñadores."
 ---
 
 El mundo entre conversaciones: un mapa de salas por las que el jugador puede caminar, hacer clic en los objetos y salir hacia una
 escena. Esta página es para guionistas y diseñadores.
 
-El modo de mundo libre es opcional. Una novela kinética pura nunca lo usa. Pero en cuanto quieres que el jugador
+El modo de mundo libre es opcional. Una novela kinética pura — una historia sin elecciones — nunca lo usa. Pero en cuanto quieres que el jugador
 elija adónde ir y con quién hablar, este es el modo al que entras.
 
 ## El grafo del mapa
@@ -104,11 +104,14 @@ El prefab es un prefab de Unity normal. Ábrelo y construye la sala igual que co
 | Componente | Qué marca |
 |---|---|
 | `FreeRoamRoom` | La raíz del prefab. Reúne el renderer del fondo, los interactuables y los puntos. |
-| `FreeRoamInteractable` | Un objeto clicable. Su **id es el nombre del GameObject**, que es como el grafo del mapa encuentra su lógica. |
+| `FreeRoamInteractable` | Un objeto clicable. Su id lo vincula al registro de lógica del grafo del mapa: el campo **Button Id** si está definido; si no, el nombre del GameObject. |
 | `FreeRoamCharacterSpot` | Un lugar donde se para un personaje. |
 
-Como los ids son nombres, renombrar un GameObject en el prefab renombra el objeto al que está vinculada la lógica de la sala.
-Renombra los objetos desde el editor de la sala, no desde la Hierarchy, y ambos se mantienen sincronizados.
+Los objetos creados por el editor de la sala llegan con el **Button Id** ya relleno, así que renombrar esos
+GameObjects en la Hierarchy es inocuo — el nombre es una etiqueta, y el siguiente sync lo reescribe de todas
+formas al Display Name del objeto. Un objeto que añades al prefab a mano con el Button Id vacío se busca por
+su nombre: renómbralo y el clic deja de encontrar su lógica, con solo un aviso en la Console para contártelo.
+Rellena el Button Id, o renombra desde el editor de la sala.
 
 ### Puntos de personaje
 

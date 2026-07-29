@@ -1,6 +1,6 @@
 ---
 title: "Blocks reference"
-description: "A block is one instruction inside a Dialogue Node. Blocks are the whole authoring vocabulary of the visual novel: a line of dialogue, a backdrop, a character"
+description: "Every block a Dialogue Node can hold, category by category: what each one does, its options, and the behaviours that surprise people."
 ---
 
 A block is one instruction inside a Dialogue Node. Blocks are the whole authoring vocabulary of the visual
@@ -32,7 +32,7 @@ other block does its job and immediately hands over to the next one — the back
 music cue and the variable change above a line all happen before that line appears, in one frame, invisibly.
 That is why you author a scene as: set the stage, then say something.
 
-Three blocks besides Dialogue also stop:
+Four blocks besides Dialogue also stop:
 
 - The three **Input** blocks (`Ask → variable`, `Ask → dictionary`, `Ask → character name`) show their
   question and open the text box together, and wait for the player to type.
@@ -341,7 +341,7 @@ whitelist of rooms; leave it empty and every room in the map is offered.
 
 ### Go to VN scene
 
-Jumps to another Visual Novel — Intro to Chapter 1 — without passing through free roam. Optionally start at
+Jumps to another Visual Novel — from the Intro to Chapter 1, say — without passing through free roam. Optionally start at
 a specific node inside it instead of its entry node. This swaps the whole story asset, unlike a subgraph,
 which stays inside the current one.
 

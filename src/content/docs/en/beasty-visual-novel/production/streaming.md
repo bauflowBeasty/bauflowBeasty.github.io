@@ -1,6 +1,6 @@
 ---
 title: "Streaming (Addressables)"
-description: "Load art on demand instead of loading the whole game into memory. Streaming is opt-in, and it is beta in 1.0.0 — it works, and the tests cover it, but the API"
+description: "Load art on demand instead of holding the whole game in memory. Streaming via Addressables is opt-in and beta in 1.0.0: the model, setup, and limits."
 ---
 
 Load art on demand instead of loading the whole game into memory. Streaming is **opt-in**, and it is **beta in
@@ -88,7 +88,7 @@ streaming provider behind it, it is real memory management.
 ## The gotcha you must know
 
 > **Warning**
-> **After you rebuild, you must rebuild the Addressables content.** Streamed art resolves through the
+> **Every time you build the game, rebuild the Addressables content too.** Streamed art resolves through the
 > Addressables catalog, and a stale catalog does not know about the sprites you just migrated or changed — so
 > the art will not resolve at runtime. Make "Build Addressables content" a step in your build checklist, right
 > next to running the validator. See [Building and platforms](/docs/beasty-visual-novel/production/building-and-platforms/).

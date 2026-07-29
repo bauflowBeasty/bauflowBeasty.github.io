@@ -1,6 +1,6 @@
 ---
 title: "Large projects"
-description: "A twenty-hour game is not a two-hour game with more nodes in it. This page is about the parts of the package built for scale, and the habits that keep a long"
+description: "A twenty-hour game is not a two-hour game with more nodes. The parts of the package built for scale, and the habits that keep a long production moving."
 ---
 
 A twenty-hour game is not a two-hour game with more nodes in it. This page is about the parts of the package

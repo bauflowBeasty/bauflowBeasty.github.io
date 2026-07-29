@@ -1,6 +1,6 @@
 ---
 title: "The story graph"
-description: "The story graph is the canvas where you build a scene. You drop nodes on it, wire them together, and the game plays them in the order the wires describe. This"
+description: "The canvas where you build a scene: how to create, wire and colour nodes, and what each of the seven node types is for."
 ---
 
 The story graph is the canvas where you build a scene. You drop nodes on it, wire them together, and the
@@ -83,7 +83,7 @@ effect on the game.
 
 ![A Dialogue node's inspector, with its block list](/docs-images/beasty-visual-novel/vn-node-dialogue.png)
 
-**Reach for it when the player just needs to be told something.** It is the node you will use most.
+**Reach for it when the player only needs to be told something.** It is the node you will use most.
 
 A dialogue node holds a stack of blocks — lines of dialogue, backdrops, characters, sounds, variable
 changes — which run top to bottom. When the stack ends, the story continues along the node's single output

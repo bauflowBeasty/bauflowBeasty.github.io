@@ -50,7 +50,7 @@ hook for a minigame, a shop, a puzzle — anything that is not a conversation.
 | **Sorting Order** | Draw order inside the room. Higher is in front. |
 
 When the room has a prefab, these fields are mirrored into the prefab's matching child object, so you can also
-just drag the object around in the prefab and the room record follows.
+drag the object around in the prefab and the room record follows.
 
 The click area is built from the sprite. By default that is the sprite's shape — but see
 [Tight click shapes](#tight-click-shapes) if your art is mostly transparent.
@@ -78,7 +78,7 @@ Notes worth knowing:
   **Custom tint** and pick your own.
 - **Animation needs a room prefab** — the clips live on the prefab's object. Assign an idle and/or a hover
   clip and the AnimatorController is generated and wired automatically. Choosing a sprite or tint mode again
-  clears the clips, so the sprite path actually runs.
+  clears the clips, so the sprite-based feedback takes over again.
 
 ## Visibility
 

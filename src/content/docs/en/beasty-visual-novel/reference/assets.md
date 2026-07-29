@@ -1,6 +1,6 @@
 ---
 title: "Assets reference"
-description: "Every ScriptableObject you create with Beasty Visual Novel, its exact Create menu path, and its main fields. Use this page as a lookup. The concepts behind th"
+description: "Every ScriptableObject Beasty Visual Novel uses, its exact Create menu path, and its main fields. A lookup page, not a tutorial."
 ---
 
 Every ScriptableObject you create with Beasty Visual Novel, its exact `Create` menu path, and its main
@@ -43,7 +43,7 @@ duplicates it.
 | `VNTimeConfig` | `Create > Beasty VN > Config > Time Config` | Dayparts, hours, weekdays, seasons. |
 | `CharacterDefinition` | `Create > Beasty VN > Characters > Character Definition` | One character. |
 | `CharacterVariableSchema` | `Create > Beasty VN > Characters > Character Variable Schema` | The fields every character has. |
-| `LocalizationTable` | `Create > Beasty VN > Localization > Localization Table` | Key by language. |
+| `LocalizationTable` | `Create > Beasty VN > Localization > Localization Table` | A grid of keys by language. |
 | `FreeRoamMapGraph` | `Create > Beasty VN > FreeRoam > FreeRoam Map Graph` | Rooms plus character routines. |
 | `QuestCatalog` | `Create > Beasty VN > Quests > Quest Catalog` | The project's quests. |
 | The seven node types | `Create > Beasty VN > Advanced > Nodes > ...` | Normally created by the graph, not by hand. |

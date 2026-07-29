@@ -1,6 +1,6 @@
 ---
 title: "Logging"
-description: "Dónde acaban los mensajes de log de la VN, cómo silenciar un subsistema ruidoso sin silenciar el resto, y por qué una build publicada se queda callada por defecto."
+description: "Dónde acaban los mensajes de log de la VN, cómo silenciar un subsistema ruidoso sin silenciar el resto, y por qué una build publicada calla por defecto."
 ---
 
 Dónde acaban los mensajes de log de la VN, cómo silenciar un subsistema ruidoso sin silenciar el resto, y por
@@ -11,7 +11,8 @@ ya son los que quieres en el editor y en una build de lanzamiento.
 
 El paquete nunca llama a `UnityEngine.Debug` directamente. Cada mensaje que produce — cargar un asset de
 historia, avanzar un nodo, resolver un keyframe, escribir un guardado — pasa por `VNLog`, una fachada estática
-del espacio de nombres `Beasty.VN.Core`, y de ahí a **Beasty Console**.
+— una única puerta de entrada para todos los mensajes — del espacio de nombres `Beasty.VN.Core`, y de ahí a
+**Beasty Console**.
 
 Beasty Console viene dentro de este paquete, así que la ventana ya está ahí:
 `Tools > Beasty Console > Console`. Consulta
@@ -19,7 +20,8 @@ Beasty Console viene dentro de este paquete, así que la ventana ya está ahí:
 filtros por nivel con recuentos en vivo, búsqueda, Collapse, Clear on Play, y un panel de detalle cuyas líneas
 de traza abren el archivo en la línea exacta dentro de tu IDE.
 
-Eso sí, la VN no *depende* de la consola: `VNLog` la encuentra por reflexión, así que si borras Beasty
+Eso sí, la VN no *depende* de la consola: `VNLog` la encuentra por reflexión — la busca en tiempo de
+ejecución en lugar de referenciarla directamente —, así que si borras Beasty
 Console del proyecto la VN sigue compilando y funcionando, y sus mensajes se van a la Consola de Unity —
 sin los filtros por nivel ni los colores por categoría. Eso es también lo que hace seguro tener Beasty
 Console por separado: borra la copia incluida, importa la tuya, y los logs de la VN siguen llegando a la

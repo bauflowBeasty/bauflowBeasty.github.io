@@ -1,6 +1,6 @@
 ---
 title: "Resumen de scripting"
-description: "Cómo está organizado Beasty Visual Novel, y dónde se conecta tu propio C#. Lee esto antes de programar contra la API, y luego ve a la página que cubre tu tarea."
+description: "Cómo está organizado Beasty Visual Novel y dónde se conecta tu C#. Lee esto antes de programar contra la API y luego ve a la página que cubre tu tarea."
 ---
 
 Cómo está organizado Beasty Visual Novel, y dónde se conecta tu propio C#. Lee esto antes de programar contra

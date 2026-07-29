@@ -1,6 +1,6 @@
 ---
 title: "Variables and conditions"
-description: "Everything your game remembers is a variable. Everything your game decides is a condition. This page is the foundation for the rest of the World section: ques"
+description: "Variables are what your game remembers; conditions are how it decides. The shared store, the Set variable block, clauses, effects and @self."
 ---
 
 Everything your game remembers is a variable. Everything your game decides is a condition. This page is
@@ -160,8 +160,8 @@ Each clause after the first carries a join: **And** or **Or**.
 a  AND  b  OR  c
 ```
 
-means `(a AND b) OR c`, not `a AND (b OR c)`. This is ordinary boolean precedence, and it is the single
-most common source of a condition that "does not work". If you want the other grouping, reorder the
+means `(a AND b) OR c`, not `a AND (b OR c)`. AND-before-OR is the standard grouping, and it is the
+single most common source of a condition that "does not work". If you want the other grouping, reorder the
 clauses or split the logic across two branches of a decision node.
 
 ### The two rules that catch everyone out
@@ -169,7 +169,7 @@ clauses or split the logic across two branches of a decision node.
 > **Warning**
 > **An empty condition is always true.** No clauses means "no condition" means "yes". A choice with an
 > empty condition is always offered; a door with an empty access exception is always open. This is what
-> you want almost all of the time — it is why you can leave the condition field alone and everything just
+> you want almost all of the time — it is why you can leave the condition field alone and everything
 > shows — but it means you cannot gate something by leaving the condition blank.
 
 > **Warning**

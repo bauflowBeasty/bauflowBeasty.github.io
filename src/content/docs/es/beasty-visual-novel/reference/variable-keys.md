@@ -1,6 +1,6 @@
 ---
 title: "Claves de variables"
-description: "Cada clave que vive en el almacén de variables, y cómo escribir una condición sobre ella. Abre esta página cuando necesites una condición sobre el tiempo de juego, el estado de una misión, la ubicación de un personaje o el inventario del jugador."
+description: "Cada clave del almacén de variables — variables, personajes, tiempo, misiones, inventario — y cómo escribir una condición sobre cada una."
 ---
 
 Cada clave que vive en el almacén de variables, y cómo escribir una condición sobre ella. Abre esta página

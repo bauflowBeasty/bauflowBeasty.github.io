@@ -1,6 +1,6 @@
 ---
 title: "The talk menu"
-description: "The per-character conversation hub: the \"what can I say to this person right now\" menu. Click a character in a room and this is what opens. This page is for w"
+description: "The per-character conversation hub: quest entries appear on their own, you add the permanent ones, and each entry decides how it ends."
 ---
 
 The per-character conversation hub: the "what can I say to this person right now" menu. Click a character in a
@@ -77,9 +77,12 @@ otherwise. A flow block inside the branch always wins.
 | `GoToRoom` | Straight to another room. |
 | `None` | Nothing. The branch decides for itself. |
 
-`GoToRoom` also takes a **Clock** setting for the arrival: leave it empty and time advances **one daypart**
-(the classic dating-sim "you spend the afternoon together"); set it to keep the clock and nothing moves; or
-name a daypart to jump straight to it.
+`GoToRoom` also takes a **Clock** setting for the arrival:
+
+- leave it empty and time advances **one daypart** — the classic dating-sim "you spend the afternoon
+  together";
+- set it to keep the clock, and time does not move;
+- name a daypart to jump straight to it.
 
 `BackToMenu` is worth understanding: the menu is **re-resolved** when you return to it, so an entry that just
 became false is gone, and one that just became true is there. Hand over the apples, come back to the menu, and

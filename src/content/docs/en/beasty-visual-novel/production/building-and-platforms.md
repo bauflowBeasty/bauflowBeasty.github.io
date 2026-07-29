@@ -14,19 +14,23 @@ What the package needs, where it runs, and what to check before you press Build.
 
 ## Render pipelines
 
+A render pipeline is the part of Unity that draws the screen. You do not have to care which one your
+project uses:
+
 **Built-in, URP (including the 2D Renderer) and HDRP all work, unchanged.**
 
-The reason is simple: the package **ships no shaders and no materials**. Backdrops, characters and props are
+The reason: the package **ships no shaders and no materials**. Backdrops, characters and props are
 sprites; the interface is uGUI. There is nothing to upgrade when you switch pipeline, and no material to go
 magenta. You can move a project from Built-in to URP mid-production and the visual novel does not notice.
 
 ## Scripting backends
 
-**Mono and IL2CPP.** Both are supported, and the save pipeline is verified against a real IL2CPP build.
+Mono and IL2CPP are the two ways Unity turns code into a build. **Both are supported**, and the save
+pipeline is verified against a real IL2CPP build.
 
 ## Platforms
 
-Anything with regular file IO — which is what the save system needs:
+Anything where the game can read and write ordinary files — which is what the save system needs:
 
 - Windows, macOS, Linux
 - Android, iOS

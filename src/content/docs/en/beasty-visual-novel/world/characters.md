@@ -1,6 +1,6 @@
 ---
 title: "Characters"
-description: "A character is one cast member: a name, a set of sprites, a way of speaking, and a bag of numbers that the story changes. This page covers everything you auth"
+description: "What a character is made of: identity, sprites, delivery styles, aliases and stats — everything you author on a Character Definition."
 ---
 
 A character is one cast member: a name, a set of sprites, a way of speaking, and a bag of numbers that
@@ -31,7 +31,7 @@ expressions, delivery styles, portraits), **Variables** (stats), **Quests** and 
 | **Id** | The stable name the whole engine uses (`maya`). Auto-filled from the asset name as a lower-case slug, and editable. |
 | **Display name** | The name the player reads. Plain text, not translated. It may contain `[tokens]`. |
 | **Name color** | The accent colour of the nameplate. |
-| **Text color** | The default colour of this character's body text. A delivery style can override it. |
+| **Text color** | The default colour of this character's body text. A delivery style (below) can override it. |
 | **Player can rename** | If on, the player may rename this character at runtime, and their name wins over yours. |
 | **Category** | `Main` or `Secondary`. Groups the cast in the editor. |
 | **Tags** | Free-form labels (`feminine`, a faction, a chapter). They group and filter the cast list in the editor. Add them with **+ Tag**. |
@@ -90,7 +90,7 @@ Each style sets:
 | **Text effect** | An animated decoration on the body text: `None`, `Wave`, `Shake`, `Fade` or `Pulse`. |
 
 Anything you leave alone falls back to the character's own defaults. A character that defines no style for
-a state simply speaks normally in it — you never have to fill in all four.
+a state speaks normally in it — you never have to fill in all four.
 
 ## Aliases: showing a different name
 
@@ -99,7 +99,7 @@ talking to yet.
 
 ![A character's alias list](/docs-images/beasty-visual-novel/vn-character-aliases.png)
 
-Add aliases with **+ Add alias** — they are just strings ("The Stranger", "The Voice"). Then:
+Add aliases with **+ Add alias** — they are plain strings ("The Stranger", "The Voice"). Then:
 
 - **For one line only:** on a **Dialogue** block, set its display-name alias. The nameplate reads
   "The Stranger" for that line and nothing else changes. The character's id, variables and sprites are
@@ -162,11 +162,12 @@ Changing a character variable from the story is the **Character variable** block
 `maya.affection > 5`. Both are explained in
 [Variables and conditions](/docs/beasty-visual-novel/world/variables-and-conditions/).
 
-## The FreeRoam sprite
+## The free-roam sprite
 
-![The FreeRoam sprite field, with the show-location and show-routine toggles](/docs-images/beasty-visual-novel/vn-character-freeroam-sprite.png)
+![The free-roam sprite field, with the show-location and show-routine toggles](/docs-images/beasty-visual-novel/vn-character-freeroam-sprite.png)
 
-**FreeRoam sprite** is the sprite used when the character stands in a room, placed there by their routine.
+The **Free Roam Sprite** field holds the sprite used when the character stands in a room, placed there by
+their routine.
 Leave it empty and the character's `base` expression sprite is used instead. Where they stand and how big
 they are is decided by the room prefab, not here — see [Character routines](/docs/beasty-visual-novel/world/character-routines/).
 

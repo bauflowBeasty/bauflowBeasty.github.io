@@ -1,6 +1,6 @@
 ---
 title: "Subgrafos"
-description: "Un subgrafo es un grafo dentro de un nodo: pliega un tramo de historia en una sola caja del lienzo padre y te deja llamarlo desde más de un lugar."
+description: "Pliega un tramo de historia en un solo nodo, reutilízalo desde varios lugares y enruta según el resultado que devuelve su nodo Return."
 ---
 
 Un subgrafo es un grafo dentro de un nodo. Lo usas para plegar un tramo de historia en una sola caja del
@@ -120,8 +120,8 @@ razonable.
 
 **4. Llámalo desde los otros dos lugares.**
 
-En el camino del sur y en las afueras del molino, crea un SubGraph Node en cada uno, y apunta cada
-`subGraph` al mismo asset de grafo. Cada uno de los tres puntos que la llaman enruta `win` y `talked` a *su
+En el camino del sur y en las afueras del molino, crea un SubGraph Node en cada uno, y apunta el campo
+`subGraph` de cada uno al mismo asset de grafo. Cada uno de los tres puntos que la llaman enruta `win` y `talked` a *su
 propia* continuación, porque las rutas viven en quien llama, no en el subgrafo. La pelea se escribe una vez;
 las consecuencias son locales.
 

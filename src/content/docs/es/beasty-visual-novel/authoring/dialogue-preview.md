@@ -1,6 +1,6 @@
 ---
 title: "Vista previa de diálogo"
-description: "La Vista previa de diálogo te muestra cómo se ve un nodo —fondo, personajes, props, cuadro de diálogo— sin entrar al modo Play."
+description: "Mira un nodo como lo verá el jugador —fondo, personajes, cuadro de diálogo— sin entrar al modo Play, y salta directo a cualquier bloque."
 ---
 
 La Vista previa de diálogo te muestra cómo se ve un nodo: el fondo, los personajes, los props, el cuadro

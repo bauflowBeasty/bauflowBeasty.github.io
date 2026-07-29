@@ -1,6 +1,6 @@
 ---
 title: "Rutinas de personajes"
-description: "Personajes que están donde deben estar, cuando deben estar. Una rutina dice: dado el día, el momento del día y el estado del mundo, en qué sala está este personaje — o si no está en ninguna."
+description: "Una rutina pone a cada personaje en la sala correcta a la hora correcta: perfiles, reglas de primera coincidencia, la grilla y las variables que publican."
 ---
 
 Personajes que están donde deben estar, cuando deben estar. Una rutina dice: dado el día, el momento del día y
@@ -38,7 +38,7 @@ Dos formas de escribirlo:
 
 - el bloque **Routine override** (categoría de paleta **World**): elige el personaje, elige el nombre del perfil.
   Deja el perfil vacío para volver al perfil por defecto.
-- un bloque **Set variable** sobre `maya.routineMode`, que hace exactamente lo mismo. El bloque es solo la
+- un bloque **Set variable** sobre `maya.routineMode`, que hace exactamente lo mismo. El bloque es la
   versión tipada, guiada por selector.
 
 En el script `.vnbeasty`, lo mismo es una línea:

@@ -57,7 +57,7 @@ the scene where the player accepts the job, and make that variable the quest's *
 ### Rewards and penalties
 
 Both are lists of variable effects: `gold += 50`, `maya.affection += 1`, `item.bread = 3`. Item grants are
-just effects on the item's count. Each is **latched** — it fires once and only once, no matter how many times
+effects on the item's count. Each is **latched** — it fires once and only once, no matter how many times
 the quest is recomputed.
 
 ## Stages, and what "ordered" means
@@ -106,7 +106,7 @@ quest bread_run objective run = true
 ### The eight objective types
 
 Every type is a template that writes a **completion condition** underneath. The condition is still the truth;
-the type just gives you the right pickers instead of raw keys. **All of them resolve to a completion condition
+the type gives you the right pickers instead of raw keys. **All of them resolve to a completion condition
 except GatherDeliver**, which is completed by handing the items over.
 
 | Type | Use it when | What it asks for |
@@ -118,7 +118,7 @@ except GatherDeliver**, which is completed by handing the items over.
 | **GatherDeliver** | The player must fetch things and hand them over. | The items and counts. **Not** a condition — see below. |
 | **SubQuest** | This step is another whole quest. | A quest. Done when that quest is `completed`. |
 | **Condition** | Nothing above fits. | The raw condition, whatever you like. The escape hatch. |
-| **WaitTime** | The player just has to let time pass. | **Wait days** and/or **Wait dayparts**, counted from the moment the objective unlocked. Both must elapse. |
+| **WaitTime** | The player has to let time pass. | **Wait days** and/or **Wait dayparts**, counted from the moment the objective unlocked. Both must elapse. |
 
 > **Note**
 > **WaitTime with both values at 0 completes immediately.** The editor warns you.
@@ -176,7 +176,8 @@ menu. See [Talk menu](/docs/beasty-visual-novel/world/talk-menu/), which owns th
 
 ### The map marker
 
-When a step moves a character (below), you can say what she looks like where she has been moved to:
+When a step moves a character (below), you can choose what she looks like in the room she has been
+moved to:
 
 ![The map marker of a quest step: sprite, position, scale and sorting order](/docs-images/beasty-visual-novel/vn-quest-marker.png)
 
@@ -216,8 +217,8 @@ A quest completes when **enough required objectives are done**:
 
 - **Completion threshold 0** (the default) means *all* required objectives.
 - A threshold of N means *at least N* of them — "clean any 3 of the 4 rooms".
-- If **no** objective is marked required, the threshold is measured against the objectives that exist (all of
-  them, or your threshold). A quest with only optional objectives is not free money.
+- If **no** objective is marked required, the threshold is measured against all the objectives instead:
+  every one of them at threshold 0, or at least N. A quest with only optional objectives is not free money.
 
 When it completes, the reward fires once. When **Fails when** passes while it is active, the quest fails and
 the penalty fires once.

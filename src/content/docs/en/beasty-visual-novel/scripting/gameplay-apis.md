@@ -1,6 +1,6 @@
 ---
 title: "Gameplay APIs"
-description: "Four static classes in Beasty.VN.Runtime: BeastyTime, BeastyRoutines, BeastyQuests and Inventory. They are the code face of the world systems you author in th"
+description: "BeastyTime, BeastyRoutines, BeastyQuests and Inventory: the static classes that read and write the world systems from code, in every app state."
 ---
 
 Four static classes in `Beasty.VN.Runtime`: `BeastyTime`, `BeastyRoutines`, `BeastyQuests` and `Inventory`.

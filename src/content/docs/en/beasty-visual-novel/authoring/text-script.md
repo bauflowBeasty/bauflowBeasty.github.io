@@ -1,6 +1,6 @@
 ---
 title: "The text script"
-description: "Write a whole scene as a plain-text file instead of clicking nodes together. The .vnbeasty format is a Ren'Py-like script that stays in two-way sync with the"
+description: "Write a scene as a plain-text .vnbeasty script that stays in two-way sync with the story graph, with an in-editor tab and a safety contract."
 ---
 
 Write a whole scene as a plain-text file instead of clicking nodes together. The `.vnbeasty` format is a
@@ -94,7 +94,9 @@ The toolbar:
 
 **Save & apply is undoable.** One `Ctrl+Z` — in Unity, not in the text editor — restores the entire graph,
 its nodes and the localization texts to their pre-import state. **Format**, linking a script and **Unlink**
-are undoable too. Automatic imports (saving the `.vnbeasty` file in an external editor) are unchanged.
+are undoable too. Automatic imports (saving the `.vnbeasty` file in an external editor) are the exception:
+Unity does not allow undo registration during an asset import, so `Ctrl+Z` cannot revert them. Their
+safety net is the timestamped `.bak` backup described under [The safety contract](#the-safety-contract).
 
 Under the editor, a report box shows the result of the last import: what was applied, what was refused, and
 the line number of the offending statement. Warnings land there too — a name that does not match anything
@@ -123,7 +125,9 @@ that **Save & apply** runs, under the same rules. You do not have to come back t
 button with a warning marker (`Graph ⚠`) instead of `Graph`, so you notice before your next edit overwrites
 the other side. Nothing has been overwritten at that point — the automatic mirror deliberately refuses to
 pick a winner between two edits a human has not reconciled. Open the Text tab, look at the script, and save
-when you are happy with it.
+when you are happy with it. The standoff only holds until one side is saved: the moment you save the
+`.vnbeasty` file in an external editor, the import runs, the script wins, and the graph's previous state is
+written to a `.bak` backup — see [The safety contract](#the-safety-contract).
 
 ## The safety contract
 
@@ -154,8 +158,9 @@ destroy authoring work.
   you can read it, and you can paste it back. Every destructive import gets its own backup file: two bad
   saves in a row cannot leave you with only the degraded copy. If the backup cannot be written — a
   read-only folder, a full disk — the import is refused rather than performed without a safety net.
-- **If both sides changed since the last sync, the most recent save wins**, and a `.bak` of the overwritten
-  side is left next to the file. You are told which side was kept and where the backup is.
+- **If both sides changed since the last sync, the most recent save wins.** Saving the `.vnbeasty` file is
+  what triggers the import, so the script is kept and the graph's previous state goes to the `.bak` next to
+  the file. The report box tells you which side was kept and where the backup is.
 - **Assets resolve by GUID.** The name in the script is how *you* find the asset; the node stores the asset
   itself. Move `bedroom.png` to another folder, or rename it, and the synced node still points at it. Run
   **Format** to refresh the name written in the text.

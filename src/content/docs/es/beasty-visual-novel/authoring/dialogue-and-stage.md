@@ -1,6 +1,6 @@
 ---
 title: "Diálogo y el escenario"
-description: "Las dos cosas que haces con más frecuencia: escribir una línea y ambientar la escena en la que ocurre. Ambas viven como bloques dentro de un Dialogue Node."
+description: "Cómo escribir una línea y ambientar la escena que la rodea: speakers, estados de interpretación, fondos, personajes, props y la cadena de reserva del arte."
 ---
 
 Esta página trata sobre las dos cosas que haces con más frecuencia: escribir una línea y ambientar la
@@ -178,14 +178,21 @@ limpia el canal: el bloque simplemente se salta.
 
 ## La cadena de reserva de expresión y retrato
 
-No vas a dibujar cada expresión para cada personaje, y no hace falta. Cuando el motor necesita arte para un
-personaje, recorre una cadena:
+No vas a dibujar cada expresión para cada personaje, y no hace falta. En el **escenario**, la cadena es:
 
-**la expresión que pediste -> el `base` del personaje -> el sprite de escenario del personaje**
+**la expresión que pediste -> el sprite `base` del personaje**
 
-La misma cadena se aplica a los retratos. Así que un personaje con solo un sprite `base` sigue funcionando
-en todas partes: pides `angry`, obtienes `base`, y el juego funciona. Nada da error, nada se vuelve rosa,
-nada desaparece. Dibuja el sprite `angry` más tarde y todas las líneas que ya lo pedían empiezan a mostrarlo.
+Así que un personaje con solo un sprite `base` sigue funcionando en todas partes: pides `angry`, obtienes
+`base`, y el juego sigue. Nada da error, nada se vuelve rosa. Dibuja el sprite `angry` más tarde y todas las
+líneas que ya lo pedían empiezan a mostrarlo. Dos casos límite que conviene conocer: un personaje sin sprite
+`base` se dibuja como un hueco vacío e invisible, sin ningún aviso, así que dale un `base` a todo el mundo;
+y una entrada de expresión que existe pero no tiene sprite asignado cuenta como arte: muestra nada en lugar
+de recurrir a la reserva.
+
+Los **retratos** recorren su propia cadena: la clave de retrato que pediste, luego el retrato `base` del
+personaje. Si no existe ninguno de los dos, el cuadro de diálogo oculta el panel del retrato; nunca toma
+prestado el sprite de escenario. Un personaje con arte de escenario pero sin arte de retrato habla sin
+retrato, sin más.
 
 La clave de expresión por defecto es `base`. Las expresiones y los retratos se configuran por personaje en
 [Personajes](/es/docs/beasty-visual-novel/world/characters/).

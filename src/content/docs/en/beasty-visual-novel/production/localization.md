@@ -1,6 +1,6 @@
 ---
 title: "Localization"
-description: "Translate a game that is already written: the two translation tables, adding and deleting languages, how the editor tells you which translations went out of date, importing and exporting spreadsheets, localizing the interface, and switching language while the game runs."
+description: "Translate a finished game: the two translation tables, stale-translation tracking, spreadsheet import and export, and switching language in game."
 ---
 
 Translate a game that is already written. This page covers the two translation tables, adding and deleting
@@ -76,7 +76,7 @@ Deleting the **main** language (index 0) is allowed, and the confirmation names 
 visible language is promoted, its texts become the source column, and the Story window, the supported-
 languages list and `defaultLanguage` all follow. The last remaining language cannot be deleted.
 
-Renaming is a delayed field on the language row: type the new code and press Enter, and the code is rewritten
+Renaming happens on the language row: type the new code and press Enter, and the code is rewritten
 in both tables, in the trash records, in the supported list and in `defaultLanguage`. The cells are
 positional, so renaming keeps every text. Renaming onto a code that already exists is refused — it would
 silently merge two languages.
@@ -124,8 +124,9 @@ stale**, **Missing** or **Stale** only. The validator also reports the totals (s
 
 ## Import and export
 
-The table exports and imports delimited text (CSV or TSV, RFC 4180: quotes double up, and any field
-containing the delimiter, a quote or a newline is quoted). Punctuation inside dialogue is never a problem.
+The table travels as a spreadsheet file, so a translator never needs Unity. It exports and imports
+delimited text (CSV or TSV, RFC 4180: quotes double up, and any field containing the delimiter, a quote
+or a newline is quoted). Punctuation inside dialogue is never a problem.
 
 ![The Export dropdown with its three scopes](/docs-images/beasty-visual-novel/vn-localization-export-menu.png)
 
@@ -160,7 +161,8 @@ Two things import does deliberately:
 
 ## Localizing the interface
 
-Story text localizes itself: a node stores a key, and the view resolves it. Interface text has to be attached
+Story text localizes itself: a node stores a key, and the game looks up the active language's text when
+the line is shown. Interface text has to be attached
 to the label that shows it, and that attachment is the `VNLocalizedText` component: it holds one UI-table key
 and rewrites its TMP label whenever the active language changes. A label without it shows whatever text it was
 authored with, forever.
@@ -170,7 +172,7 @@ authored with, forever.
 ![The result dialog of Bake Localized UI Labels](/docs-images/beasty-visual-novel/vn-localization-bake.png)
 
 **Bake scene labels** in the Localization ▸ UI toolbar (also `Tools > Beasty VN > Setup > Bake Localized UI
-Labels`) walks every canvas in the open scene and adds `VNLocalizedText`, with its key already serialized, to
+Labels`) walks every canvas in the open scene and adds `VNLocalizedText`, with its key already filled in, to
 every label whose text matches a UI-table value.
 
 It writes **into the source prefabs**, not into the scene instances, so one bake fixes every instance in every

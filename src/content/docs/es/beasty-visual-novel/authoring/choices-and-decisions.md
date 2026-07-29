@@ -1,6 +1,6 @@
 ---
 title: "Elecciones y decisiones"
-description: "Dos nodos ramifican la historia, y no son intercambiables."
+description: "Los Choice Nodes preguntan al jugador; los Decision Nodes preguntan al mundo. Cómo construir ambos, más las condiciones y efectos que los gobiernan."
 ---
 
 Dos nodos ramifican la historia, y no son intercambiables.
@@ -187,7 +187,7 @@ lea dentro de seis meses.
 Un efecto es un cambio de variable: **variable, operación, valor**. Las operaciones son `Assign`, `Add`,
 `Subtract` y `Toggle` (que invierte un Bool e ignora el valor).
 
-En lo que toca a esta página, los efectos existen en tres lugares: en una opción de elección (se aplican
+Los efectos viven en tres lugares: en una opción de elección (se aplican
 cuando el jugador la elige), en una rama de decisión (cuando se toma la rama), y en un nodo Return (cuando
 un subgrafo devuelve el control). Escriben en el mismo almacén que el bloque **Set variable**, así que se
 conservan en las partidas guardadas y el rebobinado los revierte correctamente.

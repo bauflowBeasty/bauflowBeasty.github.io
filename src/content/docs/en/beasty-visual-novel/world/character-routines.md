@@ -1,6 +1,6 @@
 ---
 title: "Character routines"
-description: "Characters who are where they should be, when they should be. A routine says: given the day, the daypart and the state of the world, which room is this charac"
+description: "A routine puts each character in the right room at the right time: profiles, first-match rules, the grid editor, and the variables they publish."
 ---
 
 Characters who are where they should be, when they should be. A routine says: given the day, the daypart and
@@ -38,7 +38,7 @@ Two ways to write it:
 
 - the **Routine override** block (palette category **World**): pick the character, pick the profile name.
   Leave the profile empty to go back to the default.
-- a **Set variable** block on `maya.routineMode`, which does exactly the same thing. The block is just the
+- a **Set variable** block on `maya.routineMode`, which does exactly the same thing. The block is the
   typed, picker-driven version.
 
 In the `.vnbeasty` script the same thing is one line:

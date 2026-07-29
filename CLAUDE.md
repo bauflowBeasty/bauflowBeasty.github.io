@@ -15,5 +15,6 @@
   no abrir las páginas una a una. Regenerar con `npm run doc:index` tras tocar contenido.
 - EN (`src/content/docs/en/`) es el contenido canónico; ES (`src/content/docs/es/`) es espejo 1:1 con las mismas rutas.
 - Página nueva de docs ⇒ registrarla en `src/data/sidebars.ts` (EN y ES).
+- Toda página nueva o edición de prosa ⇒ seguir `docs/GUIA-ESTILO-DOCS.md` (estructura, voz, audiencia por sección, descriptions ≤158).
 - Producto nuevo ⇒ seguir `HOW-TO-ADD-PROJECT.md`.
 - No editar `dist/` (generado por el build).

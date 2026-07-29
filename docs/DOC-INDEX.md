@@ -101,7 +101,7 @@ Cobertura: **85 páginas** EN (y sus 85 espejos ES), **651 símbolos** indexados
 | `VN/troubleshooting` | Troubleshooting | The game boots to a black screen. The engine is running. There are zero errors in the console. · My time conditions are all false · My character never appears in a room · A block does nothing · Saving the text script deleted a block · My script will not import · The graph and the text disagree · A choice never shows up · My variable condition never fires · The streamed art is missing · Two assets behave as one · A translation looks out of date · Nothing here matches · See also |
 | `VN/world/character-routines` | Character routines | Where a routine lives · Profiles: swapping a whole schedule in one block · Rules: first match wins · The routine grid editor · Rooms are not the only way to be somewhere · What the character looks like in the room · When routines recompute · Clicking a character in a room · Quest routine overrides · The in-game routine calendar · Worked example: a baker · See also |
 | `VN/world/character-screens` | Character screens | Adding them · The cast list · The profile · The stats screen · The routine calendar · The quest log · How the player gets there · See also |
-| `VN/world/characters` | Characters | Creating a character · Identity · Expressions and portraits · Delivery styles · Aliases: showing a different name · Character variables (stats) · The FreeRoam sprite · Appearing in the cast list · The talk menu · See also |
+| `VN/world/characters` | Characters | Creating a character · Identity · Expressions and portraits · Delivery styles · Aliases: showing a different name · Character variables (stats) · The free-roam sprite · Appearing in the cast list · The talk menu · See also |
 | `VN/world/dictionary` | The dictionary | What it is, and what it is not · Creating an entry · Using it in a line · Setting it · Dictionary token or String variable? · See also |
 | `VN/world/free-roam-rooms` | Free-roam rooms | The map graph · What a room is · Creating a room and its prefab together · Conditional backgrounds · The room prefab · Entering a room from the story, and leaving again · Music per room · See also |
 | `VN/world/game-time` | Game time | The design decision, stated up front · Turning time on · The two modes · Every field of the Time Config · Advancing time · The reserved time variables · Common mistakes · See also |
@@ -562,7 +562,7 @@ Cobertura: **85 páginas** EN (y sus 85 espejos ES), **651 símbolos** indexados
 | `ResolveAt` | VN/scripting/gameplay-apis |
 | `ResolveIn` | VN/scripting/gameplay-apis |
 | `ResolveRoomBackground` | VN/scripting/custom-mode |
-| `Resources` | SS/reference/converter-modules VN/getting-started/installation VN/production/localization VN/production/vn-settings VN/reference/assets |
+| `Resources` | SS/reference/converter-modules VN/getting-started/installation VN/getting-started/your-first-scene VN/production/localization VN/production/vn-settings VN/reference/assets |
 | `Resources.Load` | SS/guides/what-gets-saved SS/reference/converter-modules SS/troubleshooting |
 | `RestoreBackup` | SS/getting-started/save-with-code SS/reference/results-and-errors SS/reference/save-file-format SS/troubleshooting |
 | `RestoreCustomStateJson` | VN/scripting/custom-mode VN/scripting/overview |
@@ -729,7 +729,7 @@ Cobertura: **85 páginas** EN (y sus 85 espejos ES), **651 símbolos** indexados
 | `VNChars.Maya.Affection` | VN/scripting/overview |
 | `VNConfirmDialog` | VN/reference/prefabs |
 | `VNContext` | VN/production/localization VN/production/vn-settings VN/reference/assets |
-| `VNGameController` | VN/index VN/reference/prefabs VN/scripting/controllers VN/scripting/overview VN/scripting/vn-api |
+| `VNGameController` | VN/index VN/reference/prefabs VN/scripting/controllers VN/scripting/custom-mode VN/scripting/overview VN/scripting/vn-api |
 | `VNGameController.EnterCustom` | VN/scripting/overview |
 | `VNGameController.Instance` | VN/scripting/controllers VN/scripting/overview |
 | `VNGameController.Instance.RollbackFromCustom` | VN/scripting/custom-mode |
@@ -748,7 +748,7 @@ Cobertura: **85 páginas** EN (y sus 85 espejos ES), **651 símbolos** indexados
 | `VNMusicConfig` | VN/reference/assets |
 | `VNSaveSlot` | VN/production/ui-prefabs VN/reference/prefabs |
 | `VNSession` | VN/scripting/overview VN/scripting/vn-api |
-| `VNSettings` | VN/production/vn-settings VN/reference/assets |
+| `VNSettings` | VN/getting-started/your-first-scene VN/production/vn-settings VN/reference/assets |
 | `VNSettings.asset` | VN/getting-started/installation |
 | `VNSettings.defaultLanguage` | VN/changelog VN/production/localization |
 | `VNSettings.gameContext` | VN/reference/assets |

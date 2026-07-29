@@ -1,6 +1,6 @@
 ---
 title: "Variable keys"
-description: "Every key that lives in the variable store, and how to write a condition against it. This is the page to open when you need a condition on the game time, a qu"
+description: "Every key in the variable store - variables, characters, time, quests, inventory - and how to write a condition against each one."
 ---
 
 Every key that lives in the variable store, and how to write a condition against it. This is the page to

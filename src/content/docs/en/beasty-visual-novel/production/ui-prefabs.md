@@ -1,11 +1,11 @@
 ---
 title: "UI prefabs"
-description: "Everything the player sees is a uGUI prefab. There is no custom rendering layer, no proprietary UI framework and no hidden canvas: it is Unity UI, in prefabs"
+description: "Every screen the player sees is a Unity UI prefab you can open and edit. The prefab list, two ways to restyle, and the fix for the black-screen boot."
 ---
 
-Everything the player sees is a uGUI prefab. There is no custom rendering layer, no proprietary UI framework
-and no hidden canvas: it is Unity UI, in prefabs you can open and edit. This page lists them, and shows the two
-ways to restyle the game.
+Everything the player sees is a uGUI prefab (uGUI is Unity's built-in UI system). There is no custom
+rendering layer, no proprietary UI framework and no hidden canvas: it is Unity UI, in prefabs you can open
+and edit. This page lists them, and shows the two ways to restyle the game.
 
 ## The prefabs
 
@@ -31,11 +31,12 @@ The full field-by-field list is in the [prefab reference](/docs/beasty-visual-no
 ## How to restyle
 
 **Option 1: edit the prefab.** Open it, change the fonts, colours, sprites, layout and anchors, add your own
-decoration. The views find their pieces through their serialized fields, so as long as those fields still point
-at something, the prefab keeps working. This is the normal path and it costs nothing.
+decoration. The views find their pieces through the references you see in the Inspector, so as long as those
+fields still point at something, the prefab keeps working. This is the normal path and it costs nothing.
 
-**Option 2: point the views at your own canvas.** The views are ordinary MonoBehaviours with serialized
-references. Build your own canvas, put the views on it, wire the fields, and the engine drives your UI instead
+**Option 2: point the views at your own canvas.** The views are ordinary MonoBehaviours — plain Unity
+components — with references you wire in the Inspector. Build your own canvas, put the views on it, wire the
+fields, and the engine drives your UI instead
 of ours. Nothing in the runtime assumes the shipped hierarchy.
 
 ## The two prefab menu items

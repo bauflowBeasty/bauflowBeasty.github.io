@@ -1,6 +1,6 @@
 ---
 title: "La API estática VN"
-description: "VN es el punto de entrada estático a la historia en ejecución. Tus scripts nunca necesitan una referencia a un controlador: llaman a VN.Advance, leen VN.GetBool y se suscriben a VN.OnLineShown."
+description: "VN es el punto de entrada estático a la historia en ejecución: control de flujo, variables y eventos desde cualquier script, sin referencia a un controlador."
 ---
 
 `VN` es el punto de entrada estático a la historia en ejecución. Tus scripts nunca necesitan una referencia a
@@ -64,8 +64,10 @@ public static event Action<string, string> OnVariableChanged;
 
 - `OnNodeChanged` se dispara en cada nodo, incluyendo los nodos invisibles Decision, SubGraph y Return.
 - `OnLineShown` se dispara cuando una línea ha terminado de revelarse en pantalla. Su `DialogueLine` lleva
-  `SpeakerName`, `Body`, `NameColor`, `TextColor`, `Font`, `FontSizeMultiplier`, `Effect` y `Portrait`. El
-  `DialogueLine` puede ser null.
+  `SpeakerName`, `Body`, `NameColor`, `TextColor`, `Font`, `FontSizeMultiplier`, `Effect` y `Portrait`. La
+  narración no es null — llega como una línea con `SpeakerName` vacío. La línea solo es null si la vista de
+  diálogo fue destruida (una descarga de escena a mitad de sesión), así que comprueba el null en código
+  sensible al desmontaje.
 - `OnChoiceChosen` lleva el índice dentro de la lista que te dio `OnChoicePresented`, y se dispara antes de
   que la ruta avance.
 - `OnVariableChanged` lleva `(key, newValue)`. El valor es un string — así es como el almacén guarda todo — y

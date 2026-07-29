@@ -1,6 +1,6 @@
 ---
 title: "Referencia de assets"
-description: "Cada ScriptableObject que creas con Beasty Visual Novel, su ruta exacta en el menú Create y sus campos principales. Usa esta página como consulta; los conceptos se explican en Conceptos fundamentales."
+description: "Cada ScriptableObject que usa Beasty Visual Novel, su ruta exacta en el menú Create y sus campos principales. Una página de consulta, no un tutorial."
 ---
 
 Cada ScriptableObject que creas con Beasty Visual Novel, su ruta exacta en el menú `Create` y sus campos
@@ -43,7 +43,7 @@ duplica.
 | `VNTimeConfig` | `Create > Beasty VN > Config > Time Config` | Momentos del día, horas, días de la semana, estaciones. |
 | `CharacterDefinition` | `Create > Beasty VN > Characters > Character Definition` | Un personaje. |
 | `CharacterVariableSchema` | `Create > Beasty VN > Characters > Character Variable Schema` | Los campos que tiene cada personaje. |
-| `LocalizationTable` | `Create > Beasty VN > Localization > Localization Table` | Clave por idioma. |
+| `LocalizationTable` | `Create > Beasty VN > Localization > Localization Table` | Una grilla de claves por idioma. |
 | `FreeRoamMapGraph` | `Create > Beasty VN > FreeRoam > FreeRoam Map Graph` | Salas más rutinas de personaje. |
 | `QuestCatalog` | `Create > Beasty VN > Quests > Quest Catalog` | Las misiones del proyecto. |
 | Los siete tipos de nodo | `Create > Beasty VN > Advanced > Nodes > ...` | Normalmente creados por el grafo, no a mano. |

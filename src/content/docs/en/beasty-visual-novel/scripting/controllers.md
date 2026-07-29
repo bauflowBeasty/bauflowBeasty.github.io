@@ -1,6 +1,6 @@
 ---
 title: "Controllers"
-description: "The three MonoBehaviours you call from code: BeastyManager , VNGameController , VisualNovelController . All in Beasty.VN.Runtime."
+description: "The three MonoBehaviours you call from code: BeastyManager, VNGameController and VisualNovelController, and what each one owns."
 ---
 
 The three MonoBehaviours you call from code: `BeastyManager` (the rig), `VNGameController` (the app state and
@@ -126,7 +126,8 @@ public void EnterCustom();
 ```
 
 - `StartNewGame` clears the playthrough, resets the persistent stage and enters the VN host's project.
-- `EnterVisualNovel(project, nodeId)` switches project keeping the shared store, so progress carries over.
+- `EnterVisualNovel(project, nodeId)` switches to that project while keeping the shared store, so progress
+  carries over.
 - `PlayVisualNovelThenReturn` is the FreeRoam bridge: play a scene, then come back to the room you passed in.
   The optional `roomBackground` seeds the backdrop, so a dialogue with no Backdrop block of its own shows the
   room the player is standing in.

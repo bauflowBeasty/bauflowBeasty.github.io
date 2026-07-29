@@ -1,6 +1,6 @@
 ---
 title: "Character screens"
-description: "These are the screens the player opens about a character: the cast list, their profile, their stats, their weekly calendar and their quest log. All of them ar"
+description: "The cast list, profile, stats, routine calendar and quest log — ready-made screens about each character, and the settings that decide what they show."
 ---
 
 These are the screens the player opens *about* a character: the cast list, their profile, their stats,
@@ -39,7 +39,7 @@ A single character can opt out of the shared condition and carry its own instead
 per-character override on that character. Use it for the exception, not the rule: the villain who only
 appears in the list after chapter three.
 
-The list is virtualized, so a cast of a thousand opens instantly.
+The list is virtualized — only the rows on screen are drawn — so a cast of a thousand opens instantly.
 
 ## The profile
 

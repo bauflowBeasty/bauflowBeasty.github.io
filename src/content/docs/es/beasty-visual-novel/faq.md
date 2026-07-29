@@ -1,6 +1,6 @@
 ---
 title: "Preguntas frecuentes"
-description: "Respuestas cortas, con un enlace a la página donde está la explicación completa."
+description: "Respuestas cortas a preguntas comunes: código, render pipelines, guardado, localización, UI propia y migrar desde Ren'Py. Todas enlazan a la página completa."
 ---
 
 Respuestas cortas, con un enlace a la página donde está la explicación completa.
@@ -67,8 +67,8 @@ nada que pueda chocar con un paquete que ya uses.
 Sí. Beasty Save System viene incluido dentro de este paquete — no hay que importar nada aparte ni pagar nada
 extra.
 
-El guardado, la carga, el autoguardado, los slots, las miniaturas PNG, las copias de seguridad y la
-encriptación opcional funcionan de fábrica. Una partida guardada contiene todo el almacén de variables, la
+El guardado, la carga, el autoguardado, los slots, las miniaturas PNG, las copias de seguridad y el
+cifrado opcional funcionan de fábrica. Una partida guardada contiene todo el almacén de variables, la
 posición en la historia, el escenario, el estado del mundo libre, el historial de rebobinado y el estado de
 los componentes `BeastySaveable` de tu escena.
 

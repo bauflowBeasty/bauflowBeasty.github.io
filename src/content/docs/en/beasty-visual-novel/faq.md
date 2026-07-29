@@ -1,6 +1,6 @@
 ---
 title: "FAQ"
-description: "Short answers, with a link to the page that has the long one."
+description: "Short answers to common questions: code, render pipelines, saves, localization, custom UI and migrating from Ren'Py. Each links to the full page."
 ---
 
 Short answers, with a link to the page that has the long one.

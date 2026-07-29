@@ -1,6 +1,6 @@
 ---
 title: "Troubleshooting"
-description: "Symptom, cause, fix. Find your symptom, apply the fix, get back to work."
+description: "Symptom, cause, fix for the most common problems: black screen, silent blocks, refused imports, missing characters, stale translations."
 ---
 
 Symptom, cause, fix. Find your symptom, apply the fix, get back to work.

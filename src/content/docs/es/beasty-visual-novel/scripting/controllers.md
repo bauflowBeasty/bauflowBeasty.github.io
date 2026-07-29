@@ -1,6 +1,6 @@
 ---
 title: "Controladores"
-description: "Los tres MonoBehaviours que llamas desde código: BeastyManager, VNGameController y VisualNovelController. Todos en Beasty.VN.Runtime."
+description: "Los tres MonoBehaviours que llamas desde código: BeastyManager, VNGameController y VisualNovelController, y qué posee cada uno."
 ---
 
 Los tres MonoBehaviours que llamas desde código: `BeastyManager` (el rig), `VNGameController` (el estado de la

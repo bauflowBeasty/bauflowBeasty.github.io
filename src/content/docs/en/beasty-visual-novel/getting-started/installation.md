@@ -1,6 +1,6 @@
 ---
 title: "Installation"
-description: "What you need before you import Beasty Visual Novel, what happens when you do, and what each folder in the package is for. Read the render pipeline and input"
+description: "What you need before importing Beasty Visual Novel, what the import creates, and what each folder in the package is for. No pipeline or input setup required."
 ---
 
 What you need before you import Beasty Visual Novel, what happens when you do, and what each folder in
@@ -23,7 +23,7 @@ two places where a Unity package usually costs you an afternoon, and here they c
 The package works on **Built-in**, **URP** (the 2D Renderer included) and **HDRP** with no changes and no
 setup step.
 
-That is not a compatibility claim, it is a consequence of what the package is made of. It ships **no
+That is not a compatibility claim; it is a consequence of what the package is made of. It ships **no
 shaders and no materials of its own**. Everything the player sees is either:
 
 - **uGUI + TextMeshPro** — the dialogue box, the choices, the menus, the inventory, the character screens.
@@ -61,7 +61,7 @@ nothing. See [Streaming](/docs/beasty-visual-novel/production/streaming/).
 ## Beasty Save System and Beasty Console are bundled
 
 **Beasty Save System and Beasty Console ship inside this package. Do not import them separately.** If you
-already own either one as a standalone package, do not import both copies — you would end up with two
+already own either one as a standalone package, do not import both copies — you will end up with two
 copies of the same assemblies and the project will not compile.
 
 You get the full version of each, not a cut-down one. Saving is

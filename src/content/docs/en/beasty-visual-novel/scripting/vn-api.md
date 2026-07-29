@@ -1,6 +1,6 @@
 ---
 title: "The VN static API"
-description: "VN is the static entry point to the running story. Your scripts never need a reference to a controller: they call VN.Advance, read VN.GetBool, subscribe to VN"
+description: "VN is the static entry point to the running story: flow control, variables and events from any script, with no controller reference needed."
 ---
 
 `VN` is the static entry point to the running story. Your scripts never need a reference to a controller:
@@ -61,7 +61,9 @@ public static event Action<string, string> OnVariableChanged;
 
 - `OnNodeChanged` fires for every node, including the invisible Decision, SubGraph and Return nodes.
 - `OnLineShown` fires when a line has finished revealing on screen. Its `DialogueLine` carries `SpeakerName`,
-  `Body`, `NameColor`, `TextColor`, `Font`, `FontSizeMultiplier`, `Effect` and `Portrait`. It may be null.
+  `Body`, `NameColor`, `TextColor`, `Font`, `FontSizeMultiplier`, `Effect` and `Portrait`. Narration is not
+  null — it arrives as a line with an empty `SpeakerName`. The line is only null if the dialogue view has
+  been destroyed (a scene unload mid-session), so guard for it in teardown-sensitive code.
 - `OnChoiceChosen` carries the index into the list that `OnChoicePresented` gave you, and fires before the route
   advances.
 - `OnVariableChanged` carries `(key, newValue)`. The value is a string — that is how the store holds everything —

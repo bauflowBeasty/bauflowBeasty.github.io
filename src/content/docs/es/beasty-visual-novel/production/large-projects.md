@@ -1,6 +1,6 @@
 ---
 title: "Proyectos grandes"
-description: "Un juego de veinte horas no es un juego de dos horas con más nodos. Esta página trata de las partes del paquete construidas para escalar, y de los hábitos que evitan que una producción larga se estanque."
+description: "Un juego de veinte horas no es uno de dos horas con más nodos. Las partes del paquete pensadas para escalar y los hábitos que sostienen una producción larga."
 ---
 
 Un juego de veinte horas no es un juego de dos horas con más nodos. Esta página trata de las partes del

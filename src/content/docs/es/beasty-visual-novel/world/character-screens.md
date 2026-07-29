@@ -1,6 +1,6 @@
 ---
 title: "Pantallas de personaje"
-description: "Las pantallas que el jugador abre sobre un personaje: la lista de reparto, su perfil, sus estadísticas, su calendario semanal y su registro de misiones. Todas son prefabs uGUI normales."
+description: "Lista de reparto, perfil, estadísticas, calendario de rutina y registro de misiones: pantallas ya hechas y los ajustes que deciden qué muestran."
 ---
 
 Estas son las pantallas que el jugador abre *sobre* un personaje: la lista de reparto, su perfil, sus estadísticas,
@@ -39,7 +39,8 @@ Un personaje concreto puede dejar de usar la condición compartida y llevar la s
 anulación por personaje en él. Resérvalo para la excepción, no para la regla: el villano que solo
 aparece en la lista después del capítulo tres.
 
-La lista está virtualizada, así que un reparto de mil personajes se abre al instante.
+La lista está virtualizada — solo se dibujan las filas que hay en pantalla —, así que un reparto de mil
+personajes se abre al instante.
 
 ## El perfil
 

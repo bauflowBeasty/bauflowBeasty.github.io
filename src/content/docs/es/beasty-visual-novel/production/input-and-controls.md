@@ -1,11 +1,11 @@
 ---
 title: "Entrada y controles"
-description: "Cada acción que una novela visual necesita viene enlazada de fábrica, en los dos backends de entrada de Unity. Esta página lista las acciones y sus valores predeterminados, y muestra cómo cambiarlos y cómo los reasigna el jugador."
+description: "Cada acción de una novela visual viene enlazada de fábrica en ambos backends de entrada. Valores por defecto, dónde cambiarlos y cómo reasigna el jugador."
 ---
 
 Cada acción que una novela visual necesita viene enlazada de fábrica, en los dos backends de entrada de
-Unity. Esta página lista las acciones y sus valores predeterminados, muestra dónde los cambias, y explica
-cómo el jugador los reasigna.
+Unity — el nuevo Input System y el Input Manager clásico. Esta página lista las acciones y sus valores
+predeterminados, muestra dónde los cambias, y explica cómo el jugador los reasigna.
 
 ## Las acciones y sus valores predeterminados
 
@@ -73,8 +73,8 @@ lo configura en el propio Input Manager de Unity.
 ## Reasignación por parte del jugador
 
 Los enlaces de arriba son los valores PREDETERMINADOS con los que se lanza tu juego. Las reasignaciones del
-jugador son una capa aparte que se aplica encima, y persisten: se guardan en `PlayerPrefs` y se
-vuelven a aplicar en el siguiente arranque. Una pantalla de controles puede guardarlas, recargarlas o borrarlas
+jugador son una capa aparte que se aplica encima, y persisten: se guardan en `PlayerPrefs` (el almacén de
+ajustes por máquina de Unity) y se vuelven a aplicar en el siguiente arranque. Una pantalla de controles puede guardarlas, recargarlas o borrarlas
 (`SaveOverrides`, `LoadOverrides`, `ResetOverrides` en las acciones de entrada), y borrarlas devuelve el juego a
 tus valores predeterminados.
 

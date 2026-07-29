@@ -1,6 +1,6 @@
 ---
 title: "Instalación"
-description: "Lo que necesitas antes de importar Beasty Visual Novel, qué pasa cuando lo haces, y para qué sirve cada carpeta del paquete. Lee las secciones de render pipeline e input aunque tengas prisa."
+description: "Lo que necesitas antes de importar Beasty Visual Novel, qué crea la importación y para qué sirve cada carpeta del paquete. Sin configurar pipeline ni input."
 ---
 
 Lo que necesitas antes de importar Beasty Visual Novel, qué ocurre cuando lo haces, y para qué sirve cada

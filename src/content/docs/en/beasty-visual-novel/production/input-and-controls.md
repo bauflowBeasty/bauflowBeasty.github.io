@@ -1,10 +1,11 @@
 ---
 title: "Input and controls"
-description: "Every action a visual novel needs is bound out of the box, on both of Unity's input backends. This page lists the actions and their defaults, shows where you"
+description: "Every action a visual novel needs is bound out of the box on both input backends. The defaults, where you change them, and how the player rebinds."
 ---
 
-Every action a visual novel needs is bound out of the box, on both of Unity's input backends. This page lists
-the actions and their defaults, shows where you change them, and explains how the player rebinds them.
+Every action a visual novel needs is bound out of the box, on both of Unity's input backends — the new
+Input System and the classic Input Manager. This page lists the actions and their defaults, shows where you
+change them, and explains how the player rebinds them.
 
 ## The actions and their defaults
 
@@ -69,7 +70,8 @@ old backend that wants a gamepad configures it in Unity's own Input Manager.
 ## Rebinding by the player
 
 The bindings above are the DEFAULTS your game ships with. The player's own rebinds are a separate layer applied
-on top of them, and they persist: they are saved to `PlayerPrefs` and re-applied on the next launch. A controls
+on top of them, and they persist: they are saved to `PlayerPrefs` (Unity's per-machine settings storage) and
+re-applied on the next launch. A controls
 screen can save, reload or clear them (`SaveOverrides`, `LoadOverrides`, `ResetOverrides` on the input
 actions), and clearing them returns the game to your defaults.
 

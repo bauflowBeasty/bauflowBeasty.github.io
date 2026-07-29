@@ -1,6 +1,6 @@
 ---
 title: "Your first scene"
-description: "From an empty Unity project to a scene you can press Play on: a backdrop, a character who says two lines, and a choice that branches. You will not write a sin"
+description: "From an empty Unity project to a playable scene: a backdrop, a character who speaks two lines, and a choice that branches. No code, about ten minutes."
 ---
 
 From an empty Unity project to a scene you can press Play on: a backdrop, a character who says two lines,
@@ -39,8 +39,8 @@ wiring**. If a scene ever comes up broken, running it again is the first thing t
 
 ## 2. Get the assets
 
-The wizard also creates the data assets your scene needs, and asks you where to save them. If it did not
-ask (because you already had assets), or you want to do this step on its own, run:
+**Create Scene** also creates the data assets your scene needs, and asks you where to save them. If it
+did not ask (because you already had assets), or you want to do this step on its own, run:
 
 ```text
 Tools > Beasty VN > Content > Create Base Assets (intro + FreeRoam map)
@@ -48,7 +48,7 @@ Tools > Beasty VN > Content > Create Base Assets (intro + FreeRoam map)
 
 It creates **only what is missing**, wires it in, and never duplicates or overwrites anything. If you want
 a story project and nothing else — no free-roam map — use `Tools > Beasty VN > Setup > Blank Canvas`
-instead. Either way you end up with four assets. Here is what each one **is**:
+instead. Either way you end up with a small family of assets. Four of them are the ones to understand:
 
 | Asset | What it is |
 |---|---|
@@ -57,7 +57,12 @@ instead. Either way you end up with four assets. Here is what each one **is**:
 | **StoryGraph** | The canvas your nodes live on. It comes with one Dialogue node already in it, marked as the entry node — that is where playback starts. |
 | **LocalizationTable** | Every line of text in the story, keyed, one column per language. Your dialogue lives here even if you never translate it. |
 
-If those four words mean nothing to you yet, that is fine — keep going, and read
+The StoryGraph and its first node live **inside** the `intro` asset, so you will not see them as separate
+files. The rest of the family is support you will meet later: a music config (`intro_Music`), a
+character-variable schema (`intro_CharacterVariables`), the FreeRoam map (`freeroammapscheme`) and a
+`VNSettings` asset in `Resources`.
+
+If those names mean nothing to you yet, that is fine — keep going, and read
 [Core concepts](/docs/beasty-visual-novel/getting-started/core-concepts/) afterwards.
 
 ## 3. Open the editor
@@ -229,6 +234,7 @@ choice cruce:
     choice "Talk to him" -> stayed
 ```
 
+The words after `label` and `choice` are node names, so yours will show whatever your nodes are called.
 Once you can read that, you can write dialogue as fast as you can type. Read
 [The text script](/docs/beasty-visual-novel/authoring/text-script/).
 

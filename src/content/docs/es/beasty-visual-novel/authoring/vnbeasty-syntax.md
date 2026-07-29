@@ -1,6 +1,6 @@
 ---
 title: "Referencia de sintaxis .vnbeasty"
-description: "Cada construcción del guion de texto .vnbeasty, para consulta. Un archivo es una escena: cada label es un nodo, y jump los conecta entre sí. Si nunca has usado el formato, empieza por El guion de texto."
+description: "La gramática completa del guion .vnbeasty: cada sentencia, encabezado de nodo, condición y efecto, con ejemplos, para consulta."
 ---
 
 Cada construcción del guion de texto `.vnbeasty`, para consulta. Un archivo es una escena: cada `label` es un
@@ -65,8 +65,8 @@ clave:
 | `talkmenu charla (ana):` | `TalkMenuNode` | Abre el menú de conversación del personaje entre paréntesis. Consulta [El menú de conversación](#el-menú-de-conversación). |
 | `flow to_town:` | `FlowNode` | Una transición como nodo propio. Consulta [Flujo y transiciones](#flujo-y-transiciones). |
 
-Esta forma con el tipo delante es la que emite el escritor: un guion enlazado se reescribe a ella en la
-siguiente sincronización con el grafo. Un `label` cuya **única** línea es una salida de flujo `->` sigue
+Esta forma con el tipo delante es la canónica: en la siguiente sincronización con el grafo, un guion
+enlazado se reescribe para usarla. Un `label` cuya **única** línea es una salida de flujo `->` sigue
 compilando a un `FlowNode` sin necesidad de la palabra clave `flow`.
 
 La forma anterior con etiqueta, `label <nombre> (choice):`, se sigue parseando, así que los guiones
@@ -115,7 +115,7 @@ backdrop sky, hills parallax 0.4, street at 0 -20 order 2   # capas, de atrás h
 ```
 
 Un fondo de video se reproduce en bucle, con su audio a volumen completo, y arranca en cuanto aparece. Cada
-modificador desactiva una de esas cosas:
+modificador sobrescribe uno de esos valores por defecto:
 
 | Modificador | Efecto |
 |---|---|
@@ -313,7 +313,7 @@ Las formas de avance empiezan con una cantidad con signo, las formas de fijar em
 | `time +<n> days` | Avanza n días. |
 | `time daypart <name>` | Fija el momento del día. |
 | `time hour <n>` | Fija la hora. Solo en modo Clock. |
-| `time weekday <name>` | Fija el día de la semana. Siempre hacia adelante; el mismo día cuenta. |
+| `time weekday <name>` | Avanza hasta el siguiente día de la semana que coincida. Si hoy ya coincide, la fecha no se mueve. |
 
 La unidad puede ir en singular (`+1 day` es lo mismo que `+1 days`); la forma canónica escrita desde el
 grafo siempre es plural. Los nombres de momento del día y día de la semana son los configurados en la

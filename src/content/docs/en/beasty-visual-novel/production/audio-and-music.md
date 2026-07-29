@@ -1,6 +1,6 @@
 ---
 title: "Audio and music"
-description: "Sound comes in two layers: cues the story fires from a block, and a background music queue that follows the player from the main menu into the story and out i"
+description: "Two layers of sound: cues fired from story blocks, and a background music queue per app mode. The four channels, the mixer, and per-room overrides."
 ---
 
 Sound comes in two layers: **cues** the story fires from a block, and a **background music queue** that follows
@@ -19,12 +19,12 @@ run through.
 | Voice | Voice lines. A new line stops the previous one. |
 
 Every channel routes through the shipped **`BeastyVNMixer`** AudioMixer, which has a group per channel under a
-Master group. The player's volume sliders in the preferences screen drive the mixer's exposed parameters, and a
+Master group. The player's volume sliders in the preferences screen drive the mixer's channel volumes, and a
 block's own volume sets the source volume, so the two compose: a quiet cue stays quiet relative to whatever the
 player chose.
 
-Each channel owns at least two physical AudioSources, which is what lets music and ambience crossfade instead
-of cutting.
+Each channel owns at least two AudioSources — Unity's sound players — which is what lets music and ambience
+crossfade instead of cutting.
 
 > **Note**
 > If you leave a mixer group unassigned the manager still plays the sound; it just does not route that channel
@@ -57,7 +57,7 @@ fade of 0 swaps instantly.
 
 The persistent soundtrack is authored once, in a **Music Config** asset
 (`Create > Beasty VN > Config > Music Config`), and edited in the **Music** tab of the Beasty VN window. It
-holds one queue per top-level app mode:
+holds one queue per top-level app mode — the part of the game the player is in:
 
 ![The Music tab: one queue per app mode](/docs-images/beasty-visual-novel/vn-tab-music.png)
 

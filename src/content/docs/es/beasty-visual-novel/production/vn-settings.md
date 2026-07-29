@@ -42,7 +42,7 @@ Consulta [Localización](/es/docs/beasty-visual-novel/production/localization/) 
 | `autosaveAntiRollbackMargin` | Segundos. Un autoguardado en la MISMA posición que el más reciente, dentro de este margen, se omite — así que retroceder y volver a elegir la misma opción no puede inundar el anillo de autoguardado. 2 segundos por defecto. |
 | `maxAutosaves` | Cuántos slots de autoguardado tiene el anillo. Cuando está lleno, el más antiguo se sobrescribe. 6 por defecto. |
 | `saveSlotsPerPage` | Cuántos slots manuales muestra una página de la pantalla de guardado. 6 por defecto. |
-| `saveManualPages` | Cuántas páginas manuales se muestran inicialmente. El índice crece automáticamente más allá de esto, sin límite. |
+| `saveManualPages` | Cuántas páginas manuales se muestran inicialmente. El número de páginas crece automáticamente más allá de esto, sin límite. |
 | `allowSaveNaming` | Si el jugador puede titular una partida. Cuando está desactivado, un slot se etiqueta con su marca de tiempo de creación local. |
 | `defaultSaveThumbnail` | La imagen de respaldo mostrada para un slot GUARDADO cuyo PNG de miniatura falta o no se puede leer. Los slots vacíos usan en su lugar el arte de stock del prefab del slot, no esto. |
 

@@ -1,6 +1,6 @@
 ---
 title: "Modo personalizado"
-description: "VNAppState.Custom es la puerta abierta. No tiene UI incorporada: el motor cambia a este estado, te entrega la pantalla y se detiene. Pon ahí tu minijuego, tu sistema de batalla o tu mapa del mundo."
+description: "VNAppState.Custom entrega la pantalla a tu propio modo. Cómo entrar, salir, y hacer que tu minijuego guarde, cargue y rebobine con el resto del juego."
 ---
 
 `VNAppState.Custom` es la puerta abierta. No tiene UI incorporada: el motor cambia a este estado, te entrega
@@ -59,6 +59,7 @@ anterior — y devuelve false cuando no hay nada a lo que retroceder. Conéctalo
 ## Guardar tu modo
 
 El motor no puede saber cuál es el estado de tu modo, así que te lo pide, como string, y lo guarda tal cual.
+Ambos hooks son campos de `VNGameController`:
 
 ```csharp
 public Func<string> CaptureCustomStateJson;   // tú lo llenas
@@ -83,8 +84,8 @@ antes de cambiar de modo. No hace nada si `CaptureCustomStateJson` no está cone
 
 ## Los hooks de FreeRoam
 
-El mismo patrón, pero el motor ya trae una implementación, así que solo tocas esto si estás reemplazando
-FreeRoam:
+El mismo patrón — estos también son campos de `VNGameController` — pero el motor ya trae una
+implementación, así que solo tocas esto si estás reemplazando FreeRoam:
 
 ```csharp
 public Func<FreeRoamSaveState> CaptureFreeRoamState;

@@ -1,6 +1,6 @@
 ---
 title: "Variables y condiciones"
-description: "Todo lo que tu juego recuerda es una variable. Todo lo que tu juego decide es una condición. Esta página es la base del resto de la sección World: misiones, objetos, tiempo, rutinas y pantallas se construyen sobre estas dos ideas."
+description: "Las variables son lo que tu juego recuerda; las condiciones, cómo decide. El almacén compartido, el bloque Set variable, cláusulas, efectos y @self."
 ---
 
 Todo lo que tu juego recuerda es una variable. Todo lo que tu juego decide es una condición. Esta página es
@@ -160,8 +160,8 @@ Cada cláusula después de la primera lleva una unión: **And** u **Or**.
 a  AND  b  OR  c
 ```
 
-significa `(a AND b) OR c`, no `a AND (b OR c)`. Es la precedencia booleana de toda la vida, y la fuente más
-común de condiciones que "no funcionan". Si quieres la otra agrupación, reordena las cláusulas o divide la
+significa `(a AND b) OR c`, no `a AND (b OR c)`. AND antes que OR es la agrupación estándar, y es la fuente
+más común de condiciones que "no funcionan". Si quieres la otra agrupación, reordena las cláusulas o divide la
 lógica entre dos ramas de un nodo de decisión.
 
 ### Las dos reglas que engañan a todo el mundo
@@ -169,8 +169,8 @@ lógica entre dos ramas de un nodo de decisión.
 > **Advertencia**
 > **Una condición vacía siempre es verdadera.** Sin cláusulas significa "sin condición", y eso significa "sí". Una
 > elección con una condición vacía siempre se ofrece; una puerta con una excepción de acceso vacía siempre está
-> abierta. Es lo que quieres casi siempre — por eso puedes dejar el campo de condición en paz y todo se muestra
-> sin más — pero significa que no puedes ocultar algo dejando la condición en blanco.
+> abierta. Es lo que quieres casi siempre — por eso puedes dejar el campo de condición en paz y todo se
+> muestra — pero significa que no puedes ocultar algo dejando la condición en blanco.
 
 > **Advertencia**
 > **Una cláusula sin token está incompleta, y se evalúa como falsa.** Si añades una cláusula y olvidas elegir

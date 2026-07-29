@@ -1,6 +1,6 @@
 ---
 title: "Audio y música"
-description: "El sonido tiene dos capas: cues que la historia dispara desde un bloque, y una cola de música de fondo que acompaña al jugador desde el menú principal hasta la historia y el mundo."
+description: "Dos capas de sonido: cues disparados desde bloques y una cola de música de fondo por modo de app. Los cuatro canales, el mezclador y los overrides por sala."
 ---
 
 El sonido tiene dos capas: **cues** que la historia dispara desde un bloque, y una **cola de música de
@@ -19,12 +19,12 @@ cubre ambas, y el mezclador por el que pasan.
 | Voice | Líneas de voz. Una línea nueva detiene la anterior. |
 
 Cada canal se enruta a través del AudioMixer incluido **`BeastyVNMixer`**, que tiene un grupo por canal bajo un
-grupo Master. Los deslizadores de volumen del jugador en la pantalla de preferencias controlan los parámetros
-expuestos del mezclador, y el volumen propio de un bloque establece el volumen de la fuente, así que ambos se
+grupo Master. Los deslizadores de volumen del jugador en la pantalla de preferencias controlan los volúmenes
+de canal del mezclador, y el volumen propio de un bloque establece el volumen de la fuente, así que ambos se
 combinan: un cue silencioso se mantiene silencioso en proporción a lo que haya elegido el jugador.
 
-Cada canal tiene al menos dos AudioSources físicos, que es lo que permite que la música y la ambientación
-hagan crossfade en lugar de cortarse.
+Cada canal tiene al menos dos AudioSources — los reproductores de sonido de Unity —, que es lo que permite
+que la música y la ambientación hagan crossfade en lugar de cortarse.
 
 > **Nota**
 > Si dejas un grupo del mezclador sin asignar, el gestor igual reproduce el sonido; simplemente no enruta ese
@@ -57,7 +57,7 @@ el tiempo de fundido del bloque. Un fundido de 0 hace el cambio al instante.
 
 La banda sonora persistente se define una vez, en un asset **Music Config**
 (`Create > Beasty VN > Config > Music Config`), y se edita en la pestaña **Music** de la ventana de Beasty VN.
-Contiene una cola por cada modo de app de nivel superior:
+Contiene una cola por cada modo de app de nivel superior — la parte del juego en la que está el jugador:
 
 ![La pestaña Music: una cola por modo de la aplicación](/docs-images/beasty-visual-novel/vn-tab-music.png)
 

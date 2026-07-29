@@ -1,6 +1,6 @@
 ---
 title: "Validación e ids"
-description: "Dos herramientas que encuentran por ti los problemas que, de otro modo, encontrarían tus jugadores: el validador, que recorre el proyecto en busca de referencias que apuntan a nada, y las herramientas de ids, que arreglan el único error que rompe una historia en silencio."
+description: "El validador busca referencias que apuntan a nada y las herramientas de ids arreglan los duplicados — los errores que, si no, encontrarían tus jugadores."
 ---
 
 Dos herramientas que encuentran por ti los problemas que, de otro modo, encontrarían tus jugadores: el validador,
@@ -83,7 +83,7 @@ un asset de Beasty:
 - Código generado desactualizado: `VNVars` y `VNChars` se reconstruyen, así que una variable o personaje que
   eliminaste deja de existir también en tu C# (ver [Accesores generados](/es/docs/beasty-visual-novel/scripting/generated-accessors/)).
 
-Es idempotente y ligero, así que ejecutarlo nunca es un riesgo.
+Es ligero, y ejecutarlo dos veces no hace más que ejecutarlo una — así que nunca es un riesgo.
 
 ## Auto-wire
 

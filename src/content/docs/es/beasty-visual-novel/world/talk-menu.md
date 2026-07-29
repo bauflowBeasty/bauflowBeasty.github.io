@@ -1,6 +1,6 @@
 ---
 title: "El menú de conversación"
-description: "El centro de conversación de cada personaje: el menú de \"qué puedo decirle a esta persona ahora mismo\". Clica un personaje en una sala y esto es lo que se abre."
+description: "El centro de conversación de cada personaje: las entradas de misión aparecen solas, tú añades las permanentes, y cada entrada decide cómo termina."
 ---
 
 El centro de conversación de cada personaje: el menú de "qué puedo decirle a esta persona ahora mismo". Clica un personaje en una
@@ -77,9 +77,12 @@ lo contrario. Un bloque de flujo dentro de la rama siempre gana.
 | `GoToRoom` | Directo a otra sala. |
 | `None` | Nada. La rama decide por sí misma. |
 
-`GoToRoom` también recibe un ajuste **Clock** para la llegada: déjalo vacío y el tiempo avanza **un momento del día**
-(el clásico "pasan la tarde juntos" de los dating sims); fíjalo para mantener el reloj y que nada se mueva; o
-nombra un momento del día para saltar directamente a él.
+`GoToRoom` también recibe un ajuste **Clock** para la llegada:
+
+- déjalo vacío y el tiempo avanza **un momento del día** — el clásico "pasan la tarde juntos" de los
+  dating sims;
+- fíjalo en mantener el reloj y el tiempo no se mueve;
+- nombra un momento del día para saltar directamente a él.
 
 Vale la pena entender `BackToMenu`: el menú se **reevalúa** cuando vuelves a él, así que una entrada que acaba de
 volverse falsa desaparece, y una que acaba de volverse verdadera está ahí. Entrega las manzanas, vuelve al menú, y

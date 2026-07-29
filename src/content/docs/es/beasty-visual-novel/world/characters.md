@@ -1,6 +1,6 @@
 ---
 title: "Personajes"
-description: "Un personaje es un miembro del reparto: un nombre, un conjunto de sprites, una forma de hablar y un puñado de números que la historia cambia. Esta página cubre todo lo que defines en un personaje."
+description: "De qué se compone un personaje: identidad, sprites, estilos de interpretación, alias y estadísticas — todo lo que defines en un Character Definition."
 ---
 
 Un personaje es un miembro del reparto: un nombre, un conjunto de sprites, una forma de hablar y un puñado de
@@ -31,7 +31,7 @@ expresiones, estilos de entrega, retratos), **Variables** (estadísticas), **Que
 | **Id** | El nombre estable que usa todo el motor (`maya`). Se rellena automáticamente a partir del nombre del asset como un slug en minúsculas, y es editable. |
 | **Display name** | El nombre que lee el jugador. Texto plano, no se traduce. Puede contener `[tokens]`. |
 | **Name color** | El color de acento de la placa de nombre. |
-| **Text color** | El color por defecto del texto del cuerpo de este personaje. Un estilo de interpretación puede anularlo. |
+| **Text color** | El color por defecto del texto del cuerpo de este personaje. Un estilo de interpretación (más abajo) puede anularlo. |
 | **Player can rename** | Si está activado, el jugador puede renombrar a este personaje en tiempo de ejecución, y su nombre se impone al tuyo. |
 | **Category** | `Main` o `Secondary`. Agrupa el reparto en el editor. |
 | **Tags** | Etiquetas libres (`feminine`, una facción, un capítulo). Agrupan y filtran la lista del reparto en el editor. Añádelas con **+ Tag**. |
@@ -90,7 +90,7 @@ Cada estilo define:
 | **Text effect** | Una decoración animada sobre el texto del cuerpo: `None`, `Wave`, `Shake`, `Fade` o `Pulse`. |
 
 Todo lo que dejes sin tocar cae en los valores por defecto del propio personaje. Un personaje que no define ningún estilo para
-un estado simplemente habla con normalidad — nunca estás obligado a rellenar los cuatro.
+un estado habla con normalidad — nunca estás obligado a rellenar los cuatro.
 
 ## Alias: mostrar un nombre distinto
 
@@ -99,7 +99,7 @@ hablando.
 
 ![La lista de alias de un personaje](/docs-images/beasty-visual-novel/vn-character-aliases.png)
 
-Añade alias con **+ Add alias** — son solo cadenas de texto ("El Desconocido", "La Voz"). Luego:
+Añade alias con **+ Add alias** — son cadenas de texto planas ("El Desconocido", "La Voz"). Luego:
 
 - **Solo para una línea:** en un bloque **Dialogue**, define su alias de nombre visible. La placa de nombre dice
   "El Desconocido" para esa línea y nada más cambia. El id, las variables y los sprites del personaje quedan
@@ -166,8 +166,8 @@ Para cambiar una variable de personaje desde la historia está el bloque **Chara
 
 ![El campo del sprite de mundo libre, con las marcas de mostrar ubicación y rutina](/docs-images/beasty-visual-novel/vn-character-freeroam-sprite.png)
 
-**FreeRoam sprite** es el sprite que se usa cuando el personaje está de pie en una sala, colocado ahí por su rutina.
-Si lo dejas vacío, se usa la expresión `base` del personaje. Dónde se para y qué tamaño tiene lo decide
+El campo **Free Roam Sprite** contiene el sprite que se usa cuando el personaje está de pie en una sala,
+colocado ahí por su rutina. Si lo dejas vacío, se usa el sprite de la expresión `base` del personaje. Dónde se para y qué tamaño tiene lo decide
 el prefab de la sala, no este campo — consulta [Rutinas de personajes](/es/docs/beasty-visual-novel/world/character-routines/).
 
 Dos interruptores relacionados controlan qué puede ver el jugador sobre el paradero del personaje:

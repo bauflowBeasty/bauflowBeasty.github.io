@@ -78,7 +78,7 @@ Restyle the template and every row follows.
 overwrites anything. `Tools > Beasty VN > Setup > Upgrade UI Prefabs (keep customizations)` updates them
 while keeping your restyling.
 
-The `VNLocalizedText` components on these prefabs are what makes the menus follow the player's language. After
+The `VNLocalizedText` components on these prefabs make the menus follow the player's language. After
 rebuilding or restyling, run `Bake Localized UI Labels` so any label that lost its component gets it back -
 see [Localization](/docs/beasty-visual-novel/production/localization/).
 

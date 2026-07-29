@@ -1,6 +1,6 @@
 ---
 title: "Solución de problemas"
-description: "Síntoma, causa, solución. Encuentra tu síntoma, aplica la solución, y vuelve al trabajo."
+description: "Síntoma, causa, solución para los problemas más comunes: pantalla negra, bloques mudos, imports rechazados, personajes ausentes, traducciones obsoletas."
 ---
 
 Síntoma, causa, solución. Encuentra tu síntoma, aplica la solución, y vuelve al trabajo.
