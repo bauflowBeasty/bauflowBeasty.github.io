@@ -1,6 +1,6 @@
 ---
 title: "Results and errors"
-description: "Every save and load call returns a typed result carrying a BeastySaveError. This page lists the result members and all thirteen error values, with what causes"
+description: "SaveResult, LoadResult and the thirteen BeastySaveError codes: what causes each one and what your game should do about it."
 ---
 
 Every save and load call returns a typed result carrying a `BeastySaveError`. This page lists the result
@@ -226,8 +226,8 @@ migrations could not bridge the gap. Three causes, each named in `Message`:
 The file was read, verified and decrypted; the data simply does not fit the object. Causes:
 
 - **A field failed to convert** in strict mode. The message is `Field '<Type>.<field>' failed to load: ...`
-  — usually a field whose type changed (a `string` became an `int`), or a field that is now missing from
-  the JSON as a value type.
+  — usually a field whose type changed (a `string` became an `int`), or a value-type field that is
+  missing from the JSON.
 - **An unsupported collection type.** The writer turns any `IEnumerable` into an array, but a collection
   with no `Add`, `Enqueue` or `Push` cannot be read back.
 - **A converter threw** while populating a component.

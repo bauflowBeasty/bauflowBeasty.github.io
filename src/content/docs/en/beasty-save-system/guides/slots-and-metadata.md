@@ -1,6 +1,6 @@
 ---
 title: "Slots and metadata"
-description: "A slot is one save file. This page covers how slots are named, listed and deleted, and how to attach a small block of metadata to each one so you can build a"
+description: "How slots are named, listed and deleted, and how to attach plain-text metadata so a save-slot screen never has to load a full save."
 ---
 
 A slot is one save file. This page covers how slots are named, listed and deleted, and how to attach a
@@ -40,7 +40,7 @@ A slot name must be a bare file name. It is rejected if it:
 - contains a character that is not valid in a file name,
 - is a Windows reserved device name: `CON`, `PRN`, `AUX`, `NUL`, `COM1`-`COM9`, `LPT1`-`LPT9`.
 
-The device names are rejected on every platform, not just Windows, so a save folder written on macOS or
+The device names are rejected on every platform, not only Windows, so a save folder written on macOS or
 Linux stays usable when the same player moves to a Windows machine.
 
 A rejected name never touches the disk. The call comes back as a failed result with the error
@@ -51,7 +51,7 @@ Invalid slot name '../hack': it contains '..'.
 ```
 
 Anything else is fine: `slot1`, `autosave`, `quicksave`, `Chapter 2 - the well`. If you let the player
-type the slot name, check it before you use it, or just show the message the result gives you. See
+type the slot name, check it before you use it, or show the message the result gives you. See
 [Results and errors](/docs/beasty-save-system/reference/results-and-errors/).
 
 ## Exists, Delete, ListSlots

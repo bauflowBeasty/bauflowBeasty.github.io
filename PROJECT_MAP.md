@@ -2,7 +2,7 @@
 
 > **Regla:** Leer este archivo ANTES de cualquier búsqueda en el proyecto. Si un cambio agrega, mueve, renombra o elimina archivos/carpetas (o cambia el propósito de algo listado aquí), actualizar este mapa en el mismo turno.
 >
-> Última actualización: 2026-07-28
+> Última actualización: 2026-07-29
 
 ## Qué es este proyecto
 
@@ -101,7 +101,8 @@ docs/  (documentación INTERNA del repo, no se publica)
 ├── superpowers/plans/    → Planes de implementación (2026-07-13 site-redesign, 2026-07-24 contact-page)
 ├── superpowers/specs/    → Specs de diseño (redesign, portada/marca/humanización ES)
 ├── GUIA-ESTILO-DOCS.md   → Norma de estilo/estructura para toda página nueva o edición de prosa (EN canónico)
-├── revision-en-visual-novel-2026-07-28.md → Registro de la revisión de estilo EN de VN (base para replicar en ES)
+├── revision-en-visual-novel-2026-07-28.md → Registro de la revisión de estilo EN de VN (replicada en ES el 29-jul)
+├── revision-en-save-console-2026-07-29.md → Registro de la revisión de estilo EN de Save System y Console (base para replicar en ES)
 ├── screenshots.json      → Catálogo de capturas: por imagen, prioridad, desde qué vista se toma y qué debe verse
 └── SCREENSHOTS.md        → GENERADO (`npm run doc:shots`): guion de las 187 capturas, por producto y página
 

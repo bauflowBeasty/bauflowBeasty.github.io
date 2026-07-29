@@ -1,6 +1,6 @@
 ---
 title: "What gets saved"
-description: "The rules of the system: which of your data ends up in the file, which of it does not, and which mistakes make a save fail outright. Read this page once, earl"
+description: "Which of your data ends up in the save file, which does not, and which mistakes fail a save outright. The one page every user should read early."
 ---
 
 The rules of the system: which of your data ends up in the file, which of it does not, and which mistakes
@@ -123,8 +123,8 @@ Some of the module converters do store an asset name rather than skipping the re
 with `Resources.Load`.
 
 That has a consequence you have to know: **it only works if the asset lives in a `Resources/` folder.** If
-it does not resolve, the reference already wired in the scene is left alone — no error, no crash, just the
-old value. If you rely on this, put the asset in `Resources/`. If that does not suit your project, save an
+it does not resolve, the reference already wired in the scene is left alone — no error, no crash, the
+old value stays. If you rely on this, put the asset in `Resources/`. If that does not suit your project, save an
 id in your own script and resolve it yourself, as above.
 
 ## The errors that fail a save
@@ -170,7 +170,7 @@ either encode it into a string, or replace the dictionary with a `List` of key/v
 **Cause.** The JSON engine has a 512-level nesting limit. It exists so a malformed or malicious file cannot
 blow the stack.
 
-**Fix.** In practice, hitting 512 levels means an accidental recursive structure — very often the same
+**Fix.** In practice, hitting 512 levels means an accidental recursive structure — usually the same
 problem as the reference cycle above. Flatten the data.
 
 ### A `ulong` bigger than `long.MaxValue`
@@ -180,7 +180,7 @@ problem as the reference cycle above. Flatten the data.
 **Cause.** JSON numbers are written as signed 64-bit values. A `ulong` above `long.MaxValue`
 (9,223,372,036,854,775,807) has no representation.
 
-**Fix.** Use `long`, or store the value as a `string` if you really need the full `ulong` range.
+**Fix.** Use `long`, or store the value as a `string` if you need the full `ulong` range.
 
 ## Checklist for a save class
 

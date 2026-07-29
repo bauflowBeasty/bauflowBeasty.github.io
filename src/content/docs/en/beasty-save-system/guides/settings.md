@@ -1,6 +1,6 @@
 ---
 title: "Settings"
-description: "BeastySaveSettings holds every option a save or load call uses: where the file goes, whether it is encrypted, whether a backup is kept, how strictly it loads,"
+description: "Every BeastySaveSettings field, its default, and when to change it: folder, extension, encryption, backups, strict loading and data version."
 ---
 
 `BeastySaveSettings` holds every option a save or load call uses: where the file goes, whether it is
@@ -159,7 +159,7 @@ A slot name is rejected when:
 | It contains characters that are not valid in a file name | `slot:1`, `slot*` | The OS cannot create the file. |
 | It is a Windows reserved device name | `CON`, `PRN`, `AUX`, `NUL`, `COM1`–`COM9`, `LPT1`–`LPT9` | The name addresses a device, not a file — `CON.save` included. |
 
-The Windows device names are rejected on **every** platform, not just Windows. A save folder written on
+The Windows device names are rejected on **every** platform, not only Windows. A save folder written on
 macOS or Linux stays usable if the player later copies it to a Windows machine.
 
 If your game lets players name their own saves, run the name past

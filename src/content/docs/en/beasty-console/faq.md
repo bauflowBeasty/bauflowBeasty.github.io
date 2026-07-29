@@ -1,7 +1,9 @@
 ---
 title: "FAQ"
-description: "No. The Beasty Console listens alongside Unity's Console, on the same log stream. Both windows show the same entries; the Beasty one classifies them by level"
+description: "Answers to the questions that come up most: Unity Console overlap, log files, release-build cost, custom levels and disappearing logs."
 ---
+
+Short answers, with a link to the page that has the long one.
 
 ## Does it replace Unity's Console?
 

@@ -1,6 +1,6 @@
 ---
 title: "Guardado y carga asíncronos"
-description: "Tres métodos te permiten guardar y cargar sin bloquear el hilo principal en la IO de disco. Esta página muestra cómo usarlos y deja claro qué mueven fuera del hilo principal y qué no."
+description: "Guarda y carga sin bloquear el hilo principal. Qué sacan del hilo principal SaveAsync, LoadAsync y LoadIntoAsync, y qué se queda en él."
 ---
 
 Tres métodos te permiten guardar y cargar sin bloquear el hilo principal en la IO de disco. Esta página muestra
@@ -22,7 +22,7 @@ vuelve con el mismo tipo de resultado. Nada lanza excepciones; compruebas el res
 ## Qué hacen realmente
 
 > **Nota**
-> La **IO de archivos** es asíncrona. **La serialización y la encriptación no lo son** — se ejecutan en el hilo que
+> La **IO de archivos** es asíncrona. **La serialización y el cifrado no lo son** — se ejecutan en el hilo que
 > llama al método, que normalmente es el hilo principal.
 
 Esa es la descripción honesta, y es la que conviene tener en cuenta al planificar.

@@ -1,6 +1,6 @@
 ---
 title: "API reference"
-description: "Every public member of BeastyConsoleLogger.BeastyConsole. The class is static. Object is UnityEngine.Object."
+description: "Every public member of BeastyConsoleLogger.BeastyConsole: the IsEnabled switch, the level methods, PrintLongMessage, LogColor and the tag table."
 ---
 
 Every public member of `BeastyConsoleLogger.BeastyConsole`. The class is static. `Object` is

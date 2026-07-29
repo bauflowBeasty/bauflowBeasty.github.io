@@ -1,6 +1,6 @@
 ---
 title: "Components"
-description: "The two MonoBehaviours of the save system. BeastySaveable marks a GameObject as part of a scene save; BeastySaveManager holds the settings and does the saving"
+description: "The two MonoBehaviours: BeastySaveable marks a GameObject for scene saves; BeastySaveManager holds the settings and runs SaveAll and LoadAll."
 ---
 
 The two MonoBehaviours of the save system. `BeastySaveable` marks a GameObject as part of a scene save;

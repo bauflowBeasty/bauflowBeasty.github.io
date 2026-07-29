@@ -1,6 +1,6 @@
 ---
 title: "Strict vs tolerant loading"
-description: "There are two ways to load a save whose contents no longer quite match your code. Strict refuses the whole file. Tolerant loads what it can and tells you what"
+description: "Strict loading refuses a save whose fields no longer match your code; tolerant loads what it can and warns you. When to pick each."
 ---
 
 There are two ways to load a save whose contents no longer quite match your code. Strict refuses the whole
@@ -121,7 +121,7 @@ Two more behaviours, in both modes:
 
 - A member that is **missing or null** in the file falls back silently to whatever the field already
   holds. That is not a warning in either mode. Adding a new field to your data class does not break old
-  saves; the new field simply keeps its default.
+  saves; the new field keeps its default.
 - A saveable that is in the scene but has no data in the file is left untouched, with a warning. It is not
   reset.
 

@@ -1,6 +1,6 @@
 ---
 title: "Beasty Save System"
-description: "Beasty Save System saves and loads your game's data as JSON files on disk, with no external dependencies and no exceptions thrown at you. It works two ways: d"
+description: "Save and load your game's data as JSON files on disk. No dependencies, no exceptions: typed results, atomic writes, backups, encryption, migrations."
 ---
 
 Beasty Save System saves and loads your game's data as JSON files on disk, with no external dependencies

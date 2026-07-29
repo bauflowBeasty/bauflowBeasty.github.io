@@ -11,9 +11,11 @@ have to satisfy.
 
 ## Beasty Visual Novel
 
-[Beasty Visual Novel](/docs/beasty-visual-novel/) logs through its own facade, `VNLog`, which finds this
-logger by reflection — the same way the save system does — and falls back to `UnityEngine.Debug` when the
-console is not in the project. The facade adds three things on top of the API:
+[Beasty Visual Novel](/docs/beasty-visual-novel/) logs through its own facade, `VNLog` — a thin wrapper
+class that forwards every message to whichever logger it finds. `VNLog` looks this logger up by
+reflection — by class name at runtime, without referencing the assembly — the same way the save system
+does, and falls back to `UnityEngine.Debug` when the console is not in the project. The facade adds
+three things on top of the API:
 
 ![The console filled with Beasty VN logs, tagged by category](/docs-images/beasty-console/log-vn-categories.png)
 
@@ -46,8 +48,9 @@ That is why both assets ship independently. You never have to install one to use
 > appearing as warnings in Unity's own Console, and they do not trip Error Pause. They are still there,
 > under the Caution filter in the Beasty Console. Errors are unaffected: they remain Unity errors.
 
-If you would rather keep the save system's warnings as Unity warnings, assign your own log sink on the save
-system's logging facade and route them where you want.
+If you would rather keep the save system's warnings as Unity warnings, assign your own log sink: implement
+`IBeastySaveLogSink` and set `BeastySaveLog.Sink`, a static field on the save system's logging facade.
+Assign it at runtime — the field resets on every Play.
 
 ## See also
 

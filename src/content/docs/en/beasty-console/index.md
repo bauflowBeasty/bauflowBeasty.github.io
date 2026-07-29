@@ -1,6 +1,6 @@
 ---
 title: "Beasty Console"
-description: "Beasty Console is a static logging API with semantic levels  that you call instead of Debug.Log. It also ships an editor console window that classifies,"
+description: "A static logging API with eleven semantic levels you call instead of Debug.Log, plus an editor console that classifies, filters and searches every log."
 ---
 
 Beasty Console is a static logging API with semantic levels (info, verbose, trace, debug, notice,

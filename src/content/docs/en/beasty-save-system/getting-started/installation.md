@@ -75,15 +75,15 @@ Anything beyond that comes from a module:
 | Particles | `ParticleSystem` | `com.unity.modules.particlesystem` |
 | Physics2D | `BoxCollider2D`, `CapsuleCollider2D`, `CircleCollider2D` | `com.unity.modules.physics2d` |
 | Physics3D | `BoxCollider`, `CapsuleCollider`, `SphereCollider`, `MeshCollider` | `com.unity.modules.physics` |
-| TMPro | `TMP_Text` and its subclasses | `com.unity.textmeshpro`, or `com.unity.ugui` 2.0.0 or newer |
+| TMPro | `TMP_Text` and its subclasses | The TextMeshPro assembly: `com.unity.textmeshpro` (any version), or `com.unity.ugui` 2.0.0 or newer, which ships it |
 | UGUI | `RectTransform`, `CanvasGroup`, `Image`, `RawImage`, `Slider`, `Toggle` | `com.unity.ugui` |
 
 You do not install these. They are already in the folder, and each one **registers itself automatically**
 when the game starts.
 
 Each module is a separate assembly gated by a define constraint on the Unity module it needs. If your
-project has stripped that Unity module out, the module's assembly does not compile, its converters simply
-do not exist, and the rest of the package keeps working. A project with no physics does not fail to
+project has stripped that Unity module out, the module's assembly does not compile, its converters do
+not exist, and the rest of the package keeps working. A project with no physics does not fail to
 compile because of a physics converter it was never going to use.
 
 The consequence to know: if you tick a component in `BeastySaveable` whose module is not present, the save

@@ -1,11 +1,11 @@
 ---
 title: "BeastySave API"
-description: "BeastySave is the static facade and the only entry point of the save system. Every method takes a BeastySaveSettings and returns a typed result. Nothing on th"
+description: "Complete reference for the BeastySave static facade: saving, loading, slots, registration, paths and logging, with the error codes each call returns."
 ---
 
-`BeastySave` is the static facade and the only entry point of the save system. Every method takes a
-`BeastySaveSettings` and returns a typed result. Nothing on this page throws, except the three
-registration methods, which throw on developer error.
+`BeastySave` is the static facade and the only entry point of the save system. Every save, load and
+slot method takes a `BeastySaveSettings` and returns a typed result. Nothing on this page throws,
+except the three registration methods, which throw on developer error.
 
 ## Namespaces
 

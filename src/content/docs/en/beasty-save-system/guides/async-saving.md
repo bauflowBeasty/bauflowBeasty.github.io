@@ -1,6 +1,6 @@
 ---
 title: "Async saving and loading"
-description: "Three methods let you save and load without blocking the main thread on disk IO. This page shows how to use them, and is precise about what they do and do not"
+description: "Save and load without blocking the main thread. What SaveAsync, LoadAsync and LoadIntoAsync move off the main thread, and what stays on it."
 ---
 
 Three methods let you save and load without blocking the main thread on disk IO. This page shows how to

@@ -1,6 +1,6 @@
 ---
 title: "The Save Manager window"
-description: "Tools > Beasty Save System > Save Manager opens the one editor window in the package. It does three things: it creates and configures the scene's BeastySaveMa"
+description: "Tour of the Save Manager window: create the manager, make objects saveable, and inspect, restore or delete the save files on disk."
 ---
 
 `Tools > Beasty Save System > Save Manager` opens the one editor window in the package. It does three

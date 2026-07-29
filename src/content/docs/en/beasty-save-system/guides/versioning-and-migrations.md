@@ -1,6 +1,6 @@
 ---
 title: "Versioning and migrations"
-description: "You shipped. Players have saves. Now you need to change your data class. This page is about doing that without breaking the files those players already have o"
+description: "How DataVersion and registered migrations let a new build open old saves without losing data, and why newer saves are refused."
 ---
 
 You shipped. Players have saves. Now you need to change your data class. This page is about doing that
@@ -68,7 +68,7 @@ static void RegisterMigration(int fromVersion, int toVersion, Func<JsonNode, Jso
 ```
 
 `JsonNode` is the package's own JSON node type — see [The JSON engine](/docs/beasty-save-system/reference/json-engine/) for
-the full API. For a migration you need very little of it: read a member, write a member, remove a member.
+the full API. For a migration you need three operations: read a member, write a member, remove a member.
 
 Here is the change described above, as a migration from data version 1 to 2:
 

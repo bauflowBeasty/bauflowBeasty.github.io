@@ -1,6 +1,6 @@
 ---
 title: "The Beasty Console window"
-description: "The window that reads your logs back to you: it classifies every entry by level, gives each level a filter toggle and a counter, and takes you from a stack-tr"
+description: "Every control of the Beasty Console window: level filters with live counts, search, Collapse, Error Pause, and stack-trace links that open your IDE."
 ---
 
 The window that reads your logs back to you: it classifies every entry by level, gives each level a filter
@@ -34,7 +34,9 @@ level is for.
 
 ![The level filter toggles, each with its live count](/docs-images/beasty-console/log-console-filters.png)
 
-There is a toggle for every level the API can produce, plus two for everything else: Plain and Unknown.
+There is a toggle for every level the API can produce, plus **Plain** — every log without Beasty
+formatting, such as a bare `Debug.Log` — and **Unknown**, a reserved category that stays at zero in
+normal use.
 
 ## The list
 
@@ -70,7 +72,7 @@ later.
 
 **It shows everything, not only Beasty logs.** The window listens to Unity's log stream, so it receives
 every log in the project: your own `Debug.Log` calls, and messages from third-party packages. An entry it
-cannot classify is filed as Plain (a plain log) or Unknown. If you want everything classified, log through
+cannot classify is filed under Plain. If you want everything classified, log through
 [the API](/docs/beasty-console/guides/logging/).
 
 **Collapse is not retroactive.** Turning Collapse on groups messages that arrive *from then on*. Entries

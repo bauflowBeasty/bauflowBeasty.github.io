@@ -1,6 +1,6 @@
 ---
 title: "Backups and corruption"
-description: "A save file is the player's time. This page explains what the package does to make sure a crash, a power cut or a damaged file does not take that time away, a"
+description: "How atomic writes and .bak backups protect saves from crashes and corruption, and how to offer the player a restore when a load fails."
 ---
 
 A save file is the player's time. This page explains what the package does to make sure a crash, a power
@@ -38,14 +38,14 @@ You do not have to do anything to get this. There is no "safe save" option to en
 The replace step in an atomic write is what produces the backup. The file that was in the slot does not
 get thrown away; it is moved to:
 
-![A slot file and its .bak sitting side by side in the save folder](/docs-images/beasty-save-system/save-backup-files.png)
-
 ```text
 {Folder}/{slot}.{Extension}.bak
 ```
 
 With the defaults, saving over `slot1` leaves `slot1.save` (the new save) and `slot1.save.bak` (the one
 before it) side by side.
+
+![A slot file and its .bak sitting side by side in the save folder](/docs-images/beasty-save-system/save-backup-files.png)
 
 The backup holds **one** version: the immediately previous save, not a history. Each save rotates the
 current file into the `.bak` and overwrites whatever `.bak` was there. If your game autosaves every

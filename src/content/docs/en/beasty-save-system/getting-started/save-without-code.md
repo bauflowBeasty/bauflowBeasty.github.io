@@ -1,6 +1,6 @@
 ---
 title: "Save without writing code"
-description: "This page takes you from an empty scene to a working save and load without a single line of C#. You will add two components, tick some boxes, and wire two but"
+description: "From an empty scene to a working save and load without writing C#: two components, a few ticked boxes, and two wired uGUI buttons."
 ---
 
 This page takes you from an empty scene to a working save and load without a single line of C#. You will
@@ -93,7 +93,7 @@ Select the button and find the **On Click ()** list at the bottom of its inspect
 That is the whole wiring. `SaveAll` gathers every saveable object in the scene, writes the components you
 ticked, and puts them all in a file called `slot1`.
 
-The slot name is just the file name. `slot1`, `autosave`, `quicksave` — whatever you type. A few names are
+The slot name is the file name, nothing more. `slot1`, `autosave`, `quicksave` — whatever you type. A few names are
 rejected (anything with a slash, anything with `..`, and the old Windows device names like `CON` or
 `PRN`); the reasons are in [settings.md](/docs/beasty-save-system/guides/settings/).
 

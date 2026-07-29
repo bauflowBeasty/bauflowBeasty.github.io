@@ -1,6 +1,6 @@
 ---
 title: "Custom converters"
-description: "A converter teaches the save system how to turn one family of types into JSON and back. Write one when the default path cannot reach your state, or when you w"
+description: "Write an IBeastyConverter to save state the default path cannot reach, override a built-in, and register it so it survives the Play Mode reset."
 ---
 
 A converter teaches the save system how to turn one family of types into JSON and back. Write one when the

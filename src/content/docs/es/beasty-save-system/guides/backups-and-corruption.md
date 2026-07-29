@@ -1,6 +1,6 @@
 ---
 title: "Copias de seguridad y corrupción"
-description: "Un archivo de guardado es el tiempo del jugador. Esta página explica qué hace el paquete para que un crash, un corte de luz o un archivo dañado no se lleven ese tiempo, y cómo ofrecer una vuelta atrás."
+description: "Cómo las escrituras atómicas y los backups .bak protegen los guardados de crashes y corrupción, y cómo ofrecer al jugador restaurar cuando una carga falla."
 ---
 
 Un archivo de guardado es el tiempo del jugador. Esta página explica qué hace el paquete para que un crash, un
@@ -38,14 +38,14 @@ No necesitas hacer nada para conseguir esto. No hay ninguna opción de "guardado
 El paso de reemplazo en una escritura atómica es lo que produce el backup. El archivo que estaba en el slot no
 se descarta; se mueve a:
 
-![El archivo de un slot y su .bak, uno al lado del otro en la carpeta de guardado](/docs-images/beasty-save-system/save-backup-files.png)
-
 ```text
 {Folder}/{slot}.{Extension}.bak
 ```
 
 Con los valores por defecto, guardar sobre `slot1` deja `slot1.save` (el guardado nuevo) y `slot1.save.bak` (el
 anterior) lado a lado.
+
+![El archivo de un slot y su .bak, uno al lado del otro en la carpeta de guardado](/docs-images/beasty-save-system/save-backup-files.png)
 
 El backup contiene **una** versión: el guardado inmediatamente anterior, no un historial. Cada guardado rota el
 archivo actual hacia el `.bak` y sobrescribe lo que hubiera en `.bak`. Si tu juego autoguarda cada

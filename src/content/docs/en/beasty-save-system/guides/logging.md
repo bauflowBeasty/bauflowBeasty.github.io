@@ -1,6 +1,6 @@
 ---
 title: "Logging"
-description: "The Logging dropdown on BeastySaveManager: what Auto, On, Verbose and Off each print, how to send the lines somewhere else, and what it costs in a release build."
+description: "The Logging dropdown on BeastySaveManager: what each mode prints, how to send the lines to your own sink, and what logging costs in a release build."
 ---
 
 The save system tells you what it did. By default it does so in the editor and in development builds, and
@@ -105,3 +105,10 @@ project (detected by reflection — the two assets ship independently, neither n
 Logging costs nothing measurable at `Auto` in a release build: the level is `Off` and every call returns
 before it touches a sink. The per-component Verbose lines are guarded so they do not even build their
 message unless Verbose is on.
+
+## See also
+
+- [Backups and corruption](/docs/beasty-save-system/guides/backups-and-corruption/) — the checksum warning above, and what to do about it
+- [Components](/docs/beasty-save-system/reference/components/) — `BeastySaveManager`, the component that hosts the Logging dropdown
+- [Results and errors](/docs/beasty-save-system/reference/results-and-errors/) — the error codes behind the messages
+- [Troubleshooting](/docs/beasty-save-system/troubleshooting/)

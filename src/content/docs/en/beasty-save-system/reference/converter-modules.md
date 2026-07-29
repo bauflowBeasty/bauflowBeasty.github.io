@@ -1,6 +1,6 @@
 ---
 title: "Converter modules"
-description: "A converter turns one type into JSON and back. The core layer is always there; seven optional modules cover the Unity packages you may or may not have. This p"
+description: "The seven optional converter modules and the always-on core layer, with the exact fields each built-in converter stores and restores."
 ---
 
 A converter turns one type into JSON and back. The `core` layer is always there; seven optional modules
@@ -183,8 +183,8 @@ mesh the scene gave it.
 
 ### TMP_Text (and TextMeshPro, TextMeshProUGUI)
 
-`text`, `fontSize`, the colour as four members `r`, `g`, `b`, `a`, `fontStyle` and `alignment` (both as raw
-integers).
+`text`, `fontSize`, the colour as four members `r`, `g`, `b`, `a`, plus `fontStyle` and `alignment`,
+both stored as raw integers.
 
 The font asset is not stored.
 

@@ -1,6 +1,6 @@
 ---
 title: "The JSON engine"
-description: "Beasty Save System ships its own JSON engine in BeastySaveSystemCore.Json. It is public and usable on its own, for anything: config files, network payloads, t"
+description: "JsonNode, JsonParser, JsonWriter and JsonMapper: the zero-dependency JSON engine the save system ships, usable on its own for config files or tooling."
 ---
 
 Beasty Save System ships its own JSON engine in `Beasty_SaveSystemCore.Json`. It is public and usable on

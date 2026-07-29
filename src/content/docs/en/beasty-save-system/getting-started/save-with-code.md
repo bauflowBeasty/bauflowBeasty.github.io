@@ -1,6 +1,6 @@
 ---
 title: "Save with code"
-description: "The five-minute path: a data class, a BeastySaveSettings, BeastySave.Save, BeastySave.Load<T>. This page is for people who write C#. If you would rather click"
+description: "The five-minute C# path: a data class, a BeastySaveSettings, then BeastySave.Save and BeastySave.Load with typed results instead of exceptions."
 ---
 
 The five-minute path: a data class, a `BeastySaveSettings`, `BeastySave.Save`, `BeastySave.Load<T>`. This
@@ -14,8 +14,8 @@ using Beasty_SaveSystem;      // BeastySave, BeastySaveable, BeastySaveManager
 using Beasty_SaveSystemCore;  // BeastySaveSettings, SaveResult, LoadResult<T>, BeastySaveError
 ```
 
-`BeastySave` is a static facade and the only entry point. There is nothing to instantiate and nothing to
-initialise.
+`BeastySave` is a static facade — one static class that fronts the whole system — and the only entry
+point. There is nothing to instantiate and nothing to initialise.
 
 ## 1. A data class
 

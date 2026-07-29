@@ -141,9 +141,10 @@ A corrupt file is never rotated into the backup, so the `.bak` is the last copy 
 
 **Cause.** One of two, and they are different problems:
 
-1. **The `Encrypted` flag does not match the file.** `Encrypted = true` refuses to load a plain-text save,
-   and a plain-text setting cannot read an encrypted one. This is the common one: you turned encryption on
-   mid-development and your existing saves are plain.
+1. **The `Encrypted` flag does not match the file.** `Encrypted = true` refuses to load a plain-text
+   save. This is the common one: you turned encryption on mid-development and your existing saves are
+   plain. The reverse mismatch — a plain-text setting reading an encrypted file — fails too, but as
+   `Corrupt`, because the checksum cannot match.
 2. **The key is wrong.** The `EncryptionKey` in `BeastySaveSettings` is not the one the file was written
    with. Note that an empty `EncryptionKey` is not "no key" — it means the shared default key.
 

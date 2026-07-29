@@ -1,6 +1,6 @@
 ---
 title: "Release builds"
-description: "What logging costs you in a shipped game, and what the master switch does and does not do. Read this page before you scatter a thousand log calls through your"
+description: "What logging costs in a shipped game, what the master switch IsEnabled does and does not do, and how to strip log calls from a release build for real."
 ---
 
 What logging costs you in a shipped game, and what the master switch does and does not do. Read this page

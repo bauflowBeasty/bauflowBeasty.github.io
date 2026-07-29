@@ -1,6 +1,6 @@
 ---
 title: "Save file format"
-description: "The on-disk format, for anyone who wants to inspect a save, write a tool against it, or understand exactly what the pipeline does. You do not need this page t"
+description: "The on-disk format: the envelope, the group document, the write pipeline and the load gates. For inspecting saves and writing tools against them."
 ---
 
 The on-disk format, for anyone who wants to inspect a save, write a tool against it, or understand exactly

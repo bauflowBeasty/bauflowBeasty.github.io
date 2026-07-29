@@ -24,9 +24,12 @@ serialization paths are exercised by a smoke scene run against a **real IL2CPP b
 editor with the backend switched. Round-trips of the supported types, the built-in converters, encryption
 and the group save all run there.
 
-You do not need link.xml entries for the package itself. If **your own** save data type is only ever
-referenced through `Load<T>` and nothing else, standard IL2CPP stripping rules apply to it like any other
-type in your game.
+You do not need link.xml entries for the package itself. Your own data types are safe too, with one
+exception: a field declared as a **collection interface** whose element is one of your structs — say
+`ISet<ItemStack> items;` — makes the mapper build `HashSet<ItemStack>` through reflection at load time.
+If that concrete combination appears nowhere in your code, IL2CPP never generated code for it, and the
+load fails in the player even though the editor was fine. Declare the field with the concrete type
+(`HashSet<ItemStack>`, `List<ItemStack>`, `Dictionary<int, ItemStack>`) and the problem cannot happen.
 
 ## Platforms
 
@@ -88,7 +91,8 @@ The practical consequences:
 ### JSON nesting depth
 
 The parser caps nesting at **512 levels** (`JsonParser.DefaultMaxDepth`). Data nested deeper than that
-fails to save. In practice nothing legitimate reaches 512 — a linked list stored as nested objects, or an
+saves without complaint but cannot be loaded back: the load fails with `ParseError`. In practice
+nothing legitimate reaches 512 — a linked list stored as nested objects, or an
 accidental deep structure, is what gets you there. A **reference cycle** is a separate, hard failure: the
 save fails with "save data must be acyclic". Your save data must be a tree.
 
@@ -122,9 +126,9 @@ Call the API from the **main thread**. That is the expectation the package is bu
   slot safe against corruption on disk — a half-written file never replaces a good one — but which of the
   two wins is not something you should be relying on.
 
-The internals that must be safe are: converter resolution is cached in a concurrent dictionary, and the
-mapper's per-load tolerance state is thread-local. That is enough for the async paths to be sound. It is
-not a licence to serialize a scene from a worker thread.
+Two internals are built to be thread-safe: converter resolution is cached in a concurrent dictionary,
+and the mapper's per-load tolerance state is thread-local. That is enough for the async paths to be
+sound. It is not a licence to serialize a scene from a worker thread.
 
 ### Data limits
 

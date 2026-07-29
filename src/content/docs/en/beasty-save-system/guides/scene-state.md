@@ -1,6 +1,6 @@
 ---
 title: "Scene state"
-description: "How to save the objects that are already in your scene: BeastySaveable marks an object as worth saving, BeastySaveManager writes them all to one file. This pa"
+description: "Saving objects already in your scene with BeastySaveable and BeastySaveManager, and the id rules that decide whether they come back."
 ---
 
 How to save the objects that are already in your scene: `BeastySaveable` marks an object as worth saving,
@@ -87,8 +87,10 @@ static BeastySaveable Register(GameObject target, params Component[] components)
 static BeastySaveable Register(GameObject target, string id, params Component[] components);
 ```
 
-The one without an id uses whatever id the object already has, which is only useful for objects that came
-from the scene. **For anything you spawned, use the overload that takes an id.**
+The one without an id keeps the id the object already has — and if the object has no `BeastySaveable`
+yet, one is added with a fresh generated id. A fresh id cannot match anything in an older save, which is
+fine for scene objects and useless for spawned copies. **For anything you spawned, use the overload that
+takes an id.**
 
 The id has to be something you can reproduce on the next run. `enemy.goblin.3` derived from your own game
 data is stable. `enemy.` plus `Guid.NewGuid()` is not — that is the same problem again, in your own code.

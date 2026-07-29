@@ -1,6 +1,6 @@
 ---
 title: "Encryption"
-description: "The save system can encrypt the contents of a save file so a player cannot open it in a text editor and change their gold to 999999. This page shows how to tu"
+description: "Turn on AES-256 encryption so players cannot edit their saves in a text editor, and an honest note on what that protection is worth."
 ---
 
 The save system can encrypt the contents of a save file so a player cannot open it in a text editor and
@@ -17,7 +17,7 @@ change their gold to 999999. This page shows how to turn it on, and is honest ab
 > anti-cheat measure in a multiplayer game — if a value must be trustworthy, it has to be validated on a
 > server you control, not stored on the player's disk.
 
-That is the whole caveat, and it applies to every save-encryption feature in every asset, not just this
+That is the whole caveat, and it applies to every save-encryption feature in every asset, not only this
 one. It is a property of shipping the key to the attacker. With that understood, encryption is still
 worth turning on: it makes casual save editing an inconvenience instead of a five-second job, and it stops
 your save file from being a spoiler-filled plain-text list of every chapter in your game.
@@ -95,7 +95,8 @@ read, and the two must agree.
 
 - A game with `Encrypted = true` **refuses to load a plain-text save**. It fails with `DecryptFailed` and
   the message "This save is not encrypted, but this game only loads encrypted saves."
-- A game with `Encrypted = false` cannot read an encrypted save either. The load fails.
+- A game with `Encrypted = false` cannot read an encrypted save either. The load fails as `Corrupt`,
+  because the checksum cannot match.
 
 The refusal is deliberate, not an oversight. If an encrypted game happily accepted plain-text saves, then
 anyone could hand-write a plain-text save and the game would load it — and encryption would protect
