@@ -806,7 +806,7 @@ Carpeta destino: `public/docs-images/beasty-visual-novel/` · 108 pendientes de 
 
 #### `vn-character-freeroam-sprite.png` — P2 · ⬜ pendiente
 
-- **Sección:** The FreeRoam sprite · El sprite FreeRoam
+- **Sección:** The free-roam sprite · El sprite FreeRoam
 - **Vista:** Unity ▸ Tools > Beasty VN > Editor ▸ pestaña Characters ▸ Cast
 - **Qué tiene que verse:** Recorte con el sprite de mundo libre asignado (miniatura visible) y, justo debajo, los dos interruptores: Show current location y Show routine.
 
