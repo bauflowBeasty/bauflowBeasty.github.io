@@ -1,6 +1,6 @@
 ---
 title: "Versionado y migraciones"
-description: "Publicaste, los jugadores tienen guardados y ahora necesitas cambiar tu clase de datos. Cómo hacerlo sin romper los archivos que esos jugadores ya tienen en disco."
+description: "Cómo DataVersion y las migraciones registradas dejan que un build nuevo abra guardados antiguos sin perder datos, y por qué se rechazan los más nuevos."
 ---
 
 Publicaste. Los jugadores tienen guardados. Ahora necesitas cambiar tu clase de datos. Esta página explica cómo hacerlo
@@ -68,7 +68,7 @@ static void RegisterMigration(int fromVersion, int toVersion, Func<JsonNode, Jso
 ```
 
 `JsonNode` es el tipo de nodo JSON propio del paquete — consulta [El motor JSON](/es/docs/beasty-save-system/reference/json-engine/) para
-la API completa. Para una migración necesitas muy poco de ella: leer un miembro, escribir un miembro, eliminar un miembro.
+la API completa. Para una migración necesitas tres operaciones: leer un miembro, escribir un miembro, eliminar un miembro.
 
 Este es el cambio de arriba, escrito como una migración de la versión de datos 1 a la 2:
 

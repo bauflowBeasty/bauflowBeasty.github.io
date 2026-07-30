@@ -1,7 +1,9 @@
 ---
 title: "Preguntas frecuentes"
-description: "Respuestas cortas a las dudas más comunes: qué reemplaza y qué no, qué cuesta en una build, y por qué a veces un mensaje se ve recortado."
+description: "Respuestas a las dudas más comunes: solape con la Consola de Unity, archivos de log, el costo en una build, niveles propios y logs que desaparecen."
 ---
+
+Respuestas cortas, con un enlace a la página que tiene la larga.
 
 ## ¿Reemplaza a la Consola de Unity?
 

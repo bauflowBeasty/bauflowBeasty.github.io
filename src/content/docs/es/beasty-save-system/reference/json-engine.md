@@ -1,6 +1,6 @@
 ---
 title: "El motor JSON"
-description: "Beasty Save System incluye su propio motor JSON, público y utilizable por sí solo: sirve para archivos de configuración, payloads de red o herramientas."
+description: "JsonNode, JsonParser, JsonWriter y JsonMapper: el motor JSON sin dependencias incluido en el paquete, usable por separado para configuración o herramientas."
 ---
 
 Beasty Save System incluye su propio motor JSON en `Beasty_SaveSystemCore.Json`. Es público y utilizable por

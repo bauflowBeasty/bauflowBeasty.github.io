@@ -1,6 +1,6 @@
 ---
 title: "Qué se guarda"
-description: "Las reglas del sistema: qué parte de tus datos termina en el archivo, cuál no, y qué errores hacen fallar un guardado por completo. Léela una vez, cuanto antes."
+description: "Qué parte de tus datos termina en el archivo, cuál no, y qué errores hacen fallar un guardado de plano. La página que todo usuario debería leer pronto."
 ---
 
 Las reglas del sistema: qué parte de tus datos termina en el archivo, cuál no, y qué errores hacen
@@ -123,8 +123,8 @@ Algunos de los convertidores de módulo sí almacenan un nombre de asset en luga
 con `Resources.Load`.
 
 Eso tiene una consecuencia que debes conocer: **solo funciona si el asset vive en una carpeta `Resources/`.** Si
-no se resuelve, la referencia ya conectada en la escena se deja intacta — sin error, sin crash, solo el
-valor anterior. Si dependes de esto, pon el asset en `Resources/`. Si eso no le conviene a tu proyecto, guarda un
+no se resuelve, la referencia ya conectada en la escena se deja intacta — sin error, sin crash, el
+valor anterior se mantiene. Si dependes de esto, pon el asset en `Resources/`. Si eso no le conviene a tu proyecto, guarda un
 id en tu propio script y resuélvelo tú mismo, como arriba.
 
 ## Los errores que hacen fallar un guardado
@@ -170,7 +170,7 @@ codifícala en un string, o reemplaza el diccionario por una `List` de pares cla
 **Causa.** El motor JSON tiene un límite de anidamiento de 512 niveles. Existe para que un archivo malformado o
 malicioso no pueda reventar la pila.
 
-**Solución.** En la práctica, llegar a 512 niveles significa una estructura recursiva accidental — muy a menudo el mismo
+**Solución.** En la práctica, llegar a 512 niveles significa una estructura recursiva accidental — normalmente el mismo
 problema que el ciclo de referencias de arriba. Aplana los datos.
 
 ### Un `ulong` mayor que `long.MaxValue`
@@ -180,7 +180,7 @@ problema que el ciclo de referencias de arriba. Aplana los datos.
 **Causa.** Los números JSON se escriben como valores con signo de 64 bits. Un `ulong` por encima de `long.MaxValue`
 (9,223,372,036,854,775,807) no tiene representación.
 
-**Solución.** Usa `long`, o almacena el valor como un `string` si realmente necesitas el rango completo de `ulong`.
+**Solución.** Usa `long`, o almacena el valor como un `string` si necesitas el rango completo de `ulong`.
 
 ## Checklist para una clase de guardado
 

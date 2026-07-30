@@ -1,6 +1,6 @@
 ---
 title: "Slots y metadatos"
-description: "Un slot es un archivo de guardado. Cómo se nombran, listan y eliminan los slots, y cómo adjuntarles metadatos para armar una pantalla de slots sin cargar los guardados."
+description: "Cómo se nombran, listan y eliminan los slots, y cómo adjuntar metadatos en texto plano para que una pantalla de slots nunca cargue un guardado completo."
 ---
 
 Un slot es un archivo de guardado. Esta página explica cómo se nombran, listan y eliminan los slots, y cómo adjuntar un
@@ -51,7 +51,7 @@ Invalid slot name '../hack': it contains '..'.
 ```
 
 Cualquier otro nombre es válido: `slot1`, `autosave`, `quicksave`, `Chapter 2 - the well`. Si dejas que el jugador
-escriba el nombre del slot, compruébalo antes de usarlo, o simplemente muestra el mensaje que te da el resultado. Consulta
+escriba el nombre del slot, compruébalo antes de usarlo, o muestra el mensaje que te da el resultado. Consulta
 [Resultados y errores](/es/docs/beasty-save-system/reference/results-and-errors/).
 
 ## Exists, Delete, ListSlots
@@ -76,7 +76,7 @@ siguiente sección, y la razón por la que existe esta página.
 
 Para dibujar una pantalla de slots de guardado necesitas el nombre del capítulo, el tiempo de juego, el nivel, la fecha. No necesitas
 el inventario completo del jugador. Cargar doce guardados completos para imprimir doce líneas de texto es un desperdicio, y
-si los guardados están encriptados es peor: tendrías que desencriptarlos todos.
+si los guardados están cifrados es peor: tendrías que descifrarlos todos.
 
 ![La metadata de un slot, resumida en la ventana Save Manager](/docs-images/beasty-save-system/save-slot-metadata.png)
 
@@ -120,14 +120,14 @@ if (meta.Success)
 ```
 
 `ReadMeta` lee el envelope del archivo y se detiene. No toca el payload de datos, no verifica el
-checksum, y no necesita la clave de encriptación.
+checksum, y no necesita la clave de cifrado.
 
 ## Los metadatos son texto plano, incluso cuando el guardado está encriptado
 
 Este trade-off es deliberado — es lo que hace barata una lista de slots — y conviene que lo tengas claro.
 
-Los datos de un guardado pueden estar encriptados. Los metadatos nunca lo están. Se quedan en texto plano en el archivo, así que
-`ReadMeta` puede construir tu lista de slots en un juego encriptado sin desencriptar nada, y así
+Los datos de un guardado pueden estar cifrados. Los metadatos nunca lo están. Se quedan en texto plano en el archivo, así que
+`ReadMeta` puede construir tu lista de slots en un juego cifrado sin descifrar nada, y así
 la [ventana Save Manager](/es/docs/beasty-save-system/guides/save-manager-window/) puede mostrarte un resumen de un slot para el que no tiene clave.
 
 Dos consecuencias:
@@ -139,7 +139,7 @@ Dos consecuencias:
 > La verdad vive en el payload de datos, que se verifica con checksum al cargar.
 
 Tampoco pongas nada privado en ellos. Si un valor no debería ser visible en un editor de texto, su lugar está en
-los datos, no en el meta. Consulta [Encriptación](/es/docs/beasty-save-system/guides/encryption/).
+los datos, no en el meta. Consulta [Cifrado](/es/docs/beasty-save-system/guides/encryption/).
 
 ## Un ejemplo trabajado: resúmenes de slot para una UI
 
@@ -211,7 +211,7 @@ slot que el jugador no puede ver es un slot que el jugador no puede reparar, y c
 
 - [Copias de seguridad y corrupción](/es/docs/beasty-save-system/guides/backups-and-corruption/) — restaurar un slot dañado
 - [Settings](/es/docs/beasty-save-system/guides/settings/) — `Folder`, `Extension`, `DataPath`
-- [Encriptación](/es/docs/beasty-save-system/guides/encryption/) — qué cubre la encriptación y qué no
+- [Cifrado](/es/docs/beasty-save-system/guides/encryption/) — qué cubre el cifrado y qué no
 - [La ventana Save Manager](/es/docs/beasty-save-system/guides/save-manager-window/) — la misma lista de slots, en el editor
 - [API de BeastySave](/es/docs/beasty-save-system/reference/api-beastysave/) — cada método de la fachada
 - [El formato del archivo de guardado](/es/docs/beasty-save-system/reference/save-file-format/) — dónde se ubica `meta` en el archivo

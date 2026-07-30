@@ -1,6 +1,6 @@
 ---
 title: "Convertidores personalizados"
-description: "Un convertidor le enseña al sistema de guardado a convertir una familia de tipos en JSON y viceversa. Escribe uno cuando el camino por defecto no llega a tu estado, o para reemplazar un convertidor integrado."
+description: "Escribe un IBeastyConverter para guardar estado fuera del camino por defecto, sobrescribe integrados y regístralo para que sobreviva al reinicio de Play Mode."
 ---
 
 Un convertidor le enseña al sistema de guardado cómo convertir una familia de tipos en JSON y viceversa.

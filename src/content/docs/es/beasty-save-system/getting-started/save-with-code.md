@@ -1,6 +1,6 @@
 ---
 title: "Guardar con código"
-description: "El camino de cinco minutos: una clase de datos, un BeastySaveSettings, BeastySave.Save, BeastySave.Load<T>. Esta página es para quienes escriben C#; si prefieres hacer clic, hay una guía sin código."
+description: "El camino C# de cinco minutos: una clase de datos, un BeastySaveSettings, BeastySave.Save y BeastySave.Load con resultados tipados en vez de excepciones."
 ---
 
 El camino de cinco minutos: una clase de datos, un `BeastySaveSettings`, `BeastySave.Save`, `BeastySave.Load<T>`. Esta
@@ -14,8 +14,8 @@ using Beasty_SaveSystem;      // BeastySave, BeastySaveable, BeastySaveManager
 using Beasty_SaveSystemCore;  // BeastySaveSettings, SaveResult, LoadResult<T>, BeastySaveError
 ```
 
-`BeastySave` es una fachada estática y el único punto de entrada. No hay nada que instanciar y nada que
-inicializar.
+`BeastySave` es una fachada estática — una única clase estática que expone todo el sistema — y el único
+punto de entrada. No hay nada que instanciar y nada que inicializar.
 
 ## 1. Una clase de datos
 
@@ -47,7 +47,7 @@ te ahorrará un rediseño.
 
 ## 2. Settings
 
-Cada llamada recibe un `BeastySaveSettings`. Lleva la ubicación, el flag de encriptación, el flag de backup, el
+Cada llamada recibe un `BeastySaveSettings`. Lleva la ubicación, el flag de cifrado, el flag de backup, el
 modo de carga y la versión de datos. Los valores por defecto sirven tal cual.
 
 ```csharp
@@ -62,7 +62,7 @@ private static readonly BeastySaveSettings Settings = new BeastySaveSettings
 ```
 
 Como las settings se pasan **por llamada**, un autoguardado y un guardado manual en el mismo proyecto pueden comportarse
-de forma diferente — carpetas distintas, niveles de exigencia distintos, uno encriptado y el otro no. Consulta
+de forma diferente — carpetas distintas, niveles de exigencia distintos, uno cifrado y el otro no. Consulta
 [settings.md](/es/docs/beasty-save-system/guides/settings/).
 
 ## 3. Guardar
@@ -100,7 +100,7 @@ comprobar; `result.Error` es un valor `BeastySaveError` y `result.Message` lo ex
 ### Metadatos
 
 El cuarto argumento opcional es un diccionario de strings escrito en el archivo **en texto plano, incluso cuando el
-guardado está encriptado**. Así es como una pantalla de selección de slot muestra "Chapter 3 — 01:22" sin desencriptar
+guardado está cifrado**. Así es como una pantalla de selección de slot muestra "Chapter 3 — 01:22" sin descifrar
 ni deserializar nada.
 
 ```csharp
@@ -208,8 +208,8 @@ SaveResult result = await BeastySave.SaveAsync(Data, "slot1", Settings);
 LoadResult<PlayerData> loaded = await BeastySave.LoadAsync<PlayerData>("slot1", Settings);
 ```
 
-Mismos resultados, mismos códigos de error. La IO de archivos ocurre de forma asíncrona; la serialización y la
-encriptación siguen ejecutándose en el hilo que llama. Evitan que un guardado grande bloquee el hilo principal en
+Mismos resultados, mismos códigos de error. La IO de archivos ocurre de forma asíncrona; la serialización y el
+cifrado siguen ejecutándose en el hilo que llama. Evitan que un guardado grande bloquee el hilo principal en
 la IO — no son un trabajo en segundo plano. [async-saving.md](/es/docs/beasty-save-system/guides/async-saving/) lo explica con precisión.
 
 ## Adónde ir a continuación

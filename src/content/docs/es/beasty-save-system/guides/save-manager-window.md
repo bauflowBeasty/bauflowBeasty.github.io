@@ -1,6 +1,6 @@
 ---
 title: "La ventana Save Manager"
-description: "Tools > Beasty Save System > Save Manager abre la única ventana de editor del paquete: crea el BeastySaveManager de la escena, hace guardables los objetos y muestra los archivos de guardado en disco."
+description: "Recorrido por la ventana Save Manager: crea el manager, haz guardables los objetos, e inspecciona, restaura o elimina los archivos de guardado en disco."
 ---
 
 `Tools > Beasty Save System > Save Manager` abre la única ventana de editor del paquete. Hace tres
@@ -27,7 +27,7 @@ La sección superior busca el `BeastySaveManager` en la escena abierta — inclu
 Hierarchy) y su inspector completo incrustado debajo.
 
 Ese inspector incrustado es donde editas **Settings** — la carpeta, la extensión, la ruta de datos,
-la encriptación, el backup, la carga estricta y la versión de datos usada por `SaveAll` y `LoadAll`. Editarlo aquí es
+el cifrado, el backup, la carga estricta y la versión de datos usada por `SaveAll` y `LoadAll`. Editarlo aquí es
 exactamente lo mismo que seleccionar el manager y editarlo en el Inspector; está aquí para que no tengas que
 cambiar tu selección mientras trabajas. Cada campo se explica en [settings.md](/es/docs/beasty-save-system/guides/settings/).
 
@@ -119,7 +119,7 @@ Cada archivo de guardado tiene su fila:
 **Un resumen de metadatos.** El diccionario `meta` escrito con el guardado, mostrado como hasta cuatro pares `key: value`
 unidos con `·`, y luego `…` si hay más. Este es el propósito de los metadatos: un nombre de capítulo, un
 tiempo de juego, un número de nivel, legibles de un vistazo. Los metadatos se quedan en **texto plano incluso en un guardado
-encriptado**, así que el resumen funciona esté o no encriptado el archivo, y sin la clave. Consulta
+cifrado**, así que el resumen funciona esté o no cifrado el archivo, y sin la clave. Consulta
 [slots-and-metadata.md](/es/docs/beasty-save-system/guides/slots-and-metadata/).
 
 Si el archivo no se puede leer en absoluto, el resumen se reemplaza por `unreadable:` y el error — `Corrupt`,

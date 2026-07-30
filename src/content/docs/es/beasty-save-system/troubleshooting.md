@@ -143,16 +143,17 @@ la verificación. Consulta
 
 **Causa.** Una de dos, y son problemas distintos:
 
-1. **El flag `Encrypted` no coincide con el archivo.** `Encrypted = true` rechaza cargar un guardado en texto plano,
-   y una configuración en texto plano no puede leer uno encriptado. Este es el caso común: activaste la encriptación
-   a mitad de desarrollo y tus guardados existentes están en texto plano.
+1. **El flag `Encrypted` no coincide con el archivo.** `Encrypted = true` rechaza cargar un guardado en
+   texto plano. Este es el caso común: activaste el cifrado a mitad de desarrollo y tus guardados existentes
+   están en texto plano. El desajuste inverso — una configuración en texto plano leyendo un archivo
+   cifrado — también falla, pero como `Corrupt`, porque el checksum no puede coincidir.
 2. **La clave es incorrecta.** El `EncryptionKey` en `BeastySaveSettings` no es el que se usó para escribir el
    archivo. Ten en cuenta que un `EncryptionKey` vacío no significa "sin clave" — significa la clave
    compartida por defecto.
 
 **Solución.** Haz que la configuración coincida con cómo se escribió el archivo. Si cambiaste la clave o el flag entre
-builds, los guardados antiguos son ilegibles y no hay forma de recuperarlos — eso es lo que significa la encriptación.
-Decide esto antes de publicar, no después. Consulta [Encriptación](/es/docs/beasty-save-system/guides/encryption/).
+builds, los guardados antiguos son ilegibles y no hay forma de recuperarlos — eso es lo que significa el cifrado.
+Decide esto antes de publicar, no después. Consulta [Cifrado](/es/docs/beasty-save-system/guides/encryption/).
 
 ---
 
@@ -278,7 +279,7 @@ Consulta [Resultados y errores](/es/docs/beasty-save-system/reference/results-an
 - [Qué se guarda](/es/docs/beasty-save-system/guides/what-gets-saved/)
 - [Estado de la escena](/es/docs/beasty-save-system/guides/scene-state/)
 - [Copias de seguridad y corrupción](/es/docs/beasty-save-system/guides/backups-and-corruption/)
-- [Encriptación](/es/docs/beasty-save-system/guides/encryption/)
+- [Cifrado](/es/docs/beasty-save-system/guides/encryption/)
 - [Versionado y migraciones](/es/docs/beasty-save-system/guides/versioning-and-migrations/)
 - [La ventana del Save Manager](/es/docs/beasty-save-system/guides/save-manager-window/)
 - [Preguntas frecuentes](/es/docs/beasty-save-system/faq/)

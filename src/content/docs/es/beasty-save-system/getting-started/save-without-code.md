@@ -1,6 +1,6 @@
 ---
 title: "Guardar sin escribir código"
-description: "Esta página te lleva desde una escena vacía hasta un guardado y una carga funcionando sin una sola línea de C#: dos componentes, unas casillas marcadas y dos botones conectados."
+description: "De una escena vacía a un guardado y una carga funcionando sin escribir C#: dos componentes, unas casillas marcadas y dos botones uGUI conectados."
 ---
 
 Esta página te lleva desde una escena vacía hasta un guardado y una carga funcionando sin una sola línea de C#. Vas a
@@ -40,7 +40,7 @@ Púlsalo. Aparece un GameObject llamado `Beasty Save Manager` en tu escena.
 > `Add Component > Beasty > Beasty Save Manager`. Mismo resultado. La ventana es más rápida.
 
 Selecciona el nuevo objeto y mira su inspector. Tiene un campo, **Settings**, y dentro están las
-opciones sobre dónde y cómo se escriben los guardados — carpeta, extensión, encriptación, backup, carga estricta,
+opciones sobre dónde y cómo se escriben los guardados — carpeta, extensión, cifrado, backup, carga estricta,
 versión de datos. Déjalos todos como están por ahora. Los valores por defecto son los correctos. Cuando tengas
 curiosidad, [settings.md](/es/docs/beasty-save-system/guides/settings/) los explica todos.
 
@@ -93,7 +93,7 @@ Selecciona el botón y busca la lista **On Click ()** al final de su inspector.
 Esa es toda la conexión. `SaveAll` recoge cada objeto guardable en la escena, escribe los componentes que
 marcaste, y los pone todos en un archivo llamado `slot1`.
 
-El nombre del slot es solo el nombre del archivo. `slot1`, `autosave`, `quicksave` — lo que escribas. Algunos
+El nombre del slot es el nombre del archivo, nada más. `slot1`, `autosave`, `quicksave` — lo que escribas. Algunos
 nombres se rechazan (cualquiera con una barra, cualquiera con `..`, y los viejos nombres de dispositivo de Windows
 como `CON` o `PRN`); las razones están en [settings.md](/es/docs/beasty-save-system/guides/settings/).
 
@@ -162,8 +162,8 @@ Poder leer tu propio archivo de guardado es una característica, no un descuido.
 esperabas, abre el archivo y míralo. La respuesta suele estar ahí mismo.
 
 Si prefieres que los jugadores no puedan leerlo, activa **Encrypted** en la configuración del manager — pero lee
-[encryption.md](/es/docs/beasty-save-system/guides/encryption/) primero, porque explica con honestidad qué te da la
-encriptación aquí y qué no.
+[encryption.md](/es/docs/beasty-save-system/guides/encryption/) primero, porque explica con honestidad qué te da el
+cifrado aquí y qué no.
 
 Guarda de nuevo desde el juego y notarás que aparece un segundo archivo: `slot1.save.bak`. Ese es el guardado
 anterior, conservado automáticamente. Si un archivo de guardado se estropea alguna vez, el botón **Restore Backup**
@@ -212,6 +212,6 @@ la página más importante de este paquete. Léela a continuación.
 - [what-gets-saved.md](/es/docs/beasty-save-system/guides/what-gets-saved/) — qué se guarda y recupera correctamente y qué no
 - [scene-state.md](/es/docs/beasty-save-system/guides/scene-state/) — ids, objetos generados en tiempo de ejecución, y el manager en profundidad
 - [save-manager-window.md](/es/docs/beasty-save-system/guides/save-manager-window/) — cada botón en la ventana del editor
-- [settings.md](/es/docs/beasty-save-system/guides/settings/) — carpeta, extensión, encriptación, backup, estricto, versión
+- [settings.md](/es/docs/beasty-save-system/guides/settings/) — carpeta, extensión, cifrado, backup, estricto, versión
 - [slots-and-metadata.md](/es/docs/beasty-save-system/guides/slots-and-metadata/) — convertir slots en una pantalla real de slots de guardado
 - [save-with-code.md](/es/docs/beasty-save-system/getting-started/save-with-code/) — el mismo sistema, desde un script

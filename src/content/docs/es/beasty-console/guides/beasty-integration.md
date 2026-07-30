@@ -11,9 +11,11 @@ dependencia que tengas que satisfacer.
 
 ## Beasty Visual Novel
 
-[Beasty Visual Novel](/es/docs/beasty-visual-novel/) loguea a través de su propia fachada, `VNLog`, que
-encuentra este logger por reflexión — igual que hace el save system — y cae a `UnityEngine.Debug` cuando la
-consola no está en el proyecto. La fachada suma tres cosas por encima de la API:
+[Beasty Visual Novel](/es/docs/beasty-visual-novel/) loguea a través de su propia fachada, `VNLog` — una
+clase envoltorio fina que reenvía cada mensaje al logger que encuentre. `VNLog` busca este logger por
+reflexión — por nombre de clase en tiempo de ejecución, sin referenciar el assembly — igual que hace el
+save system, y cae a `UnityEngine.Debug` cuando la consola no está en el proyecto. La fachada suma tres
+cosas por encima de la API:
 
 ![La consola con logs de Beasty VN, etiquetados por categoría](/docs-images/beasty-console/log-vn-categories.png)
 
@@ -51,7 +53,8 @@ otro.
 > ven afectados: siguen siendo errores de Unity.
 
 Si prefieres mantener las advertencias del save system como advertencias de Unity, asigna tu propio log
-sink en la fachada de logging del save system y enrútalas donde quieras.
+sink: implementa `IBeastySaveLogSink` y asigna `BeastySaveLog.Sink`, un campo estático de la fachada de
+logging del save system. Asígnalo en tiempo de ejecución — el campo se resetea en cada Play.
 
 ## Ver también
 

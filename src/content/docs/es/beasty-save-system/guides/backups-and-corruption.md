@@ -167,7 +167,7 @@ Hay dos fallos que no son corrupción y que ningún backup va a arreglar:
 
 - `VersionTooNew` — el guardado fue escrito por un build más nuevo de tu juego. Consulta
   [Versionado y migraciones](/es/docs/beasty-save-system/guides/versioning-and-migrations/).
-- `DecryptFailed` — el guardado y el juego no están de acuerdo sobre la encriptación. Consulta [Encriptación](/es/docs/beasty-save-system/guides/encryption/).
+- `DecryptFailed` — el guardado y el juego no están de acuerdo sobre el cifrado. Consulta [Cifrado](/es/docs/beasty-save-system/guides/encryption/).
 
 ## Cómo hacerlo desde el editor
 

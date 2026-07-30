@@ -1,6 +1,6 @@
 ---
 title: "Beasty Console"
-description: "Una API de logging estática con niveles semánticos que llamas en lugar de Debug.Log, más una consola de editor que clasifica, filtra y busca en todos los logs de tu proyecto."
+description: "Una API de logging estática con once niveles semánticos que llamas en lugar de Debug.Log, más una consola de editor que clasifica, filtra y busca cada log."
 ---
 
 Beasty Console es una API de logging estática con niveles semánticos (info, verbose, trace, debug, notice,

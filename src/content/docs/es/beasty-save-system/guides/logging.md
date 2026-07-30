@@ -1,6 +1,6 @@
 ---
 title: "Logging"
-description: "El desplegable Logging de BeastySaveManager: qué imprime cada modo (Auto, On, Verbose y Off), cómo mandar las líneas a otro sitio y cuánto cuesta en una build de release."
+description: "El desplegable Logging de BeastySaveManager: qué imprime cada modo, cómo mandar las líneas a tu propio sink y qué cuesta el logging en una build de release."
 ---
 
 El save system te cuenta lo que hizo. Por defecto lo hace en el editor y en las builds de desarrollo, y se
@@ -106,3 +106,10 @@ y `UnityEngine.Debug` en caso contrario.
 El logging no cuesta nada medible en `Auto` dentro de una build de release: el nivel es `Off` y cada llamada
 retorna antes de tocar un sink. Las líneas Verbose por componente están protegidas para que ni siquiera
 construyan su mensaje a menos que Verbose esté activo.
+
+## Ver también
+
+- [Copias de seguridad y corrupción](/es/docs/beasty-save-system/guides/backups-and-corruption/) — el aviso del checksum de arriba, y qué hacer al respecto
+- [Componentes](/es/docs/beasty-save-system/reference/components/) — `BeastySaveManager`, el componente que aloja el desplegable Logging
+- [Resultados y errores](/es/docs/beasty-save-system/reference/results-and-errors/) — los códigos de error detrás de los mensajes
+- [Solución de problemas](/es/docs/beasty-save-system/troubleshooting/)

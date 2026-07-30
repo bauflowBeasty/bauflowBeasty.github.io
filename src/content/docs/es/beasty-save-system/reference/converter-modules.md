@@ -1,6 +1,6 @@
 ---
 title: "Módulos de convertidores"
-description: "Un convertidor convierte un tipo en JSON y viceversa. Esta página lista exactamente qué campos almacena cada convertidor, para que sepas qué volverá y qué no."
+description: "Los siete módulos de convertidores opcionales y la capa core siempre activa, con los campos exactos que cada convertidor integrado almacena y restaura."
 ---
 
 Un convertidor convierte un tipo en JSON y viceversa. La capa `core` siempre está presente; siete módulos
@@ -184,8 +184,8 @@ malla que le dio la escena.
 
 ### TMP_Text (y TextMeshPro, TextMeshProUGUI)
 
-`text`, `fontSize`, el color como cuatro miembros `r`, `g`, `b`, `a`, `fontStyle` y `alignment` (ambos como
-enteros crudos).
+`text`, `fontSize`, el color como cuatro miembros `r`, `g`, `b`, `a`, más `fontStyle` y `alignment`, ambos
+almacenados como enteros crudos.
 
 El asset de fuente no se almacena.
 

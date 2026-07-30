@@ -1,6 +1,6 @@
 ---
 title: "Formato del archivo de guardado"
-description: "El formato en disco, por si quieres inspeccionar un guardado, escribir una herramienta que lo lea o entender qué hace exactamente el pipeline. No necesitas esta página para usar el paquete."
+description: "El formato en disco: sobre, documento de grupo, pipeline de escritura y comprobaciones de carga. Para inspeccionar guardados y crear herramientas."
 ---
 
 El formato en disco, por si quieres inspeccionar un guardado, escribir una herramienta que lo lea o

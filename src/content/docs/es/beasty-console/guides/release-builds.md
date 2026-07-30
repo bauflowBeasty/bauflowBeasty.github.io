@@ -1,6 +1,6 @@
 ---
 title: "Builds de lanzamiento"
-description: "Lo que te cuesta el logging en un juego lanzado, y qué hace y qué no hace el interruptor maestro. Lee esta página antes de esparcir mil llamadas de log por tu proyecto."
+description: "Lo que cuesta el logging en un juego lanzado, qué hace y qué no el interruptor IsEnabled, y cómo eliminar de verdad los logs de una build de lanzamiento."
 ---
 
 Lo que te cuesta el logging en un juego lanzado, y qué hace y qué no hace el interruptor maestro. Lee esta

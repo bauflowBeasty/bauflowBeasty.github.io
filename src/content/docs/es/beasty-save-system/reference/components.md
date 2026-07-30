@@ -1,6 +1,6 @@
 ---
 title: "Componentes"
-description: "Los dos MonoBehaviours del sistema de guardado: BeastySaveable marca un GameObject como parte de un guardado de escena; BeastySaveManager contiene la configuración y hace el guardado."
+description: "Los dos MonoBehaviours: BeastySaveable marca un GameObject para guardados de escena; BeastySaveManager contiene la configuración y ejecuta SaveAll y LoadAll."
 ---
 
 Los dos MonoBehaviours del sistema de guardado. `BeastySaveable` marca un GameObject como parte de un

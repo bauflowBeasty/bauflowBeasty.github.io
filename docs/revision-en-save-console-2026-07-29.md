@@ -10,6 +10,17 @@ técnica) y reescribir las `description` truncadas por la migración.
 de esa página; la ES es espejo 1:1. Los cosméticos (quitar *just*, *simply*…) solo aplican si la
 ES arrastra la muletilla. Revisar todas las descriptions ES contra las nuevas EN.
 
+> **Réplica ES completada el 2026-07-30.** Las 33 páginas ES se igualaron a la EN actual (4 agentes
+> + pasada final). Extras aplicados solo en ES: normalización «encriptación» → «cifrado» en todo
+> Save System ES (cuerpos, tablas y textos de enlace `[Encriptación]` → `[Cifrado]`; el `title` de
+> `guides/encryption.md` pasó a «Cifrado» y su `## Activarla` → `## Activarlo`, sin enlaces rotos);
+> corrección de `DecryptFailed` arrastrado en `troubleshooting.md` ES; ~20 descriptions ES
+> reescritas ≤158. Pendientes de decisión: los encabezados `## ¿Es segura la encriptación?`
+> (faq.md ES) y `## Los metadatos son texto plano, incluso cuando el guardado está encriptado`
+> (slots-and-metadata.md ES) conservan «encriptación» por la regla de no renombrar encabezados;
+> unificar «un/una build» y «IO/E/S» en una pasada global. Verificado: build 174 págs, 11 968 refs
+> 0 rotas, DOC-INDEX regenerado (85 págs / 653 símbolos), descriptions ES SS+Console todas ≤158.
+
 **Patrones globales aplicados:**
 
 - Descriptions truncadas a media palabra → reescritas como 1–2 frases completas ≤158 caracteres.

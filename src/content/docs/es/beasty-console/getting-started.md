@@ -24,7 +24,7 @@ Nada que configurar. No hay un asset de settings ni configuración de escena.
 
 ## Tu primer log
 
-Agrega esto a cualquier MonoBehaviour:
+Agrega esto a cualquier MonoBehaviour, dentro de un método como `Start()`:
 
 ![La consola con el primer mensaje logueado a través de BeastyLog](/docs-images/beasty-console/log-first-log.png)
 

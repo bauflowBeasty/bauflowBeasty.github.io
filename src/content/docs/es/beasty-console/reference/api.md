@@ -1,6 +1,6 @@
 ---
 title: "Referencia de la API"
-description: "Todos los miembros públicos de BeastyConsoleLogger.BeastyConsole. La clase es estática. Object es UnityEngine.Object."
+description: "Cada miembro público de BeastyConsoleLogger.BeastyConsole: el interruptor IsEnabled, los métodos de nivel, PrintLongMessage, LogColor y las etiquetas."
 ---
 
 Todos los miembros públicos de `BeastyConsoleLogger.BeastyConsole`. La clase es estática. `Object`

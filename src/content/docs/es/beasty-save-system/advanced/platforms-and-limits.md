@@ -1,6 +1,6 @@
 ---
 title: "Plataformas y límites"
-description: "Dónde funciona el paquete, dónde no, y los límites con los que un juego publicado se topa en la práctica. Lee la sección de WebGL antes de planear una build de navegador."
+description: "Dónde corre el paquete, dónde no, y los límites con los que un juego publicado se topa en la práctica. Lee la sección de WebGL antes de planear una build web."
 ---
 
 Dónde funciona el paquete, dónde no, y los límites con los que un juego publicado se topa en la práctica.
@@ -25,9 +25,13 @@ funciona en el editor explota en el player. Los caminos de serialización se eje
 ciclos de ida y vuelta de los tipos soportados, los convertidores integrados, el cifrado y el guardado de
 grupo se ejecutan todos ahí.
 
-No necesitas entradas de link.xml para el paquete en sí. Si tu propio tipo de datos de guardado solo se
-referencia a través de `Load<T>` y nada más, las reglas de stripping estándar de IL2CPP se aplican a él como
-a cualquier otro tipo de tu juego.
+No necesitas entradas de link.xml para el paquete en sí. Tus propios tipos de datos también están a salvo,
+con una excepción: un campo declarado como **interfaz de colección** cuyo elemento es uno de tus structs —
+digamos `ISet<ItemStack> items;` — hace que el mapper construya `HashSet<ItemStack>` por reflexión al
+cargar. Si esa combinación concreta no aparece en ninguna parte de tu código, IL2CPP nunca generó código
+para ella, y la carga falla en el player aunque en el editor funcionara. Declara el campo con el tipo
+concreto (`HashSet<ItemStack>`, `List<ItemStack>`, `Dictionary<int, ItemStack>`) y el problema no puede
+ocurrir.
 
 ## Plataformas
 
@@ -93,7 +97,8 @@ Las consecuencias prácticas:
 ### Profundidad de anidación JSON
 
 El parser limita el anidamiento a **512 niveles** (`JsonParser.DefaultMaxDepth`). Los datos anidados a más
-profundidad fallan al guardar. En la práctica nada legítimo llega a 512 — una lista enlazada almacenada
+profundidad se guardan sin quejas, pero no pueden volver a cargarse: la carga falla con `ParseError`. En la
+práctica nada legítimo llega a 512 — una lista enlazada almacenada
 como objetos anidados, o una estructura profunda accidental, es lo que te lleva ahí. Un **ciclo de
 referencias** es un fallo distinto y duro: el guardado falla con "save data must be acyclic". Tus datos de
 guardado deben ser un árbol.
@@ -128,8 +133,9 @@ Llama a la API desde el **hilo principal**. El paquete está construido alrededo
   concurrente al mismo slot sea segura contra la corrupción en disco — un archivo escrito a medias nunca
   reemplaza a uno bueno — pero cuál de los dos gana no es algo en lo que debas confiar.
 
-Las partes internas que deben ser seguras entre hilos lo son: la resolución de convertidores se cachea en un
-diccionario concurrente, y el estado de tolerancia por carga del mapper es local al hilo (thread-local). Eso
+Dos partes internas están construidas para ser seguras entre hilos: la resolución de convertidores se cachea
+en un diccionario concurrente, y el estado de tolerancia por carga del mapper es local al hilo
+(thread-local). Eso
 alcanza para que los caminos asíncronos sean sólidos. No es una licencia para serializar una escena desde un
 hilo secundario.
 

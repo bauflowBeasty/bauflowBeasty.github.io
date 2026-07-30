@@ -1,6 +1,6 @@
 ---
 title: "Estado de la escena"
-description: "Cómo guardar los objetos que ya están en tu escena: BeastySaveable marca un objeto para que se guarde, BeastySaveManager los escribe todos en un archivo."
+description: "Guardar los objetos que ya están en tu escena con BeastySaveable y BeastySaveManager, y las reglas de ids que deciden si vuelven o no."
 ---
 
 Cómo guardar los objetos que ya están en tu escena: `BeastySaveable` marca un objeto para que se guarde,
@@ -87,8 +87,10 @@ static BeastySaveable Register(GameObject target, params Component[] components)
 static BeastySaveable Register(GameObject target, string id, params Component[] components);
 ```
 
-El que no tiene id usa el que el objeto ya tenga, lo cual solo es útil para objetos que vinieron
-de la escena. **Para cualquier cosa que generes, usa el overload que recibe un id.**
+El que no lleva id conserva el que el objeto ya tiene — y si el objeto aún no tiene un `BeastySaveable`,
+se le añade uno con un id recién generado. Un id recién generado no puede coincidir con nada de un
+guardado anterior, lo cual está bien para objetos de escena y es inútil para copias generadas en tiempo
+de ejecución. **Para cualquier cosa que generes, usa el overload que recibe un id.**
 
 El id tiene que ser algo que puedas reproducir en la siguiente ejecución. `enemy.goblin.3` derivado de los datos de tu
 propio juego es estable. `enemy.` más `Guid.NewGuid()` no lo es — es el mismo problema otra vez, ahora en tu

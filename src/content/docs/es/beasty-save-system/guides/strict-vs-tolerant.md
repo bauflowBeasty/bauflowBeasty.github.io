@@ -1,6 +1,6 @@
 ---
 title: "Carga estricta vs. tolerante"
-description: "Hay dos formas de cargar un guardado que ya no coincide del todo con tu código: la estricta rechaza el archivo entero; la tolerante carga lo que puede y te dice qué omitió."
+description: "La carga estricta rechaza un guardado cuyos campos ya no coinciden con tu código; la tolerante carga lo que puede y te avisa. Cuándo elegir cada una."
 ---
 
 Hay dos formas de cargar un guardado cuyo contenido ya no coincide del todo con tu código. Estricta rechaza el archivo
@@ -120,7 +120,7 @@ Dos comportamientos más, en ambos modos:
 
 - Un miembro que está **ausente o es null** en el archivo conserva en silencio el valor que el campo ya
   tenga. Eso no es una advertencia en ningún modo. Añadir un campo nuevo a tu clase de datos no rompe los guardados
-  antiguos; el campo nuevo simplemente mantiene su valor por defecto.
+  antiguos; el campo nuevo mantiene su valor por defecto.
 - Un saveable que está en la escena pero no tiene datos en el archivo se deja intacto, con una advertencia. No se
   reinicia.
 

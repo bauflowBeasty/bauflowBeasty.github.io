@@ -1,6 +1,6 @@
 ---
 title: "Beasty Save System"
-description: "Beasty Save System guarda y carga los datos de tu juego como archivos JSON en disco, sin dependencias externas y sin excepciones inesperadas."
+description: "Guarda y carga los datos del juego como JSON en disco. Sin dependencias ni excepciones: resultados tipados, escritura atómica, backups, cifrado, migraciones."
 ---
 
 Beasty Save System guarda y carga los datos de tu juego como archivos JSON en disco, sin dependencias externas
@@ -26,8 +26,8 @@ buena.
 - Guarda cualquier objeto C# plano, o el estado de los componentes en tu escena.
 - Un camino sin código: `BeastySaveManager` + `BeastySaveable` + un botón uGUI.
 - Escrituras atómicas, copias de seguridad `.bak` automáticas, checksums SHA-256 y restauración de copia de seguridad con una sola llamada.
-- Encriptación AES-256 opcional. Lee [encryption.md](/es/docs/beasty-save-system/guides/encryption/) para conocer sus límites reales.
-- Metadatos en texto plano (nivel, tiempo de juego, capítulo) legibles sin desencriptar el archivo, para que una
+- Cifrado AES-256 opcional. Lee [encryption.md](/es/docs/beasty-save-system/guides/encryption/) para conocer sus límites reales.
+- Metadatos en texto plano (nivel, tiempo de juego, capítulo) legibles sin descifrar el archivo, para que una
   pantalla de slots de guardado pueda listarlos a bajo costo.
 - Carga estricta (todo o nada, con rollback) o tolerante (omitir y advertir).
 - Versionado de datos con migraciones registradas, para que una actualización pueda leer los guardados que tus jugadores ya tienen.
@@ -65,7 +65,7 @@ Escritas para cualquiera, con o sin código.
 | [scene-state.md](/es/docs/beasty-save-system/guides/scene-state/) | `BeastySaveable`, `BeastySaveManager`, ids, objetos generados en tiempo de ejecución |
 | [slots-and-metadata.md](/es/docs/beasty-save-system/guides/slots-and-metadata/) | Slots, cómo listarlos y cómo construir una pantalla de slots de guardado |
 | [backups-and-corruption.md](/es/docs/beasty-save-system/guides/backups-and-corruption/) | Escrituras atómicas, archivos `.bak`, restaurar uno |
-| [encryption.md](/es/docs/beasty-save-system/guides/encryption/) | AES, y qué protege y qué no protege la encriptación |
+| [encryption.md](/es/docs/beasty-save-system/guides/encryption/) | AES, y qué protege y qué no protege el cifrado |
 | [strict-vs-tolerant.md](/es/docs/beasty-save-system/guides/strict-vs-tolerant/) | Los dos modos de carga |
 | [versioning-and-migrations.md](/es/docs/beasty-save-system/guides/versioning-and-migrations/) | Publicar una actualización que lee guardados antiguos |
 | [async-saving.md](/es/docs/beasty-save-system/guides/async-saving/) | Qué hacen realmente los métodos asíncronos |

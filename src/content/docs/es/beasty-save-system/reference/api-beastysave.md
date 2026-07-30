@@ -1,10 +1,10 @@
 ---
 title: "API de BeastySave"
-description: "BeastySave es la fachada estática y el único punto de entrada del sistema de guardado. Cada método recibe un BeastySaveSettings y devuelve un resultado tipado."
+description: "Referencia completa de la fachada estática BeastySave: guardar, cargar, slots, registro, rutas y logging, con los códigos de error que devuelve cada llamada."
 ---
 
-`BeastySave` es la fachada estática y el único punto de entrada del sistema de guardado. Cada método recibe un
-`BeastySaveSettings` y devuelve un resultado tipado. Nada en esta página lanza excepciones, excepto los tres
+`BeastySave` es la fachada estática y el único punto de entrada del sistema de guardado. Cada método de
+guardado, carga y slots recibe un `BeastySaveSettings` y devuelve un resultado tipado. Nada en esta página lanza excepciones, excepto los tres
 métodos de registro, que lanzan excepciones ante un error del desarrollador.
 
 ## Espacios de nombres

@@ -46,7 +46,7 @@ edita su guardado en el Bloc de notas, no en seguridad contra un atacante decidi
 tabla de clasificación ni una compra dentro del juego.
 
 Úsala para frenar las trampas casuales, y haz que cualquier dato que deba ser confiable se valide en un servidor.
-Consulta [Encriptación](/es/docs/beasty-save-system/guides/encryption/).
+Consulta [Cifrado](/es/docs/beasty-save-system/guides/encryption/).
 
 ## ¿Puedo guardar un Dictionary?
 
@@ -67,7 +67,7 @@ Consulta [Qué se guarda](/es/docs/beasty-save-system/guides/what-gets-saved/).
 
 Sí, desde código. `BeastySaveSettings` es una clase serializable normal y cada llamada a `BeastySave` recibe una
 instancia, así que puedes pasarle una diferente a cada llamada — una carpeta distinta, una extensión distinta,
-encriptación activada para una y desactivada para la otra.
+cifrado activado para una y desactivado para la otra.
 
 El camino sin código usa un solo objeto de settings: `BeastySaveManager` mantiene un único campo `settings` que
 usan tanto `SaveAll` como `LoadAll`. Ten en cuenta que cambiar `Folder` o `Extension` cambia lo que `ListSlots`
@@ -76,7 +76,7 @@ encuentra. Consulta [Settings](/es/docs/beasty-save-system/guides/settings/).
 ## ¿Cuán grande puede ser un guardado?
 
 No hay un límite estricto, pero la serialización es **síncrona** — incluso dentro de `SaveAsync`, que hace la
-IO de archivos de forma asíncrona mientras construye y encripta el JSON en el hilo que llama. Así que un guardado
+IO de archivos de forma asíncrona mientras construye y cifra el JSON en el hilo que llama. Así que un guardado
 muy grande cuesta un hitch de frame proporcional a su tamaño, y hacer `await` no elimina ese hitch.
 
 Guarda el estado del juego, no la escena completa, y autoguarda en momentos donde un hitch pase desapercibido. Consulta
@@ -84,11 +84,11 @@ Guarda el estado del juego, no la escena completa, y autoguarda en momentos dond
 
 ## ¿Puedo leer un archivo de guardado a mano?
 
-Sí, a menos que lo hayas encriptado. Un guardado es JSON, indentado con dos espacios, UTF-8 sin BOM, y puedes
+Sí, a menos que lo hayas cifrado. Un guardado es JSON, indentado con dos espacios, UTF-8 sin BOM, y puedes
 abrirlo en cualquier editor de texto. Eso es útil para depurar y para dar soporte, y también es una invitación
-abierta para cualquier jugador con un editor de texto — justo para eso existe la opción de encriptación.
+abierta para cualquier jugador con un editor de texto — justo para eso existe la opción de cifrado.
 
-El diccionario `meta` se queda en texto plano **incluso cuando el guardado está encriptado**, así que una pantalla
+El diccionario `meta` se queda en texto plano **incluso cuando el guardado está cifrado**, así que una pantalla
 de selección de slot puede mostrar el nivel y el tiempo de juego sin la clave. Trátalo como datos de visualización
 en los que no se puede confiar: se lee antes de verificar el checksum. Consulta [El formato del archivo de guardado](/es/docs/beasty-save-system/reference/save-file-format/) y
 [Slots y metadatos](/es/docs/beasty-save-system/guides/slots-and-metadata/).

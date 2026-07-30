@@ -1,6 +1,6 @@
 ---
 title: "Resultados y errores"
-description: "Cada llamada de guardado y carga devuelve un resultado tipado con un BeastySaveError. Los miembros del resultado y los trece valores de error, con su causa y qué hacer en cada caso."
+description: "SaveResult, LoadResult y los trece códigos de BeastySaveError: qué causa cada uno y qué debería hacer tu juego al respecto."
 ---
 
 Cada llamada de guardado y carga devuelve un resultado tipado que contiene un `BeastySaveError`. Esta página
@@ -232,7 +232,7 @@ El archivo fue leído, verificado y descifrado; los datos simplemente no encajan
 
 - **Un campo falló al convertir** en modo estricto. El mensaje es `Field '<Type>.<field>' failed to load:
   ...` — normalmente un campo cuyo tipo cambió (un `string` se convirtió en `int`), o un campo de tipo de
-  valor que ya no está en el JSON.
+  valor que falta en el JSON.
 - **Un tipo de colección no soportado.** El escritor convierte cualquier `IEnumerable` en un array, pero una
   colección sin `Add`, `Enqueue` o `Push` no se puede volver a leer.
 - **Un convertidor lanzó una excepción** al rellenar un componente.

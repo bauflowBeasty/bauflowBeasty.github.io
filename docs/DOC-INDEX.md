@@ -8,7 +8,7 @@
 **Identificadores.** `SS/guides/logging` es `src/content/docs/en/beasty-save-system/guides/logging.md`,
 y su espejo español es el mismo archivo bajo `es/`. Siglas: `BC` = beasty-console · `SS` = beasty-save-system · `VN` = beasty-visual-novel.
 
-Cobertura: **85 páginas** EN (y sus 85 espejos ES), **651 símbolos** indexados.
+Cobertura: **85 páginas** EN (y sus 85 espejos ES), **653 símbolos** indexados.
 
 ## Páginas
 
@@ -40,7 +40,7 @@ Cobertura: **85 páginas** EN (y sus 85 espejos ES), **651 símbolos** indexados
 | `SS/guides/async-saving` | Async saving and loading | The three methods · What they actually do · When to use them · Awaiting them · Disabling the save button while a save is in flight · Scene saves are synchronous · WebGL · See also |
 | `SS/guides/backups-and-corruption` | Backups and corruption | Two defences · Atomic writes: a half-written save cannot exist · Backups: the previous version, kept · Recovery: what to do when a load fails · Corruption you can see coming · Doing it from the editor · See also |
 | `SS/guides/encryption` | Encryption | Read this first · Turning it on · What it does · If you leave the key empty · The Encrypted flag must match the file · If you have to switch anyway · See also |
-| `SS/guides/logging` | Logging | The toggle · What it looks like · From code · Sending the logs somewhere else · Performance |
+| `SS/guides/logging` | Logging | The toggle · What it looks like · From code · Sending the logs somewhere else · Performance · See also |
 | `SS/guides/save-manager-window` | The Save Manager window | Manager · Saveables in Scene · Slots on Disk · See also |
 | `SS/guides/scene-state` | Scene state | The two components · Ids · Inactive objects are saved · Several components of the same type · Saving and loading · What actually ends up in the file · Ticking a component you cannot save · See also |
 | `SS/guides/settings` | Settings | Settings are per call, not per project · The fields · Slot names · See also |
@@ -202,6 +202,7 @@ Cobertura: **85 páginas** EN (y sus 85 espejos ES), **651 símbolos** indexados
 | `BeastySaveError.VersionTooNew` | SS/troubleshooting |
 | `BeastySaveLog` | SS/changelog SS/guides/logging SS/reference/api-beastysave |
 | `BeastySaveLog.EnableLogs` | SS/guides/logging |
+| `BeastySaveLog.Sink` | BC/guides/beasty-integration |
 | `BeastySaveLogLevel.Verbose` | SS/reference/api-beastysave |
 | `BeastySaveLogMode` | SS/reference/components |
 | `BeastySaveManager` | SS/changelog SS/faq SS/getting-started/installation SS/guides/encryption SS/guides/logging SS/guides/save-manager-window SS/guides/scene-state SS/guides/settings SS/index SS/reference/api-beastysave SS/reference/components |
@@ -385,6 +386,7 @@ Cobertura: **85 páginas** EN (y sus 85 espejos ES), **651 símbolos** indexados
 | `HistoryScreen` | VN/reference/prefabs |
 | `Hour` | VN/scripting/gameplay-apis |
 | `IBeastyConverter` | SS/faq VN/scripting/overview |
+| `IBeastySaveLogSink` | BC/guides/beasty-integration |
 | `IEnumerable` | SS/reference/json-engine SS/reference/results-and-errors |
 | `Image` | SS/getting-started/installation SS/reference/converter-modules |
 | `Image.sprite` | SS/guides/what-gets-saved SS/reference/converter-modules SS/troubleshooting |
@@ -517,7 +519,7 @@ Cobertura: **85 páginas** EN (y sus 85 espejos ES), **651 símbolos** indexados
 | `Owned` | VN/scripting/gameplay-apis |
 | `Park` | VN/world/character-routines |
 | `Parse` | SS/reference/json-engine |
-| `ParseError` | SS/guides/backups-and-corruption SS/guides/save-manager-window SS/reference/api-beastysave SS/reference/results-and-errors SS/reference/save-file-format SS/troubleshooting |
+| `ParseError` | SS/advanced/platforms-and-limits SS/guides/backups-and-corruption SS/guides/save-manager-window SS/reference/api-beastysave SS/reference/results-and-errors SS/reference/save-file-format SS/troubleshooting |
 | `ParticleSystem` | SS/getting-started/installation SS/guides/what-gets-saved SS/reference/converter-modules SS/troubleshooting |
 | `PersistentStage` | VN/scripting/controllers |
 | `PersistentStage.Reset` | VN/scripting/controllers |
@@ -639,7 +641,7 @@ Cobertura: **85 páginas** EN (y sus 85 espejos ES), **651 símbolos** indexados
 | `StageMemory` | VN/scripting/controllers |
 | `StageRoot` | VN/scripting/controllers |
 | `Stale` | VN/production/localization |
-| `Start` | VN/scripting/controllers |
+| `Start` | BC/getting-started VN/scripting/controllers |
 | `StartNewGame` | VN/scripting/controllers |
 | `StartQuest` | VN/scripting/gameplay-apis |
 | `State` | VN/scripting/custom-mode |

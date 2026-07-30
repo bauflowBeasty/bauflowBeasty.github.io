@@ -1,10 +1,10 @@
 ---
 title: "Settings"
-description: "BeastySaveSettings contiene todas las opciones que usa una llamada de guardado o carga: adónde va el archivo, encriptación, backup, qué tan estricta es la carga y la versión de datos."
+description: "Cada campo de BeastySaveSettings, su valor por defecto y cuándo cambiarlo: carpeta, extensión, cifrado, backups, carga estricta y versión de datos."
 ---
 
 `BeastySaveSettings` contiene todas las opciones que usa una llamada de guardado o carga: adónde va el archivo, si
-está encriptado, si se conserva un backup, qué tan estricta es la carga, y a qué versión de datos pertenece. Esta
+está cifrado, si se conserva un backup, qué tan estricta es la carga, y a qué versión de datos pertenece. Esta
 página lista cada campo, su valor por defecto, y la razón por la que lo cambiarías.
 
 ## Las settings son por llamada, no por proyecto
@@ -13,8 +13,8 @@ No hay ningún settings asset global. Cada método de `BeastySave` recibe un `Be
 y `BeastySaveManager` mantiene uno en su inspector para `SaveAll` y `LoadAll`.
 
 Eso significa que dos guardados en el mismo proyecto pueden comportarse de forma completamente distinta. Un autoguardado puede
-ser tolerante, sin encriptar y sin backup, escribiendo a una carpeta `Autosaves`; un guardado manual puede ser estricto,
-encriptado y con backup, escribiendo a `Saves`. Nada en el sistema los obliga a coincidir.
+ser tolerante, sin cifrar y sin backup, escribiendo a una carpeta `Autosaves`; un guardado manual puede ser estricto,
+cifrado y con backup, escribiendo a `Saves`. Nada en el sistema los obliga a coincidir.
 
 ```csharp
 static readonly BeastySaveSettings Manual = new BeastySaveSettings
@@ -45,7 +45,7 @@ juegos.
 | `Folder` | string | `"Saves"` | Subcarpeta bajo `DataPath` que contiene los archivos de guardado. |
 | `Extension` | string | `"save"` | La extensión del archivo, **sin** el punto. |
 | `DataPath` | string | vacío | Ruta base absoluta. Vacío significa `Application.persistentDataPath`. |
-| `Encrypted` | bool | `false` | Encripta el payload de datos con AES-256. |
+| `Encrypted` | bool | `false` | Cifra el payload de datos con AES-256. |
 | `EncryptionKey` | string | vacío | La clave. Vacío significa la clave por defecto compartida que viene con el asset. |
 | `Backup` | bool | `true` | Conserva el archivo anterior como `<slot>.<ext>.bak` al sobrescribir un slot. |
 | `Strict` | bool | `true` | Carga todo o nada. `false` omite los campos malos y advierte. |
@@ -88,7 +88,7 @@ legible. El envelope y los metadatos se quedan en texto plano, así que una pant
 Dos cosas que debes saber antes de activarlo:
 
 - **El flag tiene que coincidir con cómo se escribió el archivo.** Con `Encrypted = true` el sistema rechaza cargar un
-  guardado en texto plano, y con `Encrypted = false` no puede leer uno encriptado. Cambiar esta configuración en un
+  guardado en texto plano, y con `Encrypted = false` no puede leer uno cifrado. Cambiar esta configuración en un
   juego ya publicado deja varados todos los guardados existentes.
 - **Esto es ofuscación, no seguridad.** Lee [encryption.md](/es/docs/beasty-save-system/guides/encryption/) antes de confiar en ella.
 
@@ -98,8 +98,8 @@ Cualquier string no vacío funciona — de él se deriva una clave AES de 32 byt
 clave de una longitud concreta.
 
 Déjalo vacío y el sistema usa `BeastySaveSettings.SharedDefaultEncryptionKey`, que **viene incluido en
-cada copia del asset**. Cualquiera que posea Beasty Save System tiene ese string. Existe para que la encriptación funcione
-de fábrica, no para que la publiques con ella. Si la encriptación está activada y no has configurado tu propia clave, el
+cada copia del asset**. Cualquiera que posea Beasty Save System tiene ese string. Existe para que el cifrado funcione
+de fábrica, no para que publiques con ella. Si el cifrado está activado y no has configurado tu propia clave, el
 sistema te avisa una vez en el editor y en los builds de desarrollo.
 
 Configura tu propia clave antes de publicar. Luego lee [encryption.md](/es/docs/beasty-save-system/guides/encryption/), que no oculta que tu clave

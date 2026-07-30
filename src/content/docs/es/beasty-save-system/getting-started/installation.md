@@ -41,7 +41,7 @@ importación. Todo lo demás es necesario.
 |---|---|
 | `Scripts/BeastySave.cs` | La fachada estática pública. El único punto de entrada que llamas. |
 | `Scripts/Components/` | `BeastySaveable` y `BeastySaveManager`, los dos componentes de escena. |
-| `Scripts/BeastySaveSystemCore/` | El motor: pipeline de guardado, envelope, checksum, settings, migraciones, convertidores, el motor JSON, encriptación AES, escritura atómica de archivos. |
+| `Scripts/BeastySaveSystemCore/` | El motor: pipeline de guardado, envelope, checksum, settings, migraciones, convertidores, el motor JSON, cifrado AES, escritura atómica de archivos. |
 | `ConverterModules/` | Siete módulos opcionales, un assembly cada uno. Ver más abajo. |
 | `Editor/` | El inspector de `BeastySaveable` y la ventana del Save Manager. |
 | `Tests/` | Tests de EditMode. Se pueden borrar sin problema. |
@@ -76,15 +76,15 @@ Todo lo demás viene de un módulo:
 | Particles | `ParticleSystem` | `com.unity.modules.particlesystem` |
 | Physics2D | `BoxCollider2D`, `CapsuleCollider2D`, `CircleCollider2D` | `com.unity.modules.physics2d` |
 | Physics3D | `BoxCollider`, `CapsuleCollider`, `SphereCollider`, `MeshCollider` | `com.unity.modules.physics` |
-| TMPro | `TMP_Text` y sus subclases | `com.unity.textmeshpro`, o `com.unity.ugui` 2.0.0 o más reciente |
+| TMPro | `TMP_Text` y sus subclases | El assembly de TextMeshPro: `com.unity.textmeshpro` (cualquier versión), o `com.unity.ugui` 2.0.0 o más reciente, que lo incluye |
 | UGUI | `RectTransform`, `CanvasGroup`, `Image`, `RawImage`, `Slider`, `Toggle` | `com.unity.ugui` |
 
 Estos módulos no se instalan: ya están en la carpeta, y cada uno **se registra automáticamente**
 cuando el juego arranca.
 
 Cada módulo es un assembly aparte, condicionado por una restricción de define al módulo de Unity que necesita. Si
-tu proyecto eliminó ese módulo de Unity, el assembly del módulo no compila, sus convertidores simplemente
-no existen, y el resto del paquete sigue funcionando. Un proyecto sin física no falla al
+tu proyecto eliminó ese módulo de Unity, el assembly del módulo no compila, sus convertidores no
+existen, y el resto del paquete sigue funcionando. Un proyecto sin física no falla al
 compilar por culpa de un convertidor de física que nunca iba a usar.
 
 La consecuencia que conviene conocer: si marcas un componente en `BeastySaveable` cuyo módulo no está presente, el guardado
