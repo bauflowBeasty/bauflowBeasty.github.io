@@ -54,8 +54,16 @@ export const PRODUCTS: Product[] = [
       es: 'Guardado y carga por slots con motor JSON propio y cero dependencias. Escrituras atómicas, copias de seguridad por slot, checksums SHA-256, cifrado AES-256 opcional y estado de escena desde un componente que marcas.',
     },
     storeLinks: [
-      { store: 'unity', label: 'Unity Asset Store', url: null },
-      { store: 'itch', label: 'itch.io', url: null },
+      {
+        store: 'unity',
+        label: 'Unity Asset Store',
+        url: 'https://assetstore.unity.com/packages/slug/301626',
+      },
+      {
+        store: 'itch',
+        label: 'itch.io',
+        url: 'https://beastycomponents.itch.io/beasty-save-system',
+      },
     ],
     docsEntry: '/docs/beasty-save-system/',
   },
@@ -72,8 +80,16 @@ export const PRODUCTS: Product[] = [
       es: 'Una API de logging estática con once niveles semánticos, más la Beasty Console: una ventana de editor que clasifica, filtra y busca todo lo que registra tu proyecto, con salto al IDE en un clic.',
     },
     storeLinks: [
-      { store: 'unity', label: 'Unity Asset Store', url: null },
-      { store: 'itch', label: 'itch.io', url: null },
+      {
+        store: 'unity',
+        label: 'Unity Asset Store',
+        url: 'https://assetstore.unity.com/packages/slug/386438',
+      },
+      {
+        store: 'itch',
+        label: 'itch.io',
+        url: 'https://beastycomponents.itch.io/beasty-console',
+      },
     ],
     docsEntry: '/docs/beasty-console/',
   },
