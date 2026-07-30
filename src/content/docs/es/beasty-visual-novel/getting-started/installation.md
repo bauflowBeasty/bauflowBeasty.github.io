@@ -18,6 +18,10 @@ donde un paquete de Unity suele costarte una tarde, y aquí no te cuestan nada.
 | Paquetes de Unity opcionales | Addressables (solo para streaming) |
 | Backends de scripting | Mono e IL2CPP |
 
+Todas las generaciones de Unity 6 desde la 6.2 hasta la 6.5 compilan e importan **sin advertencias**. Donde
+una generación más nueva renombró una API (la 6.5 convirtió `GetInstanceID` en un error de compilación, la
+6.4 reemplazó un par de búsquedas), el paquete cambia por dentro — no tienes que configurar nada.
+
 ## Render pipeline: cualquiera de ellos, sin cambios
 
 El paquete funciona en **Built-in**, **URP** (2D Renderer incluido) y **HDRP** sin cambios y sin ningún paso

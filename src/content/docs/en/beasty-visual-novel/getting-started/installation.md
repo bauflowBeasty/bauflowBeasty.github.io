@@ -18,6 +18,10 @@ two places where a Unity package usually costs you an afternoon, and here they c
 | Optional Unity packages | Addressables (only for streaming) |
 | Scripting backends | Mono and IL2CPP |
 
+Every Unity 6 generation from 6.2 through 6.5 compiles and imports **warning-free**. Where a newer
+generation renamed an API (6.5 turned `GetInstanceID` into a compile error, 6.4 replaced a couple of
+lookups), the package switches internally — nothing for you to configure.
+
 ## Render pipeline: any of them, unchanged
 
 The package works on **Built-in**, **URP** (the 2D Renderer included) and **HDRP** with no changes and no

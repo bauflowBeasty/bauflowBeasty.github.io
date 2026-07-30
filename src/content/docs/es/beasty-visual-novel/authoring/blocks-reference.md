@@ -44,8 +44,9 @@ Además de Dialogue, otros cuatro bloques también se detienen:
 
 > **Advertencia**
 > **Un bloque Wait con 0 segundos no espera cero segundos: espera al jugador.** Se pausa hasta que el
-> jugador avanza, exactamente como una línea de diálogo sin texto. Eso suele ser lo que quieres (una pausa
-> antes de que se abra la puerta). Si querías una pausa corta, escribe un número.
+> jugador avanza, exactamente como una línea de diálogo sin texto. Auto también se detiene ahí: la pausa
+> solo termina con un avance manual. Eso suele ser lo que quieres (una pausa antes de que se abra la
+> puerta). Si querías una pausa corta, escribe un número.
 
 > **Advertencia**
 > **Un bloque sin ningún asset asignado no hace absolutamente nada.** Un bloque Backdrop vacío se salta y lo
@@ -213,8 +214,10 @@ marca el objetivo como hecho.
 
 ### Wait
 
-Pausa la historia durante un número de segundos. **Con 0 segundos, espera al clic del jugador** (consulta
-la advertencia de arriba).
+Pausa la historia durante un número de segundos antes de que corra el siguiente bloque. Los clics durante la
+pausa se tragan, **Skip** la acelera, retroceder la cancela, y una revisita tras un rebobinado no vuelve a
+esperar — como un efecto secundario, la pausa corre una sola vez. **Con 0 segundos, espera al clic del
+jugador** (consulta la advertencia de arriba).
 
 ### Advance time
 
@@ -313,7 +316,11 @@ Los tres comparten estas opciones:
 
 ### Ask → variable
 
-Escribe la respuesta en una de tus variables.
+Escribe la respuesta en una de tus variables. El campo de entrada sigue el tipo de la variable: un Bool
+recibe un desplegable true/false, un número un campo numérico, un String texto libre. Si una variable con
+tipo aparece como texto libre en una build, la pregunta no pudo resolver la definición de la variable — la
+consola lo dice, y el sitio donde mirar es el campo `Game Context` de los
+[ajustes de la VN](/es/docs/beasty-visual-novel/production/vn-settings/).
 
 ### Ask → dictionary
 

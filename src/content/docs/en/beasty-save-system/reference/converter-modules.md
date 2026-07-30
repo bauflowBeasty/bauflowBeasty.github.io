@@ -84,6 +84,10 @@ Matched by exact type. A `RectTransform` is **not** a `Transform` here — it ne
 `shadowNormalBias`, `shadowNearPlane`, `renderMode`, `cullingMask`, `cookieSize`, `enabled`.
 `lightmapBakeType` is stored in the Editor only.
 
+On Unity 6.4 and newer the directional cookie size is stored as `cookieSize2D` (a `Vector2`), the API that
+replaced the deprecated float `cookieSize`. A save written by an older version still loads: its float is
+applied as a square size.
+
 **`Light.cookie` is written (by name) but never restored.** The member is in the file for inspection; the
 load ignores it, because restoring it would need an asset reference.
 
@@ -157,6 +161,10 @@ stopped is stopped and cleared.
 All three colliders share: `isTrigger`, `usedByEffector`, `usedByComposite`, `compositeOperation` (Unity
 2023.1 and newer), `layerOverridePriority`, `includeLayers`, `excludeLayers`, `enabled`, and
 `sharedMaterial` **by name**.
+
+On Unity 6.4 and newer — where `usedByComposite` is deprecated — a save relies on `compositeOperation`
+alone. Both have been written side by side since 1.0.0, and an old save carrying only the bool still loads:
+`true` maps to `Merge`.
 
 | Collider | Also stores |
 |---|---|

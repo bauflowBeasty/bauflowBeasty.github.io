@@ -356,7 +356,7 @@
       "page": "beasty-visual-novel/authoring/story-graph",
       "prioridad": 2,
       "vista": "Unity ▸ Tools > Beasty VN > Editor ▸ pestaña Story",
-      "captura": "Clic derecho SOBRE un nodo, con el menú contextual abierto y todas sus opciones legibles."
+      "captura": "Clic derecho SOBRE un nodo, con el menú contextual abierto y todas sus opciones legibles, incluidas las entradas de portapapeles (Copy, Cut, Paste, Duplicate) añadidas en la 1.0.0."
     },
     {
       "file": "vn-graph-wiring.png",

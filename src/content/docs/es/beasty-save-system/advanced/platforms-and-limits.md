@@ -8,7 +8,9 @@ Lee la sección de WebGL antes de planear una build de navegador.
 
 ## Versión de Unity
 
-Unity **6000.2 o más reciente**.
+Unity **6000.2 o más reciente**. Todas las generaciones hasta la 6.5 compilan e importan sin advertencias;
+donde la 6.4+ marcó como deprecada una API que usaban los conversores, el paquete cambia por dentro y los
+guardados anteriores siguen cargando.
 
 El paquete tiene **cero dependencias externas**. Incluye su propio motor JSON, así que no hay ningún paquete
 Newtonsoft que instalar y nada que entre en conflicto con una versión de Newtonsoft que tu proyecto ya use.

@@ -154,7 +154,7 @@ Carpeta destino: `public/docs-images/beasty-visual-novel/` · 108 pendientes de 
 
 - **Sección:** The node context menu · El menú contextual del nodo
 - **Vista:** Unity ▸ Tools > Beasty VN > Editor ▸ pestaña Story
-- **Qué tiene que verse:** Clic derecho SOBRE un nodo, con el menú contextual abierto y todas sus opciones legibles.
+- **Qué tiene que verse:** Clic derecho SOBRE un nodo, con el menú contextual abierto y todas sus opciones legibles, incluidas las entradas de portapapeles (Copy, Cut, Paste, Duplicate) añadidas en la 1.0.0.
 
 #### `vn-graph-colors.png` — P3 · ✅ tomada
 
@@ -806,7 +806,7 @@ Carpeta destino: `public/docs-images/beasty-visual-novel/` · 108 pendientes de 
 
 #### `vn-character-freeroam-sprite.png` — P2 · ⬜ pendiente
 
-- **Sección:** The FreeRoam sprite · El sprite FreeRoam
+- **Sección:** The free-roam sprite · El sprite FreeRoam
 - **Vista:** Unity ▸ Tools > Beasty VN > Editor ▸ pestaña Characters ▸ Cast
 - **Qué tiene que verse:** Recorte con el sprite de mundo libre asignado (miniatura visible) y, justo debajo, los dos interruptores: Show current location y Show routine.
 
@@ -1180,7 +1180,7 @@ Carpeta destino: `public/docs-images/beasty-save-system/` · 26 pendientes de 26
 - **Vista:** Unity ▸ Tools > Beasty Save System > Save Manager, sección Slots on Disk
 - **Qué tiene que verse:** Pulsa Restore Backup en un slot que tenga .bak y captura el diálogo de confirmación («Replace slot 'x' with its .bak file?») con la fila del slot detrás. Si puedes, que se vea también otro slot con el botón deshabilitado por no tener copia.
 
-### Encryption · Encriptación
+### Encryption · Cifrado
 
 `/docs/beasty-save-system/guides/encryption/` — `/es/docs/beasty-save-system/guides/encryption/`
 

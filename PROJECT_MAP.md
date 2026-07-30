@@ -2,7 +2,7 @@
 
 > **Regla:** Leer este archivo ANTES de cualquier búsqueda en el proyecto. Si un cambio agrega, mueve, renombra o elimina archivos/carpetas (o cambia el propósito de algo listado aquí), actualizar este mapa en el mismo turno.
 >
-> Última actualización: 2026-07-29
+> Última actualización: 2026-07-30
 
 ## Qué es este proyecto
 
@@ -104,7 +104,9 @@ docs/  (documentación INTERNA del repo, no se publica)
 ├── revision-en-visual-novel-2026-07-28.md → Registro de la revisión de estilo EN de VN (replicada en ES el 29-jul)
 ├── revision-en-save-console-2026-07-29.md → Registro de la revisión de estilo EN de Save System y Console (base para replicar en ES)
 ├── screenshots.json      → Catálogo de capturas: por imagen, prioridad, desde qué vista se toma y qué debe verse
-└── SCREENSHOTS.md        → GENERADO (`npm run doc:shots`): guion de las 187 capturas, por producto y página
+├── SCREENSHOTS.md        → GENERADO (`npm run doc:shots`): guion de las 187 capturas, por producto y página
+└── GUIA-CAPTURAS.pdf     → Guía paso a paso (ES) para el colaborador externo que toma las capturas:
+                            clonar, normas, flujo con doc:shots y entrega. Para enviar tal cual.
 
 projects/Inventory/       → Vacío (legacy)
 dist/                     → Salida del build (generado, no editar)

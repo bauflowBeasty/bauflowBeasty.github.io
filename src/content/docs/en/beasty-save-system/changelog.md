@@ -5,6 +5,21 @@ description: "All notable changes to Beasty Save System, version by version. The
 
 All notable changes to Beasty Save System. This project follows [Semantic Versioning](https://semver.org/).
 
+## 1.0.1 — unreleased
+
+### Compatibility
+
+- Compiles warning-free on every Unity 6 generation, including 6.5, which deprecated several APIs the
+  converters and scene lookups used. `Light` saves store the directional cookie size as `cookieSize2D`
+  (a `Vector2`) on Unity 6.4+; a save written by an older version still loads — its float `cookieSize` is
+  applied as a square size. `Collider2D` saves there rely on `compositeOperation` alone (already saved
+  alongside the deprecated `usedByComposite` bool since 1.0.0), and an old save carrying only the bool
+  still loads: `true` maps to `Merge`. Scene lookups moved from `FindFirstObjectByType` to
+  `FindAnyObjectByType` and the sort-free `FindObjectsByType` overloads — identical results, every lookup
+  targeted a single object. On Unity 6.2/6.3 — where `cookieSize` and `usedByComposite` are already flagged
+  deprecated but are still the correct APIs (their replacements arrived in 6.4) — the deprecation warnings
+  are suppressed at the call sites, so those versions import warning-free too.
+
 ## 1.0.0 — 2026-07-27
 
 First public release.

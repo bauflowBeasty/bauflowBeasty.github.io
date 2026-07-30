@@ -21,6 +21,11 @@ package to install and nothing to reconcile with the packages your project alrea
 **Any render pipeline** — Built-in, URP, HDRP — because the package contains no rendering code at all. It
 reads and writes data. It never draws anything.
 
+Every Unity 6 generation from 6.2 through 6.5 compiles and imports **warning-free**. Where a newer
+generation deprecated an API the converters used (6.4 replaced the `Light` cookie size and the `Collider2D`
+composite flag), the package switches internally, and saves written by an older version still load. See
+[Converter modules](/docs/beasty-save-system/reference/converter-modules/).
+
 ## Import
 
 1. Open the Package Manager (`Window > Package Manager`).

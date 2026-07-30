@@ -61,16 +61,29 @@ que lo ubiques de un vistazo. Para mover el inicio de la escena, haz clic derech
 
 Haz clic derecho en un nodo:
 
-![El menú contextual de un nodo: Rename, Set as Entry Node, Create Subgraph, Delete Node](/docs-images/beasty-visual-novel/vn-graph-node-menu.png)
+![El menú contextual de un nodo: Rename, Set as Entry Node, Create Subgraph, Copy, Cut, Paste, Duplicate, Delete Node](/docs-images/beasty-visual-novel/vn-graph-node-menu.png)
 
 | Elemento | Qué hace |
 |---|---|
 | `Rename` | Edita el nombre del nodo in situ. El nombre es para ti, no para el jugador. |
 | `Set as Entry Node` | Hace que el grafo empiece en este nodo. |
 | `Create Subgraph` / `Open Subgraph` | Anida un grafo dentro de este nodo, o entra en el que ya tiene. Consulta [Subgrafos](/es/docs/beasty-visual-novel/authoring/subgraphs/). |
+| `Copy` / `Cut` / `Paste` / `Duplicate` | El portapapeles, también con los atajos de siempre (Ctrl+C/X/V/D). Se explica más abajo. |
 | `Delete Node` | Elimina el nodo. Se borran los cables que apuntan a él. Se te pide confirmación. |
 
 Seleccionar un nodo y pulsar Delete hace lo mismo, y funciona con una selección múltiple.
+
+### Copiar, pegar y duplicar
+
+El portapapeles trabaja sobre la selección — un nodo o varios — desde el menú contextual o con los atajos
+de siempre (Ctrl+C, Ctrl+X, Ctrl+V, Ctrl+D). Un pegado es un clon de verdad: ids de nodo nuevos, subgrafos
+clonados hasta el fondo, y los cables entre los nodos copiados conservados. Pegar en el mismo grafo conserva
+además los cables salientes de la selección hacia nodos que no copiaste; el pegado funciona entre ventanas
+Story y entre assets de escena, así que un fragmento puede pasar de un `DialogueScene` a otro.
+
+Cada texto localizado de la copia recibe una clave de localización **nueva**, y su fila copia todas las
+columnas de idioma — así que la copia llega con todas sus traducciones, y editar su texto nunca edita el del
+original.
 
 ### Colores
 

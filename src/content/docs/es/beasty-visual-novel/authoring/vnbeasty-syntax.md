@@ -269,7 +269,8 @@ Una clave que contiene un punto es una **variable de personaje**: `set juan.affe
 `give <amount> <item>` y `take <amount> <item>` se limitan al máximo del ítem y a 0. `item <id> = <amount>`
 fija la cantidad directamente. `use <item>` ejecuta los efectos de uso del ítem.
 
-`wait <seconds>` pausa. `wait` sin número espera al clic del jugador.
+`wait <seconds>` pausa. `wait` sin número espera al clic del jugador — y también detiene a Auto, hasta que
+el jugador avanza a mano.
 
 Los nombres provienen de las pestañas Variables, Dictionary e Items. El guion los referencia; no los crea.
 

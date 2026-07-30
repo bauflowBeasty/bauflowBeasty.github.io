@@ -5,6 +5,23 @@ description: "Todos los cambios relevantes de Beasty Save System, versión por v
 
 Todos los cambios relevantes de Beasty Save System. Este proyecto sigue [Semantic Versioning](https://semver.org/).
 
+## 1.0.1 — sin publicar
+
+### Compatibilidad
+
+- Compila sin advertencias en todas las generaciones de Unity 6, incluida la 6.5, que marcó como deprecadas
+  varias APIs que usaban los conversores y las búsquedas en escena. Los guardados de `Light` almacenan el
+  tamaño del cookie direccional como `cookieSize2D` (un `Vector2`) en Unity 6.4+; un guardado escrito por una
+  versión anterior sigue cargando — su `cookieSize` de tipo float se aplica como tamaño cuadrado. Los
+  guardados de `Collider2D` dependen ahí solo de `compositeOperation` (que ya se guardaba junto al bool
+  deprecado `usedByComposite` desde la 1.0.0), y un guardado antiguo que solo trae el bool sigue cargando:
+  `true` se traduce a `Merge`. Las búsquedas en escena pasaron de `FindFirstObjectByType` a
+  `FindAnyObjectByType` y a las sobrecargas sin ordenar de `FindObjectsByType` — resultados idénticos, cada
+  búsqueda apuntaba a un solo objeto. En Unity 6.2/6.3 — donde `cookieSize` y `usedByComposite` ya están
+  marcadas como deprecadas pero siguen siendo las APIs correctas (sus reemplazos llegaron en 6.4) — las
+  advertencias de deprecación se suprimen en los puntos de llamada, así que esas versiones también importan
+  sin advertencias.
+
 ## 1.0.0 — 27 de julio de 2026
 
 Primera versión pública.

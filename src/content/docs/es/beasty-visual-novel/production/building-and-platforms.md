@@ -7,7 +7,8 @@ Qué necesita el paquete, dónde se ejecuta, y qué revisar antes de presionar B
 
 ## Requisitos
 
-- **Unity 6000.2 o más reciente.**
+- **Unity 6000.2 o más reciente.** Todas las generaciones hasta la 6.5 compilan e importan sin advertencias;
+  los renombrados de API entre generaciones se resuelven dentro del paquete.
 - Sin paquetes externos. El sistema de guardado viene incluido dentro del paquete, con su propio motor JSON —
   no hay dependencia de Newtonsoft, y nada que instalar desde el Package Manager para tener un juego funcional.
 - El paquete Addressables solo se necesita si optas por el [streaming](/es/docs/beasty-visual-novel/production/streaming/).

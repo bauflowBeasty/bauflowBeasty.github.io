@@ -8,7 +8,8 @@ section before you plan a browser build.
 
 ## Unity version
 
-Unity **6000.2 or newer**.
+Unity **6000.2 or newer**. Every generation through 6.5 compiles and imports warning-free; where 6.4+
+deprecated an API the converters used, the package switches internally and older saves still load.
 
 The package has **zero external dependencies**. It ships its own JSON engine, so there is no Newtonsoft
 package to install and nothing to conflict with a version of Newtonsoft your project already uses.

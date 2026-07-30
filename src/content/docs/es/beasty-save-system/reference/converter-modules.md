@@ -85,6 +85,10 @@ Se empareja por tipo exacto. Un `RectTransform` **no** es un `Transform` aquí �
 `shadowNormalBias`, `shadowNearPlane`, `renderMode`, `cullingMask`, `cookieSize`, `enabled`.
 `lightmapBakeType` se almacena solo en el Editor.
 
+En Unity 6.4 y posteriores el tamaño del cookie direccional se almacena como `cookieSize2D` (un `Vector2`),
+la API que reemplazó al `cookieSize` de tipo float, ya deprecado. Un guardado escrito por una versión
+anterior sigue cargando: su float se aplica como tamaño cuadrado.
+
 **`Light.cookie` se escribe (por nombre) pero nunca se restaura.** El miembro está en el archivo a modo de
 inspección; la carga lo ignora, porque restaurarlo necesitaría una referencia a un asset.
 
@@ -158,6 +162,10 @@ reanuda; uno que estaba detenido se detiene y se limpia.
 Los tres colliders comparten: `isTrigger`, `usedByEffector`, `usedByComposite`, `compositeOperation` (Unity
 2023.1 en adelante), `layerOverridePriority`, `includeLayers`, `excludeLayers`, `enabled`, y
 `sharedMaterial` **por nombre**.
+
+En Unity 6.4 y posteriores — donde `usedByComposite` está deprecado — un guardado depende solo de
+`compositeOperation`. Los dos se escriben lado a lado desde la 1.0.0, y un guardado antiguo que solo trae el
+bool sigue cargando: `true` se traduce a `Merge`.
 
 | Collider | También almacena |
 |---|---|

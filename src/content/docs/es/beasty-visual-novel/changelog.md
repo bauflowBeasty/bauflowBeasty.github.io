@@ -163,6 +163,28 @@ Primera versión pública.
   EULA de la Asset Store (https://unity.com/legal/as-terms), y una licencia independiente dentro del paquete
   entra en conflicto con él. Cada `Third-Party Notices.txt` ahora apunta a ese EULA. Las copias compradas en
   itch.io reciben su propio archivo de licencia, que se añade a la descarga de itch al empaquetar.
+- **El bloque Wait ahora pausa la historia de verdad.** Un `Wait` escrito entre dos líneas retiene el flujo
+  durante sus segundos ANTES de que aparezca la siguiente línea — los clics se tragan durante la pausa,
+  retroceder la cancela, Skip la acelera, y una revisita tras un rebobinado no vuelve a esperar (como los
+  efectos secundarios, la pausa corre una sola vez). Un Wait de `0` segundos es una barrera para el avance
+  automático: Auto se detiene ahí y espera un avance manual. Antes, el bloque se podía escribir y compilar
+  desde `.vnbeasty` pero en ejecución se ignoraba en silencio.
+- **Los nodos del grafo de Story ahora se pueden copiar, cortar, pegar y duplicar** — las entradas del menú
+  contextual (y Ctrl+C/X/V/D) existían pero no hacían nada, en silencio. Un pegado clona la selección con ids
+  de nodo nuevos, clona en profundidad los subgrafos, conserva las conexiones entre los nodos copiados (y, al
+  pegar en el mismo grafo, sus aristas salientes hacia nodos no copiados), y acuña claves de localización
+  NUEVAS cuyas filas copian todas las columnas de idioma — así que editar el texto de una copia nunca edita el
+  del original. El pegado funciona entre ventanas Story y entre assets de escena.
+- **Una pregunta de variable con tipo ya no se degrada en silencio a un campo de texto libre.** El editor
+  ahora persiste en disco el enlace `VNSettings ▸ Game Context` que se asigna solo (antes se quedaba solo en
+  memoria, así que una BUILD del jugador arrancaba sin contexto: un `Ask → variable` sobre un Bool mostraba un
+  campo de texto en lugar de su desplegable true/false). Cuando la definición de la variable de una pregunta
+  sigue sin encontrarse, ahora lo dice en la consola — «Prompt for '[key]': no variable definition found
+  (undeclared key, or the shared VN Context did not resolve — check the 'Game Context' field on VNSettings).
+  The prompt falls back to a free-text field.» — en lugar de degradarse sin dejar rastro.
+- **Renombrar un nodo ya no deja una advertencia en el log.** El renombrado en línea guardaba el asset de la
+  escena mientras se reimportaba, y Unity imprimía «Importer(NativeFormatImporter) generated inconsistent
+  result» con cada renombrado; ahora guarda primero y reimporta después, sin advertencias.
 
 ### Persistencia
 
@@ -180,3 +202,18 @@ Primera versión pública.
   interruptor maestro las oculta.
 - El paquete incluye **Beasty Console** y **Beasty Save System**; al importar este asset tienes la copia
   completa de cada uno, y no hay dependencias externas.
+
+### Compatibilidad
+
+- Compila en todas las generaciones de Unity 6, incluida Unity 6.5, donde `Object.GetInstanceID()` pasó a ser
+  un error de compilación (`error CS0619: 'GetInstanceID is deprecated. Use GetEntityId instead.'`). El
+  paquete llama al reemplazo `GetEntityId` en Unity 6.4 y posteriores, y mantiene `GetInstanceID` en 6.0–6.3,
+  donde la API nueva todavía no existe.
+- Importar en Unity 6.4/6.5 tampoco imprime advertencias de deprecación: las búsquedas en escena usan
+  `FindAnyObjectByType` y, en 6.4+, las sobrecargas sin ordenar de `FindObjectsByType` y
+  `ContactFilter2D.noFilter` (cada búsqueda reemplazada apuntaba a un solo objeto, así que el comportamiento
+  no cambia), y se eliminaron dos campos de inspector que nunca se usaron (las etiquetas de encabezado
+  Day/Week de `CharacterRoutineScreen`).
+- Unity 6.2/6.3 también importan sin advertencias: ahí `ContactFilter2D.NoFilter()` ya está marcada como
+  deprecada pero sigue siendo la API correcta (su reemplazo llegó en 6.4), así que su advertencia se suprime
+  en el punto de llamada en lugar de cambiar de API antes de tiempo.

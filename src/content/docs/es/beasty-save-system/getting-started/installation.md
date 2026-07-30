@@ -21,6 +21,12 @@ Newtonsoft que instalar ni nada que reconciliar con los paquetes que tu proyecto
 **Cualquier render pipeline** — Built-in, URP, HDRP — porque el paquete no contiene ni una línea de código de
 renderizado: solo lee y escribe datos. Nunca dibuja nada.
 
+Todas las generaciones de Unity 6 desde la 6.2 hasta la 6.5 compilan e importan **sin advertencias**. Donde
+una generación más nueva marcó como deprecada una API que usaban los conversores (la 6.4 reemplazó el tamaño
+del cookie de `Light` y la bandera de composite de `Collider2D`), el paquete cambia por dentro, y los
+guardados escritos por una versión anterior siguen cargando. Consulta
+[Módulos de conversores](/es/docs/beasty-save-system/reference/converter-modules/).
+
 ## Importar
 
 1. Abre el Package Manager (`Window > Package Manager`).

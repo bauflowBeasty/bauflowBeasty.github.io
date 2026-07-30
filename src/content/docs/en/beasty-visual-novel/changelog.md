@@ -146,6 +146,27 @@ First public release.
   EULA (https://unity.com/legal/as-terms), and an independent license inside the package conflicts with it.
   Each `Third-Party Notices.txt` now points to that EULA. Copies bought on itch.io get their own license
   file, added to the itch download at packaging time.
+- **The Wait block now actually pauses the story.** A `Wait` authored between two lines holds the flow for its
+  seconds BEFORE the next line appears — clicks are swallowed during the pause, stepping back cancels it, Skip
+  fast-forwards it, and a rewound revisit does not wait again (like side effects, the pause runs once). A Wait
+  of `0` seconds is an auto-advance barrier: Auto stops there and waits for a manual advance. Before, the block
+  could be authored and compiled from `.vnbeasty` but was silently ignored at runtime.
+- **Story graph nodes can now be copied, cut, pasted and duplicated** — the context-menu entries (and
+  Ctrl+C/X/V/D) used to exist but silently did nothing. A paste clones the selection with fresh node ids,
+  deep-clones any subgraphs, keeps the connections between copied nodes (and, when pasting into the same
+  graph, their outgoing edges to non-copied nodes), and mints NEW localization keys whose rows copy every
+  language column — so editing a copy's text never edits the original's. Pasting works across Story windows
+  and across scene assets.
+- **A typed variable prompt no longer silently degrades to a free-text field.** The editor persists the
+  auto-assigned `VNSettings ▸ Game Context` link to disk (it used to stay in memory only, so a player BUILD
+  came up with no context: an `Ask → variable` on a Bool showed a text input instead of its true/false
+  dropdown). When a prompt's variable definition still cannot be found it now says so in the console —
+  "Prompt for '[key]': no variable definition found (undeclared key, or the shared VN Context did not
+  resolve — check the 'Game Context' field on VNSettings). The prompt falls back to a free-text field." —
+  instead of degrading with no trace.
+- **Renaming a node no longer logs a warning.** The inline rename saved the scene asset while re-importing
+  it, and Unity printed "Importer(NativeFormatImporter) generated inconsistent result" on every rename; the
+  rename now saves first and re-imports after, warning-free.
 
 ### Persistence
 
@@ -162,3 +183,17 @@ First public release.
   and exceptions ignore the per-category switches: only that master switch hides them.
 - The package bundles **Beasty Console** and **Beasty Save System**; importing this asset gives you the full
   copy of each, and there are no external dependencies.
+
+### Compatibility
+
+- Compiles on every Unity 6 generation, including Unity 6.5, where `Object.GetInstanceID()` became a compile
+  error (`error CS0619: 'GetInstanceID is deprecated. Use GetEntityId instead.'`). The package calls the
+  replacement `GetEntityId` on Unity 6.4 and newer, and keeps `GetInstanceID` on 6.0–6.3, where the new API
+  does not exist yet.
+- Importing on Unity 6.4/6.5 prints no deprecation warnings either: scene lookups use `FindAnyObjectByType`
+  and, on 6.4+, the sort-free `FindObjectsByType` overloads and `ContactFilter2D.noFilter` (every replaced
+  lookup targeted a single object, so behavior is unchanged), and two never-used inspector fields
+  (`CharacterRoutineScreen`'s Day/Week header labels) were removed.
+- Unity 6.2/6.3 import warning-free too: there `ContactFilter2D.NoFilter()` is already flagged deprecated but
+  is still the correct API (its replacement arrived in 6.4), so its warning is suppressed at the call site
+  instead of switching APIs early.

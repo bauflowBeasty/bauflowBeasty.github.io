@@ -60,16 +60,28 @@ the start of the scene, right-click a node and choose `Set as Entry Node`.
 
 Right-click a node:
 
-![The node context menu: Rename, Set as Entry Node, Create Subgraph, Delete Node](/docs-images/beasty-visual-novel/vn-graph-node-menu.png)
+![The node context menu: Rename, Set as Entry Node, Create Subgraph, Copy, Cut, Paste, Duplicate, Delete Node](/docs-images/beasty-visual-novel/vn-graph-node-menu.png)
 
 | Item | What it does |
 |---|---|
 | `Rename` | Edits the node's name in place. The name is for you, not the player. |
 | `Set as Entry Node` | Makes this node where the graph starts. |
 | `Create Subgraph` / `Open Subgraph` | Nests a graph inside this node, or drills into the one it already has. See [Subgraphs](/docs/beasty-visual-novel/authoring/subgraphs/). |
+| `Copy` / `Cut` / `Paste` / `Duplicate` | The clipboard, also on the usual shortcuts (Ctrl+C/X/V/D). See below. |
 | `Delete Node` | Removes the node. Any wires pointing at it are cleared. You are asked to confirm. |
 
 Selecting a node and pressing Delete does the same thing, and works on a multi-selection.
+
+### Copy, paste and duplicate
+
+The clipboard works on the selection — one node or many — from the context menu or with the usual
+shortcuts (Ctrl+C, Ctrl+X, Ctrl+V, Ctrl+D). A paste is a real clone: fresh node ids, subgraphs cloned all
+the way down, and the wires between the copied nodes kept. Pasting into the same graph also keeps the
+selection's outgoing wires to nodes you did not copy; pasting works across Story windows and across scene
+assets, so a fragment can move from one `DialogueScene` to another.
+
+Every localized text in the copy gets a **new** localization key, and its row copies every language column —
+so the copy arrives with all its translations, and editing its text never edits the original's.
 
 ### Colours
 

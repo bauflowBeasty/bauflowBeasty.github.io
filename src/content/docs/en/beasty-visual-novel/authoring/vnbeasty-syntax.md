@@ -262,7 +262,8 @@ through the inventory, clamping to the item's maximum exactly as `give` and `tak
 `give <amount> <item>` and `take <amount> <item>` clamp to the item's maximum and to 0. `item <id> =
 <amount>` sets the amount outright. `use <item>` runs the item's on-use effects.
 
-`wait <seconds>` pauses. `wait` with no number waits for the player to click.
+`wait <seconds>` pauses. `wait` with no number waits for the player to click — Auto stops there too, until
+the player advances by hand.
 
 The names come from the Variables, Dictionary and Items tabs. The script references them; it does not
 create them.

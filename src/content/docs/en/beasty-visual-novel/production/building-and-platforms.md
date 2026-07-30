@@ -7,7 +7,8 @@ What the package needs, where it runs, and what to check before you press Build.
 
 ## Requirements
 
-- **Unity 6000.2 or newer.**
+- **Unity 6000.2 or newer.** Every generation through 6.5 compiles and imports warning-free; API renames
+  between generations are handled inside the package.
 - No external packages. The save system ships inside the package, with its own JSON engine — there is no
   Newtonsoft dependency, and nothing to install from the Package Manager to get a working game.
 - The Addressables package is needed only if you opt into [streaming](/docs/beasty-visual-novel/production/streaming/).

@@ -42,8 +42,9 @@ Four blocks besides Dialogue also stop:
 
 > **Warning**
 > **A Wait block with 0 seconds does not wait zero seconds — it waits for the player.** It pauses until the
-> player advances, exactly like a dialogue line with no text. That is often what you want (a beat before the
-> door opens). If you meant a short pause, type a number.
+> player advances, exactly like a dialogue line with no text. Auto stops there too: the pause only ends with
+> a manual advance. That is often what you want (a beat before the door opens). If you meant a short pause,
+> type a number.
 
 > **Warning**
 > **A block with no asset assigned does nothing at all.** An empty Backdrop block is skipped and whatever was
@@ -207,7 +208,9 @@ the objective done.
 
 ### Wait
 
-Pauses for a number of seconds. **0 seconds waits for the player to click instead** (see the warning above).
+Pauses for a number of seconds before the next block runs. Clicks during the pause are swallowed, **Skip**
+fast-forwards it, stepping back cancels it, and a revisit after a rewind does not wait again — like a side
+effect, the pause runs once. **0 seconds waits for the player to click instead** (see the warning above).
 
 ### Advance time
 
@@ -304,7 +307,10 @@ All three share these options:
 
 ### Ask → variable
 
-Writes the answer into one of your variables.
+Writes the answer into one of your variables. The input follows the variable's type: a Bool gets a true/false
+dropdown, a number gets a number field, a String free text. If a typed variable shows up as free text in a
+build, the prompt could not resolve the variable's definition — the console says so, and the place to look is
+the `Game Context` field on [VN settings](/docs/beasty-visual-novel/production/vn-settings/).
 
 ### Ask → dictionary
 
