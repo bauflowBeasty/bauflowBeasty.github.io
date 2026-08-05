@@ -15,10 +15,10 @@ que el sitio nunca muestra una imagen rota.
 
 | | Total | Tomadas | Pendientes |
 |---|---:|---:|---:|
-| P1 · imprescindibles | 79 | 44 | 35 |
-| P2 · recomendadas | 77 | 31 | 46 |
+| P1 · imprescindibles | 79 | 57 | 22 |
+| P2 · recomendadas | 77 | 36 | 41 |
 | P3 · complementarias | 31 | 12 | 19 |
-| **Total** | **187** | **87** | **100** |
+| **Total** | **187** | **105** | **82** |
 
 **Prioridades.** P1 es donde el texto solo no basta: la ventana principal y sus pestañas, los
 asistentes, las grillas y las pantallas que ve el jugador. P2 completa una página que ya se entiende.
@@ -38,7 +38,7 @@ P3 es un extra: si no la tomas, no se nota.
 
 ## Beasty Visual Novel
 
-Carpeta destino: `public/docs-images/beasty-visual-novel/` · 64 pendientes de 151.
+Carpeta destino: `public/docs-images/beasty-visual-novel/` · 46 pendientes de 151.
 
 ### Blocks reference · Referencia de bloques
 
@@ -712,7 +712,7 @@ Carpeta destino: `public/docs-images/beasty-visual-novel/` · 64 pendientes de 1
 - **Vista:** Unity ▸ Tools > Beasty VN > Editor ▸ pestaña FreeRoam, modo Routines
 - **Qué tiene que verse:** La lista de reglas de un perfil: tres o cuatro reglas condición+sala en orden y, abajo, el fallback con la sala VACÍA, que es como se dice «no está en ninguna parte».
 
-#### `vn-routine-grid.png` — P1 · ⬜ pendiente
+#### `vn-routine-grid.png` — P1 · ✅ tomada
 
 - **Sección:** The routine grid editor · El editor de grilla de rutinas
 - **Vista:** Unity ▸ Tools > Beasty VN > Editor ▸ pestaña FreeRoam, modo Routines
@@ -734,19 +734,19 @@ Carpeta destino: `public/docs-images/beasty-visual-novel/` · 64 pendientes de 1
 
 `/docs/beasty-visual-novel/world/character-screens/` — `/es/docs/beasty-visual-novel/world/character-screens/`
 
-#### `vn-cast-list-ingame.png` — P1 · ⬜ pendiente
+#### `vn-cast-list-ingame.png` — P1 · ✅ tomada
 
 - **Sección:** The cast list · La lista de reparto
 - **Vista:** Unity ▸ Game view en Play
 - **Qué tiene que verse:** La lista del reparto abierta con cuatro o cinco personajes visibles (y alguno todavía oculto por su condición, si se nota), tal y como la ve el jugador.
 
-#### `vn-profile-ingame.png` — P1 · ⬜ pendiente
+#### `vn-profile-ingame.png` — P1 · ✅ tomada
 
 - **Sección:** The profile · El perfil
 - **Vista:** Unity ▸ Game view en Play
 - **Qué tiene que verse:** El perfil de un personaje abierto, con su retrato y nombre en la cabecera y la barra de pestañas debajo, con la primera pestaña seleccionada.
 
-#### `vn-stats-ingame.png` — P1 · ⬜ pendiente
+#### `vn-stats-ingame.png` — P1 · ✅ tomada
 
 - **Sección:** The stats screen · La pantalla de estadísticas
 - **Vista:** Unity ▸ Game view en Play
@@ -758,7 +758,7 @@ Carpeta destino: `public/docs-images/beasty-visual-novel/` · 64 pendientes de 1
 - **Vista:** Unity ▸ Game view en Play
 - **Qué tiene que verse:** Reutiliza la captura del calendario de rutinas de la página de rutinas de personaje.
 
-#### `vn-quest-log-ingame.png` — P1 · ⬜ pendiente
+#### `vn-quest-log-ingame.png` — P1 · ✅ tomada
 
 - **Sección:** The quest log · El registro de misiones
 - **Vista:** Unity ▸ Game view en Play
@@ -944,13 +944,13 @@ Carpeta destino: `public/docs-images/beasty-visual-novel/` · 64 pendientes de 1
 
 `/docs/beasty-visual-novel/world/items-and-inventory/` — `/es/docs/beasty-visual-novel/world/items-and-inventory/`
 
-#### `vn-items-tab.png` — P1 · ⬜ pendiente
+#### `vn-items-tab.png` — P1 · ✅ tomada
 
 - **Sección:** Defining an item · Definir un objeto
 - **Vista:** Unity ▸ Tools > Beasty VN > Editor ▸ pestaña Items
 - **Qué tiene que verse:** Un ítem consumible seleccionado con todos sus campos rellenos y el icono a la vista, y en la lista de la izquierda al menos un ítem de tipo Key para que se vean los dos kinds.
 
-#### `vn-item-onuse.png` — P2 · ⬜ pendiente
+#### `vn-item-onuse.png` — P2 · ✅ tomada
 
 - **Sección:** On use · Al usar
 - **Vista:** Unity ▸ Tools > Beasty VN > Editor ▸ pestaña Items
@@ -972,7 +972,7 @@ Carpeta destino: `public/docs-images/beasty-visual-novel/` · 64 pendientes de 1
 
 `/docs/beasty-visual-novel/world/quests/` — `/es/docs/beasty-visual-novel/world/quests/`
 
-#### `vn-quest-editor.png` — P1 · ⬜ pendiente
+#### `vn-quest-editor.png` — P1 · ✅ tomada
 
 - **Sección:** A quest · Una misión
 - **Vista:** Unity ▸ Tools > Beasty VN > Editor ▸ pestaña Characters ▸ Quests
@@ -984,7 +984,7 @@ Carpeta destino: `public/docs-images/beasty-visual-novel/` · 64 pendientes de 1
 - **Vista:** Unity ▸ Tools > Beasty VN > Editor ▸ pestaña Characters ▸ Quests
 - **Qué tiene que verse:** Una misión en modo Ordered con cuatro objetivos, para que se vea el orden en que se desbloquean y cuáles son obligatorios.
 
-#### `vn-quest-objective.png` — P1 · ⬜ pendiente
+#### `vn-quest-objective.png` — P1 · ✅ tomada
 
 - **Sección:** Objectives · Objetivos
 - **Vista:** Unity ▸ Tools > Beasty VN > Editor ▸ pestaña Characters ▸ Quests
@@ -1018,25 +1018,25 @@ Carpeta destino: `public/docs-images/beasty-visual-novel/` · 64 pendientes de 1
 - **Vista:** Unity ▸ Tools > Beasty VN > Editor ▸ pestaña Screens
 - **Qué tiene que verse:** Reutiliza la captura de la pestaña Screens del recorrido por el editor.
 
-#### `vn-hud-ingame.png` — P1 · ⬜ pendiente
+#### `vn-hud-ingame.png` — P1 · ✅ tomada
 
 - **Sección:** Where a screen shows up · Dónde aparece una pantalla
 - **Vista:** Unity ▸ Game view en Play, en mundo libre
 - **Qué tiene que verse:** El HUD primario en marcha sobre una sala: un contador ligado a una variable (`Money: 120`), una etiqueta de tiempo y un par de botones (inventario, personajes). Es la foto de «pantalla primaria».
 
-#### `vn-screen-item.png` — P1 · ⬜ pendiente
+#### `vn-screen-item.png` — P1 · ✅ tomada
 
 - **Sección:** Items · Elementos
 - **Vista:** Unity ▸ Tools > Beasty VN > Editor ▸ pestaña Screens
 - **Qué tiene que verse:** El elemento del contador de dinero desplegado: Text = `Money: `, Variable = `gold`, su condición de visibilidad y al menos un caso de variante condicional con icono distinto. Es el ejemplo que la página cuenta con palabras.
 
-#### `vn-screen-button-action.png` — P2 · ⬜ pendiente
+#### `vn-screen-button-action.png` — P2 · ✅ tomada
 
 - **Sección:** Actions · Acciones
 - **Vista:** Unity ▸ Tools > Beasty VN > Editor ▸ pestaña Screens
 - **Qué tiene que verse:** Un elemento Button con el desplegable de acción ABIERTO mostrando las seis acciones (OpenScreen, Close, Back, Custom, EnterVN, AdvanceTime), y sus efectos de clic debajo si los tiene.
 
-#### `vn-screen-preview.png` — P2 · ⬜ pendiente
+#### `vn-screen-preview.png` — P2 · ✅ tomada
 
 - **Sección:** Preview · Vista previa
 - **Vista:** Unity ▸ Tools > Beasty VN > Editor ▸ pestaña Screens
@@ -1046,13 +1046,13 @@ Carpeta destino: `public/docs-images/beasty-visual-novel/` · 64 pendientes de 1
 
 `/docs/beasty-visual-novel/world/talk-menu/` — `/es/docs/beasty-visual-novel/world/talk-menu/`
 
-#### `vn-talk-menu-tab.png` — P1 · ⬜ pendiente
+#### `vn-talk-menu-tab.png` — P1 · ✅ tomada
 
 - **Sección:** Where you author it · Dónde lo editas
 - **Vista:** Unity ▸ Tools > Beasty VN > Editor ▸ pestaña Characters ▸ Talk Menu
 - **Qué tiene que verse:** La sub-pestaña de un personaje con su pregunta arriba y cuatro o cinco entradas en la lista, entre ellas alguna con condición. Si hay un paso de misión inyectado automáticamente, mejor: se ve que aparece sin mantenerlo a mano.
 
-#### `vn-talk-menu-entry.png` — P2 · ⬜ pendiente
+#### `vn-talk-menu-entry.png` — P2 · ✅ tomada
 
 - **Sección:** An entry · Una entrada
 - **Vista:** Unity ▸ Tools > Beasty VN > Editor ▸ pestaña Characters ▸ Talk Menu
@@ -1068,19 +1068,19 @@ Carpeta destino: `public/docs-images/beasty-visual-novel/` · 64 pendientes de 1
 
 `/docs/beasty-visual-novel/world/variables-and-conditions/` — `/es/docs/beasty-visual-novel/world/variables-and-conditions/`
 
-#### `vn-variables-tab-new.png` — P1 · ⬜ pendiente
+#### `vn-variables-tab-new.png` — P1 · ✅ tomada
 
 - **Sección:** Creating a variable · Crear una variable
 - **Vista:** Unity ▸ Tools > Beasty VN > Editor ▸ pestaña Variables
 - **Qué tiene que verse:** Una variable recién creada y seleccionada, con su clave, tipo de valor, kind y valor por defecto rellenos, y el botón + New Variable visible. Si el kind es Enum, mejor: se ve la lista de valores permitidos.
 
-#### `vn-block-ask.png` — P2 · ⬜ pendiente
+#### `vn-block-ask.png` — P2 · ✅ tomada
 
 - **Sección:** Asking the player · Preguntar al jugador
 - **Vista:** Unity ▸ Tools > Beasty VN > Editor ▸ pestaña Story, inspector del nodo
 - **Qué tiene que verse:** El bloque desplegado con la variable elegida, la línea de pregunta escrita, un valor por defecto y la marca de respuesta obligatoria.
 
-#### `vn-block-set-variable.png` — P1 · ⬜ pendiente
+#### `vn-block-set-variable.png` — P1 · ✅ tomada
 
 - **Sección:** Changing a variable · Cambiar una variable
 - **Vista:** Unity ▸ Tools > Beasty VN > Editor ▸ pestaña Story, inspector del nodo
