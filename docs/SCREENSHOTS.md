@@ -15,10 +15,10 @@ que el sitio nunca muestra una imagen rota.
 
 | | Total | Tomadas | Pendientes |
 |---|---:|---:|---:|
-| P1 · imprescindibles | 79 | 19 | 60 |
-| P2 · recomendadas | 77 | 17 | 60 |
-| P3 · complementarias | 31 | 7 | 24 |
-| **Total** | **187** | **43** | **144** |
+| P1 · imprescindibles | 79 | 44 | 35 |
+| P2 · recomendadas | 77 | 31 | 46 |
+| P3 · complementarias | 31 | 12 | 19 |
+| **Total** | **187** | **87** | **100** |
 
 **Prioridades.** P1 es donde el texto solo no basta: la ventana principal y sus pestañas, los
 asistentes, las grillas y las pantallas que ve el jugador. P2 completa una página que ya se entiende.
@@ -38,7 +38,7 @@ P3 es un extra: si no la tomas, no se nota.
 
 ## Beasty Visual Novel
 
-Carpeta destino: `public/docs-images/beasty-visual-novel/` · 108 pendientes de 151.
+Carpeta destino: `public/docs-images/beasty-visual-novel/` · 64 pendientes de 151.
 
 ### Blocks reference · Referencia de bloques
 
@@ -60,7 +60,7 @@ Carpeta destino: `public/docs-images/beasty-visual-novel/` · 108 pendientes de 
 - **Vista:** Unity ▸ Tools > Beasty VN > Editor ▸ pestaña Story, inspector del nodo
 - **Qué tiene que verse:** Un nodo Choice con el texto de la pregunta arriba y tres opciones desplegadas: etiqueta, condición, efectos y destino de cada una. Que se vea al menos una opción condicionada y otra con efectos.
 
-#### `vn-choice-ingame.png` — P1 · ⬜ pendiente
+#### `vn-choice-ingame.png` — P1 · ✅ tomada
 
 - **Sección:** The label · La etiqueta (label)
 - **Vista:** Unity ▸ Game view en Play
@@ -116,13 +116,13 @@ Carpeta destino: `public/docs-images/beasty-visual-novel/` · 108 pendientes de 
 
 `/docs/beasty-visual-novel/authoring/dialogue-preview/` — `/es/docs/beasty-visual-novel/authoring/dialogue-preview/`
 
-#### `vn-dialogue-preview.png` — P1 · ⬜ pendiente
+#### `vn-dialogue-preview.png` — P1 · ✅ tomada
 
 - **Sección:** (entradilla) · (entradilla)
 - **Vista:** Unity ▸ Tools > Beasty VN > Dialogue Preview
 - **Qué tiene que verse:** La ventana de vista previa renderizando un nodo con fondo y dos personajes en escena, con la caja de diálogo abajo. Sin entrar en Play: la barra de Unity debe delatar que no estamos en modo de juego.
 
-#### `vn-preview-block-button.png` — P3 · ⬜ pendiente
+#### `vn-preview-block-button.png` — P3 · ✅ tomada
 
 - **Sección:** The per-block preview button · El botón de vista previa por bloque
 - **Vista:** Unity ▸ Tools > Beasty VN > Editor ▸ pestaña Story, inspector del nodo
@@ -186,7 +186,7 @@ Carpeta destino: `public/docs-images/beasty-visual-novel/` · 108 pendientes de 
 - **Vista:** Unity ▸ Tools > Beasty VN > Editor ▸ pestaña Story, inspector del nodo
 - **Qué tiene que verse:** Un nodo Flow configurado para saltar a mundo libre, con la sala destino elegida. Es el nodo que cambia de modo, y conviene verlo con datos reales.
 
-#### `vn-node-subgraph.png` — P2 · ⬜ pendiente
+#### `vn-node-subgraph.png` — P2 · ✅ tomada
 
 - **Sección:** SubGraph Node · SubGraph Node
 - **Vista:** Unity ▸ Tools > Beasty VN > Editor ▸ pestaña Story, inspector del nodo
@@ -388,7 +388,7 @@ Carpeta destino: `public/docs-images/beasty-visual-novel/` · 108 pendientes de 
 
 `/docs/beasty-visual-novel/getting-started/your-first-scene/` — `/es/docs/beasty-visual-novel/getting-started/your-first-scene/`
 
-#### `vn-create-scene-menu.png` — P2 · ⬜ pendiente
+#### `vn-create-scene-menu.png` — P2 · ✅ tomada
 
 - **Sección:** 1. Build the scene · 1. Construye la escena
 - **Vista:** Unity ▸ barra de menús Tools
@@ -400,31 +400,31 @@ Carpeta destino: `public/docs-images/beasty-visual-novel/` · 108 pendientes de 
 - **Vista:** Unity ▸ Hierarchy, justo tras ejecutar Create Scene
 - **Qué tiene que verse:** La Hierarchy inmediatamente después de `Tools > Beasty VN > Setup > Create Scene`, con BeastyManager, Stage, Canvas, Main Camera y EventSystem visibles. Recorta solo el panel Hierarchy.
 
-#### `vn-first-character.png` — P2 · ⬜ pendiente
+#### `vn-first-character.png` — P2 · ✅ tomada
 
 - **Sección:** 4. Create a character · 4. Crea un personaje
 - **Vista:** Unity ▸ Tools > Beasty VN > Editor ▸ pestaña Characters ▸ Cast
 - **Qué tiene que verse:** El personaje del tutorial recién creado con + New Character: id, nombre visible y UNA expresión `base` con su sprite asignado. Estado mínimo, no un personaje completo: es lo que el lector acaba de hacer.
 
-#### `vn-story-tab-first-node.png` — P1 · ⬜ pendiente
+#### `vn-story-tab-first-node.png` — P1 · ✅ tomada
 
 - **Sección:** 5. Write two lines · 5. Escribe dos líneas
 - **Vista:** Unity ▸ Tools > Beasty VN > Editor ▸ pestaña Story
 - **Qué tiene que verse:** La pestaña Story con el primer nodo seleccionado y cuatro bloques dentro (un Backdrop y tres de Dialogue), tal y como los deja el paso a paso de esta página. Deben verse los tres paneles: paleta, grafo e inspector del nodo.
 
-#### `vn-first-choice-node.png` — P1 · ⬜ pendiente
+#### `vn-first-choice-node.png` — P1 · ✅ tomada
 
 - **Sección:** 6. Add a choice · 6. Agrega una elección
 - **Vista:** Unity ▸ Tools > Beasty VN > Editor ▸ pestaña Story
 - **Qué tiene que verse:** El grafo con el nodo de diálogo inicial, un nodo Choice con DOS opciones y las dos aristas saliendo hacia sus nodos destino, más el inspector del Choice a la derecha con las dos etiquetas escritas. Se debe entender la forma de una bifurcación de un vistazo.
 
-#### `vn-first-play.png` — P1 · ⬜ pendiente
+#### `vn-first-play.png` — P1 · ✅ tomada
 
 - **Sección:** 7. Press Play · 7. Presiona Play
 - **Vista:** Unity ▸ Game view en Play
 - **Qué tiene que verse:** La Game view en Play mostrando la primera línea: fondo, el personaje en escena, la placa con su nombre y el texto en la caja de diálogo, con el indicador de continuar visible. Captura solo la Game view, sin la interfaz de Unity alrededor.
 
-#### `vn-validate-report.png` — P2 · ⬜ pendiente
+#### `vn-validate-report.png` — P2 · ✅ tomada
 
 - **Sección:** Validate · Valida
 - **Vista:** Unity ▸ Tools > Beasty VN > Editor ▸ botón Validate (informe en la consola o en la ventana)
@@ -434,7 +434,7 @@ Carpeta destino: `public/docs-images/beasty-visual-novel/` · 108 pendientes de 
 
 `/docs/beasty-visual-novel/production/audio-and-music/` — `/es/docs/beasty-visual-novel/production/audio-and-music/`
 
-#### `vn-mixer.png` — P3 · ⬜ pendiente
+#### `vn-mixer.png` — P3 · ✅ tomada
 
 - **Sección:** The four channels · Los cuatro canales
 - **Vista:** Unity ▸ ventana Audio Mixer
@@ -452,7 +452,7 @@ Carpeta destino: `public/docs-images/beasty-visual-novel/` · 108 pendientes de 
 - **Vista:** Unity ▸ Tools > Beasty VN > Editor ▸ pestaña Music
 - **Qué tiene que verse:** Reutiliza la captura de la pestaña Music del recorrido por el editor.
 
-#### `vn-background-music-foldout.png` — P2 · ⬜ pendiente
+#### `vn-background-music-foldout.png` — P2 · ✅ tomada
 
 - **Sección:** Background music per app mode · Música de fondo por modo de app
 - **Vista:** Unity ▸ Inspector, con el BeastyManager de la escena seleccionado
@@ -494,31 +494,31 @@ Carpeta destino: `public/docs-images/beasty-visual-novel/` · 108 pendientes de 
 
 `/docs/beasty-visual-novel/production/localization/` — `/es/docs/beasty-visual-novel/production/localization/`
 
-#### `vn-localization-tabs.png` — P1 · ⬜ pendiente
+#### `vn-localization-tabs.png` — P1 · ✅ tomada
 
 - **Sección:** The two tables · Las dos tablas
 - **Vista:** Unity ▸ Tools > Beasty VN > Editor ▸ pestaña Localization
 - **Qué tiene que verse:** La pestaña con el alternador Story / UI (global) bien visible y la grilla de la tabla de historia debajo. Es la captura que enseña que hay DOS tablas y dónde se cambia de una a otra.
 
-#### `vn-localization-add-language.png` — P1 · ⬜ pendiente
+#### `vn-localization-add-language.png` — P1 · ✅ tomada
 
 - **Sección:** Adding a language · Agregar un idioma
 - **Vista:** Unity ▸ Tools > Beasty VN > Editor ▸ pestaña Localization
 - **Qué tiene que verse:** Pulsa + Add Language y captura el desplegable ABIERTO con la lista de idiomas curados, los ya presentes en gris, la opción Custom… al final y, si tienes alguno en la papelera, su etiqueta `(restore)`.
 
-#### `vn-localization-trash.png` — P1 · ⬜ pendiente
+#### `vn-localization-trash.png` — P1 · ✅ tomada
 
 - **Sección:** Deleting a language, and getting it back · Eliminar un idioma, y recuperarlo
 - **Vista:** Unity ▸ Tools > Beasty VN > Editor ▸ pestaña Localization
 - **Qué tiene que verse:** Elimina un idioma (confirmando el diálogo) y captura el desplegable «Deleted languages (1)» ABIERTO, con la fila del idioma y sus botones Restore y Delete permanently. Si puedes hacer dos capturas, la otra buena es el diálogo de confirmación al borrar el idioma PRINCIPAL, que nombra a su sucesor.
 
-#### `vn-localization-staleness.png` — P1 · ⬜ pendiente
+#### `vn-localization-staleness.png` — P1 · ✅ tomada
 
 - **Sección:** Staleness: knowing which translations went out of date · Desactualización: saber qué traducciones quedaron obsoletas
 - **Vista:** Unity ▸ Tools > Beasty VN > Editor ▸ pestaña Localization
 - **Qué tiene que verse:** Un trozo de grilla donde convivan los CUATRO estados: la columna de origen, una celda sin traducir, una desactualizada (edita un texto de origen ya traducido para provocarla) y otra al día. Con la barra de filtros visible arriba.
 
-#### `vn-localization-grid.png` — P1 · ⬜ pendiente
+#### `vn-localization-grid.png` — P1 · ✅ tomada
 
 - **Sección:** Working in the grid · Trabajar en la grilla
 - **Vista:** Unity ▸ Tools > Beasty VN > Editor ▸ pestaña Localization
@@ -548,7 +548,7 @@ Carpeta destino: `public/docs-images/beasty-visual-novel/` · 108 pendientes de 
 - **Vista:** Unity ▸ Tools > Beasty VN > Editor ▸ pestaña Localization ▸ UI (global)
 - **Qué tiene que verse:** Con una tabla de UI cuya columna #0 no sea `en`, captura el aviso amarillo y el botón «Make English the source and fill missing defaults» justo encima de la barra de herramientas.
 
-#### `vn-preferences-language-ingame.png` — P1 · ⬜ pendiente
+#### `vn-preferences-language-ingame.png` — P1 · ✅ tomada
 
 - **Sección:** Switching language while the game runs · Cambiar de idioma mientras el juego se ejecuta
 - **Vista:** Unity ▸ Game view en Play, pantalla de preferencias
@@ -558,13 +558,13 @@ Carpeta destino: `public/docs-images/beasty-visual-novel/` · 108 pendientes de 
 
 `/docs/beasty-visual-novel/production/logging/` — `/es/docs/beasty-visual-novel/production/logging/`
 
-#### `vn-log-categories.png` — P2 · ⬜ pendiente
+#### `vn-log-categories.png` — P2 · ✅ tomada
 
 - **Sección:** Categories · Categorías
 - **Vista:** Unity ▸ Tools > Beasty Console > Console, con una escena en Play
 - **Qué tiene que verse:** La consola con logs de varias categorías de la VN a la vez (Data, Director, Stage, Streaming, Save, Verbose), para que se vea cómo va etiquetado cada mensaje.
 
-#### `vn-log-switches.png` — P2 · ⬜ pendiente
+#### `vn-log-switches.png` — P2 · ✅ tomada
 
 - **Sección:** Setting the switches so they stick · Poner los interruptores para que se queden puestos
 - **Vista:** Unity ▸ donde vivan los interruptores de log de la VN (ventana de diagnóstico o ajustes)
@@ -574,13 +574,13 @@ Carpeta destino: `public/docs-images/beasty-visual-novel/` · 108 pendientes de 
 
 `/docs/beasty-visual-novel/production/saving-and-loading/` — `/es/docs/beasty-visual-novel/production/saving-and-loading/`
 
-#### `vn-save-load-ingame.png` — P1 · ⬜ pendiente
+#### `vn-save-load-ingame.png` — P1 · ✅ tomada
 
 - **Sección:** Slots · Slots
 - **Vista:** Unity ▸ Game view en Play
 - **Qué tiene que verse:** La pantalla de guardar/cargar con varios slots ocupados (con su miniatura, la fecha y el capítulo) y alguno vacío. Si el autoguardado tiene su propio slot, que se vea.
 
-#### `vn-autosave-settings.png` — P2 · ⬜ pendiente
+#### `vn-autosave-settings.png` — P2 · ✅ tomada
 
 - **Sección:** Autosave · Autoguardado
 - **Vista:** Unity ▸ Tools > Beasty VN > Settings > Global Settings
@@ -600,13 +600,13 @@ Carpeta destino: `public/docs-images/beasty-visual-novel/` · 108 pendientes de 
 
 `/docs/beasty-visual-novel/production/ui-prefabs/` — `/es/docs/beasty-visual-novel/production/ui-prefabs/`
 
-#### `vn-ui-prefabs-folder.png` — P2 · ⬜ pendiente
+#### `vn-ui-prefabs-folder.png` — P2 · ✅ tomada
 
 - **Sección:** The prefabs · Los prefabs
 - **Vista:** Unity ▸ ventana Project
 - **Qué tiene que verse:** `BeastyVN/Prefabs/` desplegada con los prefabs visibles y legibles, y también `Runtime/UI/Prefabs/`, donde viven VNMenuRoot y VNBacklogEntry.
 
-#### `vn-upgrade-prefabs.png` — P2 · ⬜ pendiente
+#### `vn-upgrade-prefabs.png` — P2 · ✅ tomada
 
 - **Sección:** The two prefab menu items · Los dos elementos de menú de prefabs
 - **Vista:** Unity ▸ Tools > Beasty VN > Setup > Build Default Menu Prefabs / Upgrade UI Prefabs
@@ -622,7 +622,7 @@ Carpeta destino: `public/docs-images/beasty-visual-novel/` · 108 pendientes de 
 
 `/docs/beasty-visual-novel/production/validation-and-ids/` — `/es/docs/beasty-visual-novel/production/validation-and-ids/`
 
-#### `vn-validator-report.png` — P1 · ⬜ pendiente
+#### `vn-validator-report.png` — P1 · ✅ tomada
 
 - **Sección:** The validator · El validador
 - **Vista:** Unity ▸ Tools > Beasty VN > Editor ▸ botón Validate
@@ -638,19 +638,19 @@ Carpeta destino: `public/docs-images/beasty-visual-novel/` · 108 pendientes de 
 
 `/docs/beasty-visual-novel/production/vn-settings/` — `/es/docs/beasty-visual-novel/production/vn-settings/`
 
-#### `vn-settings-inspector.png` — P1 · ⬜ pendiente
+#### `vn-settings-inspector.png` — P1 · ✅ tomada
 
 - **Sección:** Shared context · Contexto compartido
 - **Vista:** Unity ▸ Tools > Beasty VN > Settings > Global Settings (o Edit > Project Settings > Beasty VN)
 - **Qué tiene que verse:** El asset entero con todas las secciones desplegadas: contexto compartido, localización, guardado, rebobinado, scripts de texto, valores por defecto de diálogo, velocidades, escenario, resolución, feedback de botones y límites blandos. Si no cabe, dos capturas: mitad de arriba y mitad de abajo.
 
-#### `vn-settings-text.png` — P3 · ⬜ pendiente
+#### `vn-settings-text.png` — P3 · ✅ tomada
 
 - **Sección:** Dialogue and text defaults · Diálogo y valores predeterminados de texto
 - **Vista:** Unity ▸ Tools > Beasty VN > Settings > Global Settings
 - **Qué tiene que verse:** Recorte de la sección de texto: valores por defecto del diálogo y los rangos de velocidad de texto y de avance automático.
 
-#### `vn-settings-stage.png` — P3 · ⬜ pendiente
+#### `vn-settings-stage.png` — P3 · ✅ tomada
 
 - **Sección:** Stage · Escenario
 - **Vista:** Unity ▸ Tools > Beasty VN > Settings > Global Settings
@@ -670,7 +670,7 @@ Carpeta destino: `public/docs-images/beasty-visual-novel/` · 108 pendientes de 
 
 `/docs/beasty-visual-novel/reference/menu-items/` — `/es/docs/beasty-visual-novel/reference/menu-items/`
 
-#### `vn-tools-menu.png` — P1 · ⬜ pendiente
+#### `vn-tools-menu.png` — P1 · ✅ tomada
 
 - **Sección:** Windows · Ventanas
 - **Vista:** Unity ▸ barra de menús Tools
@@ -680,7 +680,7 @@ Carpeta destino: `public/docs-images/beasty-visual-novel/` · 108 pendientes de 
 
 `/docs/beasty-visual-novel/reference/prefabs/` — `/es/docs/beasty-visual-novel/reference/prefabs/`
 
-#### `vn-prefabs-folder.png` — P2 · ⬜ pendiente
+#### `vn-prefabs-folder.png` — P2 · ✅ tomada
 
 - **Sección:** Lookup table · Tabla de consulta
 - **Vista:** Unity ▸ ventana Project
@@ -768,7 +768,7 @@ Carpeta destino: `public/docs-images/beasty-visual-novel/` · 108 pendientes de 
 
 `/docs/beasty-visual-novel/world/characters/` — `/es/docs/beasty-visual-novel/world/characters/`
 
-#### `vn-characters-cast.png` — P1 · ⬜ pendiente
+#### `vn-characters-cast.png` — P1 · ✅ tomada
 
 - **Sección:** Creating a character · Crear un personaje
 - **Vista:** Unity ▸ Tools > Beasty VN > Editor ▸ pestaña Characters ▸ Cast
@@ -780,25 +780,25 @@ Carpeta destino: `public/docs-images/beasty-visual-novel/` · 108 pendientes de 
 - **Vista:** Unity ▸ Tools > Beasty VN > Editor ▸ pestaña Characters ▸ Cast
 - **Qué tiene que verse:** Recorte del bloque de identidad con todos los campos rellenos, incluidos los dos colores (que se vean las muestras de color) y un par de etiquetas añadidas.
 
-#### `vn-character-expressions.png` — P1 · ⬜ pendiente
+#### `vn-character-expressions.png` — P1 · ✅ tomada
 
 - **Sección:** Expressions and portraits · Expresiones y retratos
 - **Vista:** Unity ▸ Tools > Beasty VN > Editor ▸ pestaña Characters ▸ Cast
 - **Qué tiene que verse:** Las dos listas a la vez, con al menos tres claves iguales en ambas (`base`, `sad`, `angry`) y sus miniaturas visibles, para que se vea que son dos juegos de sprites que comparten nombre.
 
-#### `vn-character-delivery.png` — P2 · ⬜ pendiente
+#### `vn-character-delivery.png` — P2 · ✅ tomada
 
 - **Sección:** Delivery styles · Estilos de interpretación
 - **Vista:** Unity ▸ Tools > Beasty VN > Editor ▸ pestaña Characters ▸ Cast
 - **Qué tiene que verse:** Un estilo de entrega desplegado (por ejemplo Shout) con la fuente, el color forzado, el multiplicador de tamaño, el prefijo/sufijo de nombre y el efecto de texto elegidos.
 
-#### `vn-character-aliases.png` — P3 · ⬜ pendiente
+#### `vn-character-aliases.png` — P3 · ✅ tomada
 
 - **Sección:** Aliases: showing a different name · Alias: mostrar un nombre distinto
 - **Vista:** Unity ▸ Tools > Beasty VN > Editor ▸ pestaña Characters ▸ Cast
 - **Qué tiene que verse:** La lista de alias con dos o tres entradas del tipo «El Desconocido», «La Voz», que es el caso de uso que explica la página.
 
-#### `vn-character-variables.png` — P1 · ⬜ pendiente
+#### `vn-character-variables.png` — P1 · ✅ tomada
 
 - **Sección:** Character variables (stats) · Variables de personaje (estadísticas)
 - **Vista:** Unity ▸ Tools > Beasty VN > Editor ▸ pestaña Characters ▸ Variables
@@ -830,25 +830,25 @@ Carpeta destino: `public/docs-images/beasty-visual-novel/` · 108 pendientes de 
 
 `/docs/beasty-visual-novel/world/free-roam-rooms/` — `/es/docs/beasty-visual-novel/world/free-roam-rooms/`
 
-#### `vn-freeroam-map.png` — P1 · ⬜ pendiente
+#### `vn-freeroam-map.png` — P1 · ✅ tomada
 
 - **Sección:** The map graph · El grafo del mapa
 - **Vista:** Unity ▸ Tools > Beasty VN > Editor ▸ pestaña FreeRoam, modo Map
 - **Qué tiene que verse:** El mapa con cinco o seis salas conectadas y la sala de entrada claramente marcada. Que se vea la barra de herramientas con el alternador Map / Routines y el botón Fix backgrounds.
 
-#### `vn-room-settings.png` — P1 · ⬜ pendiente
+#### `vn-room-settings.png` — P1 · ✅ tomada
 
 - **Sección:** What a room is · Qué es una sala
 - **Vista:** Unity ▸ Tools > Beasty VN > Editor ▸ pestaña FreeRoam, con una sala abierta
 - **Qué tiene que verse:** El editor de una sala concreta (doble clic sobre ella en el mapa) con sus campos a la vista: id, nombre visible, fondo por defecto, prefab de la sala y la lista de objetos y puertas.
 
-#### `vn-room-create.png` — P2 · ⬜ pendiente
+#### `vn-room-create.png` — P2 · ✅ tomada
 
 - **Sección:** Creating a room and its prefab together · Crear una sala y su prefab juntos
 - **Vista:** Unity ▸ Tools > Beasty VN > Editor ▸ pestaña FreeRoam, modo Map
 - **Qué tiene que verse:** El momento de crear una sala: el menú contextual con Create Room, o mejor aún el diálogo de guardado del prefab que sale inmediatamente después, porque es el paso que sorprende.
 
-#### `vn-room-backgrounds.png` — P1 · ⬜ pendiente
+#### `vn-room-backgrounds.png` — P1 · ✅ tomada
 
 - **Sección:** Conditional backgrounds · Fondos condicionales
 - **Vista:** Unity ▸ Tools > Beasty VN > Editor ▸ pestaña FreeRoam, con una sala abierta
@@ -876,19 +876,19 @@ Carpeta destino: `public/docs-images/beasty-visual-novel/` · 108 pendientes de 
 
 `/docs/beasty-visual-novel/world/game-time/` — `/es/docs/beasty-visual-novel/world/game-time/`
 
-#### `vn-time-config-assign.png` — P1 · ⬜ pendiente
+#### `vn-time-config-assign.png` — P1 · ✅ tomada
 
 - **Sección:** Turning time on · Activar el tiempo
 - **Vista:** Unity ▸ Inspector del BeastyManager
 - **Qué tiene que verse:** Recorte del inspector del BeastyManager con el campo Time Config RELLENO. Es el campo que, vacío, apaga todo el sistema de tiempo: que se identifique sin dudas.
 
-#### `vn-time-config-inspector.png` — P1 · ⬜ pendiente
+#### `vn-time-config-inspector.png` — P1 · ✅ tomada
 
 - **Sección:** Every field of the Time Config · Todos los campos de Time Config
 - **Vista:** Unity ▸ Inspector, con un asset Time Config seleccionado
 - **Qué tiene que verse:** El asset con todos los campos de la tabla de esta página a la vista: modo, la lista de momentos del día (con sus horas de inicio si estás en modo Clock), horas por día, días de la semana, estaciones, días por estación y el día/momento inicial.
 
-#### `vn-block-advance-time.png` — P2 · ⬜ pendiente
+#### `vn-block-advance-time.png` — P2 · ✅ tomada
 
 - **Sección:** The Advance time block · El bloque Advance time
 - **Vista:** Unity ▸ Tools > Beasty VN > Editor ▸ pestaña Story, inspector del nodo
@@ -904,7 +904,7 @@ Carpeta destino: `public/docs-images/beasty-visual-novel/` · 108 pendientes de 
 
 `/docs/beasty-visual-novel/world/interactables-and-doors/` — `/es/docs/beasty-visual-novel/world/interactables-and-doors/`
 
-#### `vn-room-object-inspector.png` — P1 · ⬜ pendiente
+#### `vn-room-object-inspector.png` — P1 · ✅ tomada
 
 - **Sección:** Kind and function · Tipo y función
 - **Vista:** Unity ▸ Tools > Beasty VN > Editor ▸ pestaña FreeRoam, con una sala abierta y un objeto seleccionado
@@ -916,7 +916,7 @@ Carpeta destino: `public/docs-images/beasty-visual-novel/` · 108 pendientes de 
 - **Vista:** Unity ▸ pestaña FreeRoam (ajustes) + Game view en Play (resultado)
 - **Qué tiene que verse:** Los ajustes de Hover feedback con el modo elegido y Zoom on hover activado; si puedes, la misma captura junto al efecto en el juego con el mouse sobre el objeto (tintado o sprite cambiado).
 
-#### `vn-door-inspector.png` — P1 · ⬜ pendiente
+#### `vn-door-inspector.png` — P1 · ✅ tomada
 
 - **Sección:** Doors · Puertas
 - **Vista:** Unity ▸ Tools > Beasty VN > Editor ▸ pestaña FreeRoam, con una sala abierta y una puerta seleccionada
