@@ -2,7 +2,7 @@
 
 > **Regla:** Leer este archivo ANTES de cualquier búsqueda en el proyecto. Si un cambio agrega, mueve, renombra o elimina archivos/carpetas (o cambia el propósito de algo listado aquí), actualizar este mapa en el mismo turno.
 >
-> Última actualización: 2026-07-30
+> Última actualización: 2026-08-06
 
 ## Qué es este proyecto
 
@@ -29,10 +29,10 @@ package.json              → Deps: astro 5, fuentes (Bricolage Grotesque, IBM P
 tsconfig.json             → Config TypeScript
 HOW-TO-ADD-PROJECT.md     → Guía manual: cómo agregar un producto nuevo al sitio
 FLUJO-DE-TRABAJO.md       → Guía para Álvaro: cómo se mantiene la doc entre los dos proyectos (referencia humana)
-PROJECT_MAP.md            → Este archivo
-CLAUDE.md                 → Reglas para Claude: leer el mapa antes de buscar, mantenerlo actualizado
+PROJECT_MAP.md            → Este archivo (sí se versiona en el repo)
+CLAUDE.md                 → Reglas para Claude (solo local: está en .gitignore, no se sube al repo)
 
-.claude/
+.claude/                  → (solo local: está en .gitignore, no se sube al repo)
 ├── settings.json         → Config del proyecto: hook PostToolUse que recuerda actualizar este mapa
 ├── settings.local.json   → Permisos locales (no se commitea)
 ├── hooks/project-map-reminder.mjs → Script del hook (detecta cambios estructurales)
@@ -44,7 +44,7 @@ CLAUDE.md                 → Reglas para Claude: leer el mapa antes de buscar, 
 src/
 ├── content.config.ts     → Define la colección de contenido `docs` (schema del frontmatter)
 ├── content/docs/
-│   ├── en/               → Docs en inglés (canónico) — 3 productos, ~80 páginas
+│   ├── en/               → Docs en inglés (canónico) — 3 productos, 89 páginas
 │   │   ├── beasty-save-system/    → getting-started/, guides/, advanced/, reference/, faq, troubleshooting, changelog, index
 │   │   ├── beasty-visual-novel/   → getting-started/, authoring/, scripting/, world/, production/, reference/, faq, troubleshooting, changelog, index
 │   │   └── beasty-console/   → guides/, reference/, getting-started, faq, changelog, index
@@ -81,34 +81,31 @@ src/
 └── assets/               → logo-on-dark.svg, logo-on-light.svg
 
 public/
-├── docs-images/          → Capturas usadas en las docs, por producto (beasty-save-system/, beasty-visual-novel/, beasty-console/)
-└── projects/             → Imágenes legacy de productos (save-system/, debug-logger/)
+└── docs-images/          → Capturas usadas en las docs, por producto (beasty-save-system/, beasty-visual-novel/, beasty-console/)
 
 scripts/
 ├── check-links.mjs       → Chequeo de enlaces internos (lee dist/)
 ├── doc-index.mjs         → Genera docs/DOC-INDEX.md a partir de las páginas EN
 ├── sync-check.mjs        → Informa de desincronización con el proyecto Unity (changelogs + Plastic)
 ├── screenshots.mjs       → GENERA docs/SCREENSHOTS.md cruzando las páginas con docs/screenshots.json
-├── build-pdf.mjs         → GENERA un PDF de docs básicas por asset desde dist/ (npm run doc:pdf, tras build)
-│                           y lo copia a Assets/BeastyComponents/<asset>/ del proyecto Unity
-└── migrate-docs.mjs      → Migración one-shot de docs viejas (histórico, ya sin origen que leer)
+└── build-pdf.mjs         → GENERA un PDF de docs básicas por asset desde dist/ (npm run doc:pdf, tras build)
+                            y lo copia a Assets/BeastyComponents/<asset>/ del proyecto Unity
 
 docs/  (documentación INTERNA del repo, no se publica)
 ├── changelogs/           → Copia local de los changelogs de los assets (SaveSystem, VN, Console)
 ├── DOC-INDEX.md          → GENERADO: página → secciones, y símbolo → páginas que lo documentan
 ├── sync-state.json       → Config de sync-check.mjs: ruta del proyecto Unity, cm.exe, assets
-├── DOCS-HOME.md          → Texto de portada rescatado del árbol antiguo; candidato a página /docs/
-├── superpowers/plans/    → Planes de implementación (2026-07-13 site-redesign, 2026-07-24 contact-page)
-├── superpowers/specs/    → Specs de diseño (redesign, portada/marca/humanización ES)
+├── specs/2026-07-13-portada-marca-y-humanizacion-es-design.md → Spec de la portada/marca y la
+│                           humanización ES: referencia viva de la terminología ES unificada
 ├── GUIA-ESTILO-DOCS.md   → Norma de estilo/estructura para toda página nueva o edición de prosa (EN canónico)
-├── revision-en-visual-novel-2026-07-28.md → Registro de la revisión de estilo EN de VN (replicada en ES el 29-jul)
-├── revision-en-save-console-2026-07-29.md → Registro de la revisión de estilo EN de Save System y Console (base para replicar en ES)
 ├── screenshots.json      → Catálogo de capturas: por imagen, prioridad, desde qué vista se toma y qué debe verse
-├── SCREENSHOTS.md        → GENERADO (`npm run doc:shots`): guion de las 187 capturas, por producto y página
+├── SCREENSHOTS.md        → GENERADO (`npm run doc:shots`): guion de las 192 capturas, por producto y página
+├── SCREENSHOTS-PENDIENTES.md → GENERADO (mismo comando): solo las capturas por hacer — las ⬜ pendientes
+│                           y las 🔁 a rehacer (fichas con campo `rehacer` en screenshots.json: PNG tomado
+│                           pero desactualizado; el campo se quita al sustituir el PNG)
 └── GUIA-CAPTURAS.pdf     → Guía paso a paso (ES) para el colaborador externo que toma las capturas:
                             clonar, normas, flujo con doc:shots y entrega. Para enviar tal cual.
 
-projects/Inventory/       → Vacío (legacy)
 dist/                     → Salida del build (generado, no editar)
 dist-pdf/                 → Salida de `npm run doc:pdf` (generado, no se commitea)
 ```
@@ -144,21 +141,19 @@ por ensamblado), útil para localizar el código detrás de un cambio. Está baj
    (changelog y README del asset en Unity, `products.ts`, páginas de changelog) y `npm run doc:sync`
    comprueba que coinciden.
 
-`scripts/migrate-docs.mjs` queda como **histórico**: fue la migración one-shot del árbol antiguo y ya no
-tiene origen que leer. Documenta la convención que sigue el contenido (H1 → `title`, enlaces relativos →
-rutas absolutas, imágenes → `/docs-images/<producto>/`) y el origen del defecto de las `description` EN
-truncadas (`.slice(0, 158)`).
+Convención que sigue el contenido migrado del árbol antiguo (la migración one-shot ya se retiró):
+H1 → `title`, enlaces relativos → rutas absolutas, imágenes → `/docs-images/<producto>/`.
 
 ## Reglas clave del proyecto
 
 - **EN es canónico**: todo cambio de contenido se hace primero en `src/content/docs/en/` y luego se refleja en `es/` (misma ruta de archivo).
 - **Un producto nuevo** requiere tocar: `src/data/products.ts`, `src/data/sidebars.ts`, contenido en `en/` y `es/`, e imágenes en `public/docs-images/`. Ver `HOW-TO-ADD-PROJECT.md`.
 - **La navegación lateral NO se genera sola**: agregar una página nueva exige registrarla en `src/data/sidebars.ts` (EN y ES).
-- **Para saber qué página documenta algo, usar `docs/DOC-INDEX.md`**, no abrir las 85 páginas: su índice
+- **Para saber qué página documenta algo, usar `docs/DOC-INDEX.md`**, no abrir las 89 páginas: su índice
   inverso va de símbolo (`MigratedFrom`, `BeastySaveLog`…) a página. Son 65 KB: buscar con Grep, no leerlo
   entero. Regenerarlo con `npm run doc:index` después de tocar contenido.
 - **Capturas**: cada imagen enlazada en una página tiene su ficha en `docs/screenshots.json` (prioridad,
   vista de Unity desde la que se toma, y qué estado hay que montar antes de disparar). Al documentar algo
   que se ve mejor en imagen se enlaza la captura en EN y ES aunque el PNG no exista todavía — se oculta
   sola al renderizar — y se regenera el guion con `npm run doc:shots`.
-- **Terminología ES**: unificada según spec `docs/superpowers/specs/2026-07-13-portada-marca-y-humanizacion-es-design.md` (p. ej. «cifrado», no «encriptación»).
+- **Terminología ES**: unificada según spec `docs/specs/2026-07-13-portada-marca-y-humanizacion-es-design.md` (p. ej. «cifrado», no «encriptación»).

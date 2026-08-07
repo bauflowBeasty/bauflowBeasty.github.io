@@ -3,3 +3,7 @@ dist/
 dist-pdf/
 .astro/
 npm-debug.log*
+
+# Herramientas de Claude (solo locales, no se suben al repositorio)
+.claude/
+CLAUDE.md
