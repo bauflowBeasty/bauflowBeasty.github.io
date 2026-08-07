@@ -10,19 +10,24 @@ que el sitio nunca muestra una imagen rota.
 > **Generado.** Este archivo lo produce `npm run doc:shots` a partir de las páginas y de
 > `docs/screenshots.json`. No lo edites a mano: edita la página (para mover o quitar una imagen) o el
 > catálogo (para cambiar la prioridad, la vista o el guion de una captura) y vuelve a generarlo.
+> Para trabajar, usa `docs/SCREENSHOTS-PENDIENTES.md`: solo lo que falta por hacer.
 
 ## Estado
 
-| | Total | Tomadas | Pendientes |
-|---|---:|---:|---:|
-| P1 · imprescindibles | 79 | 59 | 20 |
-| P2 · recomendadas | 77 | 53 | 24 |
-| P3 · complementarias | 31 | 20 | 11 |
-| **Total** | **187** | **132** | **55** |
+| | Total | Tomadas | Rehacer | Pendientes |
+|---|---:|---:|---:|---:|
+| P1 · imprescindibles | 83 | 58 | 1 | 24 |
+| P2 · recomendadas | 78 | 51 | 2 | 25 |
+| P3 · complementarias | 31 | 20 | 0 | 11 |
+| **Total** | **192** | **129** | **3** | **60** |
 
 **Prioridades.** P1 es donde el texto solo no basta: la ventana principal y sus pestañas, los
 asistentes, las grillas y las pantallas que ve el jugador. P2 completa una página que ya se entiende.
 P3 es un extra: si no la tomas, no se nota.
+
+**Rehacer** marca una captura ya tomada cuyo contenido quedó desactualizado (la UI cambió, o la foto
+no muestra lo que la ficha pide). Su ficha dice el motivo; al sustituir el PNG, quita el campo
+`rehacer` de `docs/screenshots.json` y regenera.
 
 ## Cómo tomarlas
 
@@ -38,7 +43,7 @@ P3 es un extra: si no la tomas, no se nota.
 
 ## Beasty Visual Novel
 
-Carpeta destino: `public/docs-images/beasty-visual-novel/` · 19 pendientes de 151.
+Carpeta destino: `public/docs-images/beasty-visual-novel/` · 24 por hacer de 153.
 
 ### Blocks reference · Referencia de bloques
 
@@ -286,11 +291,12 @@ Carpeta destino: `public/docs-images/beasty-visual-novel/` · 19 pendientes de 1
 - **Vista:** Unity ▸ Inspector, con el asset VNContext seleccionado
 - **Qué tiene que verse:** El inspector del VNContext con sus campos llenos (tabla de localización, personajes, ítems, catálogo de misiones, idiomas). La idea que ilustra es «esto es lo único que comparten todas las escenas».
 
-#### `vn-beastymanager-inspector.png` — P2 · ✅ tomada
+#### `vn-beastymanager-inspector.png` — P2 · 🔁 rehacer
 
 - **Sección:** BeastyManager - the one object · BeastyManager - el único objeto
 - **Vista:** Unity ▸ Inspector, con el BeastyManager de la escena seleccionado
-- **Qué tiene que verse:** El inspector del BeastyManager en una escena montada, con los campos asignados (Time Config, canvas principal, cámara, pantalla de carga…). Que se vea que es UN objeto del que cuelga todo.
+- **Qué tiene que verse:** El inspector del BeastyManager en una escena montada, con los campos asignados (Time Config, canvas principal, cámara, pantalla de carga…). Que se vea que es UN objeto del que cuelga todo, incluida la sección Saving con su insignia de backend.
+- **Por qué rehacerla:** La foto actual es anterior a la sección Saving: salta de Streaming a Scene references. Desde la 1.1 el inspector muestra el foldout Saving (con insignia «Local file» / «Active · …») entre Streaming y Scene references.
 
 ### Editor tour · Recorrido del editor
 
@@ -367,6 +373,16 @@ Carpeta destino: `public/docs-images/beasty-visual-novel/` · 19 pendientes de 1
 - **Sección:** Global Settings · Global Settings
 - **Vista:** Unity ▸ Tools > Beasty VN > Settings > Global Settings
 - **Qué tiene que verse:** La ventana entera con los ajustes desplegados: contexto global, tabla de localización de UI, idioma por defecto y autodetección, política de autoguardado, slots, límite de rebobinado y las carpetas de assets. Es la misma foto que sirve de referencia en la página de VN settings.
+
+### The House Demo · El House Demo
+
+`/docs/beasty-visual-novel/getting-started/house-demo/` — `/es/docs/beasty-visual-novel/getting-started/house-demo/`
+
+#### `vn-house-demo-living.png` — P1 · ⬜ pendiente
+
+- **Sección:** Running it · Ejecutarlo
+- **Vista:** Unity ▸ Game view en Play, escena Demos/HouseDemo/HouseDemo.unity
+- **Qué tiene que verse:** La sala (Living Room) de DÍA con la pose placeholder de Mia visible, las dos estanterías, la puerta al dormitorio y el HUD de mundo libre. Tómala con la misión activa y el cursor sobre Mia para que se vea el realce de interactuable. Los placeholders etiquetados (LIVING ROOM - DAY, MIA POSE…) son parte del mensaje: el demo enseña estructura, no arte.
 
 ### Installation · Instalación
 
@@ -452,11 +468,12 @@ Carpeta destino: `public/docs-images/beasty-visual-novel/` · 19 pendientes de 1
 - **Vista:** Unity ▸ Tools > Beasty VN > Editor ▸ pestaña Music
 - **Qué tiene que verse:** Reutiliza la captura de la pestaña Music del recorrido por el editor.
 
-#### `vn-background-music-foldout.png` — P2 · ✅ tomada
+#### `vn-background-music-foldout.png` — P2 · 🔁 rehacer
 
 - **Sección:** Background music per app mode · Música de fondo por modo de app
 - **Vista:** Unity ▸ Inspector, con el BeastyManager de la escena seleccionado
 - **Qué tiene que verse:** Recorte del inspector del BeastyManager con el desplegable Background Music ABIERTO y el toggle Keep Previous When Empty visible (mejor desactivado, que es el valor con el que una cola vacía significa silencio). Solo el desplegable y un poco de contexto alrededor, no el inspector entero.
+- **Por qué rehacerla:** La foto actual muestra otra cosa: la lista de Channels del manager de Audio (Mixer, canales Music/Ambient/Sfx/Voice), no el foldout Background Music con el toggle Keep Previous When Empty que pide la ficha.
 
 ### Building and platforms · Compilación y plataformas
 
@@ -574,17 +591,24 @@ Carpeta destino: `public/docs-images/beasty-visual-novel/` · 19 pendientes de 1
 
 `/docs/beasty-visual-novel/production/saving-and-loading/` — `/es/docs/beasty-visual-novel/production/saving-and-loading/`
 
-#### `vn-save-load-ingame.png` — P1 · ✅ tomada
+#### `vn-save-load-ingame.png` — P1 · 🔁 rehacer
 
 - **Sección:** Slots · Slots
 - **Vista:** Unity ▸ Game view en Play
-- **Qué tiene que verse:** La pantalla de guardar/cargar con varios slots ocupados (con su miniatura, la fecha y el capítulo) y alguno vacío. Si el autoguardado tiene su propio slot, que se vea.
+- **Qué tiene que verse:** La pantalla de guardar/cargar con varios slots ocupados (con su miniatura, la fecha y el capítulo) y alguno vacío. Si el autoguardado tiene su propio slot, que se vea. Las miniaturas deben mostrar la ESCENA, no el menú.
+- **Por qué rehacerla:** En la foto actual las miniaturas de los slots muestran el menú de pausa abierto. Desde la 1.1 la captura se toma antes de que el menú se dibuje, así que las miniaturas enseñan la escena — la foto contradice lo que la página cuenta.
 
 #### `vn-autosave-settings.png` — P2 · ✅ tomada
 
 - **Sección:** Autosave · Autoguardado
 - **Vista:** Unity ▸ Tools > Beasty VN > Settings > Global Settings
 - **Qué tiene que verse:** Recorte de la sección de guardado: política de autoguardado, número de slots y límite de rebobinado.
+
+#### `vn-saving-section.png` — P1 · ⬜ pendiente
+
+- **Sección:** The Saving section: one place for all of it · La sección Saving: todo en un sitio
+- **Vista:** Unity ▸ Inspector del BeastyManager, sección Saving
+- **Qué tiene que verse:** El foldout Saving ABIERTO con su insignia de backend visible en el título — idealmente con un backend cloud activo para que se lea «Active · Firebase Firestore»; si no, «Local file». Dentro deben verse los grupos Backend (con el desplegable Storage), Location, Security, Reliability, Versioning, Thumbnails y Save policy (Global Settings) con su botón Open Global Settings.
 
 ### Streaming (Addressables) · Streaming (Addressables)
 
@@ -1100,7 +1124,7 @@ Carpeta destino: `public/docs-images/beasty-visual-novel/` · 19 pendientes de 1
 
 ## Beasty Save System
 
-Carpeta destino: `public/docs-images/beasty-save-system/` · 26 pendientes de 26.
+Carpeta destino: `public/docs-images/beasty-save-system/` · 29 por hacer de 29.
 
 ### Installation · Instalación
 
@@ -1190,6 +1214,16 @@ Carpeta destino: `public/docs-images/beasty-save-system/` · 26 pendientes de 26
 - **Vista:** Cualquier editor de texto, con un archivo de guardado cifrado
 - **Qué tiene que verse:** Abre un `.json` guardado con cifrado activado y captura el principio del archivo: se tiene que ver el bloque `meta` en texto plano y legible, y justo al lado el payload convertido en un churro de caracteres. Esa es exactamente la promesa de la página.
 
+### Cloud saves with Firebase · Guardados en la nube con Firebase
+
+`/docs/beasty-save-system/guides/firebase/` — `/es/docs/beasty-save-system/guides/firebase/`
+
+#### `save-firebase-console-data.png` — P2 · ⬜ pendiente
+
+- **Sección:** Where the data lives · Dónde viven los datos
+- **Vista:** Navegador ▸ consola de Firebase ▸ Firestore Database ▸ pestaña Data
+- **Qué tiene que verse:** Un guardado real visto en la consola: la ruta users/{uid}/saves/{slot} con el documento cabecera (campos chunkCount y updatedAt) y su subcolección chunks abierta mostrando el documento «0» con el campo text. Debe leerse la jerarquía por usuario, que es lo que la página describe.
+
 ### Logging · Logging
 
 `/docs/beasty-save-system/guides/logging/` — `/es/docs/beasty-save-system/guides/logging/`
@@ -1214,13 +1248,13 @@ Carpeta destino: `public/docs-images/beasty-save-system/` · 26 pendientes de 26
 
 - **Sección:** (entradilla) · (entradilla)
 - **Vista:** Unity ▸ Tools > Beasty Save System > Save Manager
-- **Qué tiene que verse:** La ventana entera con las tres secciones llenas: Manager (con el inspector embebido visible), Saveables in Scene (al menos tres objetos, uno de ellos con «0 comp.» para que se vea el caso de auditoría) y Slots on Disk con dos slots o más, con su resumen de metadata.
+- **Qué tiene que verse:** La ventana entera con las tres secciones llenas: Manager (con la tarjeta de estado y los grupos de ajustes visibles), Saveables in Scene (al menos tres objetos, uno de ellos con «0 comp.» para que se vea el caso de auditoría) y Slots on Disk con dos slots o más, con su resumen de metadata.
 
 #### `save-manager-inspector.png` — P1 · ⬜ pendiente
 
 - **Sección:** Manager · Manager
 - **Vista:** Unity ▸ Tools > Beasty Save System > Save Manager, sección Manager
-- **Qué tiene que verse:** Recorte de la sección Manager con un manager ya creado: el campo de objeto arriba y, debajo, su inspector embebido con los ajustes desplegados (Folder, Extension, Data Path, Encrypted, Backup, Strict, Data Version). Es la foto de «aquí se edita todo sin cambiar de selección».
+- **Qué tiene que verse:** Recorte de la sección Manager con un manager ya creado: el campo de objeto arriba, la tarjeta de estado (fila «Active storage» con su insignia Local o Cloud) y debajo los ajustes agrupados por función — Backend (Storage y Save Mode), Location, Security, Reliability, Versioning, Logging. Es la foto de «aquí se edita todo sin cambiar de selección».
 
 #### `save-manager-dropzone.png` — P2 · ⬜ pendiente
 
@@ -1263,8 +1297,8 @@ Carpeta destino: `public/docs-images/beasty-save-system/` · 26 pendientes de 26
 #### `save-settings-inspector.png` — P1 · ⬜ pendiente
 
 - **Sección:** The fields · Los campos
-- **Vista:** Unity ▸ Inspector del BeastySaveManager
-- **Qué tiene que verse:** El bloque de ajustes del manager con TODOS los campos visibles a la vez: Folder, Extension, Data Path, Encrypted, Encryption Key, Backup, Strict y Data Version. Es la imagen de referencia de la tabla de esta página, así que no recortes ningún campo.
+- **Vista:** Unity ▸ Tools > Beasty Save System > Save Manager, grupos de Settings
+- **Qué tiene que verse:** Los grupos de ajustes con TODOS los campos visibles a la vez: Backend (Storage, Save Mode, Scope By User), Location (Folder, Extension, Data Path), Security (Encrypted y Encryption Key con el cifrado activado), Reliability (Backup, Strict) y Versioning (Data Version). Es la imagen de referencia de la tabla de esta página, así que no recortes ningún campo. En la ventana Save Manager se ven todos; en el inspector del componente, Data Path no aparece.
 
 ### Slots and metadata · Slots y metadatos
 
@@ -1275,6 +1309,16 @@ Carpeta destino: `public/docs-images/beasty-save-system/` · 26 pendientes de 26
 - **Sección:** Metadata: what a slot list actually needs · Metadatos: lo que una lista de slots realmente necesita
 - **Vista:** Unity ▸ Tools > Beasty Save System > Save Manager, sección Slots on Disk
 - **Qué tiene que verse:** Recorte de UNA fila de slot cuyo guardado lleve metadata de verdad (capítulo, tiempo jugado, nivel), para que se lea el resumen «key: value · key: value …» que la página propone usar en la pantalla de partidas.
+
+### Storage backends · Backends de almacenamiento
+
+`/docs/beasty-save-system/guides/storage-backends/` — `/es/docs/beasty-save-system/guides/storage-backends/`
+
+#### `save-storage-dropdown.png` — P1 · ⬜ pendiente
+
+- **Sección:** The Storage dropdown · El desplegable Storage
+- **Vista:** Unity ▸ Inspector del BeastySaveManager (o la ventana Save Manager), desplegable Storage
+- **Qué tiene que verse:** El desplegable Storage ABIERTO con el SDK de Firebase instalado, para que se vean las tres entradas: Local file, Firebase Firestore y Firebase Realtime Database. Si es posible, que se vea también el campo Save Mode justo debajo — son las dos decisiones que la página presenta juntas.
 
 ### Strict vs tolerant loading · Carga estricta vs. tolerante
 
@@ -1296,6 +1340,12 @@ Carpeta destino: `public/docs-images/beasty-save-system/` · 26 pendientes de 26
 - **Vista:** Unity ▸ Inspector de un Beasty Saveable
 - **Qué tiene que verse:** Un objeto con varios componentes (Transform, SpriteRenderer, Rigidbody2D, un script tuyo) para que se vean las etiquetas de capa: core, el id del módulo (ugui, physics2d…) y dev. Incluye, si puedes, un componente marcado que NADIE puede convertir, para que salga el aviso de TypeUnavailable.
 
+#### `save-manager-inspector.png` — P1 · ⬜ pendiente
+
+- **Sección:** The inspector · El inspector
+- **Vista:** Unity ▸ Inspector del BeastySaveManager
+- **Qué tiene que verse:** MISMA FOTO que la ficha de guides/save-manager-window (se reutiliza el archivo): la tarjeta de estado con la fila «Active storage» y su insignia, los campos Storage y Save Mode al frente, el foldout Advanced settings colapsado y el botón Open Save Manager. Solo hay que tomarla una vez.
+
 ### Save file format · Formato del archivo de guardado
 
 `/docs/beasty-save-system/reference/save-file-format/` — `/es/docs/beasty-save-system/reference/save-file-format/`
@@ -1308,7 +1358,7 @@ Carpeta destino: `public/docs-images/beasty-save-system/` · 26 pendientes de 26
 
 ## Beasty Console
 
-Carpeta destino: `public/docs-images/beasty-console/` · 10 pendientes de 10.
+Carpeta destino: `public/docs-images/beasty-console/` · 10 por hacer de 10.
 
 ### Getting started · Primeros pasos
 

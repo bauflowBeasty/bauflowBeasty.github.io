@@ -8,7 +8,7 @@
 **Identificadores.** `SS/guides/logging` es `src/content/docs/en/beasty-save-system/guides/logging.md`,
 y su espejo español es el mismo archivo bajo `es/`. Siglas: `BC` = beasty-console · `SS` = beasty-save-system · `VN` = beasty-visual-novel.
 
-Cobertura: **85 páginas** EN (y sus 85 espejos ES), **666 símbolos** indexados.
+Cobertura: **89 páginas** EN (y sus 89 espejos ES), **722 símbolos** indexados.
 
 ## Páginas
 
@@ -26,38 +26,41 @@ Cobertura: **85 páginas** EN (y sus 85 espejos ES), **666 símbolos** indexados
 | `BC/index` | Beasty Console | Zero dependencies · What you get · Where to start |
 | `BC/reference/api` | API reference | Fields · Methods · LogColor · Levels · Editor window · See also |
 
-### beasty-save-system — `SS` (26 páginas)
+### beasty-save-system — `SS` (29 páginas)
 
 | Página | Título | Secciones |
 |---|---|---|
+| `SS/advanced/custom-backends` | Custom storage backends | The interface · SlotRef · Registration · Whose saves are these: the user seam · What you do NOT implement · See also |
 | `SS/advanced/custom-converters` | Custom converters | The interface · The contract · A worked example · Overriding a built-in · ConverterUtil · Registration · See also |
 | `SS/advanced/platforms-and-limits` | Platforms and limits | Unity version · Scripting backends · Platforms · WebGL · Limits · See also |
-| `SS/changelog` | Changelog | 1.0.1 — unreleased · 1.0.0 — 2026-07-27 |
-| `SS/faq` | FAQ | Does it need Newtonsoft, or any other package? · Can I use it with my existing save data? · Does it work with IL2CPP? · Does it work on WebGL? · Is the encryption secure? · Can I save a Dictionary? · Can I save a ScriptableObject reference? A sprite? A prefab? · Can I have different settings for autosave and manual save? · How big can a save be? · Can I read a save file by hand? · Is it thread-safe? · Can I use just the JSON engine? · Does it work without the visual novel package? · Do I have to write code to use it? · What happens if a save file gets damaged? · Does it throw exceptions? · Can I add support for a type it does not know? · See also |
+| `SS/changelog` | Changelog | 1.1.0 — 2026-08-06 · 1.0.0 — 2026-07-27 |
+| `SS/faq` | FAQ | Does it need Newtonsoft, or any other package? · Can I use it with my existing save data? · Does it work with IL2CPP? · Does it work on WebGL? · Is the encryption secure? · Can I save a Dictionary? · Can I save a ScriptableObject reference? A sprite? A prefab? · Can I have different settings for autosave and manual save? · How big can a save be? · Can I read a save file by hand? · Can saves go to the cloud? · Can I send a save to my own server? · Is it thread-safe? · Can I use just the JSON engine? · Does it work without the visual novel package? · Do I have to write code to use it? · What happens if a save file gets damaged? · Does it throw exceptions? · Can I add support for a type it does not know? · See also |
 | `SS/getting-started/installation` | Installation | Requirements · Import · What is in the folder · After importing · The converter modules · Platforms · See also |
 | `SS/getting-started/save-with-code` | Save with code | The two namespaces · 1. A data class · 2. Settings · 3. Save · 4. Load, and handle failure properly · 5. LoadInto — load onto an object you already have · 6. Exists, Delete, ListSlots · 7. Async · Where to go next |
 | `SS/getting-started/save-without-code` | Save without writing code | What you are about to build · 1. Make a scene with something in it · 2. Add the Save Manager · 3. Make the cube saveable · 4. Add a Save button · 5. Wire the Save button · 6. Add a Load button · 7. Try it · 8. Where the file actually is · 9. The two things that will bite you · See also |
-| `SS/guides/async-saving` | Async saving and loading | The three methods · What they actually do · When to use them · Awaiting them · Disabling the save button while a save is in flight · Scene saves are synchronous · WebGL · See also |
+| `SS/guides/async-saving` | Async saving and loading | The three methods · The slot utilities have async twins too · What they actually do · When to use them · Awaiting them · Disabling the save button while a save is in flight · Scene saves: SaveAllNowAsync and LoadAllNowAsync · Async-only backends · WebGL · See also |
 | `SS/guides/backups-and-corruption` | Backups and corruption | Two defences · Atomic writes: a half-written save cannot exist · Backups: the previous version, kept · Recovery: what to do when a load fails · Corruption you can see coming · Doing it from the editor · See also |
 | `SS/guides/encryption` | Encryption | Read this first · Turning it on · What it does · If you leave the key empty · The Encrypted flag must match the file · If you have to switch anyway · See also |
+| `SS/guides/firebase` | Cloud saves with Firebase | What you need · The modules compile themselves · Pick the backend · Who is signed in · Where the data lives · Security rules · When something goes wrong · Testing against a real project · See also |
 | `SS/guides/logging` | Logging | The toggle · What it looks like · From code · Sending the logs somewhere else · Performance · See also |
 | `SS/guides/save-manager-window` | The Save Manager window | Manager · Saveables in Scene · Slots on Disk · See also |
 | `SS/guides/scene-state` | Scene state | The two components · Ids · Inactive objects are saved · Several components of the same type · Saving and loading · What actually ends up in the file · Ticking a component you cannot save · See also |
 | `SS/guides/settings` | Settings | Settings are per call, not per project · The fields · Slot names · See also |
 | `SS/guides/slots-and-metadata` | Slots and metadata | What a slot is · Naming rules · Exists, Delete, ListSlots · Metadata: what a slot list actually needs · Metadata is plain text, even when the save is encrypted · A worked example: slot summaries for a UI · See also |
+| `SS/guides/storage-backends` | Storage backends | The Storage dropdown · What changes with a cloud backend · Save Mode · Whose saves are these · The errors this page adds · See also |
 | `SS/guides/strict-vs-tolerant` | Strict vs tolerant loading | The short version · Strict: all or nothing · Tolerant: skip the bad field, keep the rest · Reading the warnings · When to use tolerant · The caveat you need to know · See also |
 | `SS/guides/versioning-and-migrations` | Versioning and migrations | The situation · DataVersion · Registering a migration · Migrations chain · The gotcha: migrations do not survive Play Mode · Migrating a scene save · Practical advice · See also |
 | `SS/guides/what-gets-saved` | What gets saved | The short version · What is saved · What is NOT saved · The errors that fail a save · Checklist for a save class · See also |
 | `SS/index` | Beasty Save System | What makes it different · Features · Where to start · The one page everybody should read · Guides · Reference · Advanced · When something goes wrong |
-| `SS/reference/api-beastysave` | BeastySave API | Namespaces · Slot names · Saving · Loading · Slots · Extension points · Paths · Logging · See also |
+| `SS/reference/api-beastysave` | BeastySave API | Namespaces · Slot names · Saving · Loading · Slots · JSON without files · Extension points · Paths · Logging · See also |
 | `SS/reference/components` | Components | BeastySaveable · BeastySaveManager · See also |
 | `SS/reference/converter-modules` | Converter modules | The modules · Rules that apply to all of them · Core · Animation · Audio · Particles · Physics2D · Physics3D · TMPro · UGUI · When a module is not there · See also |
 | `SS/reference/json-engine` | The JSON engine | Why it exists · JsonNode · JsonParser · JsonWriter · JsonMapper · Exceptions · IJsonConverterResolver · A worked example · See also |
-| `SS/reference/results-and-errors` | Results and errors | The design principle · SaveResult · LoadResult · LoadResult&lt;T&gt; · The error codes · See also |
+| `SS/reference/results-and-errors` | Results and errors | The design principle · SaveResult · SaveResult&lt;T&gt; · LoadResult · LoadResult&lt;T&gt; · The error codes · See also |
 | `SS/reference/save-file-format` | Save file format | Where the file lives · The envelope · The group (scene) format · The write pipeline · The load pipeline · Slot utilities · See also |
 | `SS/troubleshooting` | Troubleshooting | My save loaded, but the sprite / prefab / component reference is gone · The object I spawned at runtime does not remember anything · One of my objects is silently missing from the save · SaveAll fails with TypeUnavailable · Loading fails with Corrupt · Loading fails with DecryptFailed · Loading fails with VersionTooNew · My load silently does nothing · It worked in the editor and broke in the build · My custom converter stopped working after I pressed Play · Nothing saves on WebGL · Other failures worth naming · See also |
 
-### beasty-visual-novel — `VN` (50 páginas)
+### beasty-visual-novel — `VN` (51 páginas)
 
 | Página | Título | Secciones |
 |---|---|---|
@@ -70,10 +73,11 @@ Cobertura: **85 páginas** EN (y sus 85 espejos ES), **666 símbolos** indexados
 | `VN/authoring/text-script` | The text script | What it is · Why you would use it · Turning it on · The Text tab · How the two stay in sync · The safety contract · The limits · A worked example · See also |
 | `VN/authoring/transitions` | Transitions: leaving the novel | The four exits · The variable store survives the jump · Exit block or Flow node? · Exits as the target of a choice or a decision · See also |
 | `VN/authoring/vnbeasty-syntax` | .vnbeasty syntax reference | Contents · File structure · Dialogue and narration · Backdrops · Props · Characters · Audio · State and inventory · Quests, screens and routines · Game time · Prompts · Character names · Flow and transitions · Choices and decisions · The talk menu · Subgraphs and return · Conditions and effects · Notes · See also |
-| `VN/changelog` | Changelog | 1.0.0 — unreleased |
+| `VN/changelog` | Changelog | 1.0.0 — 2026-08-06 |
 | `VN/faq` | FAQ | Do I need to know how to code? · Which render pipelines are supported? · Which Unity version do I need? · Does it work with the Input System? · Do I need Addressables? · Do I need Newtonsoft, or any other package? · Does it include a save system? · Can my writer work in a text file while I build in the graph? · Can I use my own UI? · Can I use it for a dating sim, a life sim or a detective game? · Is WebGL supported? · Can I localize into any number of languages? · Can the player switch language mid-game? · Can I add my own minigame? · Is the C# source included? · How do I migrate from Ren'Py? · See also |
 | `VN/getting-started/core-concepts` | Core concepts | DialogueScene - one story · VNContext - the one shared world · StoryGraph - a canvas of nodes · Node - one beat · Block - one instruction · The variable store - the one that matters · BeastyManager - the one object · How a frame of the game flows · See also |
 | `VN/getting-started/editor-tour` | Editor tour | The top bar · The nine tabs · The other windows · See also |
+| `VN/getting-started/house-demo` | The House Demo | Running it · What it demonstrates, and where to look · Reading the story source · The placeholder art · See also |
 | `VN/getting-started/installation` | Installation | Requirements · Render pipeline: any of them, unchanged · Input: it compiles either way · Required Unity packages · Beasty Save System and Beasty Console are bundled · Platforms · Importing · What is in the package · See also |
 | `VN/getting-started/your-first-scene` | Your first scene | 1. Build the scene · 2. Get the assets · 3. Open the editor · 4. Create a character · 5. Write two lines · 6. Add a choice · 7. Press Play · 8. Two things to do before you go further · Where to go next · See also |
 | `VN/index` | Beasty Visual Novel | Two views of the same scene · More than a dialogue player · Where to start · Saves are built in · See also |
@@ -83,7 +87,7 @@ Cobertura: **85 páginas** EN (y sus 85 espejos ES), **666 símbolos** indexados
 | `VN/production/large-projects` | Large projects | What the editor already does for you · Splitting the story across scenes · Reuse with subgraphs · Keeping localization manageable · When to turn on streaming · Run the validator regularly · See also |
 | `VN/production/localization` | Localization | The two tables · Languages, and which one is the source · Staleness: knowing which translations went out of date · Working in the grid · Import and export · Localizing the interface · Switching language while the game runs · The authoring language is not the game's language · See also |
 | `VN/production/logging` | Logging | Everything goes through one facade · Categories · The master switch · Setting the switches so they stick · Two switches, not one · Logging from your own code · See also |
-| `VN/production/saving-and-loading` | Saving and loading | Slots · Autosave · What a save actually holds · Loading, and a damaged save · Where the files are, and what powers this · Saving your own game state · See also |
+| `VN/production/saving-and-loading` | Saving and loading | Slots · Autosave · What a save actually holds · Loading, and a damaged save · The Saving section: one place for all of it · Cloud saves · Where the files are, and what powers this · Saving your own game state · See also |
 | `VN/production/streaming` | Streaming (Addressables) | Why you would want it · The model, and why it is safe · Turning it on · What is NOT streamed · Node streaming · The gotcha you must know · See also |
 | `VN/production/ui-prefabs` | UI prefabs | The prefabs · How to restyle · The two prefab menu items · The black screen, and the button that fixes it · See also |
 | `VN/production/validation-and-ids` | Validation and ids | The validator · Ids · Cleaning up after a deletion · Auto-wire · See also |
@@ -139,32 +143,39 @@ Cobertura: **85 páginas** EN (y sus 85 espejos ES), **666 símbolos** indexados
 | `ApplyGroupNode` | SS/reference/components |
 | `ArgumentException` | SS/changelog SS/reference/api-beastysave SS/reference/components |
 | `ArgumentNullException` | SS/reference/api-beastysave SS/reference/components |
-| `Ask` | VN/authoring/dialogue-preview |
+| `Ask` | VN/authoring/dialogue-preview VN/getting-started/house-demo |
 | `Assets` | SS/getting-started/installation |
 | `Assign` | VN/authoring/blocks-reference VN/authoring/choices-and-decisions |
+| `Asynchronous` | SS/guides/async-saving SS/guides/firebase SS/guides/save-manager-window SS/guides/storage-backends SS/reference/components |
 | `Audio` | VN/production/vn-settings VN/scripting/overview |
 | `AudioClip` | SS/getting-started/save-without-code SS/guides/what-gets-saved |
 | `AudioSource` | SS/getting-started/installation SS/guides/what-gets-saved SS/reference/converter-modules SS/troubleshooting |
 | `AudioSource.clip` | SS/guides/what-gets-saved SS/reference/converter-modules SS/troubleshooting |
+| `AuthRequired` | SS/advanced/custom-backends SS/changelog SS/guides/firebase SS/guides/storage-backends SS/reference/api-beastysave SS/reference/results-and-errors SS/troubleshooting |
 | `Auto` | SS/changelog SS/guides/logging SS/reference/components |
 | `Autosaves` | SS/guides/settings |
 | `AUX` | SS/guides/settings SS/guides/slots-and-metadata SS/reference/api-beastysave SS/reference/results-and-errors |
 | `Awake` | SS/advanced/custom-converters SS/guides/versioning-and-migrations SS/troubleshooting VN/scripting/controllers |
 | `Back` | VN/authoring/dialogue-preview VN/production/saving-and-loading VN/production/streaming VN/production/vn-settings VN/scripting/custom-mode VN/world/screens-and-hud |
+| `BackendRequiresAsync` | SS/advanced/custom-backends SS/changelog SS/guides/async-saving SS/guides/storage-backends SS/reference/api-beastysave SS/reference/components SS/reference/results-and-errors SS/troubleshooting |
+| `BackendUnavailable` | SS/advanced/custom-backends SS/changelog SS/guides/firebase SS/guides/settings SS/guides/storage-backends SS/reference/api-beastysave SS/reference/results-and-errors SS/troubleshooting |
 | `Background` | VN/world/free-roam-rooms |
 | `Backlog` | VN/scripting/vn-api |
 | `BackToMenu` | VN/world/talk-menu |
-| `Backup` | SS/guides/backups-and-corruption SS/guides/settings |
+| `Backup` | SS/guides/backups-and-corruption SS/guides/save-manager-window SS/guides/settings |
 | `BackupAvailable` | SS/faq SS/getting-started/save-with-code SS/guides/backups-and-corruption SS/reference/results-and-errors SS/troubleshooting |
 | `Bakery` | VN/world/character-routines |
-| `BEASTY_DEV_TOOLS` | SS/changelog VN/changelog |
+| `BEASTY_DEV_TOOLS` | SS/changelog SS/guides/firebase VN/changelog |
+| `BEASTY_HAS_FIREBASE_AUTH` | SS/guides/firebase |
+| `BEASTY_HAS_FIREBASE_RTDB` | SS/guides/firebase |
+| `BEASTY_HAS_FIRESTORE` | SS/guides/firebase |
 | `Beasty_SaveSystem` | SS/reference/components |
 | `Beasty_SaveSystem.BeastySave` | SS/advanced/custom-converters |
 | `Beasty_SaveSystemCore.BeastySaveError` | SS/reference/results-and-errors |
 | `Beasty_SaveSystemCore.ConverterUtil` | SS/advanced/custom-converters |
 | `Beasty_SaveSystemCore.IBeastyConverter` | SS/advanced/custom-converters |
 | `Beasty_SaveSystemCore.Json` | SS/reference/json-engine |
-| `Beasty.Console` | BC/changelog BC/index BC/reference/api VN/changelog |
+| `Beasty.Console` | BC/changelog BC/index BC/reference/api |
 | `Beasty.Console.Editor` | BC/changelog BC/index BC/reference/api |
 | `Beasty.SaveGroup` | SS/guides/scene-state |
 | `Beasty.VN.Addressables` | VN/scripting/overview |
@@ -187,15 +198,17 @@ Cobertura: **85 páginas** EN (y sus 85 espejos ES), **666 símbolos** indexados
 | `BeastyManager.VN` | VN/scripting/controllers |
 | `BeastyQuests` | VN/index VN/scripting/gameplay-apis VN/scripting/overview VN/scripting/vn-api VN/world/quests |
 | `BeastyRoutines` | VN/index VN/scripting/gameplay-apis VN/scripting/overview VN/scripting/vn-api VN/world/character-routines |
-| `BeastySave` | SS/faq SS/getting-started/save-with-code SS/guides/logging SS/guides/settings SS/index SS/reference/api-beastysave |
+| `BeastySave` | SS/advanced/custom-backends SS/faq SS/getting-started/save-with-code SS/guides/logging SS/guides/settings SS/index SS/reference/api-beastysave |
 | `BeastySave.Exists` | SS/reference/results-and-errors |
+| `BeastySave.GetFolderPath` | SS/changelog SS/guides/storage-backends |
 | `BeastySave.ReadMeta` | SS/getting-started/save-with-code SS/reference/components SS/reference/save-file-format |
 | `BeastySave.RegisterConverter` | SS/faq SS/troubleshooting |
 | `BeastySave.RegisterMigration` | SS/faq SS/reference/results-and-errors SS/troubleshooting |
 | `BeastySave.RegisterModule` | SS/faq SS/troubleshooting |
 | `BeastySave.RestoreBackup` | SS/faq SS/guides/logging SS/guides/settings SS/reference/results-and-errors |
 | `BeastySave.Save` | SS/faq SS/getting-started/save-with-code SS/guides/settings SS/guides/versioning-and-migrations SS/guides/what-gets-saved SS/index |
-| `BeastySave.SaveAsync` | SS/guides/async-saving |
+| `BeastySave.SaveToJson` | SS/changelog SS/faq |
+| `BeastySave.ToJson` | SS/changelog |
 | `BeastySaveable` | SS/advanced/custom-converters SS/advanced/platforms-and-limits SS/changelog SS/faq SS/getting-started/installation SS/getting-started/save-without-code SS/guides/save-manager-window SS/guides/scene-state SS/guides/what-gets-saved SS/index SS/reference/components SS/reference/converter-modules SS/troubleshooting VN/changelog VN/faq VN/production/saving-and-loading VN/scripting/controllers VN/scripting/custom-mode VN/scripting/overview |
 | `BeastySaveable.Id` | SS/reference/save-file-format |
 | `BeastySaveError` | SS/faq SS/getting-started/save-with-code SS/reference/results-and-errors |
@@ -203,25 +216,37 @@ Cobertura: **85 páginas** EN (y sus 85 espejos ES), **666 símbolos** indexados
 | `BeastySaveLog` | SS/changelog SS/guides/logging SS/reference/api-beastysave |
 | `BeastySaveLog.EnableLogs` | SS/guides/logging |
 | `BeastySaveLog.Sink` | BC/guides/beasty-integration |
+| `BeastySaveLog.Warning` | SS/changelog |
 | `BeastySaveLogLevel.Verbose` | SS/reference/api-beastysave |
 | `BeastySaveLogMode` | SS/reference/components |
-| `BeastySaveManager` | SS/changelog SS/faq SS/getting-started/installation SS/guides/encryption SS/guides/logging SS/guides/save-manager-window SS/guides/scene-state SS/guides/settings SS/index SS/reference/api-beastysave SS/reference/components |
+| `BeastySaveManager` | SS/changelog SS/faq SS/getting-started/installation SS/guides/encryption SS/guides/firebase SS/guides/logging SS/guides/save-manager-window SS/guides/scene-state SS/guides/settings SS/guides/storage-backends SS/index SS/reference/api-beastysave SS/reference/components |
 | `BeastySaveManager.ApplyGroupNode` | SS/reference/results-and-errors |
 | `BeastySaveManager.CaptureGroupNode` | SS/reference/results-and-errors |
 | `BeastySaveManager.LastLoadResult` | SS/troubleshooting |
 | `BeastySaveManager.LoadAllNow` | SS/reference/results-and-errors |
+| `BeastySaveManager.LoadAllNowAsync` | SS/reference/results-and-errors |
 | `BeastySaveManager.LoadCompleted` | SS/reference/converter-modules |
-| `BeastySaveManager.SaveAll` | SS/guides/async-saving SS/guides/what-gets-saved SS/reference/save-file-format |
+| `BeastySaveManager.SaveAll` | SS/changelog SS/guides/what-gets-saved SS/reference/save-file-format |
 | `BeastySaveManager.SaveAllNow` | SS/reference/results-and-errors |
+| `BeastySaveManager.SaveAllNowAsync` | SS/changelog SS/reference/results-and-errors |
+| `BeastySaveMode` | SS/reference/components |
 | `BeastySaveSettings` | SS/faq SS/getting-started/save-with-code SS/guides/scene-state SS/guides/settings SS/index SS/reference/api-beastysave SS/reference/components SS/troubleshooting |
 | `BeastySaveSettings.DataPath` | SS/advanced/platforms-and-limits |
 | `BeastySaveSettings.DataVersion` | SS/guides/versioning-and-migrations SS/reference/api-beastysave SS/reference/results-and-errors SS/reference/save-file-format |
 | `BeastySaveSettings.Encrypted` | SS/reference/results-and-errors |
+| `BeastySaveSettings.ScopeByUser` | SS/changelog |
 | `BeastySaveSettings.SharedDefaultEncryptionKey` | SS/changelog SS/guides/settings |
+| `BeastySaveSettings.Storage` | SS/advanced/custom-backends SS/guides/storage-backends |
+| `BeastySaveSettings.StorageId` | SS/advanced/custom-backends SS/changelog SS/faq SS/reference/api-beastysave SS/reference/results-and-errors |
 | `BeastySaveSettings.Strict` | SS/reference/api-beastysave |
+| `BeastySaveStorageRegistry` | SS/changelog |
+| `BeastySaveStorageRegistry.LocalId` | SS/advanced/custom-backends |
+| `BeastySaveStorageRegistry.Register` | SS/reference/api-beastysave |
 | `BeastySaveSystem.asmdef` | SS/getting-started/installation |
+| `BeastySaveSystem.Firebase.Tests` | SS/changelog SS/guides/firebase |
+| `BeastySaveUsers` | SS/advanced/custom-backends SS/changelog SS/guides/settings SS/reference/api-beastysave |
+| `BeastySaveUsers.Provider` | SS/advanced/custom-backends SS/guides/firebase SS/guides/storage-backends |
 | `BeastyTime` | VN/index VN/scripting/gameplay-apis VN/scripting/overview VN/scripting/vn-api VN/world/game-time |
-| `BeastyVN_LICENSE.md` | VN/changelog |
 | `BeastyVNMixer` | VN/production/audio-and-music VN/production/ui-prefabs VN/reference/prefabs |
 | `BeforeSceneLoad` | SS/advanced/custom-converters |
 | `Bench` | VN/world/character-routines |
@@ -232,7 +257,7 @@ Cobertura: **85 páginas** EN (y sus 85 espejos ES), **666 símbolos** indexados
 | `BoxCollider` | SS/getting-started/installation SS/guides/scene-state SS/reference/converter-modules |
 | `BoxCollider2D` | SS/getting-started/installation SS/reference/converter-modules |
 | `Button` | VN/world/screens-and-hud |
-| `BytesWritten` | SS/reference/results-and-errors |
+| `BytesWritten` | SS/reference/api-beastysave SS/reference/results-and-errors |
 | `Camera` | SS/getting-started/installation SS/guides/what-gets-saved SS/reference/converter-modules SS/troubleshooting |
 | `CanConvert` | SS/advanced/custom-converters |
 | `CanUse` | VN/scripting/gameplay-apis |
@@ -270,6 +295,7 @@ Cobertura: **85 páginas** EN (y sus 85 espejos ES), **666 símbolos** indexados
 | `CircleCollider2D` | SS/getting-started/installation SS/reference/converter-modules |
 | `Clock` | VN/reference/assets VN/world/game-time |
 | `Close` | VN/world/screens-and-hud |
+| `Cloud` | SS/guides/save-manager-window SS/reference/components |
 | `Collider2D` | SS/changelog SS/getting-started/installation |
 | `Color` | SS/getting-started/installation SS/guides/what-gets-saved SS/reference/converter-modules |
 | `COM1` | SS/changelog SS/guides/settings SS/guides/slots-and-metadata SS/reference/api-beastysave SS/reference/results-and-errors |
@@ -285,17 +311,18 @@ Cobertura: **85 páginas** EN (y sus 85 espejos ES), **666 símbolos** indexados
 | `ConverterResolver` | SS/reference/json-engine |
 | `Copy` | VN/authoring/story-graph |
 | `Core` | VN/faq VN/index VN/scripting/overview |
-| `Corrupt` | SS/faq SS/guides/backups-and-corruption SS/guides/encryption SS/guides/save-manager-window SS/reference/api-beastysave SS/reference/components SS/reference/results-and-errors SS/reference/save-file-format SS/troubleshooting |
+| `Corrupt` | SS/faq SS/guides/backups-and-corruption SS/guides/encryption SS/guides/firebase SS/guides/save-manager-window SS/reference/api-beastysave SS/reference/components SS/reference/results-and-errors SS/reference/save-file-format SS/troubleshooting |
 | `Count` | VN/scripting/gameplay-apis |
 | `Counter` | VN/world/character-routines |
 | `Create` | VN/authoring/story-graph VN/getting-started/editor-tour VN/reference/assets |
 | `CreditsScreen` | VN/reference/prefabs |
+| `CurrentUserId` | SS/advanced/custom-backends |
 | `Custom` | VN/authoring/blocks-reference VN/authoring/dialogue-and-stage VN/faq VN/scripting/custom-mode VN/scripting/overview VN/world/screens-and-hud |
 | `Cut` | VN/authoring/story-graph |
 | `Daily` | VN/world/quests |
 | `Data` | VN/production/logging |
-| `DataPath` | SS/guides/encryption SS/guides/settings SS/guides/slots-and-metadata |
-| `DataVersion` | SS/guides/encryption SS/guides/settings SS/guides/versioning-and-migrations SS/troubleshooting |
+| `DataPath` | SS/advanced/custom-backends SS/guides/encryption SS/guides/firebase SS/guides/save-manager-window SS/guides/settings SS/guides/slots-and-metadata SS/guides/storage-backends |
+| `DataVersion` | SS/advanced/custom-backends SS/guides/encryption SS/guides/save-manager-window SS/guides/settings SS/guides/versioning-and-migrations SS/troubleshooting |
 | `DateTime` | SS/getting-started/save-with-code SS/guides/what-gets-saved SS/reference/json-engine |
 | `Day` | VN/scripting/gameplay-apis |
 | `Daypart` | VN/scripting/gameplay-apis |
@@ -307,14 +334,17 @@ Cobertura: **85 páginas** EN (y sus 85 espejos ES), **666 símbolos** indexados
 | `DecryptFailed` | SS/guides/backups-and-corruption SS/guides/encryption SS/reference/api-beastysave SS/reference/results-and-errors SS/reference/save-file-format |
 | `Default` | BC/guides/logging VN/world/character-routines |
 | `DefaultLevel` | SS/reference/api-beastysave |
-| `Delete` | SS/getting-started/save-with-code SS/guides/backups-and-corruption SS/guides/save-manager-window SS/guides/slots-and-metadata SS/reference/save-file-format |
+| `Delete` | SS/advanced/custom-backends SS/getting-started/save-with-code SS/guides/backups-and-corruption SS/guides/save-manager-window SS/guides/slots-and-metadata SS/reference/save-file-format |
+| `DeleteAsync` | SS/changelog |
+| `DeleteSlot` | SS/changelog SS/guides/async-saving SS/guides/storage-backends SS/reference/components SS/reference/results-and-errors |
 | `Deliver` | VN/scripting/gameplay-apis |
+| `DescribeAll` | SS/advanced/custom-backends |
 | `DialogPanel` | VN/production/ui-prefabs VN/reference/prefabs |
 | `DialogueBacklog.Entry` | VN/scripting/vn-api |
 | `DialogueBlock` | VN/world/quests VN/world/talk-menu |
 | `DialogueLine` | VN/scripting/vn-api |
 | `DialogueNode` | VN/authoring/vnbeasty-syntax |
-| `DialogueScene` | VN/authoring/dialogue-preview VN/authoring/story-graph VN/authoring/text-script VN/production/audio-and-music VN/production/building-and-platforms VN/production/large-projects VN/production/validation-and-ids VN/reference/assets VN/scripting/overview |
+| `DialogueScene` | VN/authoring/dialogue-preview VN/authoring/story-graph VN/authoring/text-script VN/getting-started/house-demo VN/production/audio-and-music VN/production/building-and-platforms VN/production/large-projects VN/production/validation-and-ids VN/reference/assets VN/scripting/overview |
 | `DialogueTextEffect` | VN/reference/prefabs |
 | `DialogueView` | VN/reference/prefabs |
 | `Dictionary` | SS/faq SS/getting-started/save-with-code SS/guides/strict-vs-tolerant SS/guides/what-gets-saved |
@@ -325,7 +355,7 @@ Cobertura: **85 páginas** EN (y sus 85 espejos ES), **666 símbolos** indexados
 | `Effect` | VN/scripting/vn-api |
 | `Enabled` | VN/scripting/gameplay-apis |
 | `EncodeToPNG` | SS/reference/converter-modules |
-| `Encrypted` | SS/guides/encryption SS/guides/settings SS/troubleshooting |
+| `Encrypted` | SS/guides/encryption SS/guides/save-manager-window SS/guides/settings SS/troubleshooting |
 | `EncryptionKey` | SS/guides/encryption SS/guides/settings SS/reference/results-and-errors SS/troubleshooting |
 | `Enqueue` | SS/reference/json-engine SS/reference/results-and-errors |
 | `EnterCustom` | VN/faq VN/scripting/controllers VN/scripting/custom-mode |
@@ -335,25 +365,30 @@ Cobertura: **85 páginas** EN (y sus 85 espejos ES), **666 símbolos** indexados
 | `Error` | SS/index SS/reference/results-and-errors |
 | `Evening` | VN/world/character-routines |
 | `Exception` | BC/guides/logging |
-| `Exists` | SS/reference/save-file-format |
+| `Exists` | SS/guides/async-saving SS/reference/results-and-errors SS/reference/save-file-format |
+| `ExistsAsync` | SS/changelog SS/reference/results-and-errors |
 | `Export` | VN/production/localization VN/troubleshooting |
-| `Extension` | SS/faq SS/getting-started/save-without-code SS/guides/encryption SS/guides/save-manager-window SS/guides/settings SS/guides/slots-and-metadata |
+| `Extension` | SS/advanced/custom-backends SS/faq SS/getting-started/save-without-code SS/guides/encryption SS/guides/firebase SS/guides/save-manager-window SS/guides/settings SS/guides/slots-and-metadata SS/guides/storage-backends |
 | `Fade` | VN/authoring/dialogue-and-stage VN/world/characters |
 | `Failed` | VN/scripting/controllers |
 | `FailedBackupAvailable` | VN/scripting/controllers |
 | `FieldMapFailed` | SS/advanced/custom-converters SS/changelog SS/guides/backups-and-corruption SS/guides/strict-vs-tolerant SS/reference/api-beastysave SS/reference/components SS/reference/converter-modules SS/reference/results-and-errors SS/reference/save-file-format SS/troubleshooting |
 | `FieldSkipReporter` | SS/reference/json-engine |
 | `File.Replace` | SS/advanced/platforms-and-limits SS/getting-started/installation SS/reference/save-file-format VN/production/building-and-platforms |
-| `FileNotFound` | SS/guides/backups-and-corruption SS/reference/api-beastysave SS/reference/results-and-errors SS/reference/save-file-format SS/troubleshooting |
+| `FileNotFound` | SS/advanced/custom-backends SS/guides/backups-and-corruption SS/reference/api-beastysave SS/reference/results-and-errors SS/reference/save-file-format SS/troubleshooting |
 | `FindAnyObjectByType` | SS/changelog VN/changelog |
 | `FindFirstObjectByType` | SS/changelog |
 | `FindObjectsByType` | SS/changelog VN/changelog |
+| `Firebase.Auth` | SS/guides/firebase |
+| `Firebase.Database` | SS/guides/firebase |
+| `Firebase.Firestore` | SS/guides/firebase |
+| `FirebaseSdkDetector` | SS/changelog SS/guides/firebase |
 | `Fired` | VN/world/character-routines |
 | `Fixed` | VN/reference/assets |
 | `FlexibleGridLayout` | VN/reference/prefabs |
 | `Float` | VN/reference/assets VN/reference/variable-keys VN/world/characters VN/world/variables-and-conditions |
 | `FlowNode` | VN/authoring/vnbeasty-syntax |
-| `Folder` | SS/faq SS/getting-started/save-without-code SS/guides/encryption SS/guides/save-manager-window SS/guides/settings SS/guides/slots-and-metadata |
+| `Folder` | SS/advanced/custom-backends SS/faq SS/getting-started/save-without-code SS/guides/encryption SS/guides/firebase SS/guides/save-manager-window SS/guides/settings SS/guides/slots-and-metadata SS/guides/storage-backends |
 | `Font` | VN/scripting/vn-api |
 | `FontSizeMultiplier` | VN/scripting/vn-api |
 | `Forward` | VN/authoring/dialogue-preview |
@@ -367,6 +402,7 @@ Cobertura: **85 páginas** EN (y sus 85 espejos ES), **666 símbolos** indexados
 | `FreeRoamScenario` | VN/reference/assets VN/reference/prefabs |
 | `FreeRoamScreenController` | VN/reference/prefabs |
 | `FreeRoamScreenElement` | VN/reference/prefabs |
+| `FromJson` | SS/changelog |
 | `Furnace` | SS/advanced/custom-converters |
 | `Game` | VN/scripting/overview |
 | `GameMenuScreen` | VN/production/ui-prefabs VN/reference/prefabs |
@@ -379,7 +415,9 @@ Cobertura: **85 páginas** EN (y sus 85 espejos ES), **666 símbolos** indexados
 | `GetFloat` | VN/scripting/overview |
 | `GetInstanceID` | SS/troubleshooting VN/changelog VN/getting-started/installation |
 | `GetSerializableFields` | SS/reference/json-engine |
+| `GetSlotPath` | SS/changelog SS/guides/storage-backends |
 | `GetString` | VN/scripting/overview |
+| `GetUserIdAsync` | SS/advanced/custom-backends |
 | `Give` | VN/scripting/gameplay-apis |
 | `Goodbye` | VN/world/talk-menu |
 | `GoToMainMenu` | VN/scripting/custom-mode |
@@ -397,6 +435,8 @@ Cobertura: **85 páginas** EN (y sus 85 espejos ES), **666 símbolos** indexados
 | `Hour` | VN/scripting/gameplay-apis |
 | `IBeastyConverter` | SS/faq VN/scripting/overview |
 | `IBeastySaveLogSink` | BC/guides/beasty-integration |
+| `IBeastySaveStorage` | SS/changelog SS/guides/settings |
+| `IBeastyUserProvider` | SS/advanced/custom-backends SS/changelog |
 | `IEnumerable` | SS/reference/json-engine SS/reference/results-and-errors |
 | `Image` | SS/getting-started/installation SS/reference/converter-modules |
 | `Image.sprite` | SS/guides/what-gets-saved SS/reference/converter-modules SS/troubleshooting |
@@ -414,7 +454,7 @@ Cobertura: **85 páginas** EN (y sus 85 espejos ES), **666 símbolos** indexados
 | `InventoryEntry` | SS/guides/strict-vs-tolerant |
 | `InventoryScreen` | VN/reference/prefabs |
 | `InventorySlot` | VN/reference/prefabs |
-| `IoError` | SS/guides/async-saving SS/guides/backups-and-corruption SS/guides/settings SS/reference/api-beastysave SS/reference/results-and-errors SS/reference/save-file-format SS/troubleshooting |
+| `IoError` | SS/advanced/custom-backends SS/guides/async-saving SS/guides/backups-and-corruption SS/guides/settings SS/reference/api-beastysave SS/reference/results-and-errors SS/reference/save-file-format SS/troubleshooting |
 | `IsEnabled` | BC/changelog BC/faq BC/guides/beasty-integration BC/guides/logging BC/guides/release-builds BC/index |
 | `IsReady` | VN/scripting/controllers |
 | `ItemHandle` | VN/scripting/gameplay-apis |
@@ -433,8 +473,8 @@ Cobertura: **85 páginas** EN (y sus 85 espejos ES), **666 símbolos** indexados
 | `JumpTo` | VN/scripting/vn-api |
 | `Key` | VN/reference/assets VN/reference/variable-keys VN/world/items-and-inventory |
 | `Kind` | SS/guides/versioning-and-migrations |
-| `LastLoadResult` | SS/reference/components |
-| `LastSaveResult` | SS/reference/components |
+| `LastLoadResult` | SS/guides/async-saving SS/reference/components |
+| `LastSaveResult` | SS/changelog SS/guides/async-saving SS/guides/storage-backends SS/reference/components |
 | `Left` | VN/authoring/blocks-reference VN/authoring/dialogue-and-stage |
 | `Less` | VN/reference/variable-keys VN/world/variables-and-conditions |
 | `LessOrEqual` | VN/reference/variable-keys VN/world/variables-and-conditions |
@@ -444,12 +484,15 @@ Cobertura: **85 páginas** EN (y sus 85 espejos ES), **666 símbolos** indexados
 | `Light.lightmapBakeType` | SS/troubleshooting |
 | `List` | SS/faq SS/getting-started/save-with-code SS/guides/strict-vs-tolerant SS/guides/what-gets-saved |
 | `ListSlots` | SS/faq SS/getting-started/save-with-code SS/guides/settings SS/guides/slots-and-metadata SS/reference/save-file-format |
+| `ListSlotsAsync` | SS/changelog SS/guides/firebase |
 | `Load` | SS/changelog SS/getting-started/save-with-code SS/getting-started/save-without-code SS/guides/backups-and-corruption SS/guides/encryption SS/guides/save-manager-window VN/scripting/vn-api |
-| `LoadAll` | SS/faq SS/guides/async-saving SS/guides/encryption SS/guides/save-manager-window SS/guides/scene-state SS/guides/settings SS/guides/strict-vs-tolerant SS/reference/components SS/reference/results-and-errors SS/troubleshooting |
-| `LoadAllNow` | SS/guides/async-saving SS/guides/backups-and-corruption SS/guides/scene-state |
+| `LoadAll` | SS/changelog SS/faq SS/guides/async-saving SS/guides/encryption SS/guides/firebase SS/guides/scene-state SS/guides/settings SS/guides/storage-backends SS/guides/strict-vs-tolerant SS/reference/components SS/reference/results-and-errors SS/troubleshooting |
+| `LoadAllNow` | SS/guides/backups-and-corruption SS/guides/scene-state SS/guides/storage-backends |
+| `LoadAllNowAsync` | SS/changelog SS/guides/async-saving SS/reference/components |
 | `LoadAsync` | SS/advanced/platforms-and-limits |
-| `LoadCompleted` | SS/guides/scene-state SS/reference/components SS/troubleshooting |
+| `LoadCompleted` | SS/changelog SS/guides/async-saving SS/guides/scene-state SS/guides/storage-backends SS/reference/components SS/troubleshooting |
 | `Loaded` | VN/scripting/controllers |
+| `LoadFromJson` | SS/changelog |
 | `Loading` | VN/scripting/controllers |
 | `LoadInto` | SS/getting-started/save-with-code SS/guides/backups-and-corruption SS/reference/converter-modules SS/reference/results-and-errors |
 | `LoadIntoAsync` | SS/advanced/platforms-and-limits SS/reference/results-and-errors |
@@ -460,6 +503,7 @@ Cobertura: **85 páginas** EN (y sus 85 espejos ES), **666 símbolos** indexados
 | `LoadResult.MigratedFrom` | SS/changelog SS/guides/versioning-and-migrations |
 | `LoadResult.Warnings` | SS/advanced/custom-converters SS/guides/settings SS/guides/strict-vs-tolerant SS/reference/api-beastysave SS/reference/converter-modules |
 | `LoadSlotDetailed` | VN/scripting/controllers VN/scripting/overview |
+| `Local` | SS/guides/save-manager-window SS/reference/components |
 | `LocalizationTable` | VN/production/localization VN/reference/assets |
 | `LocationOf` | VN/scripting/gameplay-apis |
 | `Log` | BC/faq BC/guides/logging BC/reference/api |
@@ -499,11 +543,13 @@ Cobertura: **85 páginas** EN (y sus 85 espejos ES), **666 símbolos** indexados
 | `NameColor` | VN/scripting/vn-api |
 | `NaN` | SS/advanced/platforms-and-limits SS/guides/what-gets-saved SS/reference/api-beastysave SS/reference/json-engine SS/reference/results-and-errors SS/troubleshooting |
 | `Navigation` | VN/world/interactables-and-doors |
+| `NetworkError` | SS/advanced/custom-backends SS/changelog SS/guides/firebase SS/guides/storage-backends SS/reference/api-beastysave SS/reference/results-and-errors SS/troubleshooting |
 | `Night` | VN/world/character-routines |
 | `None` | SS/reference/results-and-errors VN/authoring/dialogue-and-stage VN/world/characters VN/world/talk-menu |
 | `Normal` | SS/guides/logging VN/authoring/dialogue-and-stage VN/production/vn-settings |
 | `NotEquals` | VN/reference/variable-keys VN/world/variables-and-conditions |
 | `Notice` | BC/guides/logging |
+| `NotSupportedException` | SS/advanced/custom-backends |
 | `NUL` | SS/changelog SS/guides/settings SS/guides/slots-and-metadata SS/reference/api-beastysave SS/reference/results-and-errors |
 | `Object` | BC/reference/api |
 | `Object.GetInstanceID` | VN/changelog |
@@ -562,8 +608,10 @@ Cobertura: **85 páginas** EN (y sus 85 espejos ES), **666 símbolos** indexados
 | `Quests` | VN/world/quests |
 | `Queue` | SS/faq SS/getting-started/save-with-code |
 | `RawImage` | SS/getting-started/installation SS/reference/converter-modules |
-| `Read` | SS/advanced/custom-converters VN/scripting/gameplay-apis |
+| `Read` | SS/advanced/custom-backends SS/advanced/custom-converters VN/scripting/gameplay-apis |
+| `ReadBackup` | SS/advanced/custom-backends |
 | `ReadMeta` | SS/advanced/platforms-and-limits SS/guides/backups-and-corruption SS/guides/slots-and-metadata SS/reference/results-and-errors SS/reference/save-file-format |
+| `ReadMetaAsync` | SS/changelog SS/reference/results-and-errors |
 | `Ready` | VN/scripting/controllers |
 | `Rect` | SS/getting-started/installation SS/guides/what-gets-saved SS/reference/converter-modules |
 | `RectTransform` | SS/getting-started/installation SS/reference/converter-modules |
@@ -580,6 +628,7 @@ Cobertura: **85 páginas** EN (y sus 85 espejos ES), **666 símbolos** indexados
 | `Resources` | SS/reference/converter-modules VN/getting-started/installation VN/getting-started/your-first-scene VN/production/localization VN/production/vn-settings VN/reference/assets |
 | `Resources.Load` | SS/guides/what-gets-saved SS/reference/converter-modules SS/troubleshooting |
 | `RestoreBackup` | SS/getting-started/save-with-code SS/reference/results-and-errors SS/reference/save-file-format SS/troubleshooting |
+| `RestoreBackupAsync` | SS/changelog SS/guides/storage-backends SS/reference/results-and-errors |
 | `RestoreCustomStateJson` | VN/scripting/custom-mode VN/scripting/overview |
 | `RestoreSlotBackup` | VN/scripting/controllers |
 | `RestoreVisualNovel` | VN/scripting/controllers |
@@ -594,19 +643,22 @@ Cobertura: **85 páginas** EN (y sus 85 espejos ES), **666 símbolos** indexados
 | `Run` | VN/getting-started/your-first-scene |
 | `Runtime` | VN/faq VN/scripting/overview |
 | `RuntimeInitializeOnLoadMethod` | BC/guides/release-builds VN/production/logging |
-| `Save` | SS/getting-started/save-without-code SS/guides/encryption SS/guides/slots-and-metadata SS/reference/results-and-errors SS/reference/save-file-format VN/production/logging VN/scripting/vn-api |
-| `SaveAll` | SS/advanced/platforms-and-limits SS/faq SS/getting-started/save-without-code SS/guides/encryption SS/guides/save-manager-window SS/guides/scene-state SS/guides/settings SS/guides/versioning-and-migrations SS/reference/components |
-| `SaveAllNow` | SS/advanced/platforms-and-limits SS/guides/async-saving SS/guides/scene-state |
+| `Save` | SS/getting-started/save-without-code SS/guides/async-saving SS/guides/encryption SS/guides/slots-and-metadata SS/reference/results-and-errors SS/reference/save-file-format VN/production/logging VN/scripting/vn-api |
+| `SaveAll` | SS/advanced/platforms-and-limits SS/changelog SS/faq SS/getting-started/save-without-code SS/guides/async-saving SS/guides/encryption SS/guides/firebase SS/guides/save-manager-window SS/guides/scene-state SS/guides/settings SS/guides/storage-backends SS/guides/versioning-and-migrations SS/reference/components SS/reference/results-and-errors |
+| `SaveAllNow` | SS/advanced/platforms-and-limits SS/guides/async-saving SS/guides/scene-state SS/guides/storage-backends |
+| `SaveAllNowAsync` | SS/guides/async-saving |
 | `SaveAsync` | SS/advanced/platforms-and-limits SS/faq SS/guides/async-saving SS/reference/results-and-errors |
-| `SaveCompleted` | SS/advanced/platforms-and-limits SS/guides/scene-state SS/reference/components |
+| `SaveCompleted` | SS/advanced/platforms-and-limits SS/changelog SS/guides/async-saving SS/guides/scene-state SS/guides/storage-backends SS/reference/components |
 | `SaveLoadScreen` | VN/reference/prefabs |
 | `SaveOverrides` | VN/production/input-and-controls |
-| `SaveResult` | SS/advanced/platforms-and-limits SS/faq SS/getting-started/save-with-code SS/guides/what-gets-saved SS/index SS/troubleshooting |
+| `SaveResult` | SS/advanced/platforms-and-limits SS/faq SS/getting-started/save-with-code SS/guides/what-gets-saved SS/index SS/reference/results-and-errors SS/troubleshooting |
 | `SaveResult.BytesWritten` | SS/changelog |
 | `SaveResult.Ok` | SS/reference/api-beastysave |
 | `Saves` | SS/getting-started/save-without-code SS/guides/settings |
 | `SaveSlotView` | VN/reference/prefabs |
+| `SaveToJson` | SS/reference/api-beastysave SS/reference/results-and-errors |
 | `SaveToSlot` | VN/scripting/controllers |
+| `ScopeByUser` | SS/advanced/custom-backends SS/guides/settings SS/guides/storage-backends SS/reference/api-beastysave |
 | `ScriptableObject` | SS/guides/what-gets-saved VN/production/logging |
 | `Scripts` | VN/authoring/text-script |
 | `Season` | VN/scripting/gameplay-apis |
@@ -617,6 +669,7 @@ Cobertura: **85 páginas** EN (y sus 85 espejos ES), **666 símbolos** indexados
 | `SetBool` | VN/scripting/overview |
 | `SetCharacterNameToAlias` | VN/scripting/vn-api |
 | `SetDaypart` | VN/authoring/blocks-reference VN/world/game-time |
+| `SetDefault` | SS/advanced/custom-backends |
 | `SetFloat` | VN/scripting/overview |
 | `SetHour` | VN/authoring/blocks-reference VN/world/game-time |
 | `SetIsOnWithoutNotify` | SS/reference/converter-modules |
@@ -636,6 +689,7 @@ Cobertura: **85 páginas** EN (y sus 85 espejos ES), **666 símbolos** indexados
 | `SingleInfinite` | VN/production/audio-and-music |
 | `Slider` | SS/changelog SS/getting-started/installation SS/reference/converter-modules |
 | `Slot1` | SS/getting-started/save-without-code |
+| `SlotRef` | SS/advanced/custom-backends |
 | `SlotsOnly` | VN/reference/assets VN/world/character-routines VN/world/game-time |
 | `Snapshot` | VN/scripting/gameplay-apis |
 | `SortedSet` | SS/faq SS/getting-started/save-with-code |
@@ -659,16 +713,20 @@ Cobertura: **85 páginas** EN (y sus 85 espejos ES), **666 símbolos** indexados
 | `StartQuest` | VN/scripting/gameplay-apis |
 | `State` | VN/scripting/custom-mode |
 | `StateChanged` | VN/scripting/custom-mode |
+| `Storage` | SS/guides/settings |
+| `StorageId` | SS/advanced/custom-backends SS/guides/settings SS/guides/storage-backends SS/reference/results-and-errors SS/troubleshooting |
 | `StoryGraph` | VN/authoring/text-script VN/authoring/vnbeasty-syntax VN/reference/assets |
 | `Streaming` | VN/production/logging |
-| `Strict` | SS/guides/settings SS/guides/strict-vs-tolerant SS/troubleshooting |
+| `Strict` | SS/guides/save-manager-window SS/guides/settings SS/guides/strict-vs-tolerant SS/troubleshooting |
 | `StrictPopulate` | SS/reference/json-engine |
 | `String` | VN/reference/assets VN/reference/variable-keys VN/world/variables-and-conditions |
 | `SubGraphNode` | VN/authoring/vnbeasty-syntax |
 | `SubsystemRegistration` | SS/advanced/custom-converters VN/scripting/custom-mode VN/scripting/vn-api |
 | `Subtract` | VN/authoring/blocks-reference VN/authoring/choices-and-decisions |
 | `Success` | BC/guides/logging SS/faq SS/index SS/reference/results-and-errors |
+| `SupportsSynchronous` | SS/advanced/custom-backends |
 | `Suspend` | VN/scripting/vn-api |
+| `Synchronous` | SS/advanced/custom-backends SS/guides/async-saving SS/guides/storage-backends SS/reference/components |
 | `Tab` | VN/authoring/text-script VN/authoring/vnbeasty-syntax |
 | `Take` | VN/scripting/gameplay-apis |
 | `Talk` | VN/world/talk-menu |
@@ -683,6 +741,7 @@ Cobertura: **85 páginas** EN (y sus 85 espejos ES), **666 símbolos** indexados
 | `TimeConfig` | VN/scripting/controllers |
 | `TMP_Text` | SS/getting-started/installation SS/guides/what-gets-saved SS/reference/converter-modules SS/troubleshooting |
 | `Toggle` | SS/changelog SS/getting-started/installation SS/reference/converter-modules VN/authoring/blocks-reference VN/authoring/choices-and-decisions |
+| `ToJson` | SS/faq SS/reference/api-beastysave SS/reference/results-and-errors |
 | `ToNode` | SS/reference/json-engine |
 | `ToObject` | SS/reference/json-engine |
 | `ToString` | BC/guides/release-builds SS/reference/results-and-errors |
@@ -701,6 +760,7 @@ Cobertura: **85 páginas** EN (y sus 85 espejos ES), **666 símbolos** indexados
 | `Unregister` | SS/reference/components |
 | `UnregisterAll` | SS/reference/components |
 | `Use` | VN/scripting/gameplay-apis |
+| `UserId` | SS/advanced/custom-backends |
 | `V1ToV2` | SS/guides/versioning-and-migrations |
 | `V2ToV3` | SS/guides/versioning-and-migrations |
 | `Value` | SS/getting-started/save-with-code SS/reference/api-beastysave SS/reference/results-and-errors |
@@ -722,7 +782,7 @@ Cobertura: **85 páginas** EN (y sus 85 espejos ES), **666 símbolos** indexados
 | `VisualNovelController.PersistentStage` | VN/scripting/overview |
 | `VisualNovelSaveData.customStateJson` | VN/scripting/custom-mode |
 | `VisualNovelScene` | VN/production/ui-prefabs VN/reference/prefabs |
-| `VN_Canvas` | VN/changelog VN/getting-started/your-first-scene VN/production/ui-prefabs VN/reference/prefabs |
+| `VN_Canvas` | VN/getting-started/your-first-scene VN/production/ui-prefabs VN/reference/prefabs |
 | `VN_Characters` | VN/production/streaming |
 | `VN_Items` | VN/production/streaming |
 | `VN_Rooms` | VN/production/streaming |

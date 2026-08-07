@@ -120,6 +120,7 @@ The package installs under `Assets/BeastyComponents/BeastyVN/`.
 | `Prefabs/` | The ready-made UI and scene prefabs: the canvas with every screen inside it, the stage, the dialogue panel, the menus, the character screens. Restyle them. See [UI prefabs](/docs/beasty-visual-novel/production/ui-prefabs/). |
 | `Resources/` | `VNSettings.asset` and `UILocalization.asset`. These two are read at runtime, which is why they live here. See [VN settings](/docs/beasty-visual-novel/production/vn-settings/). |
 | `Sprites/` | Placeholder art, so a fresh scene shows something instead of nothing. Replace it with yours. |
+| `Demos/` | The **House Demo**: a complete, playable mini-game built with the asset — open `HouseDemo/HouseDemo.unity` and press Play. See [The House Demo](/docs/beasty-visual-novel/getting-started/house-demo/). |
 | `Documentation/` | The reference files that ship with the package, including the full `.vnbeasty` syntax and the time-and-routines reference. |
 | `Tests/` | The EditMode, PlayMode and save test suites. Safe to delete before you ship; they are excluded from a build either way. |
 

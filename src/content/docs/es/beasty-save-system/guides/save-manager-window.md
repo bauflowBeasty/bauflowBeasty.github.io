@@ -24,12 +24,32 @@ La sección superior busca el `BeastySaveManager` en la escena abierta — inclu
   escena nueva, y es donde empieza el camino sin código.
 
 **Cuando hay un manager**, aparece un campo de objeto que apunta a él (haz clic para seleccionarlo en la
-Hierarchy) y su inspector completo incrustado debajo.
+Hierarchy), una **tarjeta de estado**, y todos los ajustes debajo.
 
-Ese inspector incrustado es donde editas **Settings** — la carpeta, la extensión, la ruta de datos,
-el cifrado, el backup, la carga estricta y la versión de datos usada por `SaveAll` y `LoadAll`. Editarlo aquí es
-exactamente lo mismo que seleccionar el manager y editarlo en el Inspector; está aquí para que no tengas que
-cambiar tu selección mientras trabajas. Cada campo se explica en [settings.md](/es/docs/beasty-save-system/guides/settings/).
+La tarjeta de estado responde de un vistazo «qué está haciendo este manager ahora mismo»: el backend de
+almacenamiento activo (con una insignia `Local` o `Cloud`), el proveedor de usuario y su usuario actual
+cuando hay uno registrado, y — en Play Mode — el resultado del último guardado y de la última carga.
+
+Bajo **Settings**, cada campo está agrupado por función, y los grupos son contextuales — un campo que no
+aplica al backend activo se oculta o se deshabilita con una nota, nunca se muestra como una perilla que no
+hace nada en silencio:
+
+- **Backend** — el desplegable **Storage** y el **Save Mode**. Con un backend en la nube, el Save Mode
+  queda fijado en `Asynchronous` («Cloud backends are asynchronous by nature.»); con archivos locales,
+  aquí aparece también el toggle **Scope By User**.
+- **Location** — `Folder`, `Extension`, `DataPath`. Deshabilitados con un backend en la nube: «Cloud
+  backends store saves per user in the cloud; these fields apply to local files only.»
+- **Security** — `Encrypted`, y el campo de la clave solo con el cifrado activado. Activar el cifrado sin
+  una clave propia avisa: «No key set: a built-in default key SHARED BY EVERY PROJECT is used. Set your
+  own before shipping.»
+- **Reliability** — `Backup` y `Strict`.
+- **Versioning** — `DataVersion`.
+- **Logging** — el desplegable del modo de registro.
+
+Editar aquí es exactamente lo mismo que seleccionar el manager y editarlo en el Inspector; está aquí para
+que no tengas que cambiar tu selección mientras trabajas. Cada campo se explica en
+[settings.md](/es/docs/beasty-save-system/guides/settings/), y el comportamiento según el backend en
+[storage-backends.md](/es/docs/beasty-save-system/guides/storage-backends/).
 
 La sección **Slots on Disk** debajo lee las mismas settings, así que cambiar `Folder` aquí cambia inmediatamente
 qué archivos lista la ventana.
@@ -95,6 +115,13 @@ el trabajo real:
 
 La sección inferior lista los archivos reales en la carpeta a la que apuntan tus settings. Esta es la parte que mantendrás
 abierta mientras pruebas.
+
+> **Nota**
+> La exploración de slots funciona solo con almacenamiento en archivos locales. Con un backend en la nube
+> activo, la sección lo dice («Slot browsing is available for local file storage only.») — una lista de
+> slots en la nube depende de quién tenga la sesión iniciada, así que no hay una única carpeta que
+> mostrar. Inspecciona los guardados en la nube desde la consola de Firebase; consulta
+> [firebase.md](/es/docs/beasty-save-system/guides/firebase/).
 
 ![La sección Slots on Disk con los archivos de guardado y su resumen de metadata](/docs-images/beasty-save-system/save-manager-slots.png)
 

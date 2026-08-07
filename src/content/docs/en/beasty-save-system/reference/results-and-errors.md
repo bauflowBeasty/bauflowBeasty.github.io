@@ -1,10 +1,10 @@
 ---
 title: "Results and errors"
-description: "SaveResult, LoadResult and the thirteen BeastySaveError codes: what causes each one and what your game should do about it."
+description: "SaveResult, LoadResult and the seventeen BeastySaveError codes: what causes each one and what your game should do about it."
 ---
 
 Every save and load call returns a typed result carrying a `BeastySaveError`. This page lists the result
-members and all thirteen error values, with what causes each one and what your game should do about it.
+members and all seventeen error values, with what causes each one and what your game should do about it.
 
 ## The design principle
 
@@ -18,8 +18,8 @@ should stop you immediately.
 
 ## SaveResult
 
-Returned by `Save`, `SaveAsync`, `RestoreBackup`, `BeastySaveManager.SaveAllNow` and
-`BeastySaveManager.CaptureGroupNode`.
+Returned by `Save`, `SaveAsync`, `RestoreBackup`, `RestoreBackupAsync`, `BeastySaveManager.SaveAllNow`,
+`BeastySaveManager.SaveAllNowAsync` and `BeastySaveManager.CaptureGroupNode`.
 
 | Member | Type | Meaning |
 |---|---|---|
@@ -31,10 +31,24 @@ Returned by `Save`, `SaveAsync`, `RestoreBackup`, `BeastySaveManager.SaveAllNow`
 | `SaveResult.Fail(error, message)` | `static SaveResult` | Builds a failure result. |
 | `ToString()` | `string` | `"OK"`, or `"{Error}: {Message}"`. |
 
+## SaveResult&lt;T&gt;
+
+Returned by `SaveToJson` and `ToJson` — the JSON-without-files calls, where the "file" is a string the
+call hands back to you. Derives from `SaveResult` and adds the value.
+
+| Member | Type | Meaning |
+|---|---|---|
+| `Value` | `T` | The produced value — for the JSON calls, the envelope or payload text. Undefined when `Success` is false — do not read it. |
+| `SaveResult<T>.Ok(value, bytesWritten = 0)` | `static SaveResult<T>` | Builds a success result. |
+| `SaveResult<T>.Fail(error, message)` | `static SaveResult<T>` | Builds a failure result. |
+
+For the JSON calls, `BytesWritten` is the UTF-8 byte count of the produced text — the size the string
+would occupy on disk, even though nothing was written.
+
 ## LoadResult
 
-Returned by `LoadInto`, `LoadIntoAsync`, `BeastySaveManager.LoadAllNow` and
-`BeastySaveManager.ApplyGroupNode`.
+Returned by `LoadInto`, `LoadIntoAsync`, `BeastySaveManager.LoadAllNow`,
+`BeastySaveManager.LoadAllNowAsync` and `BeastySaveManager.ApplyGroupNode`.
 
 | Member | Type | Meaning |
 |---|---|---|
@@ -53,7 +67,8 @@ the player a "restore the previous save" button will do anything.
 
 ## LoadResult&lt;T&gt;
 
-Returned by `Load<T>`, `LoadAsync<T>` and `ReadMeta`. Derives from `LoadResult` and adds the value.
+Returned by `Load<T>`, `LoadAsync<T>`, `ReadMeta`, `ReadMetaAsync`, `LoadFromJson<T>` and `FromJson<T>`.
+Derives from `LoadResult` and adds the value.
 
 | Member | Type | Meaning |
 |---|---|---|
@@ -80,6 +95,10 @@ Returned by `Load<T>`, `LoadAsync<T>` and `ReadMeta`. Derives from `LoadResult` 
 | `VersionTooNew` | load | The file was written by a newer container or a newer data version. |
 | `MigrationFailed` | load | The file is older and the migration chain could not bring it up to date. |
 | `FieldMapFailed` | load | The data could not be mapped onto the object. |
+| `BackendRequiresAsync` | every synchronous call | The active storage backend is asynchronous-only; use the async twin. |
+| `BackendUnavailable` | save, load, all slot methods | `StorageId` names a backend whose module did not compile. |
+| `AuthRequired` | save, load, all slot methods on a remote backend | No user could be resolved for a per-user backend. |
+| `NetworkError` | save, load, all slot methods on a remote backend | The cloud operation failed in transit. |
 
 The sections below give the diagnosis and the fix for each.
 
@@ -241,6 +260,50 @@ restored.").
 **Do:** if the shape of your data changed between versions, that is what migrations are for. If you are
 mid-production and renaming fields, set `Strict = false` so the bad field is skipped and reported in
 `Warnings` instead of failing the load. See [Strict vs tolerant loading](/docs/beasty-save-system/guides/strict-vs-tolerant/).
+
+### BackendRequiresAsync
+
+A synchronous call — `Save`, `Load<T>`, `Exists`, any of them — reached a storage backend that cannot
+answer synchronously (a cloud database). The message is "This storage backend is asynchronous; use the
+Async save/load API." Nothing was attempted; the call fails before touching the backend, instead of
+blocking the main thread on a network round-trip.
+
+The manager's `SaveAll`/`LoadAll`/`DeleteSlot` never produce this error: they route themselves onto the
+asynchronous path automatically.
+
+**Do:** switch the call site to the async twin (`SaveAsync`, `LoadAsync<T>`, `ExistsAsync`…). See
+[Async saving and loading](/docs/beasty-save-system/guides/async-saving/).
+
+### BackendUnavailable
+
+`BeastySaveSettings.StorageId` names a backend that is not registered. The message is "Storage backend
+'`<id>`' is not available. Is its module (and SDK) in the project?" — almost always a Firebase backend
+whose SDK is not in the project, so the module assembly never compiled. The Storage dropdown and the
+manager's status card show the same warning in the editor.
+
+**Do:** install the SDK the module needs (see [Firebase](/docs/beasty-save-system/guides/firebase/)), or
+pick another backend. This is a project configuration problem, not something to handle at runtime.
+
+### AuthRequired
+
+A remote backend stores saves per user, and no user could be resolved. Either no user provider is
+registered at all ("No user provider is registered; remote storage needs one to know whose save this is."),
+or the provider failed to establish a session — with Firebase, typically because Anonymous auth is not
+enabled in the Firebase console, or the SDK's dependency check failed on the device.
+
+**Do:** with the Firebase Auth module in the project this resolves itself — the module registers a provider
+that signs in anonymously on the first save. If you see it anyway, check that Anonymous auth is enabled in
+the Firebase console, or register your own provider. See
+[Storage backends](/docs/beasty-save-system/guides/storage-backends/).
+
+### NetworkError
+
+The cloud operation failed in transit: no connectivity, a timeout, a server-side rejection, or a stored
+save with a missing chunk ("Save '`<slot>`' is missing chunk `<i>` of `<n>`."). The underlying SDK
+exception text is in `Message`.
+
+**Do:** treat it like `IoError`'s cloud sibling — tell the player the save failed and let them retry when
+the connection is back. Do not retry in a tight loop.
 
 ## See also
 

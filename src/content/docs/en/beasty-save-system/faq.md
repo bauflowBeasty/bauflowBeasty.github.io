@@ -33,7 +33,7 @@ switched. See [Platforms and limits](/docs/beasty-save-system/advanced/platforms
 
 ## Does it work on WebGL?
 
-**No.** WebGL is not supported in 1.0.0. The atomic write depends on file-system semantics the browser
+**No.** WebGL is not supported in 1.1.0. The atomic write depends on file-system semantics the browser
 build does not provide, and the async variants are `Task`-based. There is no setting that turns it on and
 no supported workaround; a browser build needs a different persistence layer.
 [Platforms and limits](/docs/beasty-save-system/advanced/platforms-and-limits/) says exactly why.
@@ -92,6 +92,22 @@ The `meta` dictionary stays in plain text **even when the save is encrypted**, s
 can show the level and the playtime without the key. Treat it as untrusted display data: it is read before
 the checksum. See [The save file format](/docs/beasty-save-system/reference/save-file-format/) and
 [Slots and metadata](/docs/beasty-save-system/guides/slots-and-metadata/).
+
+## Can saves go to the cloud?
+
+Yes. Set the **Storage** dropdown (or `BeastySaveSettings.StorageId`) to a registered backend and the same
+calls write there instead of to disk. Firestore and Realtime Database backends ship with the asset and
+compile themselves when the Firebase SDK is in the project; saves are stored per user, with anonymous
+sign-in handled for you. Local files remain the default. See
+[Storage backends](/docs/beasty-save-system/guides/storage-backends/) and
+[Firebase](/docs/beasty-save-system/guides/firebase/).
+
+## Can I send a save to my own server?
+
+Yes, without any backend: `BeastySave.SaveToJson` hands you the exact envelope text a save would write —
+checksum, versions, optional encryption — as a string, and `LoadFromJson<T>` loads it back with the same
+validation a file gets. `ToJson`/`FromJson<T>` do the same with clean, envelope-free JSON. Transport it
+however you like. See [the BeastySave API](/docs/beasty-save-system/reference/api-beastysave/).
 
 ## Is it thread-safe?
 

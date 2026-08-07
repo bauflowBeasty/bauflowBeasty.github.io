@@ -1,10 +1,10 @@
 ---
 title: "Resultados y errores"
-description: "SaveResult, LoadResult y los trece códigos de BeastySaveError: qué causa cada uno y qué debería hacer tu juego al respecto."
+description: "SaveResult, LoadResult y los diecisiete códigos de BeastySaveError: qué causa cada uno y qué debería hacer tu juego al respecto."
 ---
 
 Cada llamada de guardado y carga devuelve un resultado tipado que contiene un `BeastySaveError`. Esta página
-lista los miembros del resultado y los trece valores de error, con qué causa cada uno y qué debería hacer tu
+lista los miembros del resultado y los diecisiete valores de error, con qué causa cada uno y qué debería hacer tu
 juego al respecto.
 
 ## El principio de diseño
@@ -19,8 +19,8 @@ y debe detenerte de inmediato.
 
 ## SaveResult
 
-Devuelto por `Save`, `SaveAsync`, `RestoreBackup`, `BeastySaveManager.SaveAllNow` y
-`BeastySaveManager.CaptureGroupNode`.
+Devuelto por `Save`, `SaveAsync`, `RestoreBackup`, `RestoreBackupAsync`, `BeastySaveManager.SaveAllNow`,
+`BeastySaveManager.SaveAllNowAsync` y `BeastySaveManager.CaptureGroupNode`.
 
 | Miembro | Tipo | Significado |
 |---|---|---|
@@ -32,10 +32,24 @@ Devuelto por `Save`, `SaveAsync`, `RestoreBackup`, `BeastySaveManager.SaveAllNow
 | `SaveResult.Fail(error, message)` | `static SaveResult` | Construye un resultado de fallo. |
 | `ToString()` | `string` | `"OK"`, o `"{Error}: {Message}"`. |
 
+## SaveResult&lt;T&gt;
+
+Devuelto por `SaveToJson` y `ToJson` — las llamadas de JSON sin archivos, donde el «archivo» es una cadena
+que la llamada te entrega. Deriva de `SaveResult` y añade el valor.
+
+| Miembro | Tipo | Significado |
+|---|---|---|
+| `Value` | `T` | El valor producido — en las llamadas de JSON, el texto del sobre o del payload. Indefinido cuando `Success` es false — no lo leas. |
+| `SaveResult<T>.Ok(value, bytesWritten = 0)` | `static SaveResult<T>` | Construye un resultado de éxito. |
+| `SaveResult<T>.Fail(error, message)` | `static SaveResult<T>` | Construye un resultado de fallo. |
+
+En las llamadas de JSON, `BytesWritten` es el número de bytes UTF-8 del texto producido — el tamaño que la
+cadena ocuparía en disco, aunque no se haya escrito nada.
+
 ## LoadResult
 
-Devuelto por `LoadInto`, `LoadIntoAsync`, `BeastySaveManager.LoadAllNow` y
-`BeastySaveManager.ApplyGroupNode`.
+Devuelto por `LoadInto`, `LoadIntoAsync`, `BeastySaveManager.LoadAllNow`,
+`BeastySaveManager.LoadAllNowAsync` y `BeastySaveManager.ApplyGroupNode`.
 
 | Miembro | Tipo | Significado |
 |---|---|---|
@@ -54,7 +68,8 @@ ofrecer al jugador un botón de "restaurar el guardado anterior" servirá de alg
 
 ## LoadResult&lt;T&gt;
 
-Devuelto por `Load<T>`, `LoadAsync<T>` y `ReadMeta`. Deriva de `LoadResult` y añade el valor.
+Devuelto por `Load<T>`, `LoadAsync<T>`, `ReadMeta`, `ReadMetaAsync`, `LoadFromJson<T>` y `FromJson<T>`.
+Deriva de `LoadResult` y añade el valor.
 
 | Miembro | Tipo | Significado |
 |---|---|---|
@@ -81,6 +96,10 @@ Devuelto por `Load<T>`, `LoadAsync<T>` y `ReadMeta`. Deriva de `LoadResult` y a�
 | `VersionTooNew` | cargar | El archivo fue escrito por un contenedor más nuevo o una versión de datos más nueva. |
 | `MigrationFailed` | cargar | El archivo es más antiguo y la cadena de migraciones registradas no pudo salvar la brecha. |
 | `FieldMapFailed` | cargar | Los datos no pudieron mapearse sobre el objeto. |
+| `BackendRequiresAsync` | cada llamada síncrona | El backend de almacenamiento activo es solo asíncrono; usa el gemelo asíncrono. |
+| `BackendUnavailable` | guardar, cargar, todos los métodos de slot | `StorageId` nombra un backend cuyo módulo no compiló. |
+| `AuthRequired` | guardar, cargar, todos los métodos de slot en un backend remoto | No se pudo resolver un usuario para un backend por usuario. |
+| `NetworkError` | guardar, cargar, todos los métodos de slot en un backend remoto | La operación en la nube falló por el camino. |
 
 Las secciones siguientes dan el diagnóstico y la solución para cada uno.
 
@@ -246,6 +265,52 @@ were restored.").
 **Qué hacer:** si la forma de tus datos cambió entre versiones, para eso están las migraciones. Si estás en
 plena producción renombrando campos, pon `Strict = false` para que el campo incorrecto se omita y se reporte
 en `Warnings` en lugar de fallar la carga. Consulta [Carga estricta vs. tolerante](/es/docs/beasty-save-system/guides/strict-vs-tolerant/).
+
+### BackendRequiresAsync
+
+Una llamada síncrona — `Save`, `Load<T>`, `Exists`, cualquiera — llegó a un backend de almacenamiento que
+no puede responder de forma síncrona (una base de datos en la nube). El mensaje es «This storage backend
+is asynchronous; use the Async save/load API.» No se intentó nada; la llamada falla antes de tocar el
+backend, en lugar de bloquear el hilo principal en una ida y vuelta por red.
+
+Los `SaveAll`/`LoadAll`/`DeleteSlot` del manager nunca producen este error: se enrutan solos a la vía
+asíncrona automáticamente.
+
+**Haz esto:** cambia el punto de llamada al gemelo asíncrono (`SaveAsync`, `LoadAsync<T>`,
+`ExistsAsync`…). Consulta [Guardado y carga asíncronos](/es/docs/beasty-save-system/guides/async-saving/).
+
+### BackendUnavailable
+
+`BeastySaveSettings.StorageId` nombra un backend que no está registrado. El mensaje es «Storage backend
+'`<id>`' is not available. Is its module (and SDK) in the project?» — casi siempre un backend de Firebase
+cuyo SDK no está en el proyecto, así que el ensamblado del módulo nunca compiló. El desplegable Storage y
+la tarjeta de estado del manager muestran la misma advertencia en el editor.
+
+**Haz esto:** instala el SDK que el módulo necesita (consulta
+[Firebase](/es/docs/beasty-save-system/guides/firebase/)), o elige otro backend. Es un problema de
+configuración del proyecto, no algo que gestionar en tiempo de ejecución.
+
+### AuthRequired
+
+Un backend remoto almacena los guardados por usuario, y no se pudo resolver ninguno. O no hay ningún
+proveedor de usuario registrado («No user provider is registered; remote storage needs one to know whose
+save this is.»), o el proveedor no pudo establecer una sesión — con Firebase, normalmente porque el inicio
+de sesión anónimo no está habilitado en la consola de Firebase, o la comprobación de dependencias del SDK
+falló en el dispositivo.
+
+**Haz esto:** con el módulo de Firebase Auth en el proyecto esto se resuelve solo — el módulo registra un
+proveedor que inicia sesión de forma anónima en el primer guardado. Si aun así lo ves, comprueba que el
+inicio de sesión anónimo esté habilitado en la consola de Firebase, o registra tu propio proveedor.
+Consulta [Backends de almacenamiento](/es/docs/beasty-save-system/guides/storage-backends/).
+
+### NetworkError
+
+La operación en la nube falló por el camino: sin conectividad, un timeout, un rechazo del servidor, o un
+guardado almacenado con un trozo ausente («Save '`<slot>`' is missing chunk `<i>` of `<n>`.»). El texto de
+la excepción del SDK subyacente está en `Message`.
+
+**Haz esto:** trátalo como el hermano en la nube de `IoError` — dile al jugador que el guardado falló y
+déjale reintentar cuando vuelva la conexión. No reintentes en un bucle cerrado.
 
 ## Ver también
 

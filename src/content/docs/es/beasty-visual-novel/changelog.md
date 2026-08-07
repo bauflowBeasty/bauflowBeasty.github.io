@@ -5,9 +5,21 @@ description: "Todos los cambios relevantes de Beasty Visual Novel, versión por 
 
 Todos los cambios relevantes de Beasty Visual Novel. Este proyecto sigue [Semantic Versioning](https://semver.org/).
 
-## 1.0.0 — sin publicar
+## 1.0.0 — 6 de agosto de 2026
 
 Primera versión pública.
+
+### Demos
+
+- Demo House Demo en `Demos/HouseDemo`: un mini-juego completo que enseña el flujo de introducción
+  (pregunta para renombrar al jugador, elecciones de perfil, enrutado con decisiones invisibles), mundo
+  libre con dos salas conectadas, fondos de día y de noche, una rutina semanal de NPC, una misión de dos
+  pasos con recogida al inventario y un paso de entrega, un menú de conversación con entradas
+  condicionales, pantallas de perfil/estadísticas/calendario del personaje, guardado y carga, y cambio
+  entre inglés y español en vivo. Todo el arte llega como PNG de relleno etiquetados bajo
+  `Demos/HouseDemo/Sprites/` — sustituye cada archivo (mismo nombre) por el arte final; no hay que
+  recablear ninguna referencia. El guion vive en `Demos/HouseDemo/Scripts/*.vnbeasty` (el formato de
+  guion de texto, mantenido en sincronía).
 
 ### Escritura de la historia
 
@@ -16,6 +28,39 @@ Primera versión pública.
   el grafo. El grafo sigue siendo la fuente de verdad — un script vacío, imposible de parsear o irrepresentable
   nunca lo sobrescribe, y una importación destructiva deja un `.bak` con marca de tiempo.
 - Vista previa en el editor de cualquier nodo, hasta cualquier bloque.
+- El formato de texto tiene paridad 1:1 con el grafo — todo lo que los nodos pueden expresar se escribe en
+  texto: nodos de menú de conversación, la imagen lateral del nodo de elección, atrezo, fondos en capas con
+  desplazamiento/parallax/orden, `show … portrait <clave> slot <n>`, el `clear characters at <ancla>`
+  posicional, y nombres de personaje localizados.
+- Un encabezado de nodo empieza por su palabra clave de tipo: `label intro:` es un nodo de diálogo, y
+  `choice cross:`, `decision route:`, `subgraph combat:`, `return combat/done ("win"):`,
+  `talkmenu charla (ana):` y `flow to_town:` declaran los demás tipos.
+- Las variables con punto funcionan en cualquier parte del texto: `ana.afecto` en una condición o en un
+  bloque de efecto compila a la misma clave del almacén por personaje que escribe `set ana.afecto`;
+  `item.<id>` y las claves `@time:`/`@quest:`/`@char:` valen como tokens de condición, y `set item.<id>`
+  pasa por el inventario (con su límite incluido).
+- Las erratas avisan al importar: los tokens de condición, las claves de efecto, las claves de
+  `set`/`toggle`/`dict`, los ids de objeto, los ids de misión, los objetivos y los ids de pantalla se
+  comprueban contra lo declarado en el proyecto, y un nombre desconocido da una advertencia con su número
+  de línea en lugar de crear en silencio una clave muerta en ejecución.
+- El autocompletado del editor de texto ofrece el mismo catálogo que usa el selector de condiciones del
+  grafo — todos los grupos de variables (globales, campos de personaje como `ana.afecto`, recuentos
+  `item.<id>`, tokens de diccionario, claves reservadas `@time:`/`@quest:`) — más las palabras clave de
+  tipo de nodo en las líneas de encabezado, las etiquetas, las claves de `portrait` y las anclas. Las
+  palabras clave de encabezado se resaltan con el color que su tipo de nodo tiene en el grafo, y la pestaña
+  Text trae una chuleta de sintaxis.
+- Un bloque `Wait` retiene el flujo durante sus segundos ANTES de que aparezca la siguiente línea: los
+  clics se tragan durante la pausa, retroceder la cancela, Skip la acelera, y una revisita tras un
+  rebobinado no vuelve a esperar (como los efectos secundarios, la pausa corre una sola vez). Un Wait de
+  `0` segundos es una barrera para el avance automático: Auto se detiene ahí y espera un avance manual.
+- Los nodos del grafo de Story se pueden copiar, cortar, pegar y duplicar (menú contextual o Ctrl+C/X/V/D),
+  entre ventanas Story y entre assets de escena. Un pegado clona la selección con ids de nodo nuevos, clona
+  en profundidad los subgrafos, conserva las conexiones entre los nodos copiados, y acuña claves de
+  localización NUEVAS cuyas filas copian todas las columnas de idioma — así que editar el texto de una
+  copia nunca edita el del original.
+- «Save & apply» en la vista Text del guion se deshace en un solo paso — un Ctrl+Z restaura el grafo
+  entero, sus nodos y los textos de localización a su estado previo a la importación — igual que «Format»,
+  enlazar y desenlazar un guion. Las importaciones automáticas (guardar el `.vnbeasty` desde fuera) no.
 
 ### Mundo
 
@@ -23,6 +68,15 @@ Primera versión pública.
 - Tiempo de juego (momentos del día o reloj), rutinas de personajes con perfiles, y un editor de rutinas en
   cuadrícula.
 - Misiones con etapas, objetivos, recompensas y un menú de conversación por personaje.
+- Las puertas, los objetos y las poses se pueden eliminar desde la línea de tiempo de la sala (el botón ✕
+  de la ficha, o un botón «Delete…» en el inspector del elemento), con confirmación, quitando el hijo
+  correspondiente del prefab de la sala en un solo paso de deshacer. Eliminar una sala ofrece eliminar
+  también su asset de prefab de sala — la eliminación del asset no se puede deshacer, y el aviso lo dice.
+- Los perfiles de rutina se pueden eliminar desde el selector de perfil (el perfil Default integrado se
+  queda), y una rutina de personaje que queda completamente vacía — sin colocaciones, sin fallback, sin
+  diálogos de interacción — se poda automáticamente del grafo del mapa.
+- El menú de charla completo de un personaje se puede eliminar (con confirmación y deshacer), devolviendo
+  al personaje a su estado de antes de tener menú de charla; sus textos localizados se quedan en la tabla.
 
 ### Presentación
 
@@ -55,136 +109,56 @@ Primera versión pública.
   la tabla, así que las traducciones existentes se marcan correctamente como desactualizadas cuando cambia),
   con dos botones de sincronización contra la etiqueta TMP del mismo objeto: «From label» copia el texto
   actual de la etiqueta al valor de origen, «To label» escribe el valor de origen sobre la etiqueta.
-- Streaming opcional de assets de nodos con Addressables (**beta**).
-
-### Cambios previos a la publicación
-
-- **`.vnbeasty` alcanza la paridad 1:1 con el grafo de nodos.** Todo lo que los nodos pueden expresar se
-  escribe ya en texto: nodos de menú de conversación (`label charla (talkmenu ana):`), la imagen lateral del
-  nodo de elección (`image <sprite> [if <cond>]`), atrezo (`props <sprite>[, …]` / `props clear`), fondos en
-  capas con desplazamiento/parallax/orden, `show … portrait <clave> slot <n>`,
-  `expression … portrait [<clave>]`, el `clear characters at <ancla> [layer <n>]` posicional, y nombres de
-  personaje localizados (`name ana = key <claveLoc>`).
-- **Las variables con punto funcionan en cualquier parte del texto.** `ana.afecto` en una condición o en un
-  bloque de efecto compila ahora a la misma clave del almacén por personaje que escribe `set ana.afecto`
-  (antes apuntaba en silencio a una clave que no existía). `item.<id>` y las claves crudas
-  `@time:`/`@quest:`/`@char:` también valen como tokens de condición, y `set item.<id>` pasa por el
-  inventario (con su límite incluido).
-- **Las erratas avisan al importar.** Los tokens de condición, las claves de efecto, las claves de
-  `set`/`toggle`/`dict`, los ids de objeto, los ids de misión, los objetivos y los ids de pantalla se
-  comprueban contra lo declarado en el proyecto; un nombre desconocido da una advertencia con su número de
-  línea en lugar de crear en silencio una clave muerta en ejecución.
-- **El autocompletado del editor de texto ofrece ya todos los grupos de variables** (globales, campos de
-  personaje como `ana.afecto`, recuentos `item.<id>`, tokens de diccionario, claves reservadas
-  `@time:`/`@quest:`) — el mismo catálogo que usa el selector de condiciones del grafo — más las palabras
-  clave nuevas, las claves de `portrait` y las anclas.
-- **La ventana Story sigue los cambios de idioma**: eliminar, restaurar o renombrar un idioma vuelve a
-  resolver al instante las vistas previas de las tarjetas de nodo y el selector de idioma de autoría, y una
+- Cambiar de idioma en el juego cambia también los menús y el HUD: al arrancar, `BeastyManager` añade
+  `VNLocalizedText` a cualquier etiqueta cuyo texto coincida con un valor de interfaz que trae el paquete
+  (en cualquier idioma), así que las escenas y prefabs existentes siguen el idioma del jugador sin que
+  tengas que rehacer nada. Los textos propios de tus etiquetas nunca se tocan. La pestaña de localización
+  de UI (global) muestra además un botón de reparación cuando la columna de origen de la tabla no es el
+  inglés.
+- La ventana Story sigue los cambios de idioma: eliminar, restaurar o renombrar un idioma vuelve a resolver
+  al instante las vistas previas de las tarjetas de nodo y el selector de idioma de autoría, y una
   selección de idioma de autoría que ya no existe cae al idioma principal en lugar de mostrar inglés en
   silencio.
-- **Cambiar de idioma en el juego ahora cambia también los menús y el HUD.** Dos arreglos: la tabla
-  `UILocalization` incluida venía con la columna de inglés vacía (así que todos los idiomas caían a los
-  mismos textos), y las pantallas de menú anidadas en el prefab `VN_Canvas` llevaban sus etiquetas FIJADAS en
-  los componentes TMP sin ningún `VNLocalizedText` — esos menús nunca podían reaccionar a un cambio de idioma.
-  Al arrancar, `BeastyManager` ahora añade `VNLocalizedText` a cualquier etiqueta cuyo texto coincida con un
-  valor de interfaz que trae el paquete (en cualquier idioma), así que las escenas y prefabs existentes siguen
-  el idioma del jugador sin que tengas que rehacer nada. Los textos propios de tus etiquetas nunca se tocan.
-  La pestaña de localización de UI (global) muestra además un botón de reparación cuando la columna de origen
-  de la tabla no es el inglés.
-- **Las aristas de la ventana Story ya no se descolocan al hacer zoom o desplazarse.** En grafos grandes, un
-  cable cuyos nodos se habían descartado por estar fuera de pantalla (o simplificado por el LOD de zoom
-  lejano) podía reaparecer flotando en el aire o aparentemente enganchado al nodo equivocado hasta que lo
-  seleccionabas o movías la vista otra vez. Las aristas ahora recalculan su posición en cuanto vuelven a
-  entrar en vista, y un cable nunca se dibuja mientras uno de sus extremos siga oculto.
-- **El logging de la VN ya no necesita que Beasty Console esté presente.** `VNLog` llega ahora a la consola
-  por reflexión y cae a `UnityEngine.Debug` cuando el asset de la consola no está en el proyecto — así que la
-  VN compila y funciona con él o sin él (antes sus ensamblados referenciaban `Beasty.Console` directamente, y
-  borrar la consola rompía la build). Con la consola presente, los logs siguen llegando a su ventana
-  exactamente igual que antes, e importar Beasty Console junto a un proyecto que ya lo incluye deja de
-  arriesgar un error de ensamblado duplicado.
-- **Los encabezados de nodo de `.vnbeasty` ahora empiezan por el tipo de nodo.** Un nodo se abre con su
-  palabra clave de tipo seguida de su nombre: `choice cruce:`, `decision ruta:`, `subgraph combate:`,
-  `return combate/fin ("win"):`, `talkmenu charla (ana):`, `flow al_pueblo:` — y `label intro:` sigue siendo
-  el nodo de diálogo normal. Esta es la forma que el escritor emite ahora (un guion enlazado se reescribe a
-  ella en la siguiente sincronización con el grafo); la forma anterior con etiqueta, `label <nombre>
-  (choice):`, se sigue parseando, así que los guiones existentes siguen funcionando. Una etiqueta de tipo que
-  contradice la palabra clave (`choice cruce (decision):`) es un error de importación.
-- **El autocompletado de la pestaña Text ahora también funciona en las líneas de encabezado.** La columna 0
-  sugiere las palabras clave de tipo de nodo (`label`, `choice`, `decision`, `subgraph`, `return`,
-  `talkmenu`, `flow`) más `scene` y `start`; `start ` sugiere las etiquetas del guion, `talkmenu ` sugiere
-  ids de personaje para su argumento `(<personaje>)`, y `jump` y los destinos de ruta reconocen las
-  etiquetas declaradas con los nuevos encabezados que empiezan por el tipo. Las palabras clave de encabezado
-  se resaltan con el color que su tipo de nodo tiene en el grafo, y la chuleta de sintaxis muestra la forma
-  nueva.
-- **Los tests internos del asset ya no aparecen en tu Test Runner.** Los ensamblados de tests que viajan con
-  el paquete ahora solo compilan cuando está definido el símbolo de scripting `BEASTY_DEV_TOOLS`, así que
-  importar el asset ya no llena la ventana Test Runner con sus tests internos. Para ejecutarlos, agrega
-  `BEASTY_DEV_TOOLS` en `Project Settings ▸ Player ▸ Scripting Define Symbols`.
-- **Una cola de música vacía ahora significa silencio en ese modo.** Entrar en un modo (menú principal,
-  novela visual, mundo libre, personalizado) cuya cola de música de fondo no tiene clips funde la música del
-  modo anterior en lugar de dejarla sonar para siempre — los clips asignados solo al menú principal ya no
-  siguen sonando sobre la partida tras darle a Play o cargar un guardado. Para arrastrar a propósito la
-  música anterior a través de un cambio de modo, activa el interruptor **Keep Previous When Empty** del
-  controlador, ahora visible en el inspector del Beasty Manager bajo el nuevo desplegable **Background
-  Music** (antes estaba oculto, y activado, sin forma de verlo).
-- **La música por proyecto ahora se aplica al entrar en una historia.** La cola de música se resolvía antes
-  de que existiera la sesión de VN, así que la música propia de un proyecto podía ignorarse — o quedarse la
-  del proyecto anterior — al empezar partida nueva, abrir un menú de charla o cargar un guardado; ahora se
-  vuelve a resolver cuando la sesión ya está viva. La música del modo actual también arranca al cargar la
-  escena sea cual sea el orden de inicialización de los componentes, y el auto-wire mantiene el controlador
-  apuntando al mismo asset de configuración de música que edita la pestaña Music.
-- **Las puertas y los objetos por fin se pueden eliminar de una sala.** En la línea de tiempo de la sala, las
-  fichas de puerta/objeto ganaron un botón ✕, y el inspector del elemento seleccionado un botón «Delete
-  door… / Delete object… / Delete pose…». Ambos piden confirmación y además quitan el hijo correspondiente
-  del prefab de la sala, en un solo paso de deshacer. Antes, una puerta o un objeto creados no se podían
-  quitar desde el editor de ninguna manera.
-- **Los perfiles de rutina se pueden eliminar** desde el selector de perfil («Delete profile…», con
-  confirmación; el perfil Default integrado se queda). Una rutina de personaje que queda completamente
-  vacía — sin colocaciones, sin fallback, sin diálogos de interacción — se poda automáticamente del grafo del
-  mapa, en el mismo paso de deshacer que la eliminación que la vació.
-- **Eliminar una sala ahora ofrece eliminar también su asset de prefab de sala**, que antes se quedaba
-  huérfano en el proyecto (la eliminación del asset no se puede deshacer; el aviso lo dice).
-- **El menú de charla completo de un personaje se puede eliminar** («Delete talk menu…», con confirmación y
-  deshacer), devolviendo al personaje a su estado de antes de tener menú de charla. Sus textos localizados se
-  quedan en la tabla.
-- **«Save & apply» en la vista Text del guion ahora se puede deshacer.** Un solo Ctrl+Z restaura el grafo
-  entero, sus nodos y los textos de localización a su estado previo a la importación; «Format», enlazar y
-  desenlazar un guion también se pueden deshacer. Las importaciones automáticas (guardar el `.vnbeasty` desde
-  fuera) no cambian.
-- **Deshacer ahora se comporta como un paso por gesto.** Eliminar varios nodos o aristas en el grafo de
-  Story, crear una puerta/objeto/pose desde un carril de la línea de tiempo, y Auto-wire / Repair colapsan
-  cada uno en un solo paso de deshacer en lugar de varios. Editar una condición de visibilidad de la lista de
-  personajes ahora se deshace a sí misma en lugar de deshacer la acción anterior sin relación, los selectores
-  de variables e ítems y las consultas de localización se refrescan tras un deshacer en lugar de ofrecer
-  entradas obsoletas, y la línea de tiempo de FreeRoam y la grilla de rutinas sueltan una selección que un
-  deshacer eliminó en lugar de editar en silencio una copia desconectada.
-- **El paquete ya no incluye su propio archivo de licencia.** `BeastyVN_LICENSE.md` desapareció (y también
-  los del save system y la consola incluidos): un asset comprado en la Unity Asset Store se licencia bajo el
-  EULA de la Asset Store (https://unity.com/legal/as-terms), y una licencia independiente dentro del paquete
-  entra en conflicto con él. Cada `Third-Party Notices.txt` ahora apunta a ese EULA. Las copias compradas en
-  itch.io reciben su propio archivo de licencia, que se añade a la descarga de itch al empaquetar.
-- **El bloque Wait ahora pausa la historia de verdad.** Un `Wait` escrito entre dos líneas retiene el flujo
-  durante sus segundos ANTES de que aparezca la siguiente línea — los clics se tragan durante la pausa,
-  retroceder la cancela, Skip la acelera, y una revisita tras un rebobinado no vuelve a esperar (como los
-  efectos secundarios, la pausa corre una sola vez). Un Wait de `0` segundos es una barrera para el avance
-  automático: Auto se detiene ahí y espera un avance manual. Antes, el bloque se podía escribir y compilar
-  desde `.vnbeasty` pero en ejecución se ignoraba en silencio.
-- **Los nodos del grafo de Story ahora se pueden copiar, cortar, pegar y duplicar** — las entradas del menú
-  contextual (y Ctrl+C/X/V/D) existían pero no hacían nada, en silencio. Un pegado clona la selección con ids
-  de nodo nuevos, clona en profundidad los subgrafos, conserva las conexiones entre los nodos copiados (y, al
-  pegar en el mismo grafo, sus aristas salientes hacia nodos no copiados), y acuña claves de localización
-  NUEVAS cuyas filas copian todas las columnas de idioma — así que editar el texto de una copia nunca edita el
-  del original. El pegado funciona entre ventanas Story y entre assets de escena.
-- **Una pregunta de variable con tipo ya no se degrada en silencio a un campo de texto libre.** El editor
-  ahora persiste en disco el enlace `VNSettings ▸ Game Context` que se asigna solo (antes se quedaba solo en
-  memoria, así que una BUILD del jugador arrancaba sin contexto: un `Ask → variable` sobre un Bool mostraba un
-  campo de texto en lugar de su desplegable true/false). Cuando la definición de la variable de una pregunta
-  sigue sin encontrarse, ahora lo dice en la consola — «Prompt for '[key]': no variable definition found
-  (undeclared key, or the shared VN Context did not resolve — check the 'Game Context' field on VNSettings).
-  The prompt falls back to a free-text field.» — en lugar de degradarse sin dejar rastro.
-- **Renombrar un nodo ya no deja una advertencia en el log.** El renombrado en línea guardaba el asset de la
-  escena mientras se reimportaba, y Unity imprimía «Importer(NativeFormatImporter) generated inconsistent
-  result» con cada renombrado; ahora guarda primero y reimporta después, sin advertencias.
+- La tabla global de localización de la interfaz se repara sola: cada setup de escena y cada pasada de
+  Auto-wire / Repair adoptan y recablean una tabla `UILocalization` que existe pero está sin asignar, y
+  solo cuando no existe ninguna se crea una nueva junto al asset de ajustes, pre-sembrada con los textos de
+  interfaz integrados. La comprobación solo mezcla — una tabla sana, sus claves personalizadas y cada
+  traducción editada no se tocan nunca. El contenido propio de una tabla BORRADA (claves personalizadas,
+  nombres y descripciones de objetos, tus traducciones) no se recupera; la regeneración restaura los textos
+  integrados.
+- Una pregunta de variable con tipo muestra la entrada que su tipo pide (un `Ask → variable` sobre un Bool
+  muestra un desplegable true/false). Cuando la definición de la variable de una pregunta no se encuentra,
+  la consola explica dónde mirar (el campo «Game Context» de VNSettings) y la pregunta cae a un campo de
+  texto libre en lugar de degradarse sin dejar rastro.
+- La música de fondo se configura por modo (menú principal, novela visual, mundo libre, personalizado), con
+  música propia por proyecto, bajo el desplegable **Background Music** del Beasty Manager. Una cola vacía
+  significa silencio en ese modo: al entrar, la música del modo anterior se funde. Para arrastrar a
+  propósito la música anterior a través de un cambio de modo, activa el interruptor **Keep Previous When
+  Empty** del controlador.
+- Streaming opcional de assets de nodos con Addressables (**beta**).
+
+### Guardado
+
+- Nueva sección **Saving** de primer nivel en el Inspector del BeastyManager: backend de
+  almacenamiento, ubicación de los guardados, cifrado, tamaño de las miniaturas y la política global
+  de guardado (autoguardado, slots por página, nombres) en un solo sitio.
+- **Backends de almacenamiento en la nube** (los módulos Firestore / Realtime Database de Beasty Save
+  System 1.1) funcionan de punta a punta: eliges el backend en el desplegable Storage y la pantalla de
+  guardar/cargar, la cola de autoguardado, el listado de slots, el borrado y la restauración de copias
+  de seguridad trabajan contra él (asíncrono por debajo, sin nada más que configurar). Requiere el SDK
+  de Firebase; sin el SDK instalado nada cambia.
+- Con un backend en la nube, las **miniaturas viajan dentro del guardado** y reconstruyen la caché
+  local de miniaturas en cualquier dispositivo; los guardados locales siguen escribiendo el PNG vecino
+  exactamente como antes.
+- Las **miniaturas de los slots ya no muestran el menú de pausa/juego**: la captura se toma en el
+  momento en que el menú se abre, antes de que se dibuje (los autoguardados siguen capturando la escena
+  en vivo).
+- La sección Saving del BeastyManager es ahora un foldout con caja como las secciones de managers, con
+  una insignia que muestra el backend activo («Active · Firebase Firestore» con un backend en la nube,
+  «Local file» en el resto). Dentro, la configuración de almacenamiento replica la agrupación del Save
+  System (Backend, Location, Security, Reliability, Versioning) y expone cuatro ajustes nuevos por
+  proyecto: ruta de datos (vacía = la de la plataforma), copia de seguridad, carga estricta y versión
+  de datos — todos llegan a la capa de guardado.
 
 ### Persistencia
 
@@ -202,6 +176,26 @@ Primera versión pública.
   interruptor maestro las oculta.
 - El paquete incluye **Beasty Console** y **Beasty Save System**; al importar este asset tienes la copia
   completa de cada uno, y no hay dependencias externas.
+- A Beasty Console se llega por reflexión, nunca por referencia de ensamblado: con el asset de la consola
+  fuera del proyecto, `VNLog` cae a `UnityEngine.Debug`, así que la VN compila y funciona con él o sin él —
+  e importar Beasty Console junto a un proyecto que ya lo incluye no puede producir un error de ensamblado
+  duplicado.
+
+### Editor
+
+- Deshacer se comporta como un paso por gesto: eliminar varios nodos o aristas en el grafo de Story, crear
+  una puerta/objeto/pose desde un carril de la línea de tiempo, y Auto-wire / Repair colapsan cada uno en
+  un solo paso de deshacer.
+- Los ensamblados de tests internos del asset solo compilan cuando está definido el símbolo de scripting
+  `BEASTY_DEV_TOOLS`, así que importar el asset no llena la ventana Test Runner con sus tests internos.
+  Para ejecutarlos, agrega `BEASTY_DEV_TOOLS` en `Project Settings ▸ Player ▸ Scripting Define Symbols`.
+
+### Licencia
+
+- El paquete no incluye un archivo de licencia propio: un asset comprado en la Unity Asset Store se
+  licencia bajo el EULA de la Asset Store (https://unity.com/legal/as-terms), y cada
+  `Third-Party Notices.txt` apunta a él. Las copias compradas en itch.io reciben su propio archivo de
+  licencia, que se añade a la descarga de itch al empaquetar.
 
 ### Compatibilidad
 

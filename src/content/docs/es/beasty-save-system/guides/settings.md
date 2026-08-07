@@ -1,11 +1,12 @@
 ---
 title: "Settings"
-description: "Cada campo de BeastySaveSettings, su valor por defecto y cuándo cambiarlo: carpeta, extensión, cifrado, backups, carga estricta y versión de datos."
+description: "Cada campo de BeastySaveSettings, su valor por defecto y cuándo cambiarlo: backend de almacenamiento, carpeta, cifrado, backups, carga estricta y versión de datos."
 ---
 
-`BeastySaveSettings` contiene todas las opciones que usa una llamada de guardado o carga: adónde va el archivo, si
-está cifrado, si se conserva un backup, qué tan estricta es la carga, y a qué versión de datos pertenece. Esta
-página lista cada campo, su valor por defecto, y la razón por la que lo cambiarías.
+`BeastySaveSettings` contiene todas las opciones que usa una llamada de guardado o carga: a qué backend de
+almacenamiento va, adónde va el archivo, si está cifrado, si se conserva un backup, qué tan estricta es la
+carga, y a qué versión de datos pertenece. Esta página lista cada campo, su valor por defecto, y la razón
+por la que lo cambiarías.
 
 ## Las settings son por llamada, no por proyecto
 
@@ -50,15 +51,22 @@ juegos.
 | `Backup` | bool | `true` | Conserva el archivo anterior como `<slot>.<ext>.bak` al sobrescribir un slot. |
 | `Strict` | bool | `true` | Carga todo o nada. `false` omite los campos malos y advierte. |
 | `DataVersion` | int | `1` | La versión de esquema estampada en cada guardado. Dirige las migraciones. |
+| `StorageId` | string | vacío | Qué backend de almacenamiento usan las llamadas. Vacío significa archivos locales. En el editor se dibuja como el desplegable **Storage**. |
+| `ScopeByUser` | bool | `false` | Mantiene los archivos locales en una subcarpeta por usuario cuando hay un proveedor de usuario registrado. |
+| `Storage` | `IBeastySaveStorage` | `null` | Una instancia de backend asignada desde código. Si está asignada, gana sobre `StorageId`. No se serializa. |
 
-La ruta final de un guardado es:
+La ruta final de un guardado local es:
 
 ```text
 <DataPath o persistentDataPath>/<Folder>/<slot>.<Extension>
 ```
 
+— con un nivel extra, `<Folder>/<userId>/`, cuando el guardado está separado por usuario.
+
 `BeastySave.GetFolderPath(settings)` y `BeastySave.GetSlotPath("slot1", settings)` te dan esas rutas
-sin que tengas que armarlas tú.
+sin que tengas que armarlas tú. Ojo con sus límites: describen **solo la disposición de archivos
+locales** — no se separan por usuario y no dicen nada sobre dónde almacena un guardado un backend en la
+nube.
 
 ### Folder
 
@@ -144,6 +152,32 @@ y registras una migración para ese paso. Un archivo con una versión **más alt
 vez de corromperlo.
 
 Consulta [versioning-and-migrations.md](/es/docs/beasty-save-system/guides/versioning-and-migrations/).
+
+### StorageId
+
+Vacío por defecto, lo que significa archivos locales — el comportamiento que describe el resto de esta
+página. Ponle el id de un backend registrado (`firestore`, `realtime-db`, o un id tuyo) y las mismas
+llamadas escriben en ese backend. En el editor el campo se dibuja como el desplegable **Storage**, que
+lista cada backend cuyo módulo compiló.
+
+Cuando el id nombra un backend que no está disponible en el proyecto — su módulo no compiló porque falta
+el SDK — cada llamada falla con `BackendUnavailable` hasta que el módulo vuelva o el id cambie. Con un
+backend en la nube, `Folder`, `Extension` y `DataPath` no aplican: el backend almacena los guardados por
+usuario en la nube.
+
+Consulta [Backends de almacenamiento](/es/docs/beasty-save-system/guides/storage-backends/) para elegir
+backend y [Firebase](/es/docs/beasty-save-system/guides/firebase/) para la configuración de la nube.
+
+### ScopeByUser
+
+Desactivado por defecto. Actívalo y los guardados **locales** se mantienen en una subcarpeta por usuario
+(`<Folder>/<userId>/…`) siempre que haya un proveedor de usuario registrado — útil cuando varias personas
+comparten una máquina, o cuando quieres que los guardados locales sigan la misma disposición por usuario
+que un backend en la nube usa de todos modos. Los backends en la nube siempre separan por usuario; este
+flag solo afecta a los archivos locales.
+
+De quién es el id que se usa lo decide `BeastySaveUsers` — consulta
+[Backends de almacenamiento](/es/docs/beasty-save-system/guides/storage-backends/).
 
 ## Nombres de slot
 

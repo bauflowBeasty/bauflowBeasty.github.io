@@ -33,7 +33,7 @@ cambiado. Consulta [Plataformas y límites](/es/docs/beasty-save-system/advanced
 
 ## ¿Funciona en WebGL?
 
-**No.** WebGL no está soportado en 1.0.0. La escritura atómica depende de la semántica del sistema de archivos que el build de
+**No.** WebGL no está soportado en 1.1.0. La escritura atómica depende de la semántica del sistema de archivos que el build de
 navegador no proporciona, y las variantes asíncronas están basadas en `Task`. No hay ninguna opción que lo active
 ni ningún workaround soportado; un build de navegador necesita una capa de persistencia diferente.
 [Plataformas y límites](/es/docs/beasty-save-system/advanced/platforms-and-limits/) explica exactamente por qué.
@@ -92,6 +92,23 @@ El diccionario `meta` se queda en texto plano **incluso cuando el guardado está
 de selección de slot puede mostrar el nivel y el tiempo de juego sin la clave. Trátalo como datos de visualización
 en los que no se puede confiar: se lee antes de verificar el checksum. Consulta [El formato del archivo de guardado](/es/docs/beasty-save-system/reference/save-file-format/) y
 [Slots y metadatos](/es/docs/beasty-save-system/guides/slots-and-metadata/).
+
+## ¿Pueden ir los guardados a la nube?
+
+Sí. Pon el desplegable **Storage** (o `BeastySaveSettings.StorageId`) en un backend registrado y las mismas
+llamadas escriben ahí en lugar de en disco. Los backends de Firestore y Realtime Database vienen con el
+asset y se compilan solos cuando el SDK de Firebase está en el proyecto; los guardados se almacenan por
+usuario, con el inicio de sesión anónimo resuelto por ti. Los archivos locales siguen siendo el valor por
+defecto. Consulta [Backends de almacenamiento](/es/docs/beasty-save-system/guides/storage-backends/) y
+[Firebase](/es/docs/beasty-save-system/guides/firebase/).
+
+## ¿Puedo mandar un guardado a mi propio servidor?
+
+Sí, sin ningún backend: `BeastySave.SaveToJson` te entrega el texto de sobre exacto que un guardado
+escribiría — checksum, versiones, cifrado opcional — como una cadena, y `LoadFromJson<T>` lo carga de
+vuelta con la misma validación que recibe un archivo. `ToJson`/`FromJson<T>` hacen lo mismo con JSON
+limpio, sin sobre. Transpórtalo como quieras. Consulta
+[la API de BeastySave](/es/docs/beasty-save-system/reference/api-beastysave/).
 
 ## ¿Es seguro para hilos (thread-safe)?
 

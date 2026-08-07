@@ -22,6 +22,13 @@ Edit both in the **Localization** tab of the Beasty VN window (`Tools > Beasty V
 **Story / UI (global)** toggle at the top switches between them. If a project has no table yet, the tab
 offers **Create & Assign New Table**.
 
+The global UI table also **heals itself**: every scene setup and every **Auto-wire / Repair** pass checks
+it. A table that exists but is unassigned is adopted and re-wired automatically, and only when none exists
+is a fresh one created beside the VNSettings asset, pre-seeded with the built-in UI strings. The check is
+merge-only — custom keys and every edited translation are never touched. What it cannot do is resurrect a
+**deleted** table's own content: regeneration restores the built-in strings, not your keys and
+translations.
+
 Nodes never store raw text. A dialogue line stores a KEY, and the table stores the text for that key in every
 language. That is why translating is only ever "add a column".
 

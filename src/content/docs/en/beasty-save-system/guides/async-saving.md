@@ -1,10 +1,12 @@
 ---
 title: "Async saving and loading"
-description: "Save and load without blocking the main thread. What SaveAsync, LoadAsync and LoadIntoAsync move off the main thread, and what stays on it."
+description: "Save and load without blocking the main thread. What the async methods move off the main thread, and why cloud backends accept nothing else."
 ---
 
 Three methods let you save and load without blocking the main thread on disk IO. This page shows how to
-use them, and is precise about what they do and do not move off the main thread.
+use them, and is precise about what they do and do not move off the main thread. It also covers the async
+twins of the slot utilities, the async scene save, and the one rule that comes with a cloud backend: on an
+asynchronous-only backend, the async API is the only one that works.
 
 ## The three methods
 
@@ -18,6 +20,23 @@ static Task<LoadResult>    LoadIntoAsync(object target, string slot, BeastySaveS
 Each is the exact counterpart of the synchronous method of the same name, takes the same arguments, and
 comes back with the same result type. Nothing throws; you check the result, as always. See
 [Results and errors](/docs/beasty-save-system/reference/results-and-errors/).
+
+## The slot utilities have async twins too
+
+Every slot utility has an async counterpart with the same arguments and the same result:
+
+```csharp
+static Task<bool>     ExistsAsync(string slot, BeastySaveSettings settings)
+static Task<bool>     DeleteAsync(string slot, BeastySaveSettings settings)
+static Task<string[]> ListSlotsAsync(BeastySaveSettings settings)
+static Task<LoadResult<Dictionary<string, string>>> ReadMetaAsync(string slot, BeastySaveSettings settings)
+static Task<SaveResult> RestoreBackupAsync(string slot, BeastySaveSettings settings)
+```
+
+On local files these exist for symmetry — the synchronous forms work fine. On a cloud backend they are the
+only form that works: a database round-trip cannot answer synchronously. A save-slot screen that probes
+slots and reads metadata through the async twins works unchanged whether the game saves to disk or to
+[Firebase](/docs/beasty-save-system/guides/firebase/).
 
 ## What they actually do
 
@@ -146,12 +165,41 @@ writes are atomic you will not end up with a half-written file, but one of the t
 `IoError`, and which of them ends up in the slot is not something you control. One save at a time, per
 slot.
 
-## Scene saves are synchronous
+## Scene saves: SaveAllNowAsync and LoadAllNowAsync
 
-`BeastySaveManager.SaveAll`, `SaveAllNow`, `LoadAll` and `LoadAllNow` have no async counterparts. A scene
-save walks the registered components and writes the file on the spot. If you need the async behaviour for
-a scene-sized save, that is a reason to keep your save data in a plain class of your own and use
-`BeastySave.SaveAsync` on it. See [Scene state](/docs/beasty-save-system/guides/scene-state/).
+Scene saves have async twins on the manager:
+
+```csharp
+Task<SaveResult> BeastySaveManager.SaveAllNowAsync(string slot, IDictionary<string, string> meta = null)
+Task<LoadResult> BeastySaveManager.LoadAllNowAsync(string slot)
+```
+
+`SaveAllNowAsync` runs the same capture, envelope and logging flow as `SaveAllNow`, awaited through the
+pipeline. `LoadAllNowAsync` fetches the data asynchronously and applies it onto the scene objects only
+after the await returns to Unity's main thread — so the apply pass is as safe as the synchronous one.
+Both update `LastSaveResult`/`LastLoadResult` and fire `SaveCompleted`/`LoadCompleted`, exactly like their
+synchronous twins.
+
+The capture itself (walking the registered components) still runs on the main thread; it is the write and
+the read that are awaited.
+
+## Async-only backends
+
+A cloud backend — Firestore, Realtime Database, or a custom backend that reports
+`SupportsSynchronous = false` — cannot answer a synchronous call. Two different things happen depending on
+who calls:
+
+- **From code**, a synchronous call (`Save`, `Load<T>`, `Exists`…) fails immediately with the typed error
+  `BackendRequiresAsync` instead of blocking. Nothing is written; switch the call site to the async twin.
+- **From the manager's UnityEvent entry points** (`SaveAll`, `LoadAll`, `DeleteSlot` — the ones a uGUI
+  button calls), the operation is routed onto the asynchronous path automatically, fire-and-forget, so a
+  wired button keeps working and nothing is ever lost. The outcome arrives through
+  `SaveCompleted`/`LoadCompleted` and `LastSaveResult`. If the manager's **Save Mode** is still
+  `Synchronous`, a warning is logged once per session asking you to set it to `Asynchronous` to
+  acknowledge the routing.
+
+See [Storage backends](/docs/beasty-save-system/guides/storage-backends/) for Save Mode and the routing
+rules in full.
 
 ## WebGL
 

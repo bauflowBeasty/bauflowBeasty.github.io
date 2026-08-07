@@ -1,11 +1,11 @@
 ---
 title: "Settings"
-description: "Every BeastySaveSettings field, its default, and when to change it: folder, extension, encryption, backups, strict loading and data version."
+description: "Every BeastySaveSettings field, its default, and when to change it: storage backend, folder, encryption, backups, strict loading and data version."
 ---
 
-`BeastySaveSettings` holds every option a save or load call uses: where the file goes, whether it is
-encrypted, whether a backup is kept, how strictly it loads, and which data version it belongs to. This page
-lists every field, its default, and the reason you would change it.
+`BeastySaveSettings` holds every option a save or load call uses: which storage backend it goes to, where
+the file goes, whether it is encrypted, whether a backup is kept, how strictly it loads, and which data
+version it belongs to. This page lists every field, its default, and the reason you would change it.
 
 ## Settings are per call, not per project
 
@@ -49,15 +49,21 @@ component, edited in the inspector or in the Save Manager window. That is enough
 | `Backup` | bool | `true` | Keep the previous file as `<slot>.<ext>.bak` when overwriting a slot. |
 | `Strict` | bool | `true` | All-or-nothing loading. `false` skips bad fields and warns. |
 | `DataVersion` | int | `1` | The schema version stamped into every save. Drives migrations. |
+| `StorageId` | string | empty | Which storage backend the calls use. Empty means local files. Drawn as the **Storage** dropdown in the editor. |
+| `ScopeByUser` | bool | `false` | Keep local files in a per-user subfolder when a user provider is registered. |
+| `Storage` | `IBeastySaveStorage` | `null` | A backend instance set from code. When assigned it wins over `StorageId`. Not serialized. |
 
-The final path of a save is:
+The final path of a local save is:
 
 ```text
 <DataPath or persistentDataPath>/<Folder>/<slot>.<Extension>
 ```
 
+— with one extra level, `<Folder>/<userId>/`, when the save is scoped by user.
+
 `BeastySave.GetFolderPath(settings)` and `BeastySave.GetSlotPath("slot1", settings)` give you those paths
-without you having to assemble them.
+without you having to assemble them. Note their limits: they describe the **local-file layout only** — they
+are not scoped per user and they say nothing about where a cloud backend stores a save.
 
 ### Folder
 
@@ -142,6 +148,31 @@ a migration for the step. A file with a version **higher** than your setting fai
 old build refuses to guess at a save written by a newer one, rather than corrupting it.
 
 See [versioning-and-migrations.md](/docs/beasty-save-system/guides/versioning-and-migrations/).
+
+### StorageId
+
+Empty by default, which means local files — the behaviour every other section of this page describes. Set
+it to a registered backend id (`firestore`, `realtime-db`, or an id of your own) and the same calls write
+to that backend instead. In the editor the field is drawn as the **Storage** dropdown, listing every
+backend whose module compiled.
+
+When the id names a backend that is not available in the project — its module did not compile because the
+SDK is missing — every call fails with `BackendUnavailable` until the module is restored or the id is
+changed. On a cloud backend, `Folder`, `Extension` and `DataPath` do not apply: the backend stores saves
+per user in the cloud.
+
+See [Storage backends](/docs/beasty-save-system/guides/storage-backends/) for choosing a backend and
+[Firebase](/docs/beasty-save-system/guides/firebase/) for the cloud setup.
+
+### ScopeByUser
+
+Off by default. Turn it on and **local** saves are kept in a per-user subfolder
+(`<Folder>/<userId>/…`) whenever a user provider is registered — useful when several people share one
+machine, or when you want local saves to line up with the per-user layout a cloud backend uses anyway.
+Cloud backends always scope by user; this flag only affects local files.
+
+Whose id is used comes from `BeastySaveUsers` — see
+[Storage backends](/docs/beasty-save-system/guides/storage-backends/).
 
 ## Slot names
 

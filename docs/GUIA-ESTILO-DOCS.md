@@ -1,7 +1,7 @@
 # Guía de estilo de la documentación — Beasty Components
 
 > Norma para TODA página nueva o edición de prosa en `src/content/docs/`. Nació de la revisión
-> EN de Visual Novel del 2026-07-28 (`docs/revision-en-visual-novel-2026-07-28.md`) y aplica
+> EN de Visual Novel del 2026-07-28 y aplica
 > igual a los tres productos. EN es el idioma canónico: se escribe primero en EN siguiendo esta
 > guía y luego se refleja en ES.
 
@@ -68,7 +68,7 @@ autosuficiente. La calidez va en las guías, no aquí.
 
 1. Escribir EN siguiendo esta guía; registrar la página en `src/data/sidebars.ts` (EN y ES).
 2. Crear el espejo ES en la misma ruta (traducción humanizada, no literal; terminología según
-   `docs/superpowers/specs/2026-07-13-portada-marca-y-humanizacion-es-design.md`).
+   `docs/specs/2026-07-13-portada-marca-y-humanizacion-es-design.md`).
 3. Capturas: enlazar la imagen en EN y ES aunque el PNG no exista, ficha en
    `docs/screenshots.json`, y `npm run doc:shots`.
 4. `npm run build` → `npm run doc:links` → `npm run doc:index`.
@@ -77,6 +77,6 @@ autosuficiente. La calidez va en las guías, no aquí.
 
 - Cambiar solo lo que esté mal explicado, confuso o truncado. Lo que ya está bien no se
   reescribe.
-- Todo cambio de **significado** en EN se anota en un registro de revisión (patrón:
-  `docs/revision-en-visual-novel-2026-07-28.md`) para replicarlo en ES. Los cambios cosméticos
+- Todo cambio de **significado** en EN se anota en un registro de revisión (un `.md` temporal en
+  `docs/` con la lista de cambios; se elimina al terminar la réplica) para replicarlo en ES. Los cambios cosméticos
   (quitar un *just*) no necesitan réplica salvo que ES arrastre la misma muletilla.

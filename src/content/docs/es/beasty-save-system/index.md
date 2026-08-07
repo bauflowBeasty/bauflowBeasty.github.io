@@ -31,7 +31,10 @@ buena.
   pantalla de slots de guardado pueda listarlos a bajo costo.
 - Carga estricta (todo o nada, con rollback) o tolerante (omitir y advertir).
 - Versionado de datos con migraciones registradas, para que una actualización pueda leer los guardados que tus jugadores ya tienen.
-- Variantes asíncronas para la IO de archivos.
+- Backends de almacenamiento conectables: archivos locales por defecto, o Firebase Firestore / Realtime
+  Database en la nube — más una interfaz para escribir el tuyo.
+- JSON sin archivos: produce y carga el sobre de guardado completo como una cadena, para tu propio servidor o endpoint.
+- Variantes asíncronas para la IO de archivos, y cobertura asíncrona completa para los backends en la nube.
 - Siete módulos convertidores opcionales (Animation, Audio, Particles, Physics2D, Physics3D, TMPro, UGUI), cada
   uno de los cuales compila solo cuando el módulo de Unity correspondiente está en el proyecto.
 - Una ventana de editor que lista los saveables en tu escena y los archivos de guardado en disco.
@@ -69,6 +72,8 @@ Escritas para cualquiera, con o sin código.
 | [strict-vs-tolerant.md](/es/docs/beasty-save-system/guides/strict-vs-tolerant/) | Los dos modos de carga |
 | [versioning-and-migrations.md](/es/docs/beasty-save-system/guides/versioning-and-migrations/) | Publicar una actualización que lee guardados antiguos |
 | [async-saving.md](/es/docs/beasty-save-system/guides/async-saving/) | Qué hacen realmente los métodos asíncronos |
+| [storage-backends.md](/es/docs/beasty-save-system/guides/storage-backends/) | A dónde van los guardados: archivos locales, la nube y guardados por usuario |
+| [firebase.md](/es/docs/beasty-save-system/guides/firebase/) | Guardados en la nube con Firebase: Firestore y Realtime Database |
 | [save-manager-window.md](/es/docs/beasty-save-system/guides/save-manager-window/) | La ventana del editor, sección por sección |
 | [logging.md](/es/docs/beasty-save-system/guides/logging/) | El interruptor Logging, qué imprime cada modo, y cómo mandar los logs a otro sitio |
 
@@ -90,6 +95,7 @@ Firmas exactas, comportamiento exacto.
 | Página | Qué cubre |
 |---|---|
 | [custom-converters.md](/es/docs/beasty-save-system/advanced/custom-converters/) | Enseñar al sistema a guardar tus propios tipos |
+| [custom-backends.md](/es/docs/beasty-save-system/advanced/custom-backends/) | Escribir tu propio backend de almacenamiento |
 | [platforms-and-limits.md](/es/docs/beasty-save-system/advanced/platforms-and-limits/) | Versiones de Unity, IL2CPP, WebGL, rendimiento |
 
 ## Cuando algo sale mal

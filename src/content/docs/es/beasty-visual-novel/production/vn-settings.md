@@ -46,7 +46,11 @@ Consulta [Localización](/es/docs/beasty-visual-novel/production/localization/) 
 | `allowSaveNaming` | Si el jugador puede titular una partida. Cuando está desactivado, un slot se etiqueta con su marca de tiempo de creación local. |
 | `defaultSaveThumbnail` | La imagen de respaldo mostrada para un slot GUARDADO cuyo PNG de miniatura falta o no se puede leer. Los slots vacíos usan en su lugar el arte de stock del prefab del slot, no esto. |
 
-Consulta [Guardado y carga](/es/docs/beasty-visual-novel/production/saving-and-loading/).
+Estos son los ajustes de **política**, y están espejados en la sección **Saving** del Inspector del
+BeastyManager, así que puedes editarlos ahí sin abrir los Global Settings. La configuración de
+**almacenamiento** — backend, ubicación de los guardados, cifrado, tamaño de las miniaturas — vive en esa
+misma sección Saving (pertenece al controlador de la escena, no a este asset). Consulta
+[Guardado y carga](/es/docs/beasty-visual-novel/production/saving-and-loading/).
 
 ## Retroceso
 

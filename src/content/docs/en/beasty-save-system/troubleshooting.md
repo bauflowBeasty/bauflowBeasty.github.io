@@ -266,8 +266,12 @@ persistence layer. See [Platforms and limits](/docs/beasty-save-system/advanced/
 | `TypeMismatch` | The `type` recorded in the file is not the type you asked to load. |
 | `MigrationFailed` | A registered migration threw, or no chain of steps reaches the current `DataVersion`. |
 | `FieldMapFailed` | A field could not be mapped. In a strict load this fails the whole load and **nothing is applied**. In a tolerant load it would have been a warning instead. |
+| `BackendRequiresAsync` | A synchronous call reached an asynchronous-only backend (a cloud database). Switch the call site to the async twin. |
+| `BackendUnavailable` | `StorageId` names a backend whose module did not compile — almost always a missing Firebase SDK. |
+| `AuthRequired` | A remote backend could not resolve a user. With Firebase, check that Anonymous auth is enabled in the console. |
+| `NetworkError` | The cloud operation failed in transit. Treat it like `IoError`: let the player retry. |
 
-See [Results and errors](/docs/beasty-save-system/reference/results-and-errors/) for the complete list of the thirteen codes and
+See [Results and errors](/docs/beasty-save-system/reference/results-and-errors/) for the complete list of the seventeen codes and
 [Strict vs tolerant loading](/docs/beasty-save-system/guides/strict-vs-tolerant/) for the difference the `Strict` setting makes.
 
 ## See also

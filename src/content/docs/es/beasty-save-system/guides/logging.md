@@ -63,6 +63,13 @@ En **Verbose**, súmale el detalle:
 
 Todas las líneas llevan la etiqueta `[BeastySave]`, así que puedes filtrar la consola por ella.
 
+Verbose también trae el **diagnóstico de cargas**: cada carga registra cuánto texto devolvió el backend y
+cuántos ids y entradas guardables contiene el documento, y cada operación en la nube registra el id de
+usuario resuelto — los datos que necesitas cuando una carga «funciona» pero el mundo no cambia. Una carga
+que no aplica nada ni siquiera necesita Verbose: avisa con todo el detalle en lugar de terminar bien en
+silencio. Con Firestore, Verbose dice además si una lectura vino del servidor o de la caché sin conexión
+del SDK — lo primero que comprobar cuando un dispositivo muestra datos de la nube desactualizados.
+
 ## Desde código
 
 El desplegable es una fachada para `BeastySaveLog`, que es público:

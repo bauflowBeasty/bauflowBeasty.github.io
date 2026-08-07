@@ -22,6 +22,14 @@ Edita ambas en la pestaña **Localization** de la ventana de Beasty VN (`Tools >
 alternador **Story / UI (global)** de la parte superior cambia entre ellas. Si un proyecto todavía no tiene
 tabla, la pestaña ofrece **Create & Assign New Table**.
 
+La tabla global de la interfaz además **se repara sola**: cada setup de escena y cada pasada de
+**Auto-wire / Repair** la comprueban. Una tabla que existe pero está sin asignar se adopta y se recablea
+automáticamente, y solo cuando no existe ninguna se crea una nueva junto al asset de VNSettings,
+pre-sembrada con los textos de interfaz integrados. La comprobación solo mezcla — las claves
+personalizadas y cada traducción editada no se tocan nunca. Lo que no puede hacer es resucitar el
+contenido propio de una tabla **borrada**: la regeneración restaura los textos integrados, no tus claves y
+traducciones.
+
 Los nodos nunca almacenan texto en bruto. Una línea de diálogo almacena una CLAVE, y la tabla almacena el texto
 de esa clave en cada idioma. Por eso traducir siempre se reduce a "agregar una columna".
 

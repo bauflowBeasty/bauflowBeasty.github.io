@@ -5,7 +5,72 @@ description: "All notable changes to Beasty Save System, version by version. The
 
 All notable changes to Beasty Save System. This project follows [Semantic Versioning](https://semver.org/).
 
-## 1.0.1 — unreleased
+## 1.1.0 — 2026-08-06
+
+### Added
+
+- Pluggable storage backends: saves can now go to a database instead of a local file.
+  `BeastySaveSettings.StorageId` picks the backend (dropdown in the Beasty Save Manager);
+  local files remain the default and are unchanged. Custom backends implement
+  `IBeastySaveStorage` and register in `BeastySaveStorageRegistry`.
+- Firebase modules (compiled only when the Firebase SDK is present — no setup beyond importing it):
+  Firestore (`firestore`), Realtime Database (`realtime-db`), and automatic anonymous sign-in via
+  Firebase Auth. Saves are stored per user under users/{uid}/saves/{slot}. Recommended security
+  rules: each uid may only read/write its own subtree.
+- The editor keeps the `BEASTY_HAS_FIREBASE_*` scripting defines in sync automatically: it adds and
+  removes them per active build target as the Firebase SDK appears or disappears from the project,
+  so a `.unitypackage` install (or removal) of the SDK does not need a manual Player Settings edit.
+- User identity seam: `IBeastyUserProvider` / `BeastySaveUsers` decide whose saves these are;
+  `BeastySaveSettings.ScopeByUser` also scopes local files per user.
+- JSON without files: `BeastySave.SaveToJson`/`LoadFromJson` (full integrity envelope) and
+  `BeastySave.ToJson`/`FromJson` (clean payload) for custom endpoints.
+- `SaveResult<T>`: a typed result carrying a value, returned by the JSON/read APIs.
+- Async slot utilities: `ExistsAsync`, `DeleteAsync`, `ListSlotsAsync`, `ReadMetaAsync`,
+  `RestoreBackupAsync`; `BeastySaveManager.SaveAllNowAsync`/`LoadAllNowAsync`. Synchronous calls on
+  an async-only backend return the new `BackendRequiresAsync` error instead of blocking.
+- New typed errors: `BackendRequiresAsync`, `BackendUnavailable`, `AuthRequired`, `NetworkError`.
+- **Save Mode** on the Beasty Save Manager: Synchronous (default, unchanged) or Asynchronous for the
+  UnityEvent-friendly `SaveAll`/`LoadAll`/`DeleteSlot` entry points. Cloud backends always run
+  asynchronously; picking Synchronous with a cloud backend still routes asynchronously (nothing is
+  ever lost) and warns once per session. Code callers keep choosing explicitly via `*Now`/`*NowAsync`.
+- A proper inspector for the Beasty Save Manager: status card (active backend, user session, last
+  save/load result), the two decisions up front (Storage and Save Mode), everything else behind an
+  Advanced settings foldout, and a button to the full Save Manager window.
+- The Save Manager window now groups every setting by role (Backend, Location, Security, Reliability,
+  Versioning, Logging) with contextual help: fields that do not apply to the active backend are
+  hidden or disabled with a note, and enabling encryption without a key warns about the shared
+  default key.
+- Load diagnostics at Verbose level: every load logs how much text the backend returned and how many
+  saveable ids/entries the document carries; every cloud operation logs the resolved user id; a load
+  that applies nothing now warns with the full detail instead of succeeding in silence.
+- Firestore: a head document without a valid chunk count now fails as typed Corrupt data instead of
+  surfacing as a confusing parse error, and Verbose logging says whether a snapshot came from the
+  server or from the SDK's offline cache.
+- Live Firebase test suite (`BeastySaveSystem.Firebase.Tests`) that only compiles when the Firebase
+  SDK is installed — real Firestore round-trips, double-read freshness, anonymous sign-in and
+  corrupt-head detection against the configured project. Gated for both installs: `versionDefines`
+  for a UPM package, and the `FirebaseSdkDetector`-driven global scripting defines for a
+  `.unitypackage` install. Every awaited Firebase step has a hard timeout that fails the test naming
+  the stalled step, and cleanup yields instead of blocking: Firestore completions marshal through
+  the editor's main thread, so a blocking teardown wait used to deadlock the Test Runner into an
+  infinite, log-less hang.
+
+### Changed
+
+- Load's file-not-found error message now names the slot instead of the file path (storage backends
+  may have no file path at all).
+- `BeastySave.GetFolderPath`/`GetSlotPath` keep describing the local-file layout only; they are not
+  scoped per user and do not apply to non-local backends.
+- `BeastySaveManager.SaveAll`/`LoadAll`/`DeleteSlot` route to the asynchronous path automatically on
+  async-only backends (fire-and-forget; the outcome still arrives via `SaveCompleted`/`LoadCompleted`
+  and `LastSaveResult`).
+
+### Fixed
+
+- With the Beasty Console asset present, `BeastySaveLog.Warning` now surfaces as a real console
+  warning (it used to bind to an info-colored channel, invisible to the warnings filter).
+- The demo object's status label is now wired to the save/load events, so a failed save or load in
+  the demo scene reports itself instead of failing silently.
 
 ### Compatibility
 

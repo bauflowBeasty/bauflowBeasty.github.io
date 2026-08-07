@@ -23,6 +23,10 @@ picture of the moment the player saved. If a thumbnail is missing or unreadable,
 default thumbnail sprite from [VN Settings](/docs/beasty-visual-novel/production/vn-settings/). (An EMPTY slot shows the stock art on the slot
 prefab instead, not that fallback.)
 
+The thumbnail never shows the pause menu. The screenshot is taken the moment the menu opens, **before it
+draws**, so a manual save shows the scene the player was looking at — not the menu covering it. Autosaves
+capture the live scene, since no menu is open when they fire.
+
 Each slot also carries a **name**. If `allowSaveNaming` is on, the save screen's text field lets the player
 title the save; when they leave it blank, the slot is labelled with the local date and time it was created.
 
@@ -85,10 +89,53 @@ Accepting restores the previous version of that slot and retries the load. A dam
 list, labelled `Damaged save`, so the player can restore or delete it rather than watching their save silently
 vanish.
 
+## The Saving section: one place for all of it
+
+Everything this page describes is configured in one place: select the **BeastyManager** and open its
+**Saving** section — a boxed foldout like the manager sections, with a badge naming the active backend
+(`Local file`, or `Active · Firebase Firestore` when a cloud backend is on).
+
+![The Saving section of the BeastyManager Inspector, with its backend badge](/docs-images/beasty-visual-novel/vn-saving-section.png)
+
+Inside, the storage configuration mirrors the Save System's grouping — **Backend**, **Location**,
+**Security**, **Reliability**, **Versioning** — plus **Thumbnails** (the capture size) and the
+**Save policy** from Global Settings (autosave, slots per page, naming, the default thumbnail), so the
+policy fields documented in [VN settings](/docs/beasty-visual-novel/production/vn-settings/) are editable
+here too.
+
+Four of those settings are per-project and carried straight into the save layer:
+
+| Setting | Default | What it does |
+|---|---|---|
+| Data path | empty | Absolute base path for save files. Empty means the platform's persistent data path — recommended. |
+| Backup | on | Keep a rolling `.bak` of the previous save for each slot. |
+| Strict loading | on | A save that no longer matches the story or scene fails as a whole instead of applying partially. |
+| Data version | `1` | The version stamped into every save, for future migrations. |
+
+## Cloud saves
+
+The **Storage** dropdown in the Saving section's Backend group picks where saves live. `Local file` is the
+default and is everything described above. With the Firebase SDK in the project, two more entries appear —
+**Firebase Firestore** and **Firebase Realtime Database** — and picking one moves the saves to the cloud,
+per player:
+
+- The save/load screen, the autosave queue, slot listing, delete and backup restore all work against the
+  cloud backend, asynchronously under the hood. There is nothing else to configure.
+- Slot **thumbnails travel inside the save** and rebuild the local thumbnail cache on any device — a
+  player who continues on a second machine sees their pictures, not blank slots. Local saves keep writing
+  the sibling PNG exactly as before.
+- Players are signed in anonymously by default; each player's saves live under their own user id.
+
+Without the Firebase SDK installed nothing changes — the dropdown shows only `Local file`. The setup, the
+data layout and the security rules are documented on the Save System side:
+[Cloud saves with Firebase](/docs/beasty-save-system/guides/firebase/) and
+[Storage backends](/docs/beasty-save-system/guides/storage-backends/).
+
 ## Where the files are, and what powers this
 
-Saves are written under the platform's persistent data path, in the `VisualNovel` folder, with the extension
-`vnsave`, and the thumbnail as a `.png` beside each one.
+Saves are written under the platform's persistent data path (or the **Data path** you set in the Saving
+section), in the `VisualNovel` folder, with the extension `vnsave`, and the thumbnail as a `.png` beside
+each one. With a cloud backend there are no local files: saves live in the backend, per user.
 
 This is all powered by **Beasty Save System**, which ships inside this package. There is nothing to install and
 no external dependency — no Newtonsoft, no add-ons. It is the same save system documented as a product of its

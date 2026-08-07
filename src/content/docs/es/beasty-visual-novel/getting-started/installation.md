@@ -121,6 +121,7 @@ El paquete se instala bajo `Assets/BeastyComponents/BeastyVN/`.
 | `Prefabs/` | Los prefabs de UI y de escena ya listos: el canvas con cada pantalla dentro, el stage, el panel de diálogo, los menús, las pantallas de personaje. Restilízalos. Consulta [Prefabs de UI](/es/docs/beasty-visual-novel/production/ui-prefabs/). |
 | `Resources/` | `VNSettings.asset` y `UILocalization.asset`. Estos dos se leen en tiempo de ejecución, por eso viven aquí. Consulta [VN Settings](/es/docs/beasty-visual-novel/production/vn-settings/). |
 | `Sprites/` | Arte de relleno, para que una escena nueva muestre algo en lugar de nada. Reemplázalo con el tuyo. |
+| `Demos/` | El **House Demo**: un mini-juego completo y jugable construido con el asset — abre `HouseDemo/HouseDemo.unity` y dale a Play. Consulta [El House Demo](/es/docs/beasty-visual-novel/getting-started/house-demo/). |
 | `Documentation/` | Los archivos de referencia que vienen con el paquete, incluyendo la sintaxis completa de `.vnbeasty` y la referencia de tiempo y rutinas. |
 | `Tests/` | Las suites de pruebas EditMode, PlayMode y de guardado. Puedes borrarlas sin riesgo antes de lanzar; de todas formas se excluyen del build. |
 

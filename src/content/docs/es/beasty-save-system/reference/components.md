@@ -76,11 +76,23 @@ Add Component: `Beasty > Beasty Save Manager`. Marcado `[DisallowMultipleCompone
 El punto de entrada a nivel de escena del flujo sin código. Contiene la configuración, rastrea cada
 `BeastySaveable` registrado, y escribe un documento de grupo por guardado.
 
+### El inspector
+
+El inspector del manager es una vista resumen: una **tarjeta de estado** (el backend de almacenamiento
+activo con su insignia `Local`/`Cloud`, el proveedor de usuario y el usuario actual cuando hay uno
+registrado, y — en Play Mode — los resultados del último guardado y de la última carga), después las dos
+decisiones que importan al frente — **Storage** y **Save Mode** — con todo lo demás tras un foldout
+**Advanced settings** colapsado, y un botón **Open Save Manager** hacia la ventana completa.
+
+![El inspector del Beasty Save Manager: tarjeta de estado, y después Storage y Save Mode](/docs-images/beasty-save-system/save-manager-inspector.png)
+
 ### Campos del inspector
 
 | Campo | Tipo | Significado |
 |---|---|---|
-| Settings (`settings`) | `BeastySaveSettings` | Ubicación, cifrado, copias de seguridad, carga estricta y versión de datos usados por SaveAll/LoadAll. |
+| Storage (`settings.StorageId`) | `string` | Dónde se escriben los guardados, como un desplegable de los backends registrados. Archivo local es el valor por defecto. Consulta [Backends de almacenamiento](/es/docs/beasty-save-system/guides/storage-backends/). |
+| Save Mode (`saveMode`) | `BeastySaveMode` | Cómo corren `SaveAll`/`LoadAll`/`DeleteSlot`: `Synchronous` (por defecto — bloquea hasta terminar) o `Asynchronous` (corre en segundo plano y reporta por los eventos). Fijado en `Asynchronous` con un backend en la nube. |
+| Settings (`settings`) | `BeastySaveSettings` | Ubicación, cifrado, copias de seguridad, carga estricta y versión de datos usados por SaveAll/LoadAll — el foldout **Advanced settings**. |
 | Logs (`logs`) | `BeastySaveLogMode` | Cuánto imprime el save system: `Auto` (activo en el editor y en builds de desarrollo, apagado en release), `On`, `Verbose`, `Off`. Se aplica en `OnEnable` y `OnValidate`, así que cambiarlo en Play surte efecto al momento. Consulta [Logging](/es/docs/beasty-save-system/guides/logging/). |
 
 Cada campo de `BeastySaveSettings` está documentado en [Configuración](/es/docs/beasty-save-system/guides/settings/).
@@ -90,6 +102,7 @@ Cada campo de `BeastySaveSettings` está documentado en [Configuración](/es/doc
 ```csharp
 public static BeastySaveManager Instance { get; }
 public BeastySaveSettings Settings { get; }
+public BeastySaveMode SaveMode { get; set; }
 public SaveResult LastSaveResult { get; }
 public LoadResult LastLoadResult { get; }
 ```
@@ -117,19 +130,36 @@ directamente al OnClick de un Button de uGUI con el nombre del slot escrito en e
 ni una línea de C#. El resultado llega a través de `SaveCompleted`/`LoadCompleted`,
 `LastSaveResult`/`LastLoadResult`, y el log. Consulta [Guardar sin código](/es/docs/beasty-save-system/getting-started/save-without-code/).
 
+El **Save Mode** decide cómo corren: `Synchronous` bloquea hasta terminar, `Asynchronous` corre en segundo
+plano y reporta por los mismos eventos. En un backend solo asíncrono siempre toman la vía asíncrona, diga
+lo que diga el modo — un Save Mode en `Synchronous` se enruta igualmente de forma asíncrona (nunca se
+pierde nada) y registra una advertencia una vez por sesión pidiéndote poner el modo en `Asynchronous` para
+reconocerlo.
+
 ```csharp
 public SaveResult SaveAllNow(string slot, IDictionary<string, string> meta = null)
 public LoadResult LoadAllNow(string slot)
 ```
 
 Las mismas operaciones, devolviendo el resultado tipado directamente. `meta` es el diccionario de texto plano
-que una pantalla de slots vuelve a leer con `BeastySave.ReadMeta`.
+que una pantalla de slots vuelve a leer con `BeastySave.ReadMeta`. Estos ignoran el Save Mode — quien llama
+desde código elige explícitamente — y en un backend solo asíncrono devuelven `BackendRequiresAsync`.
+
+```csharp
+public Task<SaveResult> SaveAllNowAsync(string slot, IDictionary<string, string> meta = null)
+public Task<LoadResult> LoadAllNowAsync(string slot)
+```
+
+Los gemelos asíncronos. El mismo flujo de captura, sobre, registro y eventos; `LoadAllNowAsync` aplica los
+datos traídos sobre los objetos de la escena solo después de que el await vuelva al hilo principal de
+Unity. Consulta [Guardado asíncrono](/es/docs/beasty-save-system/guides/async-saving/).
 
 ```csharp
 public void DeleteSlot(string slot)
 ```
 
-Elimina el archivo del slot y su copia de seguridad. También compatible con UnityEvent.
+Elimina el archivo del slot y su copia de seguridad. También compatible con UnityEvent, y enrutado por el
+Save Mode como los otros dos.
 
 ### El registro de saveables
 

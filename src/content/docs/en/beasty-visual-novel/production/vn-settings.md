@@ -44,7 +44,11 @@ See [Localization](/docs/beasty-visual-novel/production/localization/) for the s
 | `allowSaveNaming` | Whether the player may title a save. When off, a slot is labelled with its local creation timestamp. |
 | `defaultSaveThumbnail` | The fallback image shown for a SAVED slot whose thumbnail PNG is missing or unreadable. Empty slots use the stock art on the slot prefab instead, not this. |
 
-See [Saving and loading](/docs/beasty-visual-novel/production/saving-and-loading/).
+These are the **policy** settings, and they are mirrored in the BeastyManager Inspector's **Saving**
+section, so you can edit them there without opening Global Settings. The **storage** configuration —
+backend, save location, encryption, thumbnail size — lives in that same Saving section (it belongs to the
+scene's controller, not to this asset). See
+[Saving and loading](/docs/beasty-visual-novel/production/saving-and-loading/).
 
 ## Rollback
 

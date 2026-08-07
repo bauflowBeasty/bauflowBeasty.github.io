@@ -5,26 +5,69 @@ description: "All notable changes to Beasty Visual Novel, version by version. Th
 
 All notable changes to Beasty Visual Novel. This project follows [Semantic Versioning](https://semver.org/).
 
-## 1.0.0 — unreleased
+## 1.0.0 — 2026-08-06
 
 First public release.
 
-### Story authoring
+### Demos
+- House Demo sample at `Demos/HouseDemo`: a complete mini-game showcasing the intro flow (player rename
+  prompt, profile choices, invisible decision routing), FreeRoam with two connected rooms, day/night
+  backgrounds, a weekly NPC routine, a two-step quest with an inventory pickup and a Deliver step, a talk
+  menu with conditional entries, character profile/stats/calendar screens, save/load, and live
+  English/Spanish switching. All art ships as labeled placeholder PNGs under `Demos/HouseDemo/Sprites/` —
+  replace each file (same name) with final art; no references need rewiring. Story source lives in
+  `Demos/HouseDemo/Scripts/*.vnbeasty` (the text-script format, kept in sync).
 
+### Story authoring
 - Node graph (dialogue, choice, decision, subgraph, flow) with a block-based editor.
 - `.vnbeasty` text script: write scenes as a Ren'Py-like script, kept in two-way sync with the graph. The graph
   stays the source of truth — an empty, unparseable or unrepresentable script never overwrites it, and a
   destructive import leaves a timestamped `.bak`.
 - In-editor preview of any node, up to any block.
+- The text format has 1:1 parity with the graph — everything the nodes can express is writable in text:
+  talk-menu nodes, the choice node's side image, props, layered backdrops with offset/parallax/order,
+  `show … portrait <key> slot <n>`, positional `clear characters at <anchor>`, and localized character names.
+- A node header leads with its type keyword: `label intro:` is a dialogue node, and `choice cross:`,
+  `decision route:`, `subgraph combat:`, `return combat/done ("win"):`, `talkmenu charla (ana):` and
+  `flow to_town:` declare the other kinds.
+- Dotted variables work everywhere in text: `ana.afecto` in a condition or an effect block compiles to the
+  same per-character store key that `set ana.afecto` writes; `item.<id>` and `@time:`/`@quest:`/`@char:`
+  keys are valid condition tokens, and `set item.<id>` routes through the inventory (clamping included).
+- Typos warn at import: condition tokens, effect keys, `set`/`toggle`/`dict` keys, item ids, quest ids,
+  objectives and screen ids are checked against the project's declarations, and an unknown name gets a
+  warning with its line number instead of silently creating a dead key at runtime.
+- The text editor's autocomplete offers the same catalog the graph's condition picker uses — every variable
+  group (globals, character fields as `ana.afecto`, `item.<id>` counts, dictionary tokens, `@time:`/`@quest:`
+  reserved keys) — plus the node-kind keywords on header lines, labels, `portrait` keys and anchors. Header
+  keywords are syntax-highlighted in their node kind's graph color, and the Text tab ships a Syntax
+  cheat-sheet.
+- A `Wait` block holds the flow for its seconds BEFORE the next line appears: clicks are swallowed during
+  the pause, stepping back cancels it, Skip fast-forwards it, and a rewound revisit does not wait again
+  (like side effects, the pause runs once). A Wait of `0` seconds is an auto-advance barrier: Auto stops
+  there and waits for a manual advance.
+- Story graph nodes can be copied, cut, pasted and duplicated (context menu or Ctrl+C/X/V/D), across Story
+  windows and across scene assets. A paste clones the selection with fresh node ids, deep-clones any
+  subgraphs, keeps the connections between copied nodes, and mints NEW localization keys whose rows copy
+  every language column — so editing a copy's text never edits the original's.
+- "Save & apply" in the script Text view is undoable in one step — one Ctrl+Z restores the entire graph,
+  its nodes and the localization texts to their pre-import state — and so are "Format", linking and
+  unlinking a script. Automatic imports (saving the `.vnbeasty` file externally) are not.
 
 ### World
-
 - Free-roam rooms with conditional backgrounds, doors and interactables.
 - Game time (dayparts or clock), character routines with profiles, and a routine grid editor.
 - Quests with stages, objectives, rewards and a talk-menu hub per character.
+- Doors, objects and poses can be deleted from the room timeline (✕ on the chip or a "Delete…" button in
+  the element's inspector), with confirmation, removing the matching child from the room prefab in one undo
+  step. Deleting a room offers to also delete its room prefab asset — asset deletion is not undoable, and
+  the prompt says so.
+- Routine profiles can be deleted from the profile selector (the built-in Default profile stays), and a
+  character routine left completely empty — no placements, no fallback, no interaction dialogues — is
+  pruned from the map graph automatically.
+- A character's whole talk menu can be deleted (with confirmation and undo), returning the character to its
+  pre-talk-menu state; its localized texts stay in the table.
 
 ### Presentation
-
 - Dialogue, choices, backlog, history, save/load, preferences and help screens, all localizable.
 - Localization tables with per-cell staleness tracking and CSV/TSV import and export.
 - Languages are added from a dropdown of 15 curated languages (the same names the in-game language dropdown
@@ -52,129 +95,53 @@ First public release.
   so existing translations correctly flag stale when it changes), with two sync buttons against the TMP label
   on the same object: "From label" copies the label's current text into the source value, "To label" writes
   the source value onto the label.
-- Optional Addressables streaming of node assets (**beta**).
-
-### Pre-release changes
-
-- **`.vnbeasty` reaches 1:1 parity with the node graph.** Everything the nodes can express is now writable in
-  text: talk-menu nodes (`label charla (talkmenu ana):`), the choice node's side image (`image <sprite>
-  [if <cond>]`), props (`props <sprite>[, …]` / `props clear`), layered backdrops with offset/parallax/order,
-  `show … portrait <key> slot <n>`, `expression … portrait [<key>]`, positional `clear characters at <anchor>
-  [layer <n>]`, and localized character names (`name ana = key <locKey>`).
-- **Dotted variables work everywhere in text.** `ana.afecto` in a condition or an effect block now compiles
-  to the same per-character store key that `set ana.afecto` writes (before, it silently targeted a key that
-  never existed). `item.<id>` and raw `@time:`/`@quest:`/`@char:` keys are also valid condition tokens, and
-  `set item.<id>` routes through the inventory (clamping included).
-- **Typos warn at import.** Condition tokens, effect keys, `set`/`toggle`/`dict` keys, item ids, quest ids,
-  objectives and screen ids are checked against the project's declarations; an unknown name gets a warning
-  with its line number instead of silently creating a dead key at runtime.
-- **The text editor's autocomplete now offers every variable group** (globals, character fields as
-  `ana.afecto`, `item.<id>` counts, dictionary tokens, `@time:`/`@quest:` reserved keys) — the same catalog
-  the graph's condition picker uses — plus the new keywords, `portrait` keys and anchors.
-- **The Story window follows language changes**: deleting, restoring or renaming a language re-resolves the
+- Switching language in-game changes menus and HUD too: at boot, `BeastyManager` retro-fits
+  `VNLocalizedText` onto any label whose text matches a built-in UI default (in any language), so existing
+  scenes and prefabs follow the player's language without re-authoring anything. Custom label texts are
+  never touched. The UI (global) localization tab also shows a repair button when the table's source column
+  is not English.
+- The Story window follows language changes: deleting, restoring or renaming a language re-resolves the
   node card previews and the authoring-language selector immediately, and an authoring-language selection
   that no longer exists falls back to the main language instead of silently showing English.
-- **Switching language in-game now changes menus and HUD too.** Two fixes: the bundled `UILocalization`
-  table shipped with an empty English column (so every language fell back to the same texts), and the menu
-  screens nested in the `VN_Canvas` prefab carried their labels BAKED into the TMP components with no
-  `VNLocalizedText` — those menus could never react to a language change. At boot, `BeastyManager` now
-  retro-fits `VNLocalizedText` onto any label whose text matches a built-in UI default (in any language), so
-  existing scenes and prefabs follow the player's language without re-authoring anything. Custom label texts
-  are never touched. The UI (global) localization tab also shows a repair button when the table's source
-  column is not English.
-- **Story window edges no longer drift when zooming or panning.** On large graphs, a wire whose nodes had
-  been culled off-screen (or simplified by the far-zoom LOD) could reappear floating in mid-air or seemingly
-  attached to the wrong node until it was selected or the view moved again. Edges now recompute their
-  position as soon as they come back into view, and a wire is never drawn while one of its endpoints is
-  still hidden.
-- **VN logging no longer requires Beasty Console to be present.** `VNLog` now reaches the console by
-  reflection and falls back to `UnityEngine.Debug` when the console asset is not in the project — so VN
-  compiles and runs with or without it (before, its assemblies referenced `Beasty.Console` directly, and
-  deleting the console broke the build). When the console is present, logs keep landing in its window
-  exactly as before, and importing Beasty Console alongside a project that already bundles it no longer
-  risks a duplicate-assembly error.
-- **`.vnbeasty` node headers now lead with the node kind.** A node opens with its type keyword followed by
-  its name: `choice cross:`, `decision route:`, `subgraph combat:`, `return combat/done ("win"):`,
-  `talkmenu charla (ana):`, `flow to_town:` — and `label intro:` stays the plain dialogue node. This is the
-  form the writer now emits (a linked script is rewritten to it on the next graph sync); the previous
-  `label <name> (choice):` tag form still parses, so existing scripts keep working. A type tag that
-  contradicts the keyword (`choice cross (decision):`) is an import error.
-- **The text tab's autocomplete now works on header lines too.** Column 0 suggests the node-kind keywords
-  (`label`, `choice`, `decision`, `subgraph`, `return`, `talkmenu`, `flow`) plus `scene` and `start`;
-  `start ` suggests the script's labels, `talkmenu ` suggests character ids for its `(<character>)`
-  argument, and `jump` / route targets pick up labels declared with the new kind-first headers. Header
-  keywords are syntax-highlighted in their node kind's graph color, and the Syntax cheat-sheet shows the
-  new form.
-- **The asset's internal tests no longer show up in your Test Runner.** The test assemblies that ship with
-  the package now compile only when the `BEASTY_DEV_TOOLS` scripting define is set, so importing the asset
-  no longer fills the Test Runner window with its internal tests. To run them, add `BEASTY_DEV_TOOLS` under
-  `Project Settings ▸ Player ▸ Scripting Define Symbols`.
-- **An empty music queue now means silence in that mode.** Entering a mode (main menu, visual novel,
-  free-roam, custom) whose background-music queue has no clips fades the previous mode's music out instead of
-  letting it play on forever — clips assigned only to Main Menu no longer keep sounding over gameplay after
-  Play or a loaded save. To deliberately carry the previous music across a mode change, enable the
-  controller's **Keep Previous When Empty** toggle, now visible in the Beasty Manager inspector under the new
-  **Background Music** foldout (it used to be hidden, and on, with no way to see it).
-- **Per-project music now applies when entering a story.** The music queue used to resolve before the VN
-  session existed, so a project's music override could be ignored — or the previous project's music kept —
-  when starting a new game, opening a talk menu or loading a save; it is re-resolved once the session is
-  live. The current mode's music also starts on scene load regardless of component initialization order, and
-  auto-wire keeps the controller pointed at the same music config asset the Music tab edits.
-- **Doors and objects can finally be deleted from a room.** In the room timeline, door/object chips got a ✕
-  button, and the selected element's inspector a "Delete door… / Delete object… / Delete pose…" button. Both
-  confirm first and also remove the matching child from the room prefab, in one undo step. Before, a created
-  door or object could not be removed from the editor at all.
-- **Routine profiles can be deleted** from the profile selector ("Delete profile…", with confirmation; the
-  built-in Default profile stays). A character routine left completely empty — no placements, no fallback, no
-  interaction dialogues — is pruned from the map graph automatically, in the same undo step as the deletion
-  that emptied it.
-- **Deleting a room now offers to also delete its room prefab asset**, which used to stay behind as an
-  orphan in the project (asset deletion is not undoable; the prompt says so).
-- **A character's whole talk menu can be deleted** ("Delete talk menu…", with confirmation and undo),
-  returning the character to its pre-talk-menu state. Its localized texts stay in the table.
-- **"Save & apply" in the script Text view is now undoable.** One Ctrl+Z restores the entire graph, its
-  nodes and the localization texts to their pre-import state; "Format", linking and unlinking a script are
-  undoable too. Automatic imports (saving the `.vnbeasty` file externally) are unchanged.
-- **Undo now behaves like one step per gesture.** Deleting several nodes or edges in the Story graph,
-  creating a door/object/pose from a timeline lane, and Auto-wire / Repair each collapse into a single undo
-  step instead of several. Editing a character-list visibility condition now undoes itself rather than the
-  previous unrelated action, variable/item pickers and localization lookups refresh after an undo instead of
-  offering stale entries, and the FreeRoam timeline and routine grid drop a selection that an undo removed
-  instead of silently editing a disconnected copy.
-- **The package no longer ships its own license file.** `BeastyVN_LICENSE.md` is gone (and so are the bundled
-  save system's and console's): an asset bought on the Unity Asset Store is licensed under the Asset Store
-  EULA (https://unity.com/legal/as-terms), and an independent license inside the package conflicts with it.
-  Each `Third-Party Notices.txt` now points to that EULA. Copies bought on itch.io get their own license
-  file, added to the itch download at packaging time.
-- **The Wait block now actually pauses the story.** A `Wait` authored between two lines holds the flow for its
-  seconds BEFORE the next line appears — clicks are swallowed during the pause, stepping back cancels it, Skip
-  fast-forwards it, and a rewound revisit does not wait again (like side effects, the pause runs once). A Wait
-  of `0` seconds is an auto-advance barrier: Auto stops there and waits for a manual advance. Before, the block
-  could be authored and compiled from `.vnbeasty` but was silently ignored at runtime.
-- **Story graph nodes can now be copied, cut, pasted and duplicated** — the context-menu entries (and
-  Ctrl+C/X/V/D) used to exist but silently did nothing. A paste clones the selection with fresh node ids,
-  deep-clones any subgraphs, keeps the connections between copied nodes (and, when pasting into the same
-  graph, their outgoing edges to non-copied nodes), and mints NEW localization keys whose rows copy every
-  language column — so editing a copy's text never edits the original's. Pasting works across Story windows
-  and across scene assets.
-- **A typed variable prompt no longer silently degrades to a free-text field.** The editor persists the
-  auto-assigned `VNSettings ▸ Game Context` link to disk (it used to stay in memory only, so a player BUILD
-  came up with no context: an `Ask → variable` on a Bool showed a text input instead of its true/false
-  dropdown). When a prompt's variable definition still cannot be found it now says so in the console —
-  "Prompt for '[key]': no variable definition found (undeclared key, or the shared VN Context did not
-  resolve — check the 'Game Context' field on VNSettings). The prompt falls back to a free-text field." —
-  instead of degrading with no trace.
-- **Renaming a node no longer logs a warning.** The inline rename saved the scene asset while re-importing
-  it, and Unity printed "Importer(NativeFormatImporter) generated inconsistent result" on every rename; the
-  rename now saves first and re-imports after, warning-free.
+- The global UI localization table heals itself: every scene setup and Auto-wire / Repair pass adopts and
+  re-wires a `UILocalization` table that exists but is unassigned, and only when none exists creates a
+  fresh one beside the settings asset, pre-seeded with the built-in UI strings. The check is merge-only — a
+  healthy table, its custom keys and every edited translation are never touched. A DELETED table's own
+  content (custom keys, item names and descriptions, your translations) is not recoverable; regeneration
+  restores the built-in strings.
+- A typed variable prompt renders the input its type calls for (an `Ask → variable` on a Bool shows a
+  true/false dropdown). When a prompt's variable definition cannot be found, the console explains where to
+  look (the 'Game Context' field on VNSettings) and the prompt falls back to a free-text field instead of
+  degrading with no trace.
+- Background music is configured per mode (main menu, visual novel, free-roam, custom), with per-project
+  overrides, under the Beasty Manager's **Background Music** foldout. An empty queue means silence in that
+  mode: entering it fades the previous mode's music out. To deliberately carry the previous music across a
+  mode change, enable the controller's **Keep Previous When Empty** toggle.
+- Optional Addressables streaming of node assets (**beta**).
+
+### Saving
+- New top-level **Saving** section in the BeastyManager Inspector: storage backend, save location,
+  encryption, thumbnail size, and the global save policy (autosave, slots per page, naming) in one place.
+- **Cloud storage backends** (Beasty Save System 1.1 Firestore / Realtime Database modules) are supported
+  end to end: pick the backend from the Storage dropdown and the save/load screen, autosave queue, slot
+  listing, delete and backup restore all work against it (async under the hood, nothing else to configure).
+  Requires the Firebase SDK; with no SDK installed nothing changes.
+- With a cloud backend, slot **thumbnails travel inside the save** and rebuild the local thumbnail cache
+  on any device; local saves keep writing the sibling PNG exactly as before.
+- Save-slot **thumbnails no longer show the pause/game menu**: the screenshot is taken the moment the menu
+  opens, before it draws (autosaves keep capturing the live scene).
+- The BeastyManager's Saving section is now a boxed foldout like the manager sections, with a badge
+  showing the active backend ("Active · Firebase Firestore" when a cloud backend is on, "Local file"
+  otherwise). Inside, the storage configuration mirrors the Save System's grouping (Backend,
+  Location, Security, Reliability, Versioning) and exposes four new per-project settings: data path
+  (empty = the platform default), backup, strict loading and data version — all carried into the
+  save layer.
 
 ### Persistence
-
 - Slot saves with thumbnails, autosaves, backups, and optional encryption.
 - Scene-object state (`BeastySaveable`) rides inside the save.
 
 ### Logging
-
 - Every VN log goes through `VNLog` into the Beasty Console window
   (`Tools > Beasty Console > Console`), tagged with a category — Data, Director, Stage, Streaming,
   Save, Verbose — so a noisy subsystem can be silenced without silencing the rest.
@@ -183,9 +150,24 @@ First public release.
   and exceptions ignore the per-category switches: only that master switch hides them.
 - The package bundles **Beasty Console** and **Beasty Save System**; importing this asset gives you the full
   copy of each, and there are no external dependencies.
+- Beasty Console is reached by reflection, never by assembly reference: with the console asset removed from
+  the project, `VNLog` falls back to `UnityEngine.Debug`, so VN compiles and runs with or without it — and
+  importing Beasty Console alongside a project that already bundles it cannot produce a duplicate-assembly
+  error.
+
+### Editor
+- Undo behaves like one step per gesture: deleting several nodes or edges in the Story graph, creating a
+  door/object/pose from a timeline lane, and Auto-wire / Repair each collapse into a single undo step.
+- The asset's internal test assemblies compile only when the `BEASTY_DEV_TOOLS` scripting define is set, so
+  importing the asset does not fill the Test Runner window with its internal tests. To run them, add
+  `BEASTY_DEV_TOOLS` under `Project Settings ▸ Player ▸ Scripting Define Symbols`.
+
+### Licensing
+- The package ships no license file of its own: an asset bought on the Unity Asset Store is licensed under
+  the Asset Store EULA (https://unity.com/legal/as-terms), and each `Third-Party Notices.txt` points to it.
+  Copies bought on itch.io get their own license file, added to the itch download at packaging time.
 
 ### Compatibility
-
 - Compiles on every Unity 6 generation, including Unity 6.5, where `Object.GetInstanceID()` became a compile
   error (`error CS0619: 'GetInstanceID is deprecated. Use GetEntityId instead.'`). The package calls the
   replacement `GetEntityId` on Unity 6.4 and newer, and keeps `GetInstanceID` on 6.0–6.3, where the new API

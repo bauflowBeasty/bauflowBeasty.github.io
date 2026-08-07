@@ -5,7 +5,84 @@ description: "Todos los cambios relevantes de Beasty Save System, versión por v
 
 Todos los cambios relevantes de Beasty Save System. Este proyecto sigue [Semantic Versioning](https://semver.org/).
 
-## 1.0.1 — sin publicar
+## 1.1.0 — 6 de agosto de 2026
+
+### Añadido
+
+- Backends de almacenamiento conectables: los guardados ahora pueden ir a una base de datos en lugar
+  de a un archivo local. `BeastySaveSettings.StorageId` elige el backend (desplegable en el Beasty
+  Save Manager); los archivos locales siguen siendo el valor por defecto y no cambian. Un backend
+  propio implementa `IBeastySaveStorage` y se registra en `BeastySaveStorageRegistry`.
+- Módulos de Firebase (solo compilan cuando el SDK de Firebase está presente — no hay más
+  configuración que importarlo): Firestore (`firestore`), Realtime Database (`realtime-db`) e inicio
+  de sesión anónimo automático vía Firebase Auth. Los guardados se almacenan por usuario bajo
+  users/{uid}/saves/{slot}. Reglas de seguridad recomendadas: cada uid solo puede leer y escribir su
+  propio subárbol.
+- El editor mantiene sincronizados los scripting defines `BEASTY_HAS_FIREBASE_*` automáticamente:
+  los añade y los quita por build target activo según el SDK de Firebase aparece o desaparece del
+  proyecto, así que instalar (o quitar) el SDK desde un `.unitypackage` no exige tocar los Player
+  Settings a mano.
+- Punto de extensión de identidad de usuario: `IBeastyUserProvider` / `BeastySaveUsers` deciden de
+  quién son estos guardados; `BeastySaveSettings.ScopeByUser` también separa los archivos locales
+  por usuario.
+- JSON sin archivos: `BeastySave.SaveToJson`/`LoadFromJson` (con el sobre de integridad completo) y
+  `BeastySave.ToJson`/`FromJson` (payload limpio) para endpoints propios.
+- `SaveResult<T>`: un resultado tipado que lleva un valor, devuelto por las APIs de JSON y de
+  lectura.
+- Utilidades de slot asíncronas: `ExistsAsync`, `DeleteAsync`, `ListSlotsAsync`, `ReadMetaAsync`,
+  `RestoreBackupAsync`; `BeastySaveManager.SaveAllNowAsync`/`LoadAllNowAsync`. Una llamada síncrona
+  sobre un backend solo asíncrono devuelve el nuevo error `BackendRequiresAsync` en lugar de
+  bloquear.
+- Errores tipados nuevos: `BackendRequiresAsync`, `BackendUnavailable`, `AuthRequired`,
+  `NetworkError`.
+- **Save Mode** en el Beasty Save Manager: Synchronous (por defecto, sin cambios) o Asynchronous
+  para los puntos de entrada pensados para UnityEvent — `SaveAll`/`LoadAll`/`DeleteSlot`. Los
+  backends en la nube siempre trabajan de forma asíncrona; elegir Synchronous con un backend en la
+  nube sigue yendo por la vía asíncrona (nunca se pierde nada) y avisa una vez por sesión. Desde
+  código se sigue eligiendo explícitamente con `*Now`/`*NowAsync`.
+- Un inspector de verdad para el Beasty Save Manager: tarjeta de estado (backend activo, sesión de
+  usuario, resultado del último guardado/carga), las dos decisiones al frente (Storage y Save Mode),
+  todo lo demás tras un foldout de ajustes avanzados, y un botón a la ventana completa del Save
+  Manager.
+- La ventana del Save Manager ahora agrupa cada ajuste por función (Backend, Location, Security,
+  Reliability, Versioning, Logging) con ayuda contextual: los campos que no aplican al backend
+  activo se ocultan o deshabilitan con una nota, y activar el cifrado sin clave avisa de la clave
+  compartida por defecto.
+- Diagnóstico de cargas en nivel Verbose: cada carga registra cuánto texto devolvió el backend y
+  cuántos ids/entradas guardables lleva el documento; cada operación en la nube registra el id de
+  usuario resuelto; y una carga que no aplica nada ahora avisa con todo el detalle en lugar de
+  terminar bien en silencio.
+- Firestore: un documento de cabecera sin un recuento de trozos válido ahora falla como Corrupt
+  data tipado en lugar de aflorar como un error de parseo confuso, y el registro Verbose dice si un
+  snapshot vino del servidor o de la caché sin conexión del SDK.
+- Suite de tests de Firebase en vivo (`BeastySaveSystem.Firebase.Tests`) que solo compila con el
+  SDK de Firebase instalado — idas y vueltas reales a Firestore, frescura con doble lectura, inicio
+  de sesión anónimo y detección de cabecera corrupta contra el proyecto configurado. Con puerta
+  para las dos instalaciones: `versionDefines` para un paquete UPM, y los scripting defines
+  globales gobernados por `FirebaseSdkDetector` para una instalación por `.unitypackage`. Cada paso
+  de Firebase que se espera tiene un timeout duro que hace fallar el test nombrando el paso
+  atascado, y la limpieza cede el control en lugar de bloquear: las finalizaciones de Firestore
+  pasan por el hilo principal del editor, así que una espera bloqueante en el desmontaje dejaba el
+  Test Runner colgado en un bloqueo infinito y sin logs.
+
+### Cambiado
+
+- El mensaje de error de archivo no encontrado de Load ahora nombra el slot en lugar de la ruta del
+  archivo (un backend de almacenamiento puede no tener ruta de archivo en absoluto).
+- `BeastySave.GetFolderPath`/`GetSlotPath` siguen describiendo solo la disposición de archivos
+  locales; no se separan por usuario y no aplican a backends no locales.
+- `BeastySaveManager.SaveAll`/`LoadAll`/`DeleteSlot` van por la vía asíncrona automáticamente en
+  backends solo asíncronos (dispara y olvida; el resultado sigue llegando por
+  `SaveCompleted`/`LoadCompleted` y `LastSaveResult`).
+
+### Corregido
+
+- Con el asset Beasty Console presente, `BeastySaveLog.Warning` ahora aflora como una advertencia de
+  consola de verdad (antes se enlazaba a un canal con color de información, invisible para el filtro
+  de advertencias).
+- La etiqueta de estado del objeto de la demo ahora está conectada a los eventos de guardado y
+  carga, así que un guardado o una carga fallidos en la escena de demo se anuncian en lugar de
+  fallar en silencio.
 
 ### Compatibilidad
 

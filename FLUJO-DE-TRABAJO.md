@@ -186,8 +186,8 @@ obligación (viaja con el asset), es el canal natural para avisar de qué hay qu
   assets sí están versionados (se añadieron antes de esa regla), pero cualquier `.md` **nuevo** que se cree
   allí nace privado: no se versiona ni se respalda salvo que se añada a mano.
 - **Las descripciones del frontmatter en EN están cortadas** a 155 caracteres en 59 de 82 páginas. Es
-  herencia de `scripts/migrate-docs.mjs` (`.slice(0, 158)`). Al crear una página nueva, escribe una
-  descripción completa; no imites a las vecinas.
+  herencia del script de migración del árbol antiguo (un `.slice(0, 158)`; el script ya se retiró del
+  repo). Al crear una página nueva, escribe una descripción completa; no imites a las vecinas.
 
 ## Estado a 2026-07-21 (esto sí caduca)
 

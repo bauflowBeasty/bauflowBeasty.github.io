@@ -24,6 +24,13 @@ contains characters that are invalid in a file name, or is a Windows reserved de
 `AUX`, `NUL`, `COM1`-`COM9`, `LPT1`-`LPT9`). The device names are rejected on every platform, so a save
 folder written on Linux stays usable on Windows.
 
+> **Note**
+> With a storage backend configured (`BeastySaveSettings.StorageId`), every call on this page can also
+> fail with `BackendUnavailable` (the backend's module did not compile), and — on a cloud backend —
+> `AuthRequired` or `NetworkError`. A **synchronous** call on an asynchronous-only backend fails with
+> `BackendRequiresAsync` instead of blocking. See
+> [Storage backends](/docs/beasty-save-system/guides/storage-backends/).
+
 ## Saving
 
 ```csharp
@@ -130,6 +137,58 @@ is safe. See [Backups and corruption](/docs/beasty-save-system/guides/backups-an
 
 Errors: `InvalidArgument`, `FileNotFound` (there is no backup for that slot), `IoError`.
 
+### The async twins
+
+Every slot method has an async counterpart with the same arguments, the same result type and the same
+error codes:
+
+```csharp
+public static Task<bool>     ExistsAsync(string slot, BeastySaveSettings settings)
+public static Task<bool>     DeleteAsync(string slot, BeastySaveSettings settings)
+public static Task<string[]> ListSlotsAsync(BeastySaveSettings settings)
+public static Task<LoadResult<Dictionary<string, string>>> ReadMetaAsync(string slot, BeastySaveSettings settings)
+public static Task<SaveResult> RestoreBackupAsync(string slot, BeastySaveSettings settings)
+```
+
+On an asynchronous-only backend (a cloud database) these are the only form that works — the synchronous
+forms return `BackendRequiresAsync`. See [Async saving](/docs/beasty-save-system/guides/async-saving/).
+
+## JSON without files
+
+Four calls produce and consume save **text** instead of files, for callers who own their own transport — a
+custom HTTP endpoint, a message queue, a platform cloud-save API. No storage backend is involved.
+
+```csharp
+public static SaveResult<string> SaveToJson(object data, BeastySaveSettings settings,
+                                            IDictionary<string, string> meta = null)
+```
+
+The exact envelope text a save would write to disk — checksum, versions, meta, optional encryption —
+without writing anything. `Value` holds the text; `BytesWritten` is its UTF-8 byte count. Errors:
+`InvalidArgument`, `SerializationFailed`.
+
+```csharp
+public static LoadResult<T> LoadFromJson<T>(string json, BeastySaveSettings settings)
+```
+
+Loads from an envelope produced by `SaveToJson` (or read back from your own endpoint). Checksum, type
+validation and migrations run exactly like a file load, so the error codes are the ones a `Load<T>` can
+produce, minus the file-system ones.
+
+```csharp
+public static SaveResult<string> ToJson(object data, BeastySaveSettings settings)
+public static LoadResult<T>      FromJson<T>(string json, BeastySaveSettings settings)
+```
+
+The same idea without the envelope: `ToJson` serializes the data as clean JSON — no checksum, no
+versions — and `FromJson<T>` maps it back. No integrity check and no migrations run; strict/tolerant
+mapping still applies. For endpoints that want plain data. Errors: `InvalidArgument`,
+`SerializationFailed` / `ParseError`, `FieldMapFailed`.
+
+Use the envelope pair when you want the file format's guarantees over the wire; use the clean pair when
+the receiving end defines the format. `SaveResult<T>` is described in
+[Results and errors](/docs/beasty-save-system/reference/results-and-errors/).
+
 ## Extension points
 
 ```csharp
@@ -170,6 +229,10 @@ True when some registered converter handles the type. `source` is `"dev"`, a mod
 > migration, are lost on every Play. Register them from a `[RuntimeInitializeOnLoadMethod]`. Modules
 > registered with `RegisterModule` survive the reset.
 
+Two more extension points live outside the facade: `BeastySaveStorageRegistry.Register` adds a storage
+backend of your own, and `BeastySaveUsers` decides whose saves these are. Both are covered in
+[Custom backends](/docs/beasty-save-system/advanced/custom-backends/).
+
 ## Paths
 
 ```csharp
@@ -185,6 +248,10 @@ public static string GetSlotPath(string slot, BeastySaveSettings settings)
 
 The absolute path of one slot's file: `{folder}/{slot}.{Extension}`. Does not create anything and does not
 validate the slot name.
+
+Both methods describe the **local-file layout only**: they are not scoped per user (`ScopeByUser` adds a
+`<userId>` subfolder they do not know about) and they say nothing about a cloud backend, which has no file
+path at all.
 
 ## Logging
 

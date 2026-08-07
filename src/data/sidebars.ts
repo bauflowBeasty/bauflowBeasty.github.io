@@ -30,6 +30,7 @@ export const SIDEBARS: Record<Product['id'], SidebarGroup[]> = {
       label: L.gettingStarted,
       items: [
         'getting-started/installation',
+        'getting-started/house-demo',
         'getting-started/your-first-scene',
         'getting-started/core-concepts',
         'getting-started/editor-tour',
@@ -129,6 +130,8 @@ export const SIDEBARS: Record<Product['id'], SidebarGroup[]> = {
         'guides/strict-vs-tolerant',
         'guides/versioning-and-migrations',
         'guides/async-saving',
+        'guides/storage-backends',
+        'guides/firebase',
         'guides/save-manager-window',
         'guides/logging',
       ],
@@ -146,7 +149,7 @@ export const SIDEBARS: Record<Product['id'], SidebarGroup[]> = {
     },
     {
       label: L.advanced,
-      items: ['advanced/custom-converters', 'advanced/platforms-and-limits'],
+      items: ['advanced/custom-converters', 'advanced/custom-backends', 'advanced/platforms-and-limits'],
     },
     {
       label: L.help,

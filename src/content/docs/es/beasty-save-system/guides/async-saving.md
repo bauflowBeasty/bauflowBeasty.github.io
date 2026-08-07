@@ -1,10 +1,12 @@
 ---
 title: "Guardado y carga asíncronos"
-description: "Guarda y carga sin bloquear el hilo principal. Qué sacan del hilo principal SaveAsync, LoadAsync y LoadIntoAsync, y qué se queda en él."
+description: "Guarda y carga sin bloquear el hilo principal. Qué mueven fuera del hilo principal los métodos asíncronos, y por qué la nube no acepta otra cosa."
 ---
 
 Tres métodos te permiten guardar y cargar sin bloquear el hilo principal en la IO de disco. Esta página muestra
-cómo usarlos, y deja claro qué mueven fuera del hilo principal y qué no.
+cómo usarlos, y deja claro qué mueven fuera del hilo principal y qué no. También cubre los gemelos asíncronos
+de las utilidades de slot, el guardado de escena asíncrono, y la regla que llega con un backend en la nube:
+en un backend solo asíncrono, la API asíncrona es la única que funciona.
 
 ## Los tres métodos
 
@@ -18,6 +20,23 @@ static Task<LoadResult>    LoadIntoAsync(object target, string slot, BeastySaveS
 Cada uno es la contraparte exacta del método síncrono del mismo nombre, recibe los mismos argumentos, y
 vuelve con el mismo tipo de resultado. Nada lanza excepciones; compruebas el resultado, como siempre. Consulta
 [Resultados y errores](/es/docs/beasty-save-system/reference/results-and-errors/).
+
+## Las utilidades de slot también tienen gemelos asíncronos
+
+Cada utilidad de slot tiene una contraparte asíncrona con los mismos argumentos y el mismo resultado:
+
+```csharp
+static Task<bool>     ExistsAsync(string slot, BeastySaveSettings settings)
+static Task<bool>     DeleteAsync(string slot, BeastySaveSettings settings)
+static Task<string[]> ListSlotsAsync(BeastySaveSettings settings)
+static Task<LoadResult<Dictionary<string, string>>> ReadMetaAsync(string slot, BeastySaveSettings settings)
+static Task<SaveResult> RestoreBackupAsync(string slot, BeastySaveSettings settings)
+```
+
+Con archivos locales existen por simetría — las formas síncronas funcionan bien. Con un backend en la nube
+son la única forma que funciona: una ida y vuelta a una base de datos no puede responder de forma síncrona.
+Una pantalla de slots que sondea slots y lee metadatos a través de los gemelos asíncronos funciona sin
+cambios tanto si el juego guarda en disco como en [Firebase](/es/docs/beasty-save-system/guides/firebase/).
 
 ## Qué hacen realmente
 
@@ -148,12 +167,42 @@ escrituras son atómicas no terminarás con un archivo a medio escribir, pero un
 `IoError`, y cuál de ellas termina en el slot no es algo que controles. Un guardado a la vez, por
 slot.
 
-## Los guardados de escena son síncronos
+## Guardados de escena: SaveAllNowAsync y LoadAllNowAsync
 
-`BeastySaveManager.SaveAll`, `SaveAllNow`, `LoadAll` y `LoadAllNow` no tienen contrapartes asíncronas. Un guardado
-de escena recorre los componentes registrados y escribe el archivo en el acto. Si necesitas el comportamiento asíncrono para
-un guardado del tamaño de una escena, esa es una razón para mantener tus datos de guardado en una clase propia y
-usar `BeastySave.SaveAsync` sobre ella. Consulta [Estado de la escena](/es/docs/beasty-save-system/guides/scene-state/).
+Los guardados de escena tienen gemelos asíncronos en el manager:
+
+```csharp
+Task<SaveResult> BeastySaveManager.SaveAllNowAsync(string slot, IDictionary<string, string> meta = null)
+Task<LoadResult> BeastySaveManager.LoadAllNowAsync(string slot)
+```
+
+`SaveAllNowAsync` ejecuta el mismo flujo de captura, sobre y registro que `SaveAllNow`, esperado a través
+del pipeline. `LoadAllNowAsync` trae los datos de forma asíncrona y los aplica sobre los objetos de la
+escena solo después de que el await vuelva al hilo principal de Unity — así que la pasada de aplicación es
+tan segura como la síncrona. Ambos actualizan `LastSaveResult`/`LastLoadResult` y disparan
+`SaveCompleted`/`LoadCompleted`, exactamente como sus gemelos síncronos.
+
+La captura en sí (recorrer los componentes registrados) sigue ejecutándose en el hilo principal; lo que se
+espera es la escritura y la lectura.
+
+## Backends solo asíncronos
+
+Un backend en la nube — Firestore, Realtime Database, o un backend propio que declara
+`SupportsSynchronous = false` — no puede responder una llamada síncrona. Pasan dos cosas distintas según
+quién llame:
+
+- **Desde código**, una llamada síncrona (`Save`, `Load<T>`, `Exists`…) falla de inmediato con el error
+  tipado `BackendRequiresAsync` en lugar de bloquear. No se escribe nada; cambia el punto de llamada al
+  gemelo asíncrono.
+- **Desde los puntos de entrada para UnityEvent del manager** (`SaveAll`, `LoadAll`, `DeleteSlot` — los que
+  llama un botón uGUI), la operación se enruta a la vía asíncrona automáticamente, dispara y olvida, así
+  que un botón ya conectado sigue funcionando y nunca se pierde nada. El resultado llega por
+  `SaveCompleted`/`LoadCompleted` y `LastSaveResult`. Si el **Save Mode** del manager sigue en
+  `Synchronous`, se registra una advertencia una vez por sesión pidiéndote ponerlo en `Asynchronous` para
+  reconocer el enrutado.
+
+Consulta [Backends de almacenamiento](/es/docs/beasty-save-system/guides/storage-backends/) para el Save
+Mode y las reglas de enrutado al completo.
 
 ## WebGL
 

@@ -24,12 +24,32 @@ The top section finds the `BeastySaveManager` in the open scene — including on
   scene, and it is where the zero-code path starts.
 
 **When there is a manager**, you get an object field pointing at it (click it to select it in the
-Hierarchy) and its full inspector embedded below.
+Hierarchy), a **status card**, and the full settings below.
 
-That embedded inspector is where you edit **Settings** — the folder, the extension, the data path,
-encryption, backup, strict loading and the data version used by `SaveAll` and `LoadAll`. Editing it here is
-exactly the same as selecting the manager and editing it in the Inspector; it is here so you do not have to
-change your selection while you work. Every field is explained in [settings.md](/docs/beasty-save-system/guides/settings/).
+The status card answers "what is this manager doing right now" at a glance: the active storage backend
+(with a `Local` or `Cloud` badge), the user provider and its current user when one is registered, and — in
+Play Mode — the result of the last save and load.
+
+Under **Settings**, every field is grouped by role, and the groups are contextual — a field that does not
+apply to the active backend is hidden or disabled with a note, never shown as a knob that silently does
+nothing:
+
+- **Backend** — the **Storage** dropdown and **Save Mode**. With a cloud backend, Save Mode is locked to
+  `Asynchronous` ("Cloud backends are asynchronous by nature."); with local files, a **Scope By User**
+  toggle appears here too.
+- **Location** — `Folder`, `Extension`, `DataPath`. Disabled with a cloud backend: "Cloud backends store
+  saves per user in the cloud; these fields apply to local files only."
+- **Security** — `Encrypted`, and the key field only once encryption is on. Enabling encryption without a
+  key of your own warns: "No key set: a built-in default key SHARED BY EVERY PROJECT is used. Set your own
+  before shipping."
+- **Reliability** — `Backup` and `Strict`.
+- **Versioning** — `DataVersion`.
+- **Logging** — the logging mode dropdown.
+
+Editing here is exactly the same as selecting the manager and editing it in the Inspector; it is here so
+you do not have to change your selection while you work. Every field is explained in
+[settings.md](/docs/beasty-save-system/guides/settings/), and the backend-specific behaviour in
+[storage-backends.md](/docs/beasty-save-system/guides/storage-backends/).
 
 The **Slots on Disk** section below reads the same settings, so changing `Folder` here immediately changes
 which files the window lists.
@@ -94,6 +114,12 @@ real work happens:
 
 The bottom section lists the actual files in the folder your settings point at. This is the part you will
 keep open while you test.
+
+> **Note**
+> Slot browsing works for local file storage only. With a cloud backend active, the section says so
+> ("Slot browsing is available for local file storage only.") — a cloud slot list depends on who is
+> signed in, so there is no single folder to show. Inspect cloud saves in the Firebase console instead;
+> see [firebase.md](/docs/beasty-save-system/guides/firebase/).
 
 ![The Slots on Disk section listing save files with their metadata summary](/docs-images/beasty-save-system/save-manager-slots.png)
 

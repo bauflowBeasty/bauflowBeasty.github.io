@@ -44,7 +44,7 @@ export const PRODUCTS: Product[] = [
   {
     id: 'beasty-save-system',
     name: 'Beasty Save System',
-    version: '1.0.0',
+    version: '1.1.0',
     tagline: {
       en: 'Saves that cannot half-write.',
       es: 'Guardados que no pueden quedar a medias.',

@@ -270,8 +270,12 @@ de persistencia diferente. Consulta [Plataformas y límites](/es/docs/beasty-sav
 | `TypeMismatch` | El `type` registrado en el archivo no es el tipo que pediste cargar. |
 | `MigrationFailed` | Una migración registrada lanzó una excepción, o ninguna cadena de pasos alcanza el `DataVersion` actual. |
 | `FieldMapFailed` | Un campo no se pudo mapear. En una carga estricta esto hace fallar toda la carga y **no se aplica nada**. En una carga tolerante habría quedado en una advertencia. |
+| `BackendRequiresAsync` | Una llamada síncrona llegó a un backend solo asíncrono (una base de datos en la nube). Cambia el punto de llamada al gemelo asíncrono. |
+| `BackendUnavailable` | `StorageId` nombra un backend cuyo módulo no compiló — casi siempre falta el SDK de Firebase. |
+| `AuthRequired` | Un backend remoto no pudo resolver un usuario. Con Firebase, comprueba que el inicio de sesión anónimo esté habilitado en la consola. |
+| `NetworkError` | La operación en la nube falló por el camino. Trátalo como `IoError`: deja que el jugador reintente. |
 
-Consulta [Resultados y errores](/es/docs/beasty-save-system/reference/results-and-errors/) para la lista completa de los trece códigos y
+Consulta [Resultados y errores](/es/docs/beasty-save-system/reference/results-and-errors/) para la lista completa de los diecisiete códigos y
 [Carga estricta vs. tolerante](/es/docs/beasty-save-system/guides/strict-vs-tolerant/) para la diferencia que marca la configuración `Strict`.
 
 ## Ver también

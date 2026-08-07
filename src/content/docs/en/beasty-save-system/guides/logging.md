@@ -62,6 +62,13 @@ At **Verbose**, add the detail:
 
 Every line carries the `[BeastySave]` tag, so you can filter the console by it.
 
+Verbose also carries the **load diagnostics**: every load logs how much text the backend returned and how
+many saveable ids and entries the document holds, and every cloud operation logs the resolved user id —
+the facts you need when a load "works" but the world does not change. A load that applies nothing does not
+even need Verbose: it warns with the full detail instead of succeeding in silence. With Firestore,
+Verbose additionally says whether a read was served from the server or from the SDK's offline cache — the
+first thing to check when a device shows stale cloud data.
+
 ## From code
 
 The toggle is a front end for `BeastySaveLog`, which is public:

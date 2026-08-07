@@ -74,11 +74,23 @@ Add Component: `Beasty > Beasty Save Manager`. Marked `[DisallowMultipleComponen
 The scene-level entry point of the no-code flow. It holds the settings, tracks every registered
 `BeastySaveable`, and writes one group document per save.
 
+### The inspector
+
+The manager's inspector is a summary view: a **status card** (the active storage backend with a
+`Local`/`Cloud` badge, the user provider and current user when one is registered, and — in Play Mode — the
+last save and load results), then the two decisions that matter up front — **Storage** and **Save Mode** —
+with everything else behind a collapsed **Advanced settings** foldout, and an **Open Save Manager** button
+to the full window.
+
+![The Beasty Save Manager inspector: status card, then Storage and Save Mode](/docs-images/beasty-save-system/save-manager-inspector.png)
+
 ### Inspector fields
 
 | Field | Type | Meaning |
 |---|---|---|
-| Settings (`settings`) | `BeastySaveSettings` | Location, encryption, backup, strict loading and data version used by SaveAll/LoadAll. |
+| Storage (`settings.StorageId`) | `string` | Where saves are written, as a dropdown of the registered backends. Local file is the default. See [Storage backends](/docs/beasty-save-system/guides/storage-backends/). |
+| Save Mode (`saveMode`) | `BeastySaveMode` | How `SaveAll`/`LoadAll`/`DeleteSlot` run: `Synchronous` (default — blocks until done) or `Asynchronous` (runs in the background, reports through the events). Locked to `Asynchronous` with a cloud backend. |
+| Settings (`settings`) | `BeastySaveSettings` | Location, encryption, backup, strict loading and data version used by SaveAll/LoadAll — the **Advanced settings** foldout. |
 | Logs (`logs`) | `BeastySaveLogMode` | How much the save system prints: `Auto` (on in the editor and development builds, off in release), `On`, `Verbose`, `Off`. Applied on `OnEnable` and `OnValidate`, so changing it in Play takes effect at once. See [Logging](/docs/beasty-save-system/guides/logging/). |
 
 Every field of `BeastySaveSettings` is documented in [Settings](/docs/beasty-save-system/guides/settings/).
@@ -88,6 +100,7 @@ Every field of `BeastySaveSettings` is documented in [Settings](/docs/beasty-sav
 ```csharp
 public static BeastySaveManager Instance { get; }
 public BeastySaveSettings Settings { get; }
+public BeastySaveMode SaveMode { get; set; }
 public SaveResult LastSaveResult { get; }
 public LoadResult LastLoadResult { get; }
 ```
@@ -115,19 +128,35 @@ Button's OnClick with the slot name typed into the inspector, and never write a 
 arrives through `SaveCompleted`/`LoadCompleted`, `LastSaveResult`/`LastLoadResult`, and the log. See
 [Save without code](/docs/beasty-save-system/getting-started/save-without-code/).
 
+**Save Mode** decides how they run: `Synchronous` blocks until done, `Asynchronous` runs in the background
+and reports through the same events. On an asynchronous-only backend they always take the asynchronous
+path, whatever the mode says — a Save Mode of `Synchronous` still routes asynchronously (nothing is ever
+lost) and logs a warning once per session asking you to set the mode to `Asynchronous` to acknowledge it.
+
 ```csharp
 public SaveResult SaveAllNow(string slot, IDictionary<string, string> meta = null)
 public LoadResult LoadAllNow(string slot)
 ```
 
 The same operations, returning the typed result directly. `meta` is the plain-text dictionary a slot screen
-reads back with `BeastySave.ReadMeta`.
+reads back with `BeastySave.ReadMeta`. These ignore Save Mode — a code caller chooses explicitly — and on
+an asynchronous-only backend they return `BackendRequiresAsync`.
+
+```csharp
+public Task<SaveResult> SaveAllNowAsync(string slot, IDictionary<string, string> meta = null)
+public Task<LoadResult> LoadAllNowAsync(string slot)
+```
+
+The async twins. Same capture, envelope, logging and event flow; `LoadAllNowAsync` applies the fetched
+data onto the scene objects only after the await returns to Unity's main thread. See
+[Async saving](/docs/beasty-save-system/guides/async-saving/).
 
 ```csharp
 public void DeleteSlot(string slot)
 ```
 
-Deletes the slot file and its backup. Also UnityEvent-friendly.
+Deletes the slot file and its backup. Also UnityEvent-friendly, and routed by Save Mode like the other
+two.
 
 ### The saveable registry
 

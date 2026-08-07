@@ -24,6 +24,13 @@ enraizada, contiene caracteres inválidos en un nombre de archivo, o es un nombr
 Windows (`CON`, `PRN`, `AUX`, `NUL`, `COM1`-`COM9`, `LPT1`-`LPT9`). Los nombres de dispositivo se rechazan en
 todas las plataformas, de modo que una carpeta de guardado escrita en Linux sigue siendo utilizable en Windows.
 
+> **Nota**
+> Con un backend de almacenamiento configurado (`BeastySaveSettings.StorageId`), cada llamada de esta
+> página también puede fallar con `BackendUnavailable` (el módulo del backend no compiló) y — con un
+> backend en la nube — `AuthRequired` o `NetworkError`. Una llamada **síncrona** sobre un backend solo
+> asíncrono falla con `BackendRequiresAsync` en lugar de bloquear. Consulta
+> [Backends de almacenamiento](/es/docs/beasty-save-system/guides/storage-backends/).
+
 ## Guardar
 
 ```csharp
@@ -130,6 +137,60 @@ restaurar dos veces es seguro. Consulta [Copias de seguridad y corrupción](/es/
 
 Errores: `InvalidArgument`, `FileNotFound` (no hay copia de seguridad para ese slot), `IoError`.
 
+### Los gemelos asíncronos
+
+Cada método de slot tiene una contraparte asíncrona con los mismos argumentos, el mismo tipo de resultado
+y los mismos códigos de error:
+
+```csharp
+public static Task<bool>     ExistsAsync(string slot, BeastySaveSettings settings)
+public static Task<bool>     DeleteAsync(string slot, BeastySaveSettings settings)
+public static Task<string[]> ListSlotsAsync(BeastySaveSettings settings)
+public static Task<LoadResult<Dictionary<string, string>>> ReadMetaAsync(string slot, BeastySaveSettings settings)
+public static Task<SaveResult> RestoreBackupAsync(string slot, BeastySaveSettings settings)
+```
+
+En un backend solo asíncrono (una base de datos en la nube) son la única forma que funciona — las formas
+síncronas devuelven `BackendRequiresAsync`. Consulta
+[Guardado asíncrono](/es/docs/beasty-save-system/guides/async-saving/).
+
+## JSON sin archivos
+
+Cuatro llamadas producen y consumen **texto** de guardado en lugar de archivos, para quien tiene su propio
+transporte — un endpoint HTTP propio, una cola de mensajes, la API de guardado en la nube de una
+plataforma. No interviene ningún backend de almacenamiento.
+
+```csharp
+public static SaveResult<string> SaveToJson(object data, BeastySaveSettings settings,
+                                            IDictionary<string, string> meta = null)
+```
+
+El texto de sobre exacto que un guardado escribiría en disco — checksum, versiones, meta, cifrado
+opcional — sin escribir nada. `Value` contiene el texto; `BytesWritten` es su número de bytes UTF-8.
+Errores: `InvalidArgument`, `SerializationFailed`.
+
+```csharp
+public static LoadResult<T> LoadFromJson<T>(string json, BeastySaveSettings settings)
+```
+
+Carga desde un sobre producido por `SaveToJson` (o leído de vuelta desde tu propio endpoint). El checksum,
+la validación de tipo y las migraciones corren exactamente como en una carga de archivo, así que los
+códigos de error son los que puede producir un `Load<T>`, menos los del sistema de archivos.
+
+```csharp
+public static SaveResult<string> ToJson(object data, BeastySaveSettings settings)
+public static LoadResult<T>      FromJson<T>(string json, BeastySaveSettings settings)
+```
+
+La misma idea sin el sobre: `ToJson` serializa los datos como JSON limpio — sin checksum, sin versiones —
+y `FromJson<T>` los mapea de vuelta. No corre ninguna comprobación de integridad ni migraciones; el mapeo
+estricto/tolerante sigue aplicando. Para endpoints que quieren datos planos. Errores: `InvalidArgument`,
+`SerializationFailed` / `ParseError`, `FieldMapFailed`.
+
+Usa la pareja con sobre cuando quieras las garantías del formato de archivo por el cable; usa la pareja
+limpia cuando el formato lo define el receptor. `SaveResult<T>` está descrito en
+[Resultados y errores](/es/docs/beasty-save-system/reference/results-and-errors/).
+
 ## Puntos de extensión
 
 ```csharp
@@ -171,6 +232,10 @@ convertidor.
 > migración, se pierden en cada Play. Regístralos desde un `[RuntimeInitializeOnLoadMethod]`. Los módulos
 > registrados con `RegisterModule` sobreviven al reinicio.
 
+Dos puntos de extensión más viven fuera de la fachada: `BeastySaveStorageRegistry.Register` añade un
+backend de almacenamiento propio, y `BeastySaveUsers` decide de quién son estos guardados. Ambos se cubren
+en [Backends personalizados](/es/docs/beasty-save-system/advanced/custom-backends/).
+
 ## Rutas
 
 ```csharp
@@ -186,6 +251,10 @@ public static string GetSlotPath(string slot, BeastySaveSettings settings)
 
 La ruta absoluta del archivo de un slot: `{folder}/{slot}.{Extension}`. No crea nada y no valida el nombre
 del slot.
+
+Los dos métodos describen **solo la disposición de archivos locales**: no se separan por usuario
+(`ScopeByUser` añade una subcarpeta `<userId>` que ellos no conocen) y no dicen nada de un backend en la
+nube, que no tiene ruta de archivo en absoluto.
 
 ## Logging
 

@@ -23,6 +23,11 @@ pantalla de guardado muestra una imagen del momento en que el jugador guardó. S
 puede leer, el slot usa el sprite de miniatura predeterminado de [VN Settings](/es/docs/beasty-visual-novel/production/vn-settings/). (Un slot VACÍO
 muestra en su lugar el arte de stock del prefab del slot, no ese respaldo.)
 
+La miniatura nunca muestra el menú de pausa. La captura se toma en el momento en que el menú se abre,
+**antes de que se dibuje**, así que un guardado manual muestra la escena que el jugador estaba mirando —
+no el menú tapándola. Los autoguardados capturan la escena en vivo, porque cuando se disparan no hay
+ningún menú abierto.
+
 Cada slot también lleva un **nombre**. Si `allowSaveNaming` está activado, el campo de texto de la pantalla de
 guardado permite al jugador titular la partida; cuando lo deja en blanco, el slot se etiqueta con la fecha y
 hora locales en que se creó.
@@ -96,10 +101,56 @@ anterior de ese slot y reintenta la carga. Un slot dañado permanece VISIBLE en 
 `Partida dañada`, así que el jugador puede restaurarlo o eliminarlo en lugar de ver su partida desaparecer en
 silencio.
 
+## La sección Saving: todo en un sitio
+
+Todo lo que describe esta página se configura en un solo lugar: selecciona el **BeastyManager** y abre su
+sección **Saving** — un foldout con caja como las secciones de managers, con una insignia que nombra el
+backend activo (`Local file`, o `Active · Firebase Firestore` con un backend en la nube).
+
+![La sección Saving del Inspector del BeastyManager, con la insignia del backend](/docs-images/beasty-visual-novel/vn-saving-section.png)
+
+Dentro, la configuración de almacenamiento replica la agrupación del Save System — **Backend**,
+**Location**, **Security**, **Reliability**, **Versioning** — más **Thumbnails** (el tamaño de captura) y
+la **Save policy** de los Global Settings (autoguardado, slots por página, nombres, la miniatura
+predeterminada), así que los campos de política documentados en
+[VN settings](/es/docs/beasty-visual-novel/production/vn-settings/) también se editan aquí.
+
+Cuatro de esos ajustes son por proyecto y llegan directos a la capa de guardado:
+
+| Ajuste | Por defecto | Qué hace |
+|---|---|---|
+| Data path | vacío | Ruta base absoluta para los archivos de guardado. Vacío significa la ruta de datos persistentes de la plataforma — recomendado. |
+| Backup | activado | Conserva un `.bak` rotatorio del guardado anterior de cada slot. |
+| Strict loading | activado | Un guardado que ya no encaja con la historia o la escena falla entero en lugar de aplicarse a medias. |
+| Data version | `1` | La versión estampada en cada guardado, para migraciones futuras. |
+
+## Guardados en la nube
+
+El desplegable **Storage** del grupo Backend de la sección Saving elige dónde viven los guardados.
+`Local file` es el valor por defecto y es todo lo descrito arriba. Con el SDK de Firebase en el proyecto
+aparecen dos entradas más — **Firebase Firestore** y **Firebase Realtime Database** — y elegir una lleva
+los guardados a la nube, por jugador:
+
+- La pantalla de guardar/cargar, la cola de autoguardado, el listado de slots, el borrado y la
+  restauración de copias de seguridad funcionan contra el backend en la nube, de forma asíncrona por
+  debajo. No hay nada más que configurar.
+- Las **miniaturas viajan dentro del guardado** y reconstruyen la caché local de miniaturas en cualquier
+  dispositivo — un jugador que continúa en una segunda máquina ve sus imágenes, no slots en blanco. Los
+  guardados locales siguen escribiendo el PNG vecino exactamente como antes.
+- Los jugadores inician sesión de forma anónima por defecto; los guardados de cada jugador viven bajo su
+  propio id de usuario.
+
+Sin el SDK de Firebase instalado nada cambia — el desplegable muestra solo `Local file`. La puesta en
+marcha, la disposición de los datos y las reglas de seguridad están documentadas del lado del Save System:
+[Guardados en la nube con Firebase](/es/docs/beasty-save-system/guides/firebase/) y
+[Backends de almacenamiento](/es/docs/beasty-save-system/guides/storage-backends/).
+
 ## Dónde están los archivos, y qué lo hace posible
 
-Las partidas se escriben bajo la ruta de datos persistentes de la plataforma, en la carpeta `VisualNovel`, con
-la extensión `vnsave`, y la miniatura como un `.png` junto a cada una.
+Las partidas se escriben bajo la ruta de datos persistentes de la plataforma (o el **Data path** que fijes
+en la sección Saving), en la carpeta `VisualNovel`, con la extensión `vnsave`, y la miniatura como un
+`.png` junto a cada una. Con un backend en la nube no hay archivos locales: los guardados viven en el
+backend, por usuario.
 
 Todo esto funciona gracias a **Beasty Save System**, que viene incluido dentro de este paquete. No hay nada que
 instalar ni ninguna dependencia externa — nada de Newtonsoft, nada de add-ons. Es el mismo sistema de guardado

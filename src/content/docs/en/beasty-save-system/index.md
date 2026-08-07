@@ -30,7 +30,10 @@ fails its checksum is never allowed to overwrite the last good copy.
   screen can list slots cheaply.
 - Strict (all-or-nothing, with rollback) or tolerant (skip and warn) loading.
 - Data versioning with registered migrations, so an update can read the saves your players already have.
-- Async variants for file IO.
+- Pluggable storage backends: local files by default, or Firebase Firestore / Realtime Database in the
+  cloud — plus an interface to write your own.
+- JSON without files: produce and load the full save envelope as a string, for your own server or endpoint.
+- Async variants for file IO, and full async coverage for cloud backends.
 - Seven optional converter modules (Animation, Audio, Particles, Physics2D, Physics3D, TMPro, UGUI), each
   of which compiles only when the matching Unity module is in the project.
 - An editor window that lists the saveables in your scene and the save files on disk.
@@ -68,6 +71,8 @@ Written for anyone, code or no code.
 | [strict-vs-tolerant.md](/docs/beasty-save-system/guides/strict-vs-tolerant/) | The two loading modes |
 | [versioning-and-migrations.md](/docs/beasty-save-system/guides/versioning-and-migrations/) | Shipping an update that reads old saves |
 | [async-saving.md](/docs/beasty-save-system/guides/async-saving/) | What the async methods really do |
+| [storage-backends.md](/docs/beasty-save-system/guides/storage-backends/) | Where saves go: local files, the cloud, and per-user saves |
+| [firebase.md](/docs/beasty-save-system/guides/firebase/) | Cloud saves with Firebase: Firestore and Realtime Database |
 | [save-manager-window.md](/docs/beasty-save-system/guides/save-manager-window/) | The editor window, section by section |
 | [logging.md](/docs/beasty-save-system/guides/logging/) | The Logging toggle, what each mode prints, and sending logs elsewhere |
 
@@ -89,6 +94,7 @@ Exact signatures, exact behaviour.
 | Page | What it covers |
 |---|---|
 | [custom-converters.md](/docs/beasty-save-system/advanced/custom-converters/) | Teaching the system to save your own types |
+| [custom-backends.md](/docs/beasty-save-system/advanced/custom-backends/) | Writing a storage backend of your own |
 | [platforms-and-limits.md](/docs/beasty-save-system/advanced/platforms-and-limits/) | Unity versions, IL2CPP, WebGL, performance |
 
 ## When something goes wrong
