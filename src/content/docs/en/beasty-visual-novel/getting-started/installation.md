@@ -62,15 +62,17 @@ importing.
 project. Without it, everything works normally with direct references — which is the default and costs
 nothing. See [Streaming](/docs/beasty-visual-novel/production/streaming/).
 
-## Beasty Save System and Beasty Console are bundled
+## Beasty Save System is bundled
 
-**Beasty Save System and Beasty Console ship inside this package. Do not import them separately.** If you
-already own either one as a standalone package, do not import both copies — you will end up with two
-copies of the same assemblies and the project will not compile.
+**Beasty Save System ships inside this package. Do not import it separately.** If you already own it as a
+standalone package, do not import both copies — you will end up with two copies of the same assemblies
+and the project will not compile. You get the full version, not a cut-down one:
+saving is [Beasty Save System](/docs/beasty-save-system/).
 
-You get the full version of each, not a cut-down one. Saving is
-[Beasty Save System](/docs/beasty-save-system/), and every message the VN prints goes to the
-[Beasty Console](/docs/beasty-console/) window — see [Logging](/docs/beasty-visual-novel/production/logging/).
+[Beasty Console](/docs/beasty-console/) is **not** inside the package — it is its own asset, and
+optional. With it in the project, every message the VN prints lands in its window; without it, the
+messages go to Unity's own Console. Either way, nothing to configure — see
+[Logging](/docs/beasty-visual-novel/production/logging/).
 
 There are no other dependencies. No third-party libraries, no external packages, nothing to install from
 a registry.
@@ -102,7 +104,7 @@ Both **Mono** and **IL2CPP** scripting backends are supported. See
    the runtime needs the prefabs.
 3. Wait for the compile to finish. You should now have a **Tools > Beasty VN** menu.
 4. If the menu is not there, look for compile errors in the Console. The usual cause is a second copy of
-   Beasty Save System or Beasty Console already in the project (see above).
+   Beasty Save System already in the project (see above).
 
 Next: [Your first scene](/docs/beasty-visual-novel/getting-started/your-first-scene/).
 
@@ -110,7 +112,7 @@ Next: [Your first scene](/docs/beasty-visual-novel/getting-started/your-first-sc
 
 The package installs under `Assets/BeastyComponents/BeastyVN/`.
 
-![The BeastyComponents folder in the Project window, with the three assets inside](/docs-images/beasty-visual-novel/vn-package-folder.png)
+![The BeastyComponents folder in the Project window, with BeastyVN and BeastySaveSystem inside](/docs-images/beasty-visual-novel/vn-package-folder.png)
 
 | Folder | What it is |
 |---|---|
@@ -119,10 +121,12 @@ The package installs under `Assets/BeastyComponents/BeastyVN/`.
 | `Editor/` | All the authoring tools — the Beasty VN window, the graph, the free-roam editor, the validator, the code generators. None of this ends up in your build. |
 | `Prefabs/` | The ready-made UI and scene prefabs: the canvas with every screen inside it, the stage, the dialogue panel, the menus, the character screens. Restyle them. See [UI prefabs](/docs/beasty-visual-novel/production/ui-prefabs/). |
 | `Resources/` | `VNSettings.asset` and `UILocalization.asset`. These two are read at runtime, which is why they live here. See [VN settings](/docs/beasty-visual-novel/production/vn-settings/). |
-| `Sprites/` | Placeholder art, so a fresh scene shows something instead of nothing. Replace it with yours. |
+| `Sprites/` | Placeholder art, so a fresh scene shows something instead of nothing — the UI's sprites and the House Demo's labeled placeholder PNGs. Replace any file with your own art of the same name. |
 | `Demos/` | The **House Demo**: a complete, playable mini-game built with the asset — open `HouseDemo/HouseDemo.unity` and press Play. See [The House Demo](/docs/beasty-visual-novel/getting-started/house-demo/). |
-| `Documentation/` | The reference files that ship with the package, including the full `.vnbeasty` syntax and the time-and-routines reference. |
-| `Tests/` | The EditMode, PlayMode and save test suites. Safe to delete before you ship; they are excluded from a build either way. |
+
+Beside those folders sit the files that travel with the package: `README.md`, `BeastyVN_CHANGELOG.md`,
+`Third-Party Notices.txt`, and `BeastyVN_Documentation.pdf` — an offline copy of the documentation;
+this site is the living version.
 
 Leave the package where it imports. Two things depend on it: `VNSettings.asset` and `UILocalization.asset`
 must stay inside a `Resources` folder to be readable at runtime, and the scene wizard looks for the `Stage`

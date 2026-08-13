@@ -8,7 +8,7 @@
 **Identificadores.** `SS/guides/logging` es `src/content/docs/en/beasty-save-system/guides/logging.md`,
 y su espejo español es el mismo archivo bajo `es/`. Siglas: `BC` = beasty-console · `SS` = beasty-save-system · `VN` = beasty-visual-novel.
 
-Cobertura: **89 páginas** EN (y sus 89 espejos ES), **722 símbolos** indexados.
+Cobertura: **89 páginas** EN (y sus 89 espejos ES), **725 símbolos** indexados.
 
 ## Páginas
 
@@ -73,12 +73,12 @@ Cobertura: **89 páginas** EN (y sus 89 espejos ES), **722 símbolos** indexados
 | `VN/authoring/text-script` | The text script | What it is · Why you would use it · Turning it on · The Text tab · How the two stay in sync · The safety contract · The limits · A worked example · See also |
 | `VN/authoring/transitions` | Transitions: leaving the novel | The four exits · The variable store survives the jump · Exit block or Flow node? · Exits as the target of a choice or a decision · See also |
 | `VN/authoring/vnbeasty-syntax` | .vnbeasty syntax reference | Contents · File structure · Dialogue and narration · Backdrops · Props · Characters · Audio · State and inventory · Quests, screens and routines · Game time · Prompts · Character names · Flow and transitions · Choices and decisions · The talk menu · Subgraphs and return · Conditions and effects · Notes · See also |
-| `VN/changelog` | Changelog | 1.0.0 — 2026-08-06 |
+| `VN/changelog` | Changelog | 1.0.0 — 2026-08-13 |
 | `VN/faq` | FAQ | Do I need to know how to code? · Which render pipelines are supported? · Which Unity version do I need? · Does it work with the Input System? · Do I need Addressables? · Do I need Newtonsoft, or any other package? · Does it include a save system? · Can my writer work in a text file while I build in the graph? · Can I use my own UI? · Can I use it for a dating sim, a life sim or a detective game? · Is WebGL supported? · Can I localize into any number of languages? · Can the player switch language mid-game? · Can I add my own minigame? · Is the C# source included? · How do I migrate from Ren'Py? · See also |
 | `VN/getting-started/core-concepts` | Core concepts | DialogueScene - one story · VNContext - the one shared world · StoryGraph - a canvas of nodes · Node - one beat · Block - one instruction · The variable store - the one that matters · BeastyManager - the one object · How a frame of the game flows · See also |
 | `VN/getting-started/editor-tour` | Editor tour | The top bar · The nine tabs · The other windows · See also |
 | `VN/getting-started/house-demo` | The House Demo | Running it · What it demonstrates, and where to look · Reading the story source · The placeholder art · See also |
-| `VN/getting-started/installation` | Installation | Requirements · Render pipeline: any of them, unchanged · Input: it compiles either way · Required Unity packages · Beasty Save System and Beasty Console are bundled · Platforms · Importing · What is in the package · See also |
+| `VN/getting-started/installation` | Installation | Requirements · Render pipeline: any of them, unchanged · Input: it compiles either way · Required Unity packages · Beasty Save System is bundled · Platforms · Importing · What is in the package · See also |
 | `VN/getting-started/your-first-scene` | Your first scene | 1. Build the scene · 2. Get the assets · 3. Open the editor · 4. Create a character · 5. Write two lines · 6. Add a choice · 7. Press Play · 8. Two things to do before you go further · Where to go next · See also |
 | `VN/index` | Beasty Visual Novel | Two views of the same scene · More than a dialogue player · Where to start · Saves are built in · See also |
 | `VN/production/audio-and-music` | Audio and music | The four channels · The audio blocks · Background music per app mode · Overrides: a room, or a story · Pausing the background for a scene's own track · See also |
@@ -247,6 +247,8 @@ Cobertura: **89 páginas** EN (y sus 89 espejos ES), **722 símbolos** indexados
 | `BeastySaveUsers` | SS/advanced/custom-backends SS/changelog SS/guides/settings SS/reference/api-beastysave |
 | `BeastySaveUsers.Provider` | SS/advanced/custom-backends SS/guides/firebase SS/guides/storage-backends |
 | `BeastyTime` | VN/index VN/scripting/gameplay-apis VN/scripting/overview VN/scripting/vn-api VN/world/game-time |
+| `BeastyVN_CHANGELOG.md` | VN/getting-started/installation |
+| `BeastyVN_Documentation.pdf` | VN/getting-started/installation |
 | `BeastyVNMixer` | VN/production/audio-and-music VN/production/ui-prefabs VN/reference/prefabs |
 | `BeforeSceneLoad` | SS/advanced/custom-converters |
 | `Bench` | VN/world/character-routines |
@@ -610,6 +612,7 @@ Cobertura: **89 páginas** EN (y sus 89 espejos ES), **722 símbolos** indexados
 | `RawImage` | SS/getting-started/installation SS/reference/converter-modules |
 | `Read` | SS/advanced/custom-backends SS/advanced/custom-converters VN/scripting/gameplay-apis |
 | `ReadBackup` | SS/advanced/custom-backends |
+| `README.md` | VN/getting-started/installation |
 | `ReadMeta` | SS/advanced/platforms-and-limits SS/guides/backups-and-corruption SS/guides/slots-and-metadata SS/reference/results-and-errors SS/reference/save-file-format |
 | `ReadMetaAsync` | SS/changelog SS/reference/results-and-errors |
 | `Ready` | VN/scripting/controllers |

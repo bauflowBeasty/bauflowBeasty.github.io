@@ -57,8 +57,9 @@ de `ask`, `quest`, `deliver`, `give`, condiciones y salidas `freeroam`.
 
 ## El arte de relleno
 
-Todo el arte son PNG de relleno etiquetados bajo `Demos/HouseDemo/Sprites/` — colores planos con el nombre
-del asset estampado encima (LIVING ROOM - DAY, MIA, BOOK…). Catorce archivos, nombrados por función:
+Todo el arte son PNG de relleno etiquetados bajo `BeastyVN/Sprites/` — la misma carpeta que guarda el
+arte de la UI del paquete — colores planos con el nombre del asset estampado encima (LIVING ROOM - DAY,
+MIA, BOOK…). Dieciocho archivos, nombrados por función:
 
 | Prefijo | Archivos | Se usan como |
 |---|---|---|
@@ -67,8 +68,8 @@ del asset estampado encima (LIVING ROOM - DAY, MIA, BOOK…). Catorce archivos, 
 | `portrait_` | `portrait_player`, `portrait_mia` | Retratos de diálogo |
 | `pose_` | `pose_mia_living` | Mia de pie en la sala |
 | `item_` | `item_book` | El objeto de la misión |
-| `door_` | `door_to_living`, `door_to_bedroom` | Las puertas clicables |
-| `prop_` | `prop_shelf`, `prop_bed` | Los muebles clicables |
+| `door_` | `door_to_living`, `door_to_living_night`, `door_to_bedroom`, `door_to_bedroom_hover` | Las puertas clicables, con una variante nocturna y una de hover |
+| `prop_` | `prop_shelf`, `prop_shelf_night`, `prop_bed`, `prop_bed_night` | Los muebles clicables, con sus variantes nocturnas |
 
 **Sustituye cualquier archivo por arte final con el mismo nombre y no hay que recablear nada** — cada
 referencia del demo apunta al archivo, no a una copia. El demo nunca sobrescribe un PNG existente, así que

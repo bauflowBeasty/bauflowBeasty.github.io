@@ -11,20 +11,19 @@ want in the editor and in a release build.
 
 The package never calls `UnityEngine.Debug` directly. Every message it produces — loading a story asset,
 advancing a node, resolving a keyframe, writing a save — goes through `VNLog`, a static facade — one front
-door for every message — in the `Beasty.VN.Core` namespace, and from there into **Beasty Console**.
+door for every message — in the `Beasty.VN.Core` namespace.
 
-Beasty Console ships inside this package, so the window is already there:
+Where the messages land depends on one thing: whether [Beasty Console](/docs/beasty-console/) — a
+separate, optional asset — is in the project. With it installed, every message goes to its window at
 `Tools > Beasty Console > Console`. See
-[The Beasty Console window](/docs/beasty-console/guides/console-window/) for what it can do — level filters
+[The Beasty Console window](/docs/beasty-console/guides/console-window/) for what it adds — level filters
 with live counts, search, Collapse, Clear on Play, and a detail panel whose stack-trace lines open the file
-at the right line in your IDE.
+at the right line in your IDE. Without it, the messages go to Unity's own Console — same content, minus
+the level filters and the category colours.
 
-The VN does not *depend* on the console, though: `VNLog` finds it by reflection — it looks the console up
-at runtime instead of referencing it directly — so if you delete Beasty Console from the project the VN
-still compiles and runs, and its messages go to Unity's own Console
-instead — without the level filters and the category colours. That is also what makes it safe to own
-Beasty Console separately: delete the bundled copy, import your own, and the VN's logs keep landing in the
-window exactly as before.
+The VN does not *depend* on the console: `VNLog` finds it by reflection — it looks the console up at
+runtime instead of referencing it directly — so the VN compiles and runs either way, and importing
+Beasty Console later needs no re-wiring; the VN's logs land in its window from that moment on.
 
 Every message is prefixed `[BeastyVN][Category]`, so the console's search field is enough to isolate the
 package's own output from yours. Exceptions are handed to the console as the exception object itself, which
@@ -107,8 +106,8 @@ public class VNLoggingBootstrap : MonoBehaviour
 
 ## Two switches, not one
 
-`VNLog` sits on top of Beasty Console, so there are two switches above your logs and either one silences the
-VN:
+With Beasty Console in the project, `VNLog` sits on top of it, so there are two switches above your logs
+and either one silences the VN:
 
 - **`VNLog.Enabled`** — the VN's own switch. Off in a release build.
 - **`BeastyConsole.IsEnabled`** — the console's master switch, which silences *everything* in the project,
@@ -131,8 +130,8 @@ VNLog.Info(VNLogCategory.Director, "Chapter 3 unlocked", this);
 The last parameter is a `context` object: pass a `GameObject` or a `ScriptableObject` and the entry becomes
 clickable, pinging that object in the Hierarchy or the Project window.
 
-For messages that have nothing to do with the VN, call `BeastyConsole` directly instead. See
-[Logging](/docs/beasty-console/guides/logging/).
+For messages that have nothing to do with the VN — if you own Beasty Console — call `BeastyConsole`
+directly instead. See [Logging](/docs/beasty-console/guides/logging/).
 
 ## See also
 

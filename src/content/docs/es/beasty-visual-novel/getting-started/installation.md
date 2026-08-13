@@ -62,15 +62,16 @@ antes de importar.
 el proyecto. Sin él, todo funciona con normalidad con referencias directas — que es lo predeterminado y no
 cuesta nada. Consulta [Streaming](/es/docs/beasty-visual-novel/production/streaming/).
 
-## Beasty Save System y Beasty Console vienen incluidos
+## Beasty Save System viene incluido
 
-**Beasty Save System y Beasty Console vienen incluidos dentro de este paquete. No los importes por
-separado.** Si ya tienes cualquiera de los dos como paquete independiente, no importes las dos copias —
-terminarías con dos copias de los mismos ensamblados y el proyecto no compilaría.
+**Beasty Save System viene incluido dentro de este paquete. No lo importes por separado.** Si ya lo
+tienes como paquete independiente, no importes las dos copias — terminarías con dos copias de los mismos
+ensamblados y el proyecto no compilaría. Tienes la versión completa, no una recortada: el guardado es
+[Beasty Save System](/es/docs/beasty-save-system/).
 
-Tienes la versión completa de cada uno, no una recortada. El guardado es
-[Beasty Save System](/es/docs/beasty-save-system/), y cada mensaje que imprime la VN va a la ventana
-[Beasty Console](/es/docs/beasty-console/) — consulta
+[Beasty Console](/es/docs/beasty-console/) **no** viene dentro del paquete — es un asset propio, y
+opcional. Con ella en el proyecto, cada mensaje que imprime la VN aterriza en su ventana; sin ella, los
+mensajes van a la consola propia de Unity. En ambos casos sin configurar nada — consulta
 [Logging](/es/docs/beasty-visual-novel/production/logging/).
 
 No hay otras dependencias. Ninguna librería de terceros, ningún paquete externo, nada que instalar desde un
@@ -103,7 +104,7 @@ Tanto **Mono** como **IL2CPP** son backends de scripting compatibles. Consulta
    datos central, y el runtime necesita los prefabs.
 3. Espera a que termine de compilar. Ahora deberías tener un menú **Tools > Beasty VN**.
 4. Si el menú no está ahí, busca errores de compilación en la consola. La causa habitual es una segunda
-   copia de Beasty Save System o de Beasty Console ya en el proyecto (ver arriba).
+   copia de Beasty Save System ya en el proyecto (ver arriba).
 
 Siguiente: [Tu primera escena](/es/docs/beasty-visual-novel/getting-started/your-first-scene/).
 
@@ -111,7 +112,7 @@ Siguiente: [Tu primera escena](/es/docs/beasty-visual-novel/getting-started/your
 
 El paquete se instala bajo `Assets/BeastyComponents/BeastyVN/`.
 
-![La carpeta BeastyComponents en la ventana Project, con los tres assets dentro](/docs-images/beasty-visual-novel/vn-package-folder.png)
+![La carpeta BeastyComponents en la ventana Project, con BeastyVN y BeastySaveSystem dentro](/docs-images/beasty-visual-novel/vn-package-folder.png)
 
 | Carpeta | Qué es |
 |---|---|
@@ -120,10 +121,12 @@ El paquete se instala bajo `Assets/BeastyComponents/BeastyVN/`.
 | `Editor/` | Todas las herramientas de creación — la ventana Beasty VN, el grafo, el editor de mundo libre, el validador, los generadores de código. Nada de esto termina en tu build. |
 | `Prefabs/` | Los prefabs de UI y de escena ya listos: el canvas con cada pantalla dentro, el stage, el panel de diálogo, los menús, las pantallas de personaje. Restilízalos. Consulta [Prefabs de UI](/es/docs/beasty-visual-novel/production/ui-prefabs/). |
 | `Resources/` | `VNSettings.asset` y `UILocalization.asset`. Estos dos se leen en tiempo de ejecución, por eso viven aquí. Consulta [VN Settings](/es/docs/beasty-visual-novel/production/vn-settings/). |
-| `Sprites/` | Arte de relleno, para que una escena nueva muestre algo en lugar de nada. Reemplázalo con el tuyo. |
+| `Sprites/` | Arte de relleno, para que una escena nueva muestre algo en lugar de nada — los sprites de la UI y los PNG de relleno etiquetados del House Demo. Reemplaza cualquier archivo con arte propio del mismo nombre. |
 | `Demos/` | El **House Demo**: un mini-juego completo y jugable construido con el asset — abre `HouseDemo/HouseDemo.unity` y dale a Play. Consulta [El House Demo](/es/docs/beasty-visual-novel/getting-started/house-demo/). |
-| `Documentation/` | Los archivos de referencia que vienen con el paquete, incluyendo la sintaxis completa de `.vnbeasty` y la referencia de tiempo y rutinas. |
-| `Tests/` | Las suites de pruebas EditMode, PlayMode y de guardado. Puedes borrarlas sin riesgo antes de lanzar; de todas formas se excluyen del build. |
+
+Junto a esas carpetas viajan los archivos del paquete: `README.md`, `BeastyVN_CHANGELOG.md`,
+`Third-Party Notices.txt` y `BeastyVN_Documentation.pdf` — una copia sin conexión de la documentación;
+este sitio es la versión viva.
 
 Deja el paquete en la carpeta donde se importó. Dos cosas dependen de eso: `VNSettings.asset` y `UILocalization.asset`
 deben quedarse dentro de una carpeta `Resources` para poder leerse en tiempo de ejecución, y el asistente de

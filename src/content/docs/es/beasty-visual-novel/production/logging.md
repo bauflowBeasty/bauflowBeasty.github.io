@@ -11,21 +11,19 @@ ya son los que quieres en el editor y en una build de lanzamiento.
 
 El paquete nunca llama a `UnityEngine.Debug` directamente. Cada mensaje que produce — cargar un asset de
 historia, avanzar un nodo, resolver un keyframe, escribir un guardado — pasa por `VNLog`, una fachada estática
-— una única puerta de entrada para todos los mensajes — del espacio de nombres `Beasty.VN.Core`, y de ahí a
-**Beasty Console**.
+— una única puerta de entrada para todos los mensajes — del espacio de nombres `Beasty.VN.Core`.
 
-Beasty Console viene dentro de este paquete, así que la ventana ya está ahí:
-`Tools > Beasty Console > Console`. Consulta
-[La ventana Beasty Console](/es/docs/beasty-console/guides/console-window/) para ver lo que puede hacer:
+Dónde aterrizan los mensajes depende de una sola cosa: de si
+[Beasty Console](/es/docs/beasty-console/) — un asset aparte, y opcional — está en el proyecto. Con ella
+instalada, cada mensaje va a su ventana en `Tools > Beasty Console > Console`. Consulta
+[La ventana Beasty Console](/es/docs/beasty-console/guides/console-window/) para ver lo que aporta:
 filtros por nivel con recuentos en vivo, búsqueda, Collapse, Clear on Play, y un panel de detalle cuyas líneas
-de traza abren el archivo en la línea exacta dentro de tu IDE.
+de traza abren el archivo en la línea exacta dentro de tu IDE. Sin ella, los mensajes van a la consola
+propia de Unity — el mismo contenido, sin los filtros por nivel ni los colores por categoría.
 
-Eso sí, la VN no *depende* de la consola: `VNLog` la encuentra por reflexión — la busca en tiempo de
-ejecución en lugar de referenciarla directamente —, así que si borras Beasty
-Console del proyecto la VN sigue compilando y funcionando, y sus mensajes se van a la Consola de Unity —
-sin los filtros por nivel ni los colores por categoría. Eso es también lo que hace seguro tener Beasty
-Console por separado: borra la copia incluida, importa la tuya, y los logs de la VN siguen llegando a la
-ventana igual que antes.
+La VN no *depende* de la consola: `VNLog` la encuentra por reflexión — la busca en tiempo de ejecución en
+lugar de referenciarla directamente —, así que la VN compila y funciona en ambos casos, e importar Beasty
+Console más tarde no exige recablear nada; los logs de la VN llegan a su ventana desde ese momento.
 
 Cada mensaje lleva delante `[BeastyVN][Categoría]`, así que con el campo de búsqueda de la consola basta para
 aislar lo que imprime el paquete de lo que imprimes tú. Las excepciones se le entregan a la consola como el
@@ -111,8 +109,8 @@ public class VNLoggingBootstrap : MonoBehaviour
 
 ## Dos interruptores, no uno
 
-`VNLog` se apoya en Beasty Console, así que hay dos interruptores por encima de tus logs y cualquiera de los
-dos silencia la VN:
+Con Beasty Console en el proyecto, `VNLog` se apoya en ella, así que hay dos interruptores por encima de
+tus logs y cualquiera de los dos silencia la VN:
 
 - **`VNLog.Enabled`** — el interruptor propio de la VN. Apagado en una build de lanzamiento.
 - **`BeastyConsole.IsEnabled`** — el interruptor maestro de la consola, que silencia *todo* el proyecto,
@@ -135,8 +133,8 @@ VNLog.Info(VNLogCategory.Director, "Capítulo 3 desbloqueado", this);
 El último parámetro es un objeto `context`: le pasas un `GameObject` o un `ScriptableObject` y la entrada se
 vuelve clicable, señalando ese objeto en la jerarquía o en la ventana de proyecto.
 
-Para mensajes que no tienen nada que ver con la VN, llama a `BeastyConsole` directamente. Consulta
-[Logging](/es/docs/beasty-console/guides/logging/).
+Para mensajes que no tienen nada que ver con la VN — si tienes Beasty Console —, llama a `BeastyConsole`
+directamente. Consulta [Logging](/es/docs/beasty-console/guides/logging/).
 
 ## Ver también
 

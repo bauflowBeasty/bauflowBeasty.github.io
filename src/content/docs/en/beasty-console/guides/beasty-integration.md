@@ -28,8 +28,9 @@ three things on top of the API:
 `VNLog` sits on top of `BeastyConsole`, so `IsEnabled` still applies: switching the logger off silences
 the VN too.
 
-The VN package bundles a full copy of this one, so the console is already there when you import it. Delete
-it and the VN keeps compiling and running — its logs simply go to Unity's Console instead.
+The VN package does not include this one — the console is its own asset. With both in the project, the
+VN's logs land here on their own, nothing to wire up; without the console the VN keeps compiling and
+running — its logs simply go to Unity's Console instead.
 
 ## Beasty Save System
 

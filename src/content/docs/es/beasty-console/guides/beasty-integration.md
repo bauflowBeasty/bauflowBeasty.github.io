@@ -30,8 +30,9 @@ cosas por encima de la API:
 `VNLog` se apoya en `BeastyConsole`, así que `IsEnabled` sigue aplicando: apagar el logger también
 silencia la VN.
 
-El paquete de la VN incluye una copia completa de este, así que la consola ya está ahí cuando lo importas.
-Bórrala y la VN sigue compilando y funcionando — sus logs se van a la Consola de Unity y ya está.
+El paquete de la VN no incluye este — la consola es un asset propio. Con los dos en el proyecto, los logs
+de la VN aterrizan aquí solos, sin cablear nada; sin la consola, la VN sigue compilando y funcionando —
+sus logs se van a la Consola de Unity y ya está.
 
 ## Beasty Save System
 

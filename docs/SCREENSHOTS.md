@@ -17,9 +17,9 @@ que el sitio nunca muestra una imagen rota.
 | | Total | Tomadas | Rehacer | Pendientes |
 |---|---:|---:|---:|---:|
 | P1 · imprescindibles | 83 | 58 | 1 | 24 |
-| P2 · recomendadas | 78 | 51 | 2 | 25 |
+| P2 · recomendadas | 78 | 50 | 3 | 25 |
 | P3 · complementarias | 31 | 20 | 0 | 11 |
-| **Total** | **192** | **129** | **3** | **60** |
+| **Total** | **192** | **128** | **4** | **60** |
 
 **Prioridades.** P1 es donde el texto solo no basta: la ventana principal y sus pestañas, los
 asistentes, las grillas y las pantallas que ve el jugador. P2 completa una página que ya se entiende.
@@ -43,7 +43,7 @@ no muestra lo que la ficha pide). Su ficha dice el motivo; al sustituir el PNG, 
 
 ## Beasty Visual Novel
 
-Carpeta destino: `public/docs-images/beasty-visual-novel/` · 24 por hacer de 153.
+Carpeta destino: `public/docs-images/beasty-visual-novel/` · 25 por hacer de 153.
 
 ### Blocks reference · Referencia de bloques
 
@@ -394,11 +394,12 @@ Carpeta destino: `public/docs-images/beasty-visual-novel/` · 24 por hacer de 15
 - **Vista:** Unity ▸ diálogo Import Unity Package
 - **Qué tiene que verse:** El diálogo de importación con el árbol del paquete a la vista y todo marcado. Sirve para que se vea que se importa entero, sin decisiones que tomar.
 
-#### `vn-package-folder.png` — P2 · ✅ tomada
+#### `vn-package-folder.png` — P2 · 🔁 rehacer
 
 - **Sección:** What is in the package · Qué contiene el paquete
 - **Vista:** Unity ▸ ventana Project
-- **Qué tiene que verse:** Assets/BeastyComponents desplegado mostrando BeastyVN, BeastySaveSystem y BeastyConsole al mismo nivel: es la prueba visual de que los otros dos vienen incluidos.
+- **Qué tiene que verse:** Assets/BeastyComponents desplegado mostrando BeastyVN y BeastySaveSystem al mismo nivel: es la prueba visual de que el Save System viene incluido.
+- **Por qué rehacerla:** La captura actual muestra también BeastyConsole dentro de BeastyComponents, pero desde la 1.0.0 publicada la consola ya no viaja en el bundle: rehacer con solo BeastyVN y BeastySaveSystem.
 
 ### Your first scene · Tu primera escena
 

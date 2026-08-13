@@ -2,7 +2,7 @@
 
 All notable changes to Beasty Visual Novel. This project follows [Semantic Versioning](https://semver.org/).
 
-## 1.0.0 — 2026-08-06
+## 1.0.0 — 2026-08-13
 
 First public release.
 
@@ -11,9 +11,13 @@ First public release.
   prompt, profile choices, invisible decision routing), FreeRoam with two connected rooms, day/night
   backgrounds, a weekly NPC routine, a two-step quest with an inventory pickup and a Deliver step, a talk
   menu with conditional entries, character profile/stats/calendar screens, save/load, and live
-  English/Spanish switching. All art ships as labeled placeholder PNGs under `Demos/HouseDemo/Sprites/` —
+  English/Spanish switching. All art ships as labeled placeholder PNGs under `BeastyVN/Sprites/` —
   replace each file (same name) with final art; no references need rewiring. Story source lives in
   `Demos/HouseDemo/Scripts/*.vnbeasty` (the text-script format, kept in sync).
+- House Demo: sleeping in the bed plays a `sleep` interaction node (an Advance-time block plus a return to
+  the room), the bed swaps to a darker art variant at night, and the bedroom door lights up on hover. The
+  art for both ships as labeled placeholders too (`prop_bed_night.png`, `door_to_bedroom_hover.png` under
+  `BeastyVN/Sprites/`) — replace them like the rest, same names, no rewiring.
 
 ### Story authoring
 - Node graph (dialogue, choice, decision, subgraph, flow) with a block-based editor.
@@ -30,6 +34,9 @@ First public release.
 - Dotted variables work everywhere in text: `ana.afecto` in a condition or an effect block compiles to the
   same per-character store key that `set ana.afecto` writes; `item.<id>` and `@time:`/`@quest:`/`@char:`
   keys are valid condition tokens, and `set item.<id>` routes through the inventory (clamping included).
+- Item counts start at `0`: a new game seeds `item.<id>` for every item in the catalog along with the other
+  variable defaults, so numeric conditions like `item.book < 1` pass before the first pickup. An explicit
+  variable default for the same `item.<id>` key still wins over the seeded `0`.
 - Typos warn at import: condition tokens, effect keys, `set`/`toggle`/`dict` keys, item ids, quest ids,
   objectives and screen ids are checked against the project's declarations, and an unknown name gets a
   warning with its line number instead of silently creating a dead key at runtime.
@@ -139,18 +146,19 @@ First public release.
 - Scene-object state (`BeastySaveable`) rides inside the save.
 
 ### Logging
-- Every VN log goes through `VNLog` into the Beasty Console window
-  (`Tools > Beasty Console > Console`), tagged with a category — Data, Director, Stage, Streaming,
-  Save, Verbose — so a noisy subsystem can be silenced without silencing the rest.
+- Every VN log goes through `VNLog`, tagged with a category — Data, Director, Stage, Streaming,
+  Save, Verbose — so a noisy subsystem can be silenced without silencing the rest. With Beasty Console
+  in the project, its window (`Tools > Beasty Console > Console`) receives them all; without it they go
+  to Unity's own Console.
 - `VNLog.Enabled` is on in the editor and in development builds and off in a release build, so a shipped game
   does not write a line into the player's log for every dialogue line, choice and room change. Warnings, errors
   and exceptions ignore the per-category switches: only that master switch hides them.
-- The package bundles **Beasty Console** and **Beasty Save System**; importing this asset gives you the full
-  copy of each, and there are no external dependencies.
-- Beasty Console is reached by reflection, never by assembly reference: with the console asset removed from
-  the project, `VNLog` falls back to `UnityEngine.Debug`, so VN compiles and runs with or without it — and
-  importing Beasty Console alongside a project that already bundles it cannot produce a duplicate-assembly
-  error.
+- The package bundles **Beasty Save System** — importing this asset gives you the full copy — and there
+  are no external dependencies. **Beasty Console is not included**: it is its own asset, and optional.
+- Beasty Console is reached by reflection, never by assembly reference: without the console in the
+  project, `VNLog` falls back to `UnityEngine.Debug`, so VN compiles and runs with or without it — and
+  importing Beasty Console later needs no re-wiring; the VN's logs land in its window from that moment
+  on.
 
 ### Editor
 - Undo behaves like one step per gesture: deleting several nodes or edges in the Story graph, creating a

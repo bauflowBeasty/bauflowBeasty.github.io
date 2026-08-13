@@ -5,7 +5,7 @@ description: "Todos los cambios relevantes de Beasty Visual Novel, versión por 
 
 Todos los cambios relevantes de Beasty Visual Novel. Este proyecto sigue [Semantic Versioning](https://semver.org/).
 
-## 1.0.0 — 6 de agosto de 2026
+## 1.0.0 — 13 de agosto de 2026
 
 Primera versión pública.
 
@@ -17,9 +17,14 @@ Primera versión pública.
   pasos con recogida al inventario y un paso de entrega, un menú de conversación con entradas
   condicionales, pantallas de perfil/estadísticas/calendario del personaje, guardado y carga, y cambio
   entre inglés y español en vivo. Todo el arte llega como PNG de relleno etiquetados bajo
-  `Demos/HouseDemo/Sprites/` — sustituye cada archivo (mismo nombre) por el arte final; no hay que
+  `BeastyVN/Sprites/` — sustituye cada archivo (mismo nombre) por el arte final; no hay que
   recablear ninguna referencia. El guion vive en `Demos/HouseDemo/Scripts/*.vnbeasty` (el formato de
   guion de texto, mantenido en sincronía).
+- House Demo: dormir en la cama reproduce un nodo de interacción `sleep` (un bloque Advance time más una
+  vuelta a la sala), la cama cambia a una variante de arte más oscura por la noche, y la puerta del
+  dormitorio se ilumina al pasar el cursor por encima. El arte de ambas también llega como PNG de relleno
+  etiquetados (`prop_bed_night.png` y `door_to_bedroom_hover.png` bajo `BeastyVN/Sprites/`) —
+  sustitúyelos como el resto: mismo nombre, sin recablear nada.
 
 ### Escritura de la historia
 
@@ -39,6 +44,10 @@ Primera versión pública.
   bloque de efecto compila a la misma clave del almacén por personaje que escribe `set ana.afecto`;
   `item.<id>` y las claves `@time:`/`@quest:`/`@char:` valen como tokens de condición, y `set item.<id>`
   pasa por el inventario (con su límite incluido).
+- Los recuentos de objetos arrancan en `0`: una partida nueva siembra `item.<id>` para cada objeto del
+  catálogo junto con el resto de valores por defecto de las variables, así que una condición numérica como
+  `item.book < 1` se cumple antes de la primera recogida. Un valor por defecto explícito para esa misma
+  clave `item.<id>` sigue ganando al `0` sembrado.
 - Las erratas avisan al importar: los tokens de condición, las claves de efecto, las claves de
   `set`/`toggle`/`dict`, los ids de objeto, los ids de misión, los objetivos y los ids de pantalla se
   comprueban contra lo declarado en el proyecto, y un nombre desconocido da una advertencia con su número
@@ -167,19 +176,20 @@ Primera versión pública.
 
 ### Logging
 
-- Todos los logs de la VN pasan por `VNLog` hasta la ventana Beasty Console
-  (`Tools > Beasty Console > Console`), etiquetados con una categoría — Data, Director, Stage,
+- Todos los logs de la VN pasan por `VNLog`, etiquetados con una categoría — Data, Director, Stage,
   Streaming, Save, Verbose — para que puedas silenciar un subsistema ruidoso sin silenciar el resto.
+  Con Beasty Console en el proyecto, su ventana (`Tools > Beasty Console > Console`) los recibe todos;
+  sin ella van a la consola propia de Unity.
 - `VNLog.Enabled` está activo en el editor y en builds de desarrollo, y apagado en una build de release, para
   que un juego publicado no escriba una línea en el log del jugador por cada línea de diálogo, elección y
   cambio de sala. Las advertencias, errores y excepciones ignoran los interruptores por categoría: solo ese
   interruptor maestro las oculta.
-- El paquete incluye **Beasty Console** y **Beasty Save System**; al importar este asset tienes la copia
-  completa de cada uno, y no hay dependencias externas.
-- A Beasty Console se llega por reflexión, nunca por referencia de ensamblado: con el asset de la consola
-  fuera del proyecto, `VNLog` cae a `UnityEngine.Debug`, así que la VN compila y funciona con él o sin él —
-  e importar Beasty Console junto a un proyecto que ya lo incluye no puede producir un error de ensamblado
-  duplicado.
+- El paquete incluye **Beasty Save System** — al importar este asset tienes la copia completa — y no hay
+  dependencias externas. **Beasty Console no viene incluida**: es un asset propio, y opcional.
+- A Beasty Console se llega por reflexión, nunca por referencia de ensamblado: sin la consola en el
+  proyecto, `VNLog` cae a `UnityEngine.Debug`, así que la VN compila y funciona con ella o sin ella — e
+  importarla más tarde no exige recablear nada; los logs de la VN aterrizan en su ventana desde ese
+  momento.
 
 ### Editor
 

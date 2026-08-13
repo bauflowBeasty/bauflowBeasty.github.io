@@ -55,8 +55,9 @@ documents — a working example of `ask`, `quest`, `deliver`, `give`, conditions
 
 ## The placeholder art
 
-All art is labeled placeholder PNGs under `Demos/HouseDemo/Sprites/` — flat colors with the asset's name
-stamped on them (LIVING ROOM - DAY, MIA, BOOK…). Fourteen files, named by role:
+All art is labeled placeholder PNGs under `BeastyVN/Sprites/` — the same folder that holds the package's
+UI art — flat colors with the asset's name stamped on them (LIVING ROOM - DAY, MIA, BOOK…). Eighteen
+files, named by role:
 
 | Prefix | Files | Used as |
 |---|---|---|
@@ -65,8 +66,8 @@ stamped on them (LIVING ROOM - DAY, MIA, BOOK…). Fourteen files, named by role
 | `portrait_` | `portrait_player`, `portrait_mia` | Dialogue portraits |
 | `pose_` | `pose_mia_living` | Mia standing in the room |
 | `item_` | `item_book` | The quest item |
-| `door_` | `door_to_living`, `door_to_bedroom` | The clickable doors |
-| `prop_` | `prop_shelf`, `prop_bed` | The clickable furniture |
+| `door_` | `door_to_living`, `door_to_living_night`, `door_to_bedroom`, `door_to_bedroom_hover` | The clickable doors, with a night variant and a hover variant |
+| `prop_` | `prop_shelf`, `prop_shelf_night`, `prop_bed`, `prop_bed_night` | The clickable furniture, with their night variants |
 
 **Replace any file with final art of the same name and nothing needs rewiring** — every reference in the
 demo points at the file, not at a copy. The demo never overwrites an existing PNG, so your replacements

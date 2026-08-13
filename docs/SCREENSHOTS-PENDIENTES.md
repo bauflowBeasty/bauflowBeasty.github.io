@@ -13,13 +13,13 @@ con las ya tomadas, está en `docs/SCREENSHOTS.md`.
 | | Pendientes | Rehacer | Por hacer |
 |---|---:|---:|---:|
 | P1 · imprescindibles | 24 | 1 | 25 |
-| P2 · recomendadas | 25 | 2 | 27 |
+| P2 · recomendadas | 25 | 3 | 28 |
 | P3 · complementarias | 11 | 0 | 11 |
-| **Total** | **60** | **3** | **63** |
+| **Total** | **60** | **4** | **64** |
 
 ## Beasty Visual Novel
 
-Carpeta destino: `public/docs-images/beasty-visual-novel/` · 24 por hacer de 24.
+Carpeta destino: `public/docs-images/beasty-visual-novel/` · 25 por hacer de 25.
 
 ### Dialogue and the stage · Diálogo y el escenario
 
@@ -51,6 +51,17 @@ Carpeta destino: `public/docs-images/beasty-visual-novel/` · 24 por hacer de 24
 - **Sección:** Running it · Ejecutarlo
 - **Vista:** Unity ▸ Game view en Play, escena Demos/HouseDemo/HouseDemo.unity
 - **Qué tiene que verse:** La sala (Living Room) de DÍA con la pose placeholder de Mia visible, las dos estanterías, la puerta al dormitorio y el HUD de mundo libre. Tómala con la misión activa y el cursor sobre Mia para que se vea el realce de interactuable. Los placeholders etiquetados (LIVING ROOM - DAY, MIA POSE…) son parte del mensaje: el demo enseña estructura, no arte.
+
+### Installation · Instalación
+
+`/docs/beasty-visual-novel/getting-started/installation/` — `/es/docs/beasty-visual-novel/getting-started/installation/`
+
+#### `vn-package-folder.png` — P2 · 🔁 rehacer
+
+- **Sección:** What is in the package · Qué contiene el paquete
+- **Vista:** Unity ▸ ventana Project
+- **Qué tiene que verse:** Assets/BeastyComponents desplegado mostrando BeastyVN y BeastySaveSystem al mismo nivel: es la prueba visual de que el Save System viene incluido.
+- **Por qué rehacerla:** La captura actual muestra también BeastyConsole dentro de BeastyComponents, pero desde la 1.0.0 publicada la consola ya no viaja en el bundle: rehacer con solo BeastyVN y BeastySaveSystem.
 
 ### Audio and music · Audio y música
 

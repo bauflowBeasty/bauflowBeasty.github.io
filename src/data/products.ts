@@ -36,7 +36,11 @@ export const PRODUCTS: Product[] = [
       es: 'Un motor completo de novela visual para Unity: grafo de historia y script de texto estilo Ren’Py siempre sincronizados, salas explorables, misiones, tiempo de juego, rutinas de personajes, localización y guardado — sin escribir código en ningún momento.',
     },
     storeLinks: [
-      { store: 'unity', label: 'Unity Asset Store', url: null },
+      {
+        store: 'unity',
+        label: 'Unity Asset Store',
+        url: 'https://assetstore.unity.com/packages/slug/393138',
+      },
       { store: 'itch', label: 'itch.io', url: null },
     ],
     docsEntry: '/docs/beasty-visual-novel/',

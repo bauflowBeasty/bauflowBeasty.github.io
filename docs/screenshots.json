@@ -623,7 +623,8 @@
       "page": "beasty-visual-novel/getting-started/installation",
       "prioridad": 2,
       "vista": "Unity ▸ ventana Project",
-      "captura": "Assets/BeastyComponents desplegado mostrando BeastyVN, BeastySaveSystem y BeastyConsole al mismo nivel: es la prueba visual de que los otros dos vienen incluidos."
+      "captura": "Assets/BeastyComponents desplegado mostrando BeastyVN y BeastySaveSystem al mismo nivel: es la prueba visual de que el Save System viene incluido.",
+      "rehacer": "La captura actual muestra también BeastyConsole dentro de BeastyComponents, pero desde la 1.0.0 publicada la consola ya no viaja en el bundle: rehacer con solo BeastyVN y BeastySaveSystem."
     },
     {
       "file": "vn-create-scene-menu.png",
