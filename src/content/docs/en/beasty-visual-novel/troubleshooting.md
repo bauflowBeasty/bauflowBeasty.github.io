@@ -159,7 +159,7 @@ To go back, run `Tools > Beasty VN > Streaming > Convert To Direct References`. 
 it restores the direct references so the art loads synchronously again.
 
 > **Warning**
-> Streaming is opt-in and beta in 1.0.0. If you are not shipping a very large game, leave it off. Audio,
+> Streaming is opt-in and currently in beta. If you are not shipping a very large game, leave it off. Audio,
 > video, fonts, free-roam and hover art, choice and talk-menu images, HUD icons and save thumbnails are never
 > streamed.
 

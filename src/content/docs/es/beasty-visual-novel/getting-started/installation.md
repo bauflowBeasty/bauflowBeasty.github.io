@@ -83,10 +83,10 @@ registro.
 |---|---|
 | Windows, macOS, Linux (standalone) | Compatible |
 | iOS, Android | Compatible |
-| **WebGL** | **No compatible en 1.0.0** |
+| **WebGL** | **No compatible** |
 
 > **Advertencia**
-> **WebGL no es compatible en 1.0.0.** El pipeline de guardado escribe archivos de guardado a disco a través
+> **WebGL no es compatible.** El pipeline de guardado escribe archivos de guardado a disco a través
 > del sistema de archivos normal, que WebGL no provee. La historia se reproduciría, pero el guardado y la
 > carga no funcionarían, así que la plataforma queda directamente como no compatible, en vez de compatible
 > a medias. Si tu juego debe correr en un navegador, esta es la versión que debes evitar.

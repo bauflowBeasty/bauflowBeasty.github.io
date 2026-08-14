@@ -165,7 +165,7 @@ Para volver atrás, ejecuta `Tools > Beasty VN > Streaming > Convert To Direct R
 disponible, y restaura las referencias directas para que el arte vuelva a cargarse de forma síncrona.
 
 > **Advertencia**
-> El streaming es opcional y beta en 1.0.0. Si no estás lanzando un juego muy grande, déjalo apagado. El
+> El streaming es opcional y está en beta. Si no estás lanzando un juego muy grande, déjalo apagado. El
 > audio, el video, las fuentes, el arte de mundo libre y de hover, las imágenes de elecciones y del menú de
 > conversación, los íconos del HUD y las miniaturas de guardado nunca se transmiten en streaming.
 

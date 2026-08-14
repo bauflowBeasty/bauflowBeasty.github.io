@@ -66,8 +66,8 @@ Consulta [Localización](/es/docs/beasty-visual-novel/production/localization/).
 ## Cuándo activar el streaming
 
 Actívalo cuando el arte sea de verdad el problema — un juego largo cuyos fondos y sprites de personaje no
-necesitan estar todos cargados en memoria a la vez, o una plataforma con memoria limitada. Es opcional, y es
-beta en 1.0.0, así que activarlo es una decisión deliberada, no un valor predeterminado. Y es reversible en
+necesitan estar todos cargados en memoria a la vez, o una plataforma con memoria limitada. Es opcional, y está
+en beta, así que activarlo es una decisión deliberada, no un valor predeterminado. Y es reversible en
 cualquier momento.
 
 Consulta [Streaming](/es/docs/beasty-visual-novel/production/streaming/).

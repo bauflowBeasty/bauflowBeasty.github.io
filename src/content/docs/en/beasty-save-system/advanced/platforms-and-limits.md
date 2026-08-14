@@ -57,7 +57,7 @@ required minimum free-space check). The package gives you the pieces — `SaveRe
 
 ## WebGL
 
-**WebGL is not supported in 1.1.0.** Not "untested". Not "works with a plugin". Not supported.
+**WebGL is not supported.** Not "untested". Not "works with a plugin". Not supported.
 
 Two reasons, both structural:
 

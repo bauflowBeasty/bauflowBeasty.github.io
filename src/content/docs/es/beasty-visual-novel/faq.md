@@ -52,7 +52,7 @@ Consulta [Entrada y controles](/es/docs/beasty-visual-novel/production/input-and
 
 No. Por defecto se usan referencias directas, que se resuelven de forma síncrona y no cuestan nada.
 
-Addressables solo hace falta si activas el streaming, que es opcional y está en beta en 1.0.0. Si el paquete
+Addressables solo hace falta si activas el streaming, que es opcional y está en beta. Si el paquete
 no está instalado, el módulo de streaming ni siquiera se compila, y todo lo demás funciona con normalidad.
 
 Consulta [Streaming](/es/docs/beasty-visual-novel/production/streaming/).

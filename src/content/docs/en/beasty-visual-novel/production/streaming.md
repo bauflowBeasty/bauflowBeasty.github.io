@@ -1,10 +1,10 @@
 ---
 title: "Streaming (Addressables)"
-description: "Load art on demand instead of holding the whole game in memory. Streaming via Addressables is opt-in and beta in 1.0.0: the model, setup, and limits."
+description: "Load art on demand instead of holding the whole game in memory. Streaming via Addressables is opt-in and currently in beta: the model, setup, and limits."
 ---
 
-Load art on demand instead of loading the whole game into memory. Streaming is **opt-in**, and it is **beta in
-1.0.0** — it works, and the tests cover it, but the API may change in a minor release. If that is not a risk
+Load art on demand instead of loading the whole game into memory. Streaming is **opt-in**, and it is **currently in
+beta** — it works, and the tests cover it, but the API may change in a minor release. If that is not a risk
 you want on a shipping project, leave it off: everything below is off by default and costs you nothing.
 
 ## Why you would want it

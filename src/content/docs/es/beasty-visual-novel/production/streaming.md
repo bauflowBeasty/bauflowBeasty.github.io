@@ -1,10 +1,10 @@
 ---
 title: "Streaming (Addressables)"
-description: "Carga el arte bajo demanda en vez de tener todo el juego en memoria. Streaming vía Addressables es opcional y beta en 1.0.0: modelo, configuración y límites."
+description: "Carga el arte bajo demanda en vez de tener todo el juego en memoria. Streaming vía Addressables es opcional y está en beta: modelo, configuración y límites."
 ---
 
 Carga el arte bajo demanda en lugar de cargar todo el juego en memoria. El streaming es **opcional**, y es
-**beta en 1.0.0** — funciona, y las pruebas lo cubren, pero la API puede cambiar en una versión menor. Si no
+**en beta** — funciona, y las pruebas lo cubren, pero la API puede cambiar en una versión menor. Si no
 quieres ese riesgo en un proyecto que vas a lanzar, déjalo desactivado: todo lo de abajo está desactivado
 por defecto y no te cuesta nada.
 

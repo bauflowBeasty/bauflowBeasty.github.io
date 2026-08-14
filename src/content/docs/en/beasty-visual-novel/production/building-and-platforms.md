@@ -38,7 +38,7 @@ Anything where the game can read and write ordinary files — which is what the 
 - Consoles
 
 > **Warning**
-> **WebGL is not supported in 1.0.0.** The save pipeline is the reason: the atomic write needs `File.Replace`,
+> **WebGL is not supported.** The save pipeline is the reason: the atomic write needs `File.Replace`,
 > and the async save/load variants are `Task`-based. A browser build provides neither. There is no partial
 > mode — do not plan a WebGL release on this version. The full explanation is in the save system's
 > [platforms and limits](/docs/beasty-save-system/advanced/platforms-and-limits/).

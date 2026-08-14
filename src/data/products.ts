@@ -26,7 +26,7 @@ export const PRODUCTS: Product[] = [
   {
     id: 'beasty-visual-novel',
     name: 'Beasty Visual Novel',
-    version: '1.0.0',
+    version: '1.0.1',
     tagline: {
       en: 'You write the story. It plays it.',
       es: 'Tú escribes la historia. Él la reproduce.',

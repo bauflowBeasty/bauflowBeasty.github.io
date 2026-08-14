@@ -74,7 +74,7 @@ verificadas en tiempo de compilación.
 | `Tools > Beasty VN > Streaming > Convert To Direct References` | Lo inverso. Siempre disponible, con o sin Addressables. | [Streaming](/es/docs/beasty-visual-novel/production/streaming/) |
 
 > **Advertencia**
-> El streaming con Addressables es opcional y beta en 1.0.0. Funciona, pero la API puede cambiar en una
+> El streaming con Addressables es opcional y está en beta. Funciona, pero la API puede cambiar en una
 > versión menor.
 
 ## Export

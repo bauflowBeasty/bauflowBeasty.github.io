@@ -33,7 +33,7 @@ switched. See [Platforms and limits](/docs/beasty-save-system/advanced/platforms
 
 ## Does it work on WebGL?
 
-**No.** WebGL is not supported in 1.1.0. The atomic write depends on file-system semantics the browser
+**No.** WebGL is not supported. The atomic write depends on file-system semantics the browser
 build does not provide, and the async variants are `Task`-based. There is no setting that turns it on and
 no supported workaround; a browser build needs a different persistence layer.
 [Platforms and limits](/docs/beasty-save-system/advanced/platforms-and-limits/) says exactly why.

@@ -83,10 +83,10 @@ a registry.
 |---|---|
 | Windows, macOS, Linux (standalone) | Supported |
 | iOS, Android | Supported |
-| **WebGL** | **Not supported in 1.0.0** |
+| **WebGL** | **Not supported** |
 
 > **Warning**
-> **WebGL is not supported in 1.0.0.** The save pipeline writes save files to disk through the normal
+> **WebGL is not supported.** The save pipeline writes save files to disk through the normal
 > filesystem, which WebGL does not provide. The story would play, but saving and loading would not work,
 > so the platform is not supported rather than half-supported. If your game must run in a browser, this
 > is the version to skip.

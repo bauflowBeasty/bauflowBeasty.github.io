@@ -41,6 +41,11 @@ en lenguaje llano que diga qué es y cuándo le importa al lector.
 - Vaguedades («often», «many») → dato concreto si existe.
 - La voz de la casa es directa y con personalidad (frases cortas, afirmaciones rotundas tipo
   «Seven kinds, and that is the entire list»). Conservarla; no aplanar a genérico corporativo.
+- **La prosa no lleva el número de versión del propio asset** (decisión de Álvaro, 2026-08-14). El sitio
+  siempre describe la última versión, así que «not supported in 1.0.1» se escribe «not supported», y
+  «beta in 1.0.1» es «currently in beta». Los números viven solo en las páginas de changelog. Sí se
+  quedan: menciones históricas («since 1.0.0»), versiones de OTRO producto usadas como requisito
+  («Beasty Save System 1.1») y versiones de paquetes de Unity («com.unity.ugui 2.0.0»).
 
 ## Términos y jerga
 

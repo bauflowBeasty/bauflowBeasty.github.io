@@ -61,7 +61,7 @@ certificación de ninguna plataforma.
 
 ## WebGL
 
-**WebGL no está soportado en 1.1.0.** No es que esté "sin probar", ni que "funcione con un plugin". No está
+**WebGL no está soportado.** No es que esté "sin probar", ni que "funcione con un plugin". No está
 soportado.
 
 Dos razones, ambas estructurales:

@@ -72,7 +72,7 @@ Neither is needed to author a game. They exist so a programmer gets compile-time
 | `Tools > Beasty VN > Streaming > Convert To Direct References` | The reverse. Always available, with or without Addressables. | [Streaming](/docs/beasty-visual-novel/production/streaming/) |
 
 > **Warning**
-> Addressables streaming is opt-in and beta in 1.0.0. It works, but the API may change in a minor release.
+> Addressables streaming is opt-in and currently in beta. It works, but the API may change in a minor release.
 
 ## Export
 

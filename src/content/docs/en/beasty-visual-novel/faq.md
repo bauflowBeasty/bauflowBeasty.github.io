@@ -51,7 +51,7 @@ See [Input and controls](/docs/beasty-visual-novel/production/input-and-controls
 
 No. The default is direct references, which resolve synchronously and cost nothing.
 
-Addressables is only needed if you turn on streaming, which is opt-in and beta in 1.0.0. Without the package
+Addressables is only needed if you turn on streaming, which is opt-in and currently in beta. Without the package
 installed, the streaming module does not even compile in, and everything works normally.
 
 See [Streaming](/docs/beasty-visual-novel/production/streaming/).

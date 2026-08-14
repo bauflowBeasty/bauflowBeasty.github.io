@@ -33,7 +33,7 @@ cambiado. Consulta [Plataformas y límites](/es/docs/beasty-save-system/advanced
 
 ## ¿Funciona en WebGL?
 
-**No.** WebGL no está soportado en 1.1.0. La escritura atómica depende de la semántica del sistema de archivos que el build de
+**No.** WebGL no está soportado. La escritura atómica depende de la semántica del sistema de archivos que el build de
 navegador no proporciona, y las variantes asíncronas están basadas en `Task`. No hay ninguna opción que lo active
 ni ningún workaround soportado; un build de navegador necesita una capa de persistencia diferente.
 [Plataformas y límites](/es/docs/beasty-save-system/advanced/platforms-and-limits/) explica exactamente por qué.

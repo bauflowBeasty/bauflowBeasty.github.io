@@ -61,7 +61,7 @@ See [Localization](/docs/beasty-visual-novel/production/localization/).
 ## When to turn on streaming
 
 Turn it on when your art is genuinely the problem — a long game whose backdrops and character sprites do not
-all need to be resident at once, or a memory-constrained platform. It is opt-in, and it is beta in 1.0.0, so it
+all need to be resident at once, or a memory-constrained platform. It is opt-in, and it is currently in beta, so it
 is a deliberate decision rather than a default. It is also reversible at any time.
 
 See [Streaming](/docs/beasty-visual-novel/production/streaming/).

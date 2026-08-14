@@ -40,7 +40,7 @@ necesita:
 - Consolas
 
 > **Advertencia**
-> **WebGL no es compatible en 1.0.0.** El pipeline de guardado es la razón: la escritura atómica necesita
+> **WebGL no es compatible.** El pipeline de guardado es la razón: la escritura atómica necesita
 > `File.Replace`, y las variantes asíncronas de guardado/carga están basadas en `Task`. Una build de navegador no
 > provee ninguna de las dos. No hay un modo parcial — no planifiques un lanzamiento en WebGL con esta versión.
 > La explicación completa está en [plataformas y límites](/es/docs/beasty-save-system/advanced/platforms-and-limits/) del sistema de guardado.
