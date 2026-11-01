@@ -68,12 +68,15 @@ function extraerCapitulo(producto, pagina) {
   if (!m) throw new Error(`Sin <article class="doc-content"> en ${ruta}`);
   let cuerpo = m[1];
 
-  cuerpo = cuerpo.replace(/<p class="machine doc-crumb">[\s\S]*?<\/p>/g, '');
+  cuerpo = cuerpo.replace(/<p class="[^"]*\bdoc-crumb\b[^"]*"[^>]*>[\s\S]*?<\/p>/g, '');
   cuerpo = cuerpo.replace(/<aside class="buy-cta"[\s\S]*?<\/aside>/g, '');
   // «Dónde conseguirlo» (widgets de tienda) no tiene sentido en un PDF.
   cuerpo = cuerpo.replace(/<section class="where-to-get"[\s\S]*?<\/section>/g, '');
   // Los scripts de la web (widgets, botón Copiar…) no pintan nada en el PDF.
   cuerpo = cuerpo.replace(/<script\b[\s\S]*?<\/script>/g, '');
+  // La web pinta el código con un tema oscuro (estilos en línea de Shiki): en papel se quiere
+  // claro, así que se quitan esos estilos y manda el CSS del PDF (pre gris claro, texto negro).
+  cuerpo = cuerpo.replace(/(<(?:pre|code|span)\b[^>]*?)\sstyle="[^"]*"/g, '$1');
 
   // Imágenes: resolver desde public/docs-images; una captura que no existe se omite.
   let omitidas = 0;

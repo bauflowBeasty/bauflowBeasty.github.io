@@ -1,7 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import { SIDEBARS } from '../data/sidebars';
-import { PRODUCTS } from '../data/products';
+import ProjectSwitcher from './ProjectSwitcher.astro';
 import { t, type Lang } from '../data/ui-strings';
 
 interface Props {
@@ -27,19 +27,7 @@ const overviewHref = `${prefix}/docs/${productId}/`;
 ---
 
 <nav class="doc-sidebar" aria-label={t(lang, 'nav.docs')}>
-  <div class="product-switch">
-    {
-      PRODUCTS.map((p) => (
-        <a
-          href={`${prefix}${p.docsEntry}`}
-          class:list={{ current: p.id === productId }}
-          aria-current={p.id === productId ? 'true' : undefined}
-        >
-          {p.name.replace('Beasty ', '')}
-        </a>
-      ))
-    }
-  </div>
+  <ProjectSwitcher current={productId} lang={lang} />
 
   <a class="sidebar-item overview" href={overviewHref} aria-current={isActive(overviewHref) ? 'page' : undefined}>
     {t(lang, 'docs.overview')}
@@ -74,38 +62,6 @@ const overviewHref = `${prefix}/docs/${productId}/`;
     font-size: var(--text-sm);
   }
 
-  .product-switch {
-    display: flex;
-    flex-direction: column;
-    border: 1px solid var(--border);
-    border-radius: var(--radius-md);
-    overflow: hidden;
-    background: var(--surface);
-  }
-
-  .product-switch a {
-    padding: var(--space-2) var(--space-3);
-    color: var(--text-muted);
-    font-weight: 500;
-    border-bottom: 1px solid var(--border);
-  }
-
-  .product-switch a:last-child {
-    border-bottom: none;
-  }
-
-  .product-switch a:hover {
-    text-decoration: none;
-    color: var(--text);
-    background: var(--accent-soft);
-  }
-
-  .product-switch a.current {
-    color: var(--text);
-    background: var(--surface-raised);
-    border-left: 3px solid var(--accent);
-  }
-
   .sidebar-group h3 {
     margin-bottom: var(--space-2);
     color: var(--text-faint);
@@ -118,27 +74,54 @@ const overviewHref = `${prefix}/docs/${productId}/`;
     flex-direction: column;
   }
 
+  /* «Limpia»: hover nudges right while a red bar grows; the active page gets a soft fill + bar. */
   .sidebar-item {
+    position: relative;
     display: block;
-    padding: 0.3rem var(--space-3);
+    padding: 0.3rem var(--space-3) 0.3rem 0.9rem;
+    border-radius: var(--radius-sm);
     color: var(--text-muted);
-    border-left: 2px solid var(--border);
     line-height: 1.45;
+    transition:
+      color var(--dur-fast) var(--ease-out),
+      background var(--dur-fast) var(--ease-out),
+      transform var(--dur-base) var(--ease-bounce);
+  }
+
+  .sidebar-item::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 3px;
+    height: 0;
+    border-radius: 2px;
+    background: var(--accent-strong);
+    transform: translateY(-50%);
+    transition: height var(--dur-base) var(--ease-bounce);
   }
 
   .sidebar-item:hover {
     text-decoration: none;
     color: var(--text);
-    border-left-color: var(--border-strong);
+    transform: translateX(3px);
+  }
+
+  .sidebar-item:hover::before {
+    height: 50%;
   }
 
   .sidebar-item[aria-current='page'] {
-    color: var(--accent-text);
-    border-left-color: var(--accent);
-    font-weight: 600;
+    color: var(--text);
+    background: var(--accent-soft);
+    font-weight: 700;
+  }
+
+  .sidebar-item[aria-current='page']::before {
+    height: 70%;
   }
 
   .sidebar-item.overview {
-    font-weight: 600;
+    font-weight: 700;
   }
 </style>

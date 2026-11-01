@@ -98,6 +98,11 @@ try {
               window.scrollTo(0, y);
               await new Promise((r) => setTimeout(r, 60));
             }
+            // Espera a que terminen todas las imágenes (máx. 8 s) antes de volver arriba.
+            const t0 = Date.now();
+            while ([...document.images].some((i) => !i.complete) && Date.now() - t0 < 8000) {
+              await new Promise((r) => setTimeout(r, 100));
+            }
             window.scrollTo(0, 0);
           });
           await page.waitForNetworkIdle({ idleTime: 300, timeout: 15000 }).catch(() => {});

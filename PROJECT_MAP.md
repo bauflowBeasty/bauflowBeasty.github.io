@@ -28,7 +28,7 @@ Sitio de documentación y portfolio **Beasty Components** (marca de bauflow) hec
 ## Estructura
 
 ```
-astro.config.mjs          → Config Astro: site URL, temas Shiki (github-light/dark)
+astro.config.mjs          → Config Astro: site URL, Shiki con un solo tema oscuro (github-dark-default), plugin rehype-callouts
 package.json              → Deps: astro 5, fuentes (Unbounded, Manrope, JetBrains Mono), pagefind, puppeteer-core
 tsconfig.json             → Config TypeScript
 HOW-TO-ADD-PROJECT.md     → Guía manual: cómo agregar un producto nuevo al sitio
@@ -77,7 +77,8 @@ src/
 │   ├── Header.astro / Footer.astro → Cabecera: logo · Proyectos · Contacto · búsqueda · idioma · tema. Pie con tagline
 │   ├── ProjectsMenu.astro    → Desplegable «Proyectos» (<details>, funciona sin JS) con miniatura de cada proyecto
 │   ├── SiteSearch.astro      → Búsqueda global Pagefind en un diálogo: Ctrl/⌘ K; carga Pagefind al abrirse por 1.ª vez
-│   ├── DocSidebar.astro      → Sidebar de navegación de docs
+│   ├── DocSidebar.astro      → Sidebar de docs: ProjectSwitcher + grupos (hover con barra roja, página activa marcada)
+│   ├── ProjectSwitcher.astro → Selector de proyecto del lateral (<details>, se despliega en el propio lateral)
 │   ├── TableOfContents.astro → TOC de la página actual
 │   ├── BuyCta.astro / StoreButtons.astro → Botones de compra: una pastilla con logo por tienda (negras dentro de .on-brand)
 │   ├── StoreLogo.astro       → Logo monocromo de cada tienda (Simple Icons, CC0) o bolsa genérica
@@ -100,7 +101,8 @@ src/
 │   │                       y la regla global de prefers-reduced-motion
 │   ├── base.css / typography.css → Reset + tipografía global
 │   ├── landing.css       → Ritmo vertical entre las secciones de la portada
-│   └── doc.css           → Estilos de páginas de documentación
+│   └── doc.css           → Docs «Limpia»: rombo rojo en h2, enlaces, código inline, bloques de código oscuros con
+│                           cabecera, callouts nota/advertencia, paginador, «Otros proyectos»
 ├── lib/                  → Lógica pura, sin Astro (la prueban los tests con Node):
 │   ├── catalog.ts        → getFeatured, platformFilters, isCardVisible, projectHref
 │   ├── widgets.ts        → URLs y tamaños de los widgets de Asset Store e itch.io por tema
@@ -108,6 +110,8 @@ src/
 ├── scripts/theme-init.js → Anti-flash de tema (se ejecuta inline antes del render)
 ├── scripts/details-dismiss.ts → Cierra los <details data-dismiss> con Esc / clic fuera (menús desplegables)
 ├── scripts/store-widgets.ts → Carga los widgets con permiso (recordar/retirar), variante clara/oscura según el tema
+├── scripts/code-blocks.ts → Cabecera con lenguaje + botón Copiar en los bloques de código de las docs
+├── plugins/rehype-callouts.mjs → En el build: > **Note**/**Nota** → callout--note; **Warning**/**Advertencia**/**Important** → callout--warn
 ├── scripts/juice.ts      → Efectos de puntero: attachTilt (inclinación 3D), attachSpotlight, tiltAngles
 └── assets/               → logo-on-dark.svg, logo-on-light.svg
     └── covers/           → Portada de cada proyecto: <id del producto>.png

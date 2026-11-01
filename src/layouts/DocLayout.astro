@@ -5,7 +5,8 @@ import DocSidebar from '../components/DocSidebar.astro';
 import TableOfContents from '../components/TableOfContents.astro';
 import BuyCta from '../components/BuyCta.astro';
 import WhereToGet from '../components/WhereToGet.astro';
-import { getProduct } from '../data/products';
+import ProjectCatalog from '../components/ProjectCatalog.astro';
+import { PRODUCTS, getProduct } from '../data/products';
 import { SIDEBARS } from '../data/sidebars';
 import { t, type Lang } from '../data/ui-strings';
 import '../styles/doc.css';
@@ -36,8 +37,14 @@ const idx = flat.indexOf(pageSlug === 'index' ? 'index' : pageSlug);
 const prev = idx > 0 ? flat[idx - 1] : null;
 const next = idx >= 0 && idx < flat.length - 1 ? flat[idx + 1] : null;
 
-// Machine-style breadcrumb: the brand's signature texture in the docs.
-const crumb = `${productId} / ${pageSlug === 'index' ? 'README' : pageSlug.replace(/\//g, ' / ')}.md`;
+// Human breadcrumb: "Save System › Getting started" (the overview page names the overview).
+const shortName = product.name.replace(/^Beasty\s+/, '');
+const group = SIDEBARS[productId]?.find((g) => g.items.includes(pageSlug));
+const crumbLabel = pageSlug === 'index' ? t(lang, 'docs.overview') : (group?.label[lang] ?? '');
+const crumb = crumbLabel ? `${shortName} › ${crumbLabel}` : shortName;
+
+// The project page (docs index) also lists the other projects.
+const others = pageSlug === 'index' ? PRODUCTS.filter((p) => p.id !== product.id) : [];
 ---
 
 <BaseLayout
@@ -56,8 +63,15 @@ const crumb = `${productId} / ${pageSlug === 'index' ? 'README' : pageSlug.repla
       <DocSidebar productId={productId} lang={lang} currentPath={currentPath} />
     </aside>
 
-    <article class="doc-content" lang={lang} data-pagefind-body data-pagefind-meta={`product:${product.name}`}>
-      <p class="machine doc-crumb">{crumb}</p>
+    <article
+      class="doc-content"
+      lang={lang}
+      data-pagefind-body
+      data-pagefind-meta={`product:${product.name}`}
+      data-copy={t(lang, 'code.copy')}
+      data-copied={t(lang, 'code.copied')}
+    >
+      <p class="doc-crumb" data-pagefind-ignore>{crumb}</p>
       <h1>{entry.data.title}</h1>
       <BuyCta product={product} lang={lang} />
       <div class="prose">
@@ -88,9 +102,24 @@ const crumb = `${productId} / ${pageSlug === 'index' ? 'README' : pageSlug.repla
       <TableOfContents headings={headings} lang={lang} />
     </aside>
   </div>
+
+  {
+    others.length > 0 && (
+      <div class="container doc-others">
+        <ProjectCatalog products={others} lang={lang} heading={t(lang, 'catalog.others')} />
+      </div>
+    )
+  }
 </BaseLayout>
 
 <script>
+  import { enhanceCodeBlocks } from '../scripts/code-blocks';
+
+  const article = document.querySelector<HTMLElement>('article.doc-content');
+  if (article) {
+    enhanceCodeBlocks(article, { copy: article.dataset.copy ?? 'Copy', copied: article.dataset.copied ?? 'Copied!' });
+  }
+
   // Mobile drawer
   const toggle = document.querySelector('[data-drawer-toggle]');
   toggle?.addEventListener('click', () => {

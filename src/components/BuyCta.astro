@@ -11,7 +11,7 @@ interface Props {
 const { product, lang } = Astro.props;
 ---
 
-<aside class="buy-cta">
+<aside class="buy-cta" data-pagefind-ignore>
   <p>
     {t(lang, 'docs.buyStrip')}
     <strong>{product.name}</strong>

@@ -1,0 +1,142 @@
+---
+/**
+ * Docs sidebar: the current project (thumbnail + name) as a dropdown listing
+ * every project that has docs. <details>-based: works without JavaScript.
+ */
+import { PRODUCTS, getProduct } from '../data/products';
+import { t, type Lang } from '../data/ui-strings';
+import Cover from './Cover.astro';
+
+interface Props {
+  current: string;
+  lang: Lang;
+}
+
+const { current, lang } = Astro.props;
+const prefix = lang === 'es' ? '/es' : '';
+const withDocs = PRODUCTS.filter((p) => p.docsEntry);
+const cur = getProduct(current);
+---
+
+{
+  cur && (
+    <details class="project-switcher" data-dismiss>
+      <summary>
+        <Cover id={cur.id} name={cur.name} size="thumb" class="project-switcher__thumb" />
+        <span class="project-switcher__name">
+          <span class="visually-hidden">{t(lang, 'docs.projectSwitch')}: </span>
+          {cur.name}
+        </span>
+        <svg class="chevron" width="12" height="12" viewBox="0 0 12 12" aria-hidden="true">
+          <path d="M2.5 4.5 6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+      </summary>
+      <ul class="project-switcher__list">
+        {withDocs.map((p, i) => (
+          <li style={`--i:${i}`}>
+            <a href={`${prefix}${p.docsEntry}`} aria-current={p.id === current ? 'page' : undefined}>
+              <Cover id={p.id} name={p.name} size="thumb" class="project-switcher__thumb" />
+              <span>{p.name}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </details>
+  )
+}
+
+<script>
+  import { initDetailsDismiss } from '../scripts/details-dismiss';
+  initDetailsDismiss();
+</script>
+
+<style>
+  .project-switcher {
+    position: relative;
+  }
+
+  summary {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    padding: var(--space-2);
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius-md);
+    background: var(--surface);
+    color: var(--text);
+    font-weight: 700;
+    font-size: var(--text-sm);
+    cursor: pointer;
+    list-style: none;
+    transition: border-color var(--dur-fast) var(--ease-out);
+  }
+
+  summary::-webkit-details-marker {
+    display: none;
+  }
+
+  summary:hover,
+  .project-switcher[open] summary {
+    border-color: var(--accent-strong);
+  }
+
+  .project-switcher__name {
+    flex: 1;
+    min-width: 0;
+    line-height: 1.25;
+  }
+
+  .chevron {
+    flex: none;
+    color: var(--text-faint);
+    transition: transform var(--dur-base) var(--ease-bounce);
+  }
+
+  .project-switcher[open] .chevron {
+    transform: rotate(180deg);
+  }
+
+  .project-switcher :global(.project-switcher__thumb) {
+    width: 44px;
+    flex: none;
+    border-radius: var(--radius-sm);
+  }
+
+  /* Opens in flow (the sidebar column scrolls, so an absolute list would be clipped). */
+  .project-switcher__list {
+    margin: var(--space-1) 0 0;
+    padding: var(--space-1);
+    list-style: none;
+    background: var(--surface);
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-pop);
+    transform-origin: top center;
+    animation: pop 0.3s var(--ease-bounce) backwards;
+  }
+
+  .project-switcher__list li {
+    animation: rise 0.3s var(--ease-bounce) backwards;
+    animation-delay: calc(var(--i, 0) * 40ms);
+  }
+
+  .project-switcher__list a {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    padding: var(--space-2);
+    border-radius: var(--radius-sm);
+    color: var(--text);
+    font-size: var(--text-sm);
+    font-weight: 600;
+  }
+
+  .project-switcher__list a:hover {
+    text-decoration: none;
+    background: var(--accent-soft);
+  }
+
+  .project-switcher__list a[aria-current='page'] {
+    color: var(--accent-text);
+  }
+</style>
