@@ -1,16 +1,56 @@
 ---
+/**
+ * «How they fit together»: same texts as always; the ASCII diagram becomes a
+ * visual one — covers joined by labelled arrows (solid = includes, dashed = optional).
+ */
+import { getProduct } from '../data/products';
+import { projectHref } from '../lib/catalog';
 import { t, type Lang } from '../data/ui-strings';
+import Cover from './Cover.astro';
 
 interface Props {
   lang: Lang;
 }
 
 const { lang } = Astro.props;
+
+// The relationships between the Unity packages (see ecosystem.note1 / note2).
+const vn = getProduct('beasty-visual-novel');
+const save = getProduct('beasty-save-system');
+const consoleP = getProduct('beasty-console');
+const steps = vn && save && consoleP
+  ? [
+      { node: vn },
+      { edge: 'includes' as const },
+      { node: save },
+      { edge: 'optional' as const },
+      { node: consoleP },
+    ]
+  : [];
 ---
 
 <section class="ecosystem" id="ecosystem">
   <h2>{t(lang, 'ecosystem.heading')}</h2>
-  <pre class="machine eco-diagram" aria-hidden="true"><code>beasty-visual-novel ──[includes]──&gt; beasty-save-system ··[optional]··&gt; beasty-console</code></pre>
+  {
+    steps.length > 0 && (
+      <ol class="eco-flow">
+        {steps.map((s, i) =>
+          'node' in s && s.node ? (
+            <li class="eco-node reveal" style={`--i:${i}`}>
+              <a href={projectHref(s.node, lang)}>
+                <Cover id={s.node.id} name={s.node.name} size="card" class="eco-node__cover" />
+                <span>{s.node.name}</span>
+              </a>
+            </li>
+          ) : (
+            <li class:list={['eco-edge', 'reveal', `eco-edge--${'edge' in s ? s.edge : ''}`]} style={`--i:${i}`}>
+              <span>{t(lang, `ecosystem.${'edge' in s ? s.edge : ''}`)}</span>
+            </li>
+          )
+        )}
+      </ol>
+    )
+  }
   <div class="eco-notes">
     <p>{t(lang, 'ecosystem.note1')}</p>
     <p>{t(lang, 'ecosystem.note2')}</p>
@@ -22,15 +62,90 @@ const { lang } = Astro.props;
   .ecosystem {
     display: flex;
     flex-direction: column;
-    gap: var(--space-4);
+    gap: var(--space-5);
   }
 
-  .eco-diagram {
-    padding: var(--space-3) var(--space-4);
-    border: 1px dashed var(--border-strong);
+  .eco-flow {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    margin: 0;
+    padding: var(--space-5);
+    list-style: none;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    background: var(--surface);
+  }
+
+  .eco-node {
+    flex: 0 1 12rem;
+    min-width: 0;
+  }
+
+  .eco-node a {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    color: var(--text);
+    font-weight: 700;
+    font-size: var(--text-sm);
+    text-align: center;
+    text-decoration: none;
+    transition: transform var(--dur-base) var(--ease-bounce);
+  }
+
+  .eco-node a:hover {
+    transform: translateY(-4px) rotate(-1.5deg);
+  }
+
+  .eco-node :global(.eco-node__cover) {
     border-radius: var(--radius-md);
-    overflow-x: auto;
+    border: 1px solid var(--border-strong);
+  }
+
+  /* Arrow: a line with a head, its label above. */
+  .eco-edge {
+    position: relative;
+    flex: 1 1 6rem;
+    min-width: 4rem;
+    height: 2px;
+    margin-top: -1.6rem;
+    background: var(--accent-strong);
+  }
+
+  .eco-edge::after {
+    content: '';
+    position: absolute;
+    right: -2px;
+    top: 50%;
+    width: 0.6rem;
+    height: 0.6rem;
+    border-top: 2px solid var(--accent-strong);
+    border-right: 2px solid var(--accent-strong);
+    transform: translateY(-50%) rotate(45deg);
+  }
+
+  .eco-edge--optional {
+    background: repeating-linear-gradient(90deg, var(--text-faint) 0 6px, transparent 6px 11px);
+  }
+
+  .eco-edge--optional::after {
+    border-color: var(--text-faint);
+  }
+
+  .eco-edge span {
+    position: absolute;
+    left: 50%;
+    bottom: 0.5rem;
+    transform: translateX(-50%);
+    padding: 0.1rem 0.5rem;
+    border-radius: 999px;
+    background: var(--bg);
+    border: 1px solid var(--border-strong);
     color: var(--text-muted);
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    white-space: nowrap;
   }
 
   .eco-notes {
@@ -43,5 +158,44 @@ const { lang } = Astro.props;
 
   .eco-reqs {
     color: var(--text-faint);
+  }
+
+  @media (max-width: 640px) {
+    .eco-flow {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .eco-node {
+      flex-basis: auto;
+      width: min(14rem, 100%);
+      margin-inline: auto;
+    }
+
+    .eco-edge {
+      flex: 0 0 auto;
+      width: 2px;
+      min-width: 0;
+      height: 3.5rem;
+      margin: 0 auto;
+    }
+
+    .eco-edge--optional {
+      background: repeating-linear-gradient(180deg, var(--text-faint) 0 6px, transparent 6px 11px);
+    }
+
+    .eco-edge::after {
+      right: auto;
+      top: auto;
+      left: 50%;
+      bottom: -2px;
+      transform: translateX(-50%) rotate(135deg);
+    }
+
+    .eco-edge span {
+      left: 0.9rem;
+      bottom: 50%;
+      transform: translateY(50%);
+    }
   }
 </style>

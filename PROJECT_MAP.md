@@ -72,7 +72,7 @@ src/
 │   ├── docs/[...slug].astro  → Ruta dinámica de todas las docs EN
 │   └── es/                   → index.astro + contact.astro + docs/[...slug].astro (equivalentes ES)
 ├── components/
-│   ├── LandingPage.astro     → Portada completa (hero, grid de productos) — compartida EN/ES
+│   ├── LandingPage.astro     → Portada: HomeIntro → FeaturedProject → ProjectCatalog (filtros) → EcosystemNote — EN/ES
 │   ├── ContactPage.astro     → Página de contacto: formulario de soporte vía Web3Forms — compartida EN/ES
 │   ├── Header.astro / Footer.astro → Cabecera: logo · Proyectos · Contacto · búsqueda · idioma · tema. Pie con tagline
 │   ├── ProjectsMenu.astro    → Desplegable «Proyectos» (<details>, funciona sin JS) con miniatura de cada proyecto
@@ -87,15 +87,16 @@ src/
 │   ├── ProjectCatalog.astro  → Rejilla de tarjetas + filtros por plataforma generados de los datos (ocultos sin JS o
 │   │                           con una sola plataforma); el destacado se oculta en «Todo»
 │   ├── LangSwitch.astro / ThemeToggle.astro → Cambio idioma / tema claro-oscuro
-│   ├── HeroScript.astro      → Animación/script del hero
-│   └── EcosystemNote.astro   → Nota de integración entre productos Beasty
+│   ├── HomeIntro.astro       → Entrada de la portada: textos hero.* y dos botones (sin maqueta de código)
+│   ├── FeaturedProject.astro → Proyecto destacado: bloque rojo de marca, portada grande, «NUEVO · vX», tiendas, foco de luz
+│   └── EcosystemNote.astro   → «Cómo encajan»: textos ecosystem.* + diagrama visual con portadas y flechas (incluye/opcional)
 ├── styles/
 │   ├── tokens.css        → Design tokens (paleta «Rojo protagonista», espaciado, tipografía, easing) — base del
 │   │                       sistema visual; el contraste AA lo vigila tests/unit/contrast.test.mjs
 │   ├── motion.css        → Keyframes «modo juego» (rise, pop, slam, spin-in, wiggle, squash), utilidad .reveal
 │   │                       y la regla global de prefers-reduced-motion
 │   ├── base.css / typography.css → Reset + tipografía global
-│   ├── landing.css       → Estilos de la portada
+│   ├── landing.css       → Ritmo vertical entre las secciones de la portada
 │   └── doc.css           → Estilos de páginas de documentación
 ├── lib/                  → Lógica pura, sin Astro (la prueban los tests con Node):
 │   ├── catalog.ts        → getFeatured, platformFilters, isCardVisible, projectHref

@@ -92,6 +92,15 @@ try {
         const { page, errors } = await openPage({ width, theme });
         try {
           await page.goto(server.url + route, { waitUntil: 'networkidle0', timeout: 45000 });
+          // Recorre la página para que carguen las imágenes diferidas (loading="lazy") antes de capturar.
+          await page.evaluate(async () => {
+            for (let y = 0; y < document.documentElement.scrollHeight; y += 600) {
+              window.scrollTo(0, y);
+              await new Promise((r) => setTimeout(r, 60));
+            }
+            window.scrollTo(0, 0);
+          });
+          await page.waitForNetworkIdle({ idleTime: 300, timeout: 15000 }).catch(() => {});
           await new Promise((r) => setTimeout(r, 400));
           const { scrollWidth, innerWidth } = await page.evaluate(() => ({
             scrollWidth: document.documentElement.scrollWidth,

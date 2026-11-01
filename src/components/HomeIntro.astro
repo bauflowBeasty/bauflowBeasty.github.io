@@ -1,0 +1,110 @@
+---
+/** Short welcome above the featured project: the existing hero texts, no code mockup. */
+import { t, type Lang } from '../data/ui-strings';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+---
+
+<section class="home-intro container">
+  <p class="eyebrow home-intro__eyebrow reveal" style="--i:0">{t(lang, 'hero.eyebrow')}</p>
+  <h1 class="home-intro__title reveal" style="--i:1">{t(lang, 'hero.title')}</h1>
+  <p class="home-intro__sub reveal" style="--i:2">{t(lang, 'hero.sub')}</p>
+  <div class="home-intro__ctas reveal" style="--i:3">
+    <a class="btn btn--primary" href="#catalog">{t(lang, 'hero.ctaDocs')}</a>
+    <a class="btn btn--ghost" href="#featured">{t(lang, 'hero.ctaStore')}</a>
+  </div>
+</section>
+
+<style>
+  .home-intro {
+    padding-block: var(--space-8) var(--space-6);
+  }
+
+  .home-intro__eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+  }
+
+  /* The brand's diamond, as on the docs headings. */
+  .home-intro__eyebrow::before {
+    content: '';
+    width: 0.55rem;
+    height: 0.55rem;
+    border-radius: 2px;
+    background: var(--accent-strong);
+    transform: rotate(45deg);
+  }
+
+  .home-intro__title {
+    max-width: 18ch;
+    margin-block: var(--space-3) var(--space-4);
+    font-size: var(--text-hero);
+    line-height: 1.02;
+  }
+
+  .home-intro__sub {
+    max-width: 52ch;
+    color: var(--text-muted);
+    font-size: var(--text-md);
+    text-wrap: pretty;
+  }
+
+  .home-intro__ctas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+    margin-top: var(--space-5);
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.7rem 1.3rem;
+    border-radius: var(--radius-md);
+    font-weight: 800;
+    font-size: var(--text-sm);
+    text-decoration: none;
+    transition:
+      transform var(--dur-fast) var(--ease-bounce),
+      box-shadow var(--dur-base) var(--ease-out),
+      border-color var(--dur-fast) var(--ease-out);
+  }
+
+  .btn:hover {
+    text-decoration: none;
+    transform: translateY(-2px);
+  }
+
+  .btn:active {
+    animation: squash 0.3s var(--ease-bounce);
+  }
+
+  .btn--primary {
+    background: var(--accent);
+    color: var(--accent-on);
+  }
+
+  .btn--primary:hover {
+    box-shadow: var(--shadow-glow);
+  }
+
+  .btn--ghost {
+    border: 1px solid var(--border-strong);
+    color: var(--text);
+  }
+
+  .btn--ghost:hover {
+    border-color: var(--accent-strong);
+  }
+
+  @media (max-width: 640px) {
+    .home-intro {
+      padding-block: var(--space-7) var(--space-5);
+    }
+  }
+</style>

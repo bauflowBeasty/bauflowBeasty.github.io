@@ -1,6 +1,11 @@
 ---
+/**
+ * Landing: short intro → featured project (red block) → catalog with filters →
+ * how the Unity packages fit together. Scales to any number of projects.
+ */
 import BaseLayout from '../layouts/BaseLayout.astro';
-import HeroScript from './HeroScript.astro';
+import HomeIntro from './HomeIntro.astro';
+import FeaturedProject from './FeaturedProject.astro';
 import ProjectCatalog from './ProjectCatalog.astro';
 import EcosystemNote from './EcosystemNote.astro';
 import { PRODUCTS } from '../data/products';
@@ -23,16 +28,13 @@ const featured = getFeatured(PRODUCTS);
   lang={lang}
   altHref={altHref}
 >
-  <section class="hero container">
-    <div class="hero-copy">
-      <p class="eyebrow">{t(lang, 'hero.eyebrow')}</p>
-      <h1>{t(lang, 'hero.title')}</h1>
-      <p class="hero-sub">{t(lang, 'hero.sub')}</p>
-    </div>
-    <HeroScript lang={lang} />
-  </section>
+  <HomeIntro lang={lang} />
 
-  <div class="products container" id="products">
+  <div class="container landing-featured">
+    <FeaturedProject product={featured} lang={lang} />
+  </div>
+
+  <div class="container landing-catalog">
     <ProjectCatalog
       products={PRODUCTS}
       lang={lang}
@@ -44,7 +46,7 @@ const featured = getFeatured(PRODUCTS);
     />
   </div>
 
-  <div class="container">
+  <div class="container landing-ecosystem">
     <EcosystemNote lang={lang} />
   </div>
 </BaseLayout>

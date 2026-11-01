@@ -1,36 +1,18 @@
-/* Landing (storefront) layout. */
+/* Landing layout: vertical rhythm between the sections (each component styles itself). */
 
-.hero {
-  display: grid;
-  grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
-  gap: var(--space-7);
-  align-items: center;
-  padding-block: var(--space-8) var(--space-8);
+.landing-featured {
+  margin-bottom: var(--space-7);
 }
 
-.hero-copy h1 {
-  font-size: var(--text-hero);
-  margin-block: var(--space-3) var(--space-4);
+.landing-catalog {
+  scroll-margin-top: calc(var(--header-h) + var(--space-4));
 }
 
-.hero-sub {
-  color: var(--text-muted);
-  font-size: var(--text-md);
-  max-width: 46ch;
-  text-wrap: pretty;
+.landing-ecosystem {
+  margin-top: var(--space-8);
 }
 
-.products {
-  padding-block: var(--space-5);
-}
-
-.ecosystem {
-  margin-block: var(--space-8) var(--space-6);
-}
-
-@media (max-width: 900px) {
-  .hero {
-    grid-template-columns: minmax(0, 1fr);
-    padding-block: var(--space-7);
-  }
+#featured,
+#catalog {
+  scroll-margin-top: calc(var(--header-h) + var(--space-4));
 }
