@@ -7,3 +7,6 @@ npm-debug.log*
 # Herramientas de Claude (solo locales, no se suben al repositorio)
 .claude/
 CLAUDE.md
+
+# Maquetas locales del brainstorming (visual companion)
+.superpowers/

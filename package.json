@@ -11,7 +11,10 @@
     "doc:sync": "node scripts/sync-check.mjs",
     "doc:links": "node scripts/check-links.mjs",
     "doc:shots": "node scripts/screenshots.mjs",
-    "doc:pdf": "node scripts/build-pdf.mjs"
+    "doc:pdf": "node scripts/build-pdf.mjs",
+    "test": "node --test \"tests/unit/**/*.test.mjs\"",
+    "test:dist": "node --test \"tests/dist/**/*.test.mjs\"",
+    "content:baseline": "node scripts/content-baseline.mjs"
   },
   "dependencies": {
     "@fontsource-variable/bricolage-grotesque": "^5.2.10",

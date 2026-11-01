@@ -2,7 +2,7 @@
 
 > **Regla:** Leer este archivo ANTES de cualquier búsqueda en el proyecto. Si un cambio agrega, mueve, renombra o elimina archivos/carpetas (o cambia el propósito de algo listado aquí), actualizar este mapa en el mismo turno.
 >
-> Última actualización: 2026-10-31
+> Última actualización: 2026-11-01
 
 ## Qué es este proyecto
 
@@ -20,6 +20,9 @@ Sitio de documentación y portfolio **Beasty Components** (marca de bauflow) hec
 | `npm run doc:sync` | Informar de qué documentación se ha quedado atrás respecto al proyecto Unity |
 | `npm run doc:shots` | Regenerar `docs/SCREENSHOTS.md` (guion de capturas) desde las páginas + `docs/screenshots.json` |
 | `npm run doc:pdf` | Generar los PDF de docs básicas por asset (lee `dist/`: ejecutar DESPUÉS del build) y copiarlos al proyecto Unity |
+| `npm test` | Tests unitarios (`node --test tests/unit/`), incluida la guardia de contenido |
+| `npm run test:dist` | Tests sobre el HTML generado (`tests/dist/`): ejecutar DESPUÉS del build |
+| `npm run content:baseline` | Regenerar la línea base de contenido (`tests/fixtures/content-baseline.json`) tras un cambio de texto INTENCIONADO |
 
 ## Estructura
 
@@ -90,8 +93,16 @@ scripts/
 ├── doc-index.mjs         → Genera docs/DOC-INDEX.md a partir de las páginas EN
 ├── sync-check.mjs        → Informa de desincronización con el proyecto Unity (changelogs + Plastic)
 ├── screenshots.mjs       → GENERA docs/SCREENSHOTS.md cruzando las páginas con docs/screenshots.json
-└── build-pdf.mjs         → GENERA un PDF de docs básicas por asset desde dist/ (npm run doc:pdf, tras build)
-                            y lo copia a Assets/BeastyComponents/<asset>/ del proyecto Unity
+├── build-pdf.mjs         → GENERA un PDF de docs básicas por asset desde dist/ (npm run doc:pdf, tras build)
+│                           y lo copia a Assets/BeastyComponents/<asset>/ del proyecto Unity
+└── content-baseline.mjs  → Línea base del contenido (ui-strings, textos de products.ts, huella de docs) para
+                            la guardia de contenido; `npm run content:baseline` la regenera
+
+tests/
+├── unit/                 → Tests `node --test` (lógica pura; Node 24 importa .ts directamente)
+│   └── content-guard.test.mjs → Falla si cambia cualquier texto existente (rework visual = sin cambios de contenido)
+├── dist/                 → Tests sobre dist/ tras el build; helpers.mjs: page(ruta), count(html, re)
+└── fixtures/content-baseline.json → GENERADO por content:baseline
 
 docs/  (documentación INTERNA del repo, no se publica)
 ├── changelogs/           → Copia EXACTA de los changelogs de los assets (SaveSystem, VN, Console): registra lo
@@ -100,6 +111,10 @@ docs/  (documentación INTERNA del repo, no se publica)
 ├── sync-state.json       → Config de sync-check.mjs: ruta del proyecto Unity, cm.exe, assets
 ├── specs/2026-07-13-portada-marca-y-humanizacion-es-design.md → Spec de la portada/marca y la
 │                           humanización ES: referencia viva de la terminología ES unificada
+├── specs/2026-11-01-rework-visual-design.md → Spec del rework visual (paleta «Rojo protagonista»,
+│                           movimiento «modo juego», portada destacado+catálogo, widgets de tienda,
+│                           escalado a muchos proyectos). Maquetas en .superpowers/ (local, ignorado)
+├── plans/2026-11-01-rework-visual.md → Plan de implementación del rework visual (12 tareas, rama Develop)
 ├── GUIA-ESTILO-DOCS.md   → Norma de estilo/estructura para toda página nueva o edición de prosa (EN canónico)
 ├── screenshots.json      → Catálogo de capturas: por imagen, prioridad, desde qué vista se toma y qué debe verse
 ├── SCREENSHOTS.md        → GENERADO (`npm run doc:shots`): guion de las 192 capturas, por producto y página
