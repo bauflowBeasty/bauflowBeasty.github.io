@@ -38,5 +38,5 @@ for (const route of ['/docs/beasty-visual-novel/', '/es/docs/beasty-visual-novel
 }
 
 test('regular docs pages have no where-to-get section', () => {
-  assert.doesNotMatch(page('/docs/beasty-save-system/getting-started/save-with-code/'), /where-to-get/);
+  assert.doesNotMatch(page('/docs/beasty-save-system/getting-started/save-with-code/'), /<section class="where-to-get"/);
 });

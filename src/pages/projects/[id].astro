@@ -1,0 +1,13 @@
+---
+/** /projects/<id>/ — generated page for every product WITHOUT docs (see ProjectPage). */
+import ProjectPage from '../../components/ProjectPage.astro';
+import { PRODUCTS, type Product } from '../../data/products';
+
+export function getStaticPaths() {
+  return PRODUCTS.filter((p) => !p.docsEntry).map((p) => ({ params: { id: p.id }, props: { product: p } }));
+}
+
+const { product } = Astro.props as { product: Product };
+---
+
+<ProjectPage product={product} lang="en" />

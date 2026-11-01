@@ -1,0 +1,135 @@
+---
+/**
+ * Generated page for a project WITHOUT docs (e.g. a mobile app): red header with
+ * cover, name, tagline, platforms and stores; its description; where to get it;
+ * the other projects. Projects with docs use their docs index instead.
+ */
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Cover from './Cover.astro';
+import PlatformBadges from './PlatformBadges.astro';
+import StoreButtons from './StoreButtons.astro';
+import WhereToGet from './WhereToGet.astro';
+import ProjectCatalog from './ProjectCatalog.astro';
+import { PRODUCTS, type Product } from '../data/products';
+import { t, type Lang } from '../data/ui-strings';
+
+interface Props {
+  product: Product;
+  lang: Lang;
+}
+
+const { product, lang } = Astro.props;
+const altHref = lang === 'en' ? `/es/projects/${product.id}/` : `/projects/${product.id}/`;
+const others = PRODUCTS.filter((p) => p.id !== product.id);
+---
+
+<BaseLayout title={`${product.name} — Beasty Components`} description={product.tagline[lang]} lang={lang} altHref={altHref}>
+  <div class="container project-page">
+    <header class="project-hero on-brand">
+      <div class="project-hero__media">
+        <Cover id={product.id} name={product.name} size="hero" eager />
+      </div>
+      <div class="project-hero__body">
+        <p class="project-hero__version">v{product.version}</p>
+        <h1>{product.name}</h1>
+        <p class="project-hero__tagline">{product.tagline[lang]}</p>
+        <PlatformBadges platforms={product.platforms} />
+        <StoreButtons product={product} lang={lang} />
+      </div>
+    </header>
+
+    <div class="project-page__content">
+      <p class="project-page__blurb">{product.blurb[lang]}</p>
+      <WhereToGet product={product} lang={lang} />
+    </div>
+
+    {
+      others.length > 0 && (
+        <div class="project-page__others">
+          <ProjectCatalog products={others} lang={lang} heading={t(lang, 'catalog.others')} />
+        </div>
+      )
+    }
+  </div>
+</BaseLayout>
+
+<style>
+  .project-page {
+    padding-block: var(--space-6) var(--space-4);
+  }
+
+  .project-hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+    gap: var(--space-6);
+    align-items: center;
+    padding: var(--space-6);
+    border-radius: calc(var(--radius-lg) + 4px);
+    background: var(--brand-surface);
+    color: var(--brand-on);
+    animation: slam 0.7s var(--ease-bounce) backwards;
+  }
+
+  .project-hero__media :global(.cover) {
+    border-radius: var(--radius-lg);
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
+    transform: rotate(-2deg);
+  }
+
+  .project-hero__body {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-3);
+  }
+
+  .project-hero__version {
+    padding: 0.2rem 0.65rem;
+    border-radius: 999px;
+    background: var(--brand-ink);
+    color: #ffffff;
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    font-weight: 700;
+  }
+
+  .project-hero h1 {
+    font-size: var(--text-xl);
+    line-height: 1.05;
+  }
+
+  .project-hero__tagline {
+    font-size: var(--text-md);
+    font-weight: 600;
+  }
+
+  /* Platform badges on red: dark pills. */
+  .project-hero.on-brand :global(.platform-badges li) {
+    background: var(--brand-ink);
+    border-color: var(--brand-ink);
+    color: #ffffff;
+  }
+
+  .project-page__content {
+    max-width: var(--prose-max);
+    margin-top: var(--space-7);
+  }
+
+  .project-page__blurb {
+    font-size: var(--text-md);
+    color: var(--text-muted);
+  }
+
+  .project-page__others {
+    margin-top: var(--space-8);
+    padding-top: var(--space-6);
+    border-top: 1px solid var(--border);
+  }
+
+  @media (max-width: 860px) {
+    .project-hero {
+      grid-template-columns: minmax(0, 1fr);
+      padding: var(--space-5);
+    }
+  }
+</style>

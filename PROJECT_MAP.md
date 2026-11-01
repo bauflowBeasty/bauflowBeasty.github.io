@@ -70,10 +70,13 @@ src/
 │   ├── index.astro           → Portada EN (usa LandingPage.astro)
 │   ├── contact.astro         → Página de contacto EN (usa ContactPage.astro)
 │   ├── docs/[...slug].astro  → Ruta dinámica de todas las docs EN
-│   └── es/                   → index.astro + contact.astro + docs/[...slug].astro (equivalentes ES)
+│   ├── projects/[id].astro   → Página generada /projects/<id>/ para cada producto SIN docsEntry (hoy ninguno)
+│   └── es/                   → index.astro + contact.astro + docs/[...slug].astro + projects/[id].astro (equivalentes ES)
 ├── components/
 │   ├── LandingPage.astro     → Portada: HomeIntro → FeaturedProject → ProjectCatalog (filtros) → EcosystemNote — EN/ES
 │   ├── ContactPage.astro     → Página de contacto: formulario de soporte vía Web3Forms — compartida EN/ES
+│   ├── ProjectPage.astro     → Página de proyecto sin docs: cabecera roja (portada, versión, plataformas, tiendas), descripción,
+│   │                           «Dónde conseguirlo» y «Otros proyectos»
 │   ├── Header.astro / Footer.astro → Cabecera: logo · Proyectos · Contacto · búsqueda · idioma · tema. Pie con tagline
 │   ├── ProjectsMenu.astro    → Desplegable «Proyectos» (<details>, funciona sin JS) con miniatura de cada proyecto
 │   ├── SiteSearch.astro      → Búsqueda global Pagefind en un diálogo: Ctrl/⌘ K; carga Pagefind al abrirse por 1.ª vez
