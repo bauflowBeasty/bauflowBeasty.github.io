@@ -4,6 +4,7 @@ import BaseLayout from './BaseLayout.astro';
 import DocSidebar from '../components/DocSidebar.astro';
 import TableOfContents from '../components/TableOfContents.astro';
 import BuyCta from '../components/BuyCta.astro';
+import WhereToGet from '../components/WhereToGet.astro';
 import { getProduct } from '../data/products';
 import { SIDEBARS } from '../data/sidebars';
 import { t, type Lang } from '../data/ui-strings';
@@ -20,7 +21,8 @@ const { Content, headings } = await render(entry);
 const rel = entry.id.replace(`${lang}/`, ''); // beasty-x/guides/page | beasty-x/index
 const productId = rel.split('/')[0] as keyof typeof SIDEBARS;
 const product = getProduct(productId)!;
-const pageSlug = rel.replace(`${productId}/`, ''); // guides/page | index
+// The glob loader ids a product's index.md as "<lang>/<product>" (no "/index").
+const pageSlug = rel === productId ? 'index' : rel.replace(`${productId}/`, ''); // guides/page | index
 
 const currentPath = Astro.url.pathname;
 const altHref = lang === 'en' ? `/es${currentPath}` : currentPath.replace(/^\/es/, '') || '/';
@@ -61,6 +63,7 @@ const crumb = `${productId} / ${pageSlug === 'index' ? 'README' : pageSlug.repla
       <div class="prose">
         <Content />
       </div>
+      {pageSlug === 'index' && <WhereToGet product={product} lang={lang} />}
       <nav class="doc-pager" aria-label="Pagination">
         {
           prev !== null ? (

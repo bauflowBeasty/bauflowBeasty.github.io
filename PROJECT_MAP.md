@@ -81,6 +81,9 @@ src/
 │   ├── TableOfContents.astro → TOC de la página actual
 │   ├── BuyCta.astro / StoreButtons.astro → Botones de compra: una pastilla con logo por tienda (negras dentro de .on-brand)
 │   ├── StoreLogo.astro       → Logo monocromo de cada tienda (Simple Icons, CC0) o bolsa genérica
+│   ├── WhereToGet.astro      → «Dónde conseguirlo» (solo en el índice de cada proyecto): widgets con permiso + resto de tiendas;
+│   │                           fuera de Pagefind y del PDF (build-pdf.mjs la elimina)
+│   ├── StoreWidget.astro     → Widget oficial de una tienda tras una fachada local (enlace sin JS; iframe al pulsar)
 │   ├── Cover.astro           → Portada 315:250 de un proyecto (thumb/card/hero) o marcador con la inicial si no hay imagen
 │   ├── PlatformBadges.astro  → Etiquetas de plataforma (Unity, Android, iOS, PC)
 │   ├── ProjectCard.astro     → Tarjeta del catálogo (portada, nombre, lema, plataformas) con inclinación 3D «modo juego»
@@ -104,6 +107,7 @@ src/
 │   └── consent.ts        → Permiso del visitante para cargar widgets (localStorage, nunca lanza)
 ├── scripts/theme-init.js → Anti-flash de tema (se ejecuta inline antes del render)
 ├── scripts/details-dismiss.ts → Cierra los <details data-dismiss> con Esc / clic fuera (menús desplegables)
+├── scripts/store-widgets.ts → Carga los widgets con permiso (recordar/retirar), variante clara/oscura según el tema
 ├── scripts/juice.ts      → Efectos de puntero: attachTilt (inclinación 3D), attachSpotlight, tiltAngles
 └── assets/               → logo-on-dark.svg, logo-on-light.svg
     └── covers/           → Portada de cada proyecto: <id del producto>.png

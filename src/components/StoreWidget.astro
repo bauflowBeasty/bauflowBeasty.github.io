@@ -1,0 +1,150 @@
+---
+/**
+ * One official store widget, behind a local facade: nothing from the store
+ * loads until the visitor allows it (store-widgets.ts swaps in the iframe).
+ * Without JavaScript the facade is simply a link to the store.
+ */
+import type { Product, StoreLink } from '../data/products';
+import { STORES } from '../data/stores';
+import { tf, type Lang } from '../data/ui-strings';
+import Cover from './Cover.astro';
+import StoreLogo from './StoreLogo.astro';
+
+interface Props {
+  link: StoreLink;
+  product: Product;
+  lang: Lang;
+}
+
+const { link, product, lang } = Astro.props;
+const store = STORES[link.store]?.label ?? link.label;
+const kind = STORES[link.store]?.widget ?? '';
+---
+
+<div class="store-widget" data-kind={kind} data-widget-id={link.widgetId} data-store-label={store}>
+  <a class="store-widget__facade" href={link.url} rel="noopener">
+    <Cover id={product.id} name={product.name} size="thumb" class="store-widget__cover" />
+    <span class="store-widget__text">
+      <span class="store-widget__store"><StoreLogo store={link.store} size={16} /> {store}</span>
+      <span class="store-widget__product">{product.name}</span>
+    </span>
+  </a>
+  <div class="store-widget__actions" hidden>
+    <button type="button" class="store-widget__load" data-widget-load>{tf(lang, 'widget.show', { store })}</button>
+    <p class="store-widget__notice">{tf(lang, 'widget.notice', { store })}</p>
+  </div>
+  <div class="store-widget__frame"></div>
+</div>
+
+<style>
+  .store-widget {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    padding: var(--space-4);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    background: var(--surface);
+  }
+
+  .store-widget__facade {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    color: var(--text);
+    text-decoration: none;
+  }
+
+  .store-widget__facade:hover {
+    text-decoration: none;
+  }
+
+  .store-widget__facade :global(.store-widget__cover) {
+    width: 72px;
+    flex: none;
+    border-radius: var(--radius-sm);
+    transition: transform var(--dur-base) var(--ease-bounce);
+  }
+
+  .store-widget__facade:hover :global(.store-widget__cover) {
+    transform: rotate(-3deg) scale(1.05);
+  }
+
+  .store-widget__text {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+  }
+
+  .store-widget__store {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-weight: 800;
+  }
+
+  .store-widget__product {
+    color: var(--text-muted);
+    font-size: var(--text-sm);
+  }
+
+  .store-widget__actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-2) var(--space-4);
+  }
+
+  .store-widget__actions[hidden] {
+    display: none;
+  }
+
+  .store-widget__load {
+    padding: 0.5rem 1rem;
+    border-radius: var(--radius-md);
+    background: var(--accent);
+    color: var(--accent-on);
+    font-weight: 800;
+    font-size: var(--text-sm);
+    transition: transform var(--dur-fast) var(--ease-bounce), box-shadow var(--dur-base) var(--ease-out);
+  }
+
+  .store-widget__load:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-glow);
+  }
+
+  .store-widget__load:active {
+    animation: squash 0.3s var(--ease-bounce);
+  }
+
+  .store-widget__notice {
+    flex: 1 1 14rem;
+    margin: 0;
+    color: var(--text-faint);
+    font-size: var(--text-xs);
+  }
+
+  .store-widget__frame:empty {
+    display: none;
+  }
+
+  .store-widget__frame :global(iframe) {
+    display: block;
+    max-width: 100%;
+    border: 0;
+    border-radius: var(--radius-md);
+    animation: pop 0.4s var(--ease-bounce) backwards;
+  }
+
+  /* Once the real widget is in, the facade steps aside. */
+  .store-widget:global(.is-loaded) .store-widget__facade,
+  .store-widget:global(.is-loaded) .store-widget__actions {
+    display: none;
+  }
+
+  .store-widget:global(.is-loaded) {
+    padding: var(--space-2);
+    align-items: flex-start;
+  }
+</style>

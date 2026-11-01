@@ -70,6 +70,10 @@ function extraerCapitulo(producto, pagina) {
 
   cuerpo = cuerpo.replace(/<p class="machine doc-crumb">[\s\S]*?<\/p>/g, '');
   cuerpo = cuerpo.replace(/<aside class="buy-cta"[\s\S]*?<\/aside>/g, '');
+  // «Dónde conseguirlo» (widgets de tienda) no tiene sentido en un PDF.
+  cuerpo = cuerpo.replace(/<section class="where-to-get"[\s\S]*?<\/section>/g, '');
+  // Los scripts de la web (widgets, botón Copiar…) no pintan nada en el PDF.
+  cuerpo = cuerpo.replace(/<script\b[\s\S]*?<\/script>/g, '');
 
   // Imágenes: resolver desde public/docs-images; una captura que no existe se omite.
   let omitidas = 0;
