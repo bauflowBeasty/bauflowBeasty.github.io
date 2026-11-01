@@ -1,0 +1,61 @@
+/* ============================================================
+   Motion «modo juego»: shared keyframes + entrance utility.
+   RULE: entrances use animation-fill-mode BACKWARDS, never both/forwards:
+   a retained transform would override hover transforms afterwards.
+   ============================================================ */
+
+@keyframes rise {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: none; }
+}
+
+@keyframes pop {
+  0% { opacity: 0; transform: scale(0.85); }
+  70% { opacity: 1; transform: scale(1.04); }
+  100% { transform: scale(1); }
+}
+
+@keyframes slam {
+  0% { opacity: 0; transform: translateX(-40px) scale(0.96); }
+  100% { opacity: 1; transform: none; }
+}
+
+@keyframes spin-in {
+  from { opacity: 0; transform: rotate(-180deg) scale(0.4); }
+  to { opacity: 1; transform: none; }
+}
+
+@keyframes wiggle {
+  0%, 100% { transform: rotate(0); }
+  25% { transform: rotate(-6deg) scale(1.06); }
+  75% { transform: rotate(5deg) scale(1.06); }
+}
+
+@keyframes squash {
+  0% { transform: scale(1); }
+  40% { transform: scale(1.08, 0.88); }
+  100% { transform: scale(1); }
+}
+
+/* Entrance: set --i (stagger index), optionally --reveal-name / --reveal-base. */
+.reveal {
+  animation: var(--reveal-name, rise) 0.55s var(--ease-bounce) backwards;
+  animation-delay: calc(var(--reveal-base, 0ms) + var(--i, 0) * 70ms);
+}
+
+/* Respect the OS setting: everything still renders, nothing moves. */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-delay: 0ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    transition-delay: 0ms !important;
+  }
+}

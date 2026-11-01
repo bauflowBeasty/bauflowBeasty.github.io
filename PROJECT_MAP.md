@@ -29,7 +29,7 @@ Sitio de documentación y portfolio **Beasty Components** (marca de bauflow) hec
 
 ```
 astro.config.mjs          → Config Astro: site URL, temas Shiki (github-light/dark)
-package.json              → Deps: astro 5, fuentes (Bricolage Grotesque, IBM Plex), pagefind, puppeteer-core
+package.json              → Deps: astro 5, fuentes (Unbounded, Manrope, JetBrains Mono), pagefind, puppeteer-core
 tsconfig.json             → Config TypeScript
 HOW-TO-ADD-PROJECT.md     → Guía manual: cómo agregar un producto nuevo al sitio
 FLUJO-DE-TRABAJO.md       → Guía para Álvaro: cómo se mantiene la doc entre los dos proyectos (referencia humana)
@@ -83,7 +83,10 @@ src/
 │   ├── HeroScript.astro      → Animación/script del hero
 │   └── EcosystemNote.astro   → Nota de integración entre productos Beasty
 ├── styles/
-│   ├── tokens.css        → Design tokens (colores, espaciado, tipografía) — base del sistema visual
+│   ├── tokens.css        → Design tokens (paleta «Rojo protagonista», espaciado, tipografía, easing) — base del
+│   │                       sistema visual; el contraste AA lo vigila tests/unit/contrast.test.mjs
+│   ├── motion.css        → Keyframes «modo juego» (rise, pop, slam, spin-in, wiggle, squash), utilidad .reveal
+│   │                       y la regla global de prefers-reduced-motion
 │   ├── base.css / typography.css → Reset + tipografía global
 │   ├── landing.css       → Estilos de la portada
 │   └── doc.css           → Estilos de páginas de documentación
@@ -92,6 +95,7 @@ src/
 │   ├── widgets.ts        → URLs y tamaños de los widgets de Asset Store e itch.io por tema
 │   └── consent.ts        → Permiso del visitante para cargar widgets (localStorage, nunca lanza)
 ├── scripts/theme-init.js → Anti-flash de tema (se ejecuta inline antes del render)
+├── scripts/juice.ts      → Efectos de puntero: attachTilt (inclinación 3D), attachSpotlight, tiltAngles
 └── assets/               → logo-on-dark.svg, logo-on-light.svg
     └── covers/           → Portada de cada proyecto: <id del producto>.png
 
