@@ -1,0 +1,137 @@
+---
+/**
+ * Catalog card: cover, name, tagline, platform badges. The whole card links to
+ * the project page. «Modo juego»: 3D tilt following the pointer + shine + lift
+ * (attachTilt writes --rx/--ry/--sx/--sy). The featured project's card starts
+ * hidden: it is already shown above the grid (see isCardVisible).
+ */
+import type { Product } from '../data/products';
+import type { Lang } from '../data/ui-strings';
+import { projectHref } from '../lib/catalog';
+import Cover from './Cover.astro';
+import PlatformBadges from './PlatformBadges.astro';
+
+interface Props {
+  product: Product;
+  lang: Lang;
+  featured: boolean;
+  index: number;
+}
+
+const { product, lang, featured, index } = Astro.props;
+---
+
+<a
+  class="project-card reveal"
+  href={projectHref(product, lang)}
+  data-platforms={product.platforms.join(',')}
+  data-featured={featured ? '' : undefined}
+  hidden={featured}
+  style={`--i:${index}`}
+  data-tilt
+>
+  <div class="project-card__media">
+    <Cover id={product.id} name={product.name} size="card" />
+  </div>
+  <div class="project-card__body">
+    <h3>{product.name}</h3>
+    <p class="project-card__tagline">{product.tagline[lang]}</p>
+    <PlatformBadges platforms={product.platforms} />
+  </div>
+  <span class="project-card__shine" aria-hidden="true"></span>
+</a>
+
+<style>
+  .project-card {
+    --reveal-base: 150ms;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--text);
+    text-decoration: none;
+    transform: perspective(700px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)) translateY(var(--ty, 0))
+      scale(var(--sc, 1));
+    transition:
+      transform var(--dur-slow) var(--ease-bounce),
+      box-shadow var(--dur-base) var(--ease-out),
+      border-color var(--dur-base) var(--ease-out);
+  }
+
+  .project-card[hidden] {
+    display: none;
+  }
+
+  .project-card:hover {
+    --ty: -8px;
+    --sc: 1.03;
+    text-decoration: none;
+    border-color: var(--accent-strong);
+    box-shadow: var(--shadow-glow);
+    /* Follow the pointer quickly; spring back slowly (transition above) when leaving. */
+    transition:
+      transform 120ms ease-out,
+      box-shadow var(--dur-base) var(--ease-out),
+      border-color var(--dur-base) var(--ease-out);
+  }
+
+  .project-card:focus-visible {
+    --ty: -8px;
+    --sc: 1.03;
+    --rx: 0deg;
+    --ry: 0deg;
+    border-color: var(--accent-strong);
+    box-shadow: var(--shadow-glow);
+    outline: 2px solid var(--accent-strong);
+    outline-offset: 3px;
+  }
+
+  .project-card__media {
+    overflow: hidden;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .project-card__media :global(.cover) {
+    transition: transform var(--dur-slow) var(--ease-out);
+  }
+
+  .project-card:hover .project-card__media :global(.cover) {
+    transform: scale(1.08);
+  }
+
+  .project-card__body {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    gap: var(--space-2);
+    padding: var(--space-4) var(--space-4) var(--space-5);
+  }
+
+  .project-card__body h3 {
+    font-size: var(--text-md);
+    font-weight: 700;
+  }
+
+  .project-card__tagline {
+    flex: 1;
+    color: var(--text-muted);
+    font-size: var(--text-sm);
+    line-height: 1.45;
+  }
+
+  .project-card__shine {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0;
+    background: radial-gradient(220px circle at var(--sx, 50%) var(--sy, 50%), rgba(255, 255, 255, 0.16), transparent 65%);
+    transition: opacity var(--dur-base) var(--ease-out);
+  }
+
+  .project-card:hover .project-card__shine {
+    opacity: 1;
+  }
+</style>

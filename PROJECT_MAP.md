@@ -83,7 +83,9 @@ src/
 │   ├── StoreLogo.astro       → Logo monocromo de cada tienda (Simple Icons, CC0) o bolsa genérica
 │   ├── Cover.astro           → Portada 315:250 de un proyecto (thumb/card/hero) o marcador con la inicial si no hay imagen
 │   ├── PlatformBadges.astro  → Etiquetas de plataforma (Unity, Android, iOS, PC)
-│   ├── ProductCard.astro     → Tarjeta de producto en la portada
+│   ├── ProjectCard.astro     → Tarjeta del catálogo (portada, nombre, lema, plataformas) con inclinación 3D «modo juego»
+│   ├── ProjectCatalog.astro  → Rejilla de tarjetas + filtros por plataforma generados de los datos (ocultos sin JS o
+│   │                           con una sola plataforma); el destacado se oculta en «Todo»
 │   ├── LangSwitch.astro / ThemeToggle.astro → Cambio idioma / tema claro-oscuro
 │   ├── HeroScript.astro      → Animación/script del hero
 │   └── EcosystemNote.astro   → Nota de integración entre productos Beasty

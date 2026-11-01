@@ -1,9 +1,10 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import HeroScript from './HeroScript.astro';
-import ProductCard from './ProductCard.astro';
+import ProjectCatalog from './ProjectCatalog.astro';
 import EcosystemNote from './EcosystemNote.astro';
 import { PRODUCTS } from '../data/products';
+import { getFeatured } from '../lib/catalog';
 import { t, type Lang } from '../data/ui-strings';
 import '../styles/landing.css';
 
@@ -13,6 +14,7 @@ interface Props {
 
 const { lang } = Astro.props;
 const altHref = lang === 'en' ? '/es/' : '/';
+const featured = getFeatured(PRODUCTS);
 ---
 
 <BaseLayout
@@ -30,12 +32,17 @@ const altHref = lang === 'en' ? '/es/' : '/';
     <HeroScript lang={lang} />
   </section>
 
-  <section class="products container" id="products">
-    <h2 class="visually-hidden">{t(lang, 'products.heading')}</h2>
-    <div class="product-grid">
-      {PRODUCTS.map((p, i) => <ProductCard product={p} lang={lang} index={i} />)}
-    </div>
-  </section>
+  <div class="products container" id="products">
+    <ProjectCatalog
+      products={PRODUCTS}
+      lang={lang}
+      featuredId={featured.id}
+      withFilters
+      id="catalog"
+      heading={t(lang, 'products.heading')}
+      hideHeading
+    />
+  </div>
 
   <div class="container">
     <EcosystemNote lang={lang} />

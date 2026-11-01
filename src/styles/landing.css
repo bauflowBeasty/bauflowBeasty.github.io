@@ -24,12 +24,6 @@
   padding-block: var(--space-5);
 }
 
-.product-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(19rem, 1fr));
-  gap: var(--space-5);
-}
-
 .ecosystem {
   margin-block: var(--space-8) var(--space-6);
 }
