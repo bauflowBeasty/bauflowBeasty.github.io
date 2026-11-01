@@ -74,7 +74,9 @@ src/
 ├── components/
 │   ├── LandingPage.astro     → Portada completa (hero, grid de productos) — compartida EN/ES
 │   ├── ContactPage.astro     → Página de contacto: formulario de soporte vía Web3Forms — compartida EN/ES
-│   ├── Header.astro / Footer.astro
+│   ├── Header.astro / Footer.astro → Cabecera: logo · Proyectos · Contacto · búsqueda · idioma · tema. Pie con tagline
+│   ├── ProjectsMenu.astro    → Desplegable «Proyectos» (<details>, funciona sin JS) con miniatura de cada proyecto
+│   ├── SiteSearch.astro      → Búsqueda global Pagefind en un diálogo: Ctrl/⌘ K; carga Pagefind al abrirse por 1.ª vez
 │   ├── DocSidebar.astro      → Sidebar de navegación de docs
 │   ├── TableOfContents.astro → TOC de la página actual
 │   ├── BuyCta.astro / StoreButtons.astro → Botones de compra: una pastilla con logo por tienda (negras dentro de .on-brand)
@@ -98,6 +100,7 @@ src/
 │   ├── widgets.ts        → URLs y tamaños de los widgets de Asset Store e itch.io por tema
 │   └── consent.ts        → Permiso del visitante para cargar widgets (localStorage, nunca lanza)
 ├── scripts/theme-init.js → Anti-flash de tema (se ejecuta inline antes del render)
+├── scripts/details-dismiss.ts → Cierra los <details data-dismiss> con Esc / clic fuera (menús desplegables)
 ├── scripts/juice.ts      → Efectos de puntero: attachTilt (inclinación 3D), attachSpotlight, tiltAngles
 └── assets/               → logo-on-dark.svg, logo-on-light.svg
     └── covers/           → Portada de cada proyecto: <id del producto>.png

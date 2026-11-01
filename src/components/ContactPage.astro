@@ -109,17 +109,23 @@ const ACCESS_KEY = '7cdfb1c9-5878-4bd4-954c-d3093871c563';
     align-self: flex-start;
     margin-top: var(--space-4);
     font: inherit;
-    font-weight: 600;
-    color: #fff;
-    background: var(--accent-strong);
+    font-weight: 700;
+    color: var(--accent-on);
+    background: var(--accent);
     border: 0;
     border-radius: var(--radius-md);
     padding: var(--space-2) var(--space-5);
     cursor: pointer;
+    transition: transform var(--dur-fast) var(--ease-bounce), box-shadow var(--dur-base) var(--ease-out);
   }
 
   button:hover {
-    background: var(--accent);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-glow);
+  }
+
+  button:active {
+    animation: squash 0.3s var(--ease-bounce);
   }
 
   button:disabled {

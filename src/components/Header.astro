@@ -1,7 +1,12 @@
 ---
+/**
+ * Site header: logo · Projects dropdown · Contact · search (Ctrl K) · language · theme.
+ * No per-product links: the Projects dropdown scales to any number of projects.
+ */
 import ThemeToggle from './ThemeToggle.astro';
 import LangSwitch from './LangSwitch.astro';
-import { PRODUCTS } from '../data/products';
+import ProjectsMenu from './ProjectsMenu.astro';
+import SiteSearch from './SiteSearch.astro';
 import { t, type Lang } from '../data/ui-strings';
 import logoOnDark from '../assets/logo-on-dark.svg';
 import logoOnLight from '../assets/logo-on-light.svg';
@@ -13,11 +18,6 @@ interface Props {
 
 const { lang, altHref } = Astro.props;
 const prefix = lang === 'es' ? '/es' : '';
-const shortNames: Record<string, string> = {
-  'beasty-visual-novel': 'Visual Novel',
-  'beasty-save-system': 'Save System',
-  'beasty-console': 'Console',
-};
 ---
 
 <header class="site-header">
@@ -27,15 +27,13 @@ const shortNames: Record<string, string> = {
       <img class="logo logo-light" src={logoOnLight.src} alt={t(lang, 'logo.alt')} width="110" />
     </a>
 
-    <nav class="product-nav" aria-label="Products">
-      {
-        PRODUCTS.map((p) => (
-          <a href={`${prefix}${p.docsEntry}`}>{shortNames[p.id]}</a>
-        ))
-      }
+    <nav class="main-nav" aria-label={t(lang, 'nav.projects')}>
+      <ProjectsMenu lang={lang} />
+      <a class="nav-link" href={`${prefix}/contact/`}>{t(lang, 'contact.title')}</a>
     </nav>
 
     <div class="header-tools">
+      <SiteSearch lang={lang} />
       <LangSwitch lang={lang} altHref={altHref} />
       <ThemeToggle lang={lang} />
     </div>
@@ -56,7 +54,7 @@ const shortNames: Record<string, string> = {
   .header-row {
     display: flex;
     align-items: center;
-    gap: var(--space-5);
+    gap: var(--space-4);
     height: 100%;
   }
 
@@ -71,38 +69,49 @@ const shortNames: Record<string, string> = {
     width: auto;
   }
 
+  .brand:hover .logo {
+    animation: wiggle 0.45s ease;
+  }
+
   :global(html[data-theme='dark']) .logo-light,
   :global(html[data-theme='light']) .logo-dark {
     display: none;
   }
 
-  .product-nav {
+  .main-nav {
     display: flex;
-    gap: var(--space-4);
-    margin-left: var(--space-4);
-    font-size: var(--text-sm);
-    font-weight: 500;
+    align-items: center;
+    gap: var(--space-1);
   }
 
-  .product-nav a {
+  .nav-link {
+    padding: var(--space-1) var(--space-3);
+    border-radius: var(--radius-md);
     color: var(--text-muted);
-    padding: var(--space-1) 0;
+    font-size: var(--text-sm);
+    font-weight: 700;
   }
 
-  .product-nav a:hover {
+  .nav-link:hover {
     color: var(--text);
+    background: var(--accent-soft);
     text-decoration: none;
   }
 
   .header-tools {
     display: flex;
     align-items: center;
-    gap: var(--space-3);
+    gap: var(--space-2);
     margin-left: auto;
   }
 
-  @media (max-width: 720px) {
-    .product-nav {
+  @media (max-width: 640px) {
+    .header-row {
+      gap: var(--space-2);
+    }
+
+    /* Contact stays reachable from the footer. */
+    .nav-link {
       display: none;
     }
   }

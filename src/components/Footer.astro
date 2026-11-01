@@ -25,10 +25,23 @@ const year = new Date().getFullYear();
 
 <style>
   .site-footer {
+    position: relative;
     margin-top: var(--space-9);
     border-top: 1px solid var(--border);
     background: var(--surface);
-    padding-block: var(--space-6);
+    padding-block: var(--space-7) var(--space-6);
+  }
+
+  /* Brand edge: a short red bar on the footer's top border. */
+  .site-footer::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: max(1.25rem, calc((100% - var(--content-max)) / 2));
+    width: 4.5rem;
+    height: 3px;
+    border-radius: 2px;
+    background: var(--accent-strong);
   }
 
   .footer-row {
@@ -41,7 +54,8 @@ const year = new Date().getFullYear();
 
   .footer-tagline {
     font-family: var(--font-display);
-    font-weight: 600;
+    font-weight: 700;
+    font-size: var(--text-md);
     margin-bottom: var(--space-2);
   }
 

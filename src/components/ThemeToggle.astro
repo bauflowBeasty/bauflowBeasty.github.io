@@ -36,6 +36,10 @@ const { lang } = Astro.props;
     background: var(--accent-soft);
   }
 
+  .theme-toggle svg {
+    animation: spin-in 0.45s var(--ease-bounce) backwards;
+  }
+
   /* Show the icon of the theme you would switch TO */
   :global(html[data-theme='dark']) .icon-moon,
   :global(html[data-theme='light']) .icon-sun {

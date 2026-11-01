@@ -1,0 +1,136 @@
+---
+/**
+ * «Projects» dropdown in the header: every product with its cover thumbnail.
+ * Built on <details>, so it opens without JavaScript; scales to many projects
+ * (the list scrolls instead of breaking the header).
+ */
+import { PRODUCTS } from '../data/products';
+import { projectHref } from '../lib/catalog';
+import { t, type Lang } from '../data/ui-strings';
+import Cover from './Cover.astro';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+---
+
+<details class="projects-menu" data-dismiss>
+  <summary>
+    <span>{t(lang, 'nav.projects')}</span>
+    <svg class="chevron" width="12" height="12" viewBox="0 0 12 12" aria-hidden="true">
+      <path d="M2.5 4.5 6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path>
+    </svg>
+  </summary>
+  <ul class="projects-menu__list">
+    {
+      PRODUCTS.map((p, i) => (
+        <li style={`--i:${i}`}>
+          <a href={projectHref(p, lang)}>
+            <Cover id={p.id} name={p.name} size="thumb" class="projects-menu__thumb" />
+            <span>{p.name}</span>
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</details>
+
+<script>
+  import { initDetailsDismiss } from '../scripts/details-dismiss';
+  initDetailsDismiss();
+</script>
+
+<style>
+  .projects-menu {
+    position: relative;
+  }
+
+  summary {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-1) var(--space-3);
+    border-radius: var(--radius-md);
+    color: var(--text-muted);
+    font-size: var(--text-sm);
+    font-weight: 700;
+    cursor: pointer;
+    list-style: none;
+    user-select: none;
+    transition:
+      color var(--dur-fast) var(--ease-out),
+      background var(--dur-fast) var(--ease-out);
+  }
+
+  summary::-webkit-details-marker {
+    display: none;
+  }
+
+  summary:hover,
+  .projects-menu[open] summary {
+    color: var(--text);
+    background: var(--accent-soft);
+  }
+
+  .chevron {
+    transition: transform var(--dur-base) var(--ease-bounce);
+  }
+
+  .projects-menu[open] .chevron {
+    transform: rotate(180deg);
+  }
+
+  .projects-menu__list {
+    position: absolute;
+    top: calc(100% + var(--space-2));
+    left: 0;
+    z-index: 50;
+    width: min(20rem, calc(100vw - 2rem));
+    max-height: min(70vh, 30rem);
+    overflow-y: auto;
+    margin: 0;
+    padding: var(--space-2);
+    list-style: none;
+    background: var(--surface);
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-pop);
+    transform-origin: top left;
+    animation: pop 0.3s var(--ease-bounce) backwards;
+  }
+
+  .projects-menu__list li {
+    animation: rise 0.35s var(--ease-bounce) backwards;
+    animation-delay: calc(var(--i, 0) * 40ms);
+  }
+
+  .projects-menu__list a {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    padding: var(--space-2);
+    border-radius: var(--radius-md);
+    color: var(--text);
+    font-weight: 600;
+    font-size: var(--text-sm);
+    transition:
+      background var(--dur-fast) var(--ease-out),
+      transform var(--dur-fast) var(--ease-bounce);
+  }
+
+  .projects-menu__list a:hover,
+  .projects-menu__list a:focus-visible {
+    text-decoration: none;
+    background: var(--accent-soft);
+    transform: translateX(3px);
+  }
+
+  .projects-menu__list :global(.projects-menu__thumb) {
+    width: 52px;
+    flex: none;
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+  }
+</style>
