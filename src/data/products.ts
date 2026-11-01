@@ -26,7 +26,7 @@ export const PRODUCTS: Product[] = [
   {
     id: 'beasty-visual-novel',
     name: 'Beasty Visual Novel',
-    version: '1.0.1',
+    version: '1.1.0',
     tagline: {
       en: 'You write the story. It plays it.',
       es: 'Tú escribes la historia. Él la reproduce.',
@@ -41,7 +41,9 @@ export const PRODUCTS: Product[] = [
         label: 'Unity Asset Store',
         url: 'https://assetstore.unity.com/packages/slug/393138',
       },
-      { store: 'itch', label: 'itch.io', url: null },
+      { store: 'itch', 
+        label: 'itch.io',
+        url: "https://beastycomponents.itch.io/beasty-visual-novel" },
     ],
     docsEntry: '/docs/beasty-visual-novel/',
   },

@@ -1,30 +1,39 @@
 ---
 title: "Localización"
-description: "Traduce un juego terminado: las dos tablas, el rastreo de traducciones obsoletas, importar y exportar hojas de cálculo, y el cambio de idioma en el juego."
+description: "Traduce un juego terminado: las tablas de traducción, el rastreo de traducciones obsoletas, importar y exportar hojas de cálculo, y el cambio de idioma."
 ---
 
-Traduce un juego que ya está escrito. Esta página cubre las dos tablas de traducción, cómo agregar y eliminar
+Traduce un juego que ya está escrito. Esta página cubre las tablas de traducción, cómo agregar y eliminar
 idiomas, cómo el editor te indica qué traducciones quedaron desactualizadas, la importación y exportación de
 hojas de cálculo, la localización de la interfaz, y el cambio de idioma en plena partida.
 
-## Las dos tablas
+## Las tablas de traducción
 
-Hay exactamente dos assets `LocalizationTable` en todo el juego, y nunca se mezclan.
+Hay cuatro assets `LocalizationTable` en todo el juego, y nunca se mezclan.
 
-![La pestaña Localization, con el alternador Story / UI (global) arriba](/docs-images/beasty-visual-novel/vn-localization-tabs.png)
+![La pestaña Localization, con las pestañas Story, UI, Game UI e Items arriba](/docs-images/beasty-visual-novel/vn-localization-tabs.png)
 
 | Tabla | Dónde vive | Qué contiene |
 |---|---|---|
-| La tabla de historia | En el `VNContext` (`localization`), así que todas las DialogueScene que comparten el contexto comparten también la tabla | Líneas de diálogo, etiquetas de elección, etiquetas del menú de conversación, texto de ítems y misiones — todo lo que la historia referencia por clave |
-| La tabla global de UI | `VNSettings.uiLocalization`, en `Resources` | Menús, HUD, botones, diálogos de confirmación — la interfaz |
+| La tabla de historia | En el `VNContext` (`localization`), así que todas las DialogueScene que comparten el contexto comparten también la tabla | Líneas de diálogo, etiquetas de elección, etiquetas del menú de conversación — todo lo que la historia referencia por clave |
+| La tabla global de UI | `VNSettings.uiLocalization`, creada en `Assets/Resources/` de tu proyecto | Menús, botones, diálogos de confirmación — los textos de interfaz de serie |
+| La tabla de textos del juego | En el `VNContext` (`Game Text Localization`) | Los textos que escribes para las pantallas propias del juego: textos del HUD, nombres de salas, misiones, nombres de estadísticas y variables, nombres del tiempo. Consulta [La pestaña Game UI](#la-pestaña-game-ui). |
+| La tabla de ítems | En el `VNContext` (`Item Localization`) | Nombres, descripciones y mensajes de «no se puede usar» de los ítems. Consulta [La pestaña Items](#la-pestaña-items). |
 
-Edita ambas en la pestaña **Localization** de la ventana de Beasty VN (`Tools > Beasty VN > Editor`). El
-alternador **Story / UI (global)** de la parte superior cambia entre ellas. Si un proyecto todavía no tiene
-tabla, la pestaña ofrece **Create & Assign New Table**.
+Edítalas todas en la sección **Localization** de la ventana de Beasty VN (`Tools > Beasty VN > Editor`), cuyas
+pestañas —**Story**, **UI**, **Game UI** e **Items**— cambian entre ellas. Si un proyecto todavía no tiene
+tabla, la pestaña ofrece crearla.
+
+**La tabla de UI no forma parte del paquete.** Cuando el editor carga y el proyecto no tiene ninguna, se crea
+en `Assets/Resources/UILocalization.asset`, ya rellena con todos los textos de interfaz de serie en inglés y
+español. Actualizar o reimportar el paquete nunca sobrescribe tus traducciones de UI: los textos de serie que
+añade una versión nueva se mezclan la próxima vez que carga el editor, y un texto que editaste nunca se toca.
+Una tabla que ya tengas sigue funcionando esté donde esté. Consulta
+[Instalación](/es/docs/beasty-visual-novel/getting-started/installation/#tus-ajustes-y-tu-tabla-de-ui-se-crean-solos).
 
 La tabla global de la interfaz además **se repara sola**: cada setup de escena y cada pasada de
 **Auto-wire / Repair** la comprueban. Una tabla que existe pero está sin asignar se adopta y se recablea
-automáticamente, y solo cuando no existe ninguna se crea una nueva junto al asset de VNSettings,
+automáticamente, y solo cuando no existe ninguna se crea una nueva en `Assets/Resources/`,
 pre-sembrada con los textos de interfaz integrados. La comprobación solo mezcla — las claves
 personalizadas y cada traducción editada no se tocan nunca. Lo que no puede hacer es resucitar el
 contenido propio de una tabla **borrada**: la regeneración restaura los textos integrados, no tus claves y
@@ -38,8 +47,8 @@ de esa clave en cada idioma. Por eso traducir siempre se reduce a "agregar una c
 La lista `languages` de una tabla es una lista ordenada de códigos de idioma, y **el índice 0 es el idioma de
 origen** — aquel en el que escribes el juego. Todos los demás son una traducción de este.
 
-Un idioma nunca se agrega a una sola tabla. Agregar, eliminar, restaurar y renombrar se aplican a la tabla de
-historia Y a la tabla global de UI a la vez, y también actualizan la lista de idiomas soportados del contexto
+Un idioma nunca se agrega a una sola tabla. Agregar, eliminar, restaurar y renombrar se aplican a todas las
+tablas a la vez —historia, UI, textos del juego e ítems—, y también actualizan la lista de idiomas soportados del contexto
 y `VNSettings.defaultLanguage`. Por eso el desplegable de idioma dentro del juego siempre ofrece exactamente
 los idiomas que tiene la historia.
 
@@ -171,6 +180,79 @@ Hay dos cosas que la importación hace deliberadamente:
   conserva su huella digital registrada. Solo una traducción cuyo texto realmente cambió se vuelve a marcar
   como al día respecto del origen actual.
 
+## La pestaña Game UI
+
+Los textos que escribes para las pantallas propias del juego se traducen en la pestaña **Game UI**. Viven en
+la tabla de textos del juego, que se crea y se mantiene al día sola: no hay claves que crear a mano.
+
+![La pestaña Game UI: filas agrupadas en Time, Screens, Rooms, Quests y Character stats](/docs-images/beasty-visual-novel/vn-localization-game-ui.png)
+
+Las filas van agrupadas, y el desplegable de grupo filtra la grilla:
+
+| Grupo | Qué contiene |
+|---|---|
+| **Time** | Nombres de los momentos del día, los días de la semana y las estaciones. |
+| **Screens** | Textos de los elementos del HUD, y los de sus casos condicionales. |
+| **Rooms** | Nombres de las salas, que se ven en los selectores de sala y en la pantalla de rutina del personaje. |
+| **Quests** | Títulos, descripciones, textos de objetivos y pistas de las misiones. |
+| **Character stats** | Los nombres visibles de las estadísticas, del **Display name** de cada campo. |
+| **Global variables** | Los nombres visibles de las variables globales que se usan en avisos y pistas. |
+
+- **La columna 0 es tu idioma por defecto** (`VNSettings > Default Language`). Refleja lo que escribiste en
+  los editores y aquí es de solo lectura: edita el texto donde lo escribes. Los demás idiomas son columnas
+  normales y editables.
+- Donde una traducción está vacía, o falta la tabla, el juego muestra el texto que escribiste, nunca el texto
+  de otro idioma.
+- Editar el texto de origen marca como obsoletas las traducciones de esa fila, como en las pestañas Story y UI.
+- La pestaña tiene importación y exportación CSV y un panel **Unused keys** como las demás, y cada edición se
+  puede deshacer. Los idiomas que añades, renombras o borras en otro sitio también llegan a esta tabla.
+- La tabla se refresca al abrir la pestaña, con su botón **Refresh** y antes de cada build.
+
+Si tu idioma por defecto no es la columna 0 —porque lo cambiaste después de traducir, por ejemplo—, un aviso
+ofrece **Make <language> the source**. Pide confirmación, reordena las columnas y sustituye las traducciones
+que ya tuviera ese idioma por tus textos. Hasta entonces el juego deja este aviso una vez por tabla:
+*"Game text table: the default language is '<default>' but column 0 is '<old>'. Open Localization > Game UI
+and use 'Make <default> the source' to reorder (its existing translations will be replaced by your texts)."*
+
+### Qué sigue a un renombrado
+
+Renombrar una pantalla, un elemento de pantalla, una misión, un objetivo de misión o una variable se lleva sus
+traducciones consigo. Los casos condicionales de un elemento del HUD tienen un id estable, así que una
+traducción sigue a su caso aunque los reordenes. Renombrar un nombre del tiempo (momento del día, día de la
+semana, estación), o un id que no tiene renombrado en cascada, deja las traducciones antiguas en **Unused
+keys**, listas para copiarlas o borrarlas.
+
+El **Display name** de un personaje no se traduce; consulta [Personajes](/es/docs/beasty-visual-novel/world/characters/#identidad).
+
+### Las etiquetas de pantalla tienen una sola fuente
+
+Las etiquetas de los elementos de pantalla —del HUD y del teléfono— solo se traducen en la pestaña Game UI. La
+pasada de arranque que enlaza las etiquetas de menú con los textos de UI de serie (consulta
+[Escenas hechas antes de todo esto](#escenas-hechas-antes-de-todo-esto)) se las salta, así que una etiqueta del
+HUD que dice "Settings" nunca queda sobrescrita por la traducción de serie de "Settings" al cambiar de idioma.
+Las etiquetas de menú fuera de las pantallas se enlazan como siempre.
+
+## La pestaña Items
+
+Los nombres, descripciones y mensajes de «no se puede usar» de los ítems tienen su propia tabla y su propia
+pestaña **Items**. Se escriben en la ventana Items o directamente en esta pestaña. La columna 0 es tu idioma
+por defecto.
+
+- La pestaña lista todos los textos de ítems, también los que nadie ha escrito aún, como el mensaje de «no se
+  puede usar» de un ítem. Salen como filas vacías y reciben su entrada cuando escribes en ellas: un paso de
+  Ctrl+Z.
+- La ventana Items de un proyecto nuevo muestra la primera vez un botón **Create items table**.
+- En el juego, un texto de ítem se busca en la tabla de ítems, después en la tabla de UI, y si no aparece usa
+  el id del ítem (para el nombre), nada (para la descripción) o el mensaje de serie (para «no se puede usar»).
+  Los `[token]` de los textos de ítems se siguen expandiendo.
+
+**Los proyectos que guardaban los textos de ítems en la tabla de UI migran solos**, sin perder nada —todos los
+idiomas y el estado de cada traducción—, al abrir la ventana Items o cualquier pestaña de Localization, y antes
+de cada build. Ctrl+Z deshace la migración. El texto de la primera columna de la antigua tabla de UI pasa a ser
+el texto de origen solo si la celda del idioma por defecto de la tabla de ítems estaba vacía. Una clave que
+todavía se necesita en otro sitio —un contexto aún sin migrar, o una etiqueta de menú— se queda también en la
+tabla de UI.
+
 ## Localizar la interfaz
 
 El texto de la historia se localiza solo: un nodo guarda una clave, y el juego busca el texto del idioma
@@ -238,7 +320,8 @@ idioma) y rellena los valores integrados que faltaban.
 Hay una única fuente de verdad para el idioma activo, compartida por la historia y la interfaz, y un único
 evento de "idioma cambiado". Cambia el idioma en un solo lugar y todo se resuelve de nuevo a la vez: la línea
 que está en pantalla, las elecciones visibles y un menú de conversación abierto se vuelven a renderizar al
-instante. El jugador puede cambiar de idioma en medio de una línea y verla cambiar ante sus ojos.
+instante. El HUD abierto y las pantallas de estadísticas, rutina y misiones también, sin tener que volver a
+abrirlas. El jugador puede cambiar de idioma en medio de una línea y verla cambiar ante sus ojos.
 
 ![El desplegable de idioma en la pantalla de preferencias, en el juego](/docs-images/beasty-visual-novel/vn-preferences-language-ingame.png)
 
@@ -261,7 +344,23 @@ Al iniciar, en este orden:
    arranca en un idioma que no has traducido.
 3. **El idioma predeterminado** (`defaultLanguage` en VN Settings).
 
-El idioma activo también se guarda en cada partida, y se restaura con ella.
+**Rebobinar y cargar mantienen el idioma del jugador.** El idioma es una preferencia del jugador, no estado
+de la historia: retroceder —también entre la novela y el mundo libre— o cargar una partida hecha en otro
+idioma nunca devuelve el texto al idioma anterior. Una partida sigue anotando el idioma en que se hizo, pero
+al cargarla no se aplica. Un controlador que fija un idioma explícito conserva ese idioma.
+
+### Nombres del tiempo traducidos
+
+Los tokens `[@time:daypart.label]`, `[@time:weekday.label]` y `[@time:season.label]` muestran el nombre
+traducido del momento del día, el día de la semana o la estación actuales, en el idioma del jugador, y si no
+hay traducción, el nombre que escribiste. `[@time:clock.label]` muestra la hora como `HH:00` cuando el time
+config es un reloj, y el nombre traducido del momento del día cuando solo tiene momentos del día. Los nombres
+se traducen en la pestaña Game UI, grupo **Time**.
+
+Los tokens normales `[@time:daypart]`, `[@time:weekday]` y `[@time:season]` siguen dando el nombre sin
+traducir, igual que los valores en condiciones y partidas. Los tokens `.label` son para texto que lee el
+jugador: los selectores los ofrecen para mostrar, como la variable en vivo de un elemento del HUD, y nunca en
+condiciones. Cualquier texto de UI o de ítem puede usarlos.
 
 ## El idioma de autoría no es el idioma del juego
 

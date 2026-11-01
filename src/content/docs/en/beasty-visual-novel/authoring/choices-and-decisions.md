@@ -87,6 +87,13 @@ each with a condition, and the first one that passes wins. If none pass, the def
 face you are answering can be angry or pleased depending on what you did earlier, without duplicating the
 choice node.
 
+### Walkthrough hints
+
+An option can show what it will do to the player's stats, in a short mark after its text: `Friendship+`. The
+hints are worked out from the option's effects and the node it leads to. In the inspector, each option has a
+**Walkthrough** section to hide an automatic hint or add a manual one. See
+[Stat notifications and walkthrough hints](/docs/beasty-visual-novel/world/notifications-and-walkthrough/#walkthrough-hints).
+
 ## The Decision node
 
 A decision node has no UI at all. **The player does not see it, does not click it, and cannot tell it

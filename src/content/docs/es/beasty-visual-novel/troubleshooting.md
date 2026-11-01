@@ -198,6 +198,30 @@ el resultado.
 
 Consulta [Localización](/es/docs/beasty-visual-novel/production/localization/).
 
+## Mi botón no hace caso a los colores que puse
+
+Los botones de serie usan **Sprite Swap** —`card` / `card_on`, `choice` / `choice_on`— en vez de un tinte de
+color. Por eso, una variante de prefab o una instancia en escena que sobrescribe los **Colors** (normal,
+resaltado, pulsado…) de un botón del paquete no cambia nada. Vuelve a poner la **Transition** de ese botón en
+**Color Tint** para conservar tus colores. Consulta
+[Prefabs de UI](/es/docs/beasty-visual-novel/production/ui-prefabs/#el-aspecto-de-serie-tinta-y-papel).
+
+## Un script mío ya no encuentra el sprite de un personaje
+
+Los personajes del escenario se montan por partes. `Character_N` es un `CharacterLookView`, y el sprite está en
+su hijo `Character_N/Part_0/Sprite` (un hijo por parte en una expresión por capas). Voltear un personaje pone
+ahora una escala X negativa en `Character_N` en vez de `SpriteRenderer.flipX`. Busca un nivel más abajo, y lee
+el volteo del signo de `localScale.x`. Consulta [Referencia de prefabs](/es/docs/beasty-visual-novel/reference/prefabs/#los-prefabs-de-escena).
+
+## URP deja un aviso de cámara en cada frame
+
+El mensaje es *"Camera Main Camera does not contain an additional camera data component. Open the Game Object
+in the inspector to add additional camera data."* Una cámara creada con **Tools > Beasty VN > Setup > Create
+Scene** lleva ya el componente de datos de cámara del pipeline (`UniversalAdditionalCameraData` en URP,
+`HDAdditionalCameraData` en HDRP). Para una cámara creada antes, selecciónala y añade el componente, o llama a
+`PipelineCameraSetup.EnsureCameraData(camera)` desde tu propio código de preparación. Los proyectos Built-in no
+se ven afectados.
+
 ## Nada de esto coincide
 
 Ejecuta `Tools > Beasty VN > Maintenance > Validate Selected Project`. Recorre el grafo raíz y cada

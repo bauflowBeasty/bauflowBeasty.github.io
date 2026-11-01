@@ -18,7 +18,8 @@ Dos formas, el mismo resultado:
 
 La pestaña Characters también está disponible por sí sola a través de
 `Tools > Beasty VN > Content > Character Database`. Tiene cuatro subpestañas: **Cast** (identidad, alias,
-expresiones, estilos de entrega, retratos), **Variables** (estadísticas), **Quests** y **Talk Menu**.
+expresiones, estilos de entrega, retratos), **Variables** (estadísticas), **Quests** y **Talk Menu**. La lista y el personaje seleccionado se mantienen uno al lado del otro a cualquier ancho de
+ventana, con un divisor que puedes arrastrar; su ancho se recuerda.
 
 ![La pestaña Characters, subpestaña Cast, con un personaje seleccionado](/docs-images/beasty-visual-novel/vn-characters-cast.png)
 
@@ -52,21 +53,34 @@ Dos conjuntos de sprites separados, porque son dos imágenes distintas.
 ![Las listas de expresiones y retratos, compartiendo sus claves](/docs-images/beasty-visual-novel/vn-character-expressions.png)
 
 - Las **expressions** son los sprites de escenario — el cuerpo completo o busto que ve el jugador sobre el fondo. Añádelas
-  con **+ Add expression**. Cada una es una clave más un sprite: `base`, `sad`, `angry`, lo que quieras. No hay
-  una lista fija.
+  con **+ Add expression**: primero pide un nombre —`happy`, `sad`, `angry`, lo que quieras; no hay una lista
+  fija— y luego si la expresión es un **Single sprite** o **Layered**. Una expresión por capas se monta por
+  partes en el Expression Composer; consulta [Expresiones por capas](/es/docs/beasty-visual-novel/world/layered-expressions/).
 - Los **portraits** son los pequeños iconos de UI que se muestran junto al cuadro de diálogo. Añádelos con **+ Add portrait**.
   Usan las mismas claves que las expressions, así que una línea `sad` puede mostrar un icono de cabeza `sad`.
 
-`base` es la clave por defecto. Un bloque **Show character** sin clave de expresión, o un bloque **Expression**
-que apunta a una clave que no has creado, sigue poniendo al personaje en escena, por la cadena de reserva:
+### La expresión por defecto
+
+**La primera expresión de la lista es la expresión por defecto del personaje**, se llame como se llame, sea
+Single o por capas. Su fila lleva la etiqueta *default*. Para elegir otra, usa el menú ⋮ de la fila: **Make
+default**, **Move up**, **Move down**.
+
+La expresión por defecto se usa siempre que no se nombra ninguna, o cuando la nombrada no existe: un bloque
+**Show character** sin expresión, un bloque que nombra una expresión que falta, y los puntos del personaje en
+el mundo libre. La cadena de reserva:
 
 ```text
-expression asked for  ->  base expression  ->  nothing
-portrait asked for    ->  base portrait    ->  the stage sprite for that expression
+expression asked for  ->  default expression (first in the list)
+portrait asked for    ->  first portrait  ->  no portrait
 ```
 
-Así que un personaje que solo tiene sprites de escenario igual obtiene un retrato: el motor reutiliza el sprite de escenario. Un
-personaje sin expresión `base` no muestra nada — ese es el único caso al que hay que estar atento.
+El primer retrato sustituye a todas las expresiones que no tienen uno propio. Un personaje sin ningún retrato
+habla sin él: el cuadro de diálogo oculta el panel del retrato.
+
+### La ropa
+
+**Wardrobe…**, bajo la lista de expresiones, abre el vestuario del personaje: la ropa que puede llevar encima
+de las expresiones por capas. Consulta [Vestuario y conjuntos](/es/docs/beasty-visual-novel/world/wardrobe/).
 
 ## Estilos de interpretación
 
@@ -131,9 +145,16 @@ de dos sitios, y un personaje tiene ambos:
 
 1. **El Character Variable Schema** — los campos que tiene **todo** personaje. Un asset por proyecto
    (`Create > Beasty VN > Characters > Character Variable Schema`). Declara `affection` ahí una vez y todo
-   el reparto lo tiene. Edítalo en la subpestaña **Characters > Variables**, bajo **+ Add universal field**.
-2. **Los campos propios del personaje** — declarados en ese personaje concreto, en la misma subpestaña. Úsalos para
-   cosas que solo tiene este personaje.
+   el reparto lo tiene. Edítalo en **Characters › Variables › Global**, bajo **+ Add universal field**.
+2. **Los campos propios del personaje** — declarados en ese personaje concreto, en **Characters › Variables ›
+   Per character › Own fields**. Úsalos para cosas que solo tiene este personaje.
+
+**Characters › Variables** tiene dos pestañas. **Global** guarda lo que vale para todos los personajes: el
+interruptor **Enable walkthrough** del proyecto, los campos universales y la visibilidad por defecto de la
+lista de personajes. **Per character** muestra el reparto junto a las tres páginas del personaje
+seleccionado: **Own fields**, **Global field defaults** (lo que este personaje sobrescribe de los campos
+universales) y **Character list**. La división es solo visual: nada se guarda de otra forma. Los anchos de
+las pestañas y del divisor se recuerdan.
 
 Cada campo tiene:
 
@@ -143,19 +164,23 @@ Cada campo tiene:
 | **Type** | Contador `Int`, valor `Float` o bandera `Bool`. |
 | **Default value** | El valor inicial, antes de que nada lo fije. |
 | **Show on stats** | Muestra este campo en la pantalla de estadísticas del personaje. Desactivado por defecto. |
+| **Display name** | El nombre que lee el jugador para este campo: en la pantalla de estadísticas, en los avisos y en las pistas. Vacío = la clave. Se traduce en **Localization › Game UI**. Se muestra mientras esté marcada cualquiera de **Show on stats**, **Notify changes in gameplay** o **Show in walkthrough**. |
+| **Notify changes in gameplay** | Muestra un [aviso de estadística](/es/docs/beasty-visual-novel/world/notifications-and-walkthrough/) cuando el valor cambia durante la partida. Desactivado por defecto. |
+| **Show in walkthrough** | Da a este campo [pistas de la guía](/es/docs/beasty-visual-novel/world/notifications-and-walkthrough/#pistas-de-la-guía) automáticas en las opciones. Desactivado por defecto. |
 | **Editable** | Deja que el jugador lo cambie desde la pantalla de estadísticas (+/- para números, un interruptor para booleanos). Desactivado = solo lectura. |
 | **Clamp** + **Min** / **Max** | Mantiene el valor dentro de un rango cuando el jugador lo edita. |
 | **Step** | Cuánto suma o resta cada pulsación de +/-. |
 
-Ambos indicadores de presentación empiezan desactivados. Un campo nuevo es, antes que nada, estado del juego; mostrárselo al
+Todos los indicadores de presentación empiezan desactivados. Un campo nuevo es, antes que nada, estado del juego; mostrárselo al
 jugador es una decisión que tomas a propósito.
 
 ### Anular el valor por defecto del esquema para un personaje
 
 Todos empiezan con `affection = 0`, pero Maya empieza con 10 porque es tu hermana. No necesitas un
-segundo campo para eso. En la subpestaña **Variables** del personaje, anula el valor por defecto del campo universal
-solo para este personaje. También puedes cambiar, solo para *este* personaje, si ese campo en concreto se muestra en su
-pantalla de estadísticas, sin tocar el esquema.
+segundo campo para eso. En **Per character › Global field defaults**, anula el valor por defecto del campo
+universal solo para este personaje. También puedes cambiar, solo para *este* personaje, si ese campo en
+concreto se muestra en su pantalla de estadísticas, avisa de sus cambios y sale en la guía, sin tocar el
+esquema.
 
 Para cambiar una variable de personaje desde la historia está el bloque **Character variable** (categoría de paleta
 **State**): elige el personaje, elige el campo, elige la operación. Para leerla en una condición:
@@ -167,7 +192,8 @@ Para cambiar una variable de personaje desde la historia está el bloque **Chara
 ![El campo del sprite de mundo libre, con las marcas de mostrar ubicación y rutina](/docs-images/beasty-visual-novel/vn-character-freeroam-sprite.png)
 
 El campo **Free Roam Sprite** contiene el sprite que se usa cuando el personaje está de pie en una sala,
-colocado ahí por su rutina. Si lo dejas vacío, se usa el sprite de la expresión `base` del personaje. Dónde se para y qué tamaño tiene lo decide
+colocado ahí por su rutina. Si lo dejas vacío, se usa la expresión por defecto del personaje; si esa expresión es por capas, la sala
+muestra su aspecto por capas. Dónde se para y qué tamaño tiene lo decide
 el prefab de la sala, no este campo — consulta [Rutinas de personajes](/es/docs/beasty-visual-novel/world/character-routines/).
 
 Dos interruptores relacionados controlan qué puede ver el jugador sobre el paradero del personaje:
@@ -195,10 +221,12 @@ en [Pantallas de personaje](/es/docs/beasty-visual-novel/world/character-screens
 
 Cada personaje tiene un menú de conversación: la lista de cosas que el jugador puede decirle ahora mismo. Se edita en
 la subpestaña **Characters > Talk Menu**, y los pasos de misión que apuntan a este personaje se añaden a él
-automáticamente. Consulta [El menú de conversación](/es/docs/beasty-visual-novel/world/talk-menu/).
+automáticamente, y el menú termina con la opción **Irse**. Consulta [El menú de conversación](/es/docs/beasty-visual-novel/world/talk-menu/).
 
 ## Ver también
 
+- [Expresiones por capas](/es/docs/beasty-visual-novel/world/layered-expressions/) — expresiones montadas por capas, y el Expression Composer
+- [Vestuario y conjuntos](/es/docs/beasty-visual-novel/world/wardrobe/) — ropa que la historia puede cambiar
 - [Variables y condiciones](/es/docs/beasty-visual-novel/world/variables-and-conditions/) — el almacén en el que vive cada variable de personaje
 - [Pantallas de personaje](/es/docs/beasty-visual-novel/world/character-screens/) — la lista de reparto, el perfil, la pantalla de estadísticas
 - [El menú de conversación](/es/docs/beasty-visual-novel/world/talk-menu/) — el centro de conversación de cada personaje

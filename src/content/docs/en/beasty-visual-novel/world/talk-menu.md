@@ -88,6 +88,21 @@ otherwise. A flow block inside the branch always wins.
 became false is gone, and one that just became true is there. Hand over the apples, come back to the menu, and
 the delivery entry has vanished.
 
+### The Leave option
+
+**Every talk menu ends with a Leave option**, so the player can never get stuck in a conversation. Leave ends
+the conversation: back to the room the player came from, or, for a menu opened by a TalkMenu node, on to that
+node's default next.
+
+- It is skipped when one of your entries already says goodbye: an entry with no dialogue whose ending returns
+  to a room or goes to one.
+- Turn it off per character with **Add a Leave option**, in the Characters window's talk menu. A warning
+  appears when the menu would then trap the player.
+- Give it your own text with **Leave label**. Otherwise it uses the built-in UI text `talk.leave` — "Leave",
+  "Irse", "Partir"… in every built-in language.
+
+![A character's talk menu settings with the Add a Leave option toggle and the Leave label field](/docs-images/beasty-visual-novel/vn-talk-menu-leave.png)
+
 ## Handing items over from a conversation
 
 A **GatherDeliver** objective ([Quests](/docs/beasty-visual-novel/world/quests/)) is completed by giving the items to the quest's owner, and

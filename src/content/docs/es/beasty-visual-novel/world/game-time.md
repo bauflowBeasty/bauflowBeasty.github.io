@@ -160,6 +160,11 @@ Son variables ordinarias en un espacio de nombres extraordinario: léelas en una
 elección, una condición de diálogo, la visibilidad de un objeto, una regla de rutina, la condición de inicio de
 una misión. No hace falta nada especial en ningún sitio.
 
+Para texto que lee el jugador, usa en su lugar los tokens traducidos: `[@time:daypart.label]`,
+`[@time:weekday.label]`, `[@time:season.label]` y `[@time:clock.label]` —la hora como `HH:00` en modo reloj, el
+nombre del momento del día si no—. Los nombres se traducen en **Localization › Game UI**. Consulta
+[Localización](/es/docs/beasty-visual-novel/production/localization/#nombres-del-tiempo-traducidos).
+
 ### Chuleta de condiciones
 
 ```text

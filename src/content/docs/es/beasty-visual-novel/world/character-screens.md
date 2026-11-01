@@ -14,8 +14,11 @@ proyecto y los registra como pantallas secundarias. A partir de ahí son tuyos: 
 
 ## La lista de reparto
 
-La lista de reparto tiene una fila por cada personaje que el jugador puede consultar. Al seleccionar una fila
-se abre el perfil de ese personaje.
+La lista de reparto es una hoja de papel titulada **Personajes**, con una tarjeta polaroid por cada personaje
+que el jugador puede consultar: un retrato grande y el nombre debajo. Las tarjetas forman una grilla de dos a
+cinco columnas que sigue el ancho de la pantalla, y una sola fila de tarjetas se centra. Las tarjetas se tiñen al
+pasar el mouse; al seleccionar una se abre el perfil de ese personaje. El botón de cerrar es una **X** grande de
+papel dentro de la hoja.
 
 ![La lista del reparto en el juego, una fila por personaje conocido](/docs-images/beasty-visual-novel/vn-cast-list-ingame.png)
 
@@ -39,13 +42,18 @@ Un personaje concreto puede dejar de usar la condición compartida y llevar la s
 anulación por personaje en él. Resérvalo para la excepción, no para la regla: el villano que solo
 aparece en la lista después del capítulo tres.
 
-La lista está virtualizada — solo se dibujan las filas que hay en pantalla —, así que un reparto de mil
+La lista está virtualizada —solo existen las filas de tarjetas que hay en pantalla—, así que un reparto de mil
 personajes se abre al instante.
+
+Una versión de teléfono de la lista y del perfil se crea con **+ New screen ▸ Characters ▸ Phone**; consulta
+[Pantallas de teléfono](/es/docs/beasty-visual-novel/world/phone-screens/).
 
 ## El perfil
 
-El perfil es el centro de todo lo relativo a un personaje: un encabezado con su retrato y nombre, y una
-**barra de pestañas** debajo que alterna entre secciones. La primera pestaña se muestra al abrirlo.
+El perfil es el centro de todo lo relativo a un personaje: el retrato como una polaroid con el nombre en letra
+grande a la izquierda, y una **barra de pestañas** con sus páginas a la derecha. La primera pestaña se muestra
+al abrirlo. Las etiquetas de las pestañas —Estadísticas, Calendario, Misiones— están traducidas, y las pestañas
+activa e inactiva usan tintes claros de papel (`activeTabColor` / `inactiveTabColor` en el prefab).
 
 ![El perfil de un personaje: cabecera, retrato y la barra de pestañas](/docs-images/beasty-visual-novel/vn-profile-ingame.png)
 
@@ -58,7 +66,10 @@ Las pestañas incluidas de fábrica son las tres siguientes.
 
 ## La pantalla de estadísticas
 
-La pantalla de estadísticas muestra el retrato del personaje, su nombre, y una fila por campo.
+La pantalla de estadísticas muestra el retrato y el nombre del personaje a la izquierda, y una tarjeta grande
+por campo —nombre, valor y los botones +/−— en una o dos columnas. La pantalla independiente `CharacterStats`
+usa la misma disposición. Un campo muestra su **Display name**, traducido en
+[Localization › Game UI](/es/docs/beasty-visual-novel/production/localization/#la-pestaña-game-ui).
 
 ![La pantalla de estadísticas: una fila por campo, algunos editables](/docs-images/beasty-visual-novel/vn-stats-ingame.png)
 
@@ -88,8 +99,16 @@ El calendario es el horario del personaje, en una de dos vistas, que el jugador 
 - **Vista de día** — una fila por momento del día, para hoy.
 - **Vista de semana** — la semana entera: momentos del día hacia abajo, días de la semana a lo ancho.
 
-La columna de hoy está resaltada, y el momento del día actual dentro de ella se resalta con más intensidad, así el jugador
-ve dónde está. Una celda en la que el personaje no está en ningún sitio del mapa se muestra como desconocida.
+La columna de hoy está resaltada, y el momento del día actual dentro de ella se resalta con más intensidad en el
+rojo ladrillo de acento, así el jugador ve dónde está. Una celda en la que el personaje no está en ningún sitio del
+mapa se muestra como ausente, con un texto traducido. Los nombres de las salas y los encabezados de día y momento
+del día también se traducen.
+
+La **pantalla de rutina** (`CharacterRoutineScreen`) tiene un **Day Header Template** opcional. Si lo asignas, la
+semana se dibuja como un grupo por día —un encabezado con el día de la semana seguido de una fila por momento del
+día— en vez de una lista plana. El encabezado de hoy y la fila del momento del día actual usan los colores de
+resaltado de la pantalla, y el interruptor Día/Semana sigue funcionando (Día muestra solo hoy). **Upgrade UI
+Prefabs** deja esas pantallas como están.
 
 El calendario solo se rellena para un personaje cuyo interruptor **Show routine** esté activado. Es una vista de las
 reglas de rutina que definiste — consulta [Rutinas de personajes](/es/docs/beasty-visual-novel/world/character-routines/) — no una segunda copia de ellas,

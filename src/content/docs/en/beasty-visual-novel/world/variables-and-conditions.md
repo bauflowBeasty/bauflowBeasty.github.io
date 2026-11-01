@@ -22,6 +22,9 @@ A variable has:
 | **Kind** | How the value is produced. See below. |
 | **Default value** | The value before anything sets it. |
 | **Prompt at runtime** | Ask the player for this value when the game starts. |
+| **Display name** | Optional. The name the player reads in notifications and walkthrough hints. Translated in **Localization › Game UI** (group Global variables). |
+| **Notify changes in gameplay** | Show a [notification](/docs/beasty-visual-novel/world/notifications-and-walkthrough/) when the value changes during play. |
+| **Show in walkthrough** | Show this variable in the walkthrough hints of the choices that change it. |
 
 The four **kinds** describe where a value comes from. They are a label for you and your team, and they
 change what the editor offers you:
@@ -32,6 +35,23 @@ change what the editor offers you:
 | **Fixed** | A constant you set and the game does not change. |
 | **Enum** | One of a fixed list of allowed values you type in. An Enum variable is always stored as a `String`. |
 | **Computed** | Derived by game logic — the story writes it, you never hand-set it. |
+
+### Working in the Variables tab
+
+The list and the selected variable stay side by side at any window width, with a divider you drag; its width
+is remembered. The default value uses a control for its type: a toggle for Bool, number fields for Int and
+Float, a popup of the allowed values for Enum, text for String.
+
+- The **Key**, the **Default** and the **Display name** are committed when you press Enter or leave the field,
+  so one edit is one undo step. Clicking another variable while you type commits the text to the variable you
+  typed it in.
+- A duplicate or empty key is refused, with a message under it.
+- Shortcuts work with the focus anywhere in the tab: Delete, Ctrl+D, Ctrl+C / Ctrl+V, F2, Ctrl+A, Esc and the
+  arrows. Right-click a variable for the same actions; buttons with a shortcut show it in their tooltip.
+- **+ New Variable**, Ctrl+D and Ctrl+V select the new variables and scroll them into view. A pasted variable
+  keeps its key when no variable has it, or is named like a duplicate: `<key>_copy`, `<key>_copy2`…
+- Deleting several variables asks first; deleting one never does. Every add, remove, rename and edit can be
+  undone.
 
 ### Asking the player
 
@@ -177,6 +197,18 @@ clauses or split the logic across two branches of a decision node.
 > a variable, the whole thing fails closed: the choice never appears, the door never opens. It fails
 > closed on purpose — a half-written condition that passed would silently unlock all the content behind
 > it. The engine reports it once in the Console, naming the clause, so you can find it.
+
+### Clothes and player preferences
+
+Conditions can also read:
+
+- **What a character wears**: `@char:mia:@wear.top` for a *One at a time* category, and
+  `@char:mia:@wear.earrings.hoops` (yes/no) for one piece of a *Several at once* category. See
+  [Wardrobe and outfits](/docs/beasty-visual-novel/world/wardrobe/#conditions-on-clothes).
+- **The player's preferences**: `@pref:walkthrough`, `@pref:reduceMotion`, `@pref:volume.music`… and
+  `@pref:walkthrough.available`, whether the project enables walkthrough hints. The story cannot change them: a
+  Set variable block or a choice effect that targets an `@pref:` key is ignored, with one warning per key. See
+  [Variable keys](/docs/beasty-visual-novel/reference/variable-keys/).
 
 ## Effects
 

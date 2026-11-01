@@ -1,12 +1,22 @@
 /**
  * Informa de qué documentación se ha quedado atrás respecto al proyecto Unity.
  *
+ * Modelo de changelogs (decisión de Álvaro, 2026-10-31):
+ *   - El changelog canónico (proyecto Unity) es detallado mientras la versión está `unreleased`: es el
+ *     canal de traspaso hacia la documentación. Al publicar (/release) esa versión se reduce a un resumen.
+ *   - docs/changelogs/ es una COPIA EXACTA del canónico: registra lo que ya se documentó. Una viñeta que
+ *     está en el canónico y no en la copia es trabajo pendiente para /sync-docs.
+ *   - Las páginas <producto>/changelog.md son siempre un RESUMEN, agrupado en ### New / Improved / Fixed
+ *     (ES: Nuevo / Mejorado / Corregido). En las versiones publicadas el resumen es idéntico al canónico;
+ *     en la versión `unreleased` es un borrador propio que /release copiará al canónico.
+ *
  * Comprueba, en este orden:
- *   1. Changelog canónico (proyecto Unity) vs copia local en docs/changelogs/
- *   2. Copia local vs página de docs EN (viñeta a viñeta)
- *   3. Página ES vs página EN (recuento de viñetas por sección; el texto está traducido)
- *   4. Archivos .cs tocados en el proyecto Unity según Plastic (pendientes + desde el marcador)
- *   5. Si DOC-INDEX.md se ha quedado obsoleto
+ *   1. Changelog canónico vs copia local (viñeta a viñeta) → lo pendiente de documentar
+ *   2. Copia local vs página EN: mismas versiones; las publicadas, viñeta a viñeta; formato del resumen
+ *   3. Página ES vs página EN (mismas versiones y viñetas por sección; el texto está traducido)
+ *   4. Archivos .cs tocados en el proyecto Unity según Plastic (pendientes de check-in)
+ *   5. Versiones alineadas en los cuatro sitios
+ *   6. Si DOC-INDEX.md se ha quedado obsoleto
  *
  * No modifica nada: solo informa. La ruta del proyecto Unity sale de docs/sync-state.json,
  * y se puede sobrescribir con la variable de entorno BEASTY_PROJECT.
@@ -46,19 +56,54 @@ function vinetas(md) {
   return out.map((v) => v.replace(/\s+/g, ' ').trim());
 }
 
-/** Viñetas por sección `###`, para comparar EN y ES sin depender del idioma. */
-function vinetasPorSeccion(md) {
-  const mapa = new Map();
-  let seccionActual = '(sin sección)';
-  let indice = 0;
-  for (const bloque of md.split(/^(###\s+.+)$/m)) {
-    if (/^###\s+/.test(bloque)) { seccionActual = bloque.replace(/^###\s+/, '').trim(); indice++; }
-    else mapa.set(`${indice}`, { titulo: seccionActual, n: vinetas(bloque).length });
+const sinFrontmatter = (s) => s.replace(/^---\r?\n[\s\S]*?\r?\n---\r?\n/, '');
+
+/**
+ * Separa un changelog en versiones `## X.Y.Z — estado` y, dentro, en secciones `###`.
+ * Una versión está publicada si su estado lleva una fecha (tiene dígitos); `unreleased` / `sin publicar` no.
+ */
+function versiones(md) {
+  const out = [];
+  let version = null;
+  let seccion = null;
+  let buffer = [];
+  const cerrar = () => {
+    if (seccion) seccion.vinetas = vinetas(buffer.join('\n'));
+    buffer = [];
+  };
+  for (const linea of sinFrontmatter(md).split(/\r?\n/)) {
+    const mv = linea.match(/^##\s+(\d+\.\d+\.\d+)\s*[—-]\s*(.+?)\s*$/);
+    const ms = linea.match(/^###\s+(.+?)\s*$/);
+    if (mv) {
+      cerrar();
+      seccion = { titulo: '(sin sección)', vinetas: [] };
+      version = { version: mv[1], estado: mv[2], publicada: /\d/.test(mv[2]), secciones: [seccion] };
+      out.push(version);
+    } else if (ms && version) {
+      cerrar();
+      seccion = { titulo: ms[1], vinetas: [] };
+      version.secciones.push(seccion);
+    } else if (seccion) {
+      buffer.push(linea);
+    }
   }
-  return mapa;
+  cerrar();
+  for (const v of out) {
+    v.secciones = v.secciones.filter((s) => s.titulo !== '(sin sección)' || s.vinetas.length);
+    v.todas = v.secciones.flatMap((s) => s.vinetas);
+  }
+  return out;
 }
 
-const sinFrontmatter = (s) => s.replace(/^---\r?\n[\s\S]*?\r?\n---\r?\n/, '');
+/** Secciones permitidas en el resumen de las páginas de changelog (docs/GUIA-ESTILO-DOCS.md). */
+const SECCIONES_RESUMEN = {
+  en: ['New', 'Improved', 'Fixed'],
+  es: ['Nuevo', 'Mejorado', 'Corregido'],
+};
+/** Una viñeta de resumen más larga que esto ya no es un resumen. */
+const MAX_VINETA_RESUMEN = 240;
+
+const corto = (v) => `«${v.slice(0, 90)}…»`;
 
 // ── 1 y 2: changelogs ────────────────────────────────────────────────────────
 seccion('1. Changelogs: proyecto Unity → docs/changelogs/ → páginas de docs');
@@ -69,41 +114,83 @@ if (!existsSync(PROYECTO)) {
   for (const [asset, cfg] of Object.entries(estado.assets)) {
     const canonico = join(PROYECTO, 'Assets', 'BeastyComponents', asset, cfg.changelog);
     const local = join('docs', 'changelogs', cfg.changelog);
-    if (!existsSync(canonico)) { aviso(`${asset}: no existe el changelog canónico (${canonico})`); continue; }
     if (!existsSync(local)) { aviso(`${asset}: falta la copia local docs/changelogs/${cfg.changelog}`); continue; }
 
-    const vCanon = vinetas(readFileSync(canonico, 'utf8'));
-    const vLocal = vinetas(readFileSync(local, 'utf8'));
-    const soloCanon = vCanon.filter((v) => !vLocal.includes(v));
-    const soloLocal = vLocal.filter((v) => !vCanon.includes(v));
-    if (!soloCanon.length && !soloLocal.length) bien(`${asset}: changelog canónico == copia local`);
-    for (const v of soloCanon) aviso(`${asset}: viñeta SOLO en el canónico → falta traerla: «${v.slice(0, 90)}…»`);
-    for (const v of soloLocal) aviso(`${asset}: viñeta SOLO en la copia local → falta llevarla al asset: «${v.slice(0, 90)}…»`);
-
-    // La copia local frente a la página EN de docs.
-    const paginaEn = join('src', 'content', 'docs', 'en', cfg.producto, 'changelog.md');
-    if (!existsSync(paginaEn)) { aviso(`${asset}: no existe la página ${paginaEn}`); continue; }
-    const vPagina = vinetas(sinFrontmatter(readFileSync(paginaEn, 'utf8')));
-    const faltanEnPagina = vLocal.filter((v) => !vPagina.includes(v));
-    const sobranEnPagina = vPagina.filter((v) => !vLocal.includes(v));
-    if (!faltanEnPagina.length && !sobranEnPagina.length) bien(`${asset}: copia local == página EN de docs`);
-    for (const v of faltanEnPagina) aviso(`${asset}: la página EN no refleja «${v.slice(0, 90)}…»`);
-    for (const v of sobranEnPagina) aviso(`${asset}: la página EN tiene de más «${v.slice(0, 90)}…»`);
-
-    // La página ES, por recuento de viñetas por sección (el texto está traducido).
-    const paginaEs = join('src', 'content', 'docs', 'es', cfg.producto, 'changelog.md');
-    if (!existsSync(paginaEs)) { aviso(`${asset}: no existe la página ES ${paginaEs}`); continue; }
-    const secEn = vinetasPorSeccion(sinFrontmatter(readFileSync(paginaEn, 'utf8')));
-    const secEs = vinetasPorSeccion(sinFrontmatter(readFileSync(paginaEs, 'utf8')));
-    if (secEn.size !== secEs.size) {
-      aviso(`${asset}: EN tiene ${secEn.size} secciones de changelog y ES tiene ${secEs.size}`);
+    // 1. Canónico frente a la copia local: lo que /sync-docs aún no ha documentado.
+    if (!existsSync(canonico)) {
+      aviso(`${asset}: no existe el changelog canónico (${canonico}); compruebo solo la copia local y las páginas`);
     } else {
-      const desajustes = [...secEn.entries()].filter(([k, v]) => secEs.get(k)?.n !== v.n);
-      if (!desajustes.length) bien(`${asset}: página ES al día (mismo número de viñetas por sección)`);
-      for (const [k, v] of desajustes) {
-        aviso(`${asset}: sección «${v.titulo}» tiene ${v.n} viñetas en EN y ${secEs.get(k)?.n} en ES`);
+      const vCanon = vinetas(readFileSync(canonico, 'utf8'));
+      const vLocal = vinetas(readFileSync(local, 'utf8'));
+      const soloCanon = vCanon.filter((v) => !vLocal.includes(v));
+      const soloLocal = vLocal.filter((v) => !vCanon.includes(v));
+      if (!soloCanon.length && !soloLocal.length) bien(`${asset}: changelog canónico == copia local`);
+      if (soloCanon.length) {
+        aviso(`${asset}: ${soloCanon.length} viñeta(s) del canónico sin documentar todavía (no están en la copia local):`);
+        for (const v of soloCanon) console.log(`       · ${corto(v)}`);
+      }
+      for (const v of soloLocal) {
+        aviso(`${asset}: viñeta SOLO en la copia local (el canónico la cambió o la quitó; vuelve a copiarlo): ${corto(v)}`);
       }
     }
+
+    // 2. La copia local frente a la página EN, que es un resumen.
+    const paginaEn = join('src', 'content', 'docs', 'en', cfg.producto, 'changelog.md');
+    if (!existsSync(paginaEn)) { aviso(`${asset}: no existe la página ${paginaEn}`); continue; }
+    const verLocal = versiones(readFileSync(local, 'utf8'));
+    const verEn = versiones(readFileSync(paginaEn, 'utf8'));
+    const antes = problemas;
+
+    const numsLocal = verLocal.map((v) => v.version).join(', ');
+    const numsEn = verEn.map((v) => v.version).join(', ');
+    if (numsLocal !== numsEn) aviso(`${asset}: versiones distintas — copia local [${numsLocal}], página EN [${numsEn}]`);
+
+    for (const vl of verLocal) {
+      const ve = verEn.find((v) => v.version === vl.version);
+      if (!ve) continue;
+      if (ve.estado !== vl.estado) aviso(`${asset} ${vl.version}: la cabecera dice «${vl.estado}» en la copia local y «${ve.estado}» en la página EN`);
+      if (vl.publicada) {
+        // Publicada: el canónico ya es el resumen, así que la página lo reproduce viñeta a viñeta.
+        for (const v of vl.todas.filter((x) => !ve.todas.includes(x))) aviso(`${asset} ${vl.version}: la página EN no refleja ${corto(v)}`);
+        for (const v of ve.todas.filter((x) => !vl.todas.includes(x))) aviso(`${asset} ${vl.version}: la página EN tiene de más ${corto(v)}`);
+      } else if (!ve.todas.length) {
+        aviso(`${asset} ${vl.version}: la página EN no tiene aún el resumen de esta versión`);
+      }
+    }
+    for (const ve of verEn) {
+      for (const s of ve.secciones) {
+        if (!SECCIONES_RESUMEN.en.includes(s.titulo)) {
+          aviso(`${asset} ${ve.version}: sección «${s.titulo}» en la página EN; el resumen usa solo ${SECCIONES_RESUMEN.en.join(' / ')}`);
+        }
+      }
+      for (const v of ve.todas.filter((x) => x.length > MAX_VINETA_RESUMEN)) {
+        aviso(`${asset} ${ve.version}: viñeta de ${v.length} caracteres, demasiado larga para un resumen: ${corto(v)}`);
+      }
+    }
+    if (problemas === antes) bien(`${asset}: página EN al día (resumen con las mismas versiones que la copia local)`);
+
+    // 3. La página ES frente a la EN: mismas versiones, secciones y viñetas por sección (el texto está traducido).
+    const paginaEs = join('src', 'content', 'docs', 'es', cfg.producto, 'changelog.md');
+    if (!existsSync(paginaEs)) { aviso(`${asset}: no existe la página ES ${paginaEs}`); continue; }
+    const verEs = versiones(readFileSync(paginaEs, 'utf8'));
+    const antesEs = problemas;
+    const numsEs = verEs.map((v) => v.version).join(', ');
+    if (numsEs !== numsEn) aviso(`${asset}: versiones distintas — página EN [${numsEn}], página ES [${numsEs}]`);
+    for (const ve of verEn) {
+      const vs = verEs.find((v) => v.version === ve.version);
+      if (!vs) continue;
+      if (vs.publicada !== ve.publicada) aviso(`${asset} ${ve.version}: publicada en una página y sin publicar en la otra`);
+      const cuenta = (v) => v.secciones.map((s) => s.vinetas.length).join('/');
+      if (cuenta(vs) !== cuenta(ve)) {
+        aviso(`${asset} ${ve.version}: viñetas por sección EN ${cuenta(ve)} y ES ${cuenta(vs)}`);
+      }
+      for (const s of vs.secciones) {
+        if (!SECCIONES_RESUMEN.es.includes(s.titulo)) {
+          aviso(`${asset} ${vs.version}: sección «${s.titulo}» en la página ES; el resumen usa solo ${SECCIONES_RESUMEN.es.join(' / ')}`);
+        }
+      }
+    }
+    if (problemas === antesEs) bien(`${asset}: página ES al día (mismas versiones y viñetas por sección)`);
   }
 }
 
@@ -151,10 +238,16 @@ if (!existsSync(estado.plasticCli)) {
 // ── 4: versiones alineadas ───────────────────────────────────────────────────
 seccion('3. Versiones');
 
-/** Primera cabecera `## X.Y.Z — algo` de un changelog. */
+/**
+ * Última versión PUBLICADA (cabecera con fecha) de un changelog, y la que está en curso si la hay.
+ * products.ts y el README declaran la publicada: la `unreleased` sube a esos sitios al hacer /release.
+ */
 function versionDelChangelog(ruta) {
-  const m = readFileSync(ruta, 'utf8').match(/^##\s+(\d+\.\d+\.\d+)\s*[—-]\s*(.+)$/m);
-  return m ? { version: m[1], estado: m[2].trim() } : null;
+  const todas = versiones(readFileSync(ruta, 'utf8'));
+  const publicada = todas.find((v) => v.publicada);
+  if (!publicada) return null;
+  const enCurso = todas.find((v) => !v.publicada);
+  return { version: publicada.version, estado: publicada.estado, enCurso: enCurso?.version ?? null };
 }
 
 const productsTs = readFileSync(join('src', 'data', 'products.ts'), 'utf8');
@@ -183,7 +276,8 @@ if (existsSync(PROYECTO)) {
     ].filter(([, v]) => v && v !== ch.version);
 
     if (!desalineadas.length) {
-      bien(`${asset}: ${ch.version} (${ch.estado}) — changelog, products.ts y README coinciden`);
+      const curso = ch.enCurso ? `; ${ch.enCurso} en curso, sin publicar` : '';
+      bien(`${asset}: ${ch.version} (${ch.estado}) — changelog, products.ts y README coinciden${curso}`);
     } else {
       for (const [donde, v] of desalineadas) {
         aviso(`${asset}: el changelog dice ${ch.version} y ${donde} dice ${v}`);

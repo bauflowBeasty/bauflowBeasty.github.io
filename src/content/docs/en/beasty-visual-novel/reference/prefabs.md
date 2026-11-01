@@ -47,12 +47,25 @@ which is what you want in a real project.
 
 `Stage` carries the `FreeRoamScenario` component. That is where you assign your `FreeRoamMapGraph`.
 
+Each character on the stage is a `CharactersRoot/Character_N` object: a `CharacterLookView` with a
+`SortingGroup` and one `Part_i/Sprite` child per part. A Single expression has exactly one part,
+`Part_0/Sprite`; a [layered expression](/docs/beasty-visual-novel/world/layered-expressions/) has one per layer
+and clothing part. Flipping a character mirrors the whole `Character_N` with a negative X scale. A script that
+needs a character's sprite looks under `Character_N`, not on it, and reads the flip from the sign of
+`Character_N`'s `localScale.x`.
+
+The screen effects need no prefab: the BeastyManager creates the `VNStageCompositor` at runtime, with the
+`Beasty/VN/StageComposite` shader from `Resources`.
+
 ## The dialogue and choice prefabs
 
 `VN_Canvas` holds the whole interface. `DialogueView` drives the dialogue box, `ChoiceView` drives the
 options.
 
-- To restyle the dialogue box, edit `DialogPanel`.
+- To restyle the dialogue box, edit `DialogPanel`. Its name plate sits above the box's top-left corner, and
+  `DialogueView` → **Speaker Panel** points at it, so narration lines hide the whole plate. The text input
+  prompt (`InputPrompt`) has its own **Confirm** and **Back** buttons; **Back** is wired to `DialogueView` →
+  **Input Back Button** and translated through `input.back`.
 - To restyle the choices, edit `ChoiseBtn` (one button) and `ChoiseRoot` (their container). `ChoiceView`
   instantiates `ChoiseBtn` once per option that passes its condition.
 
@@ -72,7 +85,14 @@ runtime, so you can drop it under any Canvas.
 to restyle one menu rather than the whole set.
 
 `VNSaveSlot` and `VNBacklogEntry` are templates: one is instantiated per save slot, one per line of history.
-Restyle the template and every row follows.
+Restyle the template and every row follows. An empty slot shows `SaveSlotView` → **Empty Stock Sprite**,
+the dashed `slot_empty` picture by default.
+
+`PreferencesScreen` (on `GameMenuScreen`) has optional fields for the newer rows: **Auto On By Default Toggle**,
+the reduce-motion toggle, and **Language Row** — the whole language row, label included, hidden when the game
+has a single language. A menu prefab built before these rows existed does not offer them until you run **Build
+Default Menu Prefabs** again; the preferences keep their defaults meanwhile. See
+[UI prefabs](/docs/beasty-visual-novel/production/ui-prefabs/#the-preferences-screen).
 
 `Tools > Beasty VN > Setup > Build Default Menu Prefabs` rebuilds these from scratch and warns you before it
 overwrites anything. `Tools > Beasty VN > Setup > Upgrade UI Prefabs (keep customizations)` updates them
@@ -99,6 +119,16 @@ and registering the copy as a screen on the VNContext.
 | The stats panel alone | `CharacterStats` |
 | An overlay screen laid out as a grid | `GridMenu` plus `GridItemScreenElement` |
 | An overlay screen laid out as a list | `VerticalMenu` plus `VerticalItemScreenElement` |
+| The smartphone overlay and its apps | `Phone` (see [Phone screens](/docs/beasty-visual-novel/world/phone-screens/)) |
+
+- `PhoneAppScreen` marks a screen prefab as the phone version of a template.
+- `CharacterRoutineScreen` → **Day Header Template** (`dayHeaderTemplate`) draws the routine week as one
+  group per day. **Upgrade UI Prefabs** leaves a screen that uses it alone.
+- `RuntimeListView`, the virtualized list behind the cast list, virtualizes a **grid** too: when the scroll
+  content has a `GridLayoutGroup` or `ResponsiveGridLayout`, the columns follow the content width and only the
+  visible lines of cards exist.
+- `ResponsiveGridLayout` keeps its cells at their size when the container grows with its content (an enabled
+  `ContentSizeFitter` with a vertical fit), so cards inside a scroll view are never squeezed.
 
 `VariableBoundLabel` on the element templates is what lets a HUD label show a live variable.
 

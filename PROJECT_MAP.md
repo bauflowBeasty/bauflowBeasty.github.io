@@ -2,7 +2,7 @@
 
 > **Regla:** Leer este archivo ANTES de cualquier búsqueda en el proyecto. Si un cambio agrega, mueve, renombra o elimina archivos/carpetas (o cambia el propósito de algo listado aquí), actualizar este mapa en el mismo turno.
 >
-> Última actualización: 2026-08-06
+> Última actualización: 2026-10-31
 
 ## Qué es este proyecto
 
@@ -44,9 +44,11 @@ CLAUDE.md                 → Reglas para Claude (solo local: está en .gitignor
 src/
 ├── content.config.ts     → Define la colección de contenido `docs` (schema del frontmatter)
 ├── content/docs/
-│   ├── en/               → Docs en inglés (canónico) — 3 productos, 89 páginas
+│   ├── en/               → Docs en inglés (canónico) — 3 productos, 94 páginas
 │   │   ├── beasty-save-system/    → getting-started/, guides/, advanced/, reference/, faq, troubleshooting, changelog, index
 │   │   ├── beasty-visual-novel/   → getting-started/, authoring/, scripting/, world/, production/, reference/, faq, troubleshooting, changelog, index
+│   │   │                            (1.1.0: authoring/screen-effects; world/layered-expressions, wardrobe,
+│   │   │                            notifications-and-walkthrough, phone-screens)
 │   │   └── beasty-console/   → guides/, reference/, getting-started, faq, changelog, index
 │   └── es/               → Espejo 1:1 de en/ en español (mismas rutas y nombres de archivo)
 ├── data/
@@ -92,7 +94,8 @@ scripts/
                             y lo copia a Assets/BeastyComponents/<asset>/ del proyecto Unity
 
 docs/  (documentación INTERNA del repo, no se publica)
-├── changelogs/           → Copia local de los changelogs de los assets (SaveSystem, VN, Console)
+├── changelogs/           → Copia EXACTA de los changelogs de los assets (SaveSystem, VN, Console): registra lo
+│                           ya documentado; lo que está en Unity y no aquí lo marca `doc:sync` como pendiente
 ├── DOC-INDEX.md          → GENERADO: página → secciones, y símbolo → páginas que lo documentan
 ├── sync-state.json       → Config de sync-check.mjs: ruta del proyecto Unity, cm.exe, assets
 ├── specs/2026-07-13-portada-marca-y-humanizacion-es-design.md → Spec de la portada/marca y la
@@ -122,7 +125,7 @@ del `.unitypackage`):
 
 | Archivo | Papel |
 |---|---|
-| `<Asset>_CHANGELOG.md` | **Canal de traspaso**: lo que se anota ahí es lo que hay que documentar aquí. Se copia a `docs/changelogs/` y se refleja en las páginas `<producto>/changelog.md` (EN + ES). |
+| `<Asset>_CHANGELOG.md` | **Canal de traspaso**: lo que se anota ahí (con detalle mientras la versión está `unreleased`) es lo que hay que documentar aquí. Tras documentarlo se copia tal cual a `docs/changelogs/`. Las páginas `<producto>/changelog.md` (EN + ES) llevan solo un **resumen** New/Improved/Fixed (ver `docs/GUIA-ESTILO-DOCS.md`); al publicar, `/release` sustituye el detalle del canónico por ese resumen. |
 | `README.md` | Presentación corta del paquete. |
 | `<Asset>_LICENSE.md` | Licencia. |
 
@@ -149,7 +152,7 @@ H1 → `title`, enlaces relativos → rutas absolutas, imágenes → `/docs-imag
 - **EN es canónico**: todo cambio de contenido se hace primero en `src/content/docs/en/` y luego se refleja en `es/` (misma ruta de archivo).
 - **Un producto nuevo** requiere tocar: `src/data/products.ts`, `src/data/sidebars.ts`, contenido en `en/` y `es/`, e imágenes en `public/docs-images/`. Ver `HOW-TO-ADD-PROJECT.md`.
 - **La navegación lateral NO se genera sola**: agregar una página nueva exige registrarla en `src/data/sidebars.ts` (EN y ES).
-- **Para saber qué página documenta algo, usar `docs/DOC-INDEX.md`**, no abrir las 89 páginas: su índice
+- **Para saber qué página documenta algo, usar `docs/DOC-INDEX.md`**, no abrir las 94 páginas: su índice
   inverso va de símbolo (`MigratedFrom`, `BeastySaveLog`…) a página. Son 65 KB: buscar con Grep, no leerlo
   entero. Regenerarlo con `npm run doc:index` después de tocar contenido.
 - **Capturas**: cada imagen enlazada en una página tiene su ficha en `docs/screenshots.json` (prioridad,

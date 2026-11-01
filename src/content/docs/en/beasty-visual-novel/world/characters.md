@@ -18,7 +18,9 @@ Two ways, same result:
 
 The Characters tab is also available on its own through
 `Tools > Beasty VN > Content > Character Database`. It has four sub-tabs: **Cast** (identity, aliases,
-expressions, delivery styles, portraits), **Variables** (stats), **Quests** and **Talk Menu**.
+expressions, delivery styles, portraits), **Variables** (stats), **Quests** and **Talk Menu**. The list and
+the selected character stay side by side at any window width, with a divider you drag; its width is
+remembered.
 
 ![The Characters tab, Cast sub-tab, with a character selected](/docs-images/beasty-visual-novel/vn-characters-cast.png)
 
@@ -52,21 +54,34 @@ Two separate sprite sets, because they are two different pictures.
 ![The expressions and portraits lists, sharing their keys](/docs-images/beasty-visual-novel/vn-character-expressions.png)
 
 - **Expressions** are the stage sprites — the full body or bust the player sees on the backdrop. Add them
-  with **+ Add expression**. Each is a key plus a sprite: `base`, `sad`, `angry`, whatever you want. There
-  is no fixed list.
+  with **+ Add expression**: it asks for a name — `happy`, `sad`, `angry`, whatever you want; there is no
+  fixed list — and then whether the expression is a **Single sprite** or **Layered**. A layered expression is
+  built from parts in the Expression Composer; see [Layered expressions](/docs/beasty-visual-novel/world/layered-expressions/).
 - **Portraits** are the small UI icons shown next to the dialogue box. Add them with **+ Add portrait**.
   They use the same keys as the expressions, so a `sad` line can show a `sad` head icon.
 
-`base` is the default key. A **Show character** block with no expression key, or an **Expression** block
-pointing at a key you have not made, still puts the character on stage, because of the fallback chain:
+### The default expression
+
+**The first expression in the list is the character's default**, whatever its name, Single or Layered. Its
+row is tagged *default*. To choose another, use the row's ⋮ menu: **Make default**, **Move up**, **Move
+down**.
+
+The default expression is used wherever no expression is named, or the named one does not exist: a **Show
+character** block with no expression, a block naming a missing expression, and the character's spots in
+free roam. The fallback chain:
 
 ```text
-expression asked for  ->  base expression  ->  nothing
-portrait asked for    ->  base portrait    ->  the stage sprite for that expression
+expression asked for  ->  default expression (first in the list)
+portrait asked for    ->  first portrait  ->  no portrait
 ```
 
-So a character with only stage sprites still gets a portrait: the engine reuses the stage sprite. A
-character with no `base` expression shows nothing, which is the one case to watch for.
+The first portrait stands in for every expression without one of its own. A character with no portraits at
+all speaks without one: the dialogue box hides the portrait panel.
+
+### Clothes
+
+**Wardrobe…**, under the expression list, opens the character's wardrobe: the clothes they can wear on top
+of layered expressions. See [Wardrobe and outfits](/docs/beasty-visual-novel/world/wardrobe/).
 
 ## Delivery styles
 
@@ -131,9 +146,15 @@ from two places, and a character has both:
 
 1. **The Character Variable Schema** — the fields **every** character has. One asset per project
    (`Create > Beasty VN > Characters > Character Variable Schema`). Declare `affection` there once and the
-   whole cast has it. Edit it in the **Characters > Variables** sub-tab, under **+ Add universal field**.
-2. **The character's own fields** — declared on that one character, in the same sub-tab. Use these for
-   things only this character has.
+   whole cast has it. Edit it in **Characters › Variables › Global**, under **+ Add universal field**.
+2. **The character's own fields** — declared on that one character, in **Characters › Variables › Per
+   character › Own fields**. Use these for things only this character has.
+
+**Characters › Variables** has two tabs. **Global** holds what applies to every character: the project's
+**Enable walkthrough** switch, the universal fields, and the default visibility of the character list.
+**Per character** lists the cast beside the selected character's three pages: **Own fields**, **Global field
+defaults** (this character's overrides of the universal fields) and **Character list**. The split is visual
+only: nothing is stored differently. The tab and divider widths are remembered.
 
 Every field has:
 
@@ -143,19 +164,22 @@ Every field has:
 | **Type** | `Int` counter, `Float` value or `Bool` flag. |
 | **Default value** | The starting value, before anything sets it. |
 | **Show on stats** | Show this field on the character's stats screen. Off by default. |
+| **Display name** | The name the player reads for this field — on the stats screen, in notifications and in hints. Empty = the key. Translated in **Localization › Game UI**. Shown while any of **Show on stats**, **Notify changes in gameplay** or **Show in walkthrough** is on. |
+| **Notify changes in gameplay** | Show a [stat notification](/docs/beasty-visual-novel/world/notifications-and-walkthrough/) when the value changes during play. Off by default. |
+| **Show in walkthrough** | Give this field automatic [walkthrough hints](/docs/beasty-visual-novel/world/notifications-and-walkthrough/#walkthrough-hints) on choices. Off by default. |
 | **Editable** | Let the player change it from the stats screen (+/- for numbers, a toggle for bools). Off = read-only. |
 | **Clamp** + **Min** / **Max** | Keep the value inside a range when the player edits it. |
 | **Step** | How much each +/- press adds or subtracts. |
 
-Both presentation flags start off. A new field is game state first; putting it in front of the player is a
+Every presentation flag starts off. A new field is game state first; putting it in front of the player is a
 decision you make on purpose.
 
 ### Overriding a schema default for one character
 
 Everyone starts at `affection = 0`, but Maya starts at 10 because she is your sister. You do not need a
 second field for that. In the character's **Variables** sub-tab, override the universal field's default
-value for this character only. You can also override whether that one field shows on *this* character's
-stats screen, without touching the schema.
+value for this character only, in **Per character › Global field defaults**. You can also override, for *this* character, whether that one field shows
+on the stats screen, notifies changes and shows in the walkthrough, without touching the schema.
 
 Changing a character variable from the story is the **Character variable** block (palette category
 **State**): pick the character, pick the field, pick the operation. Reading one in a condition is
@@ -168,7 +192,8 @@ Changing a character variable from the story is the **Character variable** block
 
 The **Free Roam Sprite** field holds the sprite used when the character stands in a room, placed there by
 their routine.
-Leave it empty and the character's `base` expression sprite is used instead. Where they stand and how big
+Leave it empty and the character's default expression is used instead; when that expression is layered,
+the room shows its layered look. Where they stand and how big
 they are is decided by the room prefab, not here — see [Character routines](/docs/beasty-visual-novel/world/character-routines/).
 
 Two related toggles control what the player may see about the character's whereabouts:
@@ -196,10 +221,12 @@ themselves in [Character screens](/docs/beasty-visual-novel/world/character-scre
 
 Each character has a talk menu: the list of things the player can say to them right now. It is authored in
 the **Characters > Talk Menu** sub-tab, and the quest steps that point at this character are added to it
-automatically. See [The talk menu](/docs/beasty-visual-novel/world/talk-menu/).
+automatically, and the menu ends with a **Leave** option. See [The talk menu](/docs/beasty-visual-novel/world/talk-menu/).
 
 ## See also
 
+- [Layered expressions](/docs/beasty-visual-novel/world/layered-expressions/) — expressions built from layers, and the Expression Composer
+- [Wardrobe and outfits](/docs/beasty-visual-novel/world/wardrobe/) — clothes the story can change
 - [Variables and conditions](/docs/beasty-visual-novel/world/variables-and-conditions/) — the store every character variable lives in
 - [Character screens](/docs/beasty-visual-novel/world/character-screens/) — the cast list, the profile, the stats screen
 - [The talk menu](/docs/beasty-visual-novel/world/talk-menu/) — the per-character conversation hub

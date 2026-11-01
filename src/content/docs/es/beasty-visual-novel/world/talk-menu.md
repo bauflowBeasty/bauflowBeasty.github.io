@@ -88,6 +88,21 @@ Vale la pena entender `BackToMenu`: el menú se **reevalúa** cuando vuelves a �
 volverse falsa desaparece, y una que acaba de volverse verdadera está ahí. Entrega las manzanas, vuelve al menú, y
 la entrada de la entrega ya no está.
 
+### La opción Irse
+
+**Todo menú de conversación termina con la opción Irse**, así que el jugador nunca se queda atrapado en una
+charla. Irse termina la conversación: vuelve a la sala de la que venía el jugador o, en un menú abierto por un
+nodo TalkMenu, sigue al destino por defecto de ese nodo.
+
+- Se omite cuando una de tus entradas ya sirve de despedida: una entrada sin diálogo cuyo final vuelve a una
+  sala o va a otra.
+- Desactívala por personaje con **Add a Leave option**, en el menú de conversación de la ventana Characters.
+  Aparece un aviso cuando el menú dejaría entonces atrapado al jugador.
+- Ponle tu propio texto con **Leave label**. Si no, usa el texto de UI de serie `talk.leave`: "Leave", "Irse",
+  "Partir"… en todos los idiomas de serie.
+
+![Los ajustes del menú de conversación de un personaje, con el interruptor Add a Leave option y el campo Leave label](/docs-images/beasty-visual-novel/vn-talk-menu-leave.png)
+
 ## Entregar objetos desde una conversación
 
 Un objetivo **GatherDeliver** ([Misiones](/es/docs/beasty-visual-novel/world/quests/)) se completa dando los objetos al propietario de la misión, y

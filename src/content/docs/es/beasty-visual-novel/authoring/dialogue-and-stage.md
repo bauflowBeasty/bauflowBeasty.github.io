@@ -81,10 +81,23 @@ otro sitio, ni el valor de `@char:maya:@name`.
 > renombró, o porque fue desenmascarado— usa el bloque **Character name**. Ese bloque escribe un cambio que
 > queda guardado.
 
+### Varios hablantes: Say together
+
+El bloque **Say together** (categoría de paleta **Dialogue**) es una línea que dicen a la vez de dos a cinco
+personajes: un grito de todo el grupo, una pareja que responde al unísono. La placa de nombre une sus nombres,
+cada uno en su color, y el texto se reparte en un tramo por hablante con sus colores de texto: por palabras, o
+por letras si la línea es corta. No se muestra retrato.
+
+Un bloque Say together cuyos hablantes se quedan en menos de dos personajes reales se reproduce como una línea
+normal. En el guion de texto es `mia & alex "Run!"`.
+
 ## El escenario
 
 El escenario tiene tres canales independientes: el **fondo**, los **personajes** y los **props**. Cada uno
 mantiene su valor actual hasta que un bloque del mismo canal lo cambia. Nunca repites el fondo.
+
+Cada cambio ocurre de golpe, salvo que un bloque **Transition (with)** antes de la línea diga otra cosa: una
+disolución, un fundido, un barrido. Consulta [Transiciones visuales y efectos de pantalla](/es/docs/beasty-visual-novel/authoring/screen-effects/).
 
 ![El escenario en el juego: fondo, dos personajes y la caja de diálogo](/docs-images/beasty-visual-novel/vn-stage-ingame.png)
 
@@ -132,12 +145,17 @@ Pone a un personaje en el escenario, o lo reemplaza si ya está ahí.
 | Opción | Qué hace |
 |---|---|
 | Character | Quién entra. |
-| Expression | Qué sprite de escenario usar. Por defecto, `base`. |
+| Expression | Qué sprite de escenario usar. Vacío = la expresión por defecto del personaje, la primera de su lista. |
 | Portrait | Opcional. Fija un retrato de UI distinto de la expresión en escena. Vacío = el retrato sigue a la expresión. |
 | Position | `Left`, `CenterLeft`, `Center`, `CenterRight`, `Right`, o `Custom` (una X normalizada de 0 a 1). |
 | Scale | Multiplicador de tamaño. Úsalo para dar sensación de distancia. |
 | Flip | Refleja el sprite, así un mismo sprite puede mirar hacia ambos lados. |
 | Layer | Slot de 0 a 4. El más alto se dibuja delante. Dos personajes en el mismo anclaje necesitan capas distintas, o se superponen. |
+| Outfit | Opcional. Pone un [conjunto](/es/docs/beasty-visual-novel/world/wardrobe/) al personaje en la misma línea. |
+
+Un bloque Show character que no tiene nada que ofrecer —sin personaje, con uno desconocido o con uno sin
+expresiones— se ignora: la escena se queda como si el bloque no estuviera, y su tarjeta en el inspector lo dice.
+Elegir un personaje le da al bloque la primera expresión de ese personaje.
 
 Quién está en escena es independiente de quién está hablando. Un personaje puede hablar sin estar en escena,
 o quedarse en el escenario toda una escena sin decir una palabra.
@@ -148,8 +166,8 @@ Cambia la expresión de un personaje que **ya** está en escena. Es más ligero 
 character, y es lo que usas entre líneas.
 
 Tiene una opción extra que vale la pena conocer: **also set the portrait**. Actívala y el bloque también
-fija el retrato del cuadro de diálogo, ya sea a una clave de retrato que nombres, o al retrato base del
-personaje si la dejas vacía. Eso permite que el sprite de escenario y el pequeño icono de cabeza discrepen a
+fija el retrato del cuadro de diálogo, ya sea a una clave de retrato que nombres, o al retrato por defecto
+del personaje si la dejas vacía. Eso permite que el sprite de escenario y el pequeño icono de cabeza discrepen a
 propósito, algo útil cuando el personaje está de espaldas, o cuando les oculta lo que siente a todos menos
 al jugador.
 
@@ -180,22 +198,21 @@ limpia el canal: el bloque simplemente se salta.
 
 No vas a dibujar cada expresión para cada personaje, y no hace falta. En el **escenario**, la cadena es:
 
-**la expresión que pediste -> el sprite `base` del personaje**
+**la expresión que pediste -> la expresión por defecto del personaje (la primera de su lista)**
 
-Así que un personaje con solo un sprite `base` sigue funcionando en todas partes: pides `angry`, obtienes
-`base`, y el juego sigue. Nada da error, nada se vuelve rosa. Dibuja el sprite `angry` más tarde y todas las
-líneas que ya lo pedían empiezan a mostrarlo. Dos casos límite que conviene conocer: un personaje sin sprite
-`base` se dibuja como un hueco vacío e invisible, sin ningún aviso, así que dale un `base` a todo el mundo;
-y una entrada de expresión que existe pero no tiene sprite asignado cuenta como arte: muestra nada en lugar
-de recurrir a la reserva.
+Así que un personaje con una sola expresión sigue funcionando en todas partes: pides `angry`, obtienes la de
+por defecto, y el juego sigue. Nada da error, nada se vuelve rosa. Un bloque Show character que nombra una
+expresión que falta avisa una vez en la consola. Dibuja el sprite `angry` más tarde y todas las líneas que ya
+lo pedían empiezan a mostrarlo. Un caso límite que conviene conocer: una entrada de expresión que existe pero no
+tiene sprite asignado cuenta como arte: no muestra nada en lugar de recurrir a la reserva.
 
-Los **retratos** recorren su propia cadena: la clave de retrato que pediste, luego el retrato `base` del
-personaje. Si no existe ninguno de los dos, el cuadro de diálogo oculta el panel del retrato; nunca toma
-prestado el sprite de escenario. Un personaje con arte de escenario pero sin arte de retrato habla sin
+Los **retratos** recorren su propia cadena: la clave de retrato que pediste, luego el primer retrato del
+personaje. Si el personaje no tiene ningún retrato, el cuadro de diálogo oculta el panel del retrato; nunca
+toma prestado el sprite de escenario. Un personaje con arte de escenario pero sin arte de retrato habla sin
 retrato, sin más.
 
-La clave de expresión por defecto es `base`. Las expresiones y los retratos se configuran por personaje en
-[Personajes](/es/docs/beasty-visual-novel/world/characters/).
+Las expresiones y los retratos se configuran por personaje en [Personajes](/es/docs/beasty-visual-novel/world/characters/#la-expresión-por-defecto);
+las expresiones montadas por capas, en [Expresiones por capas](/es/docs/beasty-visual-novel/world/layered-expressions/).
 
 ## Ver también
 

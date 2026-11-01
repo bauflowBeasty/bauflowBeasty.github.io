@@ -100,6 +100,8 @@ almacena bajo `@char:<id>:<field>`.
 |---|---|
 | `@char:<id>:<field>` | Un campo en un personaje. |
 | `@char:<id>:@name` | Reservado. El nombre mostrado del personaje, una vez que se ha cambiado o el jugador lo ha nombrado. |
+| `@char:<id>:@wear.<category>` | Reservado. La prenda puesta en una categoría del vestuario *One at a time*. Mientras la historia no ha cambiado la categoría, lee su prenda por defecto. |
+| `@char:<id>:@wear.<category>.<piece>` | Reservado. Sí/no: si esa prenda de una categoría *Several at once* va puesta. Mientras nadie la toca, si va puesta por defecto. |
 | `@char:@self:<field>` | Un marcador de posición usado en una condición compartida. Se resuelve al personaje para el que se esté evaluando la condición. |
 
 Ejemplos de condiciones:
@@ -114,6 +116,10 @@ Usa `@self` cuando una plantilla de condición tiene que aplicarse a todo el ele
 visibilidad de la lista de elenco dentro del juego.
 
 Consulta [Personajes](/es/docs/beasty-visual-novel/world/characters/).
+
+Las claves `@wear` las escriben los bloques Wear piece y Change outfit y `BeastyWardrobe`; consulta
+[Vestuario y conjuntos](/es/docs/beasty-visual-novel/world/wardrobe/#condiciones-sobre-la-ropa). Renombrar una
+categoría o una prenda renombra las claves y los valores que se comparan con ellas en todo el proyecto.
 
 ## Claves de rutina
 
@@ -173,6 +179,21 @@ Ejemplos de condiciones:
 
 El tiempo nunca avanza por sí solo. Lo mueves con el bloque Advance time, con el `advanceTimeOnClick` de un
 objeto de mundo libre, o desde código. Consulta [Tiempo de juego](/es/docs/beasty-visual-novel/world/game-time/).
+
+### Tokens para mostrar
+
+Cuatro tokens son para texto que lee el jugador. Nunca se guardan, y los selectores de condiciones no los
+ofrecen.
+
+| Token | Muestra |
+|---|---|
+| `@time:daypart.label` | El nombre del momento del día actual, traducido. |
+| `@time:weekday.label` | El nombre del día de la semana actual, traducido. |
+| `@time:season.label` | El nombre de la estación actual, traducido. |
+| `@time:clock.label` | La hora como `HH:00` si hay reloj; el nombre traducido del momento del día si solo hay momentos del día; nada sin Time Config. |
+
+Escríbelos entre corchetes en diálogos y etiquetas: `It is [@time:daypart.label].` Los nombres se traducen en
+[Localization › Game UI](/es/docs/beasty-visual-novel/production/localization/#nombres-del-tiempo-traducidos).
 
 ## Claves de misión
 
@@ -240,6 +261,25 @@ distintos. `Tools > Beasty VN > Validate > Find duplicate ids` no detectará un 
 variable.
 
 Consulta [El diccionario](/es/docs/beasty-visual-novel/world/dictionary/).
+
+## Claves de preferencias del jugador
+
+Las preferencias del jugador se pueden leer en cualquier sitio —en condiciones y en etiquetas como
+`[@pref:volume.music]`— y solo las cambian los botones de pantalla. Nunca se guardan en las partidas.
+
+| Clave | Valor |
+|---|---|
+| `@pref:textSpeed` | Velocidad de texto. |
+| `@pref:autoDelay` | Tiempo de auto-avance. |
+| `@pref:autoOnStart` | Sí/no: empezar con auto-avance. |
+| `@pref:skipUnread` | Sí/no: saltar el texto no leído. |
+| `@pref:reduceMotion` | Sí/no: reducir destellos y movimiento. |
+| `@pref:walkthrough` | Sí/no: pistas de la guía activadas. |
+| `@pref:walkthrough.available` | Sí/no: el proyecto activa las pistas de la guía. Solo lectura. |
+| `@pref:volume.master`, `@pref:volume.music`, `@pref:volume.sfx`, `@pref:volume.voice`, `@pref:volume.ambience` | Un volumen, de 0 a 1. |
+
+Un bloque Set variable o un efecto de opción que apunta a una clave `@pref:` se ignora, con un aviso por clave.
+Consulta [Pantallas y HUD](/es/docs/beasty-visual-novel/world/screens-and-hud/#cambiar-las-preferencias-del-jugador).
 
 ## Ver también
 

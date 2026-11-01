@@ -279,7 +279,8 @@
       "page": "beasty-visual-novel/authoring/blocks-reference",
       "prioridad": 1,
       "vista": "Unity ▸ Tools > Beasty VN > Editor ▸ pestaña Story, panel izquierdo",
-      "captura": "Recorte del panel de la paleta con TODAS las categorías desplegadas a la vez (Dialogue, Scene, Clear, State, Quests, World, Items, Audio, Input, Flow) y sus bloques legibles. Alarga la ventana en vertical si hace falta: esta captura es el índice de toda la página."
+      "captura": "Recorte del panel de la paleta con TODAS las categorías desplegadas a la vez (Dialogue, Scene, Clear, State, Quests, World, Items, Audio, Input, Flow) y sus bloques legibles. Alarga la ventana en vertical si hace falta: esta captura es el índice de toda la página.",
+      "rehacer": "La paleta tiene una categoría nueva, Effects (entre Clear y State), y bloques nuevos: Say together, Wear piece, Change outfit."
     },
     {
       "file": "vn-choice-ingame.png",
@@ -335,7 +336,8 @@
       "page": "beasty-visual-novel/authoring/dialogue-and-stage",
       "prioridad": 2,
       "vista": "Unity ▸ Tools > Beasty VN > Editor ▸ pestaña Story, inspector del nodo",
-      "captura": "El bloque desplegado con el personaje elegido, una expresión concreta y la posición en escena. Si el bloque muestra miniatura del sprite, que se vea."
+      "captura": "El bloque desplegado con el personaje elegido, una expresión concreta y la posición en escena. Si el bloque muestra miniatura del sprite, que se vea.",
+      "rehacer": "El bloque Show character tiene ahora el campo Outfit."
     },
     {
       "file": "vn-stage-ingame.png",
@@ -349,7 +351,8 @@
       "page": "beasty-visual-novel/authoring/dialogue-preview",
       "prioridad": 1,
       "vista": "Unity ▸ Tools > Beasty VN > Dialogue Preview",
-      "captura": "La ventana de vista previa renderizando un nodo con fondo y dos personajes en escena, con la caja de diálogo abajo. Sin entrar en Play: la barra de Unity debe delatar que no estamos en modo de juego."
+      "captura": "La ventana de vista previa renderizando un nodo con fondo y dos personajes en escena, con la caja de diálogo abajo. Sin entrar en Play: la barra de Unity debe delatar que no estamos en modo de juego.",
+      "rehacer": "La vista previa dibuja ya la caja de diálogo con el aspecto tinta y papel y tiene el botón ▶ Play effects. Rehacer con una línea con efecto (por ejemplo el flashback de la intro)."
     },
     {
       "file": "vn-preview-block-button.png",
@@ -609,7 +612,8 @@
       "page": "beasty-visual-novel/getting-started/editor-tour",
       "prioridad": 1,
       "vista": "Unity ▸ Tools > Beasty VN > Editor ▸ pestaña Variables",
-      "captura": "La pestaña con media docena de variables de tipos distintos (Int, Bool, String, Enum) en la lista de la izquierda y una seleccionada a la derecha, con su clave, tipo, kind y valor por defecto a la vista."
+      "captura": "La pestaña con media docena de variables de tipos distintos (Int, Bool, String, Enum) en la lista de la izquierda y una seleccionada a la derecha, con su clave, tipo, kind y valor por defecto a la vista.",
+      "rehacer": "La pestaña Variables muestra lista y detalle lado a lado con divisor, y los campos Display name, Notify changes in gameplay y Show in walkthrough."
     },
     {
       "file": "vn-import-package.png",
@@ -779,7 +783,8 @@
       "page": "beasty-visual-novel/production/localization",
       "prioridad": 1,
       "vista": "Unity ▸ Tools > Beasty VN > Editor ▸ pestaña Localization",
-      "captura": "La pestaña con el alternador Story / UI (global) bien visible y la grilla de la tabla de historia debajo. Es la captura que enseña que hay DOS tablas y dónde se cambia de una a otra."
+      "captura": "La pestaña con el alternador Story / UI (global) bien visible y la grilla de la tabla de historia debajo. Es la captura que enseña que hay DOS tablas y dónde se cambia de una a otra.",
+      "rehacer": "La sección Localization tiene ahora cuatro pestañas: Story, UI, Game UI e Items."
     },
     {
       "file": "vn-localization-trash.png",
@@ -800,7 +805,8 @@
       "page": "beasty-visual-novel/production/localization",
       "prioridad": 1,
       "vista": "Unity ▸ Game view en Play, pantalla de preferencias",
-      "captura": "La pantalla de preferencias en marcha con el desplegable de idioma ABIERTO, mostrando los nombres curados (English, Spanish…). Si puedes, una segunda captura del menú ya traducido tras elegir otro idioma."
+      "captura": "La pantalla de preferencias en marcha con el desplegable de idioma ABIERTO, mostrando los nombres curados (English, Spanish…). Si puedes, una segunda captura del menú ya traducido tras elegir otro idioma.",
+      "rehacer": "La pantalla de Preferencias se rediseñó (dos columnas sobre una hoja de papel)."
     },
     {
       "file": "vn-log-categories.png",
@@ -976,14 +982,16 @@
       "page": "beasty-visual-novel/world/character-screens",
       "prioridad": 1,
       "vista": "Unity ▸ Game view en Play",
-      "captura": "La lista del reparto abierta con cuatro o cinco personajes visibles (y alguno todavía oculto por su condición, si se nota), tal y como la ve el jugador."
+      "captura": "La lista del reparto abierta con cuatro o cinco personajes visibles (y alguno todavía oculto por su condición, si se nota), tal y como la ve el jugador.",
+      "rehacer": "La lista de personajes se rediseñó: hoja de papel con título y tarjetas polaroid en grilla."
     },
     {
       "file": "vn-profile-ingame.png",
       "page": "beasty-visual-novel/world/character-screens",
       "prioridad": 1,
       "vista": "Unity ▸ Game view en Play",
-      "captura": "El perfil de un personaje abierto, con su retrato y nombre en la cabecera y la barra de pestañas debajo, con la primera pestaña seleccionada."
+      "captura": "El perfil de un personaje abierto, con su retrato y nombre en la cabecera y la barra de pestañas debajo, con la primera pestaña seleccionada.",
+      "rehacer": "El perfil se rediseñó: polaroid y nombre a la izquierda, pestañas de papel claro a la derecha."
     },
     {
       "file": "vn-quest-log-ingame.png",
@@ -1004,7 +1012,8 @@
       "page": "beasty-visual-novel/world/character-screens",
       "prioridad": 1,
       "vista": "Unity ▸ Game view en Play",
-      "captura": "La pantalla de estadísticas con varias filas: alguna de solo lectura, alguna con botones + y −, y algún interruptor de un campo booleano. Si el personaje tiene activado Show current location, que se vea también la línea de ubicación."
+      "captura": "La pantalla de estadísticas con varias filas: alguna de solo lectura, alguna con botones + y −, y algún interruptor de un campo booleano. Si el personaje tiene activado Show current location, que se vea también la línea de ubicación.",
+      "rehacer": "Las estadísticas son ahora tarjetas grandes en una o dos columnas, con el aspecto tinta y papel."
     },
     {
       "file": "vn-character-aliases.png",
@@ -1025,7 +1034,8 @@
       "page": "beasty-visual-novel/world/characters",
       "prioridad": 1,
       "vista": "Unity ▸ Tools > Beasty VN > Editor ▸ pestaña Characters ▸ Cast",
-      "captura": "Las dos listas a la vez, con al menos tres claves iguales en ambas (`base`, `sad`, `angry`) y sus miniaturas visibles, para que se vea que son dos juegos de sprites que comparten nombre."
+      "captura": "Las dos listas a la vez, con al menos tres claves iguales en ambas (`base`, `sad`, `angry`) y sus miniaturas visibles, para que se vea que son dos juegos de sprites que comparten nombre.",
+      "rehacer": "La lista de expresiones cambió: filas Single y Layered, etiqueta default en la primera, menú ⋮ y botón Wardrobe…"
     },
     {
       "file": "vn-character-freeroam-sprite.png",
@@ -1046,7 +1056,8 @@
       "page": "beasty-visual-novel/world/characters",
       "prioridad": 1,
       "vista": "Unity ▸ Tools > Beasty VN > Editor ▸ pestaña Characters ▸ Variables",
-      "captura": "La sub-pestaña con las DOS zonas visibles: los campos universales del esquema (por ejemplo `affection`, `met`) y los campos propios del personaje seleccionado. Que se vean las marcas Show on stats y Editable, y a poder ser un valor por defecto sobrescrito para este personaje."
+      "captura": "La sub-pestaña con las DOS zonas visibles: los campos universales del esquema (por ejemplo `affection`, `met`) y los campos propios del personaje seleccionado. Que se vean las marcas Show on stats y Editable, y a poder ser un valor por defecto sobrescrito para este personaje.",
+      "rehacer": "Characters › Variables tiene ahora pestañas Global y Per character, y cada campo las casillas Notify changes in gameplay, Show in walkthrough y Display name."
     },
     {
       "file": "vn-characters-cast.png",
@@ -1193,7 +1204,8 @@
       "page": "beasty-visual-novel/world/items-and-inventory",
       "prioridad": 1,
       "vista": "Unity ▸ Game view en Play",
-      "captura": "El inventario abierto con cuatro o cinco ítems (alguno con cantidad mayor que 1, para que se vea el contador) y el popup de detalle abierto sobre uno, mostrando icono, nombre, descripción y el botón Use."
+      "captura": "El inventario abierto con cuatro o cinco ítems (alguno con cantidad mayor que 1, para que se vea el contador) y el popup de detalle abierto sobre uno, mostrando icono, nombre, descripción y el botón Use.",
+      "rehacer": "El inventario se rediseñó: hoja titulada con tarjetas polaroid y un popup de detalle grande con Use y Cancel."
     },
     {
       "file": "vn-item-onuse.png",
@@ -1214,7 +1226,8 @@
       "page": "beasty-visual-novel/world/items-and-inventory",
       "prioridad": 3,
       "vista": "Unity ▸ Tools > Beasty VN > Editor ▸ pestaña Screens",
-      "captura": "Recorte de la barra de la lista de pantallas con los botones de creación visibles (+ Primary, + Secondary, + Inventory (ready-made), + Menu, + Characters) y el del inventario señalado."
+      "captura": "Recorte de la barra de la lista de pantallas con los botones de creación visibles (+ Primary, + Secondary, + Inventory (ready-made), + Menu, + Characters) y el del inventario señalado.",
+      "rehacer": "Ya no existe el botón + Inventory (ready-made): rehacer con el menú + New screen abierto en Inventory ▸ Notebook / Phone."
     },
     {
       "file": "vn-quest-editor.png",
@@ -1263,35 +1276,40 @@
       "page": "beasty-visual-novel/world/screens-and-hud",
       "prioridad": 1,
       "vista": "Unity ▸ Game view en Play, en mundo libre",
-      "captura": "El HUD primario en marcha sobre una sala: un contador ligado a una variable (`Money: 120`), una etiqueta de tiempo y un par de botones (inventario, personajes). Es la foto de «pantalla primaria»."
+      "captura": "El HUD primario en marcha sobre una sala: un contador ligado a una variable (`Money: 120`), una etiqueta de tiempo y un par de botones (inventario, personajes). Es la foto de «pantalla primaria».",
+      "rehacer": "El HUD de la House Demo cambió: tarjeta de papel con día y momento traducidos, insignia redonda y botón Phone."
     },
     {
       "file": "vn-screen-button-action.png",
       "page": "beasty-visual-novel/world/screens-and-hud",
       "prioridad": 2,
       "vista": "Unity ▸ Tools > Beasty VN > Editor ▸ pestaña Screens",
-      "captura": "Un elemento Button con el desplegable de acción ABIERTO mostrando las seis acciones (OpenScreen, Close, Back, Custom, EnterVN, AdvanceTime), y sus efectos de clic debajo si los tiene."
+      "captura": "Un elemento Button con el desplegable de acción ABIERTO mostrando las seis acciones (OpenScreen, Close, Back, Custom, EnterVN, AdvanceTime), y sus efectos de clic debajo si los tiene.",
+      "rehacer": "La acción se elige ahora en el desplegable Does (Nothing, Open screen, Back, Close all screens, Open game menu, Change values only, Enter VN scene, Advance time, Custom event). Rehacer con ese desplegable abierto."
     },
     {
       "file": "vn-screen-item.png",
       "page": "beasty-visual-novel/world/screens-and-hud",
       "prioridad": 1,
       "vista": "Unity ▸ Tools > Beasty VN > Editor ▸ pestaña Screens",
-      "captura": "El elemento del contador de dinero desplegado: Text = `Money: `, Variable = `gold`, su condición de visibilidad y al menos un caso de variante condicional con icono distinto. Es el ejemplo que la página cuenta con palabras."
+      "captura": "El elemento del contador de dinero desplegado: Text = `Money: `, Variable = `gold`, su condición de visibilidad y al menos un caso de variante condicional con icono distinto. Es el ejemplo que la página cuenta con palabras.",
+      "rehacer": "El editor del elemento se abre ahora bajo su fila de la lista e incluye el campo Icon. Rehacer con una fila seleccionada y su editor desplegado."
     },
     {
       "file": "vn-screen-preview.png",
       "page": "beasty-visual-novel/world/screens-and-hud",
       "prioridad": 2,
       "vista": "Unity ▸ Tools > Beasty VN > Editor ▸ pestaña Screens",
-      "captura": "La vista previa del prefab de una pantalla renderizada junto a sus ajustes, con el desplegable «Hierarchy (who opens what)» ABIERTO mostrando qué botón abre qué pantalla."
+      "captura": "La vista previa del prefab de una pantalla renderizada junto a sus ajustes, con el desplegable «Hierarchy (who opens what)» ABIERTO mostrando qué botón abre qué pantalla.",
+      "rehacer": "La vista previa de Screens ahora dibuja el contenido del prefab (antes salía solo el fondo oscuro). Rehacer con un elemento seleccionado marcado en azul en la vista previa."
     },
     {
       "file": "vn-tab-screens.png",
       "page": "beasty-visual-novel/world/screens-and-hud",
       "prioridad": 2,
       "vista": "Unity ▸ Tools > Beasty VN > Editor ▸ pestaña Screens",
-      "captura": "Reutiliza la captura de la pestaña Screens del recorrido por el editor."
+      "captura": "Reutiliza la captura de la pestaña Screens del recorrido por el editor.",
+      "rehacer": "La pestaña Screens cambió: menú + New screen en vez de la fila de botones, campo Kind en vez de Is Main, elementos en filas agrupadas con icono y resumen. Rehacer con el menú + New screen abierto en Menu o Inventory."
     },
     {
       "file": "vn-talk-menu-entry.png",
@@ -1348,6 +1366,111 @@
       "prioridad": 1,
       "vista": "Unity ▸ Tools > Beasty VN > Editor ▸ pestaña Variables",
       "captura": "Una variable recién creada y seleccionada, con su clave, tipo de valor, kind y valor por defecto rellenos, y el botón + New Variable visible. Si el kind es Enum, mejor: se ve la lista de valores permitidos."
+    },
+    {
+      "file": "vn-effects-palette.png",
+      "page": "beasty-visual-novel/authoring/screen-effects",
+      "prioridad": 2,
+      "vista": "Unity ▸ Tools > Beasty VN > Editor ▸ pestaña Story, con un Dialogue Node seleccionado",
+      "captura": "La paleta Add blocks con la categoría Effects visible y sus siete botones: Transition (with), Screen effect, Clear effects, Fade, Dissolve, Flash y Punch (vpunch). Que se vea que Effects va entre Clear y State. Recorta a la paleta."
+    },
+    {
+      "file": "vn-effect-flashback.png",
+      "page": "beasty-visual-novel/authoring/screen-effects",
+      "prioridad": 2,
+      "vista": "Unity ▸ Game view en Play (House Demo, recuerdo de la mudanza de Mia en la intro)",
+      "captura": "Una línea de diálogo bajo el preset flashback: escenario en sepia, viñeta oscura y desenfoque suave, con la caja de diálogo encima perfectamente nítida y legible. Es la prueba de que los efectos no tocan la interfaz."
+    },
+    {
+      "file": "vn-effect-block-editor.png",
+      "page": "beasty-visual-novel/authoring/screen-effects",
+      "prioridad": 1,
+      "vista": "Unity ▸ Tools > Beasty VN > Editor ▸ pestaña Story ▸ inspector de un bloque Screen effect",
+      "captura": "Un bloque Screen effect con el preset flashback elegido, sus tres capas listadas (filtro sepia, viñeta, desenfoque) y la intensidad de la viñeta sobrescrita: el interruptor junto a ese campo activado y el resto apagados. Que se vea también el desplegable de duración (Until the stage changes)."
+    },
+    {
+      "file": "vn-cast-layered-row.png",
+      "page": "beasty-visual-novel/world/layered-expressions",
+      "prioridad": 1,
+      "vista": "Unity ▸ Tools > Beasty VN > Editor ▸ pestaña Characters ▸ Cast, con Mia seleccionada",
+      "captura": "La lista de expresiones de Mia con al menos una fila Single (su campo de sprite visible) y una fila Layered (miniatura, texto «Layered · N layers» y botón Edit in Composer…). Abre el menú ⋮ de la fila Single para que se vean Switch to Layered, Make default, Move up y Move down. La primera fila lleva la etiqueta default."
+    },
+    {
+      "file": "vn-expression-composer.png",
+      "page": "beasty-visual-novel/world/layered-expressions",
+      "prioridad": 1,
+      "vista": "Unity ▸ Tools > Beasty VN > Expression Composer, abierto sobre una expresión por capas de Mia (House Demo)",
+      "captura": "La ventana entera con sus tres paneles: a la izquierda las cajas de conjuntos, categorías del vestuario y árbol de capas (con un grupo desplegado); en el centro Mia en el lienzo con una capa seleccionada y el anillo de giro visible; a la derecha el inspector en la pestaña Expression mostrando los campos de esa capa (Parent, Rotation, Scale, Flip, Tint)."
+    },
+    {
+      "file": "vn-wardrobe-tab.png",
+      "page": "beasty-visual-novel/world/wardrobe",
+      "prioridad": 1,
+      "vista": "Unity ▸ Expression Composer ▸ pestaña Wardrobe del inspector, personaje Mia (House Demo)",
+      "captura": "Las categorías top, bottom y shoes desplegadas en el panel izquierdo con sus prendas; una prenda seleccionada y Mia vestida en el lienzo. En el inspector, el aviso «Changes apply to every expression that wears this piece (N)» y los ajustes de la categoría (modo One at a time, Can be empty, Default piece)."
+    },
+    {
+      "file": "vn-wardrobe-outfit-edit.png",
+      "page": "beasty-visual-novel/world/wardrobe",
+      "prioridad": 2,
+      "vista": "Unity ▸ Expression Composer ▸ caja de conjuntos, tras pulsar el lápiz de un conjunto",
+      "captura": "Un conjunto en edición: el cartel «Editing outfit '<nombre>'» con el botón Done sobre el lienzo, Mia vestida con ese conjunto, y en la lista el conjunto desplegado con sus categorías y prendas. Que se vean también los botones ojo y lápiz de las demás filas de conjuntos."
+    },
+    {
+      "file": "vn-stat-notification.png",
+      "page": "beasty-visual-novel/world/notifications-and-walkthrough",
+      "prioridad": 1,
+      "vista": "Unity ▸ Game view en Play (House Demo, justo después de responder a Mia)",
+      "captura": "Dos avisos de estadística apilados en su esquina: uno verde «Mia: Friendship+» y otro rojo con una bajada (o el de Trust). Que se vea el resto de la escena detrás para dar contexto de tamaño, y ninguna cantidad numérica en los avisos."
+    },
+    {
+      "file": "vn-walkthrough-hints.png",
+      "page": "beasty-visual-novel/world/notifications-and-walkthrough",
+      "prioridad": 1,
+      "vista": "Unity ▸ Game view en Play (House Demo, primeras palabras de Mia) con Pistas de la guía activadas en Preferencias",
+      "captura": "El menú de opciones con las pistas tras el texto de cada opción: una con Friendship+, otra con Friendship- y una con la pista manual de Trust. Que se note que las pistas no llevan color ni nombre de personaje."
+    },
+    {
+      "file": "vn-walkthrough-choice-section.png",
+      "page": "beasty-visual-novel/world/notifications-and-walkthrough",
+      "prioridad": 1,
+      "vista": "Unity ▸ Tools > Beasty VN > Editor ▸ pestaña Story ▸ inspector de una opción de un Choice Node",
+      "captura": "La sección Walkthrough de una opción desplegada: una pista automática con su interruptor de ojo (una visible y, si se puede, otra oculta) y la lista de pistas manuales con una fila seleccionada. Si se puede, abre el menú contextual de esa fila para que se vean los atajos."
+    },
+    {
+      "file": "vn-phone-home.png",
+      "page": "beasty-visual-novel/world/phone-screens",
+      "prioridad": 1,
+      "vista": "Unity ▸ Game view en Play (House Demo, tras pulsar el botón Phone del HUD)",
+      "captura": "El teléfono abierto sobre la sala: barra de estado con hora y batería, reloj grande con la fecha, la grilla de apps (People, Hints, Music, Settings, Save y las decorativas) y el dock con la barra de inicio. Si las pistas están apagadas, que se vea el icono de Hints tachado."
+    },
+    {
+      "file": "vn-talk-menu-leave.png",
+      "page": "beasty-visual-novel/world/talk-menu",
+      "prioridad": 2,
+      "vista": "Unity ▸ Tools > Beasty VN > Editor ▸ pestaña Characters ▸ Talk Menu, con Mia seleccionada",
+      "captura": "Los ajustes del menú de conversación de Mia con el interruptor Add a Leave option activado y el campo Leave label visible (vacío, para que se vea que usa el texto de serie). Si se puede, que se vea también la lista de entradas encima."
+    },
+    {
+      "file": "vn-localization-game-ui.png",
+      "page": "beasty-visual-novel/production/localization",
+      "prioridad": 1,
+      "vista": "Unity ▸ Tools > Beasty VN > Editor ▸ pestaña Localization ▸ subpestaña Game UI (House Demo)",
+      "captura": "La grilla de Game UI con el desplegable de grupo abierto (Time, Screens, Rooms, Quests, Character stats, Global variables) y filas visibles del grupo Time con columnas en (gris, de solo lectura) y es (editable). Que se vean los botones Refresh e Import/Export y el panel Unused keys plegado."
+    },
+    {
+      "file": "vn-ui-ink-paper.png",
+      "page": "beasty-visual-novel/production/ui-prefabs",
+      "prioridad": 1,
+      "vista": "Unity ▸ Game view en Play (House Demo, primeras palabras de Mia)",
+      "captura": "Una línea de diálogo de Mia con la caja de tinta, la placa de nombre alta sobre la esquina superior izquierda y dos o tres opciones en píldora de tinta, una con el mouse encima (rojo ladrillo). Es la foto del aspecto «tinta y papel»."
+    },
+    {
+      "file": "vn-preferences-screen.png",
+      "page": "beasty-visual-novel/production/ui-prefabs",
+      "prioridad": 1,
+      "vista": "Unity ▸ Game view en Play ▸ menú de juego ▸ Preferences (House Demo, con las pistas de la guía activadas en el proyecto)",
+      "captura": "La pantalla de Preferencias completa: columna izquierda con Display (Window, Language) y Text (velocidad, auto-avance, Start with auto-forward on, Skip unread text, Walkthrough hints); columna derecha con Sound (cinco volúmenes) y Accessibility (Reduce flashes and motion); Reset to defaults y Back abajo a la derecha."
     }
   ]
 }

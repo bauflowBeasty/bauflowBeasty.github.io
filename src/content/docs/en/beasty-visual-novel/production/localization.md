@@ -1,30 +1,38 @@
 ---
 title: "Localization"
-description: "Translate a finished game: the two translation tables, stale-translation tracking, spreadsheet import and export, and switching language in game."
+description: "Translate a finished game: the translation tables, stale-translation tracking, spreadsheet import and export, and switching language in game."
 ---
 
-Translate a game that is already written. This page covers the two translation tables, adding and deleting
+Translate a game that is already written. This page covers the translation tables, adding and deleting
 languages, how the editor tells you which translations went out of date, importing and exporting spreadsheets,
 localizing the interface, and switching language while the game runs.
 
-## The two tables
+## The translation tables
 
-There are exactly two `LocalizationTable` assets in play, and they never mix.
+There are four `LocalizationTable` assets in play, and they never mix.
 
-![The Localization tab, with the Story / UI (global) toggle at the top](/docs-images/beasty-visual-novel/vn-localization-tabs.png)
+![The Localization tab, with the Story, UI, Game UI and Items tabs at the top](/docs-images/beasty-visual-novel/vn-localization-tabs.png)
 
 | Table | Where it lives | What it holds |
 |---|---|---|
-| The story table | On the `VNContext` (`localization`), so every DialogueScene that shares the context shares it | Dialogue lines, choice labels, talk-menu labels, item and quest text — everything the story references by key |
-| The global UI table | `VNSettings.uiLocalization`, in `Resources` | Menus, HUD, buttons, confirmation dialogs — the interface |
+| The story table | On the `VNContext` (`localization`), so every DialogueScene that shares the context shares it | Dialogue lines, choice labels, talk-menu labels — everything the story references by key |
+| The global UI table | `VNSettings.uiLocalization`, created in your project's `Assets/Resources/` | Menus, buttons, confirmation dialogs — the built-in interface texts |
+| The game text table | On the `VNContext` (`Game Text Localization`) | The texts you write for the game's own screens: HUD texts, room names, quests, stat and variable names, time names. See [The Game UI tab](#the-game-ui-tab). |
+| The items table | On the `VNContext` (`Item Localization`) | Item names, descriptions and cannot-use messages. See [The Items tab](#the-items-tab). |
 
-Edit both in the **Localization** tab of the Beasty VN window (`Tools > Beasty VN > Editor`). The
-**Story / UI (global)** toggle at the top switches between them. If a project has no table yet, the tab
-offers **Create & Assign New Table**.
+Edit them all in the **Localization** section of the Beasty VN window (`Tools > Beasty VN > Editor`), whose
+tabs — **Story**, **UI**, **Game UI** and **Items** — switch between them. If a project has no table yet, the
+tab offers to create one.
+
+**The UI table is not part of the package.** When the editor loads and the project has none, it is created
+in `Assets/Resources/UILocalization.asset`, already filled with every built-in UI text in English and Spanish.
+Updating or reimporting the package never overwrites your UI translations: the built-in texts a new version
+adds are merged in the next time the editor loads, and a text you edited is never touched. A table you already
+have keeps working wherever it is. See [Installation](/docs/beasty-visual-novel/getting-started/installation/#your-settings-and-ui-table-are-created-for-you).
 
 The global UI table also **heals itself**: every scene setup and every **Auto-wire / Repair** pass checks
 it. A table that exists but is unassigned is adopted and re-wired automatically, and only when none exists
-is a fresh one created beside the VNSettings asset, pre-seeded with the built-in UI strings. The check is
+is a fresh one created in `Assets/Resources/`, pre-seeded with the built-in UI strings. The check is
 merge-only — custom keys and every edited translation are never touched. What it cannot do is resurrect a
 **deleted** table's own content: regeneration restores the built-in strings, not your keys and
 translations.
@@ -37,8 +45,8 @@ language. That is why translating is only ever "add a column".
 A table's `languages` list is an ordered list of language codes, and **index 0 is the source language** — the
 one you write the game in. Everything else is a translation of it.
 
-A language is never added to one table alone. Adding, deleting, restoring and renaming all apply to the story
-table AND the global UI table at once, and they also update the context's supported-languages list and
+A language is never added to one table alone. Adding, deleting, restoring and renaming all apply to every
+table at once — story, UI, game text and items — and they also update the context's supported-languages list and
 `VNSettings.defaultLanguage`. That is why the in-game language dropdown always offers exactly the languages
 the story has.
 
@@ -166,6 +174,74 @@ Two things import does deliberately:
   its recorded fingerprint. Only a translation whose text actually changed is stamped fresh against the
   current source.
 
+## The Game UI tab
+
+The texts you write for the game's own screens are translated in the **Game UI** tab. They live in the game
+text table, which is created and kept in step for you: there are no keys to create by hand.
+
+![The Game UI tab: rows grouped by Time, Screens, Rooms, Quests and Character stats](/docs-images/beasty-visual-novel/vn-localization-game-ui.png)
+
+Rows are grouped, and the group popup filters the grid:
+
+| Group | What it holds |
+|---|---|
+| **Time** | Daypart, weekday and season names. |
+| **Screens** | HUD item texts, and the texts of their conditional cases. |
+| **Rooms** | Room names, shown in room pickers and on the character routine screen. |
+| **Quests** | Quest titles, descriptions, objective texts and hints. |
+| **Character stats** | Stat display names, from each field's **Display name**. |
+| **Global variables** | The display names of global variables used in notifications and hints. |
+
+- **Column 0 is your default language** (`VNSettings > Default Language`). It mirrors what you wrote in the
+  editors and is read-only here: edit the text where you author it. Every other language is an ordinary
+  editable column.
+- Where a translation is empty, or the table is missing, the game shows the text you wrote — never another
+  language's text.
+- Editing the source text marks that row's translations as stale, as in the Story and UI tabs.
+- The tab has CSV import and export and an **Unused keys** panel like the others, and every edit is
+  undoable. Languages you add, rename or delete elsewhere reach this table too.
+- The table is refreshed when the tab opens, with its **Refresh** button, and before a build.
+
+If your default language is not column 0 — you changed it after translating, say — a banner offers **Make
+<language> the source**. It asks for confirmation, reorders the columns, and replaces that language's existing
+translations with your texts. Until then the game logs this warning once per table: *"Game text table: the
+default language is '<default>' but column 0 is '<old>'. Open Localization > Game UI and use 'Make <default>
+the source' to reorder (its existing translations will be replaced by your texts)."*
+
+### What follows a rename
+
+Renaming a screen, a screen item, a quest, a quest objective or a variable moves its translations with it.
+Conditional cases of a HUD item have a stable id, so a translation follows its case when you reorder them.
+Renaming a time name (daypart, weekday, season), or an id that has no rename cascade, leaves the old
+translations under **Unused keys**, ready to copy across or delete.
+
+A character's **Display name** is not translated; see [Characters](/docs/beasty-visual-novel/world/characters/#identity).
+
+### Screen labels have one source
+
+Screen item labels — HUD and phone labels — are translated only in the Game UI tab. The start-up pass that
+links menu labels to the built-in UI texts (see [Scenes authored before all this](#scenes-authored-before-all-this))
+skips them, so a HUD label that reads "Settings" is never overwritten by the built-in "Settings" translation
+when the language changes. Menu labels outside screens are linked as before.
+
+## The Items tab
+
+Item names, descriptions and cannot-use messages have their own table and their own **Items** tab. You author
+them in the Items window or right in this tab. Column 0 is your default language.
+
+- The tab lists every item text, including the ones nobody has typed yet, such as an item's cannot-use
+  message. They show as empty rows, and get their entry when you type in them — one Ctrl+Z step.
+- A new project's Items window shows a **Create items table** button the first time.
+- At runtime an item text is looked up in the items table, then in the UI table, then falls back to the item
+  id (for the name), to nothing (for the description) or to the built-in message (for cannot-use). `[token]`s
+  in item texts keep expanding.
+
+**Projects that kept item texts in the UI table migrate on their own**, losslessly — all languages, and the
+freshness of every translation — when the Items window or any Localization tab opens, and before a build.
+Ctrl+Z undoes the migration. The text in the old UI table's first column becomes the source text only when the
+items table's default-language cell was empty. A key still needed elsewhere — by a context not migrated yet, or
+by a menu label — stays in the UI table as well.
+
 ## Localizing the interface
 
 Story text localizes itself: a node stores a key, and the game looks up the active language's text when
@@ -229,8 +305,9 @@ its own language) and fills in the built-in defaults that were missing.
 
 There is one source of truth for the active language, shared by the story and the interface, and one "language
 changed" event. Switch language in one place and everything re-resolves at once: the line currently on screen
-is re-rendered, the choices on screen are re-rendered, and an open talk menu is re-rendered. The player can
-change language in the middle of a line and see it change under them.
+is re-rendered, the choices on screen are re-rendered, and an open talk menu is re-rendered. The open HUD,
+character stats, routine and quests screens re-render too, without reopening them. The player can change
+language in the middle of a line and see it change under them.
 
 ![The language dropdown in the preferences screen, in game](/docs-images/beasty-visual-novel/vn-preferences-language-ingame.png)
 
@@ -252,7 +329,22 @@ At boot, in this order:
    language you have not translated.
 3. **The default language** (`defaultLanguage` in VN Settings).
 
-The active language is also stored in every save, and restored with it.
+**Rewinding and loading keep the player's language.** The language is a player preference, not story state:
+stepping back — also across the novel and free roam — or loading a save made in another language never
+switches the text back. A save still records the language it was made in, but loading does not apply it. A
+controller that pins an explicit language keeps that language.
+
+### Translated time names
+
+The tokens `[@time:daypart.label]`, `[@time:weekday.label]` and `[@time:season.label]` show the translated
+name of the current time of day, weekday or season, in the player's language — falling back to the name you
+wrote. `[@time:clock.label]` shows the hour as `HH:00` when the time config is a clock, and the translated
+time-of-day name when it only has dayparts. Translate the names in the Game UI tab, group **Time**.
+
+The plain tokens `[@time:daypart]`, `[@time:weekday]` and `[@time:season]` still give the raw name, and so do
+the values in conditions and saves. The `.label` tokens are for text the player reads: pickers offer them
+for display, such as a HUD item's live variable, and never in conditions. Any UI text or item text can use
+them.
 
 ## The authoring language is not the game's language
 

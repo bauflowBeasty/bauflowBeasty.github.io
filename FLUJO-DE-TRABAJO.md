@@ -126,6 +126,16 @@ de un asset que no cambió.
 **El sitio describe siempre la última versión.** No hay documentación versionada: si una página deja de ser
 cierta, se reescribe. La historia la lleva el changelog, que se publica como una página más.
 
+**El changelog que se publica es solo un resumen** (desde el 2026-10-31): lo más significativo de cada
+versión, sin cosas técnicas, en tres apartados: *New*, *Improved* y *Fixed*. Hay tres copias y cada una
+tiene su papel:
+
+| Copia | Qué contiene |
+|---|---|
+| Changelog del asset (Unity) | Mientras la versión está sin publicar, **el detalle**: es lo que alimenta la documentación. Al publicar, el resumen. |
+| `docs/changelogs/` (sitio, interno) | Copia exacta del de Unity. Marca lo que ya se documentó: lo que esté en Unity y no aquí es trabajo pendiente para `/sync-docs`. |
+| Páginas de changelog EN y ES | Siempre el resumen. `/sync-docs` lo va escribiendo según avanza la versión. |
+
 El número de versión vive en cuatro sitios, y `npm run doc:sync` comprueba que coinciden:
 
 | Dónde | Qué |
@@ -146,9 +156,9 @@ Cuando la publiques, en este repo ejecutas:
 /release
 ```
 
-Eso cierra el changelog con la fecha real, **elimina `### Pre-release changes`** —quien compra la versión
-publicada nunca tuvo las builds anteriores, así que esas viñetas hablan de algo que no vivió; lo que siga
-siendo información útil se funde en las secciones temáticas—, sube el número en los cuatro sitios, revisa
+Eso cierra el changelog con la fecha real, **sustituye las viñetas detalladas por el resumen** que ya está
+en la página del sitio —quien compra la versión publicada nunca tuvo las builds anteriores, y el detalle ya
+vive en las páginas de docs—, sube el número en los cuatro sitios, revisa
 las menciones sueltas de la versión en las páginas, y te pregunta por las URLs de tienda si aún estaban
 como «Coming soon».
 

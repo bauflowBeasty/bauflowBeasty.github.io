@@ -22,6 +22,9 @@ Una variable tiene:
 | **Kind** | Cómo se produce el valor. Ver más abajo. |
 | **Default value** | El valor antes de que nada lo fije. |
 | **Prompt at runtime** | Pregunta al jugador por este valor cuando empieza el juego. |
+| **Display name** | Opcional. El nombre que lee el jugador en los avisos y en las pistas de la guía. Se traduce en **Localization › Game UI** (grupo Global variables). |
+| **Notify changes in gameplay** | Muestra un [aviso](/es/docs/beasty-visual-novel/world/notifications-and-walkthrough/) cuando el valor cambia durante la partida. |
+| **Show in walkthrough** | Muestra esta variable en las pistas de la guía de las opciones que la cambian. |
 
 Los cuatro **kinds** describen de dónde viene un valor. Son una etiqueta para ti y tu equipo, y
 cambian lo que te ofrece el editor:
@@ -32,6 +35,26 @@ cambian lo que te ofrece el editor:
 | **Fixed** | Una constante que fijas tú y el juego no cambia. |
 | **Enum** | Uno de una lista fija de valores permitidos que escribes tú. Una variable Enum siempre se guarda como `String`. |
 | **Computed** | La calcula la lógica del juego — la escribe la historia; tú nunca la fijas a mano. |
+
+### Trabajar en la pestaña Variables
+
+La lista y la variable seleccionada se quedan una al lado de la otra a cualquier ancho de ventana, con un
+divisor que arrastras; su ancho se recuerda. El valor por defecto usa un control según su tipo: un interruptor
+para Bool, campos numéricos para Int y Float, un desplegable con los valores permitidos para Enum, texto para
+String.
+
+- La **Key**, el **Default** y el **Display name** se confirman al pulsar Intro o al salir del campo, así que
+  una edición es un paso de deshacer. Hacer clic en otra variable mientras escribes confirma el texto en la
+  variable en la que lo escribiste.
+- Una clave repetida o vacía se rechaza, con un mensaje debajo.
+- Los atajos funcionan con el foco en cualquier parte de la pestaña: Supr, Ctrl+D, Ctrl+C / Ctrl+V, F2,
+  Ctrl+A, Esc y las flechas. El clic derecho en una variable ofrece las mismas acciones; los botones con atajo lo
+  muestran en su tooltip.
+- **+ New Variable**, Ctrl+D y Ctrl+V seleccionan las variables nuevas y las desplazan a la vista. Una variable
+  pegada conserva su clave si ninguna otra la tiene, o se nombra como un duplicado: `<key>_copy`,
+  `<key>_copy2`…
+- Borrar varias variables pide confirmación; borrar una nunca lo hace. Cada alta, baja, renombrado y edición se
+  puede deshacer.
 
 ### Preguntar al jugador
 
@@ -177,6 +200,18 @@ lógica entre dos ramas de un nodo de decisión.
 > una variable, todo el conjunto falla del lado seguro: la elección nunca aparece, la puerta nunca se abre. Falla
 > así a propósito — si una condición a medio escribir pasara, desbloquearía en silencio todo el contenido que
 > protege. El motor lo reporta una vez en la Console, nombrando la cláusula, para que puedas encontrarla.
+
+### Ropa y preferencias del jugador
+
+Las condiciones también pueden leer:
+
+- **Lo que lleva un personaje**: `@char:mia:@wear.top` para una categoría *One at a time*, y
+  `@char:mia:@wear.earrings.hoops` (sí/no) para una prenda de una categoría *Several at once*. Consulta
+  [Vestuario y conjuntos](/es/docs/beasty-visual-novel/world/wardrobe/#condiciones-sobre-la-ropa).
+- **Las preferencias del jugador**: `@pref:walkthrough`, `@pref:reduceMotion`, `@pref:volume.music`… y
+  `@pref:walkthrough.available`, que dice si el proyecto activa las pistas de la guía. La historia no puede
+  cambiarlas: un bloque Set variable o un efecto de opción que apunta a una clave `@pref:` se ignora, con un
+  aviso por clave. Consulta [Claves de variables](/es/docs/beasty-visual-novel/reference/variable-keys/).
 
 ## Efectos
 

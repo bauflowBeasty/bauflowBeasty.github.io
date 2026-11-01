@@ -8,7 +8,9 @@ leído en tiempo de ejecución.
 
 Ábrelo con `Edit > Project Settings > Beasty VN`, o con `Tools > Beasty VN > Settings > Global Settings`. Ambos
 editan **el mismo asset** (`VNSettings`, que vive en una carpeta `Resources` para que el juego pueda leerlo en
-una build).
+una build). Se crea solo en `Assets/Resources/` cuando el editor carga y el proyecto no tiene ninguno, y el único
+contexto de VN del proyecto pasa a ser su `gameContext` (uno que ya hayas elegido nunca se cambia). Consulta
+[Instalación](/es/docs/beasty-visual-novel/getting-started/installation/#tus-ajustes-y-tu-tabla-de-ui-se-crean-solos).
 
 Cada configuración de abajo tiene un valor predeterminado funcional. Puedes lanzar el juego sin tocar esta
 página.
@@ -44,7 +46,7 @@ Consulta [Localización](/es/docs/beasty-visual-novel/production/localization/) 
 | `saveSlotsPerPage` | Cuántos slots manuales muestra una página de la pantalla de guardado. 6 por defecto. |
 | `saveManualPages` | Cuántas páginas manuales se muestran inicialmente. El número de páginas crece automáticamente más allá de esto, sin límite. |
 | `allowSaveNaming` | Si el jugador puede titular una partida. Cuando está desactivado, un slot se etiqueta con su marca de tiempo de creación local. |
-| `defaultSaveThumbnail` | La imagen de respaldo mostrada para un slot GUARDADO cuyo PNG de miniatura falta o no se puede leer. Los slots vacíos usan en su lugar el arte de stock del prefab del slot, no esto. |
+| `defaultSaveThumbnail` | La imagen de respaldo mostrada para un slot GUARDADO cuyo PNG de miniatura falta o no se puede leer. Los slots vacíos usan en su lugar el arte de stock del prefab del slot, no esto. Un VNSettings creado por Beasty —automáticamente al cargar el editor, con el setup de lienzo en blanco o con el botón **Create VNSettings asset**— empieza con la imagen `thumb_missing`; uno creado desde el menú Create empieza vacío. |
 
 Estos son los ajustes de **política**, y están espejados en la sección **Saving** del Inspector del
 BeastyManager, así que puedes editarlos ahí sin abrir los Global Settings. La configuración de
@@ -130,6 +132,15 @@ Consulta [Compilación y plataformas](/es/docs/beasty-visual-novel/production/bu
 | `freeRoamHoverTween` | Los segundos que tarda el zoom/resaltado de hover. |
 
 Consulta [Interactuables y puertas](/es/docs/beasty-visual-novel/world/interactables-and-doors/).
+
+## Efectos de pantalla
+
+| Configuración | Qué hace |
+|---|---|
+| `effectLibrary` | Opcional. Un asset Effect Library con tus propios presets de transición y de efecto. Un preset con el id de uno de serie (`fade`, `dissolve`, `flash`, `vpunch`…) lo sustituye. Vacío = solo los presets de serie. |
+| `reduceFlashesByDefault` | El valor inicial de la preferencia del jugador **Reducir destellos y movimiento**: destellos suavizados, temblores reducidos y movimientos de cámara instantáneos. El jugador puede cambiarlo en Preferencias. Desactivado por defecto. |
+
+Consulta [Transiciones visuales y efectos de pantalla](/es/docs/beasty-visual-novel/authoring/screen-effects/).
 
 ## Límites suaves
 

@@ -20,8 +20,11 @@ context, so one list serves every scene in the game.
 | **Icon** | The sprite shown in the inventory grid and the detail popup. |
 | **Kind** | `Key` or `Consumable`. |
 | **Max quantity** | How high a consumable stacks. A `Key` item is always capped at 1, whatever this says. |
-| **Name key** | The localization key of the item's displayed name, in the global UI table. You author the text inline in the Items tab. |
+| **Name key** | The localization key of the item's displayed name, in the items table. You author the text inline in the Items tab. |
 | **Description key** | The localization key of the description shown in the detail popup. |
+
+Item names, descriptions and cannot-use messages are translated in their own table, in the
+[Localization › Items](/docs/beasty-visual-novel/production/localization/#the-items-tab) tab.
 
 A **Key** item is a possession flag: the player has it or does not. A **Consumable** stacks from 0 up to
 its maximum.
@@ -88,8 +91,9 @@ explaining why, until they find it. See
 
 ## The inventory screen
 
-The `Inventory` prefab is a ready-made overlay: a grid of the items the player currently holds, and a
-detail popup.
+The `Inventory` prefab is a ready-made overlay: a sheet titled **Inventory** with a grid of the items the
+player currently holds, each as a polaroid card, and a detail popup. The grid follows the screen width, and the
+texts — title, empty message, Use — are translated.
 
 ![The inventory screen in game: the grid of held items and the detail popup](/docs-images/beasty-visual-novel/vn-inventory-ingame.png)
 
@@ -97,8 +101,8 @@ detail popup.
   slot order. Use the last potion and the slot disappears and the grid closes up. Pick up something new
   and it is appended.
 - **A slot** shows the item's icon and how many are held.
-- **The detail popup** opens when the player clicks a slot. It shows the icon, the name, the description
-  and a Use button, which runs exactly the on-use logic above — including refusing, with your message,
+- **The detail popup** opens when the player clicks a slot. It is large, and shows the icon, the name, the
+  description, a **Cancel** button and a **Use** button, which runs exactly the on-use logic above — including refusing, with your message,
   when the use condition fails.
 
 It is a normal uGUI prefab. Restyle it, move things around, replace the art; see
@@ -106,15 +110,16 @@ It is a normal uGUI prefab. Restyle it, move things around, replace the art; see
 
 ### Adding it and opening it
 
-In the editor's **Screens** tab, press **+ Inventory (ready-made)**. That copies the prefab into your
-project and registers it as a secondary screen with an id. Only one inventory is ever created — press it
-twice and it selects the existing one.
+In the editor's **Screens** tab, pick **+ New screen ▸ Inventory ▸ Notebook** — or **▸ Phone** for the
+version inside the [phone](/docs/beasty-visual-novel/world/phone-screens/). That copies the prefab into your
+project and registers it as a secondary screen with an id. Each kind is created only once, and a project can
+have both, showing the same items.
 
-![The + Inventory (ready-made) button in the Screens tab](/docs-images/beasty-visual-novel/vn-screens-add-inventory.png)
+![The + New screen menu in the Screens tab, open on Inventory](/docs-images/beasty-visual-novel/vn-screens-add-inventory.png)
 
 The player reaches it in one of two ways:
 
-- **A HUD button.** Add an item to your HUD screen with the action **OpenScreen**, pointing at the
+- **A HUD button.** Add an item to your HUD screen that does **Open screen**, pointing at the
   inventory's screen id. This is the usual way.
 - **The Open screen block** (palette category **World**). Opens it from inside the story — after the
   player is handed their first item, for example.

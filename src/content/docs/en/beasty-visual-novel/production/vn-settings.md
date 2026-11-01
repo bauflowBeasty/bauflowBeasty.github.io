@@ -7,7 +7,9 @@ The project-wide defaults for the whole game: one asset, edited from two places,
 
 Open it with `Edit > Project Settings > Beasty VN`, or with `Tools > Beasty VN > Settings > Global Settings`.
 Both edit **the same asset** (`VNSettings`, which lives in a `Resources` folder so the game can read it in a
-build).
+build). It is created for you in `Assets/Resources/` when the editor loads and the project has none, and the
+project's only VN context becomes its `gameContext` (one you already chose is never changed). See
+[Installation](/docs/beasty-visual-novel/getting-started/installation/#your-settings-and-ui-table-are-created-for-you).
 
 Every setting below has a working default. You can ship without touching this page.
 
@@ -42,7 +44,7 @@ See [Localization](/docs/beasty-visual-novel/production/localization/) for the s
 | `saveSlotsPerPage` | How many manual slots one page of the save screen shows. 6 by default. |
 | `saveManualPages` | How many manual pages are shown initially. The number of pages grows automatically past this, without limit. |
 | `allowSaveNaming` | Whether the player may title a save. When off, a slot is labelled with its local creation timestamp. |
-| `defaultSaveThumbnail` | The fallback image shown for a SAVED slot whose thumbnail PNG is missing or unreadable. Empty slots use the stock art on the slot prefab instead, not this. |
+| `defaultSaveThumbnail` | The fallback image shown for a SAVED slot whose thumbnail PNG is missing or unreadable. Empty slots use the stock art on the slot prefab instead, not this. A VNSettings created by Beasty — automatically when the editor loads, by the blank-canvas setup, or by the **Create VNSettings asset** button — starts with the `thumb_missing` picture; one made from the Create menu starts empty. |
 
 These are the **policy** settings, and they are mirrored in the BeastyManager Inspector's **Saving**
 section, so you can edit them there without opening Global Settings. The **storage** configuration —
@@ -127,6 +129,15 @@ See [Building and platforms](/docs/beasty-visual-novel/production/building-and-p
 | `freeRoamHoverTween` | The seconds the hover zoom/highlight takes. |
 
 See [Interactables and doors](/docs/beasty-visual-novel/world/interactables-and-doors/).
+
+## Screen effects
+
+| Setting | What it does |
+|---|---|
+| `effectLibrary` | Optional. An Effect Library asset with your own transition and effect presets. A preset with the id of a built-in one (`fade`, `dissolve`, `flash`, `vpunch`…) replaces it. Empty = built-in presets only. |
+| `reduceFlashesByDefault` | The starting value of the player preference **Reduce flashes and motion**: flashes softened, shakes reduced, camera moves instant. Players can change it in Preferences. Off by default. |
+
+See [Visual transitions and screen effects](/docs/beasty-visual-novel/authoring/screen-effects/).
 
 ## Soft limits
 

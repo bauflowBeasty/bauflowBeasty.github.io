@@ -37,6 +37,19 @@ Qué comprueba:
 - **Colisiones de tokens.** Un nombre de `[token]` definido en más de una fuente (una variable, el diccionario,
   la tabla de localización, un id de personaje), lo que te dice cuál gana antes de que te sorprenda.
 
+- **Efectos.** Un preset que no existe, o una transición `mask` sin textura, es un error. Avisa de dos
+  transiciones antes de la misma línea, de *hasta la línea siguiente* en un nodo sin ninguna línea, de una
+  amplitud de temblor mayor que 2 y de un efecto o fundido que tapa la caja de diálogo más de 3 segundos.
+  Consulta [Transiciones visuales y efectos de pantalla](/es/docs/beasty-visual-novel/authoring/screen-effects/#qué-comprueba-el-validador).
+- **Expresiones por capas y vestuario.** Bases que faltan, madres y anclajes rotos, ids incorrectos, y entradas
+  de vestuario o bloques que nombran algo que no existe. Las listas completas están en
+  [Expresiones por capas](/es/docs/beasty-visual-novel/world/layered-expressions/#qué-comprueba-el-validador) y
+  [Vestuario y conjuntos](/es/docs/beasty-visual-novel/world/wardrobe/#qué-comprueba-el-validador).
+- **Say together.** Un bloque cuyos hablantes se quedan en menos de dos personajes reales, un hablante
+  repetido, o más de cinco.
+- **Memoria.** Un personaje que usa directamente más de 64 sprites distintos entre sus expresiones por capas y
+  su vestuario recibe un aviso que sugiere el [contenido en streaming](/es/docs/beasty-visual-novel/production/streaming/).
+
 Ejecútalo antes de una compilación, y ejecútalo después de una refactorización grande. Es rápido y nunca cambia
 nada.
 
@@ -48,6 +61,11 @@ apuntan los saltos, las elecciones, las rutinas y las puertas de mundo libre.
 **Se generan automáticamente, pero puedes editarlos.** Renombrar un id se propaga en cascada: las
 referencias que lo usaban se reescriben con él. Así que un id generado por máquina puede convertirse en
 `chapter1_intro` si eso es más fácil de manejar.
+
+Lo mismo vale para las expresiones, las capas y partes de una expresión por capas, las categorías, prendas y
+conjuntos del vestuario, y los presets de efectos: cada renombrado actualiza los bloques, condiciones y guiones
+`.vnbeasty` vinculados que lo nombran, en un solo paso de deshacer, tras una confirmación que los cuenta.
+Consulta [Vestuario y conjuntos](/es/docs/beasty-visual-novel/world/wardrobe/#ids-y-renombrados).
 
 ### Ids duplicados
 

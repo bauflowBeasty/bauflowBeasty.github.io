@@ -24,8 +24,24 @@ La vista previa se renderiza en el centro. **Haz clic en cualquier parte de la i
 exactamente como un clic izquierdo avanza el juego real. Abajo, `Back` y `Forward` recorren el nodo paso a
 paso, y una etiqueta de estado te dice dónde estás: el número de línea, `Awaiting choice`, o `End of story`.
 
-Cuando la vista previa llega a un nodo de elección, las opciones aparecen como botones debajo de la imagen.
-Haz clic en una y la vista previa la sigue.
+Cuando la vista previa llega a un nodo de elección, las opciones aparecen como botones debajo de la imagen,
+con sus [pistas de la guía](/es/docs/beasty-visual-novel/world/notifications-and-walkthrough/) si el proyecto
+las tiene activadas. Haz clic en una y la vista previa la sigue.
+
+La caja de diálogo y su texto se dibujan como en el juego: la misma caja de tinta, la misma fuente. Edita el
+nodo —o pulsa Ctrl+Z / Ctrl+Y— y la vista previa se reconstruye en la misma línea.
+
+## Reproducir los efectos
+
+Avanzar con **Back** y **Forward** corta directamente a cada línea, como un rebobinado en el juego. Los
+[efectos de pantalla](/es/docs/beasty-visual-novel/authoring/screen-effects/) que duran —sepia, tinte, viñeta,
+desenfoque, zoom de cámara— se ven mientras avanzas. Un temblor continuo se reproduce durante 2 segundos.
+
+**▶ Play effects** reproduce la línea actual como lo haría el juego: su transición, sus efectos de un solo
+golpe, la entrada de sus efectos que duran y sus [avisos de estadísticas](/es/docs/beasty-visual-novel/world/notifications-and-walkthrough/),
+empezando desde la escena de la línea anterior. Un cambio de ropa también se reproduce: la vista previa parte de
+la ropa que había antes. Los efectos cubren solo el escenario; la caja de diálogo queda encima y legible, como
+en el juego.
 
 ## El botón de vista previa por bloque
 
@@ -48,11 +64,14 @@ en nodos dentro de subgrafos.
 
 Un nodo normalmente no fija cada canal por sí mismo: hereda el fondo de algún nodo anterior. La vista
 previa reconstruye eso. Recorre hacia atrás la cadena de nodos que llevan hasta el tuyo y rellena cada
-canal —fondo, personajes, props— desde el ancestro más cercano que lo fija.
+canal —fondo, personajes, props y la ropa que lleva cada personaje— desde el ancestro más cercano que lo
+fija.
 
 Lo hace hasta donde puede: sigue una cadena de predecesores únicos y sin ambigüedad, y se detiene cuando
 llega a una ramificación o una convergencia, porque en ese punto hay más de una respuesta y no va a
-adivinar. Si el nodo que estás previsualizando se alcanza desde tres lugares distintos y hereda su fondo,
+adivinar. Dos opciones del mismo nodo de elección que llevan las dos a tu nodo cuentan como una sola entrada
+—las dos respuestas a una pregunta, por ejemplo—, así que el nodo sigue heredando la escena de antes de la
+pregunta. Si el nodo que estás previsualizando se alcanza desde tres lugares distintos y hereda su fondo,
 la vista previa puede mostrarlo sin fondo. Eso no es un error en tu escena. Fija el canal
 explícitamente, o previsualiza desde un nodo más arriba en la cadena.
 

@@ -1,10 +1,12 @@
 ---
 title: "Gameplay APIs"
-description: "BeastyTime, BeastyRoutines, BeastyQuests and Inventory: the static classes that read and write the world systems from code, in every app state."
+description: "BeastyTime, BeastyRoutines, BeastyQuests, Inventory and BeastyWardrobe: the static classes that read and write the world systems from code."
 ---
 
 Four static classes in `Beasty.VN.Runtime`: `BeastyTime`, `BeastyRoutines`, `BeastyQuests` and `Inventory`.
-They are the code face of the world systems you author in the editor.
+They are the code face of the world systems you author in the editor. Further down, the same page covers
+`BeastyWardrobe`, the notification and walkthrough APIs, translated names, and how to add your own transitions
+and screen effects.
 
 All four read and write the same `VariableStore` — `VNGameController.SharedVariables` — under reserved key
 namespaces. Three consequences, and they matter:
@@ -259,6 +261,119 @@ public sealed class PotionButton : MonoBehaviour
 
 `ItemIds` is regenerated from the Items tab whenever your ids change, exactly like the accessors in
 [Generated accessors](/docs/beasty-visual-novel/scripting/generated-accessors/). See [Items and inventory](/docs/beasty-visual-novel/world/items-and-inventory/).
+
+## Wardrobe
+
+`BeastyWardrobe` changes and reads what a character wears, at runtime. What is worn is a character variable,
+so every change is saved and rewinds like the rest of the store. See
+[Wardrobe and outfits](/docs/beasty-visual-novel/world/wardrobe/).
+
+```csharp
+public static bool   Wear(string characterId, string slotId, string pieceId);   // "" empties the category
+public static bool   Remove(string characterId, string slotId);
+public static bool   TakeOff(string characterId, string category, string pieceId);
+public static bool   SetOutfit(string characterId, string outfitId);
+public static string GetWorn(string characterId, string slotId);
+public static bool   IsWorn(string characterId, string category, string pieceId);
+public static void   ResetToDefaults(string characterId);
+```
+
+A wardrobe category is a `WardrobeSlot` in code, hence `slotId`. `TakeOff` takes one piece off a *Several at
+once* category, and empties a *One at a time* one. `IsWorn` answers for either kind: what the story put on,
+else the defaults.
+
+**A change that is not applied exactly as asked logs a warning and returns `false`.** An unknown category or
+outfit, or emptying a category that cannot be empty, changes nothing. An unknown piece is still stored — the
+category's default piece shows until a piece with that id exists — and the call returns `false` all the same.
+Every method returns `false` when no game is running.
+
+Characters already on stage refresh when a change comes from code.
+
+## Stat notifications and walkthrough
+
+The player's walkthrough switch, and how any variable is presented to the player. See
+[Stat notifications and walkthrough hints](/docs/beasty-visual-novel/world/notifications-and-walkthrough/).
+
+```csharp
+// VN (Beasty.VN.Runtime)
+public static bool Walkthrough { get; set; }
+public static event Action<bool> OnWalkthroughChanged;
+
+// VariablePresentation (Beasty.VN.Core)
+public static bool TryResolve(VNContext ctx, string storeKey, out PresentedVariable v);
+```
+
+- `VN.Walkthrough` is true when the project allows hints **and** the player turned them on. Setting it is
+  ignored, with a warning, while the project has walkthrough mode off. `OnWalkthroughChanged` fires with the
+  new effective value whenever it changes, whatever the cause — Preferences › **Reset to defaults** included.
+- `VariablePresentation.TryResolve` tells how a store key is presented: as a character field (per-character
+  overrides applied) or as a global variable. `PresentedVariable` carries its type, whether it notifies and
+  shows in the walkthrough, and `Label(table)`.
+- `VariableDefinition` has the fields `displayName`, `notifyOnChange` and `showInWalkthrough`, and
+  `DisplayLabel` — the display name, else the key.
+- `GameTextKeys.Variable(key)` (`var.<key>.label`) and `GameTextKeys.VariablePrefix(key)` (`var.<key>.`) name
+  a global variable's game texts; `GameText.VariableLabel(variable, table)` returns its translated label.
+
+> **Note**
+> `StatNotificationLine.CharacterName` is null for a global variable's line. A custom notification view must
+> not print a `Name:` prefix for it.
+
+## Translated names
+
+The names the player reads — rooms, stats, time names, items — come from the game text and items tables. These
+helpers return them in the player's language, falling back to the text you wrote:
+
+| Member | Returns |
+|---|---|
+| `GameText.Get(key, authored)` | Any game text by key. |
+| `GameText.RoomName(roomId, authored)` | A room's translated name. |
+| `GameText.StatLabel(field)` | A character field's translated display name. |
+| `ItemText.Get(key, fallback)` | An item text: the items table, then the UI table, then the fallback. |
+| `GameTextTokens.TryResolve(token, storeGet, out value)` | The `.label` tokens: `@time:daypart.label` and the rest. |
+| `BeastyRoutines.LocationDisplayOf(id)` | Where a character is right now, as a translated room name. |
+
+`VNUiLocalization.TokenLookup` resolves UI tokens and also answers the `.label` tokens, so any UI text or item
+text can use `[@time:daypart.label]`. `VariableBoundLabel.Bind` takes an optional `gameTextTable`. In the editor,
+`GameTextSync.Sync(VNContext, VNTimeConfig)` syncs the game texts, reading the time names from the given time
+config instead of the scene's `BeastyManager` — for tools that build the scene afterwards.
+
+## Talk menus
+
+`TalkMenuService.ResolveForPlayer(...)` returns a character's talk menu as the player sees it, the **Leave**
+option included; `Resolve` still returns only your entries. A Leave entry has `ResolvedTalkEntry.IsLeave`
+set, and its ending is `TalkMenuEnding.Leave`. See [The talk menu](/docs/beasty-visual-novel/world/talk-menu/#the-leave-option).
+
+## Custom transitions and effects
+
+Add your own transition mode or screen effect kind in two halves:
+
+1. **The data**: a class that derives from `TransitionSpec` (a transition) or `ScreenEffect` (an effect), with
+   serialized fields. The block editor draws those fields automatically. For a custom layout, write an
+   `IEffectFieldsDrawer` and mark it with `[EffectFieldsDrawer(typeof(YourSpec))]`.
+2. **The runtime**: an `ITransitionStyle` registered with `TransitionStyleRegistry.Register(typeof(YourSpec),
+   style)`, or an `IScreenEffectApplier` registered with `ScreenEffectApplierRegistry.Register(typeof(YourEffect),
+   applier)`.
+
+`TransitionStyleRegistry.Unregister(Type)` removes a registered style, a built-in one too. A transition with no
+style is presented as a cut. See [Visual transitions and screen effects](/docs/beasty-visual-novel/authoring/screen-effects/).
+
+## Characters' looks, and editor helpers
+
+- **Free-roam looks.** `FreeRoamInteractable.ShowLook`, `HideLook`, `ShowsLook` and `HasOwnArt`,
+  `PoseLooks.Refresh` and `LookColliderBuilder.Build` (namespace `Beasty.VN.Runtime`) paint and refresh the
+  layered look of a pose or a character spot.
+- **Editor tools** (namespace `Beasty.VN.Editor`): `StreamedContentTools.VisitCharacterArt` and `CountArt`;
+  `BeastyIdRename.RewriteValue` and `RewriteValueIn`; `WardrobeIdRename`, `ExpressionKeyRename` and
+  `WardrobeValidation`.
+- **Wardrobe data.** A category is a `WardrobeSlot` with a `mode` (`CategoryMode`). `WearAction` is the *Put
+  on* / *Take off* of the Wear piece block. `WardrobeState.Wear(..., WearAction)` and `WardrobeState.IsWorn`
+  write and read what is worn; `WardrobeKeys.PieceKey` is the variable key of one piece of a *Several at once*
+  category; `IWearSource.TryGetPieceWorn` answers it for the condition resolver.
+  `ShowCharacterBlock.outfitId` is the optional outfit of a Show character block, and
+  `ExpressionEntry.defaultOutfitId` an expression's Default outfit.
+- **Scene setup.** `PipelineCameraSetup.EnsureCameraData(camera)` (namespace `Beasty.VN.Editor`) adds the
+  per-camera data component of the active render pipeline — `UniversalAdditionalCameraData` on URP,
+  `HDAdditionalCameraData` on HDRP — as **Create Scene** does for its own camera.
 
 ## See also
 

@@ -4,9 +4,9 @@ description: "A complete, playable mini-game inside the package: open one scene,
 ---
 
 The package ships a complete mini-game at `Demos/HouseDemo`: you wake up in a small house, meet your
-housemate Mia, and run one short quest for her. It exists so you can see every major system working —
-free roam, time, routines, quests, inventory, the talk menu, saves, localization — before you build any of
-it yourself. Ten minutes of play, and every one of those words has a picture attached.
+housemate Mia, run one short quest for her, and then help her dress for a party. It exists so you can see
+every major system working — free roam, time, routines, quests, inventory, the talk menu, the wardrobe,
+screen effects, the phone, saves, localization — before you build any of it yourself. Ten minutes of play, and every one of those words has a picture attached.
 
 ## Running it
 
@@ -24,13 +24,21 @@ populated example.
 | You play | The system behind it |
 |---|---|
 | A prompt asks your name (leave it blank and you stay "Alex") | The `Ask` block and player rename — [Characters](/docs/beasty-visual-novel/world/characters/) |
+| The intro fades in from black, you dissolve onto the stage, and the screen punches when Mia shouts from the other room | Transitions and screen effects — [Visual transitions and screen effects](/docs/beasty-visual-novel/authoring/screen-effects/) |
+| A short memory of the day Mia moved in, in sepia | The `flashback` preset, then `clear effects` — [Visual transitions and screen effects](/docs/beasty-visual-novel/authoring/screen-effects/) |
 | Two profile questions, then a scene that reacts to them | Variables set by choices, routed by an **invisible decision** — [Choices and decisions](/docs/beasty-visual-novel/authoring/choices-and-decisions/) |
+| Each profile answer sets its own trait (likes books, likes games, bold, reserved), with a notification | Global variables that notify and show in the walkthrough — [Stat notifications and walkthrough hints](/docs/beasty-visual-novel/world/notifications-and-walkthrough/) |
+| Mia's first words are a choice with hints: friendship up, friendship down, and a manual *Trust* hint | Walkthrough hints and stat notifications — [Stat notifications and walkthrough hints](/docs/beasty-visual-novel/world/notifications-and-walkthrough/) |
+| Mia and you say *High five!* together | The Say together block — [Dialogue and the stage](/docs/beasty-visual-novel/authoring/dialogue-and-stage/#several-speakers-say-together) |
 | Two connected rooms, with doors | Free roam and the map graph — [Free-roam rooms](/docs/beasty-visual-novel/world/free-roam-rooms/) |
 | Clicking the bed turns day into night, and the backgrounds change | Game time (dayparts) and conditional backgrounds — [Game time](/docs/beasty-visual-novel/world/game-time/) |
 | Mia is in the living room by day, gone at night — except Sunday | A weekly **routine** — [Character routines](/docs/beasty-visual-novel/world/character-routines/) |
 | "A Good First Impression": talk to Mia, then find her book | A two-stage quest with a gather-and-deliver objective — [Quests](/docs/beasty-visual-novel/world/quests/) |
 | The book appears in the bedroom only mid-quest, and goes to your inventory | Conditional visibility and items — [Items and inventory](/docs/beasty-visual-novel/world/items-and-inventory/) |
-| Talking to Mia opens a menu; one entry only appears at friendship 10+ | The talk menu with conditional entries — [The talk menu](/docs/beasty-visual-novel/world/talk-menu/) |
+| Talking to Mia opens a menu; one entry only appears at friendship 10+, and **Leave** always closes it | The talk menu with conditional entries — [The talk menu](/docs/beasty-visual-novel/world/talk-menu/) |
+| *Party night*: give Mia her book back, then pick her top, bottom and shoes; she leaves wearing what you chose | Layered expressions, the wardrobe, effects and routines — [Wardrobe and outfits](/docs/beasty-visual-novel/world/wardrobe/) |
+| The HUD's phone, with People, Hints, Music, Settings and Save apps | The phone template — [Phone screens](/docs/beasty-visual-novel/world/phone-screens/) |
+| The HUD shows the day and time of day, translated | The `.label` time tokens — [Localization](/docs/beasty-visual-novel/production/localization/#translated-time-names) |
 | Mia's profile, stats and weekly calendar screens | Character screens — [Character screens](/docs/beasty-visual-novel/world/character-screens/) |
 | Save, quit Play, load — day, quest and inventory come back | Saving — [Saving and loading](/docs/beasty-visual-novel/production/saving-and-loading/) |
 | Switch English/Spanish in Preferences, mid-game | Localization — [Localization](/docs/beasty-visual-novel/production/localization/) |
@@ -48,16 +56,22 @@ The whole story is authored in the text-script format, kept in sync with the gra
   choices, the invisible decision, and the exit into free roam.
 - `Demos/HouseDemo/Scripts/HouseInteractions.vnbeasty` — everything in the house: Mia's talk menu
   branches, the quest beats, the book pickup, the shelves.
+- `Demos/HouseDemo/Scripts/HouseParty.vnbeasty` — *Party night*, reached when you give Mia her book back:
+  three choices that dress her (`wear`, expression changes, *Party style* hints), a sepia memory with a
+  vignette and a camera zoom, the lost earrings (`wait`, `effect hpunch`, a prop), her nickname
+  (`name mia = "Mimi"`), and her exit with a slide and an iris into the night (`time daypart Night`,
+  `routine mia Party`, `screen CharactersMenu`).
 
 Open either in the Story window's **Text** tab, or in any text editor. They are short, and they use the
 same `.vnbeasty` constructs the [syntax reference](/docs/beasty-visual-novel/authoring/vnbeasty-syntax/)
-documents — a working example of `ask`, `quest`, `deliver`, `give`, conditions and `freeroam` exits.
+documents — a working example of `ask`, `quest`, `deliver`, `give`, `with`, `effect`, `wear`, conditions
+and `freeroam` exits.
 
 ## The placeholder art
 
-All art is labeled placeholder PNGs under `BeastyVN/Sprites/` — the same folder that holds the package's
-UI art — flat colors with the asset's name stamped on them (LIVING ROOM - DAY, MIA, BOOK…). Eighteen
-files, named by role:
+The demo's art lives in `BeastyVN/Sprites/ForDemo/`. Most of it is labeled placeholder PNGs — flat colors
+with the asset's name stamped on them (LIVING ROOM - DAY, MIA, BOOK…) — named by role. The rooms are laid
+out for full-frame art: each object is a 1920×1080 sprite drawn in place.
 
 | Prefix | Files | Used as |
 |---|---|---|
@@ -65,7 +79,9 @@ files, named by role:
 | `char_` | `char_player_full`, `char_mia_full` | Stage sprites |
 | `portrait_` | `portrait_player`, `portrait_mia` | Dialogue portraits |
 | `pose_` | `pose_mia_living` | Mia standing in the room |
-| `item_` | `item_book` | The quest item |
+| `item_` | `item_book`, `item_earrings` | The quest item, and Mia's earrings in *Party night* |
+| `hud_` | `hud_profile` | The HUD's round badge |
+| `mia/` | `mia_base_*` and her clothes (`mia_blouse`, `mia_blouse2`, `mia_pants`, `mia_skirt`, `mia_shoes`, `mia_boots`) | Mia's layered expressions and wardrobe |
 | `door_` | `door_to_living`, `door_to_living_night`, `door_to_bedroom`, `door_to_bedroom_hover` | The clickable doors, with a night variant and a hover variant |
 | `prop_` | `prop_shelf`, `prop_shelf_night`, `prop_bed`, `prop_bed_night` | The clickable furniture, with their night variants |
 

@@ -16,7 +16,8 @@ componentes (bajo `Add Component > Beasty`).
 | Elemento de menú | Qué hace | Más |
 |---|---|---|
 | `Tools > Beasty VN > Editor` | Abre la ventana principal de Beasty VN: las nueve pestañas de autoría. | [Recorrido del editor](/es/docs/beasty-visual-novel/getting-started/editor-tour/) |
-| `Tools > Beasty VN > Dialogue Preview` | Reproduce un nodo — fondo, personajes, objetos, cuadro de diálogo — sin entrar en Play Mode. Puede avanzar rápido hasta un bloque dado. | [Vista previa de diálogo](/es/docs/beasty-visual-novel/authoring/dialogue-preview/) |
+| `Tools > Beasty VN > Dialogue Preview` | Reproduce un nodo — fondo, personajes, objetos, cuadro de diálogo — sin entrar en Play Mode. Puede avanzar rápido hasta un bloque dado, y reproducir sus efectos. | [Vista previa de diálogo](/es/docs/beasty-visual-novel/authoring/dialogue-preview/) |
+| `Tools > Beasty VN > Expression Composer` | Edita las expresiones por capas y el vestuario de un personaje, dibujados como los dibuja el juego. Normalmente se abre desde Characters › Cast. | [Expresiones por capas](/es/docs/beasty-visual-novel/world/layered-expressions/) |
 
 ## Setup
 

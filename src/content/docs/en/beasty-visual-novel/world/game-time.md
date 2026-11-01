@@ -160,6 +160,11 @@ They are ordinary variables in an extraordinary namespace: read them in a backgr
 condition, a dialogue condition, an object's visibility, a routine rule, a quest's start condition. Nothing
 special is required anywhere.
 
+For text the player reads, use the translated display tokens instead: `[@time:daypart.label]`,
+`[@time:weekday.label]`, `[@time:season.label]`, and `[@time:clock.label]` — the hour as `HH:00` in Clock mode,
+the daypart name otherwise. The names are translated in **Localization › Game UI**. See
+[Localization](/docs/beasty-visual-novel/production/localization/#translated-time-names).
+
 ### Condition cheat-sheet
 
 ```text

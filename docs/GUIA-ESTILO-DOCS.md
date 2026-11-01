@@ -69,6 +69,26 @@ Las páginas de `reference/` (y las tipo referencia como `blocks-reference` o `v
 son neutras, exhaustivas y citables: tablas completas, cero tono tutorial, cada fila
 autosuficiente. La calidez va en las guías, no aquí.
 
+## Páginas de changelog
+
+Decisión de Álvaro (2026-10-31): el changelog que se publica —las páginas `<producto>/changelog.md` y
+el que viaja en el paquete una vez publicada la versión— es **solo un resumen**. Lo más significativo de
+cada versión, sin cosas técnicas. El detalle vive en las páginas de docs.
+
+- Cada versión se agrupa en tres secciones, en este orden y solo las que tengan algo:
+  `### New` / `### Improved` / `### Fixed` (ES: `### Nuevo` / `### Mejorado` / `### Corregido`).
+- Una viñeta por novedad, en una o dos frases. Si es una función, abre con su nombre en negrita y un punto
+  (`- **Walkthrough hints.** Choices can show…`). Unas 5–10 viñetas por sección como máximo: lo que no
+  cambia lo que alguien hace o ve con el asset no entra.
+- Sin nombres de API, campos, clases, rutas de menú ni mensajes literales. Se dice qué gana quien usa el
+  asset («Updating the package no longer overwrites your menu translations»), no cómo se implementó.
+- Un cambio que obliga a tocar el proyecto del usuario (un *breaking change*) sí entra siempre, en
+  `Improved`, dicho en llano y con lo que hay que hacer.
+- Sin enlaces: el mismo texto viaja dentro del paquete, donde un enlace relativo no funciona.
+- La versión en curso lleva la cabecera `## X.Y.Z — unreleased` (ES `## X.Y.Z — sin publicar`); al
+  publicar, `/release` pone la fecha (ES en formato español: `14 de agosto de 2026`).
+- `npm run doc:sync` avisa de secciones con otro nombre y de viñetas de más de 240 caracteres.
+
 ## Checklist de página nueva
 
 1. Escribir EN siguiendo esta guía; registrar la página en `src/data/sidebars.ts` (EN y ES).

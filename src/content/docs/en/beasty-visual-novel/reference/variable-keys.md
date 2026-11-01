@@ -99,6 +99,8 @@ is stored under `@char:<id>:<field>`.
 |---|---|
 | `@char:<id>:<field>` | One field on one character. |
 | `@char:<id>:@name` | Reserved. The character's displayed name, once it has been changed or the player has named them. |
+| `@char:<id>:@wear.<category>` | Reserved. The piece worn in a *One at a time* wardrobe category. While the story has not changed the category, it reads the category's default piece. |
+| `@char:<id>:@wear.<category>.<piece>` | Reserved. Yes/no: whether that piece of a *Several at once* category is worn. While untouched, whether the piece is worn by default. |
 | `@char:@self:<field>` | A placeholder used in a shared condition. It resolves to whichever character the condition is being evaluated for. |
 
 Example conditions:
@@ -111,6 +113,10 @@ maya.affection >= 3          picker label
 
 Use `@self` when one condition template has to apply to the whole cast, for example the visibility rule of
 the in-game cast list.
+
+The `@wear` keys are written by the Wear piece and Change outfit blocks and by `BeastyWardrobe`; see
+[Wardrobe and outfits](/docs/beasty-visual-novel/world/wardrobe/#conditions-on-clothes). Renaming a category
+or a piece renames the keys and the values compared with them across the project.
 
 See [Characters](/docs/beasty-visual-novel/world/characters/).
 
@@ -171,6 +177,20 @@ Example conditions:
 
 Time never advances on its own. You move it with the Advance time block, with a free-roam object's
 `advanceTimeOnClick`, or from code. See [Game time](/docs/beasty-visual-novel/world/game-time/).
+
+### Display tokens
+
+Four tokens are for text the player reads. They are never stored, and the condition pickers do not offer them.
+
+| Token | Shows |
+|---|---|
+| `@time:daypart.label` | The current daypart's name, translated. |
+| `@time:weekday.label` | The current weekday's name, translated. |
+| `@time:season.label` | The current season's name, translated. |
+| `@time:clock.label` | The hour as `HH:00` with a clock; the translated daypart name with dayparts only; nothing without a Time Config. |
+
+Write them in brackets in dialogue and labels: `It is [@time:daypart.label].` The names are translated in
+[Localization › Game UI](/docs/beasty-visual-novel/production/localization/#translated-time-names).
 
 ## Quest keys
 
@@ -237,6 +257,25 @@ Because a dictionary token shares the plain namespace with your variables, give 
 `Tools > Beasty VN > Validate > Find duplicate ids` will not catch a token that shadows a variable.
 
 See [The dictionary](/docs/beasty-visual-novel/world/dictionary/).
+
+## Player preference keys
+
+The player's preferences can be read anywhere — in conditions and in labels such as `[@pref:volume.music]` — and
+changed only by screen buttons. They are never saved in game saves.
+
+| Key | Value |
+|---|---|
+| `@pref:textSpeed` | Text speed. |
+| `@pref:autoDelay` | Auto-forward time. |
+| `@pref:autoOnStart` | Yes/no: start with auto-forward on. |
+| `@pref:skipUnread` | Yes/no: skip unread text. |
+| `@pref:reduceMotion` | Yes/no: reduce flashes and motion. |
+| `@pref:walkthrough` | Yes/no: walkthrough hints on. |
+| `@pref:walkthrough.available` | Yes/no: the project enables walkthrough hints. Read only. |
+| `@pref:volume.master`, `@pref:volume.music`, `@pref:volume.sfx`, `@pref:volume.voice`, `@pref:volume.ambience` | A volume, 0 to 1. |
+
+A Set variable block or a choice effect that targets an `@pref:` key is ignored, with one warning per key.
+See [Screens and HUD](/docs/beasty-visual-novel/world/screens-and-hud/#changing-player-preferences).
 
 ## See also
 

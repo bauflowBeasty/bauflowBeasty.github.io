@@ -78,10 +78,23 @@ else, not the value of `@char:maya:@name`.
 > The alias is per line. To change a character's name permanently — because the player renamed them, or
 > because they were unmasked — use the **Character name** block instead. It writes a persisted override.
 
+### Several speakers: Say together
+
+The **Say together** block (palette category **Dialogue**) is one line said by two to five characters at once
+— a shout from the whole party, a couple answering in unison. The name plate joins their names, each in its
+color, and the text is split into one run per speaker in their text colors: by words, or by letters for a
+short line. No portrait is shown.
+
+A Say together block whose speakers come down to fewer than two real characters plays as a normal line. In the
+text script it is `mia & alex "Run!"`.
+
 ## The stage
 
 The stage has three independent channels: the **backdrop**, the **characters**, and the **props**. Each keeps
 its current value until a block of the same channel changes it. You never repeat the backdrop.
+
+Every change lands instantly, unless a **Transition (with)** block before the line says otherwise: a dissolve,
+a fade, a wipe. See [Visual transitions and screen effects](/docs/beasty-visual-novel/authoring/screen-effects/).
 
 ![The stage in game: backdrop, two characters and the dialogue box](/docs-images/beasty-visual-novel/vn-stage-ingame.png)
 
@@ -128,12 +141,17 @@ Puts a character on stage, or replaces them if they are already there.
 | Option | What it does |
 |---|---|
 | Character | Who walks on. |
-| Expression | Which stage sprite to use. Defaults to `base`. |
+| Expression | Which stage sprite to use. Empty = the character's default expression, the first in its list. |
 | Portrait | Optional. Sets a UI portrait different from the stage expression. Empty = the portrait follows the expression. |
 | Position | `Left`, `CenterLeft`, `Center`, `CenterRight`, `Right`, or `Custom` (a normalized X from 0 to 1). |
 | Scale | Size multiplier. Use it for distance. |
 | Flip | Mirrors the sprite, so one sprite faces both ways. |
 | Layer | Slot 0 to 4. Higher is drawn in front. Two characters at the same anchor need different layers, or they overlap. |
+| Outfit | Optional. Puts an [outfit](/docs/beasty-visual-novel/world/wardrobe/) on the character in the same line. |
+
+A Show character block with nothing to offer — no character, an unknown one, or one without expressions — is
+ignored: the scene stays as if the block were not there, and its card in the inspector says so. Choosing a
+character gives the block that character's first expression.
 
 Who is on stage is independent of who is speaking. A character can speak without being on stage, and stand on
 stage for a whole scene without saying a word.
@@ -144,8 +162,8 @@ Changes the expression of a character who is **already** on stage. It is lighter
 block, and it is what you use between lines.
 
 It has one extra option worth knowing: **also set the portrait**. Turn it on and the block sets the dialogue
-box portrait too — either to a portrait key you name, or to the character's base portrait if you leave it
-empty. That lets the stage sprite and the little head icon disagree on purpose, which is useful when the
+box portrait too — either to a portrait key you name, or to the character's default portrait if you leave
+it empty. That lets the stage sprite and the little head icon disagree on purpose, which is useful when the
 character is turned away, or hiding what they feel from everyone but the player.
 
 ### Hide character
@@ -176,20 +194,20 @@ not clear it — it skips the block.
 You will not draw every expression for every character, and you do not need to. On the **stage**, the
 chain is:
 
-**the expression you asked for -> the character's `base` sprite**
+**the expression you asked for -> the character's default expression (the first in its list)**
 
-So a character with only a `base` sprite still works everywhere: ask for `angry`, get `base`, and the game
-runs. Nothing errors, nothing goes pink. Draw the `angry` sprite later and every line that already asked
-for it starts showing it. Two edges worth knowing: a character with no `base` sprite renders as an empty,
-invisible slot with no warning, so give everyone a `base`; and an expression entry that exists but has no
-sprite assigned counts as art — it shows nothing rather than falling back.
+So a character with a single expression still works everywhere: ask for `angry`, get the default, and the game
+runs. Nothing errors, nothing goes pink. A Show character block naming a missing expression warns once in the
+console. Draw the `angry` sprite later and every line that already asked for it starts showing it. One edge
+worth knowing: an expression entry that exists but has no sprite assigned counts as art — it shows nothing
+rather than falling back.
 
-**Portraits** walk their own chain: the portrait key you asked for, then the character's `base` portrait.
-If neither exists, the dialogue box hides the portrait panel — it never borrows the stage sprite. A
-character with stage art but no portrait art simply speaks without a portrait.
+**Portraits** walk their own chain: the portrait key you asked for, then the character's first portrait. If
+the character has no portrait at all, the dialogue box hides the portrait panel — it never borrows the stage
+sprite. A character with stage art but no portrait art simply speaks without a portrait.
 
-The default expression key is `base`. Expressions and portraits are set up per character in
-[Characters](/docs/beasty-visual-novel/world/characters/).
+Expressions and portraits are set up per character in [Characters](/docs/beasty-visual-novel/world/characters/#the-default-expression);
+expressions built from layers, in [Layered expressions](/docs/beasty-visual-novel/world/layered-expressions/).
 
 ## See also
 

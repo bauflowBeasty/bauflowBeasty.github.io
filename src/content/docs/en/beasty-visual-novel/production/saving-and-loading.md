@@ -57,16 +57,19 @@ Ordering is derived from each file's creation timestamp, so it survives a restar
 All of it. This is the reassuring part, so here is the list:
 
 - The project id, the **graph path** through any nested subgraphs, the current node and the step within it.
-- The active **language**.
+- The **language** the save was made in. It is recorded, but loading keeps the player's current language —
+  the language is a preference, not story state.
 - **The entire variable store** — your variables, character variables, game time, quest state, the inventory,
-  and the dictionary. They all live in one store, which is why they all save without being registered
-  anywhere. See [Variables and conditions](/docs/beasty-visual-novel/world/variables-and-conditions/).
+  the dictionary, and what each character wears. They all live in one store, which is why they all save
+  without being registered anywhere. See [Variables and conditions](/docs/beasty-visual-novel/world/variables-and-conditions/).
 - The **visited nodes** (so "seen text" and skipping stay correct).
 - The **open screens** — the secondary overlays that were open, innermost last, so a load reopens the same
   navigation stack.
 - The **free-roam state**: the scenario, the current room, and the rooms the player has visited.
 - The **stage**: the backdrop, the characters on it and the props — restored even when the scene on screen was
   inherited from an earlier node.
+- The **screen effects that last** — a sepia filter, a tint, a camera zoom — rebuilt from the story on load.
+  Saves made before effects existed load with none.
 - The **rewind history** and the cross-mode rollback queue, so `Back` still crosses lines and modes after a
   load instead of dead-ending at the restored line.
 - The pending talk-menu outcome, so a save taken in the middle of a talk branch still applies its ending.

@@ -1,10 +1,12 @@
 ---
 title: "APIs de gameplay"
-description: "BeastyTime, BeastyRoutines, BeastyQuests e Inventory: clases estáticas para leer y escribir los sistemas del mundo desde código, en cualquier estado."
+description: "BeastyTime, BeastyRoutines, BeastyQuests, Inventory y BeastyWardrobe: clases estáticas para leer y escribir los sistemas del mundo desde código."
 ---
 
 Cuatro clases estáticas en `Beasty.VN.Runtime`: `BeastyTime`, `BeastyRoutines`, `BeastyQuests` e `Inventory`.
-Son la cara en código de los sistemas de mundo que creas en el editor.
+Son la cara en código de los sistemas de mundo que creas en el editor. Más abajo, la misma página cubre
+`BeastyWardrobe`, las APIs de avisos y de la guía, los nombres traducidos y cómo añadir tus propias
+transiciones y efectos de pantalla.
 
 Las cuatro leen y escriben el mismo `VariableStore` — `VNGameController.SharedVariables` — bajo namespaces
 de claves reservados. Tres consecuencias, y sí importan:
@@ -266,6 +268,124 @@ public sealed class PotionButton : MonoBehaviour
 `ItemIds` se regenera desde la pestaña Items cada vez que tus ids cambian, exactamente igual que los
 accesores en [Accesores generados](/es/docs/beasty-visual-novel/scripting/generated-accessors/). Consulta
 [Objetos e inventario](/es/docs/beasty-visual-novel/world/items-and-inventory/).
+
+## Vestuario
+
+`BeastyWardrobe` cambia y lee lo que lleva un personaje, en tiempo de ejecución. Lo que lleva es una variable
+de personaje, así que cada cambio se guarda y se rebobina como el resto del almacén. Consulta
+[Vestuario y conjuntos](/es/docs/beasty-visual-novel/world/wardrobe/).
+
+```csharp
+public static bool   Wear(string characterId, string slotId, string pieceId);   // "" vacía la categoría
+public static bool   Remove(string characterId, string slotId);
+public static bool   TakeOff(string characterId, string category, string pieceId);
+public static bool   SetOutfit(string characterId, string outfitId);
+public static string GetWorn(string characterId, string slotId);
+public static bool   IsWorn(string characterId, string category, string pieceId);
+public static void   ResetToDefaults(string characterId);
+```
+
+En código, una categoría del vestuario es un `WardrobeSlot`; de ahí `slotId`. `TakeOff` quita una prenda de
+una categoría *Several at once* y vacía una *One at a time*. `IsWorn` responde para los dos tipos: lo que le
+puso la historia o, si no, los valores por defecto.
+
+**Un cambio que no se aplica exactamente como se pidió deja un aviso y devuelve `false`.** Una categoría o un
+conjunto desconocidos, o vaciar una categoría que no puede quedarse vacía, no cambian nada. Una prenda
+desconocida se guarda igualmente —la prenda por defecto de la categoría se ve hasta que exista una prenda con
+ese id— y la llamada devuelve `false` de todos modos. Todos los métodos devuelven `false` si no hay partida en
+marcha.
+
+Los personajes que ya están en escena se actualizan cuando el cambio llega desde código.
+
+## Avisos de estadísticas y pistas de la guía
+
+El interruptor de la guía del jugador, y cómo se le presenta cualquier variable. Consulta
+[Avisos de estadísticas y pistas de la guía](/es/docs/beasty-visual-novel/world/notifications-and-walkthrough/).
+
+```csharp
+// VN (Beasty.VN.Runtime)
+public static bool Walkthrough { get; set; }
+public static event Action<bool> OnWalkthroughChanged;
+
+// VariablePresentation (Beasty.VN.Core)
+public static bool TryResolve(VNContext ctx, string storeKey, out PresentedVariable v);
+```
+
+- `VN.Walkthrough` es true cuando el proyecto permite las pistas **y** el jugador las activó. Fijarlo se ignora,
+  con un aviso, mientras el proyecto tenga la guía apagada. `OnWalkthroughChanged` salta con el nuevo valor
+  efectivo cada vez que cambia, sea cual sea la causa, **Restablecer** de Preferencias incluido.
+- `VariablePresentation.TryResolve` dice cómo se presenta una clave del almacén: como campo de personaje (con
+  lo sobrescrito por personaje aplicado) o como variable global. `PresentedVariable` lleva su tipo, si avisa y
+  si sale en la guía, y `Label(table)`.
+- `VariableDefinition` tiene los campos `displayName`, `notifyOnChange` y `showInWalkthrough`, y `DisplayLabel`:
+  el display name o, si no hay, la clave.
+- `GameTextKeys.Variable(key)` (`var.<key>.label`) y `GameTextKeys.VariablePrefix(key)` (`var.<key>.`) nombran
+  los textos de juego de una variable global; `GameText.VariableLabel(variable, table)` devuelve su etiqueta
+  traducida.
+
+> **Nota**
+> `StatNotificationLine.CharacterName` es null en la línea de una variable global. Una vista de avisos propia
+> no debe escribir un prefijo `Nombre:` para ella.
+
+## Nombres traducidos
+
+Los nombres que lee el jugador —salas, estadísticas, nombres del tiempo, ítems— salen de las tablas de textos
+del juego y de ítems. Estas utilidades los devuelven en el idioma del jugador, y si no hay traducción, el texto
+que escribiste:
+
+| Miembro | Devuelve |
+|---|---|
+| `GameText.Get(key, authored)` | Cualquier texto del juego por clave. |
+| `GameText.RoomName(roomId, authored)` | El nombre traducido de una sala. |
+| `GameText.StatLabel(field)` | El display name traducido de un campo de personaje. |
+| `ItemText.Get(key, fallback)` | Un texto de ítem: la tabla de ítems, después la de UI, después el valor de reserva. |
+| `GameTextTokens.TryResolve(token, storeGet, out value)` | Los tokens `.label`: `@time:daypart.label` y los demás. |
+| `BeastyRoutines.LocationDisplayOf(id)` | Dónde está un personaje ahora, como nombre de sala traducido. |
+
+`VNUiLocalization.TokenLookup` resuelve los tokens de UI y responde también a los tokens `.label`, así que
+cualquier texto de UI o de ítem puede usar `[@time:daypart.label]`. `VariableBoundLabel.Bind` admite un
+`gameTextTable` opcional. En el editor, `GameTextSync.Sync(VNContext, VNTimeConfig)` sincroniza los textos del
+juego leyendo los nombres del tiempo del time config que le pases en vez del `BeastyManager` de la escena: para
+herramientas que montan la escena después.
+
+## Menús de conversación
+
+`TalkMenuService.ResolveForPlayer(...)` devuelve el menú de conversación de un personaje tal como lo ve el
+jugador, con la opción **Irse** incluida; `Resolve` sigue devolviendo solo tus entradas. Una entrada Irse
+tiene `ResolvedTalkEntry.IsLeave` activado, y su final es `TalkMenuEnding.Leave`. Consulta
+[El menú de conversación](/es/docs/beasty-visual-novel/world/talk-menu/#la-opción-irse).
+
+## Transiciones y efectos propios
+
+Añade tu propio modo de transición o tipo de efecto de pantalla en dos mitades:
+
+1. **Los datos**: una clase que deriva de `TransitionSpec` (una transición) o de `ScreenEffect` (un efecto),
+   con campos serializados. El editor del bloque dibuja esos campos solo. Para una disposición propia, escribe
+   un `IEffectFieldsDrawer` y márcalo con `[EffectFieldsDrawer(typeof(TuSpec))]`.
+2. **El runtime**: un `ITransitionStyle` registrado con `TransitionStyleRegistry.Register(typeof(TuSpec),
+   style)`, o un `IScreenEffectApplier` registrado con `ScreenEffectApplierRegistry.Register(typeof(TuEfecto),
+   applier)`.
+
+`TransitionStyleRegistry.Unregister(Type)` quita un estilo registrado, también uno de serie. Una transición sin
+estilo se presenta como un corte. Consulta [Transiciones visuales y efectos de pantalla](/es/docs/beasty-visual-novel/authoring/screen-effects/).
+
+## El aspecto de los personajes, y utilidades del editor
+
+- **Aspecto en el mundo libre.** `FreeRoamInteractable.ShowLook`, `HideLook`, `ShowsLook` y `HasOwnArt`,
+  `PoseLooks.Refresh` y `LookColliderBuilder.Build` (namespace `Beasty.VN.Runtime`) pintan y refrescan el
+  aspecto por capas de una pose o de un punto de personaje.
+- **Herramientas del editor** (namespace `Beasty.VN.Editor`): `StreamedContentTools.VisitCharacterArt` y
+  `CountArt`; `BeastyIdRename.RewriteValue` y `RewriteValueIn`; `WardrobeIdRename`, `ExpressionKeyRename` y
+  `WardrobeValidation`.
+- **Datos del vestuario.** Una categoría es un `WardrobeSlot` con un `mode` (`CategoryMode`). `WearAction` es el
+  *Put on* / *Take off* del bloque Wear piece. `WardrobeState.Wear(..., WearAction)` y `WardrobeState.IsWorn`
+  escriben y leen lo que se lleva; `WardrobeKeys.PieceKey` es la clave de variable de una prenda de una
+  categoría *Several at once*; `IWearSource.TryGetPieceWorn` la responde para el resolvedor de condiciones.
+  `ShowCharacterBlock.outfitId` es el conjunto opcional de un bloque Show character, y
+  `ExpressionEntry.defaultOutfitId` el Default outfit de una expresión.
+- **Preparación de escenas.** `PipelineCameraSetup.EnsureCameraData(camera)` (namespace `Beasty.VN.Editor`)
+  añade el componente de datos por cámara del pipeline de render activo —`UniversalAdditionalCameraData` en
+  URP, `HDAdditionalCameraData` en HDRP—, igual que hace **Create Scene** con su propia cámara.
 
 ## Ver también
 

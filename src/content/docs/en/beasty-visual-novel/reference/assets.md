@@ -15,9 +15,10 @@ Most assets are per-story or per-character. A few are singletons for the whole g
 
 | Asset | How many |
 |---|---|
-| `VNSettings` | Exactly one, in a `Resources` folder. Created for you. |
+| `VNSettings` | Exactly one, in a `Resources` folder. Created for you in `Assets/Resources/` when the editor loads. |
 | `VNContext` | Exactly one for the whole game. Every story shares it. |
-| `LocalizationTable` | One for the story (on the context) plus one global UI table (on VN Settings). |
+| `LocalizationTable` | Four: the story table, the game text table and the items table (on the context), plus the global UI table (on VN Settings). |
+| `VNEffectLibrary` | Optional, assigned on VN Settings. |
 | `CharacterVariableSchema` | One, referenced by the context. |
 | `QuestCatalog` | One, referenced by the context. |
 | `VNMusicConfig` | One, referenced by the context. |
@@ -46,6 +47,7 @@ duplicates it.
 | `LocalizationTable` | `Create > Beasty VN > Localization > Localization Table` | A grid of keys by language. |
 | `FreeRoamMapGraph` | `Create > Beasty VN > FreeRoam > FreeRoam Map Graph` | Rooms plus character routines. |
 | `QuestCatalog` | `Create > Beasty VN > Quests > Quest Catalog` | The project's quests. |
+| `VNEffectLibrary` | `Create > Beasty VN > Config > Effect Library` | Your own transition and screen effect presets. |
 | The seven node types | `Create > Beasty VN > Advanced > Nodes > ...` | Normally created by the graph, not by hand. |
 
 You rarely need this menu at all.
@@ -168,8 +170,16 @@ A grid of keys by language.
 | `languages` | Language codes. Index 0 is the source language. |
 | `entries` | One row per key, with a cell per language and its translation status. |
 
-There are two tables: the story table on the VNContext, and the global UI table on VN Settings. See
-[Localization](/docs/beasty-visual-novel/production/localization/).
+There are four tables: the story table, the game text table (`Game Text Localization`) and the items table
+(`Item Localization`) on the VNContext, and the global UI table on VN Settings. The game text and items tables
+are created and kept in step for you. See
+[Localization](/docs/beasty-visual-novel/production/localization/#the-translation-tables).
+
+## VNEffectLibrary
+
+Your own transition and screen effect presets, each with an id. Assign it in **VN Settings > Screen effects >
+Effect Library**. A preset with the id of a built-in one replaces it; transition and effect presets are
+separate lists. See [Visual transitions and screen effects](/docs/beasty-visual-novel/authoring/screen-effects/#your-own-presets-the-effect-library).
 
 ## FreeRoamMapGraph
 

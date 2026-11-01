@@ -14,6 +14,8 @@ Every construct of the `.vnbeasty` text script, for lookup. One file is one scen
 - [Backdrops](#backdrops)
 - [Props](#props)
 - [Characters](#characters)
+- [Wardrobe](#wardrobe)
+- [Transitions and effects](#transitions-and-effects)
 - [Audio](#audio)
 - [State and inventory](#state-and-inventory)
 - [Quests, screens and routines](#quests-screens-and-routines)
@@ -89,12 +91,16 @@ juan "Hello"                  # speaker = the character id 'juan'
 "The room went quiet."        # no speaker = narrator
 juan (whisper) "psst..."      # delivery state
 juan as "The Stranger" "..."  # one-line display-name alias
+mia & alex "Run!"             # said together
 ```
 
 The full form is `<speaker> [(state)] [as "alias"] "text"`. The delivery state names one of the character's
 delivery styles — `whisper`, `shout`, `thinking`, or one of your own — and changes the font, colour and
 text effect of that line only. `as "..."` shows the line under an alias without changing the character's
 name; to change the name for good, use [`name`](#character-names).
+
+`<speaker> & <speaker> [& ...] "text"` is a line said together by two to five characters — the **Say
+together** block. The name plate joins their names, and the text is split between their colors.
 
 Dialogue is the only statement with free text. That text is stored in the localization table, in the
 authoring language selected in the Story tab.
@@ -156,6 +162,7 @@ props clear                                   # remove them all
 ## Characters
 
 ```text
+show juan                                # the default expression
 show juan happy at left                  # expression + anchor
 show maria base at right scale 1.2 flip
 show juan happy portrait angry slot 1    # dialogue portrait + stage slot
@@ -166,8 +173,14 @@ clear characters
 clear characters at left                 # only that position
 ```
 
-`show <character> <expression> [at <anchor>] [scale <n>] [flip] [portrait <key>] [slot <n>]`. The expression
-key is the one defined on the character; the default key is `base`.
+`show <character> [<expression>] [at <anchor>] [scale <n>] [flip] [portrait <key>] [slot <n>] [outfit <id>]`.
+The expression key is the one defined on the character. Without one, `show` uses the character's
+[default expression](/docs/beasty-visual-novel/world/characters/#the-default-expression) — the first in its
+list. `outfit <id>` puts an [outfit](#wardrobe) on in the same line.
+
+The third word after `show <character>` is read as an option when it is an option keyword (`at`, `scale`,
+`flip`, `portrait`, `slot`, `outfit`). An expression with one of those names must be quoted:
+`show juan "flip"`.
 
 | Anchor | Position |
 |---|---|
@@ -187,7 +200,7 @@ anchor on different slots overlap in a controlled order.
 
 `expression <character> <expression> [portrait [<key>]]` changes the expression of a character already on
 stage. The `portrait` suffix swaps the dialogue portrait at the same time; with a key it uses that portrait,
-without one it goes back to the character's base portrait.
+without one it goes back to the character's default portrait.
 
 `hide <character>` removes one character. `clear characters` removes all of them —
 or only one position, if you say which:
@@ -199,6 +212,66 @@ clear characters at custom 0.35 layer 2
 
 The anchors are the same ones `show` takes, `custom <x>` included. `layer <n>` (0 to 4) narrows it to a
 single slot at that position; without it, every slot at that anchor is cleared.
+
+## Wardrobe
+
+```text
+wear mia top hoodie                # put a piece on
+wear mia earrings hoops off        # take one piece off (a "Several at once" category)
+wear mia hat none                  # empty a "One at a time" category
+outfit mia party                   # put a whole outfit on
+show mia happy outfit party        # show + outfit, in one line
+```
+
+`wear <character> <category> <piece> [off]` is the **Wear piece** block. `none` takes off a *One at a time*
+category, and autocomplete offers it only for a category that may be left empty. `outfit <character> <outfit>`
+is the **Change outfit** block. An unknown character, category, piece or outfit gets a warning. See
+[Wardrobe and outfits](/docs/beasty-visual-novel/world/wardrobe/).
+
+## Transitions and effects
+
+```text
+with dissolve                                      # a preset
+with dissolve 1.5s                                 # ...with its duration overridden
+with fade 2s color ffffff hold 0.3s coverui
+with wipe left 0.8s
+with mask "HeartMask" 1.2s softness 0.15
+with iris out center 0.2 0.8 ease linear nowait
+effect vpunch
+effect flash color ffffff for 0.2s
+effect tint color ff000060 until line
+effect filter sepia 0.8 until cleared
+effect shake both amp 0.3 freq 18 for 2s
+effect camera zoom 1.3 focus 0.3 0.6 fadein 1s
+effect flashback layer vignette 0.9               # adjust one layer of a multi-layer preset
+clear effects
+clear effects shake
+```
+
+`with <preset or mode> [arguments]` is the **Transition (with)** block; it goes before the line it presents.
+`effect <preset or kind> [arguments]` is the **Screen effect** block, and `clear effects [<kind>]` the
+**Clear effects** block. See [Visual transitions and screen effects](/docs/beasty-visual-novel/authoring/screen-effects/).
+
+| Argument | Meaning |
+|---|---|
+| `<n>s` | Duration in seconds, on a transition. |
+| `ease linear` / `in` / `out` / `inout` | The speed curve of a transition. |
+| `nowait` | The line appears while the transition plays. |
+| `left` / `right` / `up` / `down` | Direction of a `wipe`, `slide` or `push`. |
+| `in` / `out` | Direction of an `iris` or `zoom`. |
+| `center <x> <y>`, `focus <x> <y>` | A point in normalized screen coordinates, 0 to 1. |
+| `color <rrggbb>` / `<rrggbbaa>` / a color name | A color: `color ffffff`, `color ff000060`, `color black`. `#` is not used, because it starts a comment. |
+| `hold <n>s`, `coverui` | A fade's hold time, and whether it covers the dialogue box. |
+| `softness <n>` | The soft edge of a `wipe`, `iris` or `mask`. |
+| `for <n>s` | An effect that lasts that many seconds and plays once. |
+| `until line` / `until cleared` | An effect that lasts until the next line, or until `clear effects`. Without `for` or `until`, it lasts until the stage changes. |
+| `amp <n>`, `freq <n>` | Amplitude and frequency of a `shake`. |
+| `fadein <n>s` | Fade-in time of an effect. |
+| `layer <name> <value>` | Adjusts one layer of a multi-layer preset such as `flashback`. |
+
+A preset name followed by arguments overrides those fields of the preset. When the graph is written back to
+text, only what differs from the default — or what a block overrides on its preset — is written. The `mask`
+texture is found by name in the project.
 
 ## Audio
 
@@ -394,6 +467,7 @@ choice cruce:
     choice "Go left" -> cave
     choice "Buy a sword" if gold >= 10 { gold -= 10 } -> smith   # condition + effects
     choice "Flee" -> freeroam town/square                        # flow target
+    choice "Tell her" hint(mia.trust up) hide(mia.friendship) -> truth  # walkthrough hints
     default -> alley                                             # used if everything is gated out
 ```
 
@@ -418,6 +492,16 @@ not the fallback; a bare `else` is the fallback.
 
 Both `choice` and `if` take an optional condition and an optional effect block, in that order, before the
 arrow. See [Conditions and effects](#conditions-and-effects).
+
+### Walkthrough hints
+
+A `choice` line also takes `hint(...)` and `hide(...)` groups, before the arrow:
+
+- `hint(<field> [mark], ...)` adds manual hints. The field is a character field (`mia.trust`) or a global
+  variable (`likes_books`). The mark is `up`, `down`, `on`, `off` or `changed`; without one, `up`.
+- `hide(<field>, ...)` hides the automatic hints of those fields.
+
+See [Stat notifications and walkthrough hints](/docs/beasty-visual-novel/world/notifications-and-walkthrough/#walkthrough-hints).
 
 > **Note**
 > There is no `menu:` block. Write one `choice "text" -> label` line per option inside a `choice` node.
@@ -525,6 +609,10 @@ if gold > 100 { rich = true, toggle celebrated } -> rich_end
   Run **Format** to refresh the name written in the text. A name that does not resolve — a typo, or a name
   several assets share — is an error: the import is refused and the graph is left untouched, so a typo can
   never destroy a reference. Disambiguate with a subfolder: `backdrop interiors/bedroom`.
+- **A name several assets share** — a FreeRoam map, another scene, a mask texture — resolves to the one
+  inside the script's own folder, when there is one. A copy of a whole project folder (the House Demo
+  duplicated to start your own, say) therefore compiles against its own assets. From anywhere else the name
+  is still ambiguous: `multiple ... assets named '<name>'`.
 - **The folders listed in [VN Settings](/docs/beasty-visual-novel/production/vn-settings/)** keep names short and unambiguous.
   They are not a gate: an asset that lives outside them still resolves by name, project-wide, as a last
   resort.
@@ -538,6 +626,11 @@ if gold > 100 { rich = true, toggle celebrated } -> rich_end
   because the name may be one you are about to create, but a typo no longer reaches the graph in silence and
   targets a key nothing else uses. Unresolvable *assets* and unknown labels remain errors and refuse the
   import.
+- **Transition and effect messages.** `unknown transition '<name>'` and `unknown effect '<name>'` for a name
+  that is neither a preset nor a mode; `'<arg>' does not apply to <effect>` (for example `'freq' does not
+  apply to tint`); `an effect has one duration ('for' or 'until'), not two.`; `'clear' takes 'characters' or
+  'effects'.`; and the warning `two 'with' before the same line: only the last one is used.`. A `with mask`
+  texture that cannot be found by name is a compile error.
 - **Autocompletion.** On a header line — column 0 — the Text tab suggests the node-kind keywords (`label`,
   `choice`, `decision`, `subgraph`, `return`, `talkmenu`, `flow`) plus `scene` and `start`; `start `
   suggests the script's labels, and `talkmenu ` suggests character ids for its `(<character>)` argument.
@@ -545,11 +638,14 @@ if gold > 100 { rich = true, toggle celebrated } -> rich_end
   tab suggests, at the start of a line: `backdrop`, `props`, `image`, `show`,
   `expression`, `hide`, `clear characters`, `jump`, `set`, `toggle`, `dict`, `give`, `take`, `use`, `item`,
   `deliver`, `wait`, `music`, `sound`, `ambient`, `voice`, `stop`, `name`, `ask`, `quest`, `screen`,
-  `routine`, `time`, `choice`, `if`, `else`, `default`, `freeroam`, `goto-scene` — plus your character ids,
+  `routine`, `time`, `choice`, `if`, `else`, `default`, `freeroam`, `goto-scene`, `with`, `effect`,
+  `clear effects`, `wear`, `outfit` — plus your character ids,
   since a line can start with a speaker. After the keyword it suggests what that keyword expects:
   characters, expressions, portrait keys, anchors, variables, dictionary tokens, items, quests and their
   objectives, screens, routine profiles, daypart and weekday names, asset names, and the labels already in
-  the file. Where a condition or an effect goes, it offers the whole variable catalog — your own variables,
+  the file. After `with` or `effect` it offers presets, modes and effect kinds, then only the arguments of the
+  one you chose (no `freq` after `effect tint`). Where a condition or an effect goes, it offers the whole
+  variable catalog — your own variables,
   character fields as `maya.affection`, `item.<id>` counts, dictionary tokens and the reserved `@time:` and
   `@quest:` keys — the same list the graph's condition picker shows.
 

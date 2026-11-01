@@ -21,8 +21,8 @@ paleta se activa.
 - El panel es **redimensionable** —arrastra su borde— y los botones se reorganizan en tantas filas como
   permita el ancho. También es **plegable**, así que puedes ocultarlo cuando solo estés conectando el grafo.
 
-Los bloques se agrupan en diez categorías: Dialogue, Scene, Clear, State, Quests, World, Items, Audio, Input
-y Flow. Aparecen en ese orden.
+Los bloques se agrupan en once categorías: Dialogue, Scene, Clear, Effects, State, Quests, World, Items,
+Audio, Input y Flow. Aparecen en ese orden.
 
 ## Cómo se ejecutan los bloques
 
@@ -80,6 +80,20 @@ espera al jugador.
 
 Se explica en profundidad en [Diálogo y el escenario](/es/docs/beasty-visual-novel/authoring/dialogue-and-stage/).
 
+### Say together
+
+Una línea que dicen a la vez de dos a cinco personajes: «¡Corre!» de todo el grupo.
+
+| Opción | Qué hace |
+|---|---|
+| Speakers | De dos a cinco personajes. |
+| Delivery, Text | Como en un bloque Dialogue. |
+
+La placa de nombre une sus nombres, cada uno en su color. El texto se reparte en un tramo por hablante, con
+sus colores de texto: por palabras, o por letras si la línea es corta. No se muestra retrato. Un bloque cuyos
+hablantes se quedan en menos de dos personajes reales se reproduce como una línea normal. El validador avisa de
+eso, de un hablante repetido y de más de cinco.
+
 ---
 
 ## Scene
@@ -103,18 +117,26 @@ Pone a un personaje en el escenario.
 | Opción | Qué hace |
 |---|---|
 | Character | Quién. |
-| Expression | Qué sprite de escenario. Por defecto, `base`. |
+| Expression | Qué sprite de escenario. Vacío = la [expresión por defecto](/es/docs/beasty-visual-novel/world/characters/#la-expresión-por-defecto) del personaje. |
 | Portrait | Opcional: un retrato de UI distinto de la expresión en escena. Vacío = usa la expresión. |
 | Position | `Left`, `CenterLeft`, `Center`, `CenterRight`, `Right`, o `Custom` con una X normalizada. |
 | Scale | Multiplicador de tamaño. |
 | Flip | Refleja el sprite horizontalmente. |
 | Layer | Slot de 0 a 4. Decide quién se dibuja delante de quién. |
+| Outfit | Opcional: pone este [conjunto](/es/docs/beasty-visual-novel/world/wardrobe/) en la misma línea. Igual que un bloque Change outfit. |
+
+Elegir un personaje le da al bloque la primera expresión de ese personaje. Un bloque Show character que no
+tiene nada que ofrecer —sin personaje, con uno desconocido o con uno sin expresiones— se ignora: la escena se
+queda como si no estuviera, y la tarjeta del bloque lo dice. Uno que nombra una expresión que falta muestra la
+expresión por defecto y avisa una vez. El desplegable de expresiones muestra una clave que falta como
+*(missing)*.
 
 ### Expression
 
 Cambia la expresión de un personaje que ya está en escena. **También** puede fijar el retrato del cuadro de
 diálogo a la vez, de modo que un personaje puede verse triste en el escenario mientras el retrato muestra
-otra cosa.
+otra cosa. Un bloque Expression que nombra una expresión que falta, o un personaje sin expresiones, se ignora,
+y su tarjeta lo dice.
 
 ### Hide character
 
@@ -124,6 +146,20 @@ Retira a un personaje del escenario.
 
 Fija los props sueltos del primer plano. Misma estructura que las capas de fondo, incluidos los sprites
 condicionales.
+
+### Wear piece
+
+Pone o quita una prenda a un personaje. Elige primero la **Category**; después el bloque ofrece **Put on** o
+**Take off** y la prenda. En una categoría *Several at once* la prenda es obligatoria. Consulta
+[Vestuario y conjuntos](/es/docs/beasty-visual-novel/world/wardrobe/#cambiar-la-ropa-desde-la-historia).
+
+### Change outfit
+
+Pone un conjunto entero a un personaje. El editor muestra una miniatura del personaje con ese conjunto y un
+resumen de lo que cambia. Un conjunto solo cambia las categorías que nombra.
+
+Si el personaje aún no tiene categorías de vestuario (Wear piece) o conjuntos (Change outfit), el bloque
+muestra un botón **Open wardrobe…**.
 
 ---
 
@@ -141,6 +177,35 @@ Backdrop vacío no sirve para eso.
 ### Props
 
 Elimina todos los props.
+
+---
+
+## Effects
+
+Cómo cambia la escena de una línea a otra, y qué colorea o mueve todo el escenario. Se explica en
+profundidad en [Transiciones visuales y efectos de pantalla](/es/docs/beasty-visual-novel/authoring/screen-effects/).
+
+### Transition (with)
+
+Decide cómo se presentan los cambios de escena de la línea siguiente: `cut`, `dissolve`, `fade`, `wipe`,
+`slide`, `push`, `iris`, `pixellate`, `zoom` o `mask`. Todos los modos tienen duración, curva de velocidad y si
+la línea espera a que termine la transición. Sin bloque Transition, una línea cambia de golpe. Si una línea
+tiene varios, gana el último.
+
+### Screen effect
+
+Añade un efecto `flash`, `shake`, `tint`, `color screen`, `color filter`, `vignette`, `blur` o `camera`. Un
+efecto nuevo sustituye al activo del mismo tipo; los de tipos distintos se suman. Cada bloque elige cuánto
+dura: hasta que cambie el escenario (por defecto), hasta la línea siguiente, hasta que se quite, o unos
+segundos.
+
+### Clear effects
+
+Quita todos los efectos de pantalla, o solo los de un tipo.
+
+### Fade, Dissolve, Flash, Punch (vpunch)
+
+Atajos: un bloque Transition o Screen effect ya ajustado a ese preset.
 
 ---
 

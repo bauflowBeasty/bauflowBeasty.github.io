@@ -20,8 +20,11 @@ contexto compartido, así que una sola lista sirve a todas las escenas del juego
 | **Icon** | El sprite que se muestra en la grilla del inventario y en el popup de detalle. |
 | **Kind** | `Key` o `Consumable`. |
 | **Max quantity** | Cuánto se puede apilar un consumible. Un objeto `Key` siempre está limitado a 1, diga lo que diga este campo. |
-| **Name key** | La clave de localización del nombre mostrado del objeto, en la tabla de UI global. Escribes el texto directamente en la pestaña Items. |
+| **Name key** | La clave de localización del nombre mostrado del objeto, en la tabla de ítems. Escribes el texto directamente en la pestaña Items. |
 | **Description key** | La clave de localización de la descripción mostrada en el popup de detalle. |
+
+Los nombres, las descripciones y los mensajes de «no se puede usar» de los ítems se traducen en su propia
+tabla, en la pestaña [Localization › Items](/es/docs/beasty-visual-novel/production/localization/#la-pestaña-items).
 
 Un objeto **Key** es una bandera de posesión: el jugador lo tiene o no lo tiene. Un **Consumable** se apila desde
 0 hasta su máximo.
@@ -88,8 +91,9 @@ que explica por qué, hasta que la encuentren. Consulta
 
 ## La pantalla de inventario
 
-El prefab `Inventory` es una superposición ya hecha: una grilla de los objetos que el jugador lleva en ese
-momento, y un popup de detalle.
+El prefab `Inventory` es una superposición ya hecha: una hoja titulada **Inventario** con una grilla de los
+objetos que el jugador lleva en ese momento, cada uno como una tarjeta polaroid, y un popup de detalle. La
+grilla sigue el ancho de la pantalla, y los textos —título, mensaje de vacío, Usar— están traducidos.
 
 ![La pantalla de inventario en el juego: la grilla de ítems y el popup de detalle](/docs-images/beasty-visual-novel/vn-inventory-ingame.png)
 
@@ -97,8 +101,8 @@ momento, y un popup de detalle.
   ranura guardado del jugador. Usa la última poción y la ranura desaparece y la grilla se recoloca. Recoge algo
   nuevo y se añade al final.
 - **Una ranura** muestra el icono del objeto y cuántos se tienen.
-- **El popup de detalle** se abre cuando el jugador clica una ranura. Muestra el icono, el nombre, la descripción
-  y un botón Use, que ejecuta exactamente la lógica on-use de arriba — incluido el rechazo, con tu mensaje,
+- **El popup de detalle** se abre cuando el jugador clica una ranura. Es grande, y muestra el icono, el nombre,
+  la descripción, un botón **Cancel** y un botón **Use**, que ejecuta exactamente la lógica on-use de arriba — incluido el rechazo, con tu mensaje,
   cuando la condición de uso falla.
 
 Es un prefab uGUI normal. Restilízalo, mueve cosas de sitio, reemplaza el arte; consulta
@@ -106,15 +110,16 @@ Es un prefab uGUI normal. Restilízalo, mueve cosas de sitio, reemplaza el arte;
 
 ### Añadirla y abrirla
 
-En la pestaña **Screens** del editor, pulsa **+ Inventory (ready-made)**. Eso copia el prefab a tu
-proyecto y lo registra como pantalla secundaria con un id. Solo se crea un inventario: si pulsas el botón
-dos veces, se selecciona el que ya existe.
+En la pestaña **Screens** del editor, elige **+ New screen ▸ Inventory ▸ Notebook**, o **▸ Phone** para la
+versión dentro del [teléfono](/es/docs/beasty-visual-novel/world/phone-screens/). Eso copia el prefab a tu
+proyecto y lo registra como pantalla secundaria con un id. Cada tipo se crea una sola vez, y un proyecto puede
+tener los dos, mostrando los mismos ítems.
 
-![El botón + Inventory (ready-made) en la pestaña Screens](/docs-images/beasty-visual-novel/vn-screens-add-inventory.png)
+![El menú + New screen de la pestaña Screens, abierto en Inventory](/docs-images/beasty-visual-novel/vn-screens-add-inventory.png)
 
 El jugador llega a ella de dos formas:
 
-- **Un botón del HUD.** Añade un elemento a tu pantalla de HUD con la acción **OpenScreen**, apuntando al id de pantalla
+- **Un botón del HUD.** Añade un elemento a tu pantalla de HUD que haga **Open screen**, apuntando al id de pantalla
   del inventario. Esta es la forma habitual.
 - **El bloque Open screen** (categoría de paleta **World**). La abre desde dentro de la historia — después de que
   el jugador reciba su primer objeto, por ejemplo.

@@ -14,8 +14,10 @@ project and registers them as secondary screens. From then on they are yours to 
 
 ## The cast list
 
-The cast list is one row per character the player may browse. Selecting a row opens that character's
-profile.
+The cast list is a paper sheet titled **Characters**, with one polaroid card per character the player may
+browse: a big portrait and the name underneath. The cards sit in a grid of two to five columns that follows the
+screen width, and a single line of cards is centered. Cards tint on hover; selecting one opens that character's
+profile. The close button is a large paper **X** inside the sheet.
 
 ![The cast list in game, one row per character met](/docs-images/beasty-visual-novel/vn-cast-list-ingame.png)
 
@@ -39,12 +41,17 @@ A single character can opt out of the shared condition and carry its own instead
 per-character override on that character. Use it for the exception, not the rule: the villain who only
 appears in the list after chapter three.
 
-The list is virtualized — only the rows on screen are drawn — so a cast of a thousand opens instantly.
+The list is virtualized — only the lines of cards on screen exist — so a cast of a thousand opens instantly.
+
+A phone version of the list and the profile is created with **+ New screen ▸ Characters ▸ Phone**; see
+[Phone screens](/docs/beasty-visual-novel/world/phone-screens/).
 
 ## The profile
 
-The profile is the per-character hub: a header with their portrait and name, and a **tab bar** underneath
-that swaps between sections. The first tab is shown when it opens.
+The profile is the per-character hub: the portrait as a polaroid with the name in large type on the left, and
+a **tab bar** with its pages on the right. The first tab is shown when it opens. The tab labels — Stats,
+Calendar, Quests — are translated, and the active and inactive tabs use light paper tints
+(`activeTabColor` / `inactiveTabColor` on the prefab).
 
 ![A character profile: header, portrait and the tab bar](/docs-images/beasty-visual-novel/vn-profile-ingame.png)
 
@@ -57,7 +64,10 @@ The shipped tabs are the three below.
 
 ## The stats screen
 
-The stats screen shows the character's portrait, name, and a row per field.
+The stats screen shows the character's portrait and name on the left, and one large card per field — name,
+value and the +/− buttons — in one or two columns. The standalone `CharacterStats` screen uses the same layout.
+A field shows its **Display name**, translated in
+[Localization › Game UI](/docs/beasty-visual-novel/production/localization/#the-game-ui-tab).
 
 ![The stats screen: a row per field, some of them editable](/docs-images/beasty-visual-novel/vn-stats-ingame.png)
 
@@ -87,8 +97,14 @@ The calendar is the character's schedule, in one of two views, toggled by the pl
 - **Day view** — one row per daypart, for today.
 - **Week view** — the whole week: dayparts down, weekdays across.
 
-Today's column is tinted, and the current daypart within it is tinted more strongly, so the player can see
-where they are. A slot where the character is nowhere on the map reads as unknown.
+Today's column is tinted, and the current daypart within it is tinted more strongly in the brick-red accent,
+so the player can see where they are. A slot where the character is nowhere on the map reads as absent, with a
+translated text. Room names and the day and time-of-day headers are translated too.
+
+The **routine screen** (`CharacterRoutineScreen`) has an optional **Day Header Template**. With it set, the week
+is drawn as one group per day — a weekday header followed by one row per daypart — instead of one flat list.
+Today's header and the current daypart's row use the screen's highlight colors, and the Day/Week toggle still
+works (Day shows only today). **Upgrade UI Prefabs** leaves such screens alone.
 
 The calendar is only filled in for a character whose **Show routine** toggle is on. It is a view of the
 routine rules you authored — see [Character routines](/docs/beasty-visual-novel/world/character-routines/) — not a second copy of them,

@@ -143,6 +143,25 @@ public static void   SetCharacterNameToAlias(string characterId, string aliasVal
 `SetCharacterNameToAlias` con un string vacío limpia el override y devuelve al personaje su nombre base.
 `GetCharacterAliases` devuelve un array vacío cuando el personaje no tiene ninguno o es desconocido.
 
+## La guía y las preferencias del jugador
+
+```csharp
+// VN
+public static bool Walkthrough { get; set; }
+public static event Action<bool> OnWalkthroughChanged;
+
+// VNPreferences
+public static bool Walkthrough { get; set; }
+public static bool ReduceFlashesAndMotion { get; set; }
+public static bool AutoOnByDefault { get; set; }
+```
+
+`VN.Walkthrough` es el interruptor efectivo: true solo cuando el proyecto activa las
+[pistas de la guía](/es/docs/beasty-visual-novel/world/notifications-and-walkthrough/) y el jugador las
+encendió. `VNPreferences` guarda las elecciones del propio jugador, las mismas que edita la pantalla de
+Preferencias: **Pistas de la guía**, **Reducir destellos y movimiento** y **Empezar con auto-avance**. Las
+preferencias nunca se guardan en las partidas.
+
 ## Música de fondo
 
 ```csharp

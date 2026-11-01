@@ -16,10 +16,10 @@ que el sitio nunca muestra una imagen rota.
 
 | | Total | Tomadas | Rehacer | Pendientes |
 |---|---:|---:|---:|---:|
-| P1 · imprescindibles | 83 | 58 | 1 | 24 |
-| P2 · recomendadas | 78 | 50 | 3 | 25 |
-| P3 · complementarias | 31 | 20 | 0 | 11 |
-| **Total** | **192** | **128** | **4** | **60** |
+| P1 · imprescindibles | 94 | 75 | 14 | 5 |
+| P2 · recomendadas | 82 | 71 | 7 | 4 |
+| P3 · complementarias | 31 | 28 | 1 | 2 |
+| **Total** | **207** | **174** | **22** | **11** |
 
 **Prioridades.** P1 es donde el texto solo no basta: la ventana principal y sus pestañas, los
 asistentes, las grillas y las pantallas que ve el jugador. P2 completa una página que ya se entiende.
@@ -43,17 +43,18 @@ no muestra lo que la ficha pide). Su ficha dice el motivo; al sustituir el PNG, 
 
 ## Beasty Visual Novel
 
-Carpeta destino: `public/docs-images/beasty-visual-novel/` · 25 por hacer de 153.
+Carpeta destino: `public/docs-images/beasty-visual-novel/` · 22 por hacer de 168.
 
 ### Blocks reference · Referencia de bloques
 
 `/docs/beasty-visual-novel/authoring/blocks-reference/` — `/es/docs/beasty-visual-novel/authoring/blocks-reference/`
 
-#### `vn-add-blocks-palette.png` — P1 · ✅ tomada
+#### `vn-add-blocks-palette.png` — P1 · 🔁 rehacer
 
 - **Sección:** The Add blocks panel · El panel Add blocks
 - **Vista:** Unity ▸ Tools > Beasty VN > Editor ▸ pestaña Story, panel izquierdo
 - **Qué tiene que verse:** Recorte del panel de la paleta con TODAS las categorías desplegadas a la vez (Dialogue, Scene, Clear, State, Quests, World, Items, Audio, Input, Flow) y sus bloques legibles. Alarga la ventana en vertical si hace falta: esta captura es el índice de toda la página.
+- **Por qué rehacerla:** La paleta tiene una categoría nueva, Effects (entre Clear y State), y bloques nuevos: Say together, Wear piece, Change outfit.
 
 ### Choices and decisions · Elecciones y decisiones
 
@@ -93,7 +94,7 @@ Carpeta destino: `public/docs-images/beasty-visual-novel/` · 25 por hacer de 15
 - **Vista:** Unity ▸ Tools > Beasty VN > Editor ▸ pestaña Story, inspector del nodo
 - **Qué tiene que verse:** Un bloque de diálogo desplegado con todos sus campos rellenos: personaje elegido, texto escrito, un estilo de entrega distinto de Normal y el alias de nombre visible. Solo el bloque, no el inspector entero.
 
-#### `vn-stage-ingame.png` — P1 · ⬜ pendiente
+#### `vn-stage-ingame.png` — P1 · ✅ tomada
 
 - **Sección:** The stage · El escenario
 - **Vista:** Unity ▸ Game view en Play
@@ -105,11 +106,12 @@ Carpeta destino: `public/docs-images/beasty-visual-novel/` · 25 por hacer de 15
 - **Vista:** Unity ▸ Tools > Beasty VN > Editor ▸ pestaña Story, inspector del nodo
 - **Qué tiene que verse:** El bloque Backdrop desplegado con el sprite asignado (que se vea la miniatura) y la transición elegida.
 
-#### `vn-block-show-character.png` — P2 · ✅ tomada
+#### `vn-block-show-character.png` — P2 · 🔁 rehacer
 
 - **Sección:** Show character · Show character
 - **Vista:** Unity ▸ Tools > Beasty VN > Editor ▸ pestaña Story, inspector del nodo
 - **Qué tiene que verse:** El bloque desplegado con el personaje elegido, una expresión concreta y la posición en escena. Si el bloque muestra miniatura del sprite, que se vea.
+- **Por qué rehacerla:** El bloque Show character tiene ahora el campo Outfit.
 
 #### `vn-block-props.png` — P3 · ✅ tomada
 
@@ -121,17 +123,40 @@ Carpeta destino: `public/docs-images/beasty-visual-novel/` · 25 por hacer de 15
 
 `/docs/beasty-visual-novel/authoring/dialogue-preview/` — `/es/docs/beasty-visual-novel/authoring/dialogue-preview/`
 
-#### `vn-dialogue-preview.png` — P1 · ✅ tomada
+#### `vn-dialogue-preview.png` — P1 · 🔁 rehacer
 
 - **Sección:** (entradilla) · (entradilla)
 - **Vista:** Unity ▸ Tools > Beasty VN > Dialogue Preview
 - **Qué tiene que verse:** La ventana de vista previa renderizando un nodo con fondo y dos personajes en escena, con la caja de diálogo abajo. Sin entrar en Play: la barra de Unity debe delatar que no estamos en modo de juego.
+- **Por qué rehacerla:** La vista previa dibuja ya la caja de diálogo con el aspecto tinta y papel y tiene el botón ▶ Play effects. Rehacer con una línea con efecto (por ejemplo el flashback de la intro).
 
 #### `vn-preview-block-button.png` — P3 · ✅ tomada
 
 - **Sección:** The per-block preview button · El botón de vista previa por bloque
 - **Vista:** Unity ▸ Tools > Beasty VN > Editor ▸ pestaña Story, inspector del nodo
 - **Qué tiene que verse:** Recorte de la lista de bloques con el botón de vista previa de UNO de ellos señalado (cursor encima o el tooltip abierto), para que quede claro que se puede previsualizar hasta un bloque concreto.
+
+### Visual transitions and screen effects · Transiciones visuales y efectos de pantalla
+
+`/docs/beasty-visual-novel/authoring/screen-effects/` — `/es/docs/beasty-visual-novel/authoring/screen-effects/`
+
+#### `vn-effects-palette.png` — P2 · ✅ tomada
+
+- **Sección:** The Effects blocks · Los bloques Effects
+- **Vista:** Unity ▸ Tools > Beasty VN > Editor ▸ pestaña Story, con un Dialogue Node seleccionado
+- **Qué tiene que verse:** La paleta Add blocks con la categoría Effects visible y sus siete botones: Transition (with), Screen effect, Clear effects, Fade, Dissolve, Flash y Punch (vpunch). Que se vea que Effects va entre Clear y State. Recorta a la paleta.
+
+#### `vn-effect-flashback.png` — P2 · ✅ tomada
+
+- **Sección:** Screen effects · Efectos de pantalla
+- **Vista:** Unity ▸ Game view en Play (House Demo, recuerdo de la mudanza de Mia en la intro)
+- **Qué tiene que verse:** Una línea de diálogo bajo el preset flashback: escenario en sepia, viñeta oscura y desenfoque suave, con la caja de diálogo encima perfectamente nítida y legible. Es la prueba de que los efectos no tocan la interfaz.
+
+#### `vn-effect-block-editor.png` — P1 · ✅ tomada
+
+- **Sección:** Presets · Presets
+- **Vista:** Unity ▸ Tools > Beasty VN > Editor ▸ pestaña Story ▸ inspector de un bloque Screen effect
+- **Qué tiene que verse:** Un bloque Screen effect con el preset flashback elegido, sus tres capas listadas (filtro sepia, viñeta, desenfoque) y la intensidad de la viñeta sobrescrita: el interruptor junto a ese campo activado y el resto apagados. Que se vea también el desplegable de duración (Until the stage changes).
 
 ### The story graph · El grafo de la historia
 
@@ -320,11 +345,12 @@ Carpeta destino: `public/docs-images/beasty-visual-novel/` · 25 por hacer de 15
 - **Vista:** Unity ▸ Tools > Beasty VN > Editor ▸ pestaña Characters
 - **Qué tiene que verse:** La pestaña completa con las cuatro sub-pestañas visibles (Cast, Variables, Quests, Talk Menu) y la lista del reparto a la izquierda con varios personajes. Aquí interesa el conjunto; el detalle de Cast ya tiene su propia captura.
 
-#### `vn-tab-variables.png` — P1 · ✅ tomada
+#### `vn-tab-variables.png` — P1 · 🔁 rehacer
 
 - **Sección:** Variables · Variables
 - **Vista:** Unity ▸ Tools > Beasty VN > Editor ▸ pestaña Variables
 - **Qué tiene que verse:** La pestaña con media docena de variables de tipos distintos (Int, Bool, String, Enum) en la lista de la izquierda y una seleccionada a la derecha, con su clave, tipo, kind y valor por defecto a la vista.
+- **Por qué rehacerla:** La pestaña Variables muestra lista y detalle lado a lado con divisor, y los campos Display name, Notify changes in gameplay y Show in walkthrough.
 
 #### `vn-tab-localization.png` — P1 · ✅ tomada
 
@@ -378,7 +404,7 @@ Carpeta destino: `public/docs-images/beasty-visual-novel/` · 25 por hacer de 15
 
 `/docs/beasty-visual-novel/getting-started/house-demo/` — `/es/docs/beasty-visual-novel/getting-started/house-demo/`
 
-#### `vn-house-demo-living.png` — P1 · ⬜ pendiente
+#### `vn-house-demo-living.png` — P1 · ✅ tomada
 
 - **Sección:** Running it · Ejecutarlo
 - **Vista:** Unity ▸ Game view en Play, escena Demos/HouseDemo/HouseDemo.unity
@@ -512,11 +538,12 @@ Carpeta destino: `public/docs-images/beasty-visual-novel/` · 25 por hacer de 15
 
 `/docs/beasty-visual-novel/production/localization/` — `/es/docs/beasty-visual-novel/production/localization/`
 
-#### `vn-localization-tabs.png` — P1 · ✅ tomada
+#### `vn-localization-tabs.png` — P1 · 🔁 rehacer
 
-- **Sección:** The two tables · Las dos tablas
+- **Sección:** The translation tables · Las tablas de traducción
 - **Vista:** Unity ▸ Tools > Beasty VN > Editor ▸ pestaña Localization
 - **Qué tiene que verse:** La pestaña con el alternador Story / UI (global) bien visible y la grilla de la tabla de historia debajo. Es la captura que enseña que hay DOS tablas y dónde se cambia de una a otra.
+- **Por qué rehacerla:** La sección Localization tiene ahora cuatro pestañas: Story, UI, Game UI e Items.
 
 #### `vn-localization-add-language.png` — P1 · ✅ tomada
 
@@ -548,29 +575,36 @@ Carpeta destino: `public/docs-images/beasty-visual-novel/` · 25 por hacer de 15
 - **Vista:** Unity ▸ Tools > Beasty VN > Editor ▸ pestaña Localization
 - **Qué tiene que verse:** El menú de Export ABIERTO mostrando los tres alcances, con el de «Missing or stale only (N)» enseñando un número de verdad (elige una sección antes para que la opción de sección no salga deshabilitada).
 
-#### `vn-localization-bake.png` — P1 · ⬜ pendiente
+#### `vn-localization-game-ui.png` — P1 · ✅ tomada
+
+- **Sección:** The Game UI tab · La pestaña Game UI
+- **Vista:** Unity ▸ Tools > Beasty VN > Editor ▸ pestaña Localization ▸ subpestaña Game UI (House Demo)
+- **Qué tiene que verse:** La grilla de Game UI con el desplegable de grupo abierto (Time, Screens, Rooms, Quests, Character stats, Global variables) y filas visibles del grupo Time con columnas en (gris, de solo lectura) y es (editable). Que se vean los botones Refresh e Import/Export y el panel Unused keys plegado.
+
+#### `vn-localization-bake.png` — P1 · ✅ tomada
 
 - **Sección:** Bake Localized UI Labels · Bake Localized UI Labels
 - **Vista:** Unity ▸ pestaña Localization ▸ UI ▸ botón Bake scene labels (o Tools > Beasty VN > Setup > Bake Localized UI Labels)
 - **Qué tiene que verse:** Ejecuta el bake en una escena con menús y captura el diálogo de resultado, que dice cuántas etiquetas se enlazaron y cuántas fueron dentro de prefabs de origen. Con la barra de la pestaña UI detrás, donde se ve el botón Bake scene labels.
 
-#### `vn-localized-text-inspector.png` — P1 · ⬜ pendiente
+#### `vn-localized-text-inspector.png` — P1 · ✅ tomada
 
 - **Sección:** Wiring one label by hand · Enganchar una etiqueta a mano
 - **Vista:** Unity ▸ Inspector de una etiqueta con VNLocalizedText
 - **Qué tiene que verse:** El inspector con una clave ya elegida: el selector de clave arriba, el campo Source text con texto, y los botones From label y To label. Si consigues una segunda captura, la buena es la de una etiqueta SIN clave todavía, donde aparece el botón «Create key from this text → ui.algo».
 
-#### `vn-localization-repair.png` — P2 · ⬜ pendiente
+#### `vn-localization-repair.png` — P2 · ✅ tomada
 
 - **Sección:** When the interface is stuck in one language · Cuando la interfaz se queda en un solo idioma
 - **Vista:** Unity ▸ Tools > Beasty VN > Editor ▸ pestaña Localization ▸ UI (global)
 - **Qué tiene que verse:** Con una tabla de UI cuya columna #0 no sea `en`, captura el aviso amarillo y el botón «Make English the source and fill missing defaults» justo encima de la barra de herramientas.
 
-#### `vn-preferences-language-ingame.png` — P1 · ✅ tomada
+#### `vn-preferences-language-ingame.png` — P1 · 🔁 rehacer
 
 - **Sección:** Switching language while the game runs · Cambiar de idioma mientras el juego se ejecuta
 - **Vista:** Unity ▸ Game view en Play, pantalla de preferencias
 - **Qué tiene que verse:** La pantalla de preferencias en marcha con el desplegable de idioma ABIERTO, mostrando los nombres curados (English, Spanish…). Si puedes, una segunda captura del menú ya traducido tras elegir otro idioma.
+- **Por qué rehacerla:** La pantalla de Preferencias se rediseñó (dos columnas sobre una hoja de papel).
 
 ### Logging · Logging
 
@@ -605,7 +639,7 @@ Carpeta destino: `public/docs-images/beasty-visual-novel/` · 25 por hacer de 15
 - **Vista:** Unity ▸ Tools > Beasty VN > Settings > Global Settings
 - **Qué tiene que verse:** Recorte de la sección de guardado: política de autoguardado, número de slots y límite de rebobinado.
 
-#### `vn-saving-section.png` — P1 · ⬜ pendiente
+#### `vn-saving-section.png` — P1 · ✅ tomada
 
 - **Sección:** The Saving section: one place for all of it · La sección Saving: todo en un sitio
 - **Vista:** Unity ▸ Inspector del BeastyManager, sección Saving
@@ -625,6 +659,18 @@ Carpeta destino: `public/docs-images/beasty-visual-novel/` · 25 por hacer de 15
 
 `/docs/beasty-visual-novel/production/ui-prefabs/` — `/es/docs/beasty-visual-novel/production/ui-prefabs/`
 
+#### `vn-ui-ink-paper.png` — P1 · ✅ tomada
+
+- **Sección:** The default look: ink and paper · El aspecto de serie: tinta y papel
+- **Vista:** Unity ▸ Game view en Play (House Demo, primeras palabras de Mia)
+- **Qué tiene que verse:** Una línea de diálogo de Mia con la caja de tinta, la placa de nombre alta sobre la esquina superior izquierda y dos o tres opciones en píldora de tinta, una con el mouse encima (rojo ladrillo). Es la foto del aspecto «tinta y papel».
+
+#### `vn-preferences-screen.png` — P1 · ✅ tomada
+
+- **Sección:** The Preferences screen · La pantalla de Preferencias
+- **Vista:** Unity ▸ Game view en Play ▸ menú de juego ▸ Preferences (House Demo, con las pistas de la guía activadas en el proyecto)
+- **Qué tiene que verse:** La pantalla de Preferencias completa: columna izquierda con Display (Window, Language) y Text (velocidad, auto-avance, Start with auto-forward on, Skip unread text, Walkthrough hints); columna derecha con Sound (cinco volúmenes) y Accessibility (Reduce flashes and motion); Reset to defaults y Back abajo a la derecha.
+
 #### `vn-ui-prefabs-folder.png` — P2 · ✅ tomada
 
 - **Sección:** The prefabs · Los prefabs
@@ -637,7 +683,7 @@ Carpeta destino: `public/docs-images/beasty-visual-novel/` · 25 por hacer de 15
 - **Vista:** Unity ▸ Tools > Beasty VN > Setup > Build Default Menu Prefabs / Upgrade UI Prefabs
 - **Qué tiene que verse:** El diálogo de aviso que sale antes de sobrescribir, con el texto legible. Es la captura que evita el «no sabía que iba a pisar mi rediseño».
 
-#### `vn-black-screen-fix.png` — P1 · ⬜ pendiente
+#### `vn-black-screen-fix.png` — P1 · ✅ tomada
 
 - **Sección:** The black screen, and the button that fixes it · La pantalla negra, y el botón que la arregla
 - **Vista:** Unity ▸ Game view en Play + el botón de arreglo en la ventana de Beasty VN
@@ -749,7 +795,7 @@ Carpeta destino: `public/docs-images/beasty-visual-novel/` · 25 por hacer de 15
 - **Vista:** Unity ▸ Tools > Beasty VN > Editor ▸ pestaña FreeRoam, con una sala abierta
 - **Qué tiene que verse:** La línea de tiempo dentro de una sala, con un carril por momento del día, algún personaje ya añadido en uno de ellos y el botón + Character visible. Es la otra cara de la grilla de rutinas.
 
-#### `vn-routine-calendar-ingame.png` — P2 · ⬜ pendiente
+#### `vn-routine-calendar-ingame.png` — P2 · ✅ tomada
 
 - **Sección:** The in-game routine calendar · El calendario de rutina dentro del juego
 - **Vista:** Unity ▸ Game view en Play
@@ -759,25 +805,28 @@ Carpeta destino: `public/docs-images/beasty-visual-novel/` · 25 por hacer de 15
 
 `/docs/beasty-visual-novel/world/character-screens/` — `/es/docs/beasty-visual-novel/world/character-screens/`
 
-#### `vn-cast-list-ingame.png` — P1 · ✅ tomada
+#### `vn-cast-list-ingame.png` — P1 · 🔁 rehacer
 
 - **Sección:** The cast list · La lista de reparto
 - **Vista:** Unity ▸ Game view en Play
 - **Qué tiene que verse:** La lista del reparto abierta con cuatro o cinco personajes visibles (y alguno todavía oculto por su condición, si se nota), tal y como la ve el jugador.
+- **Por qué rehacerla:** La lista de personajes se rediseñó: hoja de papel con título y tarjetas polaroid en grilla.
 
-#### `vn-profile-ingame.png` — P1 · ✅ tomada
+#### `vn-profile-ingame.png` — P1 · 🔁 rehacer
 
 - **Sección:** The profile · El perfil
 - **Vista:** Unity ▸ Game view en Play
 - **Qué tiene que verse:** El perfil de un personaje abierto, con su retrato y nombre en la cabecera y la barra de pestañas debajo, con la primera pestaña seleccionada.
+- **Por qué rehacerla:** El perfil se rediseñó: polaroid y nombre a la izquierda, pestañas de papel claro a la derecha.
 
-#### `vn-stats-ingame.png` — P1 · ✅ tomada
+#### `vn-stats-ingame.png` — P1 · 🔁 rehacer
 
 - **Sección:** The stats screen · La pantalla de estadísticas
 - **Vista:** Unity ▸ Game view en Play
 - **Qué tiene que verse:** La pantalla de estadísticas con varias filas: alguna de solo lectura, alguna con botones + y −, y algún interruptor de un campo booleano. Si el personaje tiene activado Show current location, que se vea también la línea de ubicación.
+- **Por qué rehacerla:** Las estadísticas son ahora tarjetas grandes en una o dos columnas, con el aspecto tinta y papel.
 
-#### `vn-routine-calendar-ingame.png` — P2 · ⬜ pendiente
+#### `vn-routine-calendar-ingame.png` — P2 · ✅ tomada
 
 - **Sección:** The routine calendar · El calendario de rutina
 - **Vista:** Unity ▸ Game view en Play
@@ -805,11 +854,12 @@ Carpeta destino: `public/docs-images/beasty-visual-novel/` · 25 por hacer de 15
 - **Vista:** Unity ▸ Tools > Beasty VN > Editor ▸ pestaña Characters ▸ Cast
 - **Qué tiene que verse:** Recorte del bloque de identidad con todos los campos rellenos, incluidos los dos colores (que se vean las muestras de color) y un par de etiquetas añadidas.
 
-#### `vn-character-expressions.png` — P1 · ✅ tomada
+#### `vn-character-expressions.png` — P1 · 🔁 rehacer
 
 - **Sección:** Expressions and portraits · Expresiones y retratos
 - **Vista:** Unity ▸ Tools > Beasty VN > Editor ▸ pestaña Characters ▸ Cast
 - **Qué tiene que verse:** Las dos listas a la vez, con al menos tres claves iguales en ambas (`base`, `sad`, `angry`) y sus miniaturas visibles, para que se vea que son dos juegos de sprites que comparten nombre.
+- **Por qué rehacerla:** La lista de expresiones cambió: filas Single y Layered, etiqueta default en la primera, menú ⋮ y botón Wardrobe…
 
 #### `vn-character-delivery.png` — P2 · ✅ tomada
 
@@ -823,13 +873,14 @@ Carpeta destino: `public/docs-images/beasty-visual-novel/` · 25 por hacer de 15
 - **Vista:** Unity ▸ Tools > Beasty VN > Editor ▸ pestaña Characters ▸ Cast
 - **Qué tiene que verse:** La lista de alias con dos o tres entradas del tipo «El Desconocido», «La Voz», que es el caso de uso que explica la página.
 
-#### `vn-character-variables.png` — P1 · ✅ tomada
+#### `vn-character-variables.png` — P1 · 🔁 rehacer
 
 - **Sección:** Character variables (stats) · Variables de personaje (estadísticas)
 - **Vista:** Unity ▸ Tools > Beasty VN > Editor ▸ pestaña Characters ▸ Variables
 - **Qué tiene que verse:** La sub-pestaña con las DOS zonas visibles: los campos universales del esquema (por ejemplo `affection`, `met`) y los campos propios del personaje seleccionado. Que se vean las marcas Show on stats y Editable, y a poder ser un valor por defecto sobrescrito para este personaje.
+- **Por qué rehacerla:** Characters › Variables tiene ahora pestañas Global y Per character, y cada campo las casillas Notify changes in gameplay, Show in walkthrough y Display name.
 
-#### `vn-character-freeroam-sprite.png` — P2 · ⬜ pendiente
+#### `vn-character-freeroam-sprite.png` — P2 · ✅ tomada
 
 - **Sección:** The free-roam sprite · El sprite FreeRoam
 - **Vista:** Unity ▸ Tools > Beasty VN > Editor ▸ pestaña Characters ▸ Cast
@@ -839,13 +890,13 @@ Carpeta destino: `public/docs-images/beasty-visual-novel/` · 25 por hacer de 15
 
 `/docs/beasty-visual-novel/world/dictionary/` — `/es/docs/beasty-visual-novel/world/dictionary/`
 
-#### `vn-dictionary-entry.png` — P2 · ⬜ pendiente
+#### `vn-dictionary-entry.png` — P2 · ✅ tomada
 
 - **Sección:** Creating an entry · Crear una entrada
 - **Vista:** Unity ▸ Tools > Beasty VN > Editor ▸ pestaña Dictionary
 - **Qué tiene que verse:** Una entrada seleccionada con su clave, su valor por defecto y la marca de editable por el jugador activada. Con otras dos o tres entradas en la lista para dar contexto.
 
-#### `vn-dictionary-ingame.png` — P3 · ⬜ pendiente
+#### `vn-dictionary-ingame.png` — P3 · ✅ tomada
 
 - **Sección:** Using it in a line · Usarlo en una línea
 - **Vista:** Unity ▸ Game view en Play
@@ -891,7 +942,7 @@ Carpeta destino: `public/docs-images/beasty-visual-novel/` · 25 por hacer de 15
 - **Vista:** Unity ▸ modo de edición de prefab
 - **Qué tiene que verse:** El prefab de la sala con dos o tres hijos con `FreeRoamCharacterSpot`, seleccionados para que se vean sus gizmos en la escena, y sus nombres (que son sus ids) en la Hierarchy.
 
-#### `vn-freeroam-ingame.png` — P1 · ⬜ pendiente
+#### `vn-freeroam-ingame.png` — P1 · ✅ tomada
 
 - **Sección:** Entering a room from the story, and leaving again · Entrar en una sala desde la historia, y volver a salir
 - **Vista:** Unity ▸ Game view en Play, en mundo libre
@@ -919,7 +970,7 @@ Carpeta destino: `public/docs-images/beasty-visual-novel/` · 25 por hacer de 15
 - **Vista:** Unity ▸ Tools > Beasty VN > Editor ▸ pestaña Story, inspector del nodo
 - **Qué tiene que verse:** El bloque con el desplegable de operación ABIERTO, para que se vean las seis operaciones (AdvanceDayparts, AdvanceHours, AdvanceDays, SetDaypart, SetHour, SetWeekday), dentro de un nodo de dormir.
 
-#### `vn-time-hud-ingame.png` — P2 · ⬜ pendiente
+#### `vn-time-hud-ingame.png` — P2 · ✅ tomada
 
 - **Sección:** From a HUD button · Desde un botón del HUD
 - **Vista:** Unity ▸ Game view en Play, en mundo libre
@@ -935,7 +986,7 @@ Carpeta destino: `public/docs-images/beasty-visual-novel/` · 25 por hacer de 15
 - **Vista:** Unity ▸ Tools > Beasty VN > Editor ▸ pestaña FreeRoam, con una sala abierta y un objeto seleccionado
 - **Qué tiene que verse:** La ficha de un objeto de tipo Interaction con función Enter VN: que se vean el kind, la función, la escena elegida y el nodo de inicio, además de sus campos de arte y posición.
 
-#### `vn-object-hover.png` — P2 · ⬜ pendiente
+#### `vn-object-hover.png` — P2 · ✅ tomada
 
 - **Sección:** Hover feedback · Efecto al pasar el cursor
 - **Vista:** Unity ▸ pestaña FreeRoam (ajustes) + Game view en Play (resultado)
@@ -947,19 +998,19 @@ Carpeta destino: `public/docs-images/beasty-visual-novel/` · 25 por hacer de 15
 - **Vista:** Unity ▸ Tools > Beasty VN > Editor ▸ pestaña FreeRoam, con una sala abierta y una puerta seleccionada
 - **Qué tiene que verse:** Una puerta de tipo Navigation con todos sus campos: sala destino, id de pasaje, Accessible desactivado y un diálogo de bloqueo asignado, más al menos UNA excepción de acceso condicional debajo.
 
-#### `vn-object-conditional-vn.png` — P3 · ⬜ pendiente
+#### `vn-object-conditional-vn.png` — P3 · ✅ tomada
 
 - **Sección:** Conditional VN: the same object, a different scene · VN condicional: el mismo objeto, una escena distinta
 - **Vista:** Unity ▸ Tools > Beasty VN > Editor ▸ pestaña FreeRoam, con una sala abierta y un objeto seleccionado
 - **Qué tiene que verse:** La lista de casos condicionales de un objeto Enter VN con el ejemplo de la cama: un caso con `time.daypart == Night` apuntando a la escena de dormir y la escena por defecto debajo.
 
-#### `vn-room-character-pose.png` — P2 · ⬜ pendiente
+#### `vn-room-character-pose.png` — P2 · ✅ tomada
 
 - **Sección:** Character poses · Poses de personaje
 - **Vista:** Unity ▸ Tools > Beasty VN > Editor ▸ pestaña FreeRoam, con una sala abierta
 - **Qué tiene que verse:** Un objeto con personaje propietario y DOS poses en la lista, cada una con su sprite y su condición, para que se vea que solo se dibuja la primera que pasa.
 
-#### `vn-tight-click-shapes.png` — P3 · ⬜ pendiente
+#### `vn-tight-click-shapes.png` — P3 · ✅ tomada
 
 - **Sección:** Tight click shapes · Áreas de clic ajustadas
 - **Vista:** Unity ▸ Tools > Beasty VN > Content > Generate Tight Click Shapes (Selection)
@@ -981,17 +1032,67 @@ Carpeta destino: `public/docs-images/beasty-visual-novel/` · 25 por hacer de 15
 - **Vista:** Unity ▸ Tools > Beasty VN > Editor ▸ pestaña Items
 - **Qué tiene que verse:** La sección On use desplegada con una condición de uso, un par de efectos, una escena de salto y la cantidad a consumir. La poción es el ejemplo perfecto.
 
-#### `vn-inventory-ingame.png` — P1 · ✅ tomada
+#### `vn-inventory-ingame.png` — P1 · 🔁 rehacer
 
 - **Sección:** The inventory screen · La pantalla de inventario
 - **Vista:** Unity ▸ Game view en Play
 - **Qué tiene que verse:** El inventario abierto con cuatro o cinco ítems (alguno con cantidad mayor que 1, para que se vea el contador) y el popup de detalle abierto sobre uno, mostrando icono, nombre, descripción y el botón Use.
+- **Por qué rehacerla:** El inventario se rediseñó: hoja titulada con tarjetas polaroid y un popup de detalle grande con Use y Cancel.
 
-#### `vn-screens-add-inventory.png` — P3 · ✅ tomada
+#### `vn-screens-add-inventory.png` — P3 · 🔁 rehacer
 
 - **Sección:** Adding it and opening it · Añadirla y abrirla
 - **Vista:** Unity ▸ Tools > Beasty VN > Editor ▸ pestaña Screens
 - **Qué tiene que verse:** Recorte de la barra de la lista de pantallas con los botones de creación visibles (+ Primary, + Secondary, + Inventory (ready-made), + Menu, + Characters) y el del inventario señalado.
+- **Por qué rehacerla:** Ya no existe el botón + Inventory (ready-made): rehacer con el menú + New screen abierto en Inventory ▸ Notebook / Phone.
+
+### Layered expressions · Expresiones por capas
+
+`/docs/beasty-visual-novel/world/layered-expressions/` — `/es/docs/beasty-visual-novel/world/layered-expressions/`
+
+#### `vn-cast-layered-row.png` — P1 · ✅ tomada
+
+- **Sección:** Creating a layered expression · Crear una expresión por capas
+- **Vista:** Unity ▸ Tools > Beasty VN > Editor ▸ pestaña Characters ▸ Cast, con Mia seleccionada
+- **Qué tiene que verse:** La lista de expresiones de Mia con al menos una fila Single (su campo de sprite visible) y una fila Layered (miniatura, texto «Layered · N layers» y botón Edit in Composer…). Abre el menú ⋮ de la fila Single para que se vean Switch to Layered, Make default, Move up y Move down. La primera fila lleva la etiqueta default.
+
+#### `vn-expression-composer.png` — P1 · ✅ tomada
+
+- **Sección:** The Expression Composer · El Expression Composer
+- **Vista:** Unity ▸ Tools > Beasty VN > Expression Composer, abierto sobre una expresión por capas de Mia (House Demo)
+- **Qué tiene que verse:** La ventana entera con sus tres paneles: a la izquierda las cajas de conjuntos, categorías del vestuario y árbol de capas (con un grupo desplegado); en el centro Mia en el lienzo con una capa seleccionada y el anillo de giro visible; a la derecha el inspector en la pestaña Expression mostrando los campos de esa capa (Parent, Rotation, Scale, Flip, Tint).
+
+### Stat notifications and walkthrough hints · Avisos de estadísticas y pistas de la guía
+
+`/docs/beasty-visual-novel/world/notifications-and-walkthrough/` — `/es/docs/beasty-visual-novel/world/notifications-and-walkthrough/`
+
+#### `vn-stat-notification.png` — P1 · ✅ tomada
+
+- **Sección:** Stat notifications · Avisos de estadísticas
+- **Vista:** Unity ▸ Game view en Play (House Demo, justo después de responder a Mia)
+- **Qué tiene que verse:** Dos avisos de estadística apilados en su esquina: uno verde «Mia: Friendship+» y otro rojo con una bajada (o el de Trust). Que se vea el resto de la escena detrás para dar contexto de tamaño, y ninguna cantidad numérica en los avisos.
+
+#### `vn-walkthrough-hints.png` — P1 · ✅ tomada
+
+- **Sección:** Walkthrough hints · Pistas de la guía
+- **Vista:** Unity ▸ Game view en Play (House Demo, primeras palabras de Mia) con Pistas de la guía activadas en Preferencias
+- **Qué tiene que verse:** El menú de opciones con las pistas tras el texto de cada opción: una con Friendship+, otra con Friendship- y una con la pista manual de Trust. Que se note que las pistas no llevan color ni nombre de personaje.
+
+#### `vn-walkthrough-choice-section.png` — P1 · ✅ tomada
+
+- **Sección:** Controlling hints on one choice · Controlar las pistas de una opción
+- **Vista:** Unity ▸ Tools > Beasty VN > Editor ▸ pestaña Story ▸ inspector de una opción de un Choice Node
+- **Qué tiene que verse:** La sección Walkthrough de una opción desplegada: una pista automática con su interruptor de ojo (una visible y, si se puede, otra oculta) y la lista de pistas manuales con una fila seleccionada. Si se puede, abre el menú contextual de esa fila para que se vean los atajos.
+
+### Phone screens · Pantallas de teléfono
+
+`/docs/beasty-visual-novel/world/phone-screens/` — `/es/docs/beasty-visual-novel/world/phone-screens/`
+
+#### `vn-phone-home.png` — P1 · ✅ tomada
+
+- **Sección:** (entradilla) · (entradilla)
+- **Vista:** Unity ▸ Game view en Play (House Demo, tras pulsar el botón Phone del HUD)
+- **Qué tiene que verse:** El teléfono abierto sobre la sala: barra de estado con hora y batería, reloj grande con la fecha, la grilla de apps (People, Hints, Music, Settings, Save y las decorativas) y el dock con la barra de inicio. Si las pistas están apagadas, que se vea el icono de Hints tachado.
 
 ### Quests · Misiones
 
@@ -1021,13 +1122,13 @@ Carpeta destino: `public/docs-images/beasty-visual-novel/` · 25 por hacer de 15
 - **Vista:** Unity ▸ Tools > Beasty VN > Editor ▸ pestaña Characters ▸ Quests
 - **Qué tiene que verse:** La sección «Talk step (character menu)» desplegada con la escena y el nodo elegidos y Complete on talk activado. Es lo que hace que el paso aparezca solo en el menú de conversación.
 
-#### `vn-quest-marker.png` — P3 · ⬜ pendiente
+#### `vn-quest-marker.png` — P3 · ✅ tomada
 
 - **Sección:** The map marker · El marcador de mapa
 - **Vista:** Unity ▸ Tools > Beasty VN > Editor ▸ pestaña Characters ▸ Quests
 - **Qué tiene que verse:** La sección del marcador con un sprite asignado y al menos un caso condicional debajo, para que se vea que puede cambiar según el estado del mundo.
 
-#### `vn-quest-routine-override.png` — P2 · ⬜ pendiente
+#### `vn-quest-routine-override.png` — P2 · ✅ tomada
 
 - **Sección:** The routine override · La anulación de rutina
 - **Vista:** Unity ▸ Tools > Beasty VN > Editor ▸ pestaña Characters ▸ Quests
@@ -1037,35 +1138,40 @@ Carpeta destino: `public/docs-images/beasty-visual-novel/` · 25 por hacer de 15
 
 `/docs/beasty-visual-novel/world/screens-and-hud/` — `/es/docs/beasty-visual-novel/world/screens-and-hud/`
 
-#### `vn-tab-screens.png` — P2 · ✅ tomada
+#### `vn-tab-screens.png` — P2 · 🔁 rehacer
 
 - **Sección:** Two kinds of screen · Dos tipos de pantalla
 - **Vista:** Unity ▸ Tools > Beasty VN > Editor ▸ pestaña Screens
 - **Qué tiene que verse:** Reutiliza la captura de la pestaña Screens del recorrido por el editor.
+- **Por qué rehacerla:** La pestaña Screens cambió: menú + New screen en vez de la fila de botones, campo Kind en vez de Is Main, elementos en filas agrupadas con icono y resumen. Rehacer con el menú + New screen abierto en Menu o Inventory.
 
-#### `vn-hud-ingame.png` — P1 · ✅ tomada
+#### `vn-hud-ingame.png` — P1 · 🔁 rehacer
 
 - **Sección:** Where a screen shows up · Dónde aparece una pantalla
 - **Vista:** Unity ▸ Game view en Play, en mundo libre
 - **Qué tiene que verse:** El HUD primario en marcha sobre una sala: un contador ligado a una variable (`Money: 120`), una etiqueta de tiempo y un par de botones (inventario, personajes). Es la foto de «pantalla primaria».
+- **Por qué rehacerla:** El HUD de la House Demo cambió: tarjeta de papel con día y momento traducidos, insignia redonda y botón Phone.
 
-#### `vn-screen-item.png` — P1 · ✅ tomada
+#### `vn-screen-item.png` — P1 · 🔁 rehacer
 
 - **Sección:** Items · Elementos
 - **Vista:** Unity ▸ Tools > Beasty VN > Editor ▸ pestaña Screens
 - **Qué tiene que verse:** El elemento del contador de dinero desplegado: Text = `Money: `, Variable = `gold`, su condición de visibilidad y al menos un caso de variante condicional con icono distinto. Es el ejemplo que la página cuenta con palabras.
+- **Por qué rehacerla:** El editor del elemento se abre ahora bajo su fila de la lista e incluye el campo Icon. Rehacer con una fila seleccionada y su editor desplegado.
 
-#### `vn-screen-button-action.png` — P2 · ✅ tomada
+#### `vn-screen-button-action.png` — P2 · 🔁 rehacer
 
 - **Sección:** Actions · Acciones
 - **Vista:** Unity ▸ Tools > Beasty VN > Editor ▸ pestaña Screens
 - **Qué tiene que verse:** Un elemento Button con el desplegable de acción ABIERTO mostrando las seis acciones (OpenScreen, Close, Back, Custom, EnterVN, AdvanceTime), y sus efectos de clic debajo si los tiene.
+- **Por qué rehacerla:** La acción se elige ahora en el desplegable Does (Nothing, Open screen, Back, Close all screens, Open game menu, Change values only, Enter VN scene, Advance time, Custom event). Rehacer con ese desplegable abierto.
 
-#### `vn-screen-preview.png` — P2 · ✅ tomada
+#### `vn-screen-preview.png` — P2 · 🔁 rehacer
 
 - **Sección:** Preview · Vista previa
 - **Vista:** Unity ▸ Tools > Beasty VN > Editor ▸ pestaña Screens
 - **Qué tiene que verse:** La vista previa del prefab de una pantalla renderizada junto a sus ajustes, con el desplegable «Hierarchy (who opens what)» ABIERTO mostrando qué botón abre qué pantalla.
+- **Por qué rehacerla:** La vista previa de Screens ahora dibuja el contenido del prefab (antes salía solo el fondo oscuro). Rehacer con un elemento seleccionado marcado en azul en la vista previa.
 
 ### The talk menu · El menú de conversación
 
@@ -1083,7 +1189,13 @@ Carpeta destino: `public/docs-images/beasty-visual-novel/` · 25 por hacer de 15
 - **Vista:** Unity ▸ Tools > Beasty VN > Editor ▸ pestaña Characters ▸ Talk Menu
 - **Qué tiene que verse:** Una entrada desplegada con todos sus campos: etiqueta, condición, escena y nodo de destino, y la opción de qué pasa cuando la rama termina.
 
-#### `vn-talk-menu-ingame.png` — P1 · ⬜ pendiente
+#### `vn-talk-menu-leave.png` — P2 · ✅ tomada
+
+- **Sección:** The Leave option · La opción Irse
+- **Vista:** Unity ▸ Tools > Beasty VN > Editor ▸ pestaña Characters ▸ Talk Menu, con Mia seleccionada
+- **Qué tiene que verse:** Los ajustes del menú de conversación de Mia con el interruptor Add a Leave option activado y el campo Leave label visible (vacío, para que se vea que usa el texto de serie). Si se puede, que se vea también la lista de entradas encima.
+
+#### `vn-talk-menu-ingame.png` — P1 · ✅ tomada
 
 - **Sección:** How the player reaches the menu · Cómo llega el jugador al menú
 - **Vista:** Unity ▸ Game view en Play, en mundo libre
@@ -1123,21 +1235,37 @@ Carpeta destino: `public/docs-images/beasty-visual-novel/` · 25 por hacer de 15
 - **Vista:** Unity ▸ Tools > Beasty VN > Editor, en una opción de Choice o en una recompensa de misión
 - **Qué tiene que verse:** Una lista de dos o tres efectos (`gold` Subtract 10, `maya.affection` Add 1, un Toggle) colgando de una opción de elección, para que se vea que es la misma operación que un bloque Set variable pero sin bloque.
 
+### Wardrobe and outfits · Vestuario y conjuntos
+
+`/docs/beasty-visual-novel/world/wardrobe/` — `/es/docs/beasty-visual-novel/world/wardrobe/`
+
+#### `vn-wardrobe-tab.png` — P1 · ✅ tomada
+
+- **Sección:** (entradilla) · (entradilla)
+- **Vista:** Unity ▸ Expression Composer ▸ pestaña Wardrobe del inspector, personaje Mia (House Demo)
+- **Qué tiene que verse:** Las categorías top, bottom y shoes desplegadas en el panel izquierdo con sus prendas; una prenda seleccionada y Mia vestida en el lienzo. En el inspector, el aviso «Changes apply to every expression that wears this piece (N)» y los ajustes de la categoría (modo One at a time, Can be empty, Default piece).
+
+#### `vn-wardrobe-outfit-edit.png` — P2 · ✅ tomada
+
+- **Sección:** Outfits · Conjuntos
+- **Vista:** Unity ▸ Expression Composer ▸ caja de conjuntos, tras pulsar el lápiz de un conjunto
+- **Qué tiene que verse:** Un conjunto en edición: el cartel «Editing outfit '<nombre>'» con el botón Done sobre el lienzo, Mia vestida con ese conjunto, y en la lista el conjunto desplegado con sus categorías y prendas. Que se vean también los botones ojo y lápiz de las demás filas de conjuntos.
+
 ## Beasty Save System
 
-Carpeta destino: `public/docs-images/beasty-save-system/` · 29 por hacer de 29.
+Carpeta destino: `public/docs-images/beasty-save-system/` · 1 por hacer de 29.
 
 ### Installation · Instalación
 
 `/docs/beasty-save-system/getting-started/installation/` — `/es/docs/beasty-save-system/getting-started/installation/`
 
-#### `save-package-folder.png` — P2 · ⬜ pendiente
+#### `save-package-folder.png` — P2 · ✅ tomada
 
 - **Sección:** What is in the folder · Qué hay en la carpeta
 - **Vista:** Unity ▸ ventana Project
 - **Qué tiene que verse:** La carpeta del paquete desplegada un nivel, para que se vean las subcarpetas de las que habla la página. Recorta solo el panel Project.
 
-#### `save-converter-modules.png` — P3 · ⬜ pendiente
+#### `save-converter-modules.png` — P3 · ✅ tomada
 
 - **Sección:** The converter modules · Los módulos convertidores
 - **Vista:** Unity ▸ ventana Project
@@ -1147,43 +1275,43 @@ Carpeta destino: `public/docs-images/beasty-save-system/` · 29 por hacer de 29.
 
 `/docs/beasty-save-system/getting-started/save-without-code/` — `/es/docs/beasty-save-system/getting-started/save-without-code/`
 
-#### `save-cube-scene.png` — P3 · ⬜ pendiente
+#### `save-cube-scene.png` — P3 · ✅ tomada
 
 - **Sección:** 1. Make a scene with something in it · 1. Crea una escena con algo dentro
 - **Vista:** Unity ▸ vista de escena + Hierarchy
 - **Qué tiene que verse:** La escena mínima del tutorial recién montada: el cubo sobre un plano en la vista de Scene, con la Hierarchy al lado para que se vea lo poco que hay. Sin el manager todavía.
 
-#### `save-manager-window-empty.png` — P1 · ⬜ pendiente
+#### `save-manager-window-empty.png` — P1 · ✅ tomada
 
 - **Sección:** 2. Add the Save Manager · 2. Añade el Save Manager
 - **Vista:** Unity ▸ Tools > Beasty Save System > Save Manager, en una escena sin manager
 - **Qué tiene que verse:** La ventana en una escena que NO tiene BeastySaveManager: se debe leer el mensaje «No BeastySaveManager in the open scene.» y verse el botón Create Beasty Save Manager. Es el punto de partida del camino sin código.
 
-#### `save-saveable-inspector.png` — P1 · ⬜ pendiente
+#### `save-saveable-inspector.png` — P1 · ✅ tomada
 
 - **Sección:** 3. Make the cube saveable · 3. Haz que el cubo sea guardable
 - **Vista:** Unity ▸ Inspector del cubo del tutorial
 - **Qué tiene que verse:** El inspector del componente Beasty Saveable con el Save Id relleno y, en Saved Components, Transform marcado. Que se vea la etiqueta de capa del conversor junto al componente (core).
 
-#### `save-button-onclick.png` — P1 · ⬜ pendiente
+#### `save-button-onclick.png` — P1 · ✅ tomada
 
 - **Sección:** 5. Wire the Save button · 5. Conecta el botón Save
 - **Vista:** Unity ▸ Inspector del botón Save (uGUI)
 - **Qué tiene que verse:** La lista OnClick del botón con: el objeto del Save Manager en el campo de objeto, la función BeastySaveManager > SaveAll (string) elegida, y `slot1` escrito en el campo de texto de debajo.
 
-#### `save-load-button-onclick.png` — P2 · ⬜ pendiente
+#### `save-load-button-onclick.png` — P2 · ✅ tomada
 
 - **Sección:** 6. Add a Load button · 6. Añade un botón Load
 - **Vista:** Unity ▸ Inspector del botón Load (uGUI)
 - **Qué tiene que verse:** Igual que la captura del botón Save, pero con la función LoadAll (string) y el mismo `slot1` escrito. Se toman de la misma forma a propósito: la pareja se compara de un vistazo.
 
-#### `save-playmode-test.png` — P3 · ⬜ pendiente
+#### `save-playmode-test.png` — P3 · ✅ tomada
 
 - **Sección:** 7. Try it · 7. Pruébalo
 - **Vista:** Unity ▸ Game view en Play
 - **Qué tiene que verse:** La Game view en Play con el cubo desplazado de su sitio y los dos botones (Save y Load) visibles en pantalla. Si te animas, dos capturas en una: antes y después de pulsar Load.
 
-#### `save-folder-explorer.png` — P2 · ⬜ pendiente
+#### `save-folder-explorer.png` — P2 · ✅ tomada
 
 - **Sección:** 8. Where the file actually is · 8. Dónde está realmente el archivo
 - **Vista:** Windows ▸ explorador de archivos, abierto con el botón Open Folder de la ventana Save Manager
@@ -1193,13 +1321,13 @@ Carpeta destino: `public/docs-images/beasty-save-system/` · 29 por hacer de 29.
 
 `/docs/beasty-save-system/guides/backups-and-corruption/` — `/es/docs/beasty-save-system/guides/backups-and-corruption/`
 
-#### `save-backup-files.png` — P2 · ⬜ pendiente
+#### `save-backup-files.png` — P2 · ✅ tomada
 
 - **Sección:** Backups: the previous version, kept · Backups: la versión anterior, conservada
 - **Vista:** Windows ▸ explorador de archivos, en la carpeta de guardado
 - **Qué tiene que verse:** La carpeta con `slot1.json` y `slot1.json.bak` visibles, con la columna de fecha de modificación a la vista: se debe notar que el .bak es la versión anterior.
 
-#### `save-restore-backup.png` — P1 · ⬜ pendiente
+#### `save-restore-backup.png` — P1 · ✅ tomada
 
 - **Sección:** Doing it from the editor · Cómo hacerlo desde el editor
 - **Vista:** Unity ▸ Tools > Beasty Save System > Save Manager, sección Slots on Disk
@@ -1209,7 +1337,7 @@ Carpeta destino: `public/docs-images/beasty-save-system/` · 29 por hacer de 29.
 
 `/docs/beasty-save-system/guides/encryption/` — `/es/docs/beasty-save-system/guides/encryption/`
 
-#### `save-encrypted-file.png` — P2 · ⬜ pendiente
+#### `save-encrypted-file.png` — P2 · ✅ tomada
 
 - **Sección:** What it does · Qué hace
 - **Vista:** Cualquier editor de texto, con un archivo de guardado cifrado
@@ -1229,13 +1357,13 @@ Carpeta destino: `public/docs-images/beasty-save-system/` · 29 por hacer de 29.
 
 `/docs/beasty-save-system/guides/logging/` — `/es/docs/beasty-save-system/guides/logging/`
 
-#### `save-manager-logging.png` — P2 · ⬜ pendiente
+#### `save-manager-logging.png` — P2 · ✅ tomada
 
 - **Sección:** The toggle · El interruptor
 - **Vista:** Unity ▸ Inspector del BeastySaveManager
 - **Qué tiene que verse:** El inspector del manager con el desplegable Logging ABIERTO, mostrando las cuatro opciones: Auto, On, Verbose y Off.
 
-#### `save-logging-output.png` — P2 · ⬜ pendiente
+#### `save-logging-output.png` — P2 · ✅ tomada
 
 - **Sección:** What it looks like · Qué pinta tiene
 - **Vista:** Unity ▸ Tools > Beasty Console > Console (o la consola de Unity), tras guardar y cargar en Play
@@ -1245,31 +1373,31 @@ Carpeta destino: `public/docs-images/beasty-save-system/` · 29 por hacer de 29.
 
 `/docs/beasty-save-system/guides/save-manager-window/` — `/es/docs/beasty-save-system/guides/save-manager-window/`
 
-#### `save-manager-window.png` — P1 · ⬜ pendiente
+#### `save-manager-window.png` — P1 · ✅ tomada
 
 - **Sección:** (entradilla) · (entradilla)
 - **Vista:** Unity ▸ Tools > Beasty Save System > Save Manager
 - **Qué tiene que verse:** La ventana entera con las tres secciones llenas: Manager (con la tarjeta de estado y los grupos de ajustes visibles), Saveables in Scene (al menos tres objetos, uno de ellos con «0 comp.» para que se vea el caso de auditoría) y Slots on Disk con dos slots o más, con su resumen de metadata.
 
-#### `save-manager-inspector.png` — P1 · ⬜ pendiente
+#### `save-manager-inspector.png` — P1 · ✅ tomada
 
 - **Sección:** Manager · Manager
 - **Vista:** Unity ▸ Tools > Beasty Save System > Save Manager, sección Manager
 - **Qué tiene que verse:** Recorte de la sección Manager con un manager ya creado: el campo de objeto arriba, la tarjeta de estado (fila «Active storage» con su insignia Local o Cloud) y debajo los ajustes agrupados por función — Backend (Storage y Save Mode), Location, Security, Reliability, Versioning, Logging. Es la foto de «aquí se edita todo sin cambiar de selección».
 
-#### `save-manager-dropzone.png` — P2 · ⬜ pendiente
+#### `save-manager-dropzone.png` — P2 · ✅ tomada
 
 - **Sección:** The drop zone · La zona de arrastre
 - **Vista:** Unity ▸ Tools > Beasty Save System > Save Manager, sección Saveables in Scene
 - **Qué tiene que verse:** Recorte de la caja «Drag GameObjects here to make them saveable», a poder ser mientras arrastras dos o tres objetos de la Hierarchy encima, para que se vea el estado resaltado de la zona.
 
-#### `save-manager-saveables-list.png` — P1 · ⬜ pendiente
+#### `save-manager-saveables-list.png` — P1 · ✅ tomada
 
 - **Sección:** The list · La lista
 - **Vista:** Unity ▸ Tools > Beasty Save System > Save Manager, sección Saveables in Scene
 - **Qué tiene que verse:** La lista con cuatro o cinco filas. Que se vean los dos casos que la página enseña a detectar: una fila con «0 comp.» y dos filas con el MISMO save id. Es la captura de auditoría de escena.
 
-#### `save-manager-slots.png` — P1 · ⬜ pendiente
+#### `save-manager-slots.png` — P1 · ✅ tomada
 
 - **Sección:** Slots on Disk · Slots on Disk
 - **Vista:** Unity ▸ Tools > Beasty Save System > Save Manager, sección Slots on Disk
@@ -1279,13 +1407,13 @@ Carpeta destino: `public/docs-images/beasty-save-system/` · 29 por hacer de 29.
 
 `/docs/beasty-save-system/guides/scene-state/` — `/es/docs/beasty-save-system/guides/scene-state/`
 
-#### `save-saveable-id.png` — P2 · ⬜ pendiente
+#### `save-saveable-id.png` — P2 · ✅ tomada
 
 - **Sección:** Ids · Ids
 - **Vista:** Unity ▸ Inspector de un Beasty Saveable
 - **Qué tiene que verse:** Recorte del campo Save Id con el id autogenerado a la vista y el botón New al lado. Suficiente para entender que el id es editable y regenerable.
 
-#### `save-saveable-multiple-components.png` — P3 · ⬜ pendiente
+#### `save-saveable-multiple-components.png` — P3 · ✅ tomada
 
 - **Sección:** Several components of the same type · Varios componentes del mismo tipo
 - **Vista:** Unity ▸ Inspector de un Beasty Saveable
@@ -1295,7 +1423,7 @@ Carpeta destino: `public/docs-images/beasty-save-system/` · 29 por hacer de 29.
 
 `/docs/beasty-save-system/guides/settings/` — `/es/docs/beasty-save-system/guides/settings/`
 
-#### `save-settings-inspector.png` — P1 · ⬜ pendiente
+#### `save-settings-inspector.png` — P1 · ✅ tomada
 
 - **Sección:** The fields · Los campos
 - **Vista:** Unity ▸ Tools > Beasty Save System > Save Manager, grupos de Settings
@@ -1305,7 +1433,7 @@ Carpeta destino: `public/docs-images/beasty-save-system/` · 29 por hacer de 29.
 
 `/docs/beasty-save-system/guides/slots-and-metadata/` — `/es/docs/beasty-save-system/guides/slots-and-metadata/`
 
-#### `save-slot-metadata.png` — P3 · ⬜ pendiente
+#### `save-slot-metadata.png` — P3 · ✅ tomada
 
 - **Sección:** Metadata: what a slot list actually needs · Metadatos: lo que una lista de slots realmente necesita
 - **Vista:** Unity ▸ Tools > Beasty Save System > Save Manager, sección Slots on Disk
@@ -1315,7 +1443,7 @@ Carpeta destino: `public/docs-images/beasty-save-system/` · 29 por hacer de 29.
 
 `/docs/beasty-save-system/guides/storage-backends/` — `/es/docs/beasty-save-system/guides/storage-backends/`
 
-#### `save-storage-dropdown.png` — P1 · ⬜ pendiente
+#### `save-storage-dropdown.png` — P1 · ✅ tomada
 
 - **Sección:** The Storage dropdown · El desplegable Storage
 - **Vista:** Unity ▸ Inspector del BeastySaveManager (o la ventana Save Manager), desplegable Storage
@@ -1325,7 +1453,7 @@ Carpeta destino: `public/docs-images/beasty-save-system/` · 29 por hacer de 29.
 
 `/docs/beasty-save-system/guides/strict-vs-tolerant/` — `/es/docs/beasty-save-system/guides/strict-vs-tolerant/`
 
-#### `save-tolerant-warnings.png` — P2 · ⬜ pendiente
+#### `save-tolerant-warnings.png` — P2 · ✅ tomada
 
 - **Sección:** Reading the warnings · Leer las advertencias
 - **Vista:** Unity ▸ consola, tras una carga en modo tolerante
@@ -1335,13 +1463,13 @@ Carpeta destino: `public/docs-images/beasty-save-system/` · 29 por hacer de 29.
 
 `/docs/beasty-save-system/reference/components/` — `/es/docs/beasty-save-system/reference/components/`
 
-#### `save-saveable-components-checklist.png` — P2 · ⬜ pendiente
+#### `save-saveable-components-checklist.png` — P2 · ✅ tomada
 
 - **Sección:** BeastySaveable · BeastySaveable
 - **Vista:** Unity ▸ Inspector de un Beasty Saveable
 - **Qué tiene que verse:** Un objeto con varios componentes (Transform, SpriteRenderer, Rigidbody2D, un script tuyo) para que se vean las etiquetas de capa: core, el id del módulo (ugui, physics2d…) y dev. Incluye, si puedes, un componente marcado que NADIE puede convertir, para que salga el aviso de TypeUnavailable.
 
-#### `save-manager-inspector.png` — P1 · ⬜ pendiente
+#### `save-manager-inspector.png` — P1 · ✅ tomada
 
 - **Sección:** The inspector · El inspector
 - **Vista:** Unity ▸ Inspector del BeastySaveManager
@@ -1351,7 +1479,7 @@ Carpeta destino: `public/docs-images/beasty-save-system/` · 29 por hacer de 29.
 
 `/docs/beasty-save-system/reference/save-file-format/` — `/es/docs/beasty-save-system/reference/save-file-format/`
 
-#### `save-file-envelope.png` — P2 · ⬜ pendiente
+#### `save-file-envelope.png` — P2 · ✅ tomada
 
 - **Sección:** The envelope · El sobre (envelope)
 - **Vista:** Cualquier editor de texto, con un archivo de guardado SIN cifrar

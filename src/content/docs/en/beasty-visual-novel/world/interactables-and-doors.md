@@ -49,8 +49,10 @@ hook for a minigame, a shop, a puzzle — anything that is not a conversation.
 | **Scale** | Its size. |
 | **Sorting Order** | Draw order inside the room. Higher is in front. |
 
-When the room has a prefab, these fields are mirrored into the prefab's matching child object, so you can also
-drag the object around in the prefab and the room record follows.
+When the room has a prefab, **the prefab owns each object's position, scale, sprite and sorting order**. Drag
+the object around in the prefab and the room record follows: selecting the object in the room's drill-in reads
+those values back from the prefab, so editing any other field never writes an old placement over your hand
+edits.
 
 The click area is built from the sprite. By default that is the sprite's shape — but see
 [Tight click shapes](#tight-click-shapes) if your art is mostly transparent.
@@ -165,6 +167,10 @@ Author them from the room's drill-in with **+ Character** (choose who) and then 
   the character's routine actually puts her in this room. You do not have to write "and Maya is here" by hand.
 - **A visible pose replaces the generic routine marker.** Without a pose, the character is drawn at a character
   spot using her free-roam sprite; with one, your art wins.
+- **A pose with no sprite of its own shows its owner's layered look**: the default expression, with the clothes
+  worn at that moment. It is clickable on any part and tinted on hover. A sprite of its own, a conditional
+  sprite that applies, or an idle animation still wins. The pose's inspector says what it will show, and offers
+  **Edit look in Composer…**. See [Layered expressions](/docs/beasty-visual-novel/world/layered-expressions/#on-stage-and-in-free-roam).
 
 Clicking a character — pose or generic marker — runs her routine's on-interact scene, or her
 [talk menu](/docs/beasty-visual-novel/world/talk-menu/) when she has one. See [Character routines](/docs/beasty-visual-novel/world/character-routines/).

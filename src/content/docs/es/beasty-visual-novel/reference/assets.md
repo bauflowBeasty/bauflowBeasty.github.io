@@ -15,9 +15,10 @@ La mayoría de los assets son por historia o por personaje. Unos pocos son singl
 
 | Asset | Cuántos |
 |---|---|
-| `VNSettings` | Exactamente uno, en una carpeta `Resources`. Creado para ti. |
+| `VNSettings` | Exactamente uno, en una carpeta `Resources`. Se crea solo en `Assets/Resources/` al cargar el editor. |
 | `VNContext` | Exactamente uno para todo el juego. Cada historia lo comparte. |
-| `LocalizationTable` | Uno para la historia (en el contexto) más una tabla global de UI (en VN Settings). |
+| `LocalizationTable` | Cuatro: la tabla de la historia, la de textos del juego y la de ítems (en el contexto), más la tabla global de UI (en VN Settings). |
+| `VNEffectLibrary` | Opcional, asignado en VN Settings. |
 | `CharacterVariableSchema` | Uno, referenciado por el contexto. |
 | `QuestCatalog` | Uno, referenciado por el contexto. |
 | `VNMusicConfig` | Uno, referenciado por el contexto. |
@@ -46,6 +47,7 @@ duplica.
 | `LocalizationTable` | `Create > Beasty VN > Localization > Localization Table` | Una grilla de claves por idioma. |
 | `FreeRoamMapGraph` | `Create > Beasty VN > FreeRoam > FreeRoam Map Graph` | Salas más rutinas de personaje. |
 | `QuestCatalog` | `Create > Beasty VN > Quests > Quest Catalog` | Las misiones del proyecto. |
+| `VNEffectLibrary` | `Create > Beasty VN > Config > Effect Library` | Tus propios presets de transición y de efectos de pantalla. |
 | Los siete tipos de nodo | `Create > Beasty VN > Advanced > Nodes > ...` | Normalmente creados por el grafo, no a mano. |
 
 Casi nunca necesitas este menú. `Tools > Beasty VN > Setup > Blank Canvas` crea el DialogueScene, el
@@ -171,8 +173,16 @@ Una grilla de claves por idioma.
 | `languages` | Códigos de idioma. El índice 0 es el idioma de origen. |
 | `entries` | Una fila por clave, con una celda por idioma y su estado de traducción. |
 
-Hay dos tablas: la tabla de la historia en el VNContext, y la tabla global de UI en VN Settings. Consulta
-[Localización](/es/docs/beasty-visual-novel/production/localization/).
+Hay cuatro tablas: la de la historia, la de textos del juego (`Game Text Localization`) y la de ítems
+(`Item Localization`) en el VNContext, y la tabla global de UI en VN Settings. Las tablas de textos del juego y
+de ítems se crean y se mantienen al día solas. Consulta
+[Localización](/es/docs/beasty-visual-novel/production/localization/#las-tablas-de-traducción).
+
+## VNEffectLibrary
+
+Tus propios presets de transición y de efectos de pantalla, cada uno con su id. Asígnalo en **VN Settings >
+Screen effects > Effect Library**. Un preset con el id de uno de serie lo sustituye; los presets de transición
+y los de efecto son listas separadas. Consulta [Transiciones visuales y efectos de pantalla](/es/docs/beasty-visual-novel/authoring/screen-effects/#tus-propios-presets-la-effect-library).
 
 ## FreeRoamMapGraph
 

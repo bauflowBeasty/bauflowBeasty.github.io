@@ -20,8 +20,8 @@ palette turns on.
 - The panel is **resizable** — drag its edge — and the buttons re-pack into as many rows as the width
   allows. It is also **collapsible**, so you can fold it away when you are only wiring the graph.
 
-Blocks are grouped into ten categories: Dialogue, Scene, Clear, State, Quests, World, Items, Audio, Input and
-Flow. They appear in that order.
+Blocks are grouped into eleven categories: Dialogue, Scene, Clear, Effects, State, Quests, World, Items,
+Audio, Input and Flow. They appear in that order.
 
 ## How blocks run
 
@@ -77,6 +77,20 @@ for the player.
 
 Covered in depth in [Dialogue and the stage](/docs/beasty-visual-novel/authoring/dialogue-and-stage/).
 
+### Say together
+
+One line said by two to five characters at once: "Run!" from the whole party.
+
+| Option | What it does |
+|---|---|
+| Speakers | Two to five characters. |
+| Delivery, Text | As on a Dialogue block. |
+
+The name plate joins their names, each in its own color. The text is split into one run per speaker, in their
+text colors — by words, or by letters for a short line. No portrait is shown. A block whose speakers come down
+to fewer than two real characters plays as a normal line. The validator warns about that, about a speaker
+listed twice, and about more than five.
+
 ---
 
 ## Scene
@@ -100,17 +114,24 @@ Puts a character on stage.
 | Option | What it does |
 |---|---|
 | Character | Who. |
-| Expression | Which stage sprite. Defaults to `base`. |
+| Expression | Which stage sprite. Empty = the character's [default expression](/docs/beasty-visual-novel/world/characters/#the-default-expression). |
 | Portrait | Optional: a different UI portrait from the on-stage expression. Empty = use the expression. |
 | Position | `Left`, `CenterLeft`, `Center`, `CenterRight`, `Right`, or `Custom` with a normalized X. |
 | Scale | Size multiplier. |
 | Flip | Mirrors the sprite horizontally. |
 | Layer | Slot 0 to 4. Decides who is drawn in front of whom. |
+| Outfit | Optional: puts this [outfit](/docs/beasty-visual-novel/world/wardrobe/) on in the same line. The same as a Change outfit block. |
+
+Choosing a character gives the block that character's first expression. A Show character block with nothing to
+offer — no character, an unknown one, or one without expressions — is ignored: the scene stays as if it were not
+there, and the block's card says so. One that names a missing expression shows the default one and warns once.
+The expression drop-down shows a missing key as *(missing)*.
 
 ### Expression
 
 Changes the expression of a character already on stage. It can **also** set the dialogue-box portrait at the
-same time, so a character can look sad on stage while the portrait shows something else.
+same time, so a character can look sad on stage while the portrait shows something else. An Expression block
+that names a missing expression, or a character with no expressions, is ignored, and its card says so.
 
 ### Hide character
 
@@ -119,6 +140,20 @@ Removes one character from the stage.
 ### Props
 
 Sets the loose foreground props. Same shape as backdrop layers, including conditional sprites.
+
+### Wear piece
+
+Puts a piece of clothing on a character, or takes one off. Pick the **Category** first; the block then offers
+**Put on** or **Take off** and the piece. In a *Several at once* category the piece is required. See
+[Wardrobe and outfits](/docs/beasty-visual-novel/world/wardrobe/#changing-clothes-from-the-story).
+
+### Change outfit
+
+Puts a whole outfit on a character. The editor shows a thumbnail of the character in that outfit and a summary
+of what it changes. An outfit only changes the categories it names.
+
+When the character has no wardrobe categories (Wear piece) or no outfits (Change outfit) yet, the block shows an
+**Open wardrobe…** button.
 
 ---
 
@@ -136,6 +171,33 @@ Backdrop block will not do it.
 ### Props
 
 Removes every prop.
+
+---
+
+## Effects
+
+How the scene changes from line to line, and what colors or moves the whole stage. Covered in depth in
+[Visual transitions and screen effects](/docs/beasty-visual-novel/authoring/screen-effects/).
+
+### Transition (with)
+
+Decides how the next line's scene changes are presented: `cut`, `dissolve`, `fade`, `wipe`, `slide`, `push`,
+`iris`, `pixellate`, `zoom` or `mask`. Every mode takes a duration, an easing and whether the line waits for the
+transition to finish. With no Transition block a line cuts instantly. If a line has several, the last one wins.
+
+### Screen effect
+
+Adds a `flash`, `shake`, `tint`, `color screen`, `color filter`, `vignette`, `blur` or `camera` effect. A new
+effect replaces an active one of the same kind; different kinds stack. Each block chooses how long it lasts:
+until the stage changes (default), until the next line, until cleared, or a number of seconds.
+
+### Clear effects
+
+Removes every screen effect, or only one kind.
+
+### Fade, Dissolve, Flash, Punch (vpunch)
+
+Shortcuts: a Transition or Screen effect block already set to that preset.
 
 ---
 

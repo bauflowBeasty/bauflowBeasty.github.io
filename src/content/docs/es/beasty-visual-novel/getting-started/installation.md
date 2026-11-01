@@ -120,7 +120,7 @@ El paquete se instala bajo `Assets/BeastyComponents/BeastyVN/`.
 | `Runtime/` | Todo lo que se ejecuta en un build: los controladores, las vistas, la capa de entrada, la integración de guardado, el módulo de streaming. |
 | `Editor/` | Todas las herramientas de creación — la ventana Beasty VN, el grafo, el editor de mundo libre, el validador, los generadores de código. Nada de esto termina en tu build. |
 | `Prefabs/` | Los prefabs de UI y de escena ya listos: el canvas con cada pantalla dentro, el stage, el panel de diálogo, los menús, las pantallas de personaje. Restilízalos. Consulta [Prefabs de UI](/es/docs/beasty-visual-novel/production/ui-prefabs/). |
-| `Resources/` | `VNSettings.asset` y `UILocalization.asset`. Estos dos se leen en tiempo de ejecución, por eso viven aquí. Consulta [VN Settings](/es/docs/beasty-visual-novel/production/vn-settings/). |
+| `Resources/` | El shader que usan los efectos de pantalla, que se lee en tiempo de ejecución. Tus ajustes y tus traducciones de UI no están aquí: viven en tu proyecto (consulta más abajo). |
 | `Sprites/` | Arte de relleno, para que una escena nueva muestre algo en lugar de nada — los sprites de la UI y los PNG de relleno etiquetados del House Demo. Reemplaza cualquier archivo con arte propio del mismo nombre. |
 | `Demos/` | El **House Demo**: un mini-juego completo y jugable construido con el asset — abre `HouseDemo/HouseDemo.unity` y dale a Play. Consulta [El House Demo](/es/docs/beasty-visual-novel/getting-started/house-demo/). |
 
@@ -128,9 +128,34 @@ Junto a esas carpetas viajan los archivos del paquete: `README.md`, `BeastyVN_CH
 `Third-Party Notices.txt` y `BeastyVN_Documentation.pdf` — una copia sin conexión de la documentación;
 este sitio es la versión viva.
 
-Deja el paquete en la carpeta donde se importó. Dos cosas dependen de eso: `VNSettings.asset` y `UILocalization.asset`
-deben quedarse dentro de una carpeta `Resources` para poder leerse en tiempo de ejecución, y el asistente de
-escena busca el prefab `Stage` en su ruta predeterminada. Tu propio contenido — escenas, personajes, arte,
+### Tus ajustes y tu tabla de UI se crean solos
+
+El paquete no trae ni los ajustes ni la tabla de traducción de la UI, así que actualizarlo o reimportarlo nunca
+los sobrescribe. Cuando el editor carga y el proyecto no tiene ninguno, Beasty crea los dos en
+`Assets/Resources/`:
+
+- `VNSettings.asset` — la [configuración de VN](/es/docs/beasty-visual-novel/production/vn-settings/) de todo el proyecto;
+- `UILocalization.asset` — la tabla global de UI, ya rellena con todos los textos de interfaz de serie en
+  inglés y español.
+
+El único contexto de VN del proyecto —en un proyecto nuevo, el de la House Demo— pasa a ser el **Game
+Context**; un Game Context que ya hayas elegido nunca se cambia. Así que importar el paquete en un proyecto nuevo y abrir la House Demo es todo lo que hace falta: se
+juega con la interfaz traducida y el cambio de idioma en Preferencias, sin preparar nada. La consola lo dice:
+
+```text
+Created 'Assets/Resources/VNSettings.asset' (global settings).
+[UiTableAutoWire] Created 'Assets/Resources/UILocalization.asset' (global UI localization).
+```
+
+Tras actualizar el paquete, los textos de UI de serie que añade se mezclan en tu tabla la próxima vez que carga
+el editor. Un texto que editaste nunca se sobrescribe, y una tabla que ya tengas sigue funcionando esté donde
+esté. Los botones **Create VNSettings asset**, en Global Settings y en el BeastyManager, y
+`Tools > Beasty VN > Setup > Blank Canvas` pasan por el mismo paso: crean los dos assets en
+`Assets/Resources/` solo si el proyecto no tiene ninguno, y nunca un segundo `VNSettings`.
+
+Deja el paquete en la carpeta donde se importó. Dos cosas dependen de eso: tus `VNSettings.asset` y
+`UILocalization.asset` deben quedarse dentro de una carpeta `Resources` para poder leerse en tiempo de
+ejecución, y el asistente de escena busca el prefab `Stage` en su ruta predeterminada. Tu propio contenido — escenas, personajes, arte,
 scripts — va donde quieras; el editor te pide una carpeta cuando crea assets.
 
 ## Ver también

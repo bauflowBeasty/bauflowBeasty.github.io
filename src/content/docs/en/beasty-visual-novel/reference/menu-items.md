@@ -15,7 +15,8 @@ components (under `Add Component > Beasty`).
 | Menu item | What it does | More |
 |---|---|---|
 | `Tools > Beasty VN > Editor` | Opens the main Beasty VN window: the nine authoring tabs. | [Editor tour](/docs/beasty-visual-novel/getting-started/editor-tour/) |
-| `Tools > Beasty VN > Dialogue Preview` | Plays a node - backdrop, characters, props, dialogue box - without entering Play Mode. Can fast-forward to a given block. | [Dialogue preview](/docs/beasty-visual-novel/authoring/dialogue-preview/) |
+| `Tools > Beasty VN > Dialogue Preview` | Plays a node - backdrop, characters, props, dialogue box - without entering Play Mode. Can fast-forward to a given block, and play its effects. | [Dialogue preview](/docs/beasty-visual-novel/authoring/dialogue-preview/) |
+| `Tools > Beasty VN > Expression Composer` | Edits layered expressions and a character's wardrobe, drawn as the game draws them. Normally opened from Characters › Cast. | [Layered expressions](/docs/beasty-visual-novel/world/layered-expressions/) |
 
 ## Setup
 

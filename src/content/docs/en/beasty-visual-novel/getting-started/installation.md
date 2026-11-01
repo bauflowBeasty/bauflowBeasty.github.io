@@ -120,7 +120,7 @@ The package installs under `Assets/BeastyComponents/BeastyVN/`.
 | `Runtime/` | Everything that runs in a build: the controllers, the views, the input layer, the save integration, the streaming module. |
 | `Editor/` | All the authoring tools — the Beasty VN window, the graph, the free-roam editor, the validator, the code generators. None of this ends up in your build. |
 | `Prefabs/` | The ready-made UI and scene prefabs: the canvas with every screen inside it, the stage, the dialogue panel, the menus, the character screens. Restyle them. See [UI prefabs](/docs/beasty-visual-novel/production/ui-prefabs/). |
-| `Resources/` | `VNSettings.asset` and `UILocalization.asset`. These two are read at runtime, which is why they live here. See [VN settings](/docs/beasty-visual-novel/production/vn-settings/). |
+| `Resources/` | The shader the screen effects use, read at runtime. Your settings and UI translations are not here: they live in your project (see below). |
 | `Sprites/` | Placeholder art, so a fresh scene shows something instead of nothing — the UI's sprites and the House Demo's labeled placeholder PNGs. Replace any file with your own art of the same name. |
 | `Demos/` | The **House Demo**: a complete, playable mini-game built with the asset — open `HouseDemo/HouseDemo.unity` and press Play. See [The House Demo](/docs/beasty-visual-novel/getting-started/house-demo/). |
 
@@ -128,7 +128,31 @@ Beside those folders sit the files that travel with the package: `README.md`, `B
 `Third-Party Notices.txt`, and `BeastyVN_Documentation.pdf` — an offline copy of the documentation;
 this site is the living version.
 
-Leave the package where it imports. Two things depend on it: `VNSettings.asset` and `UILocalization.asset`
+### Your settings and UI table are created for you
+
+The package ships neither the settings nor the UI translation table, so updating or reimporting it never
+overwrites them. When the editor loads and the project has none, Beasty creates both in `Assets/Resources/`:
+
+- `VNSettings.asset` — the project-wide [VN settings](/docs/beasty-visual-novel/production/vn-settings/);
+- `UILocalization.asset` — the global UI table, already filled with every built-in UI text in English and
+  Spanish.
+
+The project's only VN context — in a new project, the House Demo's — becomes the **Game Context**; a Game Context you already chose is never changed. So importing
+the package into a new project and opening the House Demo is all it takes: it plays with a translated
+interface and the language switch in Preferences, with no setup. The console says so:
+
+```text
+Created 'Assets/Resources/VNSettings.asset' (global settings).
+[UiTableAutoWire] Created 'Assets/Resources/UILocalization.asset' (global UI localization).
+```
+
+After a package update, the built-in UI texts it adds are merged into your table the next time the editor
+loads. A text you edited is never overwritten, and a table you already have keeps working wherever it is. The
+**Create VNSettings asset** buttons, in Global Settings and on the BeastyManager, and
+`Tools > Beasty VN > Setup > Blank Canvas` go through the same step: they create both assets in
+`Assets/Resources/` only when the project has none, and never a second `VNSettings`.
+
+Leave the package where it imports. Two things depend on it: your `VNSettings.asset` and `UILocalization.asset`
 must stay inside a `Resources` folder to be readable at runtime, and the scene wizard looks for the `Stage`
 prefab at its default path. Your own content — scenes, characters, art, scripts — goes wherever you like;
 the editor asks you for a folder when it creates assets.

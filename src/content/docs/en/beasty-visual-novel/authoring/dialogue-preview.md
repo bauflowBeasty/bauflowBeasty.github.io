@@ -24,8 +24,23 @@ The preview renders in the middle. **Click anywhere on the image to advance**, e
 advances the real game. At the bottom, `Back` and `Forward` step through the node, and a status label tells
 you where you are: the line number, `Awaiting choice`, or `End of story`.
 
-When the preview reaches a choice node, the options appear as buttons under the image. Click one and the
-preview follows it.
+When the preview reaches a choice node, the options appear as buttons under the image, with their
+[walkthrough hints](/docs/beasty-visual-novel/world/notifications-and-walkthrough/) when the project has them
+on. Click one and the preview follows it.
+
+The dialogue box and its text are drawn as in the game: the same ink box, the same font. Edit the node — or
+press Ctrl+Z / Ctrl+Y — and the preview rebuilds itself on the same line.
+
+## Playing effects
+
+Stepping with **Back** and **Forward** cuts straight to each line, like a rewind in the game. Lasting
+[screen effects](/docs/beasty-visual-novel/authoring/screen-effects/) — sepia, tint, vignette, blur, camera zoom
+— are visible while you step. A continuous shake plays for 2 seconds.
+
+**▶ Play effects** plays the current line as the game would: its transition, its one-shot effects, the fade-in
+of its lasting effects and its [stat notifications](/docs/beasty-visual-novel/world/notifications-and-walkthrough/),
+starting from the previous line's scene. A clothing change plays too: the preview starts from the clothes worn
+before it. Effects cover the stage only; the dialogue box stays on top and readable, as in the game.
 
 ## The per-block preview button
 
@@ -46,10 +61,13 @@ subgraphs too.
 
 A node usually does not set every channel itself: it inherits the backdrop from whatever node came before it.
 The preview reconstructs that. It walks backwards along the chain of nodes leading to yours and fills each
-channel — backdrop, characters, props — from the nearest ancestor that sets it.
+channel — backdrop, characters, props, and the clothes each character wears — from the nearest ancestor that
+sets it.
 
 It does this on a best-effort basis: it follows a chain of single, unambiguous predecessors, and it stops when
-it reaches a branch or a merge, because at that point there is more than one answer and it will not guess. If a
+it reaches a branch or a merge, because at that point there is more than one answer and it will not guess. Two
+options of the same choice node that both lead to your node count as one way in — both answers of a question,
+say — so the node still inherits the scene before the question. If a
 node you are previewing is reached from three different places, and it inherits its backdrop, the preview may
 show it with no backdrop. That is not a bug in your scene. Set the channel explicitly, or preview from a node
 further up the chain.

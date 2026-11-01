@@ -36,6 +36,19 @@ What it checks:
 - **Token collisions.** A `[token]` name defined in more than one source (a variable, the dictionary, the
   localization table, a character id), which tells you which one wins before it surprises you.
 
+- **Effects.** A preset that does not exist, or a `mask` transition without a texture, is an error. It warns
+  about two transitions before the same line, *until the next line* in a node with no line, a shake amplitude
+  above 2, and an effect or fade that covers the dialogue box for more than 3 seconds. See
+  [Visual transitions and screen effects](/docs/beasty-visual-novel/authoring/screen-effects/#what-the-validator-checks).
+- **Layered expressions and wardrobe.** Missing bases, broken parents and anchors, bad ids, and wardrobe
+  entries or blocks that name something that does not exist. The full lists are in
+  [Layered expressions](/docs/beasty-visual-novel/world/layered-expressions/#what-the-validator-checks) and
+  [Wardrobe and outfits](/docs/beasty-visual-novel/world/wardrobe/#what-the-validator-checks).
+- **Say together.** A block whose speakers come down to fewer than two real characters, a speaker listed twice,
+  or more than five.
+- **Memory.** A character that references more than 64 different sprites directly across its layered
+  expressions and wardrobe gets a warning suggesting [streamed content](/docs/beasty-visual-novel/production/streaming/).
+
 Run it before a build, and run it after a big refactor. It is fast and it never changes anything.
 
 ## Ids
@@ -45,6 +58,11 @@ choices, routines and free-roam doors point at.
 
 **They are auto-generated, but they are yours to edit.** Renaming an id cascades: the references that used it
 are rewritten with it. So a machine-generated id can become `chapter1_intro` if that is easier to live with.
+
+The same holds for expressions, the layers and parts of a layered expression, wardrobe categories, pieces and
+outfits, and effect presets: each rename re-points the blocks, conditions and linked `.vnbeasty` scripts that
+name it, in one undo step, after a confirmation that counts them. See
+[Wardrobe and outfits](/docs/beasty-visual-novel/world/wardrobe/#ids-and-renames).
 
 ### Duplicate ids
 

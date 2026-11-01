@@ -91,6 +91,13 @@ de casos, cada uno con una condición, y el primero que se cumpla gana. Si ningu
 sprite por defecto. Así que la cara a la que estás respondiendo puede estar enojada o contenta según lo que
 hiciste antes, sin duplicar el nodo de elección.
 
+### Pistas de la guía
+
+Una opción puede mostrar qué hará con las estadísticas del jugador, con una marca breve tras su texto:
+`Friendship+`. Las pistas se calculan a partir de los efectos de la opción y del nodo al que lleva. En el
+inspector, cada opción tiene una sección **Walkthrough** para ocultar una pista automática o añadir una manual.
+Consulta [Avisos de estadísticas y pistas de la guía](/es/docs/beasty-visual-novel/world/notifications-and-walkthrough/#pistas-de-la-guía).
+
 ## El nodo Decision
 
 Un nodo de decisión no tiene UI en absoluto. **El jugador no lo ve, no hace clic en él, y no puede saber que

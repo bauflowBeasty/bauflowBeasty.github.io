@@ -88,9 +88,10 @@ Más detalle en: [Personajes](/es/docs/beasty-visual-novel/world/characters/), [
 
 ### Variables
 
-Tus variables globales: clave, tipo, valor predeterminado, y cómo se comporta la variable. Es una lista
-con un panel de detalle, y las variables de personaje tienen una lista de personajes a la izquierda para
-que puedas saltar rápido de un personaje a otro.
+Tus variables globales: clave, tipo, valor predeterminado, nombre visible, y cómo se comporta la variable,
+incluido si avisa de sus cambios y si sale en las pistas de la guía. La lista y la variable seleccionada se
+quedan una al lado de la otra a cualquier ancho, con un divisor que arrastras. Las variables de personaje viven
+en **Characters › Variables**, divididas en las pestañas **Global** y **Per character**.
 
 ![La pestaña Variables: la lista maestro-detalle de variables globales](/docs-images/beasty-visual-novel/vn-tab-variables.png)
 
@@ -146,7 +147,7 @@ Más detalle en: [Salas de mundo libre](/es/docs/beasty-visual-novel/world/free-
 
 Pantallas de HUD y superposición: la barra persistente que siempre está en pantalla, y los paneles que se
 abren encima del juego. Cada pantalla es un prefab más una lista de los objetos dentro de ella que hacen
-algo.
+algo. Un solo menú **+ New screen** crea todos los tipos, pantallas de teléfono incluidas.
 
 ![La pestaña Screens: la lista de pantallas, sus ajustes y la vista previa del prefab](/docs-images/beasty-visual-novel/vn-tab-screens.png)
 
@@ -162,6 +163,12 @@ descripción, y qué pasa cuando el jugador usa uno.
 Más detalle en: [Ítems e inventario](/es/docs/beasty-visual-novel/world/items-and-inventory/).
 
 ## Las otras ventanas
+
+### Expression Composer
+
+`Tools > Beasty VN > Expression Composer`, que normalmente se abre desde **Characters › Cast**. Edita las
+expresiones por capas y el vestuario de un personaje sobre un lienzo que lo dibuja exactamente como el juego.
+Consulta [Expresiones por capas](/es/docs/beasty-visual-novel/world/layered-expressions/).
 
 ### Dialogue Preview
 

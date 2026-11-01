@@ -5,7 +5,64 @@ description: "Every screen the player sees is a Unity UI prefab you can open and
 
 Everything the player sees is a uGUI prefab (uGUI is Unity's built-in UI system). There is no custom
 rendering layer, no proprietary UI framework and no hidden canvas: it is Unity UI, in prefabs you can open
-and edit. This page lists them, and shows the two ways to restyle the game.
+and edit. This page describes their default look, lists them, and shows the two ways to restyle the game.
+
+## The default look: ink and paper
+
+The ready-made prefabs share one hand-drawn look: a dark ink dialogue box and name plate with cream text, ink
+pill choices that turn brick red when hovered or selected, menus on a lined paper sheet over a dimmed scene,
+paper card buttons, polaroid save slots, and matching sliders, toggles, dropdowns, scrollbars and input
+fields.
+
+![The ink-and-paper look in game: the dialogue box, the name plate and two choices, one hovered](/docs-images/beasty-visual-novel/vn-ui-ink-paper.png)
+
+- **Sprites.** About twenty small 9-slice sprites in `Sprites/UI` (around 120 KB in total), shared by every
+  prefab. None contains text, so nothing needs translating. The older sprites (`textbox`, `namebox`, `frame`,
+  `nvl`, `notify`, `skip`) kept their file and GUID, so your own prefabs that point at them pick up the new art
+  on their own.
+- **Font.** Nunito, Regular and Bold, with TextMesh Pro font assets that cover Spanish and other western
+  languages without gaps. It is licensed under the SIL Open Font License 1.1, declared in
+  `Third-Party Notices.txt`. Speaker names keep each character's **Name Color**; the name plate is dark, so
+  light colors stay readable.
+- **Buttons** use **Sprite Swap** (`card` / `card_on`, `choice` / `choice_on`) instead of a color tint. If a
+  prefab variant or a scene instance of a package button overrides its **Colors**, those colors no longer do
+  anything: set that button's **Transition** back to **Color Tint** to keep them.
+- **Readable at any resolution.** Every ready-made screen is sized for the 4K `VN_Canvas`: no text is smaller
+  than 28 units (14 px at 1080p), and buttons are large enough to hit comfortably. The Main Menu, Save/Load,
+  Credits, Help and History panels keep their proportions and their share of the screen at any resolution,
+  like the confirm dialog.
+- **The game menu.** Save/Load fills the menu area, with large **Manual / Autosaves** tabs and a footer with the
+  page arrows (`|<`, `<`, `>`, `>|`), the save-name field and **Back**. Credits, Help and History fill it too,
+  and History entries are ink on the paper sheet.
+- **Custom menus** (`GridMenu`, `VerticalMenu`) sit on a paper sheet, so their ink labels read over any scene.
+- **Empty save slots** show a dashed `slot_empty` picture.
+
+`Build Default Menu Prefabs` and the screen builders in the Screens section give the prefabs they **create**
+the same look. They never restyle a prefab that already exists in your project. The
+[Dialogue Preview](/docs/beasty-visual-novel/authoring/dialogue-preview/) uses the same dialogue box, so the
+preview matches Play mode.
+
+## The Preferences screen
+
+![The Preferences screen: Display and Text on the left, Sound and Accessibility on the right](/docs-images/beasty-visual-novel/vn-preferences-screen.png)
+
+Preferences is one paper sheet next to the game menu, in two columns:
+
+| Left | Right |
+|---|---|
+| **Display** — Window, Language | **Sound** — Master volume, Music, Ambient, SFX, Voice |
+| **Text** — Text speed, Auto-forward time, Start with auto-forward on, Skip unread text, Walkthrough hints | **Accessibility** — Reduce flashes and motion |
+
+**Reset to defaults** and **Back** sit at the bottom right. Rows are large — label on the left, control on the
+right — and the layout stretches with the screen.
+
+- **Start with auto-forward on** and **Reduce flashes and motion** both reset with **Reset to defaults**.
+- **Walkthrough hints** appears only when the project has
+  [walkthrough hints](/docs/beasty-visual-novel/world/notifications-and-walkthrough/) on.
+- When the game has a single language, the whole **Language** row is hidden, label included.
+
+Menu prefabs built before these options existed show them after you run **Build Default Menu Prefabs** again.
+Its rebuilt menu root carries the same Preferences screen, with every label and header translated.
 
 ## The prefabs
 
@@ -16,13 +73,14 @@ and edit. This page lists them, and shows the two ways to restyle the game.
 | `VisualNovelScene` | A whole ready-made scene: everything below, already wired. |
 | `VN_Canvas` | The entire interface in one prefab: the dialogue view, the choice view, and the menu manager with the main menu, game menu, save/load, preferences, history, credits and help screens, plus the confirm dialog and the loading screen. |
 | `Stage` | The stage (backdrop, characters, props) and the free-roam scenario. |
-| `DialogPanel` | The dialogue panel: the name plate and the line. |
+| `DialogPanel` | The dialogue panel: the name plate above the box's top-left corner, the line, and the text input prompt with its **Confirm** and **Back** buttons. Narration lines hide the name plate. |
 | `ChoiseRoot`, `ChoiseBtn` | The choice container and the choice button template. |
 | `MainMenuScreen`, `GameMenuScreen`, `VNMenuRoot` | The menus. |
 | `VNSaveSlot` | One save slot cell, instantiated once per slot. |
 | `VNBacklogEntry` | One history line, instantiated once per line. |
 | `Inventory` | The inventory screen, its slots and the item detail popup. |
 | `CharactersMenu`, `CharacterProfile`, `CharacterStats`, `CharacterRoutine` | The character screens: the cast list, the profile with its tab bar, the stats panel and the routine calendar. |
+| `Phone` | The ready-made smartphone overlay. See [Phone screens](/docs/beasty-visual-novel/world/phone-screens/). |
 | `GridMenu`, `VerticalMenu` and the item-element templates | The layouts an overlay screen is built from. |
 | `BeastyVNMixer` | The AudioMixer, with a group per channel (Music, Ambient, Sfx, Voice). |
 

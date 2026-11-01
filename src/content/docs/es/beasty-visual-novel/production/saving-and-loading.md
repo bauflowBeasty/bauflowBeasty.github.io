@@ -65,9 +65,10 @@ Todo. Esta es la parte tranquilizadora; aquí va la lista:
 
 - El id del proyecto, la **ruta del grafo** a través de cualquier subgrafo anidado, el nodo actual y el paso
   dentro de él.
-- El **idioma** activo.
+- El **idioma** en que se hizo la partida. Queda anotado, pero al cargar se mantiene el idioma actual del
+  jugador: el idioma es una preferencia, no estado de la historia.
 - **Todo el almacén de variables** — tus variables, las variables de personaje, el tiempo de juego, el estado
-  de las misiones, el inventario, y el diccionario. Todos viven en un solo almacén, por eso todos se guardan
+  de las misiones, el inventario, el diccionario y la ropa que lleva cada personaje. Todos viven en un solo almacén, por eso todos se guardan
   sin estar registrados en ningún lado. Consulta [Variables y condiciones](/es/docs/beasty-visual-novel/world/variables-and-conditions/).
 - Los **nodos visitados** (así que el "texto visto" y el salto de texto se mantienen correctos).
 - Las **pantallas abiertas** — las superposiciones secundarias que estaban abiertas, la más interna al final,
@@ -75,6 +76,8 @@ Todo. Esta es la parte tranquilizadora; aquí va la lista:
 - El **estado del mundo libre**: el escenario, la sala actual, y las salas que el jugador ha visitado.
 - El **escenario**: el fondo, los personajes en él y los props — restaurados incluso cuando la escena en
   pantalla se heredó de un nodo anterior.
+- Los **efectos de pantalla que duran** —un filtro sepia, un tinte, un zoom de cámara—, reconstruidos a partir
+  de la historia al cargar. Las partidas hechas antes de que existieran los efectos cargan sin ninguno.
 - El **historial de rebobinado** y la cola de retroceso entre modos, así que `Back` sigue cruzando líneas y
   modos después de cargar en lugar de detenerse en la línea restaurada.
 - El resultado pendiente del menú de conversación, así que una partida guardada en medio de una rama de

@@ -15,6 +15,8 @@ seguridad.
 - [Fondos](#fondos)
 - [Atrezo](#atrezo)
 - [Personajes](#personajes)
+- [Vestuario](#vestuario)
+- [Transiciones y efectos](#transiciones-y-efectos)
 - [Audio](#audio)
 - [Estado e inventario](#estado-e-inventario)
 - [Misiones, pantallas y rutinas](#misiones-pantallas-y-rutinas)
@@ -93,12 +95,16 @@ juan "Hello"                  # speaker = el id de personaje 'juan'
 "The room went quiet."        # sin speaker = narrador
 juan (whisper) "psst..."      # delivery state
 juan as "The Stranger" "..."  # alias de display-name en una línea
+mia & alex "Run!"             # dicho a la vez
 ```
 
 La forma completa es `<speaker> [(state)] [as "alias"] "text"`. El delivery state nombra uno de los
 delivery styles del personaje —`whisper`, `shout`, `thinking`, o uno propio— y cambia la fuente, el color y
 el efecto de texto solo de esa línea. `as "..."` muestra la línea bajo un alias sin cambiar el nombre del
 personaje; para cambiar el nombre de forma permanente, usa [`name`](#nombres-de-personaje).
+
+`<speaker> & <speaker> [& ...] "text"` es una línea que dicen a la vez de dos a cinco personajes: el bloque
+**Say together**. La placa de nombre une sus nombres, y el texto se reparte entre sus colores.
 
 El diálogo es la única sentencia con texto libre. Ese texto se almacena en la tabla de localización, en el
 idioma de autoría seleccionado en la pestaña Story.
@@ -162,18 +168,25 @@ entre comillas.
 ## Personajes
 
 ```text
+show juan                                # la expresión por defecto
 show juan happy at left                  # expresión + anclaje
 show maria base at right scale 1.2 flip
 show juan happy portrait angry slot 1    # retrato del diálogo + capa en escena
 expression juan sad
-expression juan sad portrait             # ...y cambia también el retrato, al base
+expression juan sad portrait             # ...y cambia también el retrato, al de por defecto
 hide juan
 clear characters
 clear characters at left                 # solo esa posición
 ```
 
-`show <character> <expression> [at <anchor>] [scale <n>] [flip] [portrait <key>] [slot <n>]`. La clave de
-expresión es la definida en el personaje; la clave por defecto es `base`.
+`show <character> [<expression>] [at <anchor>] [scale <n>] [flip] [portrait <key>] [slot <n>] [outfit <id>]`.
+La clave de expresión es la definida en el personaje. Sin ella, `show` usa la
+[expresión por defecto](/es/docs/beasty-visual-novel/world/characters/#la-expresión-por-defecto) del
+personaje: la primera de su lista. `outfit <id>` pone un [conjunto](#vestuario) en la misma línea.
+
+La tercera palabra tras `show <character>` se lee como opción cuando es una palabra clave de opción (`at`,
+`scale`, `flip`, `portrait`, `slot`, `outfit`). Una expresión que se llame así tiene que ir entre comillas:
+`show juan "flip"`.
 
 | Anclaje | Posición |
 |---|---|
@@ -193,7 +206,7 @@ mismo anclaje pero en capas distintas se superponen en un orden que tú controla
 
 `expression <character> <expression> [portrait [<key>]]` cambia la expresión de un personaje ya en escena.
 El sufijo `portrait` cambia a la vez el retrato del diálogo: con una clave usa ese retrato, y sin ninguna
-vuelve al retrato base del personaje.
+vuelve al retrato por defecto del personaje.
 
 `hide <character>` retira a un personaje. `clear characters` retira a todos — o solo a una posición, si
 dices cuál:
@@ -205,6 +218,66 @@ clear characters at custom 0.35 layer 2
 
 Los anclajes son los mismos que acepta `show`, `custom <x>` incluido. `layer <n>` (de 0 a 4) lo reduce a una
 sola capa de esa posición; sin él se despejan todas las capas de ese anclaje.
+
+## Vestuario
+
+```text
+wear mia top hoodie                # poner una prenda
+wear mia earrings hoops off        # quitar una prenda (categoría "Several at once")
+wear mia hat none                  # vaciar una categoría "One at a time"
+outfit mia party                   # poner un conjunto entero
+show mia happy outfit party        # show + conjunto, en una línea
+```
+
+`wear <character> <category> <piece> [off]` es el bloque **Wear piece**. `none` vacía una categoría *One at a
+time*, y el autocompletado solo lo ofrece en una categoría que puede quedarse vacía. `outfit <character>
+<outfit>` es el bloque **Change outfit**. Un personaje, categoría, prenda o conjunto desconocidos dan un aviso.
+Consulta [Vestuario y conjuntos](/es/docs/beasty-visual-novel/world/wardrobe/).
+
+## Transiciones y efectos
+
+```text
+with dissolve                                      # un preset
+with dissolve 1.5s                                 # ...con su duración cambiada
+with fade 2s color ffffff hold 0.3s coverui
+with wipe left 0.8s
+with mask "HeartMask" 1.2s softness 0.15
+with iris out center 0.2 0.8 ease linear nowait
+effect vpunch
+effect flash color ffffff for 0.2s
+effect tint color ff000060 until line
+effect filter sepia 0.8 until cleared
+effect shake both amp 0.3 freq 18 for 2s
+effect camera zoom 1.3 focus 0.3 0.6 fadein 1s
+effect flashback layer vignette 0.9               # ajustar una capa de un preset de varias capas
+clear effects
+clear effects shake
+```
+
+`with <preset o modo> [argumentos]` es el bloque **Transition (with)**; va antes de la línea que presenta.
+`effect <preset o tipo> [argumentos]` es el bloque **Screen effect**, y `clear effects [<tipo>]` el bloque
+**Clear effects**. Consulta [Transiciones visuales y efectos de pantalla](/es/docs/beasty-visual-novel/authoring/screen-effects/).
+
+| Argumento | Significado |
+|---|---|
+| `<n>s` | Duración en segundos, en una transición. |
+| `ease linear` / `in` / `out` / `inout` | La curva de velocidad de una transición. |
+| `nowait` | La línea aparece mientras se reproduce la transición. |
+| `left` / `right` / `up` / `down` | Dirección de un `wipe`, `slide` o `push`. |
+| `in` / `out` | Dirección de un `iris` o un `zoom`. |
+| `center <x> <y>`, `focus <x> <y>` | Un punto en coordenadas de pantalla normalizadas, de 0 a 1. |
+| `color <rrggbb>` / `<rrggbbaa>` / un nombre de color | Un color: `color ffffff`, `color ff000060`, `color black`. No se usa `#`, porque empieza un comentario. |
+| `hold <n>s`, `coverui` | El tiempo de espera de un fundido, y si tapa la caja de diálogo. |
+| `softness <n>` | El borde suave de un `wipe`, `iris` o `mask`. |
+| `for <n>s` | Un efecto que dura esos segundos y se reproduce una vez. |
+| `until line` / `until cleared` | Un efecto que dura hasta la línea siguiente, o hasta `clear effects`. Sin `for` ni `until`, dura hasta que cambie el escenario. |
+| `amp <n>`, `freq <n>` | Amplitud y frecuencia de un `shake`. |
+| `fadein <n>s` | Tiempo de entrada de un efecto. |
+| `layer <nombre> <valor>` | Ajusta una capa de un preset de varias capas, como `flashback`. |
+
+Un nombre de preset seguido de argumentos sobrescribe esos campos del preset. Al escribir el grafo de vuelta a
+texto solo se escribe lo que difiere del valor por defecto, o lo que un bloque sobrescribe de su preset. La
+textura de `mask` se busca por nombre en el proyecto.
 
 ## Audio
 
@@ -402,6 +475,7 @@ choice cruce:
     choice "Go left" -> cave
     choice "Buy a sword" if gold >= 10 { gold -= 10 } -> smith   # condición + efectos
     choice "Flee" -> freeroam town/square                        # destino de flujo
+    choice "Tell her" hint(mia.trust up) hide(mia.friendship) -> truth  # pistas de la guía
     default -> alley                                             # usado si todo queda bloqueado
 ```
 
@@ -427,6 +501,16 @@ no el fallback; un `else` a secas es el fallback.
 
 Tanto `choice` como `if` aceptan una condición opcional y un bloque de efectos opcional, en ese orden, antes
 de la flecha. Consulta [Condiciones y efectos](#condiciones-y-efectos).
+
+### Pistas de la guía
+
+Una línea `choice` admite además grupos `hint(...)` y `hide(...)`, antes de la flecha:
+
+- `hint(<campo> [marca], ...)` añade pistas manuales. El campo es un campo de personaje (`mia.trust`) o una
+  variable global (`likes_books`). La marca es `up`, `down`, `on`, `off` o `changed`; sin marca, `up`.
+- `hide(<campo>, ...)` oculta las pistas automáticas de esos campos.
+
+Consulta [Avisos de estadísticas y pistas de la guía](/es/docs/beasty-visual-novel/world/notifications-and-walkthrough/#pistas-de-la-guía).
 
 > **Nota**
 > No hay un bloque `menu:`. Escribe una línea `choice "text" -> label` por opción dentro de un nodo
@@ -536,6 +620,10 @@ if gold > 100 { rich = true, toggle celebrated } -> rich_end
   resuelve —una errata, o un nombre que comparten varios assets— es un error: la importación se rechaza y el
   grafo queda intacto, así que una errata nunca puede destruir una referencia. Desambigua con una
   subcarpeta: `backdrop interiors/bedroom`.
+- **Un nombre que comparten varios assets** —un mapa de FreeRoam, otra escena, una textura de máscara— se
+  resuelve al que está en la propia carpeta del guion, si lo hay. Así, una copia de la carpeta entera de un
+  proyecto (la House Demo duplicada para empezar la tuya, por ejemplo) compila contra sus propios assets.
+  Desde cualquier otro sitio el nombre sigue siendo ambiguo: `multiple ... assets named '<name>'`.
 - **Las carpetas listadas en [Configuración de VN](/es/docs/beasty-visual-novel/production/vn-settings/)** mantienen los nombres
   cortos y sin ambigüedad. No son una restricción excluyente: un asset que viva fuera de ellas se sigue
   resolviendo por nombre, en todo el proyecto, como último recurso.
@@ -549,6 +637,11 @@ if gold > 100 { rich = true, toggle celebrated } -> rich_end
   importación sigue adelante, porque puede ser un nombre que estás a punto de crear—, pero ya no llega al
   grafo en silencio apuntando a una clave que no usa nadie más. Los *assets* que no se resuelven y los
   labels inexistentes siguen siendo errores y rechazan la importación.
+- **Mensajes de transiciones y efectos.** `unknown transition '<name>'` y `unknown effect '<name>'` para un
+  nombre que no es ni un preset ni un modo; `'<arg>' does not apply to <effect>` (por ejemplo `'freq' does not
+  apply to tint`); `an effect has one duration ('for' or 'until'), not two.`; `'clear' takes 'characters' or
+  'effects'.`; y el aviso `two 'with' before the same line: only the last one is used.`. Una textura de
+  `with mask` que no se encuentra por nombre es un error de compilación.
 - **Autocompletado.** En una línea de encabezado —columna 0— la pestaña Text sugiere las palabras clave de
   tipo de nodo (`label`, `choice`, `decision`, `subgraph`, `return`, `talkmenu`, `flow`) más `scene` y
   `start`; `start ` sugiere las etiquetas del guion, y `talkmenu ` sugiere ids de personaje para su
@@ -557,11 +650,14 @@ if gold > 100 { rich = true, toggle celebrated } -> rich_end
   `props`, `image`, `show`,
   `expression`, `hide`, `clear characters`, `jump`, `set`, `toggle`, `dict`, `give`, `take`, `use`, `item`,
   `deliver`, `wait`, `music`, `sound`, `ambient`, `voice`, `stop`, `name`, `ask`, `quest`, `screen`,
-  `routine`, `time`, `choice`, `if`, `else`, `default`, `freeroam`, `goto-scene` —además de tus ids de
+  `routine`, `time`, `choice`, `if`, `else`, `default`, `freeroam`, `goto-scene`, `with`, `effect`,
+  `clear effects`, `wear`, `outfit` —además de tus ids de
   personaje, ya que una línea puede empezar con un speaker. Después de la palabra clave sugiere lo que esa
   palabra clave espera: personajes, expresiones, claves de retrato, anclajes, variables, tokens de
   diccionario, ítems, misiones y sus objetivos, pantallas, perfiles de rutina, nombres de momento del día y
-  día de la semana, nombres de asset, y los labels ya presentes en el archivo. Donde va una condición o un
+  día de la semana, nombres de asset, y los labels ya presentes en el archivo. Tras `with` o `effect` ofrece
+  presets, modos y tipos de efecto, y después solo los argumentos del que elegiste (nada de `freq` tras
+  `effect tint`). Donde va una condición o un
   efecto, ofrece el catálogo entero de variables —tus propias variables, campos de personaje escritos
   `maya.affection`, recuentos `item.<id>`, tokens de diccionario y las claves reservadas `@time:` y
   `@quest:`—, la misma lista que enseña el selector de condiciones del grafo.

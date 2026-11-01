@@ -85,9 +85,10 @@ Covered by: [Characters](/docs/beasty-visual-novel/world/characters/), [Quests](
 
 ### Variables
 
-Your global variables: key, type, default value, and how the variable behaves. It is a list with a
-detail panel, and character variables get a character list down the left so you can move between
-characters quickly.
+Your global variables: key, type, default value, display name, and how the variable behaves — including
+whether it notifies changes and shows in walkthrough hints. The list and the selected variable stay side by
+side at any width, with a divider you drag. Character variables live in **Characters › Variables**, split into
+**Global** and **Per character** tabs.
 
 ![The Variables tab: the master-detail list of global variables](/docs-images/beasty-visual-novel/vn-tab-variables.png)
 
@@ -139,7 +140,8 @@ Covered by: [Free roam rooms](/docs/beasty-visual-novel/world/free-roam-rooms/),
 ### Screens
 
 HUD and overlay screens: the persistent bar that is always on screen, and the panels that open on top of
-the game. Each screen is a prefab plus a list of the objects in it that do something.
+the game. Each screen is a prefab plus a list of the objects in it that do something. One **+ New screen** menu
+creates every kind, phone screens included.
 
 ![The Screens tab: the screen list, its settings and the prefab preview](/docs-images/beasty-visual-novel/vn-tab-screens.png)
 
@@ -155,6 +157,12 @@ what happens when the player uses one.
 Covered by: [Items and inventory](/docs/beasty-visual-novel/world/items-and-inventory/).
 
 ## The other windows
+
+### Expression Composer
+
+`Tools > Beasty VN > Expression Composer`, normally opened from **Characters › Cast**. It edits layered
+expressions and a character's wardrobe on a canvas that draws the character exactly as the game does. See
+[Layered expressions](/docs/beasty-visual-novel/world/layered-expressions/).
 
 ### Dialogue Preview
 

@@ -81,6 +81,14 @@ funcionando exactamente como siempre:
 - Íconos de HUD y de pantalla.
 - Miniaturas de guardado.
 
+## Expresiones por capas y ropa
+
+Una parte de capa o una prenda que tiene dirección de streaming solo se carga cuando se muestra —nunca el
+vestuario entero— y se libera con el resto del arte de la escena: el del diálogo en el escenario, el de la sala
+en el mundo libre. Una parte que sale de la pantalla suelta su sprite. Una expresión Single que cambia, y una
+parte por capas que sigue siendo la misma parte, mantienen su arte actual hasta que carga el nuevo, así que no
+parpadean. Consulta [Expresiones por capas](/es/docs/beasty-visual-novel/world/layered-expressions/#proyectos-con-streaming).
+
 ## Streaming de nodos
 
 Aparte del arte, los nodos se cargan a través de una ventana deslizante: el nodo actual, el anterior (para

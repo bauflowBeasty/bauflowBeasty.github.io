@@ -78,6 +78,14 @@ they always did:
 - HUD and screen icons.
 - Save thumbnails.
 
+## Layered expressions and clothes
+
+A layer part or a piece of clothing that has a streamed address is loaded only when it is shown — never the
+whole wardrobe — and released with the rest of the scene's art: the dialogue's on the stage, the room's in free
+roam. A part that leaves the screen drops its sprite. A Single expression that changes, and a layered part that
+stays the same part, keep their current art until the new art loads, so they do not blink. See
+[Layered expressions](/docs/beasty-visual-novel/world/layered-expressions/#streamed-projects).
+
 ## Node streaming
 
 Separately from art, nodes are loaded through a sliding window: the current node, the previous one (so `Back`

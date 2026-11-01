@@ -138,6 +138,25 @@ public static void   SetCharacterNameToAlias(string characterId, string aliasVal
 `SetCharacterNameToAlias` with an empty string clears the override and returns the character to the base name.
 `GetCharacterAliases` returns an empty array when the character has none or is unknown.
 
+## Walkthrough and player preferences
+
+```csharp
+// VN
+public static bool Walkthrough { get; set; }
+public static event Action<bool> OnWalkthroughChanged;
+
+// VNPreferences
+public static bool Walkthrough { get; set; }
+public static bool ReduceFlashesAndMotion { get; set; }
+public static bool AutoOnByDefault { get; set; }
+```
+
+`VN.Walkthrough` is the effective switch: true only when the project enables
+[walkthrough hints](/docs/beasty-visual-novel/world/notifications-and-walkthrough/) and the player turned
+them on. `VNPreferences` holds the player's own choices, the same ones the Preferences screen edits:
+**Walkthrough hints**, **Reduce flashes and motion** and **Start with auto-forward on**. Preferences are never
+saved in game saves.
+
 ## Background music
 
 ```csharp

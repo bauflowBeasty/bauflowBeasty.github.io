@@ -127,7 +127,9 @@ Una vez que una regla coloca a un personaje en una sala, el runtime tiene que di
 4. **El centro de la sala**, si no quedan puntos.
 
 El arte propio del personaje proviene del **sprite de mundo libre** en la Character Definition; si está vacío, se usa su
-sprite de expresión base.
+expresión por defecto, dibujada capa a capa cuando es una
+[expresión por capas](/es/docs/beasty-visual-novel/world/layered-expressions/#en-escena-y-en-el-mundo-libre), con
+la ropa que lleve en ese momento.
 
 ### Puntos de personaje
 

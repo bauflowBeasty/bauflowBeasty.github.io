@@ -50,8 +50,10 @@ enganche para un minijuego, una tienda, un puzle — cualquier cosa que no sea u
 | **Scale** | Su tamaño. |
 | **Sorting Order** | Orden de dibujado dentro de la sala. Más alto queda delante. |
 
-Cuando la sala tiene un prefab, estos campos se reflejan en el objeto hijo correspondiente del prefab, así que
-también puedes arrastrar el objeto directamente dentro del prefab y el registro de la sala lo sigue.
+Cuando la sala tiene un prefab, **el prefab manda en la posición, la escala, el sprite y el orden de dibujo de
+cada objeto**. Arrastra el objeto dentro del prefab y el registro de la sala lo sigue: al seleccionar el objeto en
+el drill-in de la sala se leen esos valores del prefab, así que editar cualquier otro campo nunca escribe una
+posición antigua encima de lo que moviste a mano.
 
 El área de clic se construye a partir del sprite. Por defecto es la forma del sprite — pero consulta
 [Áreas de clic ajustadas](#áreas-de-clic-ajustadas) si tu arte es mayormente transparente.
@@ -166,6 +168,11 @@ el detalle de la sala con **+ Character** (elige quién) y luego **+ Pose** para
   mientras la rutina realmente tenga al personaje en esta sala. No tienes que escribir a mano "y Maya está aquí".
 - **Una pose visible reemplaza al marcador genérico de la rutina.** Sin una pose, el personaje se dibuja en un punto de personaje
   usando su sprite de mundo libre; con una, gana tu arte.
+- **Una pose sin sprite propio muestra el aspecto por capas de su dueño**: la expresión por defecto, con la ropa
+  que lleve en ese momento. Se puede hacer clic en cualquier parte y se tiñe al pasar el mouse. Un sprite propio,
+  un sprite condicional que se cumple o una animación de reposo siguen teniendo prioridad. El inspector de la
+  pose dice qué va a mostrar y ofrece **Edit look in Composer…**. Consulta
+  [Expresiones por capas](/es/docs/beasty-visual-novel/world/layered-expressions/#en-escena-y-en-el-mundo-libre).
 
 Clicar en un personaje — pose o marcador genérico — ejecuta la escena de interacción de su rutina, o su
 [menú de conversación](/es/docs/beasty-visual-novel/world/talk-menu/) cuando tiene uno. Consulta [Rutinas de personajes](/es/docs/beasty-visual-novel/world/character-routines/).

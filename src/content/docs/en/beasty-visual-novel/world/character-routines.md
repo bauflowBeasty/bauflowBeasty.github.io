@@ -127,7 +127,9 @@ Once a rule places a character in a room, the runtime has to draw her. It uses t
 4. **The room's centre**, if there are no spots left.
 
 The character's own art comes from the **free-roam sprite** on the Character Definition; if that is empty, her
-base expression sprite is used.
+default expression is used — drawn layer by layer when it is a
+[layered expression](/docs/beasty-visual-novel/world/layered-expressions/#on-stage-and-in-free-roam), with the
+clothes she wears at that moment.
 
 ### Character spots
 

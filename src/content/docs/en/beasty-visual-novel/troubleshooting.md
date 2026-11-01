@@ -189,6 +189,28 @@ still there, but it no longer matches.
 
 See [Localization](/docs/beasty-visual-novel/production/localization/).
 
+## My button ignores the colors I set
+
+The ready-made buttons use **Sprite Swap** — `card` / `card_on`, `choice` / `choice_on` — instead of a color
+tint. A prefab variant or a scene instance that overrides a package button's **Colors** (normal, highlighted,
+pressed…) therefore shows no change. Set that button's **Transition** back to **Color Tint** to keep your colors.
+See [UI prefabs](/docs/beasty-visual-novel/production/ui-prefabs/#the-default-look-ink-and-paper).
+
+## A script of mine no longer finds a character's sprite
+
+Characters on the stage are built from parts. `Character_N` is a `CharacterLookView`, and the sprite is on its
+child `Character_N/Part_0/Sprite` (one child per part for a layered expression). Flipping a character now sets a
+negative X scale on `Character_N` instead of `SpriteRenderer.flipX`. Look one level deeper, and read the flip
+from the sign of `localScale.x`. See [Prefab reference](/docs/beasty-visual-novel/reference/prefabs/#the-scene-prefabs).
+
+## URP logs a camera warning every frame
+
+The message is *"Camera Main Camera does not contain an additional camera data component. Open the Game Object
+in the inspector to add additional camera data."* A camera made by **Tools > Beasty VN > Setup > Create Scene**
+now carries the pipeline's camera data component (`UniversalAdditionalCameraData` on URP,
+`HDAdditionalCameraData` on HDRP). For a camera created earlier, select it and add the component, or call
+`PipelineCameraSetup.EnsureCameraData(camera)` from your own setup code. Built-in projects are unaffected.
+
 ## Nothing here matches
 
 Run `Tools > Beasty VN > Maintenance > Validate Selected Project`. It walks the root graph and every

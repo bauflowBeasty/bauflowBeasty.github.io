@@ -47,12 +47,25 @@ que es lo que quieres en un proyecto real.
 
 `Stage` lleva el componente `FreeRoamScenario`. Ahí es donde asignas tu `FreeRoamMapGraph`.
 
+Cada personaje del escenario es un objeto `CharactersRoot/Character_N`: un `CharacterLookView` con un
+`SortingGroup` y un hijo `Part_i/Sprite` por parte. Una expresión Single tiene exactamente una parte,
+`Part_0/Sprite`; una [expresión por capas](/es/docs/beasty-visual-novel/world/layered-expressions/) tiene una
+por cada capa y parte de ropa. Voltear un personaje refleja el `Character_N` entero con una escala X negativa.
+Un script que necesite el sprite de un personaje lo busca debajo de `Character_N`, no en él, y lee el volteo
+del signo de `localScale.x` de `Character_N`.
+
+Los efectos de pantalla no necesitan prefab: el BeastyManager crea el `VNStageCompositor` en tiempo de
+ejecución, con el shader `Beasty/VN/StageComposite` de `Resources`.
+
 ## Los prefabs de diálogo y opciones
 
 `VN_Canvas` contiene toda la interfaz. `DialogueView` maneja el cuadro de diálogo, `ChoiceView` maneja las
 opciones.
 
-- Para rediseñar el cuadro de diálogo, edita `DialogPanel`.
+- Para rediseñar el cuadro de diálogo, edita `DialogPanel`. Su placa de nombre está sobre la esquina superior
+  izquierda de la caja, y `DialogueView` → **Speaker Panel** apunta a ella, así que las líneas de narración
+  ocultan la placa entera. El cuadro para escribir (`InputPrompt`) tiene sus propios botones **Confirm** y
+  **Back**; **Back** va cableado a `DialogueView` → **Input Back Button** y se traduce con `input.back`.
 - Para rediseñar las opciones, edita `ChoiseBtn` (un botón) y `ChoiseRoot` (su contenedor). `ChoiceView`
   instancia `ChoiseBtn` una vez por cada opción que pasa su condición.
 
@@ -72,7 +85,14 @@ de BeastyManager en tiempo de ejecución, así que puedes soltarlo bajo cualquie
 quieres rediseñar un menú en vez del conjunto completo.
 
 `VNSaveSlot` y `VNBacklogEntry` son plantillas: una se instancia por cada ranura de guardado, otra por cada
-línea de historial. Rediseña la plantilla y todas las filas cambian con ella.
+línea de historial. Rediseña la plantilla y todas las filas cambian con ella. Una ranura vacía muestra
+`SaveSlotView` → **Empty Stock Sprite**, por defecto la imagen discontinua `slot_empty`.
+
+`PreferencesScreen` (en `GameMenuScreen`) tiene campos opcionales para las filas nuevas: **Auto On By Default
+Toggle**, el interruptor de reducir movimiento y **Language Row** —la fila de idioma entera, etiqueta incluida,
+que se oculta cuando el juego tiene un solo idioma—. Un prefab de menú construido antes de que existieran estas
+filas no las ofrece hasta que vuelves a ejecutar **Build Default Menu Prefabs**; mientras tanto, las
+preferencias mantienen su valor por defecto. Consulta [Prefabs de UI](/es/docs/beasty-visual-novel/production/ui-prefabs/#la-pantalla-de-preferencias).
 
 `Tools > Beasty VN > Setup > Build Default Menu Prefabs` los reconstruye desde cero y te avisa antes de
 sobrescribir nada. `Tools > Beasty VN > Setup > Upgrade UI Prefabs (keep customizations)` los actualiza
@@ -100,6 +120,17 @@ proyecto y registrando la copia como una pantalla en el VNContext.
 | Solo el panel de estadísticas | `CharacterStats` |
 | Una pantalla overlay organizada como grilla | `GridMenu` más `GridItemScreenElement` |
 | Una pantalla overlay organizada como lista | `VerticalMenu` más `VerticalItemScreenElement` |
+| La superposición de smartphone y sus apps | `Phone` (consulta [Pantallas de teléfono](/es/docs/beasty-visual-novel/world/phone-screens/)) |
+
+- `PhoneAppScreen` marca un prefab de pantalla como la versión de teléfono de una plantilla.
+- `CharacterRoutineScreen` → **Day Header Template** (`dayHeaderTemplate`) dibuja la semana de la rutina como
+  un grupo por día. **Upgrade UI Prefabs** deja como está una pantalla que lo usa.
+- `RuntimeListView`, la lista virtualizada que hay detrás de la lista de reparto, virtualiza también una
+  **grilla**: cuando el contenido con scroll tiene un `GridLayoutGroup` o un `ResponsiveGridLayout`, las columnas
+  siguen el ancho del contenido y solo existen las filas de tarjetas visibles.
+- `ResponsiveGridLayout` mantiene el tamaño de sus celdas cuando el contenedor crece con su contenido (un
+  `ContentSizeFitter` activo con ajuste vertical), así que las tarjetas dentro de una vista con scroll nunca se
+  aplastan.
 
 `VariableBoundLabel` en las plantillas de elemento es lo que le permite a una etiqueta de HUD mostrar una
 variable en vivo.
