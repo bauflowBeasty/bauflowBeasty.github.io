@@ -29,6 +29,9 @@ npm run dev        → abre http://localhost:4321
 | Texto de una página de docs (inglés) | `src/content/docs/en/<producto>/<página>.md` |
 | Texto de una página de docs (español) | `src/content/docs/es/<producto>/<página>.md` |
 | Enlaces de tienda (Asset Store, itch.io…) | `src/data/products.ts` → `storeLinks` |
+| Plataformas de un proyecto (filtros del catálogo) | `src/data/products.ts` → `platforms` |
+| Proyecto destacado de la portada | `src/data/products.ts` → `featured: true` (solo uno) |
+| Portada de un proyecto | `src/assets/covers/<id>.png` |
 | Nombre, tagline o descripción de un producto | `src/data/products.ts` |
 | Textos de la interfaz (botones, menús) | `src/data/ui-strings.ts` |
 | Orden y grupos del menú lateral de docs | `src/data/sidebars.ts` |
@@ -41,13 +44,19 @@ En `src/data/products.ts`, busca el producto y cambia `url: null` por la URL rea
 
 ```ts
 storeLinks: [
-  { store: 'unity', label: 'Unity Asset Store', url: 'https://assetstore.unity.com/packages/...' },
-  { store: 'itch', label: 'itch.io', url: 'https://bauflow.itch.io/...' },
+  { store: 'unity', label: 'Unity Asset Store', url: 'https://assetstore.unity.com/packages/slug/393138', widgetId: '393138' },
+  { store: 'itch', label: 'itch.io', url: 'https://beastycomponents.itch.io/mi-juego', widgetId: '4897713' },
 ],
 ```
 
-Mientras `url` sea `null`, el botón aparece como "Coming soon" deshabilitado.
-Para añadir otra tienda, añade una línea más al array con su `label` y `url`.
+- Mientras `url` sea `null`, el botón aparece como "Coming soon" deshabilitado.
+- `store` tiene que ser una de las tiendas de `src/data/stores.ts`: `unity`, `itch`, `google-play`,
+  `app-store` o `steam`. Para una tienda nueva, añádela ahí (y su logo en `src/components/StoreLogo.astro`).
+- `widgetId` hace que salga el widget oficial en «Dónde conseguirlo» (solo Asset Store e itch.io tienen widget;
+  el resto salen como botón con su logo):
+  - **Asset Store:** el número final de la URL del paquete (`.../packages/slug/393138` → `393138`).
+  - **itch.io:** abre `https://<usuario>.itch.io/<juego>/data.json` y copia el número de `"id"`.
+- Los widgets solo se cargan cuando el visitante lo permite (pulsando «Mostrar widget…»).
 
 ## Añadir una página de documentación
 
@@ -69,10 +78,20 @@ Para añadir otra tienda, añade una línea más al array con su `label` y `url`
 
 ## Añadir un producto nuevo
 
-1. Añádelo a `src/data/products.ts` (id, nombre, taglines, storeLinks, docsEntry).
-2. Crea su árbol de docs en `src/content/docs/en/<nuevo-id>/` (con un `index.md`) y su espejo `es/`.
-3. Define su menú en `src/data/sidebars.ts` bajo el mismo id.
-4. Añade el nombre corto en `shortNames` de `src/components/Header.astro`.
+1. Añádelo a `src/data/products.ts`. **El orden del array es el orden del catálogo de la portada.** Campos:
+   - `id`, `name`, `version`, `tagline` y `blurb` (EN y ES), `storeLinks` (ver arriba).
+   - `platforms`: una o varias de `unity`, `android`, `ios`, `pc` (`src/data/platforms.ts`). Los filtros
+     del catálogo salen solos de lo que haya: si nadie tiene Android, no aparece el filtro «Android».
+   - `featured: true` si debe ser el proyecto destacado de la portada (solo uno; si ninguno lo lleva,
+     se destaca el primero del array).
+   - `docsEntry` (p. ej. `'/docs/<id>/'`) **solo si tiene documentación**.
+2. Portada: guarda `src/assets/covers/<id>.png` con proporción 315:250 (por ejemplo 630×500 o 1260×1000).
+   Sin portada, la web muestra la inicial del proyecto en un rombo rojo.
+3. **Con documentación:** crea su árbol en `src/content/docs/en/<id>/` (con un `index.md`) y su espejo `es/`,
+   y define su menú en `src/data/sidebars.ts` bajo el mismo id. Su `index.md` hace de página de proyecto.
+4. **Sin documentación** (por ejemplo una app): no hace falta nada más; se genera sola la página
+   `/projects/<id>/` (y `/es/projects/<id>/`) con portada, descripción, «Dónde conseguirlo» y otros proyectos.
+5. El menú «Proyectos» de la cabecera y el selector de las docs se actualizan solos.
 
 ## Capturas de pantalla
 

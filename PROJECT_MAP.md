@@ -206,7 +206,7 @@ H1 → `title`, enlaces relativos → rutas absolutas, imágenes → `/docs-imag
 ## Reglas clave del proyecto
 
 - **EN es canónico**: todo cambio de contenido se hace primero en `src/content/docs/en/` y luego se refleja en `es/` (misma ruta de archivo).
-- **Un producto nuevo** requiere tocar: `src/data/products.ts`, `src/data/sidebars.ts`, contenido en `en/` y `es/`, e imágenes en `public/docs-images/`. Ver `HOW-TO-ADD-PROJECT.md`.
+- **Un producto nuevo** requiere: `src/data/products.ts` (con `platforms`, tiendas y, si tiene docs, `docsEntry`) y su portada en `src/assets/covers/<id>.png`; si tiene docs, además contenido en `en/` y `es/` y su menú en `src/data/sidebars.ts`. Sin docs, su página `/projects/<id>/` se genera sola. Ver `HOW-TO-ADD-PROJECT.md`.
 - **La navegación lateral NO se genera sola**: agregar una página nueva exige registrarla en `src/data/sidebars.ts` (EN y ES).
 - **Para saber qué página documenta algo, usar `docs/DOC-INDEX.md`**, no abrir las 94 páginas: su índice
   inverso va de símbolo (`MigratedFrom`, `BeastySaveLog`…) a página. Son 65 KB: buscar con Grep, no leerlo
