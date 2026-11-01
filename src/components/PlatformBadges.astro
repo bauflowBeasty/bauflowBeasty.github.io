@@ -1,0 +1,35 @@
+---
+import { PLATFORMS, type PlatformId } from '../data/platforms';
+
+interface Props {
+  platforms: PlatformId[];
+}
+
+const { platforms } = Astro.props;
+---
+
+<ul class="platform-badges">
+  {platforms.map((p) => <li>{PLATFORMS[p]?.label ?? p}</li>)}
+</ul>
+
+<style>
+  .platform-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-1);
+    padding: 0;
+    list-style: none;
+  }
+
+  .platform-badges li {
+    padding: 0.1rem 0.5rem;
+    border-radius: var(--radius-sm);
+    background: var(--surface-raised);
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+  }
+</style>

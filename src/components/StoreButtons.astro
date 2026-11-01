@@ -1,6 +1,12 @@
 ---
+/**
+ * One pill per store: logo + label, all alike so 6–8 stores fit without noise.
+ * On red surfaces (inside .on-brand) they turn into black pills.
+ * `url: null` → disabled «Coming soon» pill.
+ */
 import type { Product } from '../data/products';
 import { t, type Lang } from '../data/ui-strings';
+import StoreLogo from './StoreLogo.astro';
 
 interface Props {
   product: Product;
@@ -16,11 +22,13 @@ const { product, lang, compact = false } = Astro.props;
     product.storeLinks.map((link) =>
       link.url ? (
         <a class="store-btn" href={link.url} rel="noopener">
-          {link.label}
+          <StoreLogo store={link.store} size={compact ? 14 : 16} />
+          <span>{link.label}</span>
         </a>
       ) : (
         <span class="store-btn disabled" aria-disabled="true" title={t(lang, 'product.comingSoon')}>
-          {link.label}
+          <StoreLogo store={link.store} size={compact ? 14 : 16} />
+          <span>{link.label}</span>
           <small>{t(lang, 'product.comingSoon')}</small>
         </span>
       )
@@ -37,28 +45,54 @@ const { product, lang, compact = false } = Astro.props;
 
   .store-btn {
     display: inline-flex;
-    align-items: baseline;
+    align-items: center;
     gap: var(--space-2);
-    padding: var(--space-2) var(--space-4);
+    padding: 0.5rem 0.9rem;
     border-radius: var(--radius-md);
-    background: var(--accent-strong);
-    color: var(--accent-on);
-    font-weight: 600;
+    background: var(--surface-raised);
+    border: 1px solid var(--border-strong);
+    color: var(--text);
+    font-weight: 700;
     font-size: var(--text-sm);
-    line-height: 1.4;
-    transition: filter var(--dur-fast) var(--ease-out);
+    line-height: 1.2;
+    text-decoration: none;
+    transition:
+      transform var(--dur-fast) var(--ease-bounce),
+      border-color var(--dur-fast) var(--ease-out),
+      background var(--dur-fast) var(--ease-out);
   }
 
   .store-btn:hover {
     text-decoration: none;
-    filter: brightness(1.12);
+    transform: translateY(-2px);
+    border-color: var(--accent-strong);
+  }
+
+  .store-btn:active {
+    animation: squash 0.3s var(--ease-bounce);
+  }
+
+  /* Black pills on the red brand surface (featured block, project header). */
+  :global(.on-brand) .store-btn {
+    background: var(--brand-ink);
+    border-color: var(--brand-ink);
+    color: #ffffff;
+  }
+
+  :global(.on-brand) .store-btn:hover {
+    background: #000000;
+    border-color: #000000;
   }
 
   .store-btn.disabled {
-    background: var(--surface-raised);
     color: var(--text-muted);
-    border: 1px solid var(--border);
+    border-style: dashed;
     cursor: default;
+  }
+
+  .store-btn.disabled:hover {
+    transform: none;
+    border-color: var(--border-strong);
   }
 
   .store-btn.disabled small {
@@ -71,7 +105,7 @@ const { product, lang, compact = false } = Astro.props;
   }
 
   .compact .store-btn {
-    padding: var(--space-1) var(--space-3);
+    padding: 0.3rem 0.7rem;
     font-size: var(--text-xs);
   }
 </style>

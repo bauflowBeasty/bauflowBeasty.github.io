@@ -49,6 +49,24 @@ export const UI: Record<Lang, Record<string, string>> = {
     'contact.sending': 'Sending…',
     'contact.sent': 'Sent. You’ll get a reply by email.',
     'contact.error': 'Something went wrong. Please try again in a minute.',
+    // Rework visual (2026-11): new interface strings
+    'nav.projects': 'Projects',
+    'search.open': 'Search',
+    'search.close': 'Close search',
+    'catalog.all': 'All',
+    'catalog.filterLabel': 'Filter by platform',
+    'catalog.others': 'Other projects',
+    'featured.new': 'New',
+    'where.heading': 'Where to get it',
+    'widget.show': 'Show {store} widget',
+    'widget.notice': 'Loads content from {store}, which may set cookies.',
+    'widget.remember': 'Remember my choice',
+    'widget.revoke': 'Stop loading store widgets automatically',
+    'code.copy': 'Copy',
+    'code.copied': 'Copied!',
+    'docs.projectSwitch': 'Switch project',
+    'ecosystem.includes': 'includes',
+    'ecosystem.optional': 'optional',
   },
   es: {
     skipToContent: 'Saltar al contenido',
@@ -96,9 +114,32 @@ export const UI: Record<Lang, Record<string, string>> = {
     'contact.sending': 'Enviando…',
     'contact.sent': 'Enviado. Recibirás respuesta por correo.',
     'contact.error': 'Algo falló. Inténtalo de nuevo en un minuto.',
+    // Rework visual (2026-11): new interface strings
+    'nav.projects': 'Proyectos',
+    'search.open': 'Buscar',
+    'search.close': 'Cerrar búsqueda',
+    'catalog.all': 'Todo',
+    'catalog.filterLabel': 'Filtrar por plataforma',
+    'catalog.others': 'Otros proyectos',
+    'featured.new': 'Nuevo',
+    'where.heading': 'Dónde conseguirlo',
+    'widget.show': 'Mostrar widget de {store}',
+    'widget.notice': 'Carga contenido de {store}, que puede usar cookies.',
+    'widget.remember': 'Recordar mi elección',
+    'widget.revoke': 'Dejar de cargar los widgets automáticamente',
+    'code.copy': 'Copiar',
+    'code.copied': '¡Copiado!',
+    'docs.projectSwitch': 'Cambiar de proyecto',
+    'ecosystem.includes': 'incluye',
+    'ecosystem.optional': 'opcional',
   },
 };
 
 export function t(lang: Lang, key: string): string {
   return UI[lang][key] ?? UI.en[key] ?? key;
+}
+
+/** t() with {placeholder} substitution: tf('es', 'widget.show', { store: 'itch.io' }). */
+export function tf(lang: Lang, key: string, vars: Record<string, string>): string {
+  return t(lang, key).replace(/\{(\w+)\}/g, (m, name: string) => vars[name] ?? m);
 }

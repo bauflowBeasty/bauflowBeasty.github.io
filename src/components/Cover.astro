@@ -1,0 +1,93 @@
+---
+/**
+ * A project's cover (315:250, decorative: the name is always shown next to it).
+ * Without an image in src/assets/covers/<id>.*, a placeholder: the project's
+ * initial inside a red diamond — never a broken image.
+ */
+import { Image } from 'astro:assets';
+import { getCover } from '../data/covers';
+
+interface Props {
+  id: string;
+  name: string;
+  size: 'thumb' | 'card' | 'hero';
+  eager?: boolean;
+  class?: string;
+}
+
+const { id, name, size, eager = false, class: extra } = Astro.props;
+const img = getCover(id);
+const TARGET = { thumb: 64, card: 400, hero: 720 }[size];
+const w = img ? Math.min(TARGET, img.width) : TARGET;
+const h = Math.round((w * 250) / 315);
+const widths = img ? [...new Set([w, Math.min(w * 2, img.width)])] : [];
+const SIZES = { thumb: '64px', card: '(max-width: 640px) 100vw, 400px', hero: '(max-width: 900px) 100vw, 720px' }[size];
+const initial = (name.replace(/^Beasty\s+/i, '').trim().charAt(0) || '?').toUpperCase();
+---
+
+{
+  img ? (
+    <Image
+      src={img}
+      alt=""
+      width={w}
+      height={h}
+      widths={widths}
+      sizes={SIZES}
+      loading={eager ? 'eager' : 'lazy'}
+      decoding="async"
+      class:list={['cover', `cover--${size}`, extra]}
+    />
+  ) : (
+    <div class:list={['cover', 'cover--placeholder', `cover--${size}`, extra]} aria-hidden="true">
+      <span>{initial}</span>
+    </div>
+  )
+}
+
+<style>
+  :global(.cover) {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 315 / 250;
+    object-fit: cover;
+  }
+
+  :global(.cover--placeholder) {
+    display: grid;
+    place-items: center;
+    background:
+      radial-gradient(circle at 30% 20%, var(--accent-soft), transparent 60%),
+      var(--surface-raised);
+  }
+
+  /* The letter stays upright: only the ::before diamond is rotated. */
+  :global(.cover--placeholder span) {
+    position: relative;
+    z-index: 0;
+    display: grid;
+    place-items: center;
+    width: 34%;
+    aspect-ratio: 1;
+    color: var(--brand-on);
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(1rem, 6vw, 3rem);
+    line-height: 1;
+  }
+
+  :global(.cover--placeholder span::before) {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: var(--brand-surface);
+    border-radius: 14%;
+    transform: rotate(45deg);
+  }
+
+  :global(.cover--thumb.cover--placeholder span) {
+    font-size: 0.85rem;
+  }
+</style>

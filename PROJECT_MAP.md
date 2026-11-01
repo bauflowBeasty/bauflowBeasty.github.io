@@ -62,7 +62,7 @@ src/
 │   ├── stores.ts         → Tiendas posibles (Asset Store, itch.io, Google Play, App Store, Steam) y si tienen widget
 │   ├── covers.ts         → getCover(id): portada de src/assets/covers/<id>.* (solo Vite)
 │   ├── sidebars.ts       → Estructura de navegación lateral de las docs (por producto, EN y ES)
-│   └── ui-strings.ts     → Strings de UI traducidos (labels, botones, textos fijos EN/ES)
+│   └── ui-strings.ts     → Strings de UI traducidos (labels, botones, textos fijos EN/ES); t() y tf() con {variables}
 ├── layouts/
 │   ├── BaseLayout.astro  → Layout raíz: <head>, fuentes, theme-init, header/footer
 │   └── DocLayout.astro   → Layout de páginas de docs: sidebar + contenido + TOC + CTA compra
@@ -77,7 +77,10 @@ src/
 │   ├── Header.astro / Footer.astro
 │   ├── DocSidebar.astro      → Sidebar de navegación de docs
 │   ├── TableOfContents.astro → TOC de la página actual
-│   ├── BuyCta.astro / StoreButtons.astro → Botones de compra (Asset Store / itch.io)
+│   ├── BuyCta.astro / StoreButtons.astro → Botones de compra: una pastilla con logo por tienda (negras dentro de .on-brand)
+│   ├── StoreLogo.astro       → Logo monocromo de cada tienda (Simple Icons, CC0) o bolsa genérica
+│   ├── Cover.astro           → Portada 315:250 de un proyecto (thumb/card/hero) o marcador con la inicial si no hay imagen
+│   ├── PlatformBadges.astro  → Etiquetas de plataforma (Unity, Android, iOS, PC)
 │   ├── ProductCard.astro     → Tarjeta de producto en la portada
 │   ├── LangSwitch.astro / ThemeToggle.astro → Cambio idioma / tema claro-oscuro
 │   ├── HeroScript.astro      → Animación/script del hero
