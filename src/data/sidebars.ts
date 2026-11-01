@@ -5,7 +5,6 @@
  */
 
 import type { Lang } from './ui-strings';
-import type { Product } from './products';
 
 export type SidebarGroup = {
   label: Record<Lang, string>;
@@ -24,7 +23,7 @@ const L = {
   help: { en: 'Help', es: 'Ayuda' },
 };
 
-export const SIDEBARS: Record<Product['id'], SidebarGroup[]> = {
+export const SIDEBARS: Record<string, SidebarGroup[]> = {
   'beasty-visual-novel': [
     {
       label: L.gettingStarted,

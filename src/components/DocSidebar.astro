@@ -5,7 +5,7 @@ import { PRODUCTS } from '../data/products';
 import { t, type Lang } from '../data/ui-strings';
 
 interface Props {
-  productId: keyof typeof SIDEBARS;
+  productId: string;
   lang: Lang;
   /** Site path of the page being rendered, used to mark the active item. */
   currentPath: string;

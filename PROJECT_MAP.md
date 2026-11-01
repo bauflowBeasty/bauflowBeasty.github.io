@@ -55,7 +55,11 @@ src/
 │   │   └── beasty-console/   → guides/, reference/, getting-started, faq, changelog, index
 │   └── es/               → Espejo 1:1 de en/ en español (mismas rutas y nombres de archivo)
 ├── data/
-│   ├── products.ts       → Fuente de verdad de los productos: nombres, descripciones, precios, links de tienda, estado
+│   ├── products.ts       → Fuente de verdad de los productos: nombres, descripciones, links de tienda (+ widgetId),
+│   │                       plataformas, destacado (`featured`), docs opcionales. Orden del array = orden del catálogo
+│   ├── platforms.ts      → Plataformas posibles (Unity, Android, iOS, PC) y su orden en los filtros
+│   ├── stores.ts         → Tiendas posibles (Asset Store, itch.io, Google Play, App Store, Steam) y si tienen widget
+│   ├── covers.ts         → getCover(id): portada de src/assets/covers/<id>.* (solo Vite)
 │   ├── sidebars.ts       → Estructura de navegación lateral de las docs (por producto, EN y ES)
 │   └── ui-strings.ts     → Strings de UI traducidos (labels, botones, textos fijos EN/ES)
 ├── layouts/
@@ -82,8 +86,13 @@ src/
 │   ├── base.css / typography.css → Reset + tipografía global
 │   ├── landing.css       → Estilos de la portada
 │   └── doc.css           → Estilos de páginas de documentación
+├── lib/                  → Lógica pura, sin Astro (la prueban los tests con Node):
+│   ├── catalog.ts        → getFeatured, platformFilters, isCardVisible, projectHref
+│   ├── widgets.ts        → URLs y tamaños de los widgets de Asset Store e itch.io por tema
+│   └── consent.ts        → Permiso del visitante para cargar widgets (localStorage, nunca lanza)
 ├── scripts/theme-init.js → Anti-flash de tema (se ejecuta inline antes del render)
 └── assets/               → logo-on-dark.svg, logo-on-light.svg
+    └── covers/           → Portada de cada proyecto: <id del producto>.png
 
 public/
 └── docs-images/          → Capturas usadas en las docs, por producto (beasty-save-system/, beasty-visual-novel/, beasty-console/)
