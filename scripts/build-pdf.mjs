@@ -12,6 +12,7 @@ import { readFileSync, writeFileSync, existsSync, mkdirSync, copyFileSync } from
 import { join, dirname, resolve } from 'node:path';
 import { pathToFileURL, fileURLToPath } from 'node:url';
 import puppeteer from 'puppeteer-core';
+import { findChrome } from './lib/chrome.mjs';
 
 const raiz = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const SITE = 'https://bauflowbeasty.github.io';
@@ -57,19 +58,6 @@ function datosProducto(nombreClave) {
     if (m[1].toLowerCase().replace(/\s+/g, '-') === nombreClave) return { nombre: m[1], version: m[2] };
   }
   throw new Error(`No encuentro '${nombreClave}' en products.ts`);
-}
-
-function buscarChrome() {
-  if (process.env.BEASTY_CHROME) return process.env.BEASTY_CHROME;
-  const candidatos = [
-    'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe',
-    'C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe',
-    'C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe',
-    'C:\\Program Files\\Microsoft\\Edge\\Application\\msedge.exe',
-  ];
-  const hallado = candidatos.find((c) => existsSync(c));
-  if (!hallado) throw new Error('No encuentro Chrome ni Edge; define BEASTY_CHROME.');
-  return hallado;
 }
 
 function extraerCapitulo(producto, pagina) {
@@ -154,7 +142,7 @@ ${cuerpo}
 
 const salida = join(raiz, 'dist-pdf');
 mkdirSync(salida, { recursive: true });
-const chrome = buscarChrome();
+const chrome = findChrome();
 const browser = await puppeteer.launch({ executablePath: chrome });
 
 try {

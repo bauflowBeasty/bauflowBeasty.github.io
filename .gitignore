@@ -10,3 +10,6 @@ CLAUDE.md
 
 # Maquetas locales del brainstorming (visual companion)
 .superpowers/
+
+# Capturas de npm run ui:check (generadas)
+dist-shots/

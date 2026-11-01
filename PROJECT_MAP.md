@@ -22,6 +22,7 @@ Sitio de documentación y portfolio **Beasty Components** (marca de bauflow) hec
 | `npm run doc:pdf` | Generar los PDF de docs básicas por asset (lee `dist/`: ejecutar DESPUÉS del build) y copiarlos al proyecto Unity |
 | `npm test` | Tests unitarios (`node --test tests/unit/`), incluida la guardia de contenido |
 | `npm run test:dist` | Tests sobre el HTML generado (`tests/dist/`): ejecutar DESPUÉS del build |
+| `npm run ui:check` | Revisión en navegador real del sitio construido (desbordes, errores JS, movimiento reducido) + capturas en `dist-shots/`: ejecutar DESPUÉS del build |
 | `npm run content:baseline` | Regenerar la línea base de contenido (`tests/fixtures/content-baseline.json`) tras un cambio de texto INTENCIONADO |
 
 ## Estructura
@@ -104,8 +105,15 @@ scripts/
 ├── screenshots.mjs       → GENERA docs/SCREENSHOTS.md cruzando las páginas con docs/screenshots.json
 ├── build-pdf.mjs         → GENERA un PDF de docs básicas por asset desde dist/ (npm run doc:pdf, tras build)
 │                           y lo copia a Assets/BeastyComponents/<asset>/ del proyecto Unity
-└── content-baseline.mjs  → Línea base del contenido (ui-strings, textos de products.ts, huella de docs) para
-                            la guardia de contenido; `npm run content:baseline` la regenera
+├── content-baseline.mjs  → Línea base del contenido (ui-strings, textos de products.ts, huella de docs) para
+│                           la guardia de contenido; `npm run content:baseline` la regenera
+├── ui-check.mjs          → `npm run ui:check` (tras build): abre dist/ en Chrome a 375/768/1280 y en tema
+│                           claro/oscuro; falla si hay scroll horizontal, errores JS o animaciones con
+│                           movimiento reducido; capturas en dist-shots/ (ignorado). Opciones: --consent,
+│                           --routes a/,b/ (sin barra inicial en Git Bash)
+└── lib/
+    ├── chrome.mjs        → findChrome(): Chrome/Edge del sistema o BEASTY_CHROME (lo usan PDF y ui-check)
+    └── serve-dist.mjs    → serveDist(dir): servidor estático mínimo para revisar dist/
 
 tests/
 ├── unit/                 → Tests `node --test` (lógica pura; Node 24 importa .ts directamente)
